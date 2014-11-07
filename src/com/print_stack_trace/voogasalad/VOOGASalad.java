@@ -1,6 +1,6 @@
 package com.print_stack_trace.voogasalad;
 
-import com.print_stack_trace.voogasalad.view.GUI;
+import com.print_stack_trace.voogasalad.controller.GUI;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
