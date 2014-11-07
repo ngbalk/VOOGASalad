@@ -1,5 +1,12 @@
 package com.print_stack_trace.voogasalad.player;
 
-public class GamePlayer {
+import javafx.scene.Group;
 
+public class GamePlayer {
+	private Group root = new Group();
+	
+	public Group initialize() {
+		//TODO: Implement
+		return root;
+	}
 }
