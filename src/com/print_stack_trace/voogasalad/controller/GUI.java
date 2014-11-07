@@ -1,3 +1,9 @@
+/**
+ * @author Pranava Raparla
+ * @author Zachary Podbela
+ * Date Created: 11/06/14
+ * Date Modified: 11/07/14
+ */
 package com.print_stack_trace.voogasalad.controller;
 
 import com.print_stack_trace.voogasalad.controller.author.GameAuthor;
