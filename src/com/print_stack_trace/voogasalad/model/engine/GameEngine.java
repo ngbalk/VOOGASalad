@@ -4,17 +4,14 @@ import com.print_stack_trace.voogasalad.model.LevelModel;
 import com.print_stack_trace.voogasalad.model.RuntimeModel;
 
 public class GameEngine {
-	private static GameEngine singletonInstance;
 	private LevelModel currentLevel;
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
 	/**
-	 * Constructor Method. It is private because this class is designed to only
-	 * be used as a Singleton. Call the static method getSharedInstance to
-	 * access the Singleton.
+	 * Constructor Method.
 	 */
-	private GameEngine() {
+	public GameEngine() {
 		//TODO: Implement Constructor
 	}
 	
@@ -37,13 +34,6 @@ public class GameEngine {
 	public void setCurrentLevel(LevelModel currentLevel) {
 		this.currentLevel = currentLevel;
 		loadLevel(currentLevel);
-	}
-
-	public static GameEngine getSharedInstance() {
-		if(singletonInstance == null) {
-			singletonInstance = new GameEngine();
-		}
-		return singletonInstance;
 	}
 	
 	//-------------------PRIVATE METHODS-------------------//
