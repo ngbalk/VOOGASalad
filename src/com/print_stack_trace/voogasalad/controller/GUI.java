@@ -8,6 +8,7 @@ package com.print_stack_trace.voogasalad.controller;
 
 import com.print_stack_trace.voogasalad.controller.author.GameAuthor;
 import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
+import com.print_stack_trace.voogasalad.guiElements.GreenGUI;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;
@@ -21,7 +22,7 @@ public class GUI {
 		//Coded with help from: http://www.java2s.com/Code/Java/JavaFX/AddTabtoTabPane.htm
 		TabController[] tabControllers = new TabController[2];
 		tabControllers[0] = new GamePlayer();
-		tabControllers[1] = new GameAuthor();
+		tabControllers[1] = new GreenGUI(width, height);
 		String[] tabTitles = new String[2];
 		tabTitles[0] = "Game Player";
 		tabTitles[1] = "Level Builder";
