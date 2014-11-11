@@ -14,4 +14,11 @@ public class GamePlayer implements TabController {
 		//TODO: Implement
 		return root;
 	}
+	
+	/**
+	 * uses the engine to update the players view
+	 */
+	public void updateScene(){
+		
+	}
 }
