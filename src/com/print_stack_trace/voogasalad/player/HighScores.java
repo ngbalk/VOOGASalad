@@ -6,6 +6,8 @@ import java.util.Map;
 public class HighScores {
 	/***
 	 * Class used to Store HighScores for the game
+	 * Class will probably be deleted --> waiting on pranava and Zach for input of 
+	 * where to store scores and highScores
 	 */
 	private double highestScore;
 	//private double currentScore;
@@ -18,13 +20,14 @@ public class HighScores {
 		scores.clear();
 	}
 	
-	public void updateScore(Player p, double score){
+	public void updateScore(Character p, double score){
 		//check is player score already exist
 		//check if current player score is greater than high score
 		//add/edit high score
-	
+	}
 	public String toString() {
 		//iterate over map, print HighScores
+		return null;
 	}
 	
 }
