@@ -35,22 +35,23 @@ public class GameEngine {
 	
 	//GAME AUTHORING
 	
-	Integer addObjectToLevel(SpriteCharacteristics spriteModel) {
-		//TODO: This should mirror public on LevelModel.java
-		return null;
+	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) {
+		return currentLevel.addObject(spriteModel);
 	}
 	
-	Integer updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
-		//TODO: This should mirror public on LevelModel.java
-		return null;
+	public boolean updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
+		return currentLevel.updateObject(modelID, spriteModel);
 	}
 	
-	boolean deleteObject(Integer modelID) {
-		//TODO: This should mirror public on LevelModel.java
-		return false;
+	public boolean deleteObject(Integer modelID) {
+		return currentLevel.deleteObject(modelID);
 	}
 	
 	//GAME PLAYER
+	
+	public void update() {
+		//TODOL Call RuntimeEngine
+	}
 	
 	public RuntimeModel getStatus() {
 		RuntimeModel ret = new RuntimeModel();
