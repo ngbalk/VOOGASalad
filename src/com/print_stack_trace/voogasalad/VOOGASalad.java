@@ -1,24 +1,34 @@
 package com.print_stack_trace.voogasalad;
 
-import com.print_stack_trace.voogasalad.controller.GUI;
+import com.print_stack_trace.voogasalad.controller.ViewController;
+import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class VOOGASalad extends Application {
-	private static final int WIDTH = 58*20;
-	private static final int HEIGHT = 58*11;
+public abstract class VOOGASalad extends Application {
+	private static final int DEFAULT_WIDTH = 58*20; //Default Width is 58*20
+	private static final int DEFAULT_HEIGHT = 58*11; //Default Height is 58*20
+	protected Stage mainStage;
 
 	@Override
 	public void start(Stage arg0) throws Exception {
-		Scene scene = GUI.init(WIDTH, HEIGHT);
-		arg0.setScene(scene);
-		arg0.show();
+		mainStage = arg0;
+		GameEngine gameEngine = new GameEngine();
+		ViewController authorGUI = getMainGUI();
+		Scene scene = new Scene(authorGUI.initialize(gameEngine), getWidth(), getHeight());
+		mainStage.setScene(scene);
+		mainStage.show();
 	}
 	
-	public static void main(String[] args)
-	{
-		launch(args);
+	public abstract ViewController getMainGUI();
+	
+	public int getWidth() {
+		return DEFAULT_WIDTH;
+	}
+	
+	public int getHeight() {
+		return DEFAULT_HEIGHT;
 	}
 }
