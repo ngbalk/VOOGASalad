@@ -21,9 +21,6 @@ public class RuntimeEngine {
 	/**
 	 * Constructor Method.
 	 */
-	public RuntimeEngine() {
-		//TODO: Implement Constructor
-	}
 	
 	public RuntimeEngine(LevelModel currentLevel) {
 		//TODO: Implement Constructor
@@ -35,8 +32,8 @@ public class RuntimeEngine {
 	 * 
 	 * @param currentLevel
 	 */
-	public void update(LevelModel currentLevel) {
-		
+	public void update() {
+		//TODO: 
 	}
 		
 	//GAME AUTHORING
