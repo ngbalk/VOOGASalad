@@ -12,7 +12,6 @@ import java.io.File;
 import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.LevelModel;
-import com.print_stack_trace.voogasalad.model.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 public class RuntimeEngine {
