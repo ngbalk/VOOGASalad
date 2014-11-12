@@ -5,8 +5,7 @@ import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
 
 public class PSTGamePlayer extends VOOGASalad {
 
-	@Override
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		launch(args);
 	}
 

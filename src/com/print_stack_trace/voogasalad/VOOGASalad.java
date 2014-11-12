@@ -22,7 +22,6 @@ public abstract class VOOGASalad extends Application {
 		mainStage.show();
 	}
 	
-	public abstract void main(String[] args);
 	public abstract ViewController getMainGUI();
 	
 	public int getWidth() {
