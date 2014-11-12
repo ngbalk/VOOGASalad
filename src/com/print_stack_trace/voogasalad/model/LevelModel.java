@@ -49,6 +49,9 @@ public class LevelModel {
 		return true;
 	}
 	
+	
+	//TODO: Talk to authoring about how goals are implemented 
+	//      this is needed to implement this method.
 	public boolean setGoal(Goal goal) {
 		return false;
 	}
