@@ -10,10 +10,11 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
 
+import Exceptions.GamePlayerException;
+
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
-import com.print_stack_trace.voogasalad.player.GamePlayerException;
 import com.print_stack_trace.voogasalad.player.Score;
 
 import javafx.event.EventHandler;

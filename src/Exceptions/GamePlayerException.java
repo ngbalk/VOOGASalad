@@ -1,4 +1,4 @@
-package com.print_stack_trace.voogasalad.player;
+package Exceptions;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
