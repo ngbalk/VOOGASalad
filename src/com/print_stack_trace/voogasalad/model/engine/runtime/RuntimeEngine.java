@@ -15,7 +15,7 @@ import com.print_stack_trace.voogasalad.model.LevelModel;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 public class RuntimeEngine {
-	
+	private LevelModel currentLevel;
 	//-------------------CONSTRUCTORS-------------------//
 	
 	/**
@@ -25,17 +25,20 @@ public class RuntimeEngine {
 		//TODO: Implement Constructor
 	}
 	
+	public RuntimeEngine(LevelModel currentLevel) {
+		//TODO: Implement Constructor
+	}
+	
 	//-------------------PUBLIC METHODS-------------------//
 		
 	/**
 	 * 
+	 * @param currentLevel
 	 */
 	public void update(LevelModel currentLevel) {
 		
 	}
-	
-	
-	
+		
 	//GAME AUTHORING
 	
 	
