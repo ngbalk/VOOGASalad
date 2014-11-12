@@ -1,20 +1,27 @@
 package com.print_stack_trace.voogasalad.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.print_stack_trace.voogasalad.controller.author.Goal;
-import com.print_stack_trace.voogasalad.model.SpriteCharacteristics.ObjectType;
+import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
 
 public class LevelModel {
 	
 	Map<Integer, SpriteCharacteristics> spriteMap;
 	private Integer currentID;
 	private boolean isLocked;
+	private PhysicsEngine physicsEngine;
 	
 	
+	public PhysicsEngine getPhysicsEngine() {
+		return physicsEngine;
+	}
+
+	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
+		if (isLocked);
+		this.physicsEngine = physicsEngine;
+	}
+
 	private Integer incrementID() {
 		while(spriteMap.keySet().contains(currentID)) {
 			currentID++;

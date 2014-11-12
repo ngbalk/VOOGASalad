@@ -16,6 +16,8 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 public class RuntimeEngine {
 	private LevelModel currentLevel;
+	private PhysicsEngine physicsEngine;
+	
 	//-------------------CONSTRUCTORS-------------------//
 	
 	/**
@@ -23,6 +25,7 @@ public class RuntimeEngine {
 	 */
 	
 	public RuntimeEngine(LevelModel currentLevel) {
+		physicsEngine = currentLevel.getPhysicsEngine();
 		//TODO: Implement Constructor
 	}
 	
@@ -34,6 +37,7 @@ public class RuntimeEngine {
 	 */
 	public void update() {
 		//TODO: 
+		//physicsEngine.animateSolo(allObjects);
 	}
 		
 	//GAME AUTHORING
