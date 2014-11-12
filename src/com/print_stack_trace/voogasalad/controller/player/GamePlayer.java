@@ -1,15 +1,19 @@
 package com.print_stack_trace.voogasalad.controller.player;
 
+
 import java.awt.event.ActionEvent;
 
-import com.print_stack_trace.voogasalad.controller.TabController;
+
+
+import com.print_stack_trace.voogasalad.controller.ViewController;
+
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
 
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 
-public class GamePlayer implements TabController {
+public class GamePlayer implements ViewController {
 	private Group root = new Group();
 	private GameEngine gameEngine;
 	
