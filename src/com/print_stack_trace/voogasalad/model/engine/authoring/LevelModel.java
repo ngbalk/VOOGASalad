@@ -2,84 +2,81 @@ package com.print_stack_trace.voogasalad.model.engine.authoring;
 
 import java.util.Map;
 
-<<<<<<< HEAD:src/com/print_stack_trace/voogasalad/model/LevelModel.java
-=======
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
->>>>>>> 58fdedd0fe8487d07c684f079cbce13a5c7dd9b0:src/com/print_stack_trace/voogasalad/model/engine/authoring/LevelModel.java
 import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.sprites.Goal;
 
 public class LevelModel {
-	
-	Map<Integer, SpriteCharacteristics> spriteMap;
-	private Integer currentID;
-	private boolean isLocked;
-	private PhysicsEngine physicsEngine;
-	
-	
-	public PhysicsEngine getPhysicsEngine() {
-		return physicsEngine;
-	}
+    
+    Map<Integer, SpriteCharacteristics> spriteMap;
+    private Integer currentID;
+    private boolean isLocked;
+    private PhysicsEngine physicsEngine;
+    
+    
+    public PhysicsEngine getPhysicsEngine() {
+        return physicsEngine;
+    }
 
-	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
-		if (isLocked);
-		this.physicsEngine = physicsEngine;
-	}
+    public void setPhysicsEngine(PhysicsEngine physicsEngine) {
+        if (isLocked);
+        this.physicsEngine = physicsEngine;
+    }
 
-	private Integer incrementID() {
-		while(spriteMap.keySet().contains(currentID)) {
-			currentID++;
-		}
-		return currentID;
-	}
-	
-	public void setLocked() {
-		isLocked = true;
-	}
-	
-	public void setUnlocked() {
-		isLocked = false;
-	}
-	
-	public Integer addObject (SpriteCharacteristics chars) {
-		if (isLocked) return null;
-		return 0;
-	}
-	
-	public boolean deleteObject (Integer ModelID) {
-		if (isLocked) return false;
-		spriteMap.remove(ModelID);
-		return true;
-	}
-	
-	public boolean updateObject (Integer ModelID, SpriteCharacteristics chars) {
-		if (isLocked) return false;
-		//if it passes other logic tests including: no collisions
-		spriteMap.remove(ModelID);
-		spriteMap.put(ModelID, chars);
-		return true;
-	}
-	
-	
-	//TODO: Talk to authoring about how goals are implemented 
-	//      this is needed to implement this method.
-	public boolean setGoal(Goal goal) {
-		return false;
-	}
-	
-	
-	
-	/*public HashMap<Integer, SpriteCharacteristics> getSpriteTypes(ObjectType obj) {
-		HashMap<Integer, SpriteCharacteristics> sprites = new HashMap<Integer, SpriteCharacteristics >();
-		for (Integer i: spriteMap.keySet()) {
-			if (spriteMap.get(i).objectType == obj) {
-				sprites.put(i, spriteMap.get(i));
-			}
-		}
-		return sprites;
-	}*/
-	
-	
-	
+    private Integer incrementID() {
+        while(spriteMap.keySet().contains(currentID)) {
+            currentID++;
+        }
+        return currentID;
+    }
+    
+    public void setLocked() {
+        isLocked = true;
+    }
+    
+    public void setUnlocked() {
+        isLocked = false;
+    }
+    
+    public Integer addObject (SpriteCharacteristics chars) {
+        if (isLocked) return null;
+        return 0;
+    }
+    
+    public boolean deleteObject (Integer ModelID) {
+        if (isLocked) return false;
+        spriteMap.remove(ModelID);
+        return true;
+    }
+    
+    public boolean updateObject (Integer ModelID, SpriteCharacteristics chars) {
+        if (isLocked) return false;
+        //if it passes other logic tests including: no collisions
+        spriteMap.remove(ModelID);
+        spriteMap.put(ModelID, chars);
+        return true;
+    }
+    
+    
+    //TODO: Talk to authoring about how goals are implemented 
+    //      this is needed to implement this method.
+    public boolean setGoal(Goal goal) {
+        return false;
+    }
+    
+    
+    
+    /*public HashMap<Integer, SpriteCharacteristics> getSpriteTypes(ObjectType obj) {
+        HashMap<Integer, SpriteCharacteristics> sprites = new HashMap<Integer, SpriteCharacteristics >();
+        for (Integer i: spriteMap.keySet()) {
+            if (spriteMap.get(i).objectType == obj) {
+                sprites.put(i, spriteMap.get(i));
+            }
+        }
+        return sprites;
+    }*/
+    
+    
+    
 
 }
