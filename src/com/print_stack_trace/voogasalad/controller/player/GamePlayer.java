@@ -4,6 +4,7 @@ import com.print_stack_trace.voogasalad.controller.TabController;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;
+import javafx.scene.Scene;
 
 public class GamePlayer implements TabController {
 	private Group root = new Group();
@@ -11,7 +12,8 @@ public class GamePlayer implements TabController {
 	
 	public Group initialize(GameEngine gameEngine) {
 		this.gameEngine = gameEngine;
-		//TODO: Implement
-		return root;
+		HomeGUI homeGUI = new HomeGUI();
+		return homeGUI.initialize(gameEngine);
 	}
+	
 }
