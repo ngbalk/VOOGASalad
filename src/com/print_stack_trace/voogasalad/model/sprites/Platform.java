@@ -1,10 +1,12 @@
 package com.print_stack_trace.voogasalad.model.sprites;
 
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+
 public class Platform extends Block {
 
-    public Platform (String id) {
-        super(id);
-        // TODO Auto-generated constructor stub
+    public Platform (String id, SpriteCharacteristics spriteCharacteristics) {
+        super(id, spriteCharacteristics);
+        
     }
 
     @Override

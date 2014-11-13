@@ -1,10 +1,12 @@
 package com.print_stack_trace.voogasalad.model.sprites;
 
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+
 public class Hero extends Character {
 
-    public Hero (String id) {
-        super(id);
-        // TODO Auto-generated constructor stub
+    public Hero (String id, SpriteCharacteristics spriteCharacteristics) {
+        super(id, spriteCharacteristics);
+        
     }
 
     @Override

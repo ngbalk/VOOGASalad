@@ -1,10 +1,12 @@
 package com.print_stack_trace.voogasalad.model.sprites;
 
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+
 public class Obstacle extends Block{
 
-    public Obstacle (String id) {
-        super(id);
-        // TODO Auto-generated constructor stub
+    public Obstacle (String id, SpriteCharacteristics spriteCharacteristics) {
+        super(id, spriteCharacteristics);
+        
     }
 
     @Override

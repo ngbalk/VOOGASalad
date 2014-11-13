@@ -13,10 +13,12 @@ public class GameAuthorEngine {
 	private LevelModel currentLevel;
 
 	public enum SpriteType {
-		PLAYER,
+		HERO,
+		ENEMY,
+		PLATFORM,
 		OBSTACLE,
-		GOAL,
-		SCENERY
+		REWARD
+		
 	}
 
 	public GameAuthorEngine(){
