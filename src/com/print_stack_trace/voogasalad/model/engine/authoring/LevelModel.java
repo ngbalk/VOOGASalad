@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
-import com.print_stack_trace.voogasalad.model.sprites.Goal;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 public class LevelModel {
     
