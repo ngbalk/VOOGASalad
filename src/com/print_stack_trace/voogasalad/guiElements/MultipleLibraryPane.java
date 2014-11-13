@@ -9,14 +9,17 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class MultipleLibraryPane extends TabPane{
 	private double myWidth;
 	private double myHeight;
+	private Pane myMainPane;
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/guiResources/Tabs.Properties";
-	public MultipleLibraryPane(Number width, Number height) {
-		myWidth=(double) width;
-		myHeight=(double) height;
+	public MultipleLibraryPane(Number width, Number height, Pane otherPane) {
+		myWidth= width.doubleValue();
+		myHeight=height.doubleValue();
+		myMainPane=otherPane;
 		loadAndAddTabs();
 	}
 	private void loadAndAddTabs(){
@@ -28,8 +31,9 @@ public class MultipleLibraryPane extends TabPane{
 				Tab myNewTab=new Tab();
 				myNewTab.setText((String) pictureName);
 				Class myClass=Class.forName(prop.getProperty((String) pictureName));
-				AbstractLibraryPane myLibrary=(AbstractLibraryPane) myClass.getConstructor(Number.class, Number.class, String.class).newInstance(myWidth, myHeight, null);
-				myNewTab.setContent(myLibrary);
+				AbstractLibraryPane myLibrary=(AbstractLibraryPane) myClass.getConstructor(Number.class, Number.class, Pane.class).newInstance(myWidth, myHeight, myMainPane);
+				ScrollBarPane myPane=new ScrollBarPane(myWidth, myHeight, myLibrary);
+				myNewTab.setContent(myPane);
 				this.getTabs().add(myNewTab);
 			}
 		}

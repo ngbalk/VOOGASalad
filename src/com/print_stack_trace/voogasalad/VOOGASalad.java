@@ -15,7 +15,6 @@ public class VOOGASalad extends Application {
 		Scene scene = GUI.init(WIDTH, HEIGHT);
 		arg0.setScene(scene);
 		arg0.show();
-		
 	}
 	
 	public static void main(String[] args)
