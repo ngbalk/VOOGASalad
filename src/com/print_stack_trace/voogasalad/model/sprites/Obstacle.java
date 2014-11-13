@@ -1,4 +1,4 @@
-package com.print_stack_trace.voogasalad.controller.author;
+package com.print_stack_trace.voogasalad.model.sprites;
 
 public class Obstacle extends Block{
 
