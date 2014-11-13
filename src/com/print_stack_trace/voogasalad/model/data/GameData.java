@@ -3,7 +3,7 @@ package com.print_stack_trace.voogasalad.model.data;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import com.print_stack_trace.voogasalad.model.LevelModel;
+import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameData {
 
