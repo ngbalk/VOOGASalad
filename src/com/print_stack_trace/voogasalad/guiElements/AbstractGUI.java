@@ -9,10 +9,10 @@ import javafx.scene.layout.Pane;
 public abstract class AbstractGUI extends BorderPane {
 	private double myWidth;
 	private double myHeight;
-	public AbstractGUI(Number width, Number height){
-		setPrefSize((double)width, (double)height);
-		myWidth= (double)width;
-		myHeight=(double)height;
+	public AbstractGUI(double width, double height){
+		//setPrefSize((double)width, (double)height);
+		myWidth= width;
+		myHeight=height;
 		setCenter(setCenterPane());
 		setBottom(setBottomPane());
 		setLeft(setLeftPane());
