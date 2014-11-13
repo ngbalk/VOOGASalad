@@ -1,4 +1,4 @@
-package com.print_stack_trace.voogasalad.model.sprites;
+package com.print_stack_trace.voogasalad.model.environment;
 
 public class DestinationGoal extends Goal {
 

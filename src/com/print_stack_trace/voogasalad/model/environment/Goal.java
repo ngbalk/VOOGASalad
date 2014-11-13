@@ -1,7 +1,9 @@
-package com.print_stack_trace.voogasalad.model.sprites;
+package com.print_stack_trace.voogasalad.model.environment;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import com.print_stack_trace.voogasalad.model.sprites.Sprite;
 
 public abstract class Goal {
     
