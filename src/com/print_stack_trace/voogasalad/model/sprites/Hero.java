@@ -4,8 +4,8 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 public class Hero extends Character {
 
-    public Hero (String id, SpriteCharacteristics spriteCharacteristics) {
-        super(id, spriteCharacteristics);
+    public Hero (SpriteCharacteristics spriteCharacteristics) {
+        super(spriteCharacteristics);
         
     }
 

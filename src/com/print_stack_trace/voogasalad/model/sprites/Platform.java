@@ -4,8 +4,8 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 public class Platform extends Block {
 
-    public Platform (String id, SpriteCharacteristics spriteCharacteristics) {
-        super(id, spriteCharacteristics);
+    public Platform (SpriteCharacteristics spriteCharacteristics) {
+        super(spriteCharacteristics);
         
     }
 

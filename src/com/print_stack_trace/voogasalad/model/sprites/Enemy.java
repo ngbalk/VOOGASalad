@@ -5,8 +5,8 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 public class Enemy extends Character {
 
     
-    public Enemy (String id, SpriteCharacteristics spriteCharacteristics) {
-        super(id, spriteCharacteristics);
+    public Enemy (SpriteCharacteristics spriteCharacteristics) {
+        super(spriteCharacteristics);
         
     }
     //TODO

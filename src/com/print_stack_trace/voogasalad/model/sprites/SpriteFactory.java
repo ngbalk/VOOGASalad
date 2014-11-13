@@ -7,7 +7,7 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 public class SpriteFactory {
     public static final String spritePath = "com.print_stack_trace.voogasalad.model.sprites.";
 
-    protected Sprite buildSprite(SpriteCharacteristics mySpriteCharacteristics) {
+    public Sprite buildSprite(SpriteCharacteristics mySpriteCharacteristics) {
         Constructor<?> con = null;
         Sprite newSprite = null;
 

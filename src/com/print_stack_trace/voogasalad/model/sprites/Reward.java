@@ -6,8 +6,8 @@ public class Reward extends Sprite {
     
     private int myValue;
     
-    public Reward (String id, SpriteCharacteristics spriteCharacteristics) {
-        super(id, spriteCharacteristics);
+    public Reward (SpriteCharacteristics spriteCharacteristics) {
+        super(spriteCharacteristics);
     }
 
     @Override

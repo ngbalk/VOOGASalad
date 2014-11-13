@@ -4,8 +4,8 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 public class Obstacle extends Block{
 
-    public Obstacle (String id, SpriteCharacteristics spriteCharacteristics) {
-        super(id, spriteCharacteristics);
+    public Obstacle (SpriteCharacteristics spriteCharacteristics) {
+        super(spriteCharacteristics);
         
     }
 

@@ -7,14 +7,13 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 public abstract class Sprite {
-    private String myId;
     protected SpriteCharacteristics mySpriteCharacteristics;
     protected Point2D myPosition;
     protected Image myImage;
     protected SpriteType mySpriteType;
     
-    public Sprite(String id, SpriteCharacteristics spriteCharacteristics) {
-        myId = id;
+    public Sprite(SpriteCharacteristics spriteCharacteristics) {
+
         mySpriteCharacteristics = spriteCharacteristics;
         setSpriteProperties();
     }
@@ -26,8 +25,14 @@ public abstract class Sprite {
         myImage = mySpriteCharacteristics.img;
     }
     
-    protected boolean updateSpriteProperties(SpriteCharacteristics spriteCharacteristics) {
+    public boolean updateSpriteProperties(SpriteCharacteristics spriteCharacteristics) {
         mySpriteCharacteristics = spriteCharacteristics;
+        setSpriteProperties();
         return true;
     }
+    
+    public SpriteType getMySpriteType() {
+        return mySpriteType;
+    }
 }
+

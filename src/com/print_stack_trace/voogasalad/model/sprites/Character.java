@@ -9,8 +9,8 @@ public abstract class Character extends Sprite {
     private double mySpeed;
     private String myDirectionFacing;
     
-    public Character (String id, SpriteCharacteristics spriteCharacteristics) {
-        super(id, spriteCharacteristics);
+    public Character (SpriteCharacteristics spriteCharacteristics) {
+        super(spriteCharacteristics);
         
     }
 
