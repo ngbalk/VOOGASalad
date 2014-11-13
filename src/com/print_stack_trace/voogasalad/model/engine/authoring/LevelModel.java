@@ -1,7 +1,11 @@
-package com.print_stack_trace.voogasalad.model;
+package com.print_stack_trace.voogasalad.model.engine.authoring;
 
 import java.util.Map;
 
+<<<<<<< HEAD:src/com/print_stack_trace/voogasalad/model/LevelModel.java
+=======
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+>>>>>>> 58fdedd0fe8487d07c684f079cbce13a5c7dd9b0:src/com/print_stack_trace/voogasalad/model/engine/authoring/LevelModel.java
 import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.sprites.Goal;
 

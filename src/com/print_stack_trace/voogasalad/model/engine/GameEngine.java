@@ -6,8 +6,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import com.print_stack_trace.voogasalad.model.LevelModel;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
+import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngineList;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
@@ -16,6 +17,7 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 public class GameEngine {
 	private LevelModel currentLevel;
 	private RuntimeEngine runtimeEngine;
+	private GameAuthorEngine authorEngine;
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -41,15 +43,15 @@ public class GameEngine {
 	//GAME AUTHORING
 	
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) {
-		return currentLevel.addObject(spriteModel);
+		return authorEngine.addObjectToLevel(spriteModel);
 	}
 	
 	public boolean updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
-		return currentLevel.updateObject(modelID, spriteModel);
+		return authorEngine.updateObject(modelID, spriteModel);
 	}
 	
 	public boolean deleteObject(Integer modelID) {
-		return currentLevel.deleteObject(modelID);
+		return authorEngine.deleteObject(modelID);
 	}
 	
 	public void setProgramPhysicEngine(int engineIndex) {
