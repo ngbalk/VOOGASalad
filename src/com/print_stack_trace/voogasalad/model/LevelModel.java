@@ -2,8 +2,8 @@ package com.print_stack_trace.voogasalad.model;
 
 import java.util.Map;
 
-import com.print_stack_trace.voogasalad.controller.author.Goal;
 import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.sprites.Goal;
 
 public class LevelModel {
 	
