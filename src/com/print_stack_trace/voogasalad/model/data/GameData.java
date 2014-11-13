@@ -3,7 +3,7 @@ package com.print_stack_trace.voogasalad.model.data;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import com.print_stack_trace.voogasalad.model.LevelModel;
+import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameData {
 
@@ -64,7 +64,7 @@ public class GameData {
 	 *            - name of the level that the high score will be associated
 	 *            with
 	 */
-	public void saveHighScore(String name, HighScores highscore) {
+	public void saveHighScore(String name, HighScore highscore) {
 
 	}
 
@@ -74,7 +74,7 @@ public class GameData {
 	 *            - name of the file that the high scores are being loaded for
 	 * @return list or text representation of the high scores
 	 */
-	public List<HighScores> loadHighScores(String name) {
+	public List<HighScore> loadHighScores(String name) {
 		return null;
 
 	}
