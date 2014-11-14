@@ -1,12 +1,12 @@
 package com.print_stack_trace.voogasalad.model.engine;
 
-import java.awt.Image;
-import java.awt.Point;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.data.GameData;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
@@ -17,7 +17,8 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 public class GameEngine {
 	private LevelModel currentLevel;
 	private RuntimeEngine runtimeEngine;
-	private GameAuthorEngine authorEngine;
+	private GameAuthorEngine authorEngine = new GameAuthorEngine();
+	private GameData gameData = new GameData();
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -35,11 +36,11 @@ public class GameEngine {
 		//loadLevel(LevelModel level)
 	}
 	
-	//TODO: @data This should mirror public on GameData.java
-	public void saveGame(File gameFile) {
-		//loadLevel(LevelModel level)
+	public void saveGame(String location, String fileName) throws IOException {
+		LevelModel lvl = null; //TODO: Import from authoing enviro
+		gameData.writeLevel(lvl, location, fileName);
 	}
-	
+
 	//GAME AUTHORING
 	
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) {
@@ -62,9 +63,8 @@ public class GameEngine {
 		return PhysicsEngineList.getProgramPhysicEngineList();
 	}
 	
-	//TODO: Ask front end ppl what the params they want are
-	public void setProgramPhysicEngineUsingParams() {
-		//setPhysicsEngine(PhysicsEngineList.physicEngineFromParams(foo, bar));
+	public void setProgramPhysicEngineUsingParams(int gravity, int drag, int intensity) {
+		setPhysicsEngine(PhysicsEngineList.physicEngineFromParams(gravity, drag, intensity));
 	}
 	
 	//GAME PLAYER
@@ -96,6 +96,6 @@ public class GameEngine {
 	}
 	
 	private void setPhysicsEngine(PhysicsEngine newEngine) {
-		currentLevel.setPhysicsEngine(newEngine);
+		//.setPhysicsEngine(newEngine);
 	}
 }
