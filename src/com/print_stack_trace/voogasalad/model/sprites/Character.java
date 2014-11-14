@@ -5,9 +5,10 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import javafx.geometry.Point2D;
 
 public abstract class Character extends Sprite {
-    private int myHealth;
-    private double mySpeed;
-    private String myDirectionFacing;
+    //TODO: MAKE GETTERS; PUBLIC FOR TESTING
+    public int myHealth;
+    public double mySpeed;
+    public String myDirectionFacing;
     
     public Character (SpriteCharacteristics spriteCharacteristics) {
         super(spriteCharacteristics);
