@@ -1,5 +1,4 @@
 package com.print_stack_trace.voogasalad.controller;
-
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;
