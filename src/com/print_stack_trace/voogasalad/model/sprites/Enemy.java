@@ -1,11 +1,14 @@
-package com.print_stack_trace.voogasalad.controller.author;
+package com.print_stack_trace.voogasalad.model.sprites;
+
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 public class Enemy extends Character {
 
-    public Enemy (String id) {
-        super(id);
-    }
     
+    public Enemy (SpriteCharacteristics spriteCharacteristics) {
+        super(spriteCharacteristics);
+        
+    }
     //TODO
     @Override
     public void update () {
