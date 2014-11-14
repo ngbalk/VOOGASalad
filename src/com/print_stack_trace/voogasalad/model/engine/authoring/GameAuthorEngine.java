@@ -3,6 +3,7 @@ package com.print_stack_trace.voogasalad.model.engine.authoring;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
@@ -19,6 +20,24 @@ public class GameAuthorEngine {
 		OBSTACLE,
 		REWARD
 		
+	}
+	
+	public enum GoalType {
+	    REACH_OBJECT,
+	    REACH_DISTANCE,
+	    KILL_BOSS,
+	    POINTS,
+	    STAY_ALIVE
+	}
+	
+	public enum CameraType {
+	    SCROLLING_RIGHT_TO_LEFT,
+	    SCROLLING_LEFT_TO_RIGHT,
+	    SCROLLING_TOP_TO_BOTTOM,
+	    SCROLLING_BOTTOM_TO_TOP,
+	    CENTERED_ON_PLAYER,
+	    SCROLL_WHEN_EDGE_REACHED
+	    
 	}
 
 	public GameAuthorEngine(){
@@ -62,11 +81,11 @@ public class GameAuthorEngine {
 		currentLevel.setPhysicsEngine(engine);
 	}
 
-	public void setGoal(Goal goal){
+	public void setGoal(GoalCharacteristics goal){
 		currentLevel.setGoal(goal);
 	}
 
-	public void setCameraType(){
-
+	public void setCameraType(CameraType c){
+	    currentLevel.setCameraType(c);
 	}
 }

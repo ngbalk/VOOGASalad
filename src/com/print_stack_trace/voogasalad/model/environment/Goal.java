@@ -1,32 +1,28 @@
 package com.print_stack_trace.voogasalad.model.environment;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import com.print_stack_trace.voogasalad.model.sprites.Sprite;
+import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.GoalType;
 
 public abstract class Goal {
     
-    private double value;
-    private Collection<Sprite> mySpriteList;
+    protected GoalCharacteristics myGoalCharacteristics;
+    protected GoalType myGoalType;
     
-    public Goal() {
-        mySpriteList = new ArrayList<Sprite>();
-        value = 0;
+    public Goal(GoalCharacteristics goalCharacteristics) {
+        myGoalCharacteristics = goalCharacteristics;
+        setGoalProperties();
     }
-    
-    public Goal(Sprite sprite) {
-        this();
-        mySpriteList.add(sprite);
-    }
-    
-    public Goal(Collection<Sprite> spriteList){
-        this();
-        mySpriteList = spriteList;
-    }
-    
     
     public abstract boolean isCompleted();
     
+    protected void setGoalProperties() {
+        myGoalType = myGoalCharacteristics.myGoalType;
+    }
+    
+    public boolean updateGoalCharacteristics(GoalCharacteristics goalCharacteristics) {
+        myGoalCharacteristics = goalCharacteristics;
+        setGoalProperties();
+        return true;
+    }
     
 }

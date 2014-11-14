@@ -23,6 +23,7 @@ public abstract class Sprite {
     protected void setSpriteProperties() {
         myPosition = mySpriteCharacteristics.p;
         myImage = mySpriteCharacteristics.img;
+        mySpriteType = mySpriteCharacteristics.objectType;
     }
     
     public boolean updateSpriteProperties(SpriteCharacteristics spriteCharacteristics) {
