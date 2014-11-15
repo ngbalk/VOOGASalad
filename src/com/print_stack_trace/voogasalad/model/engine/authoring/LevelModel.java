@@ -12,6 +12,7 @@ public class LevelModel {
 	private Integer currentID;
 	private boolean isLocked;
 	private PhysicsEngine physicsEngine;
+	private Goal myGoal;
 	
 	
 	public PhysicsEngine getPhysicsEngine() {
@@ -23,7 +24,7 @@ public class LevelModel {
 		this.physicsEngine = physicsEngine;
 	}
 
-	private Integer incrementID() {
+	private Integer generateID() {
 		while(spriteMap.keySet().contains(currentID)) {
 			currentID++;
 		}
@@ -40,7 +41,9 @@ public class LevelModel {
 	
 	public Integer addObject (SpriteCharacteristics chars) {
 		if (isLocked) return null;
-		return 0;
+		int newID = generateID();
+		spriteMap.put(newID, chars);
+		return newID;
 	}
 	
 	public boolean deleteObject (Integer ModelID) {
@@ -61,7 +64,8 @@ public class LevelModel {
 	//TODO: Talk to authoring about how goals are implemented 
 	//      this is needed to implement this method.
 	public boolean setGoal(Goal goal) {
-		return false;
+		myGoal = goal;
+		return true;
 	}
 	
 	
