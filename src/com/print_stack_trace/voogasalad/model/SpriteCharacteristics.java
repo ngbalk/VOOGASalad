@@ -7,7 +7,7 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 
 public class SpriteCharacteristics {
 	public Image img;
-	public Point p;
+	public Point location;
 	public boolean interactive;
 	public SpriteType objectType;
 }

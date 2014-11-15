@@ -41,6 +41,18 @@ public class LevelModel {
 	
 	public Integer addObject (SpriteCharacteristics chars) {
 		if (isLocked) return null;
+		
+		for (Integer i: spriteMap.keySet()) {
+			/*
+			 * Logic for if object can be added 
+			 * Loop through sprites to see if
+			 * location of new added sprite is
+			 * unoccupied.  If so, return null 
+			 * in this loop. Otherwise, conclude
+			 * the loop.
+			*/
+		}
+		
 		int newID = generateID();
 		spriteMap.put(newID, chars);
 		return newID;
