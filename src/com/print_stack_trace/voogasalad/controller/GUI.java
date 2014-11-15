@@ -34,10 +34,10 @@ public class GUI {
 
         TabPane tabPane = new TabPane();
         BorderPane borderPane = new BorderPane();
-        for (int i = 0; i < tabControllers.length; i++) {
+        for (int i = 0; i < viewControllers.length; i++) {
             Tab tab = new Tab();
             tab.setText(tabTitles[i]);
-            Group tabContent = tabControllers[i].initialize(sharedGameEngine);
+            Group tabContent = viewControllers[i].initialize(sharedGameEngine);
             tab.setContent(tabContent);
             tabPane.getTabs().add(tab);
         }
