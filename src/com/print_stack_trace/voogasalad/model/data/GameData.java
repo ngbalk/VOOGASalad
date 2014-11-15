@@ -1,5 +1,7 @@
 package com.print_stack_trace.voogasalad.model.data;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class GameData {
 	 * @param name
 	 *            - name of the file to be saved
 	 */
-	public void writeLevel(LevelModel lvl, String location, String name) {
+	public void writeLevel(LevelModel lvl, String location, String name) throws IOException {
 
 	}
 
@@ -37,7 +39,7 @@ public class GameData {
 	 * @return an instance of the level model that the game engine or game
 	 *         authoring environment will either play or edit
 	 */
-	public LevelModel loadLevel(String fileName) {
+	public LevelModel loadLevel(String fileName) throws FileNotFoundException {
 		return null;
 
 	}
