@@ -21,9 +21,9 @@ import javafx.scene.layout.BorderPane;
 public class GUI {
 	public static Scene init(double width, double height) {
 		//Coded with help from: http://www.java2s.com/Code/Java/JavaFX/AddTabtoTabPane.htm
-		TabController[] tabControllers = new TabController[2];
-		tabControllers[0] = new HomeGUI(width, height);
-		tabControllers[1] = new GreenGUI(width, height);
+		ViewController[] viewControllers = new ViewController[2];
+		viewControllers[0] = new HomeGUI(width, height);
+		viewControllers[1] = new GreenGUI(width, height);
 		String[] tabTitles = new String[2];
 		tabTitles[0] = "Game Player";
 		tabTitles[1] = "Level Builder";
@@ -34,10 +34,10 @@ public class GUI {
 
         TabPane tabPane = new TabPane();
         BorderPane borderPane = new BorderPane();
-        for (int i = 0; i < tabControllers.length; i++) {
+        for (int i = 0; i < viewControllers.length; i++) {
             Tab tab = new Tab();
             tab.setText(tabTitles[i]);
-            Group tabContent = tabControllers[i].initialize(sharedGameEngine);
+            Group tabContent = viewControllers[i].initialize(sharedGameEngine);
             tab.setContent(tabContent);
             tabPane.getTabs().add(tab);
         }

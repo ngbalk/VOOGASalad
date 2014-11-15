@@ -1,6 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.player;
 
 import com.print_stack_trace.voogasalad.controller.TabController;
+import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.guiElements.AbstractGUI;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
@@ -11,10 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class HomeGUI extends AbstractGUI implements TabController{
+public class HomeGUI extends AbstractGUI implements ViewController{
 	GameEngine myGameEngine;
-	public HomeGUI(Number width, Number height) {
+	public HomeGUI(double width, double height) {
 		super(width, height);
 	}
 	private Group myRoot;
@@ -26,6 +29,10 @@ public class HomeGUI extends AbstractGUI implements TabController{
 		Button newGameButton= new Button("New Game");
 		Button loadGameButton = new Button("Load Game");
 		Button helpButton = new Button("Help");
+		
+		Image background = new Image("../LevelImages/overworld_bg.png");
+		ImageView bg = new ImageView(background);
+		myRoot.getChildren().add(bg);
 		
 		toolBar.getItems().addAll(newGameButton, loadGameButton, helpButton);
 		myRoot.getChildren().add(toolBar);															
