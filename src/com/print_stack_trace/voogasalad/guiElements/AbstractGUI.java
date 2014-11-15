@@ -18,6 +18,7 @@ public abstract class AbstractGUI extends BorderPane {
 		myHeight=height.doubleValue();
 		gamePane=(Pane) setCenterPane();
 		setCenter(gamePane);
+//		setCenter(setCenterPane());
 		setBottom(setBottomPane());
 		setLeft(setLeftPane());
 		setRight(setRightPane());
