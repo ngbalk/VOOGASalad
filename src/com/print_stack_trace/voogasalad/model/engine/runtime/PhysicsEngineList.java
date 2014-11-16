@@ -2,7 +2,6 @@ package com.print_stack_trace.voogasalad.model.engine.runtime;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
@@ -18,8 +17,7 @@ public class PhysicsEngineList {
 		return null;
 	}
 	
-	//TODO: Obviously not foo-bar
-	public static PhysicsEngine physicEngineFromParams(int foo, int bar) {
+	public static PhysicsEngine physicEngineFromParams(int gravity, int drag, int intensity) {
 		return new PhysicsEngine() {
 
 			@Override
