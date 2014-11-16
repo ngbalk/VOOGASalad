@@ -1,4 +1,4 @@
-package com.print_stack_trace.voogasalad.guiElements;
+package com.print_stack_trace.voogasalad.controller.guiElements;
 import com.print_stack_trace.voogasalad.controller.TabController;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.author.GameAuthor;
