@@ -1,9 +1,9 @@
-package com.print_stack_trace.voogasalad.guiElements;
+package com.print_stack_trace.voogasalad.controller.guiElements;
 
 import java.util.Collection;
 import java.util.HashSet;
 
-import com.print_stack_trace.voogasalad.gameElements.GameObject;
+import com.print_stack_trace.voogasalad.controller.gameElements.GameObject;
 
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;

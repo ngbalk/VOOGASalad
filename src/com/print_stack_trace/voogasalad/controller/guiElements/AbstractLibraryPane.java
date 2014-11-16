@@ -1,4 +1,4 @@
-package com.print_stack_trace.voogasalad.guiElements;
+package com.print_stack_trace.voogasalad.controller.guiElements;
 import javafx.scene.layout.Pane;
 public abstract class AbstractLibraryPane extends Pane{
 	protected String myResources;
