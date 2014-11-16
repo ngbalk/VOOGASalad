@@ -17,7 +17,7 @@ public class GameAuthor implements ViewController {
 	private GameEngine gameEngine;
 	private double myWidth;
 	private double myHeight;
-	public GameAuthor(int width, int height){
+	public GameAuthor(double width, double height){
 		myWidth=width;
 		myHeight=height;
 	}

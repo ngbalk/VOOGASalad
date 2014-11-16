@@ -1,14 +1,19 @@
 package com.print_stack_trace.voogasalad.guiElements;
 
+import com.print_stack_trace.voogasalad.controller.TabController;
+import com.print_stack_trace.voogasalad.controller.ViewController;
+
 import com.print_stack_trace.voogasalad.controller.author.GameAuthor;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
+
 import javafx.scene.Group;
 import javafx.scene.Node;
 
-public class GreenGUI extends AbstractGUI {
+public class GreenGUI extends AbstractGUI implements ViewController{
 	private double myWidth;
 	private double myHeight;
-	public GreenGUI(Number width, Number height){
+	private GameEngine myGameEngine;
+	public GreenGUI(double width, double height){
 		super(width, height);
 		setLeft(null);
 		this.setBorderStyle(this);
@@ -28,8 +33,10 @@ public class GreenGUI extends AbstractGUI {
 
 	public Group initialize(GameEngine gameEngine) {
 		Group myGroup=new Group();
-		myGroup.getChildren().add(this);
-		return new Group(myGroup);
+		myGameEngine = gameEngine;
+		Group root = new Group();
+		root.getChildren().add(this);
+		return root;
 	}
 
 	

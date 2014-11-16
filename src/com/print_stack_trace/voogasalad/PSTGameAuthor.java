@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.author.GameAuthor;
+import com.print_stack_trace.voogasalad.guiElements.GreenGUI;
 
 public class PSTGameAuthor extends VOOGASalad {
 	

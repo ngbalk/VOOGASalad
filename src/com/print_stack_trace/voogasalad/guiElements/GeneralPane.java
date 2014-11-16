@@ -2,9 +2,6 @@ package com.print_stack_trace.voogasalad.guiElements;
 
 import java.util.Collection;
 import java.util.HashSet;
-
-import com.print_stack_trace.voogasalad.controller.author.Sprite;
-
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
