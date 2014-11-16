@@ -1,38 +1,23 @@
 package com.print_stack_trace.voogasalad.controller.player;
 
-
-import java.awt.event.ActionEvent;
-
-
-
-
-
 import java.io.File;
 import java.io.FileInputStream;
 
-import Exceptions.GamePlayerException;
-
-import com.print_stack_trace.voogasalad.Constants;
-import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.guiElements.AbstractGUI;
-import com.print_stack_trace.voogasalad.model.engine.GameEngine;
-import com.print_stack_trace.voogasalad.player.Score;
-
 import javafx.event.EventHandler;
 import javafx.scene.Group;
-<<<<<<< HEAD
 import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-=======
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToolBar;
->>>>>>> master
 
-public class GamePlayer implements ViewController{
+import com.print_stack_trace.voogasalad.Constants;
+import com.print_stack_trace.voogasalad.controller.ViewController;
+import com.print_stack_trace.voogasalad.exceptions.GamePlayerException;
+import com.print_stack_trace.voogasalad.model.engine.GameEngine;
+import com.print_stack_trace.voogasalad.player.Score;
+
+public class GamePlayer extends ViewController {
 	private Group myRoot;
 	private GameEngine myGameEngine;
 	
@@ -46,12 +31,21 @@ public class GamePlayer implements ViewController{
 	 * determine which methods needs to be called from  backend, so they can create public methods
 	 */
 	public Group initialize(GameEngine gameEngine) {
-<<<<<<< HEAD
-		this.gameEngine = gameEngine;
-		root.setOnKeyReleased(KeyPad);
+		myGameEngine = gameEngine;
+		myRoot = new Group();
+		myRoot.setOnKeyReleased(KeyPad);
 		initializeGUIElements();
 		setHandlersForGuiElements();
-		return root;
+		//Add behavior for menu buttons later
+		
+		ToolBar toolBar = new ToolBar();
+		Button newGameButton= new Button("New Game");
+		Button loadGameButton = new Button("Load Game");
+		Button helpButton = new Button("Help");
+		
+		toolBar.getItems().addAll(newGameButton, loadGameButton, helpButton);
+		myRoot.getChildren().add(toolBar);															
+		return myRoot;
 	}
 	
 	/**
@@ -132,26 +126,10 @@ public class GamePlayer implements ViewController{
 		FileChooser fc = new FileChooser(); 
 		File file = fc.showOpenDialog(new Stage());
 		if (!file.getName().endsWith(Constants.JPEG) && !file.getName().endsWith(Constants.PNG)){
-			GamePlayerException.displayError(Constants.PLEASE_UPLOAD_A_JPEG_OR_PNG);
+			displayError(new GamePlayerException()); //TODO: make a new proper subclass with the right message
 			return; 
 		}
 		FileInputStream fis;
 	}
-=======
-		myGameEngine = gameEngine;
-		myRoot = new Group();
-		//Add behavior for menu buttons later
-		
-		ToolBar toolBar = new ToolBar();
-		Button newGameButton= new Button("New Game");
-		Button loadGameButton = new Button("Load Game");
-		Button helpButton = new Button("Help");
-		
-		toolBar.getItems().addAll(newGameButton, loadGameButton, helpButton);
-		myRoot.getChildren().add(toolBar);															
-		return myRoot;
-	}
-
->>>>>>> master
 	
 }
