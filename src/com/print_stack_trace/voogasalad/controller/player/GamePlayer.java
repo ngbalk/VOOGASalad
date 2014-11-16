@@ -1,42 +1,24 @@
 package com.print_stack_trace.voogasalad.controller.player;
 
-<<<<<<< HEAD
 import java.io.File;
 import java.io.FileInputStream;
-=======
-import java.awt.List;
-import java.io.File;
 import java.util.ArrayList;
-
-import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.controller.guiElements.AbstractGUI;
-import com.print_stack_trace.voogasalad.model.engine.GameEngine;
-import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
-import com.print_stack_trace.voogasalad.model.data.GameData;
-import com.print_stack_trace.voogasalad.model.data.HighScore;
->>>>>>> master
 
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
-<<<<<<< HEAD
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.exceptions.GamePlayerException;
+import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
-=======
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
->>>>>>> master
 
 public class GamePlayer extends ViewController {
 	private Group myRoot;
@@ -78,7 +60,6 @@ public class GamePlayer extends ViewController {
 		
 		return myRoot;
 	}
-<<<<<<< HEAD
 	
 	/**
 	 * update the players view: Engine will change locations/stats on the backend; player will update the scene after changes
@@ -163,7 +144,6 @@ public class GamePlayer extends ViewController {
 		}
 		FileInputStream fis;
 	}
-=======
 
 	//may need to move this elsewhere to deal with hiding scores after a bit
 	private void extractAndDisplayScores() {
@@ -196,7 +176,5 @@ public class GamePlayer extends ViewController {
 		//LevelModel lm = com.print_stack_trace.voogasalad.model.data.GameData.loadLevel(null);
 		return null; 
 	}
-
->>>>>>> master
 	
 }
