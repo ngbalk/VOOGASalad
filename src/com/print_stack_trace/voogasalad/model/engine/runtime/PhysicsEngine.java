@@ -34,10 +34,20 @@ public class PhysicsEngine {
 		for(SpriteCharacteristics obj : allObjects) {
 			soloHandler.applyPhysics(obj);
 		}
-		//TODO: Detect Collisions
+		/*
+			TODO: Detect Collisions
+			If a collision is detected, call the private method collisionHandler(SpriteCharacteristics s1, SpriteCharacteristics s2)
+			with the two colliding SpriteCharactoristicObjects. It would be best to put the collision detection logic in a new class
+			(maybe even static since instance vars may not be needed);.
+			
+			Ideal Example
+			if(CollisionDetector.isIntersecting(SpriteCharacteristics s1, SpriteCharacteristics s2)) {
+				collisionHandler(SpriteCharacteristics s1, SpriteCharacteristics s2);
+			}
+		*/
 	}
 	
-	public void collisionHandler(SpriteCharacteristics s1, SpriteCharacteristics s2) {
+	private void collisionHandler(SpriteCharacteristics s1, SpriteCharacteristics s2) {
 		CollisionResult result = getResultOfCollision(s1, s2);
 		CollisionHandler handler = getHandlerForResult(result);
 		handler.applyResult(result, s1, s2);
