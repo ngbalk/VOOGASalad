@@ -30,8 +30,7 @@ public class LevelModel {
 	}
 
 	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
-		if (isLocked);
-		this.physicsEngine = physicsEngine;
+		if (!isLocked) this.physicsEngine = physicsEngine;
 	}
 
 	private Integer generateID() {

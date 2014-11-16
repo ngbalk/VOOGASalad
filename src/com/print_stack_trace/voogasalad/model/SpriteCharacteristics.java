@@ -15,6 +15,14 @@ public class SpriteCharacteristics {
 	public int value;
 	public String directionFacing;
 	
+	// COLLISION FIELDS
+	public int healthEffect;
+	public boolean animateSelf;
+	public boolean animateOther;
+	public boolean solidSprite;
+	
+	
+	
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
 //		Default values 
