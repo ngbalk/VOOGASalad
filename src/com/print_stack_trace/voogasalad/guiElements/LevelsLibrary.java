@@ -17,16 +17,9 @@ public class LevelsLibrary extends PictureLibrary{
 	@Override
 	protected void addToOtherPane(Image myImage){
 		myMainPane.getChildren().removeAll(onGamePane);
-		DraggableItem copyNode=new DraggableItem((ImageView) makeImageView(myImage), myMainPane.getWidth(), myMainPane.getHeight());
-		ImageView background=(ImageView)copyNode.getMyItem();
-		background.setFitWidth(myMainPane.getWidth());
-		background.setFitHeight(myMainPane.getHeight()-10);
-		background.setFitWidth(myMainPane.getWidth()-10);
-		background.setSmooth(true);
-		background.setPreserveRatio(false);
-		background.relocate(5, 5);
-		myMainPane.getChildren().add(0, copyNode.getMyItem());
-		onGamePane.add(background);
+		ImageView myView=(ImageView) makeImageView(myImage);
+		((GamePane) myMainPane).addBackground(myView);
+		onGamePane.add(myView);
 		
 	}
 }

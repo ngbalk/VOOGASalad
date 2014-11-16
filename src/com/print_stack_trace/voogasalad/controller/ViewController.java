@@ -4,6 +4,7 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import javafx.scene.Group;
 
 public interface ViewController {
+	
 	/**
 	 * Initialization method. Setup your view objects and put them all into one
 	 * root node; !!!: This method must be called after instantiation.

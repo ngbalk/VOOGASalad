@@ -1,12 +1,17 @@
 package com.print_stack_trace.voogasalad.guiElements;
 
+import com.print_stack_trace.voogasalad.model.engine.GameEngine;
+
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 
 public abstract class AbstractGUI extends BorderPane {
 	private double myWidth;
@@ -31,6 +36,16 @@ public abstract class AbstractGUI extends BorderPane {
 		Pane bottomPane=new Pane();
 		setStyle(bottomPane);
 		bottomPane.setPrefSize(myWidth, 100);
+		Label currentLevel=new Label("Current Level");
+		currentLevel.relocate(20, 20);
+		currentLevel.setStyle("-fx-font-size: 15");
+		currentLevel.setPrefSize(100, 20);
+		currentLevel.setTextFill(Paint.valueOf("WHITE"));
+		LevelBar myLevelBar=new LevelBar(myWidth*.1, 20, 100, 20);
+		LevelButton myLevelButton=new LevelButton();
+		myLevelButton.relocate(myWidth*.3, 20);
+		myLevelButton.setPrefSize(100, 50);
+		bottomPane.getChildren().addAll(myLevelBar, currentLevel, myLevelButton);
 		this.setVisible(true);
 		return bottomPane;
 	}

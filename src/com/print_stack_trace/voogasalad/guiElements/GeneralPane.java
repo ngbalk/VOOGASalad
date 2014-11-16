@@ -3,11 +3,14 @@ package com.print_stack_trace.voogasalad.guiElements;
 import java.util.Collection;
 import java.util.HashSet;
 
-import com.print_stack_trace.voogasalad.gameElements.GameObject;
+import com.print_stack_trace.voogasalad.controller.author.Sprite;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public abstract class GeneralPane extends Pane{
@@ -17,16 +20,14 @@ public abstract class GeneralPane extends Pane{
 	private double myWidth;
 	private double myHeight;
 	private Stage myStage;
-	private GameObject myGameObject;
 	private String myName;
 	private Collection<TextField> myTextFields=new HashSet<TextField>();
 	public GeneralPane(){
-		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_NAME, null);
+		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_NAME);
 	}
-	public GeneralPane(Number width, Number height, String name, GameObject gameObject){
+	public GeneralPane(Number width, Number height, String name){
 		initiate();
-		myName=name;
-		myGameObject=gameObject;	
+		myName=name;	
 	}
 	public abstract void createTextFields();
 	public abstract void makeObservable(Collection toObserve);
@@ -42,7 +43,5 @@ public abstract class GeneralPane extends Pane{
 		Scene myScene=new Scene(this, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		myStage.setScene(myScene);
 		this.setPrefSize(myWidth, myHeight);
-	}
-	
-	
+	}	
 }

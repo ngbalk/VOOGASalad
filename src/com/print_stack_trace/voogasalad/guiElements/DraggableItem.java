@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class DraggableItem {
 	//blah{
@@ -20,7 +21,7 @@ public class DraggableItem {
 		//this.blahInclass(X::doSomething());
 		//this.blahInClass(e-->callCode(myPrivateData));
 	//}
-	private ImageView myItem;
+	private GameObject myItem;
 	private double mouseXLocation;
 	private double mouseYLocation;
 	private double myX;
@@ -29,32 +30,33 @@ public class DraggableItem {
 	private double myHeight;
 	private double gridWidth;
 	private double gridHeight;
-	private GeneralPane myNewPane=new SpritePane();
-	public DraggableItem(ImageView item, Number width, Number height){
+	private PaneChooser myPaneChooser=new PaneChooser();
+	public DraggableItem(GameObject item, Number width, Number height){
 		myItem=item;
-		myWidth=item.getFitWidth();
-		myHeight=item.getFitHeight();
+		myWidth=item.getImage().getFitWidth();
+		myHeight=item.getImage().getFitHeight();
 		gridWidth=width.doubleValue()-15;
 		gridHeight=height.doubleValue()-15;
 		drag();
 	}
 	private void drag(){
-		myItem.setOnMousePressed(new EventHandler <MouseEvent>(){
+		myItem.getImage().setOnMousePressed(new EventHandler <MouseEvent>(){
 
 			@Override
 			public void handle(MouseEvent event) {
 				mouseXLocation=event.getSceneX();
 				mouseYLocation=event.getSceneY();
+				Pane myNewPane=myPaneChooser.createPane(myItem.getType());
+				((GeneralPane) myNewPane).openPane();
 			}
 		});
 		
-		myItem.setOnMouseDragged(new EventHandler<MouseEvent>(){
+		myItem.getImage().setOnMouseDragged(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
 				if (!outOfBounds(new Point((int)event.getSceneX(), (int)event.getSceneY()))){
 					myX=event.getSceneX();
 					myY=event.getSceneY();
-					myNewPane.openPane();
 					translate();
 					mouseXLocation=event.getSceneX();
 					mouseYLocation=event.getSceneY();
@@ -63,21 +65,10 @@ public class DraggableItem {
 		});
 	}
 	private void translate(){
-		myItem.relocate(myX-myWidth/2, (myY-myHeight/1.5));
-	}
-	private void click(){
-		myItem.setOnMousePressed(new EventHandler<MouseEvent>(){
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+		myItem.getImage().relocate(myX-myWidth/2, (myY-myHeight/1.5));
 	}
 	public Node getMyItem(){
-		return myItem;
+		return myItem.getImage();
 	}
 	private boolean outOfBounds(Point myLocation){
 		if (myLocation.x>gridWidth-10||myLocation.x<45){

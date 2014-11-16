@@ -33,7 +33,6 @@ public class PictureLibrary extends AbstractLibraryPane{
 				ImageView myView=(ImageView) makeImageView(myImage);
 				myView.setOnMousePressed(event->addToOtherPane(myImage));
 				addImageToGrid(myView);
-				
 			}
 		}
 		catch (Exception e) {
@@ -42,9 +41,8 @@ public class PictureLibrary extends AbstractLibraryPane{
 	}
 	
 	protected void addToOtherPane(Image myImage){
-		DraggableItem copyNode=new DraggableItem((ImageView) makeImageView(myImage), myMainPane.getWidth(), myMainPane.getHeight());
 		GamePane gamerPane=(GamePane)myMainPane;
-		gamerPane.addGameObject((ImageView) copyNode.getMyItem());
+		gamerPane.addGameObject((ImageView) makeImageView(myImage));
 		
 	}
 	
