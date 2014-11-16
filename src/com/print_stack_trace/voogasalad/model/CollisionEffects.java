@@ -14,5 +14,5 @@ public class CollisionEffects {
 	public String levelEffect;
 	
 
-
+	
 }
