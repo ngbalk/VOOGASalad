@@ -15,7 +15,24 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 
 public class PhysicsEngine {
 	private static final int MATRIX_SIZE = SpriteType.values().length;
+	
+	/**
+	 * The decision Matrix is the basis for determining HOW to handle a given collision.
+	 * 
+	 *	 								SpriteType
+	 *			 			|	A	|	B	|	C	|	D	|
+	 *				 	A	|Explode|		|		|		|
+	 *  SpriteType	 	B	|		|Allow	|Disp2	|		|
+	 *					C	|		|Disp1	|		|		|
+	 *					D	|		|		|		|		|
+	 *
+	 * Given two objects that have collided, we can lookup their types in the table
+	 * and get back a CollisionResult describing how the collision should play out.
+	 * For example, if a sprite of type A collides with another sprite of type A,
+	 * we know we must apply an "explode" type collision to them both.
+	 */
 	private CollisionResult[][] decisionMatrix;
+	
 	private Map<CollisionResult , CollisionHandler> handlerMap;
 	private SoloPhysicsHandler soloHandler;
 	
@@ -24,6 +41,7 @@ public class PhysicsEngine {
 		ObjectTwoFullDisplacement,
 		ObjectBothFullDisplacement,
 		ObjectBothNoDisplacement,
+		NoAction
 	};
 	
 	public PhysicsEngine() {
@@ -47,6 +65,25 @@ public class PhysicsEngine {
 		*/
 	}
 	
+	/**
+	 * Private method to assist in the proper collision handling lifecycle.
+	 * Once it has been confirmed that two SpriteCharacteristics are colliding, 
+	 * we must determine what collision should occur given the types of colliding
+	 * objects and then apply the collision to the objects.
+	 * the following events happen:
+	 * 		1. The decisionMatrix is used to get the proper CollisionResult for 
+	 * 		the colliding types of SpriteCharacteristics.
+	 * 		2. The handlerMap is used to get the proper CollisionHandler subclass
+	 * 		for applying the CollisionResult received in step 1.
+	 * 		3. Call the .applyResult method on the CollisionResult subclass
+	 * 		received in step 2 to animate, transform, or change the states of the
+	 * 		colliding objects.
+	 * @param 	s1
+	 * 		a SpriteCharacteristics instance representing one of the colliding objects
+	 * @param 	s2	
+	 * 		a SpriteCharacteristics instance representing the other colliding object
+	 * @see	CollisionHandler, SpriteCharacteristics
+	 */
 	private void collisionHandler(SpriteCharacteristics s1, SpriteCharacteristics s2) {
 		CollisionResult result = getResultOfCollision(s1, s2);
 		CollisionHandler handler = getHandlerForResult(result);
