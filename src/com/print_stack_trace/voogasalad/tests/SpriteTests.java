@@ -1,4 +1,4 @@
-package testpackage;
+package com.print_stack_trace.voogasalad.tests;
 
 import static org.junit.Assert.*;
 

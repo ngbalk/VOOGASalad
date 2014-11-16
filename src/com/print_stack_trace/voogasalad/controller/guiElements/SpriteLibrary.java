@@ -1,4 +1,4 @@
-package com.print_stack_trace.voogasalad.guiElements;
+package com.print_stack_trace.voogasalad.controller.guiElements;
 
 public class SpriteLibrary extends PictureLibrary {
 	public SpriteLibrary(Number width, Number height, String resources) {

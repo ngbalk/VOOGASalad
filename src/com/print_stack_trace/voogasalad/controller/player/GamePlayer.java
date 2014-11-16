@@ -5,7 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.guiElements.AbstractGUI;
+import com.print_stack_trace.voogasalad.controller.guiElements.AbstractGUI;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.data.GameData;
@@ -46,7 +46,8 @@ public class GamePlayer implements ViewController{
 		//bg.setImage(new Image(getClass().getResourceAsStream("../images/boss.png")));
 		//myRoot.getChildren().add(bg);
 		toolBar.getItems().addAll(newGameButton, loadGameButton, helpButton, pauseButton, showBestScores);
-		myRoot.getChildren().add(toolBar);															
+		myRoot.getChildren().add(toolBar);
+		
 		return myRoot;
 	}
 

@@ -1,4 +1,4 @@
-package com.print_stack_trace.voogasalad.guiElements;
+package com.print_stack_trace.voogasalad.controller.guiElements;
 
 import javafx.scene.Node;
 import javafx.scene.control.MenuBar;
