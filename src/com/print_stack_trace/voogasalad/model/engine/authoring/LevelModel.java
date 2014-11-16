@@ -21,7 +21,8 @@ public class LevelModel {
 	private Integer currentID;
 	private boolean isLocked;
 	private PhysicsEngine physicsEngine;
-	private Goal myGoal;
+	private GoalCharacteristics myGoalChars;
+	private CameraType myCameraType;
 	
 	
 	public PhysicsEngine getPhysicsEngine() {
@@ -84,8 +85,17 @@ public class LevelModel {
 	
 	//TODO: Talk to authoring about how goals are implemented 
 	//      this is needed to implement this method.
-	public boolean setGoal(Goal goal) {
-		myGoal = goal;
+	public boolean setGoal(GoalCharacteristics goal) {
+		if (isLocked) return false;
+		//what determines if a goal can be set?
+		myGoalChars = goal;
+		return true;
+	}
+	
+	public boolean setCameraType(CameraType cameraType) {
+		if (isLocked) return false;
+		//in what context can you not set a certain cameraType
+		myCameraType = cameraType;
 		return true;
 	}
 	
