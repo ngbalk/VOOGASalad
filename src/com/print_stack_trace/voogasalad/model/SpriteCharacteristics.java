@@ -14,12 +14,7 @@ public class SpriteCharacteristics {
 	public double speed;
 	public int value;
 	public String directionFacing;
-	
-	// COLLISION FIELDS
-	public int healthEffect;
-	public boolean animateSelf;
-	public boolean animateOther;
-	public boolean solidSprite;
+	public CollisionEffects myCollisionEffects;
 	
 	
 	

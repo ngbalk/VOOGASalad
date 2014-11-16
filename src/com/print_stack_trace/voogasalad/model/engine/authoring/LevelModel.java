@@ -91,6 +91,10 @@ public class LevelModel {
 		return true;
 	}
 	
+	public GoalCharacteristics getGoal() {
+		return myGoalChars;
+	}
+	
 	public boolean setCameraType(CameraType cameraType) {
 		if (isLocked) return false;
 		//in what context can you not set a certain cameraType
@@ -98,19 +102,9 @@ public class LevelModel {
 		return true;
 	}
 	
-	
-	
-	/*public HashMap<Integer, SpriteCharacteristics> getSpriteTypes(ObjectType obj) {
-		HashMap<Integer, SpriteCharacteristics> sprites = new HashMap<Integer, SpriteCharacteristics >();
-		for (Integer i: spriteMap.keySet()) {
-			if (spriteMap.get(i).objectType == obj) {
-				sprites.put(i, spriteMap.get(i));
-			}
-		}
-		return sprites;
-	}*/
-	
-	
+	public CameraType getCameraType() {
+		return myCameraType;
+	}
 	
 
 }
