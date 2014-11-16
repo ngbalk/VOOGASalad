@@ -21,12 +21,20 @@ public class RuntimeEngine {
 	//-------------------CONSTRUCTORS-------------------//
 	
 	/**
-	 * Constructor Method.
+	 * Blank Constructor Method.
 	 */
-	
-	public RuntimeEngine(LevelModel currentLevel) {
+	public RuntimeEngine() {
+		currentLevel = null;
+		physicsEngine = null;
+	}
+	/**
+	 * Takes in a LevelModel and sets private variables
+	 * @param level
+	 */
+	public RuntimeEngine(LevelModel level) {
+		this();
+		currentLevel = level;
 		physicsEngine = currentLevel.getPhysicsEngine();
-		//TODO: Implement Constructor
 	}
 	
 	//-------------------PUBLIC METHODS-------------------//
@@ -36,21 +44,22 @@ public class RuntimeEngine {
 	 * @param currentLevel
 	 */
 	public void update() {
-		//TODO: 
-		//physicsEngine.animateSolo(allObjects);
-	}
-		
-	//GAME AUTHORING
-	
+		//TODO: Finish implementation
+		physicsEngine.animateAll(currentLevel.spriteMap.values());
+	}	
 	
 	//GAME PLAYER
 	
+	/**
+	 * This is looks like an accessor to everyone else but
+	 * a RuntimeModel should be created at the time it is called and built 
+	 * from the appropriate LevelModel data at time of call
+	 * @return 
+	 */
 	public RuntimeModel getStatus() {
-		RuntimeModel ret = new RuntimeModel();
-		/*TODO: Implement -- this is looks like an accessor to everyone else but
-		 *a RuntimeModel should be created at the time it is called and built 
-		 *from all of the various at time of call. */
-		return ret;
+		//TODO: update this...very bare bones
+		RuntimeModel runtimeModel = new RuntimeModel(currentLevel);
+		return runtimeModel;
 	}
 	
 	

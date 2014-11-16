@@ -17,11 +17,11 @@ import com.print_stack_trace.voogasalad.model.sprites.SpriteFactory;
 
 public class LevelModel {
 	
-	Map<Integer, SpriteCharacteristics> spriteMap;
+	public Map<Integer, SpriteCharacteristics> spriteMap;
 	private Integer currentID;
 	private boolean isLocked;
 	private PhysicsEngine physicsEngine;
-	private Goal myGoal;
+	public Goal myGoal;
 	
 	
 	public PhysicsEngine getPhysicsEngine() {
