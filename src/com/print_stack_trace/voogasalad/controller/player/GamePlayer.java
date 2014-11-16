@@ -14,19 +14,27 @@ import Exceptions.GamePlayerException;
 
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.controller.ViewController;
+import com.print_stack_trace.voogasalad.guiElements.AbstractGUI;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
 
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+=======
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
+>>>>>>> master
 
-public class GamePlayer implements ViewController {
-	private Group root = new Group();
-	private GameEngine gameEngine;
+public class GamePlayer implements ViewController{
+	private Group myRoot;
+	private GameEngine myGameEngine;
 	
 	private Score currentScore;
 	
@@ -38,6 +46,7 @@ public class GamePlayer implements ViewController {
 	 * determine which methods needs to be called from  backend, so they can create public methods
 	 */
 	public Group initialize(GameEngine gameEngine) {
+<<<<<<< HEAD
 		this.gameEngine = gameEngine;
 		root.setOnKeyReleased(KeyPad);
 		initializeGUIElements();
@@ -128,5 +137,21 @@ public class GamePlayer implements ViewController {
 		}
 		FileInputStream fis;
 	}
+=======
+		myGameEngine = gameEngine;
+		myRoot = new Group();
+		//Add behavior for menu buttons later
+		
+		ToolBar toolBar = new ToolBar();
+		Button newGameButton= new Button("New Game");
+		Button loadGameButton = new Button("Load Game");
+		Button helpButton = new Button("Help");
+		
+		toolBar.getItems().addAll(newGameButton, loadGameButton, helpButton);
+		myRoot.getChildren().add(toolBar);															
+		return myRoot;
+	}
+
+>>>>>>> master
 	
 }

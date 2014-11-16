@@ -1,6 +1,9 @@
 package com.print_stack_trace.voogasalad.controller;
+<<<<<<< HEAD
 
 import com.print_stack_trace.voogasalad.exceptions.VoogaException;
+=======
+>>>>>>> master
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;
