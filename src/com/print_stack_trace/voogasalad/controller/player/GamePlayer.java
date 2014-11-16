@@ -79,7 +79,7 @@ public class GamePlayer implements ViewController{
 		FileChooser fc = new FileChooser();
 		File levelFile = fc.showOpenDialog(new Stage()); 
 		//LevelModel lm = com.print_stack_trace.voogasalad.model.data.GameData.loadLevel(null);
-		return null;
+		return null; 
 	}
 
 	
