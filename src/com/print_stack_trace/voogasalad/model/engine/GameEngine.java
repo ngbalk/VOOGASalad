@@ -130,7 +130,7 @@ public class GameEngine {
 		runtimeEngine = new RuntimeEngine(currentLevel);
 	}
 	
-	private void saveHighScore(String name, HighScore highScore) {
+	public void saveHighScore(String name, HighScore highScore) {
 		gameData.saveHighScore(name, highScore);
 	}
 }
