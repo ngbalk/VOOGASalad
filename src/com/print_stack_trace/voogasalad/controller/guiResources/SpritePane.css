@@ -1,0 +1,35 @@
+.mainlabel2{
+  	-fx-font: 40px "Serif";
+	-fx-background-color: BLACK; 
+	-fx-width: 100;
+	-fx-border-color: #0099CC;
+	-fx-border-width: 5px;
+	-fx-text-fill: WHITE;
+}
+.text-field1{
+	-fx-font: 14px "Serif";
+	-fx-background-color: BLACK;
+}
+.sublabel1{
+	-fx-font: 20px "Serif";
+	-fx-background-color:
+	 	BLACK,
+ 		linear-gradient(#FFFFFF, #FFFFFF),
+		
+		linear-gradient(#000000, #0099CC); 
+	-fx-border-color: #0099CC;
+	-fx-background-insets: 0, 0, 2, 10;
+	-fx-text-fill: WHITE;
+}
+.mainlabel1 {
+	-fx-background-color: 
+        #000000,
+        linear-gradient(#FFFFFF, #0099CC),
+        linear-gradient(#FFFFFF, #0099CC),
+        linear-gradient(#000000, #0099CC);
+    -fx-background-radius: 3,2,2,2;
+    -fx-background-insets: 3,3,10,4;
+    -fx-padding: 12 12 12 12;
+    -fx-text-fill: "WHITE";
+    -fx-font-size: 20px;
+}

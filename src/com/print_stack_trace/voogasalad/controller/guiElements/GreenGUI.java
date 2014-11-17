@@ -1,15 +1,13 @@
+
 package com.print_stack_trace.voogasalad.controller.guiElements;
 import com.print_stack_trace.voogasalad.controller.ViewController;
+
 import com.print_stack_trace.voogasalad.controller.author.GameAuthor;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
-/**
- * 
- * PETRA! WE ARE NO LONGER USING THIS CLASS, MAKE CHANGES IN GAMEAUTHOR.JAVA!!!
- *
- */
+
 public class GreenGUI extends AbstractGUI implements ViewController{
 	private double myWidth;
 	private double myHeight;
@@ -28,15 +26,18 @@ public class GreenGUI extends AbstractGUI implements ViewController{
 		myPane.setStyle("-fx-border-color: BLACK; -fx-border-width: 5");
 	}
 	protected void setBorderAndBackgroundStyle(Node myPane){
-		myPane.setStyle("-fx-background-color: BLACK; -fx-border-color: #00ced1; -fx-border-width: 5");
+		myPane.setStyle("-fx-background-color: BLACK; -fx-border-color: #0099CC; -fx-border-width: 5");
 	}
 
-	@Override
+
 	public Group initialize(GameEngine gameEngine) {
+		Group myGroup=new Group();
 		myGameEngine = gameEngine;
-		Group myGroup = new Group();
-		myGroup.getChildren().add(this);
-		return myGroup;
+		Group root = new Group();
+		root.getChildren().add(this);
+		return root;
 	}
+
+	
 
 }
