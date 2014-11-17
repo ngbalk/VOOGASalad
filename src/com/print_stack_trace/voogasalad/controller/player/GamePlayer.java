@@ -20,7 +20,7 @@ import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
 
-public class GamePlayer extends ViewController {
+public class GamePlayer implements ViewController {
 	private Group myRoot;
 	private GameEngine myGameEngine;
 	
@@ -40,7 +40,7 @@ public class GamePlayer extends ViewController {
 		initializeGUIElements();
 		setHandlersForGuiElements();
 		//Add behavior for menu buttons later
-		
+				
 		ToolBar toolBar = new ToolBar();
 		Button newGameButton= new Button("New Game");
 		Button loadGameButton = new Button("Load Game");
@@ -139,7 +139,7 @@ public class GamePlayer extends ViewController {
 		FileChooser fc = new FileChooser(); 
 		File file = fc.showOpenDialog(new Stage());
 		if (!file.getName().endsWith(Constants.JPEG) && !file.getName().endsWith(Constants.PNG)){
-			displayError(new GamePlayerException()); //TODO: make a new proper subclass with the right message
+			ViewController.displayError(new GamePlayerException()); //TODO: make a new proper subclass with the right message
 			return; 
 		}
 		FileInputStream fis;
