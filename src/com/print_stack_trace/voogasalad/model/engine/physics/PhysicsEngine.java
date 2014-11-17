@@ -90,7 +90,7 @@ public class PhysicsEngine {
 	private void collisionHandler(SpriteCharacteristics s1, SpriteCharacteristics s2) {
 		CollisionResult result = getResultOfCollision(s1, s2);
 		CollisionHandler handler = getHandlerForResult(result);
-		handler.applyResult(result, s1, s2);
+		handler.applyCollisionEffects(s1, s2);
 	}
 	
 	private CollisionResult getResultOfCollision(SpriteCharacteristics s1, SpriteCharacteristics s2) {

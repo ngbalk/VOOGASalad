@@ -21,7 +21,8 @@ public class LevelModel {
 	private Integer currentID;
 	private boolean isLocked;
 	private PhysicsEngine physicsEngine;
-	private Goal myGoal;
+	private GoalCharacteristics myGoalChars;
+	private CameraType myCameraType;
 	
 	
 	public PhysicsEngine getPhysicsEngine() {
@@ -29,8 +30,7 @@ public class LevelModel {
 	}
 
 	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
-		if (isLocked);
-		this.physicsEngine = physicsEngine;
+		if (!isLocked) this.physicsEngine = physicsEngine;
 	}
 
 	private Integer generateID() {
@@ -84,24 +84,27 @@ public class LevelModel {
 	
 	//TODO: Talk to authoring about how goals are implemented 
 	//      this is needed to implement this method.
-	public boolean setGoal(Goal goal) {
-		myGoal = goal;
+	public boolean setGoal(GoalCharacteristics goal) {
+		if (isLocked) return false;
+		//what determines if a goal can be set?
+		myGoalChars = goal;
 		return true;
 	}
 	
+	public GoalCharacteristics getGoal() {
+		return myGoalChars;
+	}
 	
+	public boolean setCameraType(CameraType cameraType) {
+		if (isLocked) return false;
+		//in what context can you not set a certain cameraType
+		myCameraType = cameraType;
+		return true;
+	}
 	
-	/*public HashMap<Integer, SpriteCharacteristics> getSpriteTypes(ObjectType obj) {
-		HashMap<Integer, SpriteCharacteristics> sprites = new HashMap<Integer, SpriteCharacteristics >();
-		for (Integer i: spriteMap.keySet()) {
-			if (spriteMap.get(i).objectType == obj) {
-				sprites.put(i, spriteMap.get(i));
-			}
-		}
-		return sprites;
-	}*/
-	
-	
+	public CameraType getCameraType() {
+		return myCameraType;
+	}
 	
 
 }
