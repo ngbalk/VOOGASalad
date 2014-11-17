@@ -1,11 +1,16 @@
 package com.print_stack_trace.voogasalad.model.data;
 
-import java.lang.reflect.Type;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameData {
+	private Map<String, HighScore> highScores = new HashMap<String, HighScore>();
 
 	/**
 	 * constructor for GameData
@@ -26,7 +31,7 @@ public class GameData {
 	 * @param name
 	 *            - name of the file to be saved
 	 */
-	public void writeLevel(LevelModel lvl, String location, String name) {
+	public void writeLevel(LevelModel lvl, String location, String name) throws IOException {
 
 	}
 
@@ -37,7 +42,7 @@ public class GameData {
 	 * @return an instance of the level model that the game engine or game
 	 *         authoring environment will either play or edit
 	 */
-	public LevelModel loadLevel(String fileName) {
+	public LevelModel loadLevel(String fileName) throws FileNotFoundException {
 		return null;
 
 	}
@@ -64,9 +69,12 @@ public class GameData {
 	 *            - name of the level that the high score will be associated
 	 *            with
 	 */
-	public void saveHighScore(String name, HighScore highscore) {
-
+	private void saveHighScores(){//String name) {
+		//TODO: name is your job!! You need to put the file in the system directory or something. not the users problem.
+		//USE highScores for current the list.
 	}
+	
+	
 
 	/**
 	 * 
@@ -74,9 +82,17 @@ public class GameData {
 	 *            - name of the file that the high scores are being loaded for
 	 * @return list or text representation of the high scores
 	 */
-	public List<HighScore> loadHighScores(String name) {
-		return null;
-
+	private void loadHighScores(){//String name) {
+		//TODO: name is your job!! You need to put the file in the system directory or something. not the users problem.
+		highScores = null; //SET local highScores var once you load;
 	}
-
+	
+	public Map<String, HighScore> getHighScores() {
+		return highScores;
+	}
+	
+	public void saveHighScore(String name, HighScore highScore) {
+		highScores.put(name, highScore);
+		saveHighScores();
+	}
 }
