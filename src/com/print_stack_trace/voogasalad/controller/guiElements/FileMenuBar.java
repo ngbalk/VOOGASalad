@@ -10,7 +10,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
 public class FileMenuBar extends MenuBar{
-	private final String DEFAULT_MENU_NAMES="./com.print_stack_trace.voogasalad.guiResources/";
+	private final String DEFAULT_MENU_NAMES="./com.print_stack_trace.voogasalad.controller.guiResources/";
 	public FileMenuBar(){
 		this.loadMenuNames();
 	}
@@ -18,7 +18,7 @@ public class FileMenuBar extends MenuBar{
 	private void loadMenuItems(Menu menuName){
 		try {
 			Properties prop = new Properties();
-			InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/guiResources/FileMenuBarNames.Properties");
+			InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/controller/guiResources/FileMenuBarNames.Properties");
 			prop.load(stream);
 			for(Object menuItemName : prop.keySet()){
 				String[] value=prop.getProperty((String) menuItemName).split(";");
@@ -35,7 +35,7 @@ public class FileMenuBar extends MenuBar{
 	private void loadMenuNames(){
 		try {
 			Properties prop = new Properties();
-			InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/guiResources/FileBarMenu.Properties");
+			InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/controller/guiResources/FileBarMenu.Properties");
 			prop.load(stream);
 			for(Object menuName : prop.keySet()){
 				Menu myNewMenu=new Menu(prop.getProperty((String)menuName));

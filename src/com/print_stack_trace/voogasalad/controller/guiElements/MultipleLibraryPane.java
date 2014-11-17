@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 public class MultipleLibraryPane extends TabPane{
 	private double myWidth;
 	private double myHeight;
-	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/guiResources/Tabs.Properties";
+	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/Tabs.Properties";
 	public MultipleLibraryPane(Number width, Number height) {
 		myWidth=(double) width;
 		myHeight=(double) height;
