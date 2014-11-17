@@ -5,7 +5,7 @@
  * Date Created: 11/11/14
  * Date Modified: 11/11/14
  */
-package com.print_stack_trace.voogasalad.model.engine.runtime;
+package com.print_stack_trace.voogasalad.model.engine.physics;
 
 import java.util.Collection;
 import java.util.Map;
@@ -35,13 +35,16 @@ public class PhysicsEngine {
 	
 	private Map<CollisionResult , CollisionHandler> handlerMap;
 	private SoloPhysicsHandler soloHandler;
-	
+
 	public enum CollisionResult {
 		ObjectOneFullDisplacement,
 		ObjectTwoFullDisplacement,
 		ObjectBothFullDisplacement,
 		ObjectBothNoDisplacement,
-		NoAction
+		NoAction,
+		Dissappear,
+		GameOverLose,
+		GameOverWin
 	};
 	
 	public PhysicsEngine() {
@@ -104,5 +107,13 @@ public class PhysicsEngine {
 	
 	public void setHandlerForResult(CollisionResult result, CollisionHandler handler) {
 		handlerMap.put(result, handler);
+	}
+	
+	public SoloPhysicsHandler getSoloHandler() {
+		return soloHandler;
+	}
+
+	public void setSoloHandler(SoloPhysicsHandler soloHandler) {
+		this.soloHandler = soloHandler;
 	}
 }

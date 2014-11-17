@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
-import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 public class GameAuthorEngine {
