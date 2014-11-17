@@ -14,7 +14,6 @@ public class SpriteCharacteristics {
 	public double speed;
 	public int value;
 	public String directionFacing;
-	public CollisionEffects myCollisionEffects;
 	
 	
 	
