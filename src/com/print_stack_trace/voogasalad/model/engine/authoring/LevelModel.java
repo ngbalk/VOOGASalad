@@ -1,19 +1,15 @@
 package com.print_stack_trace.voogasalad.model.engine.authoring;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
+import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
-import com.print_stack_trace.voogasalad.model.environment.Goal;
-import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
-import com.print_stack_trace.voogasalad.model.sprites.Sprite;
-import com.print_stack_trace.voogasalad.model.sprites.SpriteFactory;
+import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsHandler;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
 
 public class LevelModel {
 	
@@ -23,14 +19,10 @@ public class LevelModel {
 	private PhysicsEngine physicsEngine;
 	private GoalCharacteristics myGoalChars;
 	private CameraType myCameraType;
-	
+	private LevelCharacteristics myLevelChars;
 	
 	public PhysicsEngine getPhysicsEngine() {
 		return physicsEngine;
-	}
-
-	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
-		if (!isLocked) this.physicsEngine = physicsEngine;
 	}
 
 	private Integer generateID() {
@@ -106,5 +98,32 @@ public class LevelModel {
 		return myCameraType;
 	}
 	
-
+	public boolean setLevelCharacteristics(LevelCharacteristics levelSpecs) {
+		if (isLocked) return false;
+		//in what context can you not set a certain cameraType
+		myLevelChars = levelSpecs;
+		return true;
+	}
+	
+	public LevelCharacteristics getLevelCharacteristics() {
+		return myLevelChars;
+	}
+	
+	public boolean setSoloHandler(SoloPhysicsHandler soloHandler) {
+		if (isLocked) return false;
+		physicsEngine.setSoloHandler(soloHandler);
+		return true;
+	}
+	
+	public boolean setCollisionHandlerForResult(CollisionResult result, CollisionHandler handler) {
+		if (isLocked) return false;
+		physicsEngine.setHandlerForResult(result, handler);
+		return true;
+	}
+	
+	public boolean setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) {
+		if (isLocked) return false;
+		physicsEngine.setResultOfCollision(result, s1, s2);
+		return true;
+	}
 }

@@ -3,21 +3,17 @@ package com.print_stack_trace.voogasalad.model.engine;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-
-import javafx.scene.image.Image;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.data.GameData;
+import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
@@ -67,38 +63,33 @@ public class GameEngine {
 	
 	//Adding, Removing, and Updating Goals
 	public Integer addGoalToLevel(GoalCharacteristics goalModel) {
-		//TODO: Pass to authorEngine!
-		return null;
+		return authorEngine.addGoalToLevel(goalModel);
 	}
 
 	public boolean updateGoal(Integer goalID, GoalCharacteristics goalModel) {
-		//TODO: Pass to authorEngine!
-		return false;
+		return authorEngine.updateGoal(goalID, goalModel);
 	}
 
 	public boolean deleteGoal(Integer goalID) {
-		return false;
+		return authorEngine.deleteGoal(goalID);
 	}
 	
 	//Global Physics
 	public void setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
-		//TODO: setPhysicsEngine(PhysicsEngineList.getProgramPhysicEngine(engineIndex));
+		authorEngine.setProgramPhysicsEngine(engineType);
 	}
 	
 	public void setPhysicsEngineUsingParams(int gravity, int drag, int intensity) {
-		//TODO: setPhysicsEngine(PhysicsEngineList.physicEngineFromParams(gravity, drag, intensity));
+		authorEngine.setPhysicsEngineUsingParams(gravity, drag, intensity);
 	}
 	
 	//Sprite-to-Sprite Physics
 	public void setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) {
-		//TODO: Pass back to authoring
+		authorEngine.setResultOfCollision(result, s1, s2);
 	}
 	
-	//TODO: This might need to change depending on front end imp
-	public void setDamageDealtForCollisionType(CollisionResult result, int damage) {
-		//TODO: Pass back to authoring
-		CollisionHandler handler; //Get new anon handler using CollisionHandlerList
-		//handlerMap.put(result, handler);
+	public void setCustomParamForCollisionType(CollisionResult result, UserDefinedCollisionParams paramType, int param) {
+		authorEngine.setCustomParamForCollisionType(result, paramType, param);
 	}
 	
 	//Viewport/Camera Parameters
@@ -108,8 +99,8 @@ public class GameEngine {
 	}
 	
 	//Global Parameters
-	public void setLevelCharacteristics(LevelCharacteristics levelSpecs) {
-		//TODO: Pass back to authoring
+	public boolean setLevelCharacteristics(LevelCharacteristics levelSpecs) {
+		return authorEngine.setLevelCharacteristics(levelSpecs);
 	}
 	
 	//GAME PLAYER
@@ -122,9 +113,8 @@ public class GameEngine {
 		return runtimeEngine.getStatus();
 	}
 	
-	public Map<Integer, Double> getHighScoreList() {
-		//TODO: Return high score list
-		return null;
+	public Map<String, HighScore> getHighScoreList() {
+		return gameData.getHighScores();
 	}
 	
 	//-------------------ACCESSORS-------------------//
@@ -138,5 +128,9 @@ public class GameEngine {
 	private void loadLevel(LevelModel level) {
 		this.currentLevel = level;
 		runtimeEngine = new RuntimeEngine(currentLevel);
+	}
+	
+	private void saveHighScore(String name, HighScore highScore) {
+		gameData.saveHighScore(name, highScore);
 	}
 }
