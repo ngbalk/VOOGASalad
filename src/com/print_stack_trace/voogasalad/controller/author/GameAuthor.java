@@ -1,7 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.author;
 
 import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.guiElements.GreenGUI;
+import com.print_stack_trace.voogasalad.controller.guiElements.GreenGUI;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;
