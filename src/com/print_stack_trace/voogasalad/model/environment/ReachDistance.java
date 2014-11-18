@@ -4,7 +4,7 @@ import javafx.geometry.Point2D;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
-public class ReachDistance extends Goal{
+public class ReachDistance extends Goal implements GoalElement{
     
     private Point2D myDestination;
 
@@ -13,16 +13,18 @@ public class ReachDistance extends Goal{
         // TODO Auto-generated constructor stub
     }
 
-    @Override
-    public boolean isCompleted () {
-        // TODO Auto-generated method stub
-        return false;
-    }
+
     @Override
     protected void setGoalProperties() {
         super.setGoalProperties();
         myDestination = myGoalCharacteristics.myDestination;
 
     }
+
+	@Override
+	public void acceptChecker(GoalElementVisitor visitor) {
+		isCompleted = visitor.visit(this);
+		
+	}
 
 }
