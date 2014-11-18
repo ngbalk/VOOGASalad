@@ -115,8 +115,6 @@ public class LevelModel {
 	}
 
 
-
-
 	public Goal getGoal(Integer id) {
 		return goalMap.get(id);
 	}

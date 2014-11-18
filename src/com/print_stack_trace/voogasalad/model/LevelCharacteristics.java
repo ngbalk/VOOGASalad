@@ -5,8 +5,8 @@ import java.io.File;
 import javafx.scene.image.Image;
 
 public class LevelCharacteristics {
-	public File nextLevel;
-	public Image backgroundImg;
-	public int requiredNumberOfGoals;
+	public File nextLevel = null;
+	public Image backgroundImg = null;
+	public int requiredNumberOfGoals = 0;
 	//TODO: More...
 }

@@ -11,7 +11,7 @@ public class ElementLockedException extends RuntimeException implements VoogaExc
 	@Override
 	public String printMessage() {
 		// TODO Auto-generated method stub
-		return null;
+		return "This element is currently locked.";
 	}
 
 }

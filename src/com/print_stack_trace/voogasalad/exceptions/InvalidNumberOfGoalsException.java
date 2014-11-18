@@ -2,6 +2,7 @@ package com.print_stack_trace.voogasalad.exceptions;
 
 public class InvalidNumberOfGoalsException extends RuntimeException implements VoogaException{
 
+	private static final String INVALID_NUMBER_OF_GOALS_STRING = "Invalid number of Goals set";
 	/**
 	 * 
 	 */
@@ -10,7 +11,7 @@ public class InvalidNumberOfGoalsException extends RuntimeException implements V
 	@Override
 	public String printMessage() {
 		// TODO Auto-generated method stub
-		return null;
+		return INVALID_NUMBER_OF_GOALS_STRING;
 	}
 
 }
