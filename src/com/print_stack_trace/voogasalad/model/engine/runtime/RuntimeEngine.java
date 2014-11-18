@@ -13,6 +13,7 @@ import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 
 public class RuntimeEngine {
 	private LevelModel currentLevel;
