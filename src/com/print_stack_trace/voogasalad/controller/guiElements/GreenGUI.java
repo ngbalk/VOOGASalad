@@ -1,23 +1,26 @@
-package com.print_stack_trace.voogasalad.controller.author;
-
+package com.print_stack_trace.voogasalad.controller.guiElements;
+import com.print_stack_trace.voogasalad.controller.TabController;
 import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.controller.guiElements.AbstractGUI;
+import com.print_stack_trace.voogasalad.controller.author.GameAuthor;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
-
-public class GameAuthor extends AbstractGUI implements ViewController {
+/**
+ * 
+ * PETRA! WE ARE NO LONGER USING THIS CLASS, MAKE CHANGES IN GAMEAUTHOR.JAVA!!!
+ *
+ */
+public class GreenGUI extends AbstractGUI implements ViewController{
 	private double myWidth;
 	private double myHeight;
 	private GameEngine myGameEngine;
-	public GameAuthor(double width, double height){
+	public GreenGUI(double width, double height){
 		super(width, height);
 		setLeft(null);
 		this.setBorderStyle(this);
 	}
-
-
+	
 	protected void setStyle(Node myPane){
 		myPane.setStyle("-fx-background-color: BLACK");
 
@@ -37,6 +40,4 @@ public class GameAuthor extends AbstractGUI implements ViewController {
 		return myGroup;
 	}
 
-	
-	
 }
