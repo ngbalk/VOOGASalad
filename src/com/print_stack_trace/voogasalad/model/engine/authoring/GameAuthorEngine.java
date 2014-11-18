@@ -26,25 +26,25 @@ public class GameAuthorEngine {
 		PLATFORM,
 		OBSTACLE,
 		REWARD
-		
+
 	}
-	
+
 	public enum GoalType {
-	    REACH_OBJECT,
-	    REACH_DISTANCE,
-	    KILL_BOSS,
-	    POINTS,
-	    STAY_ALIVE
+		REACH_OBJECT,
+		REACH_DISTANCE,
+		KILL_BOSS,
+		POINTS,
+		STAY_ALIVE
 	}
-	
+
 	public enum CameraType {
-	    SCROLLING_RIGHT_TO_LEFT,
-	    SCROLLING_LEFT_TO_RIGHT,
-	    SCROLLING_TOP_TO_BOTTOM,
-	    SCROLLING_BOTTOM_TO_TOP,
-	    CENTERED_ON_PLAYER,
-	    SCROLL_WHEN_EDGE_REACHED
-	    
+		SCROLLING_RIGHT_TO_LEFT,
+		SCROLLING_LEFT_TO_RIGHT,
+		SCROLLING_TOP_TO_BOTTOM,
+		SCROLLING_BOTTOM_TO_TOP,
+		CENTERED_ON_PLAYER,
+		SCROLL_WHEN_EDGE_REACHED
+
 	}
 
 	public GameAuthorEngine(){
@@ -85,40 +85,38 @@ public class GameAuthorEngine {
 	}
 
 	public Integer addGoalToLevel(GoalCharacteristics goalModel) {
-		//TODO: Pass to authorEngine!
-		return null;
+		return currentLevel.setGoal(goalModel);
 	}
 
-	public boolean updateGoal(Integer goalID, GoalCharacteristics goalModel) {
-		//TODO: Pass to authorEngine!
-		return false;
+	public void updateGoal(Integer goalID, GoalCharacteristics goalModel) {
+		currentLevel.updateGoal(goalID, goalModel);
 	}
 
-	public boolean deleteGoal(Integer goalID) {
-		return false;
+	public void deleteGoal(Integer goalID) {
+		currentLevel.deleteGoal(goalID);
 	}
 
 	public void setCameraType(CameraType c){
-	    currentLevel.setCameraType(c);
+		currentLevel.setCameraType(c);
 	}
-	
-	public boolean setLevelCharacteristics(LevelCharacteristics levelSpecs) {
-		return currentLevel.setLevelCharacteristics(levelSpecs);
+
+	public void setLevelCharacteristics(LevelCharacteristics levelSpecs) {
+		currentLevel.setLevelCharacteristics(levelSpecs);
 	}
-	
-	public boolean setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
-		return currentLevel.setSoloHandler(PhysicsEngineList.getProgramPhysicEngine(engineType));
+
+	public void setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
+		currentLevel.setSoloHandler(PhysicsEngineList.getProgramPhysicEngine(engineType));
 	}
-	
-	public boolean setPhysicsEngineUsingParams(int gravity, int drag, int intensity) {
-		return currentLevel.setSoloHandler(PhysicsEngineList.physicEngineFromParams(gravity, drag, intensity));
+
+	public void setPhysicsEngineUsingParams(int gravity, int drag, int intensity) {
+		currentLevel.setSoloHandler(PhysicsEngineList.physicEngineFromParams(gravity, drag, intensity));
 	}
-	
-	public boolean setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) {
-		return currentLevel.setResultOfCollision(result, s1, s2);
+
+	public void setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) {
+		currentLevel.setResultOfCollision(result, s1, s2);
 	}
-	
-	public boolean setCustomParamForCollisionType(CollisionResult result, UserDefinedCollisionParams paramType, int param) {
-		return currentLevel.setCollisionHandlerForResult(result, CollisionHandlerList.collisionEngineFromParams(result, paramType, param));
+
+	public void setCustomParamForCollisionType(CollisionResult result, UserDefinedCollisionParams paramType, int param) {
+		currentLevel.setCollisionHandlerForResult(result, CollisionHandlerList.collisionEngineFromParams(result, paramType, param));
 	}
 }

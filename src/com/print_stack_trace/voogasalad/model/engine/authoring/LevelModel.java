@@ -1,7 +1,9 @@
 package com.print_stack_trace.voogasalad.model.engine.authoring;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import com.print_stack_trace.voogasalad.exceptions.ElementLockedException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -10,39 +12,51 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
 public class LevelModel {
-	
+
 	Map<Integer, SpriteCharacteristics> spriteMap;
+	Map<Integer, Goal> goalMap;
 	private Integer currentID;
 	private boolean isLocked;
 	private PhysicsEngine physicsEngine;
-	private GoalCharacteristics myGoalChars;
 	private CameraType myCameraType;
 	private LevelCharacteristics myLevelChars;
+	private GoalFactory myGoalFactory;
+
+	public LevelModel(){
+		myGoalFactory = new GoalFactory();
+		currentID = 0;
+		spriteMap = new HashMap<>();
+		goalMap = new HashMap<>();
+	}
 	
 	public PhysicsEngine getPhysicsEngine() {
 		return physicsEngine;
 	}
 
-	private Integer generateID() {
-		while(spriteMap.keySet().contains(currentID)) {
+	private Integer generateID(Map map) {
+		while(map.keySet().contains(currentID)) {
 			currentID++;
 		}
 		return currentID;
 	}
-	
+
 	public void setLocked() {
 		isLocked = true;
 	}
-	
+
 	public void setUnlocked() {
 		isLocked = false;
 	}
-	
-	public Integer addObject (SpriteCharacteristics chars) {
-		if (isLocked) return null;
-		
+
+	public Integer addObject (SpriteCharacteristics chars) throws ElementLockedException {
+		if (isLocked){
+			throw new ElementLockedException();
+		}
+
 		for (Integer i: spriteMap.keySet()) {
 			/*
 			 * Logic for if object can be added 
@@ -51,79 +65,100 @@ public class LevelModel {
 			 * unoccupied.  If so, return null 
 			 * in this loop. Otherwise, conclude
 			 * the loop.
-			*/
+			 */
 		}
-		
-		int newID = generateID();
+
+		int newID = generateID(spriteMap);
 		spriteMap.put(newID, chars);
 		return newID;
 	}
-	
-	public boolean deleteObject (Integer ModelID) {
-		if (isLocked) return false;
+
+	public void deleteObject (Integer ModelID) throws ElementLockedException {
+		if (isLocked){
+			throw new ElementLockedException();
+		}
 		spriteMap.remove(ModelID);
-		return true;
 	}
-	
-	public boolean updateObject (Integer ModelID, SpriteCharacteristics chars) {
-		if (isLocked) return false;
+
+	public void updateObject (Integer ModelID, SpriteCharacteristics chars) 
+			throws ElementLockedException {
+		if (isLocked) throw new ElementLockedException();
 		//if it passes other logic tests including: no collisions
 		spriteMap.remove(ModelID);
 		spriteMap.put(ModelID, chars);
-		return true;
 	}
-	
-	
+
 	//TODO: Talk to authoring about how goals are implemented 
 	//      this is needed to implement this method.
-	public boolean setGoal(GoalCharacteristics goal) {
-		if (isLocked) return false;
+	public Integer setGoal(GoalCharacteristics goal) throws ElementLockedException  {
+		if (isLocked) throw new ElementLockedException();
+
 		//what determines if a goal can be set?
-		myGoalChars = goal;
-		return true;
+		int newID = generateID(goalMap);
+		goalMap.put(newID, myGoalFactory.buildGoal(goal));
+		return newID;
+
 	}
 	
-	public GoalCharacteristics getGoal() {
-		return myGoalChars;
+	public void updateGoal(Integer goalID, GoalCharacteristics goal)
+	throws ElementLockedException{
+		if(isLocked) throw new ElementLockedException();
+		goalMap.remove(goalID);
+		goalMap.put(goalID, myGoalFactory.buildGoal(goal));
+		
 	}
 	
-	public boolean setCameraType(CameraType cameraType) {
-		if (isLocked) return false;
+	public void deleteGoal(Integer goalID) throws ElementLockedException{
+		if(isLocked) throw new ElementLockedException();
+		goalMap.remove(goalID);
+
+	}
+
+
+
+
+	public Goal getGoal(Integer id) {
+		return goalMap.get(id);
+	}
+
+	public void setCameraType(CameraType cameraType)
+			throws ElementLockedException {
+		if (isLocked) throw new ElementLockedException();
 		//in what context can you not set a certain cameraType
 		myCameraType = cameraType;
-		return true;
 	}
-	
+
 	public CameraType getCameraType() {
 		return myCameraType;
 	}
-	
-	public boolean setLevelCharacteristics(LevelCharacteristics levelSpecs) {
-		if (isLocked) return false;
+
+	public void setLevelCharacteristics(LevelCharacteristics levelSpecs)
+			throws ElementLockedException {
+		if (isLocked) throw new ElementLockedException();
 		//in what context can you not set a certain cameraType
 		myLevelChars = levelSpecs;
-		return true;
 	}
-	
+
 	public LevelCharacteristics getLevelCharacteristics() {
 		return myLevelChars;
 	}
-	
-	public boolean setSoloHandler(SoloPhysicsHandler soloHandler) {
-		if (isLocked) return false;
+
+	public void setSoloHandler(SoloPhysicsHandler soloHandler)
+			throws ElementLockedException {
+		if (isLocked) throw new ElementLockedException();
 		physicsEngine.setSoloHandler(soloHandler);
-		return true;
+
 	}
-	
-	public boolean setCollisionHandlerForResult(CollisionResult result, CollisionHandler handler) {
-		if (isLocked) return false;
+
+	public void setCollisionHandlerForResult(CollisionResult result,
+			CollisionHandler handler) throws ElementLockedException  {
+		if (isLocked) throw new ElementLockedException();
 		physicsEngine.setHandlerForResult(result, handler);
-		return true;
 	}
-	
-	public boolean setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) {
-		if (isLocked) return false;
+
+	public void setResultOfCollision(CollisionResult result, SpriteCharacteristics s1,
+			SpriteCharacteristics s2) throws ElementLockedException {
+		if (isLocked) throw new ElementLockedException();
 		physicsEngine.setResultOfCollision(result, s1, s2);
-		return true;
 	}
 }
