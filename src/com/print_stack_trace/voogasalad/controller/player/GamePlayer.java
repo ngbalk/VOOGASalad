@@ -6,21 +6,24 @@ import java.util.ArrayList;
 
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.controller.ViewController;
+import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
 import com.print_stack_trace.voogasalad.exceptions.GamePlayerException;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
 
-public class GamePlayer extends ViewController {
+public class GamePlayer implements ViewController {
 	private Group myRoot;
 	private GameEngine myGameEngine;
 	
@@ -37,8 +40,8 @@ public class GamePlayer extends ViewController {
 		myGameEngine = gameEngine;
 		myRoot = new Group();
 		myRoot.setOnKeyReleased(KeyPad);
-		initializeGUIElements();
-		setHandlersForGuiElements();
+		//initializeGUIElements();
+		//setHandlersForGuiElements();
 		//Add behavior for menu buttons later
 		
 		ToolBar toolBar = new ToolBar();
@@ -55,12 +58,26 @@ public class GamePlayer extends ViewController {
 		//ImageView bg = new ImageView(new Image("../LevelImages/overworld_bg.png"));
 		//bg.setImage(new Image(getClass().getResourceAsStream("../images/boss.png")));
 		//myRoot.getChildren().add(bg);
+		helpButton.setOnAction(e->createTableVisual());
 		toolBar.getItems().addAll(newGameButton, loadGameButton, helpButton, pauseButton, showBestScores);
 		myRoot.getChildren().add(toolBar);
 		
 		return myRoot;
 	}
 	
+	private void createTableVisual() {
+		Stage stage = new Stage();
+		stage.setWidth(500);
+		stage.setHeight(500);
+		stage.initStyle(StageStyle.UTILITY);
+		Group root = new Group();
+		Scene s = new Scene(root); 
+		root.getChildren().add(new DecisionTable());
+		stage.setScene(s);
+		stage.show();
+		return;
+	}
+
 	/**
 	 * update the players view: Engine will change locations/stats on the backend; player will update the scene after changes
 	 * Maybe use observables to observe when something changes (just a thought)
@@ -139,7 +156,7 @@ public class GamePlayer extends ViewController {
 		FileChooser fc = new FileChooser(); 
 		File file = fc.showOpenDialog(new Stage());
 		if (!file.getName().endsWith(Constants.JPEG) && !file.getName().endsWith(Constants.PNG)){
-			displayError(new GamePlayerException()); //TODO: make a new proper subclass with the right message
+			//displayError(new GamePlayerException()); //TODO: make a new proper subclass with the right message
 			return; 
 		}
 		FileInputStream fis;
