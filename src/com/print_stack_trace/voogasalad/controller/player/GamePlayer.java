@@ -43,7 +43,7 @@ public class GamePlayer implements ViewController {
 		//initializeGUIElements();
 		//setHandlersForGuiElements();
 		//Add behavior for menu buttons later
-		
+				
 		ToolBar toolBar = new ToolBar();
 		Button newGameButton= new Button("New Game");
 		Button loadGameButton = new Button("Load Game");
@@ -156,7 +156,8 @@ public class GamePlayer implements ViewController {
 		FileChooser fc = new FileChooser(); 
 		File file = fc.showOpenDialog(new Stage());
 		if (!file.getName().endsWith(Constants.JPEG) && !file.getName().endsWith(Constants.PNG)){
-			//displayError(new GamePlayerException()); //TODO: make a new proper subclass with the right message
+
+			ViewController.displayError(new GamePlayerException()); //TODO: make a new proper subclass with the right message
 			return; 
 		}
 		FileInputStream fis;

@@ -1,146 +1,129 @@
 package com.print_stack_trace.voogasalad.model.engine.authoring;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
+import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
-import com.print_stack_trace.voogasalad.model.engine.runtime.PhysicsEngine;
-import com.print_stack_trace.voogasalad.model.environment.Goal;
-import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
-import com.print_stack_trace.voogasalad.model.sprites.Sprite;
-import com.print_stack_trace.voogasalad.model.sprites.SpriteFactory;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsHandler;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
 
 public class LevelModel {
+	
+	Map<Integer, SpriteCharacteristics> spriteMap;
+	private Integer currentID;
+	private boolean isLocked;
+	private PhysicsEngine physicsEngine;
+	private GoalCharacteristics myGoalChars;
+	private CameraType myCameraType;
+	private LevelCharacteristics myLevelChars;
+	
+	public PhysicsEngine getPhysicsEngine() {
+		return physicsEngine;
+	}
 
-    private Map<Integer, Sprite> spriteMap;
-    private Map<SpriteType, List<Sprite>> spriteTypeMap;
-    private Integer currentID;
-    private boolean isLocked;
-    private PhysicsEngine physicsEngine;
-    private SpriteFactory mySpriteFactory;
-    private GoalFactory myGoalFactory;
-    private Goal myGoal;
-    private CameraType myCameraType;
-
-    public LevelModel() {
-        mySpriteFactory = new SpriteFactory();
-        myGoalFactory = new GoalFactory();
-        spriteMap = new HashMap<>();
-        spriteTypeMap = new HashMap<>();
-        currentID = 0;
-    }
-
-    public PhysicsEngine getPhysicsEngine() {
-        return physicsEngine;
-    }
-
-    public void setPhysicsEngine(PhysicsEngine physicsEngine) {
-        if (isLocked);
-        this.physicsEngine = physicsEngine;
-    }
-
-    private Integer incrementID() {
-        while(spriteMap.keySet().contains(currentID)) {
-            currentID++;
-        }
-        return currentID;
-    }
-
-    public void setLocked() {
-        isLocked = true;
-    }
-
-    public void setUnlocked() {
-        isLocked = false;
-    }
-
-    public Integer addObject (SpriteCharacteristics characteristics) {
-        if (isLocked) return null;
-        Integer id = null;
-        if (isAddable(characteristics)) {
-            Sprite sp = mySpriteFactory.buildSprite(characteristics);
-            id = incrementID();
-            spriteMap.put(id, sp);
-            addToSpriteTypeCollection(sp, characteristics);
-        }
-
-        return id;
-    }
-
-    private void addToSpriteTypeCollection(Sprite sp, SpriteCharacteristics characteristics) {
-        SpriteType type = characteristics.objectType;
-        if(!spriteTypeMap.containsKey(type)) {
-            spriteTypeMap.put(type, new ArrayList<>());
-        }
-        spriteTypeMap.get(type).add(sp);
-    }
-
-    public boolean deleteObject (Integer modelID) {
-        if (isLocked) return false;
-        Sprite sp = spriteMap.get(modelID);
-        List<Sprite> sprites = spriteTypeMap.get(sp.getMySpriteType());
-        sprites.remove(sp);
-        spriteMap.remove(modelID);
-
-        return true;
-    }
-
-    public boolean updateObject (Integer ModelID, SpriteCharacteristics chars) {
-        if (isLocked) return false;
-        //if it passes other logic tests including: no collisions
-        Sprite sp = spriteMap.get(ModelID);
-        sp.updateSpriteProperties(chars);
-        return true;
-    }
-
-
-    //TODO: Talk to authoring about how goals are implemented 
-    //      this is needed to implement this method.
-    public boolean setGoal(GoalCharacteristics goalCharacteristics) {
-        myGoal = myGoalFactory.buildGoal(goalCharacteristics);
-        return true;
-    }
-
-
-
-    /*public HashMap<Integer, SpriteCharacteristics> getSpriteTypes(ObjectType obj) {
-        HashMap<Integer, SpriteCharacteristics> sprites = new HashMap<Integer, SpriteCharacteristics >();
-        for (Integer i: spriteMap.keySet()) {
-            if (spriteMap.get(i).objectType == obj) {
-                sprites.put(i, spriteMap.get(i));
-            }
-        }
-        return sprites;
-    }*/
-    
-    public Map<Integer,Sprite> getSpriteMap() {
-        return spriteMap;
-    }
-    
-    public Map<SpriteType,List<Sprite>> getSpritTypeMap() {
-        return spriteTypeMap;
-    }
-
-    private boolean isAddable(SpriteCharacteristics spriteCharacteristics) {
-        //TODO IMPLEMENT THIS LATER
-        return true;
-    }
-
-    public void setCameraType(CameraType c){
-        myCameraType = c;
-    }
-    
-    public CameraType getCameraType(){
-        return myCameraType;
-    }
-    
-    public Goal getGoal(){
-        return myGoal;
-    }
-
+	private Integer generateID() {
+		while(spriteMap.keySet().contains(currentID)) {
+			currentID++;
+		}
+		return currentID;
+	}
+	
+	public void setLocked() {
+		isLocked = true;
+	}
+	
+	public void setUnlocked() {
+		isLocked = false;
+	}
+	
+	public Integer addObject (SpriteCharacteristics chars) {
+		if (isLocked) return null;
+		
+		for (Integer i: spriteMap.keySet()) {
+			/*
+			 * Logic for if object can be added 
+			 * Loop through sprites to see if
+			 * location of new added sprite is
+			 * unoccupied.  If so, return null 
+			 * in this loop. Otherwise, conclude
+			 * the loop.
+			*/
+		}
+		
+		int newID = generateID();
+		spriteMap.put(newID, chars);
+		return newID;
+	}
+	
+	public boolean deleteObject (Integer ModelID) {
+		if (isLocked) return false;
+		spriteMap.remove(ModelID);
+		return true;
+	}
+	
+	public boolean updateObject (Integer ModelID, SpriteCharacteristics chars) {
+		if (isLocked) return false;
+		//if it passes other logic tests including: no collisions
+		spriteMap.remove(ModelID);
+		spriteMap.put(ModelID, chars);
+		return true;
+	}
+	
+	
+	//TODO: Talk to authoring about how goals are implemented 
+	//      this is needed to implement this method.
+	public boolean setGoal(GoalCharacteristics goal) {
+		if (isLocked) return false;
+		//what determines if a goal can be set?
+		myGoalChars = goal;
+		return true;
+	}
+	
+	public GoalCharacteristics getGoal() {
+		return myGoalChars;
+	}
+	
+	public boolean setCameraType(CameraType cameraType) {
+		if (isLocked) return false;
+		//in what context can you not set a certain cameraType
+		myCameraType = cameraType;
+		return true;
+	}
+	
+	public CameraType getCameraType() {
+		return myCameraType;
+	}
+	
+	public boolean setLevelCharacteristics(LevelCharacteristics levelSpecs) {
+		if (isLocked) return false;
+		//in what context can you not set a certain cameraType
+		myLevelChars = levelSpecs;
+		return true;
+	}
+	
+	public LevelCharacteristics getLevelCharacteristics() {
+		return myLevelChars;
+	}
+	
+	public boolean setSoloHandler(SoloPhysicsHandler soloHandler) {
+		if (isLocked) return false;
+		physicsEngine.setSoloHandler(soloHandler);
+		return true;
+	}
+	
+	public boolean setCollisionHandlerForResult(CollisionResult result, CollisionHandler handler) {
+		if (isLocked) return false;
+		physicsEngine.setHandlerForResult(result, handler);
+		return true;
+	}
+	
+	public boolean setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) {
+		if (isLocked) return false;
+		physicsEngine.setResultOfCollision(result, s1, s2);
+		return true;
+	}
 }

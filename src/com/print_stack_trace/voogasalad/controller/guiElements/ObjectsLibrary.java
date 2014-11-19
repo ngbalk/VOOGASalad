@@ -1,9 +1,10 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
-public class ObjectsLibrary extends PictureLibrary{
+import javafx.scene.layout.Pane;
 
-	public ObjectsLibrary(Number width, Number height, String resources) {
-		super(width, height, resources);
+public class ObjectsLibrary extends PictureLibrary{
+	public ObjectsLibrary(Number width, Number height, Pane otherPane) {
+		super(width, height, otherPane);
 		myResources="./com/print_stack_trace/voogasalad/controller/guiResources/ObjectImages.Properties";
 		loadAndAddData();
 	}
