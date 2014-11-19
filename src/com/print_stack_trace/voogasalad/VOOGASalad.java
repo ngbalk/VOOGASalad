@@ -24,11 +24,11 @@ public abstract class VOOGASalad extends Application {
 	
 	public abstract ViewController getMainGUI();
 	
-	public int getWidth() {
+	public double getWidth() {
 		return DEFAULT_WIDTH;
 	}
 	
-	public int getHeight() {
+	public double getHeight() {
 		return DEFAULT_HEIGHT;
 	}
 }
