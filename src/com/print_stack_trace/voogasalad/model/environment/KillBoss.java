@@ -12,7 +12,9 @@ public class KillBoss extends Goal implements GoalElement{
         // TODO Auto-generated constructor stub
     }
 
-
+    public Integer getBossID() {
+        return myBossID;
+    }
 
     @Override
     protected void setGoalProperties() {

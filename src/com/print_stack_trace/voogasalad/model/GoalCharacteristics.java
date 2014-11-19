@@ -1,8 +1,8 @@
 package com.print_stack_trace.voogasalad.model;
 
-import javafx.geometry.Point2D;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.GoalType;
+import javafx.geometry.Point2D;
 
 
 public class GoalCharacteristics {

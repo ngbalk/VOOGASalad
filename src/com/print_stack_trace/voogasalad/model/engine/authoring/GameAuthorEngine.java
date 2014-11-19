@@ -13,7 +13,6 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerLis
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
-import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 public class GameAuthorEngine {
 
@@ -26,16 +25,8 @@ public class GameAuthorEngine {
 		PLATFORM,
 		OBSTACLE,
 		REWARD
-
 	}
 
-	public enum GoalType {
-		REACH_OBJECT,
-		REACH_DISTANCE,
-		KILL_BOSS,
-		POINTS,
-		STAY_ALIVE
-	}
 
 	public enum CameraType {
 		SCROLLING_RIGHT_TO_LEFT,
@@ -44,7 +35,6 @@ public class GameAuthorEngine {
 		SCROLLING_BOTTOM_TO_TOP,
 		CENTERED_ON_PLAYER,
 		SCROLL_WHEN_EDGE_REACHED
-
 	}
 
 	public GameAuthorEngine(){
