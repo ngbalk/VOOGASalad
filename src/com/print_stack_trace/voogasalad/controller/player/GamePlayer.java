@@ -26,7 +26,7 @@ import com.print_stack_trace.voogasalad.player.Score;
 public class GamePlayer implements ViewController {
 	private Group myRoot;
 	private GameEngine myGameEngine;
-	
+	private DecisionTable dt = new DecisionTable();
 	private Score currentScore;
 	
 	/* instance of buttons */
@@ -71,8 +71,8 @@ public class GamePlayer implements ViewController {
 		stage.setHeight(500);
 		stage.initStyle(StageStyle.UTILITY);
 		Group root = new Group();
-		Scene s = new Scene(root); 
-		root.getChildren().add(new DecisionTable());
+		Scene s = new Scene(root);
+		root.getChildren().add(dt);
 		stage.setScene(s);
 		stage.show();
 		return;
@@ -83,7 +83,7 @@ public class GamePlayer implements ViewController {
 	 * Maybe use observables to observe when something changes (just a thought)
 	 */
 	public void updateScene(){
-		
+
 	}
 	
 	
