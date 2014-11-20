@@ -8,10 +8,12 @@ import javafx.stage.StageStyle;
 
 public class DecisionTableButton extends Button {
 	public static final String text = "Edit Collision Table";
+	private DecisionTable myTable;
 	
-	public DecisionTableButton(){
+	public DecisionTableButton(DecisionTable table){
 		this.setText(text);
 		this.setOnAction(event->showTable());
+		myTable = table;
 	}
 
 	private void showTable() {
@@ -21,7 +23,7 @@ public class DecisionTableButton extends Button {
 		stage.initStyle(StageStyle.UTILITY);
 		Group root = new Group();  
 		Scene s = new Scene(root);
-		root.getChildren().add(new DecisionTable());
+		root.getChildren().add(myTable);
 		stage.setScene(s);
 		stage.show();
 		return;
