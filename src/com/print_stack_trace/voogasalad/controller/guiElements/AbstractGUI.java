@@ -45,7 +45,8 @@ public abstract class AbstractGUI extends BorderPane {
 		LevelButton myLevelButton=new LevelButton();
 		myLevelButton.relocate(myWidth*.3, 20);
 		myLevelButton.setPrefSize(100, 50);
-		bottomPane.getChildren().addAll(myLevelBar, currentLevel, myLevelButton);
+		DecisionTableButton tableButton = new DecisionTableButton();
+		bottomPane.getChildren().addAll(myLevelBar, currentLevel, myLevelButton, tableButton);
 		this.setVisible(true);
 		return bottomPane;
 	}

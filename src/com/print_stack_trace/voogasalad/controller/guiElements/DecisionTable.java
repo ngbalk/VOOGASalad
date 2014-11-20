@@ -15,28 +15,33 @@ public class DecisionTable extends GridPane {
 	public static final int numClasses = GameAuthorEngine.SpriteType.values().length;
 	public static final SpriteType[] types = GameAuthorEngine.SpriteType.values();
 	public static final int gapSize = 5;
+	private int currentRowColCount;
 	
 	public DecisionTable(){
 		this.setHgap(gapSize*2);
 		this.setVgap(gapSize);
+		currentRowColCount = numClasses;
+		Button b = new Button("Add Type");
+		this.add(b, 0, 0);
+		b.setOnAction(e->this.addType("fdfs"));
 		for(int i = 0; i<numClasses; i++){
 			String s = types[i].toString()+"   ";
-			Text t = new Text(s);
+			Text t = new Text(s); 
 			Text t2 = new Text(s); //have to have this to avoid adding duplicate children
 			this.add(t, i+1, 0);
 			this.add(t2, 0, i+1);
 			for(int j=0; j<numClasses; j++){
 				ComboBox<String> cb = new ComboBox<String>();
 				cb.getItems().add("test string");
-				cb.setOnAction(e-> getValForObjectTypes());
+				cb.getItems().add("screw308");
+				int temp1= i+1; int temp2=j+1;
+				cb.setOnAction(e-> getValForObjectTypes(temp2,temp1)); 
 				this.add(cb, i+1, j+1);
 			} 
-		}
+		} 
 	}
 	
-	public String getValForObjectTypes(){
-		int keyIndex = 2;
-		int valIndex = 3;
+	public String getValForObjectTypes(int keyIndex, int valIndex){
 		ComboBox cb = (ComboBox) getNodeByRowColumnIndex(keyIndex, valIndex, this);		
 		String s = (String) cb.getValue();
 		System.out.println(s);
@@ -55,5 +60,21 @@ public class DecisionTable extends GridPane {
 			}
 		}
 		return result;
+	}
+	
+	public void addType(String s){
+		Text t = new Text(s);
+		Text t2 = new Text(s);
+		currentRowColCount++;  
+		this.add(t2, 0, currentRowColCount);
+		this.add(t, currentRowColCount, 0);
+		for(int i = 1; i<currentRowColCount;i++){
+			ComboBox<String> cb = new ComboBox<String>();
+			this.add(cb, currentRowColCount, i);
+		}
+		for(int i = 1; i<currentRowColCount+1;i++){
+			ComboBox<String> cb = new ComboBox<String>();
+			this.add(cb, i, currentRowColCount);
+		}
 	}
 }
