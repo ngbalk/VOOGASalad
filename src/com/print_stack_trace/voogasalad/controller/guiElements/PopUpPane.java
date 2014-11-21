@@ -49,7 +49,6 @@ public class PopUpPane extends GeneralPane{
 	private void makeLabels(){
 		try{
 			Properties prop = new Properties();
-			System.out.println(DEFAULT_RESOURCE+myResourceName+".Properties");
 			InputStream stream = getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE+myResourceName+".Properties");
 			prop.load(stream);
 			for(Object labelName : prop.keySet()){
