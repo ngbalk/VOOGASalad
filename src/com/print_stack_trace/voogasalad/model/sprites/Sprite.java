@@ -1,14 +1,14 @@
 package com.print_stack_trace.voogasalad.model.sprites;
 
+import java.awt.Image;
+import java.awt.Point;
+
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
-import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
-
 public abstract class Sprite {
     protected SpriteCharacteristics mySpriteCharacteristics;
-    protected Point2D myPosition;
+    protected Point myPosition;
     protected Image myImage;
     protected SpriteType mySpriteType;
     
