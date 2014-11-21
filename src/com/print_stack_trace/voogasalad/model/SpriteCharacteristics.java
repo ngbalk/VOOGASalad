@@ -15,6 +15,8 @@ public class SpriteCharacteristics {
 	public int value;
 	public String directionFacing;
 	
+	
+	
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
 //		Default values 
