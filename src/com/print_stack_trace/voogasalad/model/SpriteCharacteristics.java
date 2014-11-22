@@ -20,7 +20,7 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
 //		Default values 
-//		img = new Image("");
+		img = new Image("");
 		p = new Point2D(0,0);
 		interactive = true;
 		health = 10;

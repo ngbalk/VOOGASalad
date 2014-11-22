@@ -43,28 +43,25 @@ public class GameAuthorEngine {
 		levelList.add(currentLevel);
 	}
 
-	public boolean setCurrentLevel(int index){
+	public void setCurrentLevel(int index){
+	    if(index < 0 || index >= levelList.size()) {
+	        throw new ArrayIndexOutOfBoundsException();
+	    }
 		if(levelList.get(index)!= null){
 			currentLevel = levelList.get(index);
-			return true;
 		}
-		return false;
 	}
 
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) {
-
-		currentLevel.addObject(spriteModel);
-		return null;
+		return currentLevel.addObject(spriteModel);
 	}
 
-	public boolean updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
+	public void updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
 		currentLevel.updateObject(modelID, spriteModel);
-		return true;
 	}
 
-	public boolean deleteObject(Integer modelID) {
+	public void deleteObject(Integer modelID) {
 		currentLevel.deleteObject(modelID);
-		return false;
 	}
 
 	public LevelModel getCurrentLevel(){
