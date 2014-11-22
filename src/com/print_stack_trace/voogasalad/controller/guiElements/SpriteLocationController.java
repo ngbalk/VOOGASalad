@@ -22,7 +22,7 @@ public class SpriteLocationController extends Group{
 	private TextField mySetYTextBox;
 	private ImageView mySpriteImage;
 	private SpriteCharacteristics mySpriteCharacteristics;
-	public SpriteLocationController(ImageView spriteImage, SpriteCharacteristics spriteCharacteristics){
+	public SpriteLocationController(ImageView spriteImage, SpriteCharacteristics spriteCharacteristics, double xLocation, double yLocation){
 		mySpriteImage = spriteImage;
 		mySpriteCharacteristics = spriteCharacteristics;
 		mySetXTextBox = new TextField();
