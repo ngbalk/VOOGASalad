@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputControl;
 
 public class SpriteXController extends UserInputText{
 	private GameObject mySprite;
