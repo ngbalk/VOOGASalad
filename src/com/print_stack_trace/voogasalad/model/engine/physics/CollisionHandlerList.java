@@ -2,7 +2,7 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
 
 import java.util.Map;
 
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 
 public class CollisionHandlerList {
 	public enum UserDefinedCollisionParams {
@@ -12,7 +12,7 @@ public class CollisionHandlerList {
 	
 	public static CollisionHandler collisionEngineFromParams(CollisionResult baseHandler, UserDefinedCollisionParams paramType, int param) {
 		//return new CollisionHandler() {
-			//TODO: Impliment
+			//TODO: Implement
 		//};
 		return null;
 	}

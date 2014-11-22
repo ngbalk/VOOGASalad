@@ -2,7 +2,7 @@ package com.print_stack_trace.voogasalad.model.environment;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
-public class Points extends Goal{
+public class Points extends Goal implements GoalElement{
     
     private int myPoints;
 
@@ -11,16 +11,19 @@ public class Points extends Goal{
         // TODO Auto-generated constructor stub
     }
 
-    @Override
-    public boolean isCompleted () {
-        // TODO Auto-generated method stub
-        return false;
-    }
+
     
     @Override
     protected void setGoalProperties() {
         myPoints = myGoalCharacteristics.myPointTotal;
         
     }
+
+
+
+	@Override
+	public void acceptChecker(GoalElementVisitor visitor) {
+		isCompleted = visitor.visit(this);		
+	}
 
 }

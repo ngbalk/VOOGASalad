@@ -32,7 +32,6 @@ public class DraggableItem {
 
 			@Override
 			public void handle(MouseEvent event) {
-				myItem.setOnMousePress();
 				mouseXLocation=event.getSceneX();
 				mouseYLocation=event.getSceneY();
 			}
