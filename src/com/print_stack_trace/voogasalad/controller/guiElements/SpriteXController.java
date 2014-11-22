@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
 public class SpriteXController extends UserInputText{
-	private GameObject mySprite;
 	private TextField myTextBox;
 	public SpriteXController (GameObject sprite){
 		myTextBox = (TextField) myNode;
