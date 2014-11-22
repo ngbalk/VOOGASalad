@@ -7,6 +7,7 @@ import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
@@ -25,6 +26,6 @@ public interface AbstractGameAuthorEngine {
 	public void setLevelCharacteristics(LevelCharacteristics levelSpecs) throws ElementLockedException;
 	public void setProgramPhysicsEngine(ProgramPhysicEngine engineType) throws ElementLockedException;
 	public void setPhysicsEngineUsingParams(int gravity, int drag, int intensity) throws ElementLockedException;
-	public void setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) throws ElementLockedException;
+	public void setResultOfCollision(CollisionResult result, SpriteType s1, SpriteType s2) throws ElementLockedException;
 	public void setCustomParamForCollisionType(CollisionResult result, UserDefinedCollisionParams paramType, int param) throws ElementLockedException;
 }

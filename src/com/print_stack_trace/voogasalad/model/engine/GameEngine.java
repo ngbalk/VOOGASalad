@@ -13,8 +13,10 @@ import javafx.scene.input.KeyEvent;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.data.AbstractGameData;
 import com.print_stack_trace.voogasalad.model.data.GameData;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
+import com.print_stack_trace.voogasalad.model.engine.authoring.AbstractGameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
@@ -28,8 +30,8 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 public class GameEngine {
 	private LevelModel currentLevel;
 	private RuntimeEngine runtimeEngine;
-	private GameAuthorEngine authorEngine = new GameAuthorEngine();
-	private GameData gameData = new GameData();
+	private AbstractGameAuthorEngine authorEngine;
+	private AbstractGameData gameData;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -37,7 +39,12 @@ public class GameEngine {
 	 * Constructor Method.
 	 */
 	public GameEngine() {
-		//TODO: Implement Constructor
+		this(new GameAuthorEngine(), new GameData());
+	}
+	
+	public GameEngine(AbstractGameAuthorEngine authorEngine, AbstractGameData gameData) {
+		this.authorEngine = authorEngine;
+		this.gameData = gameData;
 	}
 
 	//-------------------PUBLIC METHODS-------------------//
@@ -46,7 +53,7 @@ public class GameEngine {
 		loadLevel(gameData.loadLevel(inputStream));
 	}
 	
-	public void saveGame(BufferedOutputStream outputStream) {
+	public void saveGame(BufferedOutputStream outputStream) throws IOException {
 		LevelModel lvl = authorEngine.getCurrentLevel();
 		gameData.writeLevel(lvl, outputStream);
 	}
@@ -62,7 +69,7 @@ public class GameEngine {
 		authorEngine.updateObject(modelID, spriteModel);
 	}
 
-	public deleteObject(Integer modelID) {
+	public void deleteObject(Integer modelID) {
 		authorEngine.deleteObject(modelID);
 	}
 

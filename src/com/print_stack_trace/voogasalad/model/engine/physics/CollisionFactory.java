@@ -6,9 +6,6 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
  * Date Modified: 11/22/14
  */
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
-import com.print_stack_trace.voogasalad.model.engine.physics.collisions.*;;
 
 public class CollisionFactory {
 	//TODO: verify that this path takes us to the right package
