@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -23,7 +24,7 @@ public class DecisionTable extends GridPane {
 		currentRowColCount = numClasses;
 		Button b = new Button("Add Type");
 		this.add(b, 0, 0);
-		b.setOnAction(e->this.addType("fdfs"));
+		b.setOnAction(e->promptForType());//this.addType("fdfs"));
 		for(int i = 0; i<numClasses; i++){
 			String s = types[i].toString()+"   ";
 			Text t = new Text(s); 
@@ -62,7 +63,12 @@ public class DecisionTable extends GridPane {
 		return result;
 	}
 	
-	public void addType(String s){
+	public void promptForType(){
+		TextDialogBox prompter = new TextDialogBox(new TextField());
+		prompter.submitButton.setOnAction(e->addType(prompter.submit()));
+	}
+	
+	private void addType(String s){
 		Text t = new Text(s);
 		Text t2 = new Text(s);
 		currentRowColCount++;  

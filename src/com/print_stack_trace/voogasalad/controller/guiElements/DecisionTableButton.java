@@ -23,7 +23,7 @@ public class DecisionTableButton extends Button {
 		stage.initStyle(StageStyle.UTILITY);
 		Group root = new Group();  
 		Scene s = new Scene(root);
-		root.getChildren().add(myTable);
+		root.getChildren().add(myTable);  
 		stage.setScene(s);
 		stage.show();
 		return;
