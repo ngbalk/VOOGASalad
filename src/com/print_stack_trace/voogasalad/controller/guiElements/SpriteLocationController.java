@@ -20,15 +20,13 @@ public class SpriteLocationController extends Group{
 	private HBox myYHBox;
 	private TextField mySetXTextBox;
 	private TextField mySetYTextBox;
-	private ImageView mySpriteImage;
-	private SpriteCharacteristics mySpriteCharacteristics;
-	public SpriteLocationController(ImageView spriteImage, SpriteCharacteristics spriteCharacteristics, double xLocation, double yLocation){
-		mySpriteImage = spriteImage;
-		mySpriteCharacteristics = spriteCharacteristics;
+	private GameObject mySprite;
+	public SpriteLocationController(GameObject sprite, double xLocation, double yLocation){
+		mySprite = sprite;
 		mySetXTextBox = new TextField();
 		mySetYTextBox = new TextField();
-		mySetXTextBox.setText(Double.toString(spriteImage.getLayoutX()));
-		mySetYTextBox.setText(Double.toString(spriteImage.getLayoutY()));
+		mySetXTextBox.setText(Double.toString(sprite.getImage().getLayoutX()));
+		mySetYTextBox.setText(Double.toString(sprite.getImage().getLayoutY()));
 		makeLabels();
 	}
 	private void makeLabels(){
@@ -47,8 +45,8 @@ public class SpriteLocationController extends Group{
 	//Maybe we can have one button that calls this method, and have a similar method on all of these 
 	//GUI elements, maybe they should implement the same interface so we can do this with a loop?
 	public void setCharacteristic(){
-		double newXValue = mySpriteImage.getLayoutX();
-		double newYValue = mySpriteImage.getLayoutY();
+		double newXValue = mySprite.getImage().getLayoutX();
+		double newYValue = mySprite.getImage().getLayoutY();
 		try{
 			if(!mySetXTextBox.getText().isEmpty()){
 				newXValue = Double.parseDouble(mySetXTextBox.getText());
@@ -60,8 +58,8 @@ public class SpriteLocationController extends Group{
 		catch(NumberFormatException e){
 			JOptionPane.showMessageDialog(null, "Not a valid X or Y location");
 		}
-		mySpriteImage.setLayoutX(newXValue);
-		mySpriteImage.setLayoutY(newYValue);
+		mySprite.getImage().setLayoutX(newXValue);
+		mySprite.getImage().setLayoutY(newYValue);
 		
 //		TO IMPLEMENT
 //		mySpriteCharacteristics.setX(newXValue);
