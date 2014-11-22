@@ -3,19 +3,17 @@ package com.print_stack_trace.voogasalad.model.engine.authoring;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.print_stack_trace.voogasalad.exceptions.ElementLockedException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList.UserDefinedCollisionParams;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
-import com.print_stack_trace.voogasalad.model.environment.Goal;
 
-public class GameAuthorEngine {
+public class GameAuthorEngine implements AbstractGameAuthorEngine {
 
 	private List<LevelModel> levelList;
 	private LevelModel currentLevel;
@@ -26,25 +24,15 @@ public class GameAuthorEngine {
 		PLATFORM,
 		OBSTACLE,
 		REWARD
-		
 	}
-	
-	public enum GoalType {
-	    REACH_OBJECT,
-	    REACH_DISTANCE,
-	    KILL_BOSS,
-	    POINTS,
-	    STAY_ALIVE
-	}
-	
+
 	public enum CameraType {
-	    SCROLLING_RIGHT_TO_LEFT,
-	    SCROLLING_LEFT_TO_RIGHT,
-	    SCROLLING_TOP_TO_BOTTOM,
-	    SCROLLING_BOTTOM_TO_TOP,
-	    CENTERED_ON_PLAYER,
-	    SCROLL_WHEN_EDGE_REACHED
-	    
+		SCROLLING_RIGHT_TO_LEFT,
+		SCROLLING_LEFT_TO_RIGHT,
+		SCROLLING_TOP_TO_BOTTOM,
+		SCROLLING_BOTTOM_TO_TOP,
+		CENTERED_ON_PLAYER,
+		SCROLL_WHEN_EDGE_REACHED
 	}
 
 	public GameAuthorEngine(){
@@ -53,28 +41,25 @@ public class GameAuthorEngine {
 		levelList.add(currentLevel);
 	}
 
-	public boolean setCurrentLevel(int index){
+	public void setCurrentLevel(int index){
+	    if(index < 0 || index >= levelList.size()) {
+	        throw new ArrayIndexOutOfBoundsException();
+	    }
 		if(levelList.get(index)!= null){
 			currentLevel = levelList.get(index);
-			return true;
 		}
-		return false;
 	}
 
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) {
-
-		currentLevel.addObject(spriteModel);
-		return null;
+		return currentLevel.addObject(spriteModel);
 	}
 
-	public boolean updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
+	public void updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
 		currentLevel.updateObject(modelID, spriteModel);
-		return true;
 	}
 
-	public boolean deleteObject(Integer modelID) {
+	public void deleteObject(Integer modelID) {
 		currentLevel.deleteObject(modelID);
-		return false;
 	}
 
 	public LevelModel getCurrentLevel(){
@@ -85,40 +70,40 @@ public class GameAuthorEngine {
 	}
 
 	public Integer addGoalToLevel(GoalCharacteristics goalModel) {
-		//TODO: Pass to authorEngine!
-		return null;
+		return currentLevel.setGoal(goalModel);
 	}
 
-	public boolean updateGoal(Integer goalID, GoalCharacteristics goalModel) {
-		//TODO: Pass to authorEngine!
-		return false;
+	public void updateGoal(Integer goalID, GoalCharacteristics goalModel) {
+		currentLevel.updateGoal(goalID, goalModel);
 	}
 
-	public boolean deleteGoal(Integer goalID) {
-		return false;
+	public void deleteGoal(Integer goalID) {
+		currentLevel.deleteGoal(goalID);
 	}
 
 	public void setCameraType(CameraType c){
-	    currentLevel.setCameraType(c);
+		currentLevel.setCameraType(c);
 	}
-	
-	public boolean setLevelCharacteristics(LevelCharacteristics levelSpecs) {
-		return currentLevel.setLevelCharacteristics(levelSpecs);
+
+	public void setLevelCharacteristics(LevelCharacteristics levelSpecs) {
+		currentLevel.setLevelCharacteristics(levelSpecs);
 	}
-	
-	public boolean setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
-		return currentLevel.setSoloHandler(PhysicsEngineList.getProgramPhysicEngine(engineType));
+
+	public void setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
+		currentLevel.setSoloHandler(PhysicsEngineList.getProgramPhysicEngine(engineType));
 	}
-	
-	public boolean setPhysicsEngineUsingParams(int gravity, int drag, int intensity) {
-		return currentLevel.setSoloHandler(PhysicsEngineList.physicEngineFromParams(gravity, drag, intensity));
+
+	public void setPhysicsEngineUsingParams(int gravity, int drag, int intensity) {
+		currentLevel.setSoloHandler(PhysicsEngineList.physicEngineFromParams(gravity, drag, intensity));
 	}
-	
-	public boolean setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) {
-		return currentLevel.setResultOfCollision(result, s1, s2);
+
+	public void setResultOfCollision(CollisionResult result, SpriteType s1, SpriteType s2) {
+		currentLevel.setResultOfCollision(result, s1, s2);
 	}
-	
-	public boolean setCustomParamForCollisionType(CollisionResult result, UserDefinedCollisionParams paramType, int param) {
-		return currentLevel.setCollisionHandlerForResult(result, CollisionHandlerList.collisionEngineFromParams(result, paramType, param));
+
+	public void setCustomParamForCollisionType(CollisionResult result, UserDefinedCollisionParams paramType, int param) {
+		currentLevel.setCollisionHandlerForResult(result, CollisionHandlerList.collisionEngineFromParams(result, paramType, param));
 	}
+
+
 }

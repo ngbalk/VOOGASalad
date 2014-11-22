@@ -2,7 +2,7 @@ package com.print_stack_trace.voogasalad.model.environment;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
-public class KillBoss extends Goal{
+public class KillBoss extends Goal implements GoalElement{
     
     
     private Integer myBossID;
@@ -12,11 +12,8 @@ public class KillBoss extends Goal{
         // TODO Auto-generated constructor stub
     }
 
-
-    @Override
-    public boolean isCompleted () {
-        // TODO Auto-generated method stub
-        return false;
+    public Integer getBossID() {
+        return myBossID;
     }
 
     @Override
@@ -25,5 +22,12 @@ public class KillBoss extends Goal{
         myBossID = myGoalCharacteristics.myObjectID;
         
     }
+
+
+	@Override
+	public void acceptChecker(GoalElementVisitor visitor) {
+		isCompleted = visitor.visit(this);
+		
+	}
     
 }
