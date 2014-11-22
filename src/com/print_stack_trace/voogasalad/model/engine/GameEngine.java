@@ -16,6 +16,7 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.data.GameData;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList.UserDefinedCollisionParams;
@@ -57,12 +58,12 @@ public class GameEngine {
 		return authorEngine.addObjectToLevel(spriteModel);
 	}
 
-	public boolean updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
-		return authorEngine.updateObject(modelID, spriteModel);
+	public void updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
+		authorEngine.updateObject(modelID, spriteModel);
 	}
 
-	public boolean deleteObject(Integer modelID) {
-		return authorEngine.deleteObject(modelID);
+	public deleteObject(Integer modelID) {
+		authorEngine.deleteObject(modelID);
 	}
 
 	//Adding, Removing, and Updating Goals
@@ -88,7 +89,7 @@ public class GameEngine {
 	}
 
 	//Sprite-to-Sprite Physics
-	public void setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) {
+	public void setResultOfCollision(CollisionResult result, SpriteType s1, SpriteType s2) {
 		authorEngine.setResultOfCollision(result, s1, s2);
 	}
 

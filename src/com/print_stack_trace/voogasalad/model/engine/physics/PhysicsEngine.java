@@ -86,8 +86,8 @@ public class PhysicsEngine {
 		return decisionMatrix[s1.objectType.ordinal()][s2.objectType.ordinal()];
 	}
 	
-	public void setResultOfCollision(CollisionResult result, SpriteCharacteristics s1, SpriteCharacteristics s2) {
-		 decisionMatrix[s1.objectType.ordinal()][s2.objectType.ordinal()] = result;
+	public void setResultOfCollision(CollisionResult result, SpriteType s1, SpriteType s2) {
+		 decisionMatrix[s1.ordinal()][s2.ordinal()] = result;
 	}
 	
 	private CollisionHandler getHandlerForResult(CollisionResult result) {

@@ -9,6 +9,7 @@ import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsHandler;
@@ -151,8 +152,8 @@ public class LevelModel {
         physicsEngine.setHandlerForResult(result, handler);
     }
 
-    public void setResultOfCollision(CollisionResult result, SpriteCharacteristics s1,
-            SpriteCharacteristics s2) throws ElementLockedException {
+    public void setResultOfCollision(CollisionResult result, SpriteType s1,
+            SpriteType s2) throws ElementLockedException {
         if (isLocked) throw new ElementLockedException();
         physicsEngine.setResultOfCollision(result, s1, s2);
     }
