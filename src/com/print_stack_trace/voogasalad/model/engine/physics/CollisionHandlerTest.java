@@ -6,6 +6,8 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 public class CollisionHandlerTest implements CollisionHandler {
 
+	//-------------------PUBLIC METHODS-------------------//
+
 	@Override
 	public boolean haveCollided(SpriteCharacteristics s1,
 			SpriteCharacteristics s2) {
@@ -20,8 +22,10 @@ public class CollisionHandlerTest implements CollisionHandler {
 		// TODO Auto-generated method stub
 		
 	}
+
+	//-------------------PRIVATE METHODS-------------------//
 	
-	public boolean boundsOverlap(SpriteCharacteristics s1, SpriteCharacteristics s2) {
+	private boolean boundsOverlap(SpriteCharacteristics s1, SpriteCharacteristics s2) {
 		
 		double s1XPos = getXPos(s1);
 		double s1YPos = getYPos(s1);
@@ -39,14 +43,14 @@ public class CollisionHandlerTest implements CollisionHandler {
 		
 	}
 	
-	public double distanceBetween(double a, double b) {
+	private double distanceBetween(double a, double b) {
 		return Math.abs(a-b); 
 	}
 	
-	public double getXPos(SpriteCharacteristics s) {
+	private double getXPos(SpriteCharacteristics s) {
 		return s.p.getX();
 	}
-	public double getYPos(SpriteCharacteristics s) {
+	private double getYPos(SpriteCharacteristics s) {
 		return s.p.getY();
 	}
 
