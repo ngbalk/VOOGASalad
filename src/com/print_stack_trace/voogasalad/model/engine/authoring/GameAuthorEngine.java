@@ -3,6 +3,7 @@ package com.print_stack_trace.voogasalad.model.engine.authoring;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.print_stack_trace.voogasalad.exceptions.ElementLockedException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -103,4 +104,6 @@ public class GameAuthorEngine implements AbstractGameAuthorEngine {
 	public void setCustomParamForCollisionType(CollisionResult result, UserDefinedCollisionParams paramType, int param) {
 		currentLevel.setCollisionHandlerForResult(result, CollisionHandlerList.collisionEngineFromParams(result, paramType, param));
 	}
+
+
 }
