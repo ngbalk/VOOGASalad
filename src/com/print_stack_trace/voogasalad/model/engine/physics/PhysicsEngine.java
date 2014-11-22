@@ -42,7 +42,9 @@ public class PhysicsEngine {
 		ObjectBothFullDisplacement,
 		ObjectBothNoDisplacement,
 		NoAction,
-		Dissappear,
+		ObjectOneDisappear,
+		ObjectTwoDisappear,
+		ObjectBothDisappear,
 		GameOverLose,
 		GameOverWin
 	};
