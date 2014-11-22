@@ -18,7 +18,7 @@ public class RuntimeModel {
 
 	//-------------------VARIABLES-------------------//
 
-	public Map<Integer, SpriteCharacteristics> spriteMap;
+	public Map<Integer, RuntimeSprite> runtimeSpriteMap;
 	//public Map<Integer, AnimationEffects> animationEffects
 	public Map<Integer,Goal> goalMap;
 
@@ -28,7 +28,7 @@ public class RuntimeModel {
 	 * Constructor for generic RuntimeModel
 	 */
 	public RuntimeModel() {
-		spriteMap = new HashMap<Integer, SpriteCharacteristics>();
+		runtimeSpriteMap = new HashMap<Integer, RuntimeSprite>();
 		//animationEffects = new HashMap<Integer, AnimationEffects>();
 		goalMap = new HashMap<>();
 	}
@@ -39,7 +39,8 @@ public class RuntimeModel {
 	 */
 	public RuntimeModel(LevelModel level) {
 		this();
-		spriteMap = level.getSpriteMap();
+		for(Integer i: level.getSpriteMap().keySet())
+			runtimeSpriteMap.put(i, new RuntimeSprite(level.getSpriteMap().get(i)));
 		//animationEffects = level.animationEffects;
 		goalMap = level.getGoalMap();
 	}
@@ -50,8 +51,8 @@ public class RuntimeModel {
 	 * Return the sprite map of integer IDs to sprite characteristics
 	 * @return spriteMap
 	 */
-	public Map<Integer, SpriteCharacteristics> getSpriteMap() {
-		return spriteMap;
+	public Map<Integer, RuntimeSprite> getSpriteMap() {
+		return runtimeSpriteMap;
 	}
 	
 	/**
