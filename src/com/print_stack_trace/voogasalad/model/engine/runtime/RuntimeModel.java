@@ -1,7 +1,7 @@
 /**
  * @author Pranava Raparla
  * Date Created: 11/10/14
- * Date Modified: 11/21/14
+ * Date Modified: 11/22/14
  */
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
@@ -20,7 +20,7 @@ public class RuntimeModel {
 
 	public Map<Integer, SpriteCharacteristics> spriteMap;
 	//public Map<Integer, AnimationEffects> animationEffects
-	public GoalCharacteristics goalCharacteristics;
+	public Map<Integer,Goal> goalMap;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -30,7 +30,7 @@ public class RuntimeModel {
 	public RuntimeModel() {
 		spriteMap = new HashMap<Integer, SpriteCharacteristics>();
 		//animationEffects = new HashMap<Integer, AnimationEffects>();
-		goalCharacteristics = null;
+		goalMap = new HashMap<>();
 	}
 	
 	/**
@@ -39,9 +39,9 @@ public class RuntimeModel {
 	 */
 	public RuntimeModel(LevelModel level) {
 		this();
-		spriteMap = level.spriteMap;
+		spriteMap = level.getSpriteMap();
 		//animationEffects = level.animationEffects;
-		goalCharacteristics = level.getGoal();
+		goalMap = level.getGoalMap();
 	}
 	
 	//-------------------ACCESSORS-------------------//
@@ -67,9 +67,9 @@ public class RuntimeModel {
 	 * Return the goal associated with a given level
 	 * @return goal
 	 */
-	public GoalCharacteristics getGoal() {
+	public Map<Integer,Goal> getGoalMap() {
 		//consider returning a string instead of the entire goal
-		return goalCharacteristics;
+		return goalMap;
 	}
 	
 }

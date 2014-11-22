@@ -6,11 +6,11 @@ import java.util.List;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList.UserDefinedCollisionParams;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
 

@@ -43,8 +43,8 @@ public class CollisionFactory {
             }
             try {
             	//newCollisionResult = (CollisionHandler) con.newInstance(((CollisionHandler)myCollisionResult).class);
-            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                    | InvocationTargetException e) {
+            	
+            } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }

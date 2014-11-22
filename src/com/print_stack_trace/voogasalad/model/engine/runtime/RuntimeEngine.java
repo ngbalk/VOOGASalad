@@ -40,7 +40,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 */
 	public void update() {
 		//TODO: Finish implementation
-		physicsEngine.animateAll(currentLevel.spriteMap.values());
+		physicsEngine.animateAll(currentLevel.getSpriteMap().values());
 	}	
 	
 	//GAME PLAYER

@@ -20,7 +20,7 @@ public class LevelModel {
 
     Map<Integer, SpriteCharacteristics> mySpriteMap;
     Map<Integer, Goal> goalMap;
-    private Integer currentID;
+	private Integer currentID;
     private boolean isLocked;
     private PhysicsEngine physicsEngine;
     private CameraType myCameraType;
@@ -105,10 +105,13 @@ public class LevelModel {
 
     }
 
-
     public Goal getGoal(Integer id) {
         return goalMap.get(id);
     }
+    
+    public Map<Integer, Goal> getGoalMap() {
+		return goalMap;
+	}
 
     public void setCameraType(CameraType cameraType)
             throws ElementLockedException {
