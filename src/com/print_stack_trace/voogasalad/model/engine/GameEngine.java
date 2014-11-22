@@ -1,9 +1,14 @@
 package com.print_stack_trace.voogasalad.model.engine;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
+
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
@@ -36,14 +41,13 @@ public class GameEngine {
 	
 	//-------------------PUBLIC METHODS-------------------//
 	
-	public void loadGame(File gameFile) throws FileNotFoundException {
-		//TODO: @data This should allow diff types
-		loadLevel(gameData.loadLevel(gameFile.getAbsolutePath()));
+	public void loadGame(BufferedInputStream inputStream) {
+		loadLevel(gameData.loadLevel(inputStream));
 	}
 	
-	public void saveGame(String location, String fileName) throws IOException {
-		LevelModel lvl = null; //TODO: Import from authoing enviro
-		gameData.writeLevel(lvl, location, fileName);
+	public void saveGame(BufferedOutputStream outputStream) {
+		LevelModel lvl = authorEngine.getCurrentLevel();
+		gameData.writeLevel(lvl, outputStream);
 	}
 
 	//GAME AUTHORING
@@ -115,6 +119,10 @@ public class GameEngine {
 	
 	public Map<String, HighScore> getHighScoreList() {
 		return gameData.getHighScores();
+	}
+	
+	public EventHandler<KeyEvent> getRuntimeKeyHandler() {
+		return null;
 	}
 	
 	//-------------------ACCESSORS-------------------//
