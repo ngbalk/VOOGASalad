@@ -1,7 +1,7 @@
 /**
  * @author Pranava Raparla
  * Date Created: 11/10/14
- * Date Modified: 11/11/14
+ * Date Modified: 11/21/14
  */
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
@@ -15,43 +15,46 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 
-public class RuntimeEngine {
-	private LevelModel currentLevel;
+public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
 	/**
-	 * Constructor Method.
+	 * Takes in a LevelModel and sets private variables
+	 * @param level
 	 */
-	
 	public RuntimeEngine(LevelModel currentLevel) {
+		super(currentLevel);
+		this.currentLevel = currentLevel;
 		physicsEngine = currentLevel.getPhysicsEngine();
-		//TODO: Implement Constructor
 	}
 	
 	//-------------------PUBLIC METHODS-------------------//
 		
 	/**
-	 * 
+	 * Update all of the data in the current level. Calls PhysicsEngine
+	 * to "animate" sprites and other objects by "moving" sprites and
+	 * handling collisions. Nothing is returned.
 	 * @param currentLevel
 	 */
 	public void update() {
-		//TODO: 
-		//physicsEngine.animateSolo(allObjects);
-	}
-		
-	//GAME AUTHORING
-	
+		//TODO: Finish implementation
+		physicsEngine.animateAll(currentLevel.getSpriteMap().values());
+	}	
 	
 	//GAME PLAYER
 	
+	/**
+	 * This is looks like an accessor to everyone else but
+	 * a RuntimeModel should be created at the time it is called and built 
+	 * from the appropriate LevelModel data at time of call
+	 * @return runtimeModel 
+	 */
 	public RuntimeModel getStatus() {
-		RuntimeModel ret = new RuntimeModel();
-		/*TODO: Implement -- this is looks like an accessor to everyone else but
-		 *a RuntimeModel should be created at the time it is called and built 
-		 *from all of the various at time of call. */
-		return ret;
+		//TODO: update this...very bare bones
+		RuntimeModel runtimeModel = new RuntimeModel(currentLevel);
+		return runtimeModel;
 	}
 	
 	
