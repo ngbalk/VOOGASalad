@@ -1,3 +1,10 @@
+/**
+ * @author Justin Carrao
+ * @author Pranava Raparla
+ * Date Created: 11/21/14
+ * Date Modified: 11/21/14
+ */
+
 package com.print_stack_trace.voogasalad.model.engine.physics;
 
 import java.util.ArrayList;
