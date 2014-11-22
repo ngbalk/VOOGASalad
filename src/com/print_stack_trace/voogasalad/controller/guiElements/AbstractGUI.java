@@ -17,6 +17,7 @@ public abstract class AbstractGUI extends BorderPane {
 	private double myWidth;
 	private double myHeight;
 	private Pane gamePane;
+	
 	public AbstractGUI(Number width, Number height){
 		setPrefSize(width.doubleValue(), height.doubleValue());
 		myWidth= width.doubleValue();
@@ -45,7 +46,9 @@ public abstract class AbstractGUI extends BorderPane {
 		LevelButton myLevelButton=new LevelButton();
 		myLevelButton.relocate(myWidth*.3, 20);
 		myLevelButton.setPrefSize(100, 50);
-		bottomPane.getChildren().addAll(myLevelBar, currentLevel, myLevelButton);
+		DecisionTable table = new DecisionTable();
+		DecisionTableButton tableButton = new DecisionTableButton(table);
+		bottomPane.getChildren().addAll(myLevelBar, currentLevel, myLevelButton, tableButton);
 		this.setVisible(true);
 		return bottomPane;
 	}

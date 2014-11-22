@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public interface ViewController {
-	
+
 	/**
 	 * Initialization method. Setup your view objects and put them all into one
 	 * root node; !!!: This method must be called after instantiation.
