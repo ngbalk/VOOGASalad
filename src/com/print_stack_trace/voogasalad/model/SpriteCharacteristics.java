@@ -2,8 +2,11 @@ package com.print_stack_trace.voogasalad.model;
 
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
+import java.util.*;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+//import com.print_stack_trace.voogasalad.model.engine.physics.ArrayList;
+//import com.print_stack_trace.voogasalad.model.engine.physics.List;
 
 public class SpriteCharacteristics {
 	public Image img;
@@ -14,7 +17,7 @@ public class SpriteCharacteristics {
 	public double speed;
 	public int value;
 	public String directionFacing;
-	
+
 	
 	
 	public SpriteCharacteristics(SpriteType t){
@@ -28,5 +31,7 @@ public class SpriteCharacteristics {
 		value = 0;
 		directionFacing = "";
 	}
+	
+
 	
 }

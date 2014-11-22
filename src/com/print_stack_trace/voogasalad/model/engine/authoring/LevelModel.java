@@ -10,10 +10,12 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 public class LevelModel {
 	
-	Map<Integer, SpriteCharacteristics> spriteMap;
+	public Map<Integer, SpriteCharacteristics> spriteMap;
+	public Goal myGoal;
 	private Integer currentID;
 	private boolean isLocked;
 	private PhysicsEngine physicsEngine;
