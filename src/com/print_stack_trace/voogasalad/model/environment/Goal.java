@@ -1,9 +1,10 @@
 package com.print_stack_trace.voogasalad.model.environment;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.GoalType;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 
 public abstract class Goal {
+	public boolean isCompleted = false;
     
     protected GoalCharacteristics myGoalCharacteristics;
     protected GoalType myGoalType;
@@ -12,8 +13,6 @@ public abstract class Goal {
         myGoalCharacteristics = goalCharacteristics;
         setGoalProperties();
     }
-    
-    public abstract boolean isCompleted();
     
     protected void setGoalProperties() {
         myGoalType = myGoalCharacteristics.myGoalType;

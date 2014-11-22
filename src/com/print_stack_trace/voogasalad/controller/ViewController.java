@@ -9,7 +9,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public abstract class ViewController {
+public interface ViewController {
+	
 	/**
 	 * Initialization method. Setup your view objects and put them all into one
 	 * root node; !!!: This method must be called after instantiation.
@@ -20,7 +21,7 @@ public abstract class ViewController {
 	 */
 	public abstract Group initialize(GameEngine gameEngine);
 	
-	public void displayError(VoogaException exception){
+	public static void displayError(VoogaException exception){
 		Stage errorStage = new Stage();
 		errorStage.setWidth(500);
 		errorStage.setHeight(200);

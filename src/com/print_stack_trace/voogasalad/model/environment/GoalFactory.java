@@ -5,10 +5,17 @@ import java.lang.reflect.InvocationTargetException;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
-
 public class GoalFactory {
     public static final String goalPath = "com.print_stack_trace.voogasalad.model.environment.";
 
+    public enum GoalType {
+        REACH_OBJECT,
+        REACH_DISTANCE,
+        KILL_BOSS,
+        POINTS,
+        STAY_ALIVE
+    }
+    
     public Goal buildGoal(GoalCharacteristics myGoalCharacteristics) {
         Constructor<?> con = null;
         Goal newGoal = null;
