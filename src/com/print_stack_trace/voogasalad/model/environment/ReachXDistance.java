@@ -1,28 +1,33 @@
 package com.print_stack_trace.voogasalad.model.environment;
 
+import javafx.geometry.Point2D;
+
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
-public class StayAlive extends Goal implements GoalElement{
+public class ReachXDistance extends Goal implements GoalElement{
     
+    private double myXDestination;
     private Integer myHeroID;
 
-    public StayAlive (GoalCharacteristics goalCharacteristics) {
+    public ReachXDistance (GoalCharacteristics goalCharacteristics) {
         super(goalCharacteristics);
-        // TODO Auto-generated constructor stub
     }
 
+    public double getXDestination() {
+        return myXDestination;
+    }
+    
     public Integer getHeroID() {
         return myHeroID;
     }
-    
+
     @Override
     protected void setGoalProperties() {
         super.setGoalProperties();
+        myXDestination = myGoalCharacteristics.myDestination.getX();
         myHeroID = myGoalCharacteristics.myObjectID;
-        
+
     }
-
-
 
 	@Override
 	public void acceptChecker(GoalElementVisitor visitor) {
