@@ -5,7 +5,6 @@ import javafx.scene.control.TextField;
 public class UserInputText extends UserInputType{
 	
 	public UserInputText() {
-		myNode=new TextField();
 	}
 
 }
