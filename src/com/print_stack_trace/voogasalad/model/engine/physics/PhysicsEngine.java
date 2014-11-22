@@ -1,9 +1,8 @@
 /**
  * @author Zachary Podbela
  * @author Pranava Raparla
-
  * Date Created: 11/11/14
- * Date Modified: 11/11/14
+ * Date Modified: 11/22/14
  */
 package com.print_stack_trace.voogasalad.model.engine.physics;
 
@@ -12,6 +11,7 @@ import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 
 public class PhysicsEngine {
 	private static final int MATRIX_SIZE = SpriteType.values().length;
@@ -35,19 +35,6 @@ public class PhysicsEngine {
 	
 	private Map<CollisionResult , CollisionHandler> handlerMap;
 	private SoloPhysicsHandler soloHandler;
-
-	public enum CollisionResult {
-		ObjectOneFullDisplacement,
-		ObjectTwoFullDisplacement,
-		ObjectBothFullDisplacement,
-		ObjectBothNoDisplacement,
-		NoAction,
-		ObjectOneDisappear,
-		ObjectTwoDisappear,
-		ObjectBothDisappear,
-		GameOverLose,
-		GameOverWin
-	};
 	
 	public PhysicsEngine() {
 		decisionMatrix = new CollisionResult[MATRIX_SIZE][MATRIX_SIZE];
