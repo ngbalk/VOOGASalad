@@ -1,7 +1,7 @@
 /**
  * @author Pranava Raparla
  * Date Created: 11/10/14
- * Date Modified: 11/11/14
+ * Date Modified: 11/21/14
  */
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
@@ -41,7 +41,9 @@ public class RuntimeEngine {
 	//-------------------PUBLIC METHODS-------------------//
 		
 	/**
-	 * 
+	 * Update all of the data in the current level. Calls PhysicsEngine
+	 * to "animate" sprites and other objects by "moving" sprites and
+	 * handling collisions. Nothing is returned.
 	 * @param currentLevel
 	 */
 	public void update() {
@@ -55,7 +57,7 @@ public class RuntimeEngine {
 	 * This is looks like an accessor to everyone else but
 	 * a RuntimeModel should be created at the time it is called and built 
 	 * from the appropriate LevelModel data at time of call
-	 * @return 
+	 * @return runtimeModel 
 	 */
 	public RuntimeModel getStatus() {
 		//TODO: update this...very bare bones
