@@ -41,7 +41,7 @@ public class PopUpPane extends GeneralPane{
 		myLabel.setPrefSize(width, height);
 		myLabel.relocate(x, y);
 		UserInputFactory myInput=new UserInputFactory();
-		Node myInputType=myInput.createUserInput(values[6], values).getType();
+		Node myInputType=myInput.createUserInput(values[6], values, myGameObject).getType();
 		//needs refactoring
 		this.getChildren().add(myLabel);
 		if (myInputType!=null){
