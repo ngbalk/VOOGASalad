@@ -10,8 +10,8 @@ public class CollisionHandlerTest implements CollisionHandler {
 	public boolean haveCollided(SpriteCharacteristics s1,
 			SpriteCharacteristics s2) {
 		// TODO Auto-generated method stub
+		return boundsOverlap(s1, s2);
 		
-		return false;
 	}
 
 	@Override
