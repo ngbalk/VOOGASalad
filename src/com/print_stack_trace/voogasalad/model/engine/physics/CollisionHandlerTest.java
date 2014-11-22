@@ -35,11 +35,7 @@ public class CollisionHandlerTest implements CollisionHandler {
 		double xGapTolerance = (s1.img.getWidth()/2) + (s2.img.getWidth()/2);
 		double yGapTolerance = (s1.img.getHeight()/2) + (s2.img.getHeight()/2);
 		
-		if (distanceBetween(s1XPos, s2XPos) < xGapTolerance 
-				&& distanceBetween(s1YPos, s2YPos) < yGapTolerance) {
-			return true;
-		}
-		return false;
+		return (distanceBetween(s1XPos, s2XPos) < xGapTolerance && distanceBetween(s1YPos, s2YPos) < yGapTolerance);
 		
 	}
 	
