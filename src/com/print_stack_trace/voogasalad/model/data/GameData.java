@@ -3,12 +3,15 @@ package com.print_stack_trace.voogasalad.model.data;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameData {
@@ -30,9 +33,15 @@ public class GameData {
 	 *            - level created by the authoring environment
 	 * @param outputStreawm
 	 * 				output stream for level to save
+	 * @throws IOException 
 	 */
-	public void writeLevel(LevelModel lvl, BufferedOutputStream outputStream) {
-
+	public void writeLevel(Object lvl, BufferedOutputStream outputStream) throws IOException {
+		Gson gson = new GsonBuilder().create();
+		Map<String, Object> objMap = new HashMap<String, Object>();
+		String json = gson.toJson(objMap);
+		byte[] stringInBytes = json.getBytes();
+		outputStream.write(stringInBytes);
+		outputStream.flush();
 	}
 
 	/**
@@ -41,9 +50,17 @@ public class GameData {
 	 *            input stream for level to load
 	 * @return an instance of the level model that the game engine or game
 	 *         authoring environment will either play or edit
+	 * @throws IOException 
 	 */
-	public LevelModel loadLevel(BufferedInputStream inputStream) {
+	public LevelModel loadLevel(BufferedInputStream inputStream) throws IOException {
+		Gson gson = new GsonBuilder().create();
+		byte[] bytes = new byte[inputStream.available()];
+		inputStream.read(bytes);
+		String json = bytes.toString();
+		
+		
 		return null;
+		
 
 	}
 
