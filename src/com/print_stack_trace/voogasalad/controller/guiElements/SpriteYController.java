@@ -23,18 +23,15 @@ public class SpriteYController extends UserInputText{
 		});
 	}
 	public void setCharacteristic(String newValue){
-		double newXValue = mySprite.getImage().getLayoutY();
+		double newYValue = mySprite.getImage().getLayoutY();
 		try{
-			newXValue = Double.parseDouble(newValue);
+			newYValue = Double.parseDouble(newValue);
 		}
 		catch(NumberFormatException e){
 			JOptionPane.showMessageDialog(null, "Not a valid X location");
 		}
-		mySprite.getImage().setLayoutY(newXValue);
-		
-//		TO IMPLEMENT
-//		mySpriteCharacteristics.setX(newXValue);
-//		mySpriteCharacteristics.setY(newYValue);
+		mySprite.getImage().setLayoutY(newYValue);
+		mySprite.getCharacteristics().setY(newYValue);
 	}
 
 }
