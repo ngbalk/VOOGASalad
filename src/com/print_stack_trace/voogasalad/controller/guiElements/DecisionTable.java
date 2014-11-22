@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -11,10 +12,13 @@ import javafx.scene.text.Text;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
 
 public class DecisionTable extends GridPane {
 	public static final int numClasses = GameAuthorEngine.SpriteType.values().length;
 	public static final SpriteType[] types = GameAuthorEngine.SpriteType.values();
+	public static final CollisionResult[] collisions = PhysicsEngine.CollisionResult.values();  
 	public static final int gapSize = 5;
 	private int currentRowColCount;
 	
@@ -32,9 +36,7 @@ public class DecisionTable extends GridPane {
 			this.add(t, i+1, 0);
 			this.add(t2, 0, i+1);
 			for(int j=0; j<numClasses; j++){
-				ComboBox<String> cb = new ComboBox<String>();
-				cb.getItems().add("test string");
-				cb.getItems().add("screw308");
+				ComboBox<String> cb =  createPopulatedBox();
 				int temp1= i+1; int temp2=j+1;
 				cb.setOnAction(e-> getValForObjectTypes(temp2,temp1)); 
 				this.add(cb, i+1, j+1);
@@ -69,18 +71,28 @@ public class DecisionTable extends GridPane {
 	}
 	
 	private void addType(String s){
-		Text t = new Text(s);
+		Text t = new Text(s);  
 		Text t2 = new Text(s);
 		currentRowColCount++;  
 		this.add(t2, 0, currentRowColCount);
 		this.add(t, currentRowColCount, 0);
 		for(int i = 1; i<currentRowColCount;i++){
-			ComboBox<String> cb = new ComboBox<String>();
+			ComboBox<String> cb = createPopulatedBox();
 			this.add(cb, currentRowColCount, i);
 		}
 		for(int i = 1; i<currentRowColCount+1;i++){
-			ComboBox<String> cb = new ComboBox<String>();
+			ComboBox<String> cb = createPopulatedBox();
 			this.add(cb, i, currentRowColCount);
 		}
+	}
+	
+	private ComboBox<String> createPopulatedBox(){
+		ComboBox<String> cb = new ComboBox<String>();
+		String[] collisionStrings = new String[collisions.length];
+		for(int i=0; i <collisions.length; i++){
+			collisionStrings[i] = collisions[i].toString();
+		}
+		cb.getItems().addAll(collisionStrings);
+		return cb;
 	}
 }

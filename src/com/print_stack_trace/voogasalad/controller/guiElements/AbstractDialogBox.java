@@ -24,7 +24,6 @@ public abstract class AbstractDialogBox {
 		myNode = node; 
 		box.getChildren().addAll(myNode, submitButton);
 		root.getChildren().add(box);
-		//root.getChildren().add(submitButton);
 		submitButton.setOnAction(e->submit());
 		stage.setScene(s);
 		stage.show();
