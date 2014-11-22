@@ -8,7 +8,7 @@ public class LevelButton extends Button {
 		this.setOnAction(event->createPane());
 	}
 	private void createPane(){
-		GeneralPane myPane=new PopUpPane("LevelPane");
+		GeneralPane myPane=new PopUpPane("LevelPane", null);
 		myPane.openPane();
 	}
 }

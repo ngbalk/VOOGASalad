@@ -1,34 +1,18 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
-import java.awt.Point;
 import java.util.HashMap;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import javax.swing.JOptionPane;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableDoubleValue;
-import javafx.beans.value.ObservableIntegerValue;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.ScrollBar;
+import com.print_stack_trace.voogasalad.model.engine.GameEngine;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class GamePane extends Pane{
 	private double myWidth;
 	private double myHeight;
+	private GameEngine myGameEngine;
 	private HashMap<ImageView, Number> myData;
 	public GamePane(double width, double height){
 		myWidth=width;
@@ -45,13 +29,14 @@ public class GamePane extends Pane{
 		this.getChildren().addAll(myScrollingBars);
 	}
 	public void addGameObject(ImageView gameObjectImageView){
-		String gameObjectType=JOptionPane.showInputDialog("What type of object would you like this image to be: (player, object, enemy, or obstacle");
-		GameObject myGameObject=new GameObject(0, gameObjectImageView, gameObjectType);
+		String gameObjectType=JOptionPane.showInputDialog("What type of object would you like this image to be: (hero, obstacle, enemy, platform or reward");
+		GameObject myGameObject=new GameObject(0, gameObjectImageView, gameObjectType, myGameEngine);
+		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
+		myGameObject.setID(myID);
 		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
 		myData.put(gameObjectImageView, 0);
 		this.getChildren().add(gameObjectImageView);
 	}
-	
 	public double getGridWidth(){
 		return myWidth;
 	}
@@ -59,9 +44,9 @@ public class GamePane extends Pane{
 		return myHeight;
 	}
 	public void addBackground(ImageView imgView){
-		GameObject myGameObject=new GameObject(0,imgView, "level background");
+		GameObject myGameObject=new GameObject(0,imgView, "level background", myGameEngine);
 		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
-		ImageView background=(ImageView)copyNode.getMyItem();
+		ImageView background=myGameObject.getImage();
 		background.setFitWidth(getWidth());
 		background.setFitHeight(getHeight()-10);
 		background.setFitWidth(getWidth()-10);
@@ -69,5 +54,8 @@ public class GamePane extends Pane{
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
 		this.getChildren().add(0, background);
+	}
+	public void addGameEngine(GameEngine gameEngine){
+		myGameEngine=gameEngine;
 	}
 }

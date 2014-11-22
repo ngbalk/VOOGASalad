@@ -6,6 +6,9 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import com.print_stack_trace.voogasalad.controller.gameElements.Sprite;
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -15,9 +18,10 @@ public class PopUpPane extends GeneralPane{
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
 	protected String myResourceName="";
 	protected String myName="";
-	public PopUpPane(String resource){
+	public PopUpPane(String resource, GameObject myObject){
 		super();
 		myResourceName=resource;
+		myGameObject=myObject;
 		this.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
 		this.setStyle("-fx-background-color: BLACK");
 		makeLabels();
