@@ -17,6 +17,7 @@ public abstract class AbstractGUI extends BorderPane {
 	private double myWidth;
 	private double myHeight;
 	private Pane gamePane;
+	private GameEngine myGameEngine;
 	public AbstractGUI(Number width, Number height){
 		setPrefSize(width.doubleValue(), height.doubleValue());
 		myWidth= width.doubleValue();
@@ -76,4 +77,11 @@ public abstract class AbstractGUI extends BorderPane {
 	protected abstract void setBorderAndBackgroundStyle(Node stylePane);
 	protected abstract void setStyle(Node stylePane);
 	protected abstract void setBorderStyle(Node stylePane);
+	public Group initialize(GameEngine gameEngine) {
+		myGameEngine = gameEngine;
+		Group root = new Group();
+		root.getChildren().add(this);
+		((GamePane) gamePane).addGameEngine(myGameEngine);
+		return root;
+	}
 }

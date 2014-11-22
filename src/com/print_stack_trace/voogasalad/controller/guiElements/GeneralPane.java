@@ -43,5 +43,8 @@ public abstract class GeneralPane extends Pane{
 		myStage.setScene(myScene);
 		myStage.setHeight(myHeight);
 		myStage.setWidth(myWidth+15);
-	}	
+	}
+	public void close(){
+		myStage.close();
+	}
 }

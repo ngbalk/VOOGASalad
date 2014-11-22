@@ -9,18 +9,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 public class DraggableItem {
-	//blah{
-		//for (x: x list)
-			//x.dosomething(myPrivateData)
-	//instead 
-	//pass in an interface with its function defined .
-	//blahInClass(Consumer <x> func){
-		//myList.map(func);
-	//}
-	//blah{
-		//this.blahInclass(X::doSomething());
-		//this.blahInClass(e-->callCode(myPrivateData));
-	//}
 	private GameObject myItem;
 	private double mouseXLocation;
 	private double mouseYLocation;
@@ -44,10 +32,9 @@ public class DraggableItem {
 
 			@Override
 			public void handle(MouseEvent event) {
+				myItem.setOnMousePress();
 				mouseXLocation=event.getSceneX();
 				mouseYLocation=event.getSceneY();
-				Pane myNewPane=myPaneChooser.createPane(myItem.getType());
-				((GeneralPane) myNewPane).openPane();
 			}
 		});
 		
