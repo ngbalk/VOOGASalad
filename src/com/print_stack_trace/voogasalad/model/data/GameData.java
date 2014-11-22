@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameData {
@@ -32,16 +33,18 @@ public class GameData {
 	 * @param lvl
 	 *            - level created by the authoring environment
 	 * @param outputStreawm
-	 * 				output stream for level to save
-	 * @throws IOException 
+	 *            output stream for level to save
+	 * @throws IOException
 	 */
-	public void writeLevel(Object lvl, BufferedOutputStream outputStream) throws IOException {
+	public void writeLevel(Object lvl, BufferedOutputStream outputStream)
+			throws IOException {
 		Gson gson = new GsonBuilder().create();
 		Map<String, Object> objMap = new HashMap<String, Object>();
-		String json = gson.toJson(objMap);
+		String json = gson.toJson(lvl);
 		byte[] stringInBytes = json.getBytes();
 		outputStream.write(stringInBytes);
 		outputStream.flush();
+		outputStream.close();
 	}
 
 	/**
@@ -50,17 +53,18 @@ public class GameData {
 	 *            input stream for level to load
 	 * @return an instance of the level model that the game engine or game
 	 *         authoring environment will either play or edit
-	 * @throws IOException 
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
+	 * @throws JsonSyntaxException 
 	 */
-	public LevelModel loadLevel(BufferedInputStream inputStream) throws IOException {
+	public Object loadLevel(BufferedInputStream inputStream, Object o) throws IOException, JsonSyntaxException, ClassNotFoundException {
 		Gson gson = new GsonBuilder().create();
 		byte[] bytes = new byte[inputStream.available()];
 		inputStream.read(bytes);
 		String json = bytes.toString();
 		
-		
+		gson.fromJson(json, o.getClass());
 		return null;
-		
 
 	}
 
@@ -86,12 +90,11 @@ public class GameData {
 	 *            - name of the level that the high score will be associated
 	 *            with
 	 */
-	private void saveHighScores(){//String name) {
-		//TODO: name is your job!! You need to put the file in the system directory or something. not the users problem.
-		//USE highScores for current the list.
+	private void saveHighScores() {// String name) {
+		// TODO: name is your job!! You need to put the file in the system
+		// directory or something. not the users problem.
+		// USE highScores for current the list.
 	}
-	
-	
 
 	/**
 	 * 
@@ -99,15 +102,16 @@ public class GameData {
 	 *            - name of the file that the high scores are being loaded for
 	 * @return list or text representation of the high scores
 	 */
-	private void loadHighScores(){//String name) {
-		//TODO: name is your job!! You need to put the file in the system directory or something. not the users problem.
-		highScores = null; //SET local highScores var once you load;
+	private void loadHighScores() {// String name) {
+		// TODO: name is your job!! You need to put the file in the system
+		// directory or something. not the users problem.
+		highScores = null; // SET local highScores var once you load;
 	}
-	
+
 	public Map<String, HighScore> getHighScores() {
 		return highScores;
 	}
-	
+
 	public void saveHighScore(String name, HighScore highScore) {
 		highScores.put(name, highScore);
 		saveHighScores();
