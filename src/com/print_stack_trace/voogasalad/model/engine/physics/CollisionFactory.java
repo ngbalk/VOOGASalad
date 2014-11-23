@@ -7,8 +7,6 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
  */
 import java.lang.reflect.Constructor;
 
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList.UserDefinedCollisionParams;
-
 public class CollisionFactory {
 	//TODO: verify that this path takes us to the right package
 	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.enginge.physics.collisions";
@@ -25,6 +23,8 @@ public class CollisionFactory {
 	};
 	
 	public enum UserDefinedCollisionParams {
+		
+		
 		PointsAwarded,
 		DamageDealt
 	}
@@ -44,8 +44,8 @@ public class CollisionFactory {
                 e.printStackTrace();
             }
             try {
-            	//newCollisionResult = (CollisionHandler) con.newInstance(((CollisionHandler)myCollisionResult).class);
-            	
+            	newCollisionResult = (CollisionHandler) con.newInstance();
+            	//if constructor changes, updated the newInstance() call
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
