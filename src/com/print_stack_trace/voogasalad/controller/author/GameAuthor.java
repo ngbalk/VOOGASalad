@@ -9,7 +9,7 @@ import javafx.scene.Group;
 public class GameAuthor implements ViewController {
 	
 	private Group root = new Group();
-	private GameEngine gameEngine;
+	private GameEngine myGameEngine;
 	private double myWidth;
 	private double myHeight;
 	public GameAuthor(double width, double height){
@@ -17,7 +17,7 @@ public class GameAuthor implements ViewController {
 		myHeight=height;
 	}
 	public Group initialize(GameEngine gameEngine) {
-		gameEngine = gameEngine;
+		myGameEngine = gameEngine;
 		GreenGUI myGUI=new GreenGUI(myWidth, myHeight);
 		root=myGUI.initialize(gameEngine);
 		return root;

@@ -1,6 +1,11 @@
 package com.print_stack_trace.voogasalad.model.data;
 
+<<<<<<< HEAD
 import java.io.File;
+=======
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+>>>>>>> 297c2920e5bb30cb72acaf00b5d44034071ea0d8
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,13 +14,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import com.google.gson.Gson;
+=======
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+>>>>>>> 297c2920e5bb30cb72acaf00b5d44034071ea0d8
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
-public class GameData {
+public class GameData implements AbstractGameData {
 	private Map<String, HighScore> highScores = new HashMap<String, HighScore>();
 	private Gson gson;
 	/**
@@ -32,12 +43,20 @@ public class GameData {
 	 * 
 	 * @param lvl
 	 *            - level created by the authoring environment
-	 * @param location
-	 *            - provides the location ont he hard drive to store the file
-	 * @param name
-	 *            - name of the file to be saved
+	 * @param outputStreawm
+	 *            output stream for level to save
+	 * @throws IOException
 	 */
-	public void writeLevel(LevelModel lvl, File location) throws IOException {
+
+	public void writeLevelMarcus(LevelModel lvl, File location) throws IOException {
+			/* Tested out my WriteLevel; The following is its ouput
+			 * This is a hero: true
+			 *	Object Added ID: 0
+			 * gson to Json :{"spriteMap":{"0":{"p":{"x":0.5,"y":10.23,"hash":0},"interactive":true,"objectType":"HERO","health":10,"speed":10.0,"value":0,"directionFacing":""}},"currentID":0,"isLocked":false}
+			 * wrote file to C:\Users\Marcus Cain\AppData\Roaming\Microsoft\Windows\Network Shortcuts\json2.txt
+			 */
+	
+	
 		/* Ensure that levelModel does not contain any javafx objects.
 		 * also ensure that objects within levelModel (SpriteCharacteristics) does
 		 * not contain any javafx primitive or objets
@@ -61,13 +80,13 @@ public class GameData {
 		 */
 		
 		if(location != null){
-			saveFile(json,location);
+			saveFileMarcus(json,location);
 			return;
 		}
 		throw new IOException("Application did not specify target location to save");
 	}
 
-	private void saveFile(String s, File file) {
+	private void saveFileMarcus(String s, File file) {
 		try {
 			FileWriter fileWriter = new FileWriter(file);
 			fileWriter.write(s);
@@ -80,14 +99,34 @@ public class GameData {
 		}
 	}
 
+	public void writeLevel(Object lvl, BufferedOutputStream outputStream)
+			throws IOException {
+		Gson gson = new GsonBuilder().create();
+		Map<String, Object> objMap = new HashMap<String, Object>();
+		String json = gson.toJson(lvl);
+		byte[] stringInBytes = json.getBytes();
+		outputStream.write(stringInBytes);
+		outputStream.flush();
+		outputStream.close();
+	}
+
 	/**
 	 * 
-	 * @param fileName
-	 *            name of the game that the user wants
+	 * @param inputStream
+	 *            input stream for level to load
 	 * @return an instance of the level model that the game engine or game
 	 *         authoring environment will either play or edit
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
+	 * @throws JsonSyntaxException 
 	 */
-	public LevelModel loadLevel(String fileName) throws FileNotFoundException {
+	public Object loadLevel(BufferedInputStream inputStream, Object o) throws IOException, JsonSyntaxException, ClassNotFoundException {
+		Gson gson = new GsonBuilder().create();
+		byte[] bytes = new byte[inputStream.available()];
+		inputStream.read(bytes);
+		String json = bytes.toString();
+		
+		gson.fromJson(json, o.getClass());
 		return null;
 
 	}
@@ -114,12 +153,11 @@ public class GameData {
 	 *            - name of the level that the high score will be associated
 	 *            with
 	 */
-	private void saveHighScores(){//String name) {
-		//TODO: name is your job!! You need to put the file in the system directory or something. not the users problem.
-		//USE highScores for current the list.
+	private void saveHighScores() {// String name) {
+		// TODO: name is your job!! You need to put the file in the system
+		// directory or something. not the users problem.
+		// USE highScores for current the list.
 	}
-	
-	
 
 	/**
 	 * 
@@ -127,15 +165,16 @@ public class GameData {
 	 *            - name of the file that the high scores are being loaded for
 	 * @return list or text representation of the high scores
 	 */
-	private void loadHighScores(){//String name) {
-		//TODO: name is your job!! You need to put the file in the system directory or something. not the users problem.
-		highScores = null; //SET local highScores var once you load;
+	private void loadHighScores() {// String name) {
+		// TODO: name is your job!! You need to put the file in the system
+		// directory or something. not the users problem.
+		highScores = null; // SET local highScores var once you load;
 	}
-	
+
 	public Map<String, HighScore> getHighScores() {
 		return highScores;
 	}
-	
+
 	public void saveHighScore(String name, HighScore highScore) {
 		highScores.put(name, highScore);
 		saveHighScores();
