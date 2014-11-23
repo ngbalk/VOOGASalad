@@ -37,7 +37,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 */
 	public void update() {
 		//TODO: Finish implementation
-		physicsEngine.animateAll(runtimeModel.getSprites());
+		physicsEngine.animateAll(runtimeModel.getSpriteMap().values());
 	}	
 	
 	//GAME PLAYER
@@ -61,7 +61,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	public void handleKeyPress(KeyEvent event) {
 		
 	}
-	
 	
 	//-------------------ACCESSORS-------------------//
 	
