@@ -36,13 +36,13 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
 //		Default values 
-//		img = new Image("");
-		p = new Point(0,0);
-		interactive = true;
-		startingHealth = 10;
-		startingSpeed = 10;
-		value = 0;
-		startingDirectionFacing = "left";
+		img = DEFAULT_IMAGE;
+		p = DEFAULT_POINT;
+		interactive = DEFAULT_INTERACTIVE;
+		startingHealth = DEFAULT_HEALTH;
+		startingSpeed = DEFAULT_SPEED;
+		value = DEFAULT_VALUE;
+		startingDirectionFacing = DEFAULT_DIRECTION_FACING;
 	}
 
     public Image getImg () {
