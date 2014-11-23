@@ -10,7 +10,7 @@ package com.print_stack_trace.voogasalad.model.engine.physics.collisions;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 
-public class ObjectOneFullDisplacement implements CollisionHandler {
+public class ObjectOneFullDisplacement extends CollisionHandler {
 
 	@Override
 	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
