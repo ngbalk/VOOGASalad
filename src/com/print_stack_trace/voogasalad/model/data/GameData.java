@@ -1,11 +1,8 @@
 package com.print_stack_trace.voogasalad.model.data;
 
-<<<<<<< HEAD
 import java.io.File;
-=======
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
->>>>>>> 297c2920e5bb30cb72acaf00b5d44034071ea0d8
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,16 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-<<<<<<< HEAD
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import com.google.gson.Gson;
-=======
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
->>>>>>> 297c2920e5bb30cb72acaf00b5d44034071ea0d8
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameData implements AbstractGameData {
