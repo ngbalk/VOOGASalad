@@ -7,6 +7,8 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
  */
 import java.lang.reflect.Constructor;
 
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
+
 public class CollisionFactory {
 	//TODO: verify that this path takes us to the right package
 	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.enginge.physics.collisions";
@@ -23,14 +25,12 @@ public class CollisionFactory {
 	};
 	
 	public enum UserDefinedCollisionParams {
-		
-		
 		PointsAwarded,
 		DamageDealt
 	}
 	
 	//TODO: make sure its collision result vs. collision handler and vice-versa
-    public CollisionHandler buildCollisionHandler(CollisionResult myCollisionResult) {
+    public static CollisionHandler buildCollisionHandler(CollisionResult myCollisionResult) {
         Constructor<?> con = null;
         CollisionHandler newCollisionResult = null;
 
@@ -58,12 +58,17 @@ public class CollisionFactory {
         return null;
     }
     
-	//TODO: integrate this method
 	public static CollisionHandler collisionEngineFromParams(CollisionResult baseHandler, UserDefinedCollisionParams paramType, int param) {
-		//return new CollisionHandler() {
-			//TODO: Implement
-		//};
-		return null;
+		return new CollisionHandler() {
+			private final CollisionHandler base = buildCollisionHandler(baseHandler);
+			
+			@Override
+			public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
+					RuntimeSpriteCharacteristics s2) {
+				base.applyCollisionEffects(s1, s2);
+				//TODO: Apply Points or Damage
+			}
+		};
 	}
     
     //TODO: Determine if this method from goal characteristics is applicable...
