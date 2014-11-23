@@ -2,7 +2,8 @@ package com.print_stack_trace.voogasalad.controller.guiElements;
 
 import java.util.HashMap;
 
-import javax.swing.JOptionPane;
+
+
 
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
@@ -30,15 +31,16 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		this.getChildren().addAll(myScrollingBars);
 	}
 	public void addGameObject(ImageView gameObjectImageView){
-		String gameObjectType=JOptionPane.showInputDialog("What type of object would you like this image to be: (hero, obstacle, enemy, platform or reward");
-		GameObject myGameObject=new GameObject(0, gameObjectImageView, gameObjectType);
-		//Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
-		//myGameObject.setID(myID);
-		gameObjectImageView.setOnMouseClicked(event->createPane(myGameObject));
-		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
-		myData.put(gameObjectImageView, 0);
-		
-		this.getChildren().add(gameObjectImageView);
+		if (gameObjectImageView!=null){
+			String myMessage=new InputMessage().showInputDialog("What type of object would you like this image to be: (hero, obstacle, enemy, platform or reward");
+			SpriteObject myGameObject=new SpriteObject(0, gameObjectImageView, myMessage, this);
+			Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
+			myGameObject.setID(myID);
+			gameObjectImageView.setOnMouseClicked(event->createPane(myGameObject));
+			DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
+			myData.put(gameObjectImageView, 0);
+			this.getChildren().add(gameObjectImageView);
+		}
 	}
 	public double getGridWidth(){
 		return myWidth;
@@ -47,26 +49,38 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return myHeight;
 	}
 	public void createPane(GameObject object){
-		Pane myNewPane=myPaneChooser.createPane(object.getType(), object);
+		Pane myNewPane=myPaneChooser.createPane(((SpriteObject)object).getType(), object);
 		((GeneralPane) myNewPane).openPane();
-
 	}
 	public void addBackground(ImageView imgView){
-		GameObject myGameObject=new GameObject(0,imgView, "level background");
-		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
-		ImageView background=myGameObject.getImage();
+		LevelObject levelBackground=new LevelObject(imgView,this);
+		DraggableItem copyNode=new DraggableItem(levelBackground, getWidth(), getHeight());
+		ImageView background=levelBackground.getImage();
 		background.setFitWidth(getWidth());
 		background.setFitHeight(getHeight()-10);
 		background.setFitWidth(getWidth()-10);
 		background.setSmooth(true);
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
-		this.getChildren().add(0, background);
+		imgView.setOnMouseClicked(e->createLevelPane(levelBackground));
+		levelBackground.getCharacteristics().setBackground(background.getImage());
+		this.getChildren().add(0, levelBackground.getImage());
+	}
+	public void createLevelPane(LevelObject myLevel){
+		Pane myNewPane=myPaneChooser.createPane("level background", myLevel);
+		((GeneralPane) myNewPane).openPane();
 	}
 	public void addGameEngine(GameEngine gameEngine){
 		myGameEngine=gameEngine;
 	}
-	public void update(GameObject myObject){
-		myGameEngine.updateObject(myObject.getId(), myObject.getCharacteristics());
+	public void update(SpriteObject myObject){
+		myGameEngine.updateObject(myObject.getId(),myObject.getCharacteristics());
 	}
+	public void update(LevelObject myObject){
+		myGameEngine.setLevelCharacteristics(myObject.getCharacteristics());
+		if (myObject.getCharacteristics().getBackground()==null){
+			this.setStyle("-fx-background-color: #"+myObject.getCharacteristics().getColor());
+		}
+	}
+	
 }

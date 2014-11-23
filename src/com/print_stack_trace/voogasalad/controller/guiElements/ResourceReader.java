@@ -1,24 +1,28 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
 public class ResourceReader {
-	public ResourceReader(){
-	}
-	public void doActionOnResources(ResourceAction myAction){
+	private HashMap<String, String> myProperties=new HashMap<String, String>();
+	public ResourceReader(String resource){
 		try{
 			Properties prop = new Properties();
-			InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.Properties");
+			InputStream stream = getClass().getClassLoader().getResourceAsStream(resource);
 			prop.load(stream);
 			for(Object object : prop.keySet()){
-				myAction.doAction(object);
+				myProperties.put((String)object, prop.getProperty((String) object));
 			}
 		}
 		catch(Exception e){
-			JOptionPane.showMessageDialog(null, "File not found");
+			JOptionPane.showMessageDialog(null, resource+"file not found");
 		}
+
+	}
+	public HashMap<String, String> getProperties(){
+		return myProperties;
 	}
 }

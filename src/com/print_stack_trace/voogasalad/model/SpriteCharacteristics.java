@@ -1,14 +1,19 @@
 package com.print_stack_trace.voogasalad.model;
 
-import java.awt.Image;
-import java.awt.Point;
 
+
+import java.util.HashMap;
+
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+
+import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 //import com.print_stack_trace.voogasalad.model.engine.physics.ArrayList;
 //import com.print_stack_trace.voogasalad.model.engine.physics.List;
 
 public class SpriteCharacteristics {
-	public Image img;
+	private Image myImage;
 	private double xLocation;
 	private double yLocation;
 	public boolean interactive;
@@ -19,8 +24,9 @@ public class SpriteCharacteristics {
 	public String directionFacing;
 	public double width;
 	public double height;
+	private HashMap<PossibleSpriteAction, KeyCode> myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
 
-	
+
 	
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
@@ -45,6 +51,15 @@ public class SpriteCharacteristics {
 	}
 	public void setY(double yLocation){
 		this.yLocation = yLocation;
+	}
+	public void setImage(Image imageToChange){
+		myImage=imageToChange;
+	}
+	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
+		myMovements.put(myAction, myKey);
+	}
+	public HashMap<PossibleSpriteAction, KeyCode> getMovements(){
+		return myMovements;
 	}
 	
 

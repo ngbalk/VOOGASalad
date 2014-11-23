@@ -33,8 +33,8 @@ public class SpriteXController extends UserInputText{
 			JOptionPane.showMessageDialog(null, "Not a valid X location");
 		}
 		mySprite.getImage().setLayoutX(newXValue);
-		mySprite.getCharacteristics().setX(newXValue);
-		mySprite.getCharacteristics().setY(newXValue);
+		((SpriteObject)mySprite).getCharacteristics().setX(newXValue);
+		mySprite.getDelegate().update((SpriteObject) mySprite);
 	}
 
 }

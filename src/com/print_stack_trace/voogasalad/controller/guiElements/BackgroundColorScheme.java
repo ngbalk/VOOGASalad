@@ -29,8 +29,15 @@ public class BackgroundColorScheme extends UserInputType{
 			colorCircle.setRadius(10);
 			colorCircle.relocate(startX, 0);
 			myBox.getChildren().add(colorCircle);
+			colorCircle.setOnMouseClicked(e->changeColor(myColor));
 		}
 		return myBox;
+	}
+	private void changeColor(String myColor){
+		((LevelObject) mySprite).getImage().setImage(null);
+		((LevelObject) mySprite).getCharacteristics().setBackgroundColor(myColor);
+		((LevelObject) mySprite).getDelegate().update((LevelObject)mySprite);
+		
 	}
 	private HashSet<String> loadColors(){
 		HashSet<String> myColors=new HashSet<String>();
