@@ -16,8 +16,10 @@ public class SpriteCharacteristics {
 	public double speed;
 	public int value;
 	public String directionFacing;
-
 	
+	public SpriteCharacteristics(SpriteCharacteristics obj) {
+		// TODO Impliment clone method
+	}
 	
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
@@ -30,6 +32,10 @@ public class SpriteCharacteristics {
 		value = 0;
 		directionFacing = "";
 	}
+
+
+
+	
 	
 
 	

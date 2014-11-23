@@ -7,7 +7,7 @@
  */
 package com.print_stack_trace.voogasalad.model.engine.physics;
 
-import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
 public class CollisionDetector {
 	
@@ -17,9 +17,12 @@ public class CollisionDetector {
 	 * @param spriteB
 	 * @return true if a collision happened, false otherwise
 	 */
-	public boolean haveCollided(SpriteCharacteristics spriteA, SpriteCharacteristics spriteB) {
-		//TODO: Implement this
-		return false;
+	public static boolean haveCollided(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB) {
+		if(spriteA.interactive && spriteB.interactive) {
+			//TODO: !!!
+			return false;
+		} else {
+			return false;
+		}
 	}
-	
 }

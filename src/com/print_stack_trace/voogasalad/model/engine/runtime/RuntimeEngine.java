@@ -6,17 +6,14 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
-import java.awt.Image;
-import java.awt.Point;
-import java.io.File;
-import java.util.Map;
+import javafx.scene.input.KeyEvent;
 
-import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 
 public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
+	private RuntimeModel runtimeModel;
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -26,7 +23,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 */
 	public RuntimeEngine(LevelModel currentLevel) {
 		super(currentLevel);
-		this.currentLevel = currentLevel;
+		runtimeModel = new RuntimeModel(currentLevel);
 		physicsEngine = currentLevel.getPhysicsEngine();
 	}
 	
@@ -40,7 +37,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 */
 	public void update() {
 		//TODO: Finish implementation
-		physicsEngine.animateAll(currentLevel.getSpriteMap().values());
+		physicsEngine.animateAll(runtimeModel.getSprites());
 	}	
 	
 	//GAME PLAYER
@@ -55,6 +52,14 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		//TODO: update this...very bare bones
 		RuntimeModel runtimeModel = new RuntimeModel(currentLevel);
 		return runtimeModel;
+	}
+	
+	public void handleKeyRelease(KeyEvent event) {
+		
+	}
+	
+	public void handleKeyPress(KeyEvent event) {
+		
 	}
 	
 	

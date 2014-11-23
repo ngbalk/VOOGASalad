@@ -10,6 +10,7 @@ import java.util.Map;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
+import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -49,8 +50,8 @@ public class GameEngine {
 
 	//-------------------PUBLIC METHODS-------------------//
 	
-	public void loadGame(BufferedInputStream inputStream) {
-		loadLevel(gameData.loadLevel(inputStream));
+	public void loadGame(BufferedInputStream inputStream) throws JsonSyntaxException, ClassNotFoundException, IOException {
+		loadLevel((LevelModel) gameData.loadLevel(inputStream, new LevelModel()));
 	}
 	
 	public void saveGame(BufferedOutputStream outputStream) throws IOException {
@@ -129,8 +130,26 @@ public class GameEngine {
 		return gameData.getHighScores();
 	}
 	
-	public EventHandler<KeyEvent> getRuntimeKeyHandler() {
-		return null;
+	public EventHandler<KeyEvent> getRuntimeKeyPressHandler() {
+		return new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent arg0) {
+				if(runtimeEngine != null) {
+					runtimeEngine.handleKeyPress(arg0);
+				}
+			}
+		};
+	}
+	
+	public EventHandler<KeyEvent> getRuntimeKeyReleasaeHandler() {
+		return new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent arg0) {
+				if(runtimeEngine != null) {
+					runtimeEngine.handleKeyRelease(arg0);
+				}
+			}
+		};
 	}
 	
 	//-------------------ACCESSORS-------------------//
