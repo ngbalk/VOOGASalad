@@ -28,7 +28,7 @@ public class UserInputFactory {
 				| IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "There is no such type");
+			JOptionPane.showMessageDialog(null, typeOfInput+ "does not exist.");
 		}
 		return null;
 	}

@@ -22,6 +22,7 @@ public class SpriteWidthController extends SpriteCharacteristicController{
 		mySprite.getImage().setFitWidth(newWidth);
 		mySprite.getImage().setPreserveRatio(false);
 		((SpriteObject)mySprite).getCharacteristics().setWidth(newWidth);
+		mySprite.getDelegate().update((SpriteObject) mySprite);
 	}
 	@Override
 	protected void populateDefaultText() {

@@ -1,26 +1,25 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
-
-
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
-
-import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
-
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 public abstract class LevelCharacteristicController extends UserInputText{
-	protected LevelModel myLevel;
+	protected LevelObject myLevel;
 	protected TextField myTextBox;
-	public LevelCharacteristicController(LevelModel level){
-		myLevel = level;
+	public LevelCharacteristicController(GameObject level){
+		myLevel = (LevelObject)level;
 		myTextBox = (TextField) myNode;
 		populateDefaultText();
-		myTextBox.textProperty().addListener(new ChangeListener<String>(){
+		myTextBox.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+
 			@Override
-			public void changed(ObservableValue<? extends String> arg0,
-					String oldVal, String newVal) {
-					setCharacteristic(newVal);
+			public void handle(KeyEvent e) {
+				if (e.getCode()==KeyCode.ENTER){
+					setCharacteristic(myTextBox.getText());
+				}
+				
 			}
+			
 		});
 	}
 	abstract protected void populateDefaultText();

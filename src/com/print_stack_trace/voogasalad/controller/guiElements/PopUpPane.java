@@ -25,7 +25,6 @@ public class PopUpPane extends GeneralPane{
 		this.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
 		this.setStyle("-fx-background-color: BLACK");
 		makeLabels();
-		
 	}
 	public PopUpPane(Number width, Number height, String name, GameObject gameObject){
 		super(width, height, name);
