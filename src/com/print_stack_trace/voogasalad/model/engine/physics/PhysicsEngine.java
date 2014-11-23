@@ -2,16 +2,16 @@
  * @author Zachary Podbela
  * @author Pranava Raparla
  * Date Created: 11/11/14
- * Date Modified: 11/22/14
+ * Date Modified: 11/23/14
  */
 package com.print_stack_trace.voogasalad.model.engine.physics;
 
 import java.util.Collection;
 import java.util.Map;
 
-import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
 public class PhysicsEngine {
 	private static final int MATRIX_SIZE = SpriteType.values().length;
@@ -40,23 +40,23 @@ public class PhysicsEngine {
 		decisionMatrix = new CollisionResult[MATRIX_SIZE][MATRIX_SIZE];
 	}
 	
-	public void animateAll(Collection<SpriteCharacteristics> allObjects) {
-		for(SpriteCharacteristics obj : allObjects) {
-			soloHandler.applyPhysics(obj);
+	public void animateAll(Collection<RuntimeSpriteCharacteristics> allObjects, int framesPerSecond) {
+		for(RuntimeSpriteCharacteristics obj : allObjects) {
+			soloHandler.applyPhysics(obj, framesPerSecond);
 		}
-		/*
-			TODO: Detect Collisions
-			If a collision is detected, call the private method collisionHandler(SpriteCharacteristics s1, SpriteCharacteristics s2)
-			with the two colliding SpriteCharactoristicObjects. It would be best to put the collision detection logic in a new class
-			(maybe even static since instance vars may not be needed);.
-			
-			Ideal Example
-			if(CollisionDetector.isIntersecting(SpriteCharacteristics s1, SpriteCharacteristics s2)) {
-				collisionHandler(SpriteCharacteristics s1, SpriteCharacteristics s2);
+		
+		RuntimeSpriteCharacteristics[] array = (RuntimeSpriteCharacteristics[]) allObjects.toArray();
+		for(int i = 0; i < array.length; i++) {
+			RuntimeSpriteCharacteristics s1 = array[i];
+			for(int j = i+1; j < array.length; j++) {
+				RuntimeSpriteCharacteristics s2 = array[j];
+				if(CollisionDetector.haveCollided(s1, s2)) {
+					collisionHandler(s1, s2);
+				}	
 			}
-		*/
+		}
 	}
-	
+		
 	/**
 	 * Private method to assist in the proper collision handling lifecycle.
 	 * Once it has been confirmed that two SpriteCharacteristics are colliding, 
@@ -76,13 +76,13 @@ public class PhysicsEngine {
 	 * 		a SpriteCharacteristics instance representing the other colliding object
 	 * @see	CollisionHandler, SpriteCharacteristics
 	 */
-	private void collisionHandler(SpriteCharacteristics s1, SpriteCharacteristics s2) {
+	private void collisionHandler(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
 		CollisionResult result = getResultOfCollision(s1, s2);
 		CollisionHandler handler = getHandlerForResult(result);
 		handler.applyCollisionEffects(s1, s2);
 	}
 	
-	private CollisionResult getResultOfCollision(SpriteCharacteristics s1, SpriteCharacteristics s2) {
+	private CollisionResult getResultOfCollision(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
 		return decisionMatrix[s1.objectType.ordinal()][s2.objectType.ordinal()];
 	}
 	

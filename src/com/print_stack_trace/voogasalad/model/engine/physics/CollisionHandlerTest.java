@@ -2,7 +2,7 @@
  * @author Justin Carrao
  * @author Pranava Raparla
  * Date Created: 11/21/14
- * Date Modified: 11/21/14
+ * Date Modified: 11/23/14
  */
 
 package com.print_stack_trace.voogasalad.model.engine.physics;
@@ -10,25 +10,17 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
 import java.util.ArrayList;
 
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
-public class CollisionHandlerTest implements CollisionHandler {
+public class CollisionHandlerTest extends CollisionHandler {
 
 	//-------------------PUBLIC METHODS-------------------//
-
+	
 	@Override
-	public boolean haveCollided(SpriteCharacteristics s1,
-			SpriteCharacteristics s2) {
-		// TODO Auto-generated method stub
-		return boundsOverlap(s1, s2);
-		
+	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+		//TODO: Implement this
 	}
 
-	@Override
-	public void applyCollisionEffects(SpriteCharacteristics s1,
-			SpriteCharacteristics s2) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	//-------------------PRIVATE METHODS-------------------//
 	
@@ -55,6 +47,13 @@ public class CollisionHandlerTest implements CollisionHandler {
 	}
 	private double getYPos(SpriteCharacteristics s) {
 		return s.p.getY();
+	}
+
+	@Override
+	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
+			RuntimeSpriteCharacteristics s2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

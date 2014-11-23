@@ -7,9 +7,9 @@ import com.print_stack_trace.voogasalad.exceptions.ElementLockedException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList.UserDefinedCollisionParams;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
 
@@ -93,7 +93,7 @@ public class GameAuthorEngine implements AbstractGameAuthorEngine {
 		currentLevel.setSoloHandler(PhysicsEngineList.getProgramPhysicEngine(engineType));
 	}
 
-	public void setPhysicsEngineUsingParams(int gravity, int drag, int intensity) {
+	public void setPhysicsEngineUsingParams(float gravity, float drag, float intensity) {
 		currentLevel.setSoloHandler(PhysicsEngineList.physicEngineFromParams(gravity, drag, intensity));
 	}
 
@@ -102,7 +102,7 @@ public class GameAuthorEngine implements AbstractGameAuthorEngine {
 	}
 
 	public void setCustomParamForCollisionType(CollisionResult result, UserDefinedCollisionParams paramType, int param) {
-		currentLevel.setCollisionHandlerForResult(result, CollisionHandlerList.collisionEngineFromParams(result, paramType, param));
+		currentLevel.setCollisionHandlerForResult(result, CollisionFactory.collisionEngineFromParams(result, paramType, param));
 	}
 
 
