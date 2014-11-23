@@ -17,7 +17,7 @@ public class GamePlayerException extends RuntimeException implements VoogaExcept
 	}
 	
 	public String printMessage() {
-		//TODO: Make it nice
+		// TODO Move to property List
 		return "GamePlayerException";
 	}
 }

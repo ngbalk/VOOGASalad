@@ -19,7 +19,7 @@ public class CollisionDetector {
 	 */
 	public static boolean haveCollided(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB) {
 		if(spriteA.interactive && spriteB.interactive) {
-			//TODO: !!!
+			//TODO: @ethan&nick
 			return false;
 		} else {
 			return false;

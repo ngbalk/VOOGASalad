@@ -8,5 +8,4 @@ public class LevelCharacteristics {
 	public File nextLevel = null;
 	public Image backgroundImg = null;
 	public int requiredNumberOfGoals = 0;
-	//TODO: More...
 }
