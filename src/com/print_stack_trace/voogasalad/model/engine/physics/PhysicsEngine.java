@@ -56,18 +56,7 @@ public class PhysicsEngine {
 			}
 		*/
 	}
-	
-	/**
-	 * Determine if two "sprites" (SpriteCharacteristics) have collided.
-	 * @param s1	the first "sprite" to check for collision
-	 * @param s2	the second "sprite" to check for collision
-	 * @return		whether two "sprites" have collided
-	 */
-	public boolean haveCollided(SpriteCharacteristics s1, SpriteCharacteristics s2) {
-		//TODO: implement this
-		return false;
-	}
-	
+		
 	/**
 	 * Private method to assist in the proper collision handling lifecycle.
 	 * Once it has been confirmed that two SpriteCharacteristics are colliding, 
