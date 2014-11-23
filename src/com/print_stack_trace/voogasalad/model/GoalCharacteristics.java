@@ -9,6 +9,7 @@ public class GoalCharacteristics {
 
     public GoalType myGoalType;
     public Integer myObjectID;
+    public Integer myObjectiveID;
     public Integer myPointTotal;
     public Point2D myDestination;
     
