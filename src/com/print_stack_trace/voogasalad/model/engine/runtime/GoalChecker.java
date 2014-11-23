@@ -21,7 +21,7 @@ public class GoalChecker implements GoalElementVisitor {
 
     @Override
     public boolean visit(KillBoss goal) {
-        return myLevel.getSpriteMap().get(goal.getBossID()).health <= 0;
+        return myLevel.getSpriteMap().get(goal.getBossID()).startingHealth <= 0;
     }
 
     //TODO: after we know how points work
@@ -55,7 +55,7 @@ public class GoalChecker implements GoalElementVisitor {
 
     @Override
     public boolean visit(StayAlive goal) {
-        return myLevel.getSpriteMap().get(goal.getHeroID()).health <= 0;
+        return myLevel.getSpriteMap().get(goal.getHeroID()).startingHealth <= 0;
     }
 
 }
