@@ -5,17 +5,27 @@ import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 public class ReachObject extends Goal implements GoalElement{
 
     private Integer mySpriteID;
+    private Integer myObjectiveID;
 
     public ReachObject (GoalCharacteristics goalCharacteristics) {
         super(goalCharacteristics);
         // TODO Auto-generated constructor stub
     }
 
+    
+    public Integer getMySpriteID() {
+        return mySpriteID;
+    }
+    
+    public Integer getMyObjectiveID() {
+        return myObjectiveID;
+    }
 
     @Override
     protected void setGoalProperties() {
         super.setGoalProperties();
         mySpriteID = myGoalCharacteristics.myObjectID;
+        myObjectiveID = myGoalCharacteristics.myObjectiveID;
 
     }
 
