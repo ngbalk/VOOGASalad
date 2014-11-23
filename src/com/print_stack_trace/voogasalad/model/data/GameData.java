@@ -41,7 +41,7 @@ public class GameData implements AbstractGameData {
 	 * @throws IOException
 	 */
 
-	public void writeLevelMarcus(LevelModel lvl, File location) throws IOException {
+	public void writeLevelMarcus(LevelModel lvl) throws IOException {
 			/* Tested out my WriteLevel; The following is its ouput
 			 * This is a hero: true
 			 *	Object Added ID: 0
@@ -63,17 +63,14 @@ public class GameData implements AbstractGameData {
 		 */
 		
 		/*
-		 * 	front end (authoring environmen, creates the fileChooser, since they have refernce to a stage
-		 * FileChooser fc = new FileChooser();
-		 * File file = fileChooser.showSaveDialog(new Stage());
+		 * 	front end (authoring environment DOES NOT need to know about FILE or Location of FILE -> completely GameData responsibility
 		 * 
-		 * we take that file as a paramter, and save json content to the file
-    }
+
 		 *  store json into a file
 		 */
-		
-		if(location != null){
-			saveFileMarcus(json,location);
+		File file = new File(System.getProperty("user.dir") + "/src/jsonData.txt");
+		if(file.getCanonicalPath() != null){
+			saveFileMarcus(json,file);
 			return;
 		}
 		throw new IOException("Application did not specify target location to save");
