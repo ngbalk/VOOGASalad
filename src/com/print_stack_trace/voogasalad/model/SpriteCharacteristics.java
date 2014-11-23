@@ -25,7 +25,7 @@ public class SpriteCharacteristics {
 	public double width;
 	public double height;
 	private HashMap<PossibleSpriteAction, KeyCode> myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
-
+	private String name;
 
 	
 	public SpriteCharacteristics(SpriteType t){
@@ -52,6 +52,7 @@ public class SpriteCharacteristics {
 	public void setY(double yLocation){
 		this.yLocation = yLocation;
 	}
+
 	public void setImage(Image imageToChange){
 		myImage=imageToChange;
 	}
@@ -60,6 +61,26 @@ public class SpriteCharacteristics {
 	}
 	public HashMap<PossibleSpriteAction, KeyCode> getMovements(){
 		return myMovements;
+	}
+
+	public double getWidth(){
+		return width;
+	}
+	public double getHeight(){
+		return height;
+	}
+	public void setWidth(double width){
+		this.width = width;
+	}
+	public void setHeight(double height){
+		this.height = height;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+
 	}
 	
 
