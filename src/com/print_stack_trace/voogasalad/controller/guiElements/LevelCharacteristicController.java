@@ -9,9 +9,9 @@ import javafx.scene.control.TextField;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public abstract class LevelCharacteristicController extends UserInputText{
-	protected LevelModel myLevel;
+	protected GameObject myLevel;
 	protected TextField myTextBox;
-	public LevelCharacteristicController(LevelModel level){
+	public LevelCharacteristicController(GameObject level){
 		myLevel = level;
 		myTextBox = (TextField) myNode;
 		populateDefaultText();
