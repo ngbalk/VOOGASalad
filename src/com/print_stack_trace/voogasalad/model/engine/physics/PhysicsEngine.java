@@ -40,9 +40,9 @@ public class PhysicsEngine {
 		decisionMatrix = new CollisionResult[MATRIX_SIZE][MATRIX_SIZE];
 	}
 	
-	public void animateAll(Collection<RuntimeSpriteCharacteristics> allObjects) {
+	public void animateAll(Collection<RuntimeSpriteCharacteristics> allObjects, int framesPerSecond) {
 		for(RuntimeSpriteCharacteristics obj : allObjects) {
-			soloHandler.applyPhysics(obj);
+			soloHandler.applyPhysics(obj, framesPerSecond);
 		}
 		
 		RuntimeSpriteCharacteristics[] array = (RuntimeSpriteCharacteristics[]) allObjects.toArray();

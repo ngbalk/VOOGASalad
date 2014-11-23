@@ -92,7 +92,7 @@ public class GameEngine {
 		authorEngine.setProgramPhysicsEngine(engineType);
 	}
 
-	public void setPhysicsEngineUsingParams(int gravity, int drag, int intensity) {
+	public void setPhysicsEngineUsingParams(float gravity, float drag, float intensity) {
 		authorEngine.setPhysicsEngineUsingParams(gravity, drag, intensity);
 	}
 
@@ -134,9 +134,7 @@ public class GameEngine {
 		return new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent arg0) {
-				if(runtimeEngine != null) {
-					runtimeEngine.handleKeyPress(arg0);
-				}
+				handleKeyPress(arg0);
 			}
 		};
 	}
@@ -145,11 +143,13 @@ public class GameEngine {
 		return new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent arg0) {
-				if(runtimeEngine != null) {
-					runtimeEngine.handleKeyRelease(arg0);
-				}
+				handleKeyRelease(arg0);
 			}
 		};
+	}
+	
+	public void setFramesPerSecond(int framesPerSecond) {
+		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
 	
 	//-------------------ACCESSORS-------------------//
@@ -167,5 +167,17 @@ public class GameEngine {
 
 	public void saveHighScore(String name, HighScore highScore) {
 		gameData.saveHighScore(name, highScore);
+	}
+	
+	private void handleKeyRelease(KeyEvent event) {
+		if(runtimeEngine != null) {
+			runtimeEngine.handleKeyRelease(event);
+		}
+	}
+	
+	private void handleKeyPress(KeyEvent event) {
+		if(runtimeEngine != null) {
+			runtimeEngine.handleKeyPress(event);
+		}
 	}
 }

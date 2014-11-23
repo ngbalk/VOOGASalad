@@ -14,6 +14,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
+	int framesPerSecond;
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -37,20 +38,20 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 */
 	public void update() {
 		//TODO: Finish implementation
-		physicsEngine.animateAll(runtimeModel.getSpriteMap().values());
-	}	
+		physicsEngine.animateAll(runtimeModel.getSpriteMap().values(), framesPerSecond);
+	}
+	
+	public void setFramesPerSecond(int framesPerSecond) {
+		this.framesPerSecond = framesPerSecond;
+	}
 	
 	//GAME PLAYER
 	
 	/**
-	 * This is looks like an accessor to everyone else but
-	 * a RuntimeModel should be created at the time it is called and built 
-	 * from the appropriate LevelModel data at time of call
+	 * Get the current state of the level in progress
 	 * @return runtimeModel 
 	 */
 	public RuntimeModel getStatus() {
-		//TODO: update this...very bare bones
-		RuntimeModel runtimeModel = new RuntimeModel(currentLevel);
 		return runtimeModel;
 	}
 	

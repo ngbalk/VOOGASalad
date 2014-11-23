@@ -93,7 +93,7 @@ public class GameAuthorEngine implements AbstractGameAuthorEngine {
 		currentLevel.setSoloHandler(PhysicsEngineList.getProgramPhysicEngine(engineType));
 	}
 
-	public void setPhysicsEngineUsingParams(int gravity, int drag, int intensity) {
+	public void setPhysicsEngineUsingParams(float gravity, float drag, float intensity) {
 		currentLevel.setSoloHandler(PhysicsEngineList.physicEngineFromParams(gravity, drag, intensity));
 	}
 
