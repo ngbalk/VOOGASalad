@@ -20,12 +20,10 @@ public class CollisionFactory {
 		ObjectOneDisappear,
 		ObjectTwoDisappear,
 		ObjectBothDisappear,
-		GameOverLose,
-		GameOverWin
 	};
 	
 	//TODO: make sure its collision result vs. collision handler and vice-versa
-    public CollisionHandler buildGoal(CollisionResult myCollisionResult) {
+    public CollisionHandler buildCollisionHandler(CollisionResult myCollisionResult) {
         Constructor<?> con = null;
         CollisionHandler newCollisionResult = null;
 
