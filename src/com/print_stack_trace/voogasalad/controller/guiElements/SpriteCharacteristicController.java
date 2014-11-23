@@ -1,8 +1,12 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public abstract class SpriteCharacteristicController extends UserInputText {
 	protected TextField myTextBox;
@@ -11,14 +15,17 @@ public abstract class SpriteCharacteristicController extends UserInputText {
 		myTextBox = (TextField) myNode;
 		mySprite = sprite;
 		populateDefaultText();
-		myTextBox.textProperty().addListener(new ChangeListener<String>(){
-			@Override
-			public void changed(ObservableValue<? extends String> arg0,
-					String oldVal, String newVal) {
-					setCharacteristic(newVal);
+		myTextBox.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+			public void handle(KeyEvent e){
+				if (e.getCode()==KeyCode.ENTER){
+					changeVal();
+				}
 			}
-			
 		});
+
+	}
+	private void changeVal(){
+		setCharacteristic(myTextBox.getText());
 	}
 	abstract protected void populateDefaultText();
 	abstract protected void setCharacteristic(String newValue);

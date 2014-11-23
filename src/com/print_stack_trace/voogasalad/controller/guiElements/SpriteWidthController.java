@@ -20,6 +20,7 @@ public class SpriteWidthController extends SpriteCharacteristicController{
 			JOptionPane.showMessageDialog(null, "Not a valid Width");
 		}
 		mySprite.getImage().setFitWidth(newWidth);
+		mySprite.getImage().setPreserveRatio(false);
 		((SpriteObject)mySprite).getCharacteristics().setWidth(newWidth);
 	}
 	@Override

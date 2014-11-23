@@ -20,10 +20,10 @@ public class SpriteXController extends SpriteCharacteristicController{
 			JOptionPane.showMessageDialog(null, "Not a valid X location");
 		}
 		mySprite.getImage().setLayoutX(newXValue);
-
 		((SpriteObject)mySprite).getCharacteristics().setX(newXValue);
 		((SpriteObject)mySprite).getDelegate().update((SpriteObject) mySprite);
 	}
+
 	@Override
 	protected void populateDefaultText() {
 		myTextBox.setText(Double.toString(mySprite.getImage().getLayoutX()));
