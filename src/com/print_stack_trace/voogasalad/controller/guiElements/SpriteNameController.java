@@ -12,6 +12,7 @@ public class SpriteNameController extends SpriteCharacteristicController {
 	@Override
 	protected void setCharacteristic(String newValue) {
 		((SpriteObject)mySprite).getCharacteristics().setName(newValue);
+		mySprite.getDelegate().update((SpriteObject) mySprite);
 	}
 
 }

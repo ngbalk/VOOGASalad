@@ -20,6 +20,7 @@ public class SpriteHeightController extends SpriteCharacteristicController{
 			JOptionPane.showMessageDialog(null, "Not a valid Height");
 		}
 		mySprite.getImage().setFitHeight(newHeight);
+		mySprite.getImage().setPreserveRatio(false);
 		((SpriteObject) mySprite).getCharacteristics().setHeight(newHeight);
 	}
 	@Override 
