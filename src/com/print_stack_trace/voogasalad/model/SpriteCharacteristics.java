@@ -22,10 +22,10 @@ public class SpriteCharacteristics {
 	public Point p;
 	public boolean interactive;
 	public SpriteType objectType;
-	public int health;
-	public double speed;
+	public int startingHealth;
+	public double startingSpeed;
 	public int value;
-	public String directionFacing;
+	public String startingDirectionFacing;
 
 	
 	
@@ -35,10 +35,10 @@ public class SpriteCharacteristics {
 //		img = new Image("");
 		p = new Point(0,0);
 		interactive = true;
-		health = 10;
-		speed = 10;
+		startingHealth = 10;
+		startingSpeed = 10;
 		value = 0;
-		directionFacing = "";
+		startingDirectionFacing = "left";
 	}
 	
 

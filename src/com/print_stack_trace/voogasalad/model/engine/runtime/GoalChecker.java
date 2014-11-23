@@ -12,14 +12,16 @@ import com.print_stack_trace.voogasalad.model.environment.StayAlive;
 public class GoalChecker implements GoalElementVisitor {
     private static final int GOAL_DESTINATION_BUFFER = 2;
     private LevelModel myLevel;
+    private CollisionDetector myCollisionDetector;
 
     public GoalChecker(LevelModel level) {
         myLevel = level;
+        myCollisionDetector = new CollisionDetector();
     }
 
     @Override
     public boolean visit(KillBoss goal) {
-        return myLevel.getSpriteMap().get(goal.getBossID()).health <= 0;
+        return myLevel.getSpriteMap().get(goal.getBossID()).startingHealth <= 0;
     }
 
     //TODO: after we know how points work
@@ -43,17 +45,17 @@ public class GoalChecker implements GoalElementVisitor {
                 && (heroYPosition < (goal.getYDestination() + GOAL_DESTINATION_BUFFER )); 
     }
 
-    //TODO after collision detection is implemented
     @Override
     public boolean visit(ReachObject goal) {
-        // TODO Auto-generated method stub
-        return false;
+        return myCollisionDetector.haveCollided(myLevel.getSpriteMap().get(goal.getMySpriteID()), 
+                myLevel.getSpriteMap().get(goal.getMyObjectiveID()));
+
     }
 
 
     @Override
     public boolean visit(StayAlive goal) {
-        return myLevel.getSpriteMap().get(goal.getHeroID()).health <= 0;
+        return myLevel.getSpriteMap().get(goal.getHeroID()).startingHealth <= 0;
     }
 
 }
