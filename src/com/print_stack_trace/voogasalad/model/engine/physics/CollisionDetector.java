@@ -4,7 +4,7 @@
  * Date Created: 11/15/14
  * Date Modified: 11/17/14
  */
-package com.print_stack_trace.voogasalad.model.engine.runtime;
+package com.print_stack_trace.voogasalad.model.engine.physics;
 
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
