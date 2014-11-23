@@ -9,13 +9,16 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 
 public class SpriteCharacteristics {
 	public Image img;
-	public Point p;
+	private double xLocation;
+	private double yLocation;
 	public boolean interactive;
 	public SpriteType objectType;
 	public int health;
 	public double speed;
 	public int value;
 	public String directionFacing;
+	public double width;
+	public double height;
 
 	
 	
@@ -23,12 +26,25 @@ public class SpriteCharacteristics {
 		objectType = t;
 //		Default values 
 //		img = new Image("");
-		p = new Point(0,0);
+		xLocation = 0.0;
+		yLocation = 0.0;
 		interactive = true;
 		health = 10;
 		speed = 10;
 		value = 0;
 		directionFacing = "";
+	}
+	public double getX(){
+		return xLocation;
+	}
+	public double getY(){
+		return yLocation;
+	}
+	public void setX(double xLocation){
+		this.xLocation = xLocation; 
+	}
+	public void setY(double yLocation){
+		this.yLocation = yLocation;
 	}
 	
 
