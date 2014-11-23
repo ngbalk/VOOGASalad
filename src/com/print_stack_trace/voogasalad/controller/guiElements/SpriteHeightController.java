@@ -12,7 +12,7 @@ public class SpriteHeightController extends SpriteCharacteristicController{
 	}
 	@Override	
 	protected void setCharacteristic(String newValue){
-		double newHeight = mySprite.getCharacteristics().getHeight();
+		double newHeight = ((SpriteObject)mySprite).getCharacteristics().getHeight();
 		try{
 			newHeight = Double.parseDouble(newValue);
 		}
@@ -20,11 +20,11 @@ public class SpriteHeightController extends SpriteCharacteristicController{
 			JOptionPane.showMessageDialog(null, "Not a valid Height");
 		}
 		mySprite.getImage().setFitHeight(newHeight);
-		mySprite.getCharacteristics().setHeight(newHeight);
+		((SpriteObject) mySprite).getCharacteristics().setHeight(newHeight);
 	}
 	@Override 
 	protected void populateDefaultText(){
-		myTextBox.setText(Double.toString(mySprite.getCharacteristics().getHeight()));
+		myTextBox.setText(Double.toString(((SpriteObject)mySprite).getCharacteristics().getHeight()));
 	}
 
 }

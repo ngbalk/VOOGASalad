@@ -12,7 +12,7 @@ public class SpriteWidthController extends SpriteCharacteristicController{
 	}
 	@Override
 	public void setCharacteristic(String newValue){
-		double newWidth = mySprite.getCharacteristics().getWidth();
+		double newWidth = ((SpriteObject)mySprite).getCharacteristics().getWidth();
 		try{
 			newWidth = Double.parseDouble(newValue);
 		}
@@ -20,11 +20,11 @@ public class SpriteWidthController extends SpriteCharacteristicController{
 			JOptionPane.showMessageDialog(null, "Not a valid Width");
 		}
 		mySprite.getImage().setFitWidth(newWidth);
-		mySprite.getCharacteristics().setWidth(newWidth);
+		((SpriteObject)mySprite).getCharacteristics().setWidth(newWidth);
 	}
 	@Override
 	protected void populateDefaultText() {
-		myTextBox.setText(Double.toString(mySprite.getCharacteristics().getWidth()));
+		myTextBox.setText(Double.toString(((SpriteObject)mySprite).getCharacteristics().getWidth()));
 	}
 
 }
