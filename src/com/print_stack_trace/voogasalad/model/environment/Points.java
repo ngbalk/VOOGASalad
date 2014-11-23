@@ -4,7 +4,7 @@ import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
 public class Points extends Goal implements GoalElement{
     
-    private int myPoints;
+    public int reqPoints;
 
     public Points (GoalCharacteristics goalCharacteristics) {
         super(goalCharacteristics);
@@ -14,7 +14,7 @@ public class Points extends Goal implements GoalElement{
     
     @Override
     protected void setGoalProperties() {
-        myPoints = myGoalCharacteristics.myPointTotal;
+    	reqPoints = myGoalCharacteristics.myPointTotal;
         
     }
 
