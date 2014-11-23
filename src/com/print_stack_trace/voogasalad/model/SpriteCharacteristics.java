@@ -44,6 +44,71 @@ public class SpriteCharacteristics {
 		value = 0;
 		startingDirectionFacing = "left";
 	}
+
+    public Image getImg () {
+        return img;
+    }
+
+    public void setImg (Image img) {
+        this.img = img;
+    }
+
+    public Point getP () {
+        return p;
+    }
+
+    public void setP (Point p) {
+        this.p = p;
+    }
+
+    public boolean isInteractive () {
+        return interactive;
+    }
+
+    public void setInteractive (boolean interactive) {
+        this.interactive = interactive;
+    }
+
+    public SpriteType getObjectType () {
+        return objectType;
+    }
+
+    public void setObjectType (SpriteType objectType) {
+        this.objectType = objectType;
+    }
+
+    public int getStartingHealth () {
+        return startingHealth;
+    }
+
+    public void setStartingHealth (int startingHealth) {
+        this.startingHealth = startingHealth;
+    }
+
+    public double getStartingSpeed () {
+        return startingSpeed;
+    }
+
+    public void setStartingSpeed (double startingSpeed) {
+        this.startingSpeed = startingSpeed;
+    }
+
+    public int getValue () {
+        return value;
+    }
+
+    public void setValue (int value) {
+        this.value = value;
+    }
+
+    public String getStartingDirectionFacing () {
+        return startingDirectionFacing;
+    }
+
+    public void setStartingDirectionFacing (String startingDirectionFacing) {
+        this.startingDirectionFacing = startingDirectionFacing;
+    }
+	
 	
 
 	
