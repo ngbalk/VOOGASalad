@@ -34,7 +34,7 @@ public class GamePlayer implements ViewController {
 	
 	/***
 	 * TODO: Obtain Front End Person to work on graphical elements
-	 * determine which methods needs to be called from  backend, so they can create public methods
+	 * determine which methods needs to be called from backend, so they can create public methods
 	 */
 	public Group initialize(GameEngine gameEngine) {
 		myGameEngine = gameEngine;
@@ -157,7 +157,7 @@ public class GamePlayer implements ViewController {
 		File file = fc.showOpenDialog(new Stage());
 		if (!file.getName().endsWith(Constants.JPEG) && !file.getName().endsWith(Constants.PNG)){
 
-			ViewController.displayError(new GamePlayerException()); //TODO: make a new proper subclass with the right message
+			ViewController.displayError(new GamePlayerException()); //TODO: @zacharyPodbela make a new proper subclass with the right message
 			return; 
 		}
 		FileInputStream fis;
@@ -165,7 +165,6 @@ public class GamePlayer implements ViewController {
 
 	//may need to move this elsewhere to deal with hiding scores after a bit
 	private void extractAndDisplayScores() {
-		// TODO Auto-generated method stub
 		ArrayList<HighScore> scores = new ArrayList<HighScore>();
 		scores.add(new HighScore("Dan", 100));
 		scores.add(new HighScore("Tim", 20));
@@ -181,10 +180,7 @@ public class GamePlayer implements ViewController {
 	}
 
 	private void pause() {
-		// TODO Auto-generated method stub
-		//need a backend method to put in lambda (or here if complicated)
-			//I'm guessing it'll involve changing a boolean
-		System.out.println("test");
+		// TODO Implement this method -- STOP CALLING update() on gameEngine
 		return;
 	}
 

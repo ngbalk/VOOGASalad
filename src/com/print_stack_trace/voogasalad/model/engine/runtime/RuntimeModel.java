@@ -46,15 +46,6 @@ public class RuntimeModel {
 	}
 	
 	/**
-	 * Return the animationEffects associated with each SpriteCharacteristics
-	 * @return animationEffects
-	 */
-	//TODO: Create AnimationEffects class (if necessary?) and then uncomment this
-	/*public Map<Integer, AnimationEffects> getAnimations() {
-		return animationEffects;
-	}*/
-	
-	/**
 	 * Return the goal associated with a given level
 	 * @return goal
 	 */

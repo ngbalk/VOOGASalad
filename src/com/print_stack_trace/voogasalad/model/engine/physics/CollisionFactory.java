@@ -11,7 +11,7 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 
 public class CollisionFactory {
 	//TODO: verify that this path takes us to the right package
-	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.enginge.physics.collisions";
+	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.enginge.physics.collisions.";
 	
 	public enum CollisionResult {
 		ObjectOneFullDisplacement,
@@ -66,12 +66,11 @@ public class CollisionFactory {
 			public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
 					RuntimeSpriteCharacteristics s2) {
 				base.applyCollisionEffects(s1, s2);
-				//TODO: Apply Points or Damage
+				//TODO: @zacharyPodbela Apply Points or Damage
 			}
 		};
 	}
     
-    //TODO: Determine if this method from goal characteristics is applicable...
     private String reformatTypeString(String s) {
         String[] words = s.split("_");
         String reformattedString = "";
