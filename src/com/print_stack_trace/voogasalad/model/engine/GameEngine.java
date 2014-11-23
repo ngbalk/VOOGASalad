@@ -10,6 +10,7 @@ import java.util.Map;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
+import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -21,7 +22,7 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList.UserDefinedCollisionParams;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
@@ -49,8 +50,8 @@ public class GameEngine {
 
 	//-------------------PUBLIC METHODS-------------------//
 	
-	public void loadGame(BufferedInputStream inputStream) {
-		loadLevel(gameData.loadLevel(inputStream));
+	public void loadGame(BufferedInputStream inputStream) throws JsonSyntaxException, ClassNotFoundException, IOException {
+		loadLevel((LevelModel) gameData.loadLevel(inputStream, new LevelModel()));
 	}
 	
 	public void saveGame(BufferedOutputStream outputStream) throws IOException {
@@ -91,7 +92,7 @@ public class GameEngine {
 		authorEngine.setProgramPhysicsEngine(engineType);
 	}
 
-	public void setPhysicsEngineUsingParams(int gravity, int drag, int intensity) {
+	public void setPhysicsEngineUsingParams(float gravity, float drag, float intensity) {
 		authorEngine.setPhysicsEngineUsingParams(gravity, drag, intensity);
 	}
 
@@ -129,8 +130,26 @@ public class GameEngine {
 		return gameData.getHighScores();
 	}
 	
-	public EventHandler<KeyEvent> getRuntimeKeyHandler() {
-		return null;
+	public EventHandler<KeyEvent> getRuntimeKeyPressHandler() {
+		return new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent arg0) {
+				handleKeyPress(arg0);
+			}
+		};
+	}
+	
+	public EventHandler<KeyEvent> getRuntimeKeyReleasaeHandler() {
+		return new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent arg0) {
+				handleKeyRelease(arg0);
+			}
+		};
+	}
+	
+	public void setFramesPerSecond(int framesPerSecond) {
+		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
 	
 	//-------------------ACCESSORS-------------------//
@@ -148,5 +167,17 @@ public class GameEngine {
 
 	public void saveHighScore(String name, HighScore highScore) {
 		gameData.saveHighScore(name, highScore);
+	}
+	
+	private void handleKeyRelease(KeyEvent event) {
+		if(runtimeEngine != null) {
+			runtimeEngine.handleKeyRelease(event);
+		}
+	}
+	
+	private void handleKeyPress(KeyEvent event) {
+		if(runtimeEngine != null) {
+			runtimeEngine.handleKeyPress(event);
+		}
 	}
 }
