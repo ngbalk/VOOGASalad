@@ -2,7 +2,7 @@
  * @author Zachary Podbela
  * @author Pranava Raparla
  * Date Created: 11/11/14
- * Date Modified: 11/22/14
+ * Date Modified: 11/23/14
  */
 package com.print_stack_trace.voogasalad.model.engine.physics;
 
@@ -58,6 +58,17 @@ public class PhysicsEngine {
 	}
 	
 	/**
+	 * Determine if two "sprites" (SpriteCharacteristics) have collided.
+	 * @param s1	the first "sprite" to check for collision
+	 * @param s2	the second "sprite" to check for collision
+	 * @return		whether two "sprites" have collided
+	 */
+	public boolean haveCollided(SpriteCharacteristics s1, SpriteCharacteristics s2) {
+		//TODO: implement this
+		return false;
+	}
+	
+	/**
 	 * Private method to assist in the proper collision handling lifecycle.
 	 * Once it has been confirmed that two SpriteCharacteristics are colliding, 
 	 * we must determine what collision should occur given the types of colliding
@@ -81,6 +92,7 @@ public class PhysicsEngine {
 		CollisionHandler handler = getHandlerForResult(result);
 		handler.applyCollisionEffects(s1, s2);
 	}
+	
 	
 	private CollisionResult getResultOfCollision(SpriteCharacteristics s1, SpriteCharacteristics s2) {
 		return decisionMatrix[s1.objectType.ordinal()][s2.objectType.ordinal()];

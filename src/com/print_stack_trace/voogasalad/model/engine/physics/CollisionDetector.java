@@ -1,8 +1,9 @@
 /**
  * @author Justin Carrao
+ * @author Zachary Podbela
  * @author Pranava Raparla
  * Date Created: 11/15/14
- * Date Modified: 11/17/14
+ * Date Modified: 11/23/14
  */
 package com.print_stack_trace.voogasalad.model.engine.physics;
 
@@ -17,7 +18,7 @@ public class CollisionDetector {
 	 * @return true if a collision happened, false otherwise
 	 */
 	public boolean haveCollided(SpriteCharacteristics spriteA, SpriteCharacteristics spriteB) {
-		//TODO: impelement this
+		//TODO: Implement this
 		return false;
 	}
 	
