@@ -14,7 +14,10 @@ import javafx.scene.shape.Circle;
 public class BackgroundColorScheme extends UserInputType{
 	public BackgroundColorScheme(){
 		myNode=makeColors();
-
+	}
+	public BackgroundColorScheme(GameObject object){
+		this();
+		mySprite=object;
 	}
 	private HBox makeColors(){
 		int startX=0;

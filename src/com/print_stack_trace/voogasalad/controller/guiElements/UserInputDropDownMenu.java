@@ -10,4 +10,5 @@ public class UserInputDropDownMenu extends UserInputType{
 		this();
 		mySprite=object;
 	}
+	
 }
