@@ -29,17 +29,14 @@ public class SpriteCharacteristics {
 	public int value;
 	public String startingDirectionFacing;
 	
-	public SpriteCharacteristics(SpriteCharacteristics obj) {
-		// TODO Implement clone method
-	}
-	
+	//-------------------CONSTRUCTORS-------------------//
+
 	/**
 	 * Constructor for SpriteCharacteristics takes in an enum SpriteType t and sets values
 	 * @param t
 	 */
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
-//		Default values 
 		img = DEFAULT_IMAGE;
 		p = DEFAULT_POINT;
 		interactive = DEFAULT_INTERACTIVE;
@@ -48,20 +45,37 @@ public class SpriteCharacteristics {
 		value = DEFAULT_VALUE;
 		startingDirectionFacing = DEFAULT_DIRECTION_FACING;
 	}
+	
+	/**
+	 * Constructor that essentially "clones" another spritecharacteristics class
+	 * @param obj
+	 */
+	public SpriteCharacteristics(SpriteCharacteristics obj) {
+		objectType = obj.getObjectType();
+		img = obj.getImage();
+		p = obj.getPoint();
+		interactive = obj.isInteractive();
+		startingHealth = obj.getStartingHealth();
+		startingSpeed = obj.getStartingSpeed();
+		value = obj.getValue();
+		startingDirectionFacing = obj.getStartingDirectionFacing();
+	}
 
-    public Image getImg () {
+	//-------------------ACCESSORS-------------------//
+	
+    public Image getImage () {
         return img;
     }
 
-    public void setImg (Image img) {
+    public void setImage (Image img) {
         this.img = img;
     }
 
-    public Point getP () {
+    public Point getPoint () {
         return p;
     }
 
-    public void setP (Point p) {
+    public void setPoint (Point p) {
         this.p = p;
     }
 
@@ -112,9 +126,5 @@ public class SpriteCharacteristics {
     public void setStartingDirectionFacing (String startingDirectionFacing) {
         this.startingDirectionFacing = startingDirectionFacing;
     }
->>>>>>> origin/master
-	
-	
-
 	
 }
