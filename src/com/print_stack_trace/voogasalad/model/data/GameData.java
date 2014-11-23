@@ -1,22 +1,28 @@
 package com.print_stack_trace.voogasalad.model.data;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import com.google.gson.Gson;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameData {
 	private Map<String, HighScore> highScores = new HashMap<String, HighScore>();
-
+	private Gson gson;
 	/**
 	 * constructor for GameData
 	 */
 	public GameData() {
-
+		gson = new Gson();
 	}
 
 	/**
@@ -31,8 +37,47 @@ public class GameData {
 	 * @param name
 	 *            - name of the file to be saved
 	 */
-	public void writeLevel(LevelModel lvl, String location, String name) throws IOException {
+	public void writeLevel(LevelModel lvl, File location) throws IOException {
+		/* Ensure that levelModel does not contain any javafx objects.
+		 * also ensure that objects within levelModel (SpriteCharacteristics) does
+		 * not contain any javafx primitive or objets
+		 */
+		String json = gson.toJson(lvl);
+		System.out.println("gson to Json :" +  json);
+		
+		/*
+		 * Possible workoutaround for gson inability to serialize javafx is to create
+		 * classes that extend the javafx class, and implement serialiazable
+		 */
+		
+		/*
+		 * 	front end (authoring environmen, creates the fileChooser, since they have refernce to a stage
+		 * FileChooser fc = new FileChooser();
+		 * File file = fileChooser.showSaveDialog(new Stage());
+		 * 
+		 * we take that file as a paramter, and save json content to the file
+    }
+		 *  store json into a file
+		 */
+		
+		if(location != null){
+			saveFile(json,location);
+			return;
+		}
+		throw new IOException("Application did not specify target location to save");
+	}
 
+	private void saveFile(String s, File file) {
+		try {
+			FileWriter fileWriter = new FileWriter(file);
+			fileWriter.write(s);
+			fileWriter.close();
+			System.out.println("wrote file to " + file.getCanonicalPath());
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
 	}
 
 	/**
