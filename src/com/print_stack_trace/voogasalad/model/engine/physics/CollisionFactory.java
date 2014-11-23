@@ -7,6 +7,8 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
  */
 import java.lang.reflect.Constructor;
 
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandlerList.UserDefinedCollisionParams;
+
 public class CollisionFactory {
 	//TODO: verify that this path takes us to the right package
 	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.enginge.physics.collisions";
@@ -21,6 +23,11 @@ public class CollisionFactory {
 		ObjectTwoDisappear,
 		ObjectBothDisappear,
 	};
+	
+	public enum UserDefinedCollisionParams {
+		PointsAwarded,
+		DamageDealt
+	}
 	
 	//TODO: make sure its collision result vs. collision handler and vice-versa
     public CollisionHandler buildCollisionHandler(CollisionResult myCollisionResult) {
@@ -50,6 +57,14 @@ public class CollisionFactory {
         
         return null;
     }
+    
+	//TODO: integrate this method
+	public static CollisionHandler collisionEngineFromParams(CollisionResult baseHandler, UserDefinedCollisionParams paramType, int param) {
+		//return new CollisionHandler() {
+			//TODO: Implement
+		//};
+		return null;
+	}
     
     //TODO: Determine if this method from goal characteristics is applicable...
     private String reformatTypeString(String s) {
