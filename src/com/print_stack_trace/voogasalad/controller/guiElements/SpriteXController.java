@@ -6,24 +6,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
-public class SpriteXController extends UserInputText{
-	private TextField myTextBox;
+public class SpriteXController extends SpriteCharacteristicController{
 	public SpriteXController (GameObject sprite){
-		myTextBox = (TextField) myNode;
-		mySprite = sprite;
-		myTextBox.setText(Double.toString(sprite.getImage().getLayoutX()));
-		myTextBox.textProperty().addListener(new ChangeListener<String>(){
-			@Override
-			public void changed(ObservableValue<? extends String> arg0,
-					String oldVal, String newVal) {
-					setCharacteristic(newVal);
-			}
-			
-		});
+		super(sprite);
 	}
-	//Maybe we can have one button that calls this method, and have a similar method on all of these 
-	//GUI elements, maybe they should implement the same interface so we can do this with a loop?
-	
+	@Override
 	public void setCharacteristic(String newValue){
 		double newXValue = mySprite.getImage().getLayoutX();
 		try{
@@ -34,7 +21,10 @@ public class SpriteXController extends UserInputText{
 		}
 		mySprite.getImage().setLayoutX(newXValue);
 		mySprite.getCharacteristics().setX(newXValue);
-		mySprite.getCharacteristics().setY(newXValue);
+	}
+	@Override
+	protected void populateDefaultText() {
+		myTextBox.setText(Double.toString(mySprite.getImage().getLayoutX()));
 	}
 
 }
