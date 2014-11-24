@@ -21,6 +21,7 @@ public class PictureLibrary extends AbstractLibraryPane{
 		super(width, height, otherPane);
 		myColumns=width.intValue()/pictureSize;
 		myRows=height.intValue()/pictureSize;
+		this.setStyle("-fx-background-color: BLACK");
 	}
 	
 	@Override

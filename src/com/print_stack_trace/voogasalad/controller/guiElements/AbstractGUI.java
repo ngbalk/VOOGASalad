@@ -35,8 +35,7 @@ public abstract class AbstractGUI extends BorderPane {
 		setPrefSize(width.doubleValue(), height.doubleValue());
 		myWidth= width.doubleValue();
 		myHeight=height.doubleValue();
-		gamePane=(GamePane) setCenterPane();
-		setCenter(gamePane);
+		setCenter(setCenterPane());
 		setBottom(setBottomPane());
 		setLeft(setLeftPane());
 		setRight(setRightPane());
@@ -85,40 +84,41 @@ public abstract class AbstractGUI extends BorderPane {
 		}
 	}
 
-protected Node setCenterPane(){
-	
-	GamePane centerPane=new GamePane(myWidth-400, myHeight-130);
-	setBorderAndBackgroundStyle(centerPane);
-	
-	return centerPane;
-}
+	protected Node setCenterPane(){
+		GamePane centerPane=new GamePane(myWidth-400, myHeight-130);
+		setBorderAndBackgroundStyle(centerPane);
+		gamePane=centerPane;
+		ScrollBarPane myScroll=new ScrollBarPane(myWidth-200, myHeight-130, centerPane);
 
-protected Node setTopPane(){
-	FileMenuBar topPane=new FileMenuBar();
-	topPane.setPrefSize(myWidth, 20);
-	return topPane;
-}
+		return myScroll;
+	}
 
-protected Node setLeftPane(){
-	Pane leftPane=null;
-	return leftPane;
-}
+	protected Node setTopPane(){
+		FileMenuBar topPane=new FileMenuBar();
+		topPane.setPrefSize(myWidth, 20);
+		return topPane;
+	}
 
-protected Node setRightPane(){
-	MultipleLibraryPane myTabPane=new MultipleLibraryPane(400, myHeight-130, gamePane);
-	myTabPane.setPrefSize(400, myHeight-130);
-	setBorderAndBackgroundStyle(myTabPane);
-	return myTabPane;
-}
+	protected Node setLeftPane(){
+		Pane leftPane=null;
+		return leftPane;
+	}
 
-protected abstract void setBorderAndBackgroundStyle(Node stylePane);
-protected abstract void setStyle(Node stylePane);
-protected abstract void setBorderStyle(Node stylePane);
-public Group initialize(GameEngine gameEngine) {
-	myGameEngine = gameEngine;
-	Group root = new Group();
-	root.getChildren().add(this);
-	((GamePane) gamePane).addGameEngine(myGameEngine);
-	return root;
-}
+	protected Node setRightPane(){
+		MultipleLibraryPane myTabPane=new MultipleLibraryPane(400, myHeight-130, gamePane);
+		myTabPane.setPrefSize(400, myHeight-130);
+		setBorderAndBackgroundStyle(myTabPane);
+		return myTabPane;
+	}
+
+	protected abstract void setBorderAndBackgroundStyle(Node stylePane);
+	protected abstract void setStyle(Node stylePane);
+	protected abstract void setBorderStyle(Node stylePane);
+	public Group initialize(GameEngine gameEngine) {
+		myGameEngine = gameEngine;
+		Group root = new Group();
+		root.getChildren().add(this);
+		((GamePane) gamePane).addGameEngine(myGameEngine);
+		return root;
+	}
 }

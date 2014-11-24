@@ -4,6 +4,7 @@ import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class LevelObject extends GameObject{
 	private LevelCharacteristics myCharacteristics=new LevelCharacteristics();
@@ -25,10 +26,10 @@ public class LevelObject extends GameObject{
 	public void setDelegate(ViewObjectDelegate delegate){
 		myDelegate=delegate;
 	}
-	public void setColorPane(String color){
+	public void setColorPane(Color color){
 		this.setImage(null);
 		colorPane.setVisible(true);
-		colorPane.setStyle("-fx-background-color: #"+color);
+		colorPane.setStyle("-fx-background-color: #"+Integer.toHexString(color.hashCode()));
 	}
 	public Pane getColorPane (){
 		return colorPane;
