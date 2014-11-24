@@ -101,9 +101,13 @@ public class SpriteCharacteristics {
     	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
     	return javaFXImage;
     }
+    
+    public void setJavaAWTImage(Image image) {
+        this.img = image;
+    }
 
-    public void setImage(Image img) {
-        this.img = img;
+    public void setImage(javafx.scene.image.Image image) {
+        this.img = SwingFXUtils.fromFXImage(image, null);
     }
 
     public Point getPoint () {
