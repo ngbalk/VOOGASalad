@@ -1,7 +1,5 @@
 package com.print_stack_trace.voogasalad.model;
 
-
-
 import java.awt.Point;
 import java.util.HashMap;
 

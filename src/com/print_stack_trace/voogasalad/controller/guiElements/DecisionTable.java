@@ -18,11 +18,13 @@ public class DecisionTable extends GridPane {
 	public static final SpriteType[] types = GameAuthorEngine.SpriteType.values();
 	public static final CollisionResult[] collisions = CollisionFactory.CollisionResult.values();  
 	public static final int gapSize = 5;
+	public static final int maxDimension = 1000;
 	private int currentRowColCount;
 	
 	public DecisionTable(){
 		this.setHgap(gapSize*2);
 		this.setVgap(gapSize);
+		this.setMaxSize(maxDimension, maxDimension);
 		currentRowColCount = numClasses;
 		Button b = new Button("Add Type");
 		this.add(b, 0, 0);
