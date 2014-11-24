@@ -14,10 +14,10 @@ import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
-import com.print_stack_trace.voogasalad.model.data.AbstractGameData;
+import com.print_stack_trace.voogasalad.model.data.IGameData;
 import com.print_stack_trace.voogasalad.model.data.GameData;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
-import com.print_stack_trace.voogasalad.model.engine.authoring.AbstractGameAuthorEngine;
+import com.print_stack_trace.voogasalad.model.engine.authoring.IGameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
@@ -31,8 +31,8 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 public class GameEngine {
 	private LevelModel currentLevel;
 	private RuntimeEngine runtimeEngine;
-	private AbstractGameAuthorEngine authorEngine;
-	private AbstractGameData gameData;
+	private IGameAuthorEngine authorEngine;
+	private IGameData gameData;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -43,7 +43,7 @@ public class GameEngine {
 		this(new GameAuthorEngine(), new GameData());
 	}
 	
-	public GameEngine(AbstractGameAuthorEngine authorEngine, AbstractGameData gameData) {
+	public GameEngine(IGameAuthorEngine authorEngine, IGameData gameData) {
 		this.authorEngine = authorEngine;
 		this.gameData = gameData;
 	}

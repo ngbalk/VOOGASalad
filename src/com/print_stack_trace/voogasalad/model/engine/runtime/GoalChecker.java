@@ -1,6 +1,6 @@
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
-import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionDetector;
 import com.print_stack_trace.voogasalad.model.environment.GoalElementVisitor;
 import com.print_stack_trace.voogasalad.model.environment.KillBoss;
 import com.print_stack_trace.voogasalad.model.environment.Points;
@@ -11,51 +11,46 @@ import com.print_stack_trace.voogasalad.model.environment.StayAlive;
 
 public class GoalChecker implements GoalElementVisitor {
     private static final int GOAL_DESTINATION_BUFFER = 2;
-    private LevelModel myLevel;
-    private CollisionDetector myCollisionDetector;
+    private RuntimeModel myLevel;
 
-    public GoalChecker(LevelModel level) {
+    public GoalChecker(RuntimeModel level) {
         myLevel = level;
-        myCollisionDetector = new CollisionDetector();
     }
 
     @Override
     public boolean visit(KillBoss goal) {
-        return myLevel.getSpriteMap().get(goal.getBossID()).startingHealth <= 0;
+        return myLevel.getRuntimeSpriteMap().get(goal.getBossID()).startingHealth <= 0;
     }
 
-    //TODO: after we know how points work
     @Override
     public boolean visit(Points goal) {
-        // TODO Auto-generated method stub
-        return false;
+        return myLevel.currentPoints >= goal.reqPoints;
     }
 
     @Override
     public boolean visit(ReachXDistance goal) {
-        double heroXPosition = myLevel.getSpriteMap().get(goal.getHeroID()).p.getX();
+        double heroXPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).p.getX();
         return (heroXPosition > (goal.getXDestination() - GOAL_DESTINATION_BUFFER)) 
                 && (heroXPosition < (goal.getXDestination() + GOAL_DESTINATION_BUFFER )); 
     }
 
     @Override
     public boolean visit(ReachYDistance goal) {
-        double heroYPosition = myLevel.getSpriteMap().get(goal.getHeroID()).p.getY();
+        double heroYPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).p.getY();
         return (heroYPosition > (goal.getYDestination() - GOAL_DESTINATION_BUFFER)) 
                 && (heroYPosition < (goal.getYDestination() + GOAL_DESTINATION_BUFFER )); 
     }
 
     @Override
     public boolean visit(ReachObject goal) {
-        return myCollisionDetector.haveCollided(myLevel.getSpriteMap().get(goal.getMySpriteID()), 
-                myLevel.getSpriteMap().get(goal.getMyObjectiveID()));
-
+        return CollisionDetector.haveCollided(myLevel.getRuntimeSpriteMap().get(goal.getMySpriteID()), 
+                myLevel.getRuntimeSpriteMap().get(goal.getMyObjectiveID()));
     }
 
 
     @Override
     public boolean visit(StayAlive goal) {
-        return myLevel.getSpriteMap().get(goal.getHeroID()).startingHealth <= 0;
+        return myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).health <= 0;
     }
 
 }

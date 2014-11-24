@@ -18,7 +18,7 @@ import javafx.stage.StageStyle;
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
-import com.print_stack_trace.voogasalad.exceptions.GamePlayerException;
+import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
@@ -157,7 +157,7 @@ public class GamePlayer implements ViewController {
 		File file = fc.showOpenDialog(new Stage());
 		if (!file.getName().endsWith(Constants.JPEG) && !file.getName().endsWith(Constants.PNG)){
 
-			ViewController.displayError(new GamePlayerException()); //TODO: @zacharyPodbela make a new proper subclass with the right message
+			ViewController.displayError(new InvalidImageFileException());
 			return; 
 		}
 		FileInputStream fis;
