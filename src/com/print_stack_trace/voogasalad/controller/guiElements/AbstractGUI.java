@@ -67,7 +67,7 @@ public abstract class AbstractGUI extends BorderPane {
 		return bottomPane;
 	}
 	public void save(Button myButton){
-		FileChooser fileChooser = new FileChooser();
+		/*FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Level");
 		Stage newStage=new Stage();
 		File file = fileChooser.showSaveDialog(newStage);
@@ -78,6 +78,19 @@ public abstract class AbstractGUI extends BorderPane {
 			} catch (IOException ex) {
 				System.out.println(ex.getMessage());
 			}
+		}
+		*/
+		
+		/*
+		 * Marcus proposol below:
+		 * Remove fileChooser (user should not specify where to save level, should they?
+		 * 
+		 */
+		try {
+			myGameEngine.saveGame();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

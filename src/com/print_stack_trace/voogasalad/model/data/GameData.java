@@ -40,7 +40,7 @@ public class GameData implements IGameData {
 	 *            output stream for level to save
 	 * @throws IOException
 	 */
-
+	@Override
 	public void writeLevelMarcus(LevelModel lvl) throws IOException {
 			/* Tested out my WriteLevel; The following is its ouput
 			 * This is a hero: true
@@ -53,6 +53,7 @@ public class GameData implements IGameData {
 		/* Ensure that levelModel does not contain any javafx objects.
 		 * also ensure that objects within levelModel (SpriteCharacteristics) does
 		 * not contain any javafx primitive or objets
+		 * use transient keyword
 		 */
 		String json = gson.toJson(lvl);
 		System.out.println("gson to Json :" +  json);
@@ -68,6 +69,7 @@ public class GameData implements IGameData {
 
 		 *  store json into a file
 		 */
+		
 		File file = new File(System.getProperty("user.dir") + "/src/jsonData.txt");
 		if(file.getCanonicalPath() != null){
 			saveFileMarcus(json,file);

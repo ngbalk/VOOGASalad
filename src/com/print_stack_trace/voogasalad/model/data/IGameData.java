@@ -9,6 +9,7 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public interface IGameData {
 	public void writeLevel(Object lvl, BufferedOutputStream outputStream) throws IOException;
@@ -16,4 +17,5 @@ public interface IGameData {
 	public void saveLevel(String name);
 	public Map<String, HighScore> getHighScores();
 	public void saveHighScore(String name, HighScore highScore);
+	public void writeLevelMarcus(LevelModel lvl) throws IOException;
 }

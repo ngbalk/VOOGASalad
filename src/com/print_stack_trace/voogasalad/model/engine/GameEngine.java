@@ -54,9 +54,11 @@ public class GameEngine {
 		loadLevel((LevelModel) gameData.loadLevel(inputStream, new LevelModel()));
 	}
 	
-	public void saveGame(BufferedOutputStream outputStream) throws IOException {
+	public void saveGame() throws IOException {
 		LevelModel lvl = authorEngine.getCurrentLevel();
-		gameData.writeLevel(lvl, outputStream);
+		//System.out.println("Level Name: " + lvl.getLevelCharacteristics().getName());
+		gameData.writeLevelMarcus(lvl);
+		
 	}
 
 	//GAME AUTHORING

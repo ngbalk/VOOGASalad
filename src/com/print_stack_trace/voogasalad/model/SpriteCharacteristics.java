@@ -3,6 +3,7 @@ package com.print_stack_trace.voogasalad.model;
 import java.awt.Point;
 import java.util.HashMap;
 
+
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
@@ -14,7 +15,7 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 public class SpriteCharacteristics {
 
 	// DEFAULT VARIABLES
-	public static final Image DEFAULT_IMAGE = null;
+	public static final transient Image DEFAULT_IMAGE = null;
 	public static final Point DEFAULT_POINT = new Point(0,0);
 	public static final boolean DEFAULT_INTERACTIVE = true;
 	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
@@ -27,7 +28,7 @@ public class SpriteCharacteristics {
 	public static final double DEFAULT_HEIGHT=100;
 	
 	// GAME AUTHORING VARIABLES
-	public Image img;
+	public transient Image img;
 	public Point p;
 	public boolean interactive;
 	public SpriteType objectType;

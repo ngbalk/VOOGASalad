@@ -1,15 +1,17 @@
 package com.print_stack_trace.voogasalad.model;
 
 
+//import java.awt.Image;
 import java.io.File;
 
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
+
+import javafx.scene.image.Image; //change to java awt
+//import javafx.scene.paint.Color;
 
 public class LevelCharacteristics {
 	private String name;
 	public File nextLevel = null;
-	private Image backgroundImage = null;
+	private transient Image backgroundImage = null;
 	public int requiredNumberOfGoals = 0;
 
 	private String myColor;
