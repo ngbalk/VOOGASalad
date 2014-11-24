@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
-public interface AbstractGameData {
+public interface IGameData {
 	public void writeLevel(Object lvl, BufferedOutputStream outputStream) throws IOException;
 	public Object loadLevel(BufferedInputStream inputStream, Object o) throws IOException, JsonSyntaxException, ClassNotFoundException;
 	public void saveLevel(String name);

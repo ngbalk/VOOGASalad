@@ -4,4 +4,8 @@ public class NullInput extends UserInputType{
 	public NullInput(){
 		myNode=null;
 	}
+	public NullInput(GameObject object){
+		this();
+		mySprite=object;
+	}
 }

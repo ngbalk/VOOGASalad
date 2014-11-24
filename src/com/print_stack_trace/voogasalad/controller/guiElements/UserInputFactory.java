@@ -15,20 +15,20 @@ public class UserInputFactory {
 	public UserInputFactory(){
 		createMap();
 	}
-	public UserInputType createUserInput(String myType, String[] values){
+	public UserInputType createUserInput(String myType, String[] values, GameObject sprite){
 		Class<? extends UserInputType> typeOfInput=myTypes.get(myType);
 		if (typeOfInput==null){
 			return null;
 		}
 		UserInputType mySpecificType;
 		try {
-			mySpecificType = typeOfInput.getConstructor().newInstance();
+			mySpecificType = typeOfInput.getConstructor(GameObject.class).newInstance(sprite);
 			return mySpecificType;
 		} catch (InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "There is no such type");
+			JOptionPane.showMessageDialog(null, typeOfInput+ "does not exist.");
 		}
 		return null;
 	}

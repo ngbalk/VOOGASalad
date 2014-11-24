@@ -9,7 +9,6 @@ public class ReachObject extends Goal implements GoalElement{
 
     public ReachObject (GoalCharacteristics goalCharacteristics) {
         super(goalCharacteristics);
-        // TODO Auto-generated constructor stub
     }
 
     

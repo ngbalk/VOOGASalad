@@ -6,6 +6,9 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import com.print_stack_trace.voogasalad.controller.gameElements.Sprite;
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -15,17 +18,20 @@ public class PopUpPane extends GeneralPane{
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
 	protected String myResourceName="";
 	protected String myName="";
-	public PopUpPane(String resource){
+	public PopUpPane(String resource, GameObject myObject){
 		super();
-		myResourceName=resource;
-		this.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
-		this.setStyle("-fx-background-color: BLACK");
-		makeLabels();
-		
+		initiate(resource, myObject);
 	}
 	public PopUpPane(Number width, Number height, String name, GameObject gameObject){
 		super(width, height, name);
-		myGameObject=gameObject;	
+		initiate(name, gameObject);
+	}
+	private void initiate(String resource, GameObject myObject){
+		myResourceName=resource;
+		myGameObject=myObject;
+		this.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
+		this.setStyle("-fx-background-color: BLACK");
+		makeLabels();
 	}
 	public void createTextFields(){}
 	public void makeObservable(Collection toObserve){}
@@ -37,7 +43,7 @@ public class PopUpPane extends GeneralPane{
 		myLabel.setPrefSize(width, height);
 		myLabel.relocate(x, y);
 		UserInputFactory myInput=new UserInputFactory();
-		Node myInputType=myInput.createUserInput(values[6], values).getType();
+		Node myInputType=myInput.createUserInput(values[6], values, myGameObject).getType();
 		//needs refactoring
 		this.getChildren().add(myLabel);
 		if (myInputType!=null){
@@ -49,7 +55,6 @@ public class PopUpPane extends GeneralPane{
 	private void makeLabels(){
 		try{
 			Properties prop = new Properties();
-			System.out.println(DEFAULT_RESOURCE+myResourceName+".Properties");
 			InputStream stream = getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE+myResourceName+".Properties");
 			prop.load(stream);
 			for(Object labelName : prop.keySet()){
@@ -59,7 +64,7 @@ public class PopUpPane extends GeneralPane{
 			}
 		}
 		catch(Exception e){
-			JOptionPane.showMessageDialog(null, "Pop Up File Not Available");
+			JOptionPane.showMessageDialog(null, myResourceName+" Not Available");
 		}
 	}
 

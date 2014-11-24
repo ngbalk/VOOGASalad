@@ -1,7 +1,9 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.util.HashMap;
+
 import javafx.scene.Node;
 
 public interface ResourceAction {
-	public Node doAction(Object myObject);
+	public Node doAction(HashMap<String, String> properties);
 }

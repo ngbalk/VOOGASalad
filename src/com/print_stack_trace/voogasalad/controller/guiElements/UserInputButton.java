@@ -10,6 +10,10 @@ public class UserInputButton extends UserInputType {
 		((Button) myNode).setOnAction(event->makePopUpPane());
 		
 	}
+	public UserInputButton(GameObject object){
+		this();
+		mySprite=object;
+	}
 	private void makePopUpPane(){
 		Pane myPopUp=new KeyFramePopUpPane();
 		((GeneralPane) myPopUp).openPane();

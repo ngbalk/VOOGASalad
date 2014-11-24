@@ -10,10 +10,10 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
+import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator;
+import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 
-public class GameAuthorEngine implements AbstractGameAuthorEngine {
+public class GameAuthorEngine implements IGameAuthorEngine {
 
 	private List<LevelModel> levelList;
 	private LevelModel currentLevel;
@@ -90,11 +90,11 @@ public class GameAuthorEngine implements AbstractGameAuthorEngine {
 	}
 
 	public void setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
-		currentLevel.setSoloHandler(PhysicsEngineList.getProgramPhysicEngine(engineType));
+		currentLevel.setSoloHandler(SoloPhysicsGenerator.getProgramPhysicEngine(engineType));
 	}
 
 	public void setPhysicsEngineUsingParams(float gravity, float drag, float intensity) {
-		currentLevel.setSoloHandler(PhysicsEngineList.physicEngineFromParams(gravity, drag, intensity));
+		currentLevel.setSoloHandler(SoloPhysicsGenerator.physicEngineFromParams(gravity, drag, intensity));
 	}
 
 	public void setResultOfCollision(CollisionResult result, SpriteType s1, SpriteType s2) {

@@ -9,7 +9,6 @@ public class KillBoss extends Goal implements GoalElement{
 
     public KillBoss (GoalCharacteristics goalCharacteristics) {
         super(goalCharacteristics);
-        // TODO Auto-generated constructor stub
     }
 
     public Integer getBossID() {

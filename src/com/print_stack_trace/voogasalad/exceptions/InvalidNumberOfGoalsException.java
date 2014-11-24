@@ -10,7 +10,7 @@ public class InvalidNumberOfGoalsException extends RuntimeException implements V
 
 	@Override
 	public String printMessage() {
-		// TODO Auto-generated method stub
+		// TODO Move to property List
 		return INVALID_NUMBER_OF_GOALS_STRING;
 	}
 

@@ -8,7 +8,6 @@ public class StayAlive extends Goal implements GoalElement{
 
     public StayAlive (GoalCharacteristics goalCharacteristics) {
         super(goalCharacteristics);
-        // TODO Auto-generated constructor stub
     }
 
     public Integer getHeroID() {

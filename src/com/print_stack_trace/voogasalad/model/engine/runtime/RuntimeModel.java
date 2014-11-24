@@ -6,6 +6,7 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,13 +14,16 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 
-public class RuntimeModel {
+public class RuntimeModel extends LevelModel {
 
 	//-------------------VARIABLES-------------------//
 
 	private Map<Integer, RuntimeSpriteCharacteristics> runtimeSpriteMap;
-	//public Map<Integer, AnimationEffects> animationEffects
 	private Map<Integer,Goal> goalMap;
+	public int currentPoints;
+	public Date currentTime;
+	public boolean gameOver = false;
+	public boolean gameVictory = false;
 
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -33,6 +37,8 @@ public class RuntimeModel {
 			runtimeSpriteMap.put(i, new RuntimeSpriteCharacteristics(level.getSpriteMap().get(i)));
 		//animationEffects = level.animationEffects;
 		goalMap = level.getGoalMap();
+		currentPoints = 0;
+		currentTime = new Date();
 	}
 	
 	//-------------------ACCESSORS-------------------//
@@ -41,18 +47,9 @@ public class RuntimeModel {
 	 * Return the sprite map of integer IDs to sprite characteristics
 	 * @return spriteMap
 	 */
-	public Map<Integer, RuntimeSpriteCharacteristics> getSpriteMap() {
+	public Map<Integer, RuntimeSpriteCharacteristics> getRuntimeSpriteMap() {
 		return runtimeSpriteMap;
 	}
-	
-	/**
-	 * Return the animationEffects associated with each SpriteCharacteristics
-	 * @return animationEffects
-	 */
-	//TODO: Create AnimationEffects class (if necessary?) and then uncomment this
-	/*public Map<Integer, AnimationEffects> getAnimations() {
-		return animationEffects;
-	}*/
 	
 	/**
 	 * Return the goal associated with a given level

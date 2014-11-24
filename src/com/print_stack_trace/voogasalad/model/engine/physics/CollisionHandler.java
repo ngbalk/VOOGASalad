@@ -8,6 +8,7 @@
 
 package com.print_stack_trace.voogasalad.model.engine.physics;
 
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
 public abstract class CollisionHandler {
@@ -18,5 +19,5 @@ public abstract class CollisionHandler {
 	 * @param s1	the first "sprite" to have collision effects applied
 	 * @param s2	the second "sprite" to have collision effects applied
 	 */
-	public abstract void applyCollisionEffects(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2);
+	public abstract void applyCollisionEffects(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime);
 }

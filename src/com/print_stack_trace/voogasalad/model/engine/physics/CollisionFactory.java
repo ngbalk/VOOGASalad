@@ -7,11 +7,12 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
  */
 import java.lang.reflect.Constructor;
 
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
 public class CollisionFactory {
 	//TODO: verify that this path takes us to the right package
-	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.enginge.physics.collisions";
+	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.enginge.physics.collisions.";
 	
 	public enum CollisionResult {
 		ObjectOneFullDisplacement,
@@ -58,20 +59,33 @@ public class CollisionFactory {
         return null;
     }
     
+    /**
+     * Public method to generate standard collision handler but with additional 
+     * key-value specification from the UserDefinedCollisionParams (such as 
+     * awarding points, causing damage); 
+     */
 	public static CollisionHandler collisionEngineFromParams(CollisionResult baseHandler, UserDefinedCollisionParams paramType, int param) {
 		return new CollisionHandler() {
 			private final CollisionHandler base = buildCollisionHandler(baseHandler);
-			
+			private final UserDefinedCollisionParams fParamType = paramType;
 			@Override
 			public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
-					RuntimeSpriteCharacteristics s2) {
-				base.applyCollisionEffects(s1, s2);
-				//TODO: Apply Points or Damage
+					RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
+				base.applyCollisionEffects(s1, s2, currentRuntime);
+				switch (fParamType) {
+				case DamageDealt:
+					s2.health -= param;
+					break;
+				case PointsAwarded:
+					currentRuntime.currentPoints += param;
+					break;
+				default:
+					break;
+				}
 			}
 		};
 	}
     
-    //TODO: Determine if this method from goal characteristics is applicable...
     private String reformatTypeString(String s) {
         String[] words = s.split("_");
         String reformattedString = "";

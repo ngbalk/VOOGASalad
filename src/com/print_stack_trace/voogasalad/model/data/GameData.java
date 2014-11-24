@@ -19,7 +19,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
-public class GameData implements AbstractGameData {
+public class GameData implements IGameData {
 	private Map<String, HighScore> highScores = new HashMap<String, HighScore>();
 	private Gson gson;
 	/**

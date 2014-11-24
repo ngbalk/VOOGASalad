@@ -13,7 +13,9 @@ public class KeyFramePopUpPane extends GeneralPane {
 	private Label myCurrentKey;
 	public KeyFramePopUpPane(){
 		super();
-		myBox=new KeyFrameBox(this.getWidth(), this.getHeight()*.1);
+		setPrefSize(this.getWidth(), this.getHeight());
+		System.out.println(this.getPrefWidth());
+		myBox=new KeyFrameBox(this.getPrefWidth(), this.getPrefHeight()*.1);
 		this.getChildren().add(myBox);
 		currentKeyFramePane();
 	}

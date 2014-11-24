@@ -4,27 +4,27 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 
 public class DecisionTable extends GridPane {
 	public static final int numClasses = GameAuthorEngine.SpriteType.values().length;
 	public static final SpriteType[] types = GameAuthorEngine.SpriteType.values();
-	public static final CollisionResult[] collisions = PhysicsEngine.CollisionResult.values();  
+	public static final CollisionResult[] collisions = CollisionFactory.CollisionResult.values();  
 	public static final int gapSize = 5;
+	public static final int maxDimension = 1000;
 	private int currentRowColCount;
 	
 	public DecisionTable(){
 		this.setHgap(gapSize*2);
 		this.setVgap(gapSize);
+		this.setMaxSize(maxDimension, maxDimension);
 		currentRowColCount = numClasses;
 		Button b = new Button("Add Type");
 		this.add(b, 0, 0);

@@ -10,9 +10,9 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
+import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 
-public interface AbstractGameAuthorEngine {
+public interface IGameAuthorEngine {
 	public void setCurrentLevel(int index) throws ElementLockedException, ArrayIndexOutOfBoundsException;
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) throws ElementLockedException;
 	public void updateObject(Integer modelID, SpriteCharacteristics spriteModel) throws ElementLockedException;

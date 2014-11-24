@@ -1,33 +1,29 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class GameObject {
-	private int myID;
-	private ImageView myImage;
-	private String myType;
-	public GameObject(int ID, ImageView image, String type){
-		myID=ID;
+public abstract class GameObject  {
+	protected ImageView myImage;
+	protected ViewObjectDelegate myDelegate;
+	public GameObject(ImageView image){
+		this(image, null);
+	}
+	public GameObject (GoalType goal){};
+	public GameObject(ImageView image, ViewObjectDelegate delegate){
 		myImage=image;
-		myType=type;
+		myDelegate=delegate;
 	}
+	
 	public ImageView getImage(){
-		return myImage;
-	}
-	public int  getId(){
-		return myID;
-	}
-	public void setID(int id){
-		myID=id;
+		return myImage;	
 	}
 	public void setImage(Image img){
 		myImage.setImage(img);
 	}
-	public String getType(){
-		return myType;
-	}
-	public void setType(String type){
-		myType=type;
+	public ViewObjectDelegate getDelegate(){
+		return myDelegate;
 	}
 }
