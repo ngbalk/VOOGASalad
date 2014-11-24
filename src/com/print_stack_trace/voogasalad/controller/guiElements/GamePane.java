@@ -36,6 +36,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			SpriteObject myGameObject=new SpriteObject(0, gameObjectImageView, myMessage, this);
 			Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
 			myGameObject.setID(myID);
+			myGameObject.getCharacteristics().setHeight(myGameObject.getImage().getFitHeight());
+			myGameObject.getCharacteristics().setWidth(myGameObject.getImage().getFitWidth());
 			gameObjectImageView.setOnMouseClicked(event->createPane(myGameObject));
 			DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
 			myData.put(gameObjectImageView, 0);
