@@ -17,5 +17,7 @@ public class UserInputDropDownMenu extends UserInputType{
 		mySprite=object;
 	}
 	protected void addMenus(){};
-	
+	protected void setCurrent(String myName){
+		currentMenu.setText(myName);
+	}
 }

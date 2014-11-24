@@ -58,7 +58,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		levelBackground.setImageView(imgView);
 		levelBackground.getColorPane().setVisible(false);
 		this.getChildren().add(0,imgView);
-		DraggableItem copyNode=new DraggableItem(levelBackground, getWidth(), getHeight());
 		ImageView background=levelBackground.getImage();
 		background.setFitWidth(getWidth());
 		background.setFitHeight(getHeight()-10);
@@ -67,6 +66,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
 		levelBackground.getCharacteristics().setBackground(background.getImage());
+		levelUpdate(levelBackground);
 		levelBackground.getImage().setOnMouseClicked(e->createLevelPane(levelBackground));
 		levelBackground.getColorPane().setOnMouseClicked(e->createLevelPane(levelBackground));
 	}
@@ -84,8 +84,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myLevelBar=levelBar;
 	}
 	public void update(LevelObject currentLevel){
-		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
-		myLevelBar.setCurrentLevel(currentLevel);
+		levelUpdate(currentLevel);
 	}
 	public void addLevelUpdate(LevelObject myObject){
 		myObject.setDelegate(this);
@@ -93,7 +92,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myLevelBar.addLevel(name, myObject).setOnAction(e->levelUpdate(myObject));
 		myObject.getCharacteristics().setName(name);
 		myLevelBar.setCurrentLevel(myObject);
-		levelUpdate(myObject);
 	}
 	public void levelUpdate(LevelObject currentLevel){
 		myLevelBar.setCurrentLevel(currentLevel);
@@ -101,13 +99,18 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		this.getChildren().removeAll(myLevelBar.getNonActiveColors());
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
+		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
 	}
 	public Pane sizePane(Pane toBeSize){
 		toBeSize.setPrefSize(this.getWidth(), this.getHeight());
 		return toBeSize;
 	}
 	public void saveLevel(){
-		//myGameEngine.
+		
+	}
+	public void update(GoalObject myObject){
+		myGameEngine.addGoalToLevel(myObject.getCharacteristics());
+		
 	}
 
 }

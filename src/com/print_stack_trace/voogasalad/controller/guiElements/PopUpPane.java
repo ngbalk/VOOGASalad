@@ -20,15 +20,18 @@ public class PopUpPane extends GeneralPane{
 	protected String myName="";
 	public PopUpPane(String resource, GameObject myObject){
 		super();
+		initiate(resource, myObject);
+	}
+	public PopUpPane(Number width, Number height, String name, GameObject gameObject){
+		super(width, height, name);
+		initiate(name, gameObject);
+	}
+	private void initiate(String resource, GameObject myObject){
 		myResourceName=resource;
 		myGameObject=myObject;
 		this.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
 		this.setStyle("-fx-background-color: BLACK");
 		makeLabels();
-	}
-	public PopUpPane(Number width, Number height, String name, GameObject gameObject){
-		super(width, height, name);
-		myGameObject=gameObject;	
 	}
 	public void createTextFields(){}
 	public void makeObservable(Collection toObserve){}
@@ -61,7 +64,7 @@ public class PopUpPane extends GeneralPane{
 			}
 		}
 		catch(Exception e){
-			JOptionPane.showMessageDialog(null, "Pop Up File Not Available");
+			JOptionPane.showMessageDialog(null, myResourceName+" Not Available");
 		}
 	}
 
