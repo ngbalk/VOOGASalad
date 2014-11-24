@@ -5,8 +5,10 @@ import java.util.HashMap;
 
 
 
+
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -27,7 +29,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		this.setUpScrollingBars();
 	}
 	private void setUpScrollingBars(){
-		ScrollingBarPair myScrollingBars=new ScrollingBarPair((int)myWidth-20,(int) myHeight-14);
+		ScrollingBarPair myScrollingBars=new ScrollingBarPair((int)myWidth-20,(int) myHeight-14, this);
 		this.getChildren().addAll(myScrollingBars);
 	}
 	public void addGameObject(ImageView gameObjectImageView){

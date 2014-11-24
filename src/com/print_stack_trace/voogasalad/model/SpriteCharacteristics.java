@@ -6,12 +6,14 @@
 
 package com.print_stack_trace.voogasalad.model;
 
+
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.*;
+import javafx.scene.*;
 import javafx.scene.input.KeyCode;
 
 import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
