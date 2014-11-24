@@ -112,15 +112,13 @@ public class GameData implements IGameData {
 	 * @throws ClassNotFoundException 
 	 * @throws JsonSyntaxException 
 	 */
-	public Object loadLevel(BufferedInputStream inputStream, Object o) throws IOException, JsonSyntaxException, ClassNotFoundException {
+	public Object loadLevel(BufferedInputStream inputStream, Class<?> cls) throws IOException, JsonSyntaxException, ClassNotFoundException {
 		Gson gson = new GsonBuilder().create();
 		byte[] bytes = new byte[inputStream.available()];
 		inputStream.read(bytes);
 		String json = bytes.toString();
-		
-		gson.fromJson(json, o.getClass());
-		return null;
-
+		Object o = cls.cast(gson.fromJson(json, cls));
+		return o;
 	}
 
 	/**
@@ -170,5 +168,12 @@ public class GameData implements IGameData {
 	public void saveHighScore(String name, HighScore highScore) {
 		highScores.put(name, highScore);
 		saveHighScores();
+	}
+
+	@Override
+	public Object loadLevel(BufferedInputStream inputStream, Object o)
+			throws IOException, JsonSyntaxException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
