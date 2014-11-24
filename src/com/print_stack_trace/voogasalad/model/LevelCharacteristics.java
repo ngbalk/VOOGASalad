@@ -11,8 +11,7 @@ public class LevelCharacteristics {
 	public File nextLevel = null;
 	private Image backgroundImage = null;
 	public int requiredNumberOfGoals = 0;
-
-	private String myColor;
+	private Color myColor;
 	//TODO: More...
 	public String getName() {
 		return name;
@@ -24,14 +23,14 @@ public class LevelCharacteristics {
 		myColor=null;
 		backgroundImage=img;
 	}
-	public void setBackgroundColor(String color){
+	public void setBackgroundColor(Color color){
 		backgroundImage=null;
 		myColor=color;
 	}
 	public Image getBackground(){
 		return backgroundImage;
 	}
-	public String getColor(){
+	public Color getColor(){
 		return myColor;
 	}
 	
