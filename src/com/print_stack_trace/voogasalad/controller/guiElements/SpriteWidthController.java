@@ -17,7 +17,7 @@ public class SpriteWidthController extends SpriteCharacteristicController{
 			newWidth = Double.parseDouble(newValue);
 		}
 		catch(NumberFormatException e){
-			JOptionPane.showMessageDialog(null, "Not a valid Width");
+			
 		}
 		mySprite.getImage().setFitWidth(newWidth);
 		mySprite.getImage().setPreserveRatio(false);

@@ -18,14 +18,10 @@ public abstract class SpriteCharacteristicController extends UserInputText {
 		myTextBox.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
 			public void handle(KeyEvent e){
 				if (e.getCode()==KeyCode.ENTER){
-					changeVal();
+					setCharacteristic(myTextBox.getText());
 				}
 			}
 		});
-
-	}
-	private void changeVal(){
-		setCharacteristic(myTextBox.getText());
 	}
 	abstract protected void populateDefaultText();
 	abstract protected void setCharacteristic(String newValue);

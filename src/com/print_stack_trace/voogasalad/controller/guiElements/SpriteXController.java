@@ -17,7 +17,7 @@ public class SpriteXController extends SpriteCharacteristicController{
 			newXValue = Double.parseDouble(newValue);
 		}
 		catch(NumberFormatException e){
-			JOptionPane.showMessageDialog(null, "Not a valid X location");
+			
 		}
 		mySprite.getImage().setLayoutX(newXValue);
 		((SpriteObject)mySprite).getCharacteristics().setX(newXValue);
