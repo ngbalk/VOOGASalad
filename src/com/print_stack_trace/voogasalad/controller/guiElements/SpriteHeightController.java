@@ -22,6 +22,7 @@ public class SpriteHeightController extends SpriteCharacteristicController{
 		mySprite.getImage().setFitHeight(newHeight);
 		mySprite.getImage().setPreserveRatio(false);
 		((SpriteObject) mySprite).getCharacteristics().setHeight(newHeight);
+		mySprite.getDelegate().update((SpriteObject) mySprite);
 	}
 	@Override 
 	protected void populateDefaultText(){

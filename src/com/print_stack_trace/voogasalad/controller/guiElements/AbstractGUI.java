@@ -16,13 +16,13 @@ import javafx.scene.paint.Paint;
 public abstract class AbstractGUI extends BorderPane {
 	private double myWidth;
 	private double myHeight;
-	private Pane gamePane;
+	private GamePane gamePane;
 	private GameEngine myGameEngine;
 	public AbstractGUI(Number width, Number height){
 		setPrefSize(width.doubleValue(), height.doubleValue());
 		myWidth= width.doubleValue();
 		myHeight=height.doubleValue();
-		gamePane=(Pane) setCenterPane();
+		gamePane=(GamePane) setCenterPane();
 		setCenter(gamePane);
 		setBottom(setBottomPane());
 		setLeft(setLeftPane());
@@ -44,6 +44,9 @@ public abstract class AbstractGUI extends BorderPane {
 		currentLevel.setTextFill(Paint.valueOf("WHITE"));
 		LevelBar myLevelBar=new LevelBar(myWidth*.1, 20, 100, 20);
 		LevelButton myLevelButton=new LevelButton();
+		gamePane.addLevelBar(myLevelBar);
+		gamePane.addLevelUpdate(new LevelObject(new ImageView()));
+		myLevelButton.setOnMouseClicked(e->gamePane.addLevelUpdate(new LevelObject(new ImageView())));
 		myLevelButton.relocate(myWidth*.3, 20);
 		myLevelButton.setPrefSize(100, 50);
 		DecisionTable table = new DecisionTable();

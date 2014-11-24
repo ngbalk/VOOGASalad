@@ -34,7 +34,9 @@ public class BackgroundColorScheme extends UserInputType{
 		return myBox;
 	}
 	private void changeColor(String myColor){
-		((LevelObject) mySprite).getImage().setImage(null);
+		((LevelObject) mySprite).getImage().setVisible(false);
+		((LevelObject) mySprite).getCharacteristics().setBackground(null);
+		((LevelObject) mySprite).setColorPane(myColor);
 		((LevelObject) mySprite).getCharacteristics().setBackgroundColor(myColor);
 		((LevelObject) mySprite).getDelegate().update((LevelObject)mySprite);
 		

@@ -16,6 +16,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	private GameEngine myGameEngine;
 	private HashMap<ImageView, Number> myData;
 	private PaneChooser myPaneChooser=new PaneChooser();
+	private LevelBar myLevelBar;
 	public GamePane(double width, double height){
 		myWidth=width;
 		myHeight=height;
@@ -24,7 +25,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myData=new HashMap<ImageView, Number>();
 		this.setPrefSize(width, height);
 		this.setUpScrollingBars();
-
 	}
 	private void setUpScrollingBars(){
 		ScrollingBarPair myScrollingBars=new ScrollingBarPair((int)myWidth-20,(int) myHeight-14);
@@ -53,7 +53,11 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		((GeneralPane) myNewPane).openPane();
 	}
 	public void addBackground(ImageView imgView){
-		LevelObject levelBackground=new LevelObject(imgView,this);
+		LevelObject levelBackground=myLevelBar.getCurrentLevel();
+		this.getChildren().remove(levelBackground.getImage());
+		levelBackground.setImageView(imgView);
+		levelBackground.getColorPane().setVisible(false);
+		this.getChildren().add(0,imgView);
 		DraggableItem copyNode=new DraggableItem(levelBackground, getWidth(), getHeight());
 		ImageView background=levelBackground.getImage();
 		background.setFitWidth(getWidth());
@@ -62,13 +66,13 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		background.setSmooth(true);
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
-		imgView.setOnMouseClicked(e->createLevelPane(levelBackground));
 		levelBackground.getCharacteristics().setBackground(background.getImage());
-		this.getChildren().add(0, levelBackground.getImage());
+		levelBackground.getImage().setOnMouseClicked(e->createLevelPane(levelBackground));
+		levelBackground.getColorPane().setOnMouseClicked(e->createLevelPane(levelBackground));
 	}
 	public void createLevelPane(LevelObject myLevel){
-		Pane myNewPane=myPaneChooser.createPane("level background", myLevel);
-		((GeneralPane) myNewPane).openPane();
+			Pane myNewPane=myPaneChooser.createPane("level background", myLevel);
+			((GeneralPane) myNewPane).openPane();
 	}
 	public void addGameEngine(GameEngine gameEngine){
 		myGameEngine=gameEngine;
@@ -76,11 +80,34 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public void update(SpriteObject myObject){
 		myGameEngine.updateObject(myObject.getId(),myObject.getCharacteristics());
 	}
-	public void update(LevelObject myObject){
-		myGameEngine.setLevelCharacteristics(myObject.getCharacteristics());
-		if (myObject.getCharacteristics().getBackground()==null){
-			this.setStyle("-fx-background-color: #"+myObject.getCharacteristics().getColor());
-		}
+	public void addLevelBar(LevelBar levelBar){
+		myLevelBar=levelBar;
 	}
-	
+	public void update(LevelObject currentLevel){
+		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
+		myLevelBar.setCurrentLevel(currentLevel);
+	}
+	public void addLevelUpdate(LevelObject myObject){
+		myObject.setDelegate(this);
+		String name=new InputMessage().showInputDialog("Name of Level:");
+		myLevelBar.addLevel(name, myObject).setOnAction(e->levelUpdate(myObject));
+		myObject.getCharacteristics().setName(name);
+		myLevelBar.setCurrentLevel(myObject);
+		levelUpdate(myObject);
+	}
+	public void levelUpdate(LevelObject currentLevel){
+		myLevelBar.setCurrentLevel(currentLevel);
+		this.getChildren().removeAll(myLevelBar.getNonActiveLevels());
+		this.getChildren().removeAll(myLevelBar.getNonActiveColors());
+		this.getChildren().add(0, currentLevel.getImage());
+		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
+	}
+	public Pane sizePane(Pane toBeSize){
+		toBeSize.setPrefSize(this.getWidth(), this.getHeight());
+		return toBeSize;
+	}
+	public void saveLevel(){
+		//myGameEngine.
+	}
+
 }
