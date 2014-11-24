@@ -33,3 +33,17 @@
     -fx-text-fill: "WHITE";
     -fx-font-size: 20px;
 }
+.keylabel1{
+	-fx-font: 20px "Serif";
+	-fx-width: bind 290;
+	-fx-height: bind 100;
+	-fx-background-color:
+	 	BLACK,
+ 		linear-gradient(#FFFFFF, #FFFFFF),
+		
+		linear-gradient(#000000, #0099CC); 
+	-fx-border-color: #0099CC;
+	-fx-background-insets: 0, 0, 2, 10;
+	-fx-text-fill: WHITE;
+	-fx-text-alignment: center;
+}

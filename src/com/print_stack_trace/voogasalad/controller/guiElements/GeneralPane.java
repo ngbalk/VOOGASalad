@@ -10,8 +10,8 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public abstract class GeneralPane extends Pane{
-	private final static int DEFAULT_WIDTH=500;
-	private final static int DEFAULT_HEIGHT=600;
+	private final static double DEFAULT_WIDTH=500;
+	private final static double DEFAULT_HEIGHT=600;
 	private final static String DEFAULT_NAME="";
 	private double myWidth;
 	private double myHeight;
@@ -22,8 +22,11 @@ public abstract class GeneralPane extends Pane{
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_NAME);
 	}
 	public GeneralPane(Number width, Number height, String name){
+		myName=name;
+		myWidth=width.doubleValue();
+		myHeight=height.doubleValue();
+		this.setPrefSize(myWidth, myHeight);
 		initiate();
-		myName=name;	
 	}
 	public abstract void createTextFields();
 	public abstract void makeObservable(Collection toObserve);
@@ -36,8 +39,13 @@ public abstract class GeneralPane extends Pane{
 			myStage.close();
 		}
 		myStage=new Stage();
-		Scene myScene=new Scene(this, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		Scene myScene=new Scene(this, myWidth, myHeight);
 		myStage.setScene(myScene);
-		this.setPrefSize(myWidth, myHeight);
-	}	
+		myStage.setHeight(myHeight);
+		myStage.setWidth(myWidth+15);
+	}
+	public void close(){
+		myStage.close();
+	}
+	
 }

@@ -1,14 +1,20 @@
 package com.print_stack_trace.voogasalad.model;
 
-import java.awt.Image;
-import java.awt.Point;
 
+
+import java.awt.Point;
+import java.util.HashMap;
+
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+
+import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 //import com.print_stack_trace.voogasalad.model.engine.physics.ArrayList;
 //import com.print_stack_trace.voogasalad.model.engine.physics.List;
 
 public class SpriteCharacteristics {
-	
+
 	// DEFAULT VARIABLES
 	public static final Image DEFAULT_IMAGE = null;
 	public static final Point DEFAULT_POINT = new Point(0,0);
@@ -18,6 +24,9 @@ public class SpriteCharacteristics {
 	public static final double DEFAULT_SPEED = 10;
 	public static final int DEFAULT_VALUE = 0;
 	public static final String DEFAULT_DIRECTION_FACING = "left";
+	public static final String DEFAULT_NAME="";
+	public static final double DEFAULT_WIDTH=100;
+	public static final double DEFAULT_HEIGHT=100;
 	
 	// GAME AUTHORING VARIABLES
 	public Image img;
@@ -28,6 +37,12 @@ public class SpriteCharacteristics {
 	public double startingSpeed;
 	public int value;
 	public String startingDirectionFacing;
+	
+	//AUTHOR
+	public String name;
+	public double width;
+	public double height;
+	public HashMap<PossibleSpriteAction, KeyCode> myMovements=new HashMap<PossibleSpriteAction,KeyCode>();
 	
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -44,7 +59,13 @@ public class SpriteCharacteristics {
 		startingSpeed = DEFAULT_SPEED;
 		value = DEFAULT_VALUE;
 		startingDirectionFacing = DEFAULT_DIRECTION_FACING;
+		width=DEFAULT_WIDTH;
+		height=DEFAULT_HEIGHT;
+		name=DEFAULT_NAME;
+		myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
+
 	}
+
 	
 	/**
 	 * Constructor that essentially "clones" another spritecharacteristics class
@@ -67,7 +88,7 @@ public class SpriteCharacteristics {
         return img;
     }
 
-    public void setImage (Image img) {
+    public void setImage(Image img) {
         this.img = img;
     }
 
@@ -127,4 +148,44 @@ public class SpriteCharacteristics {
         this.startingDirectionFacing = startingDirectionFacing;
     }
 	
+	public double getX(){
+		return p.getX();
+	}
+	public double getY(){
+		return p.getY();
+	}
+	public void setX(double xLocation){
+		p.x=(int)xLocation; 
+	}
+	public void setY(double yLocation){
+		p.y=(int) yLocation;
+	}
+
+	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
+		myMovements.put(myAction, myKey);
+	}
+	public HashMap<PossibleSpriteAction, KeyCode> getMovements(){
+		return myMovements;
+	}
+
+	public double getWidth(){
+		return width;
+	}
+	public double getHeight(){
+		return height;
+	}
+	public void setWidth(double width){
+		this.width = width;
+	}
+	public void setHeight(double height){
+		this.height = height;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+
+	}
+    
 }

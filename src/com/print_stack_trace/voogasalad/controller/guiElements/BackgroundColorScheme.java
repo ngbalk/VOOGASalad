@@ -14,7 +14,10 @@ import javafx.scene.shape.Circle;
 public class BackgroundColorScheme extends UserInputType{
 	public BackgroundColorScheme(){
 		myNode=makeColors();
-
+	}
+	public BackgroundColorScheme(GameObject object){
+		this();
+		mySprite=object;
 	}
 	private HBox makeColors(){
 		int startX=0;
@@ -26,8 +29,17 @@ public class BackgroundColorScheme extends UserInputType{
 			colorCircle.setRadius(10);
 			colorCircle.relocate(startX, 0);
 			myBox.getChildren().add(colorCircle);
+			colorCircle.setOnMouseClicked(e->changeColor(myColor));
 		}
 		return myBox;
+	}
+	private void changeColor(String myColor){
+		((LevelObject) mySprite).getImage().setVisible(false);
+		((LevelObject) mySprite).getCharacteristics().setBackground(null);
+		((LevelObject) mySprite).setColorPane(myColor);
+		((LevelObject) mySprite).getCharacteristics().setBackgroundColor(myColor);
+		((LevelObject) mySprite).getDelegate().update((LevelObject)mySprite);
+		
 	}
 	private HashSet<String> loadColors(){
 		HashSet<String> myColors=new HashSet<String>();

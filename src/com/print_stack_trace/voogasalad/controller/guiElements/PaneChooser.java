@@ -14,11 +14,11 @@ public class PaneChooser {
 		public PaneChooser(){
 			createMap();
 		}
-		public Pane createPane(String myType){
+		public Pane createPane(String myType, GameObject myObject){
 			if (myTypes.get(myType)==null){
 				return null;
 			}
-			PopUpPane mySpecificType = new PopUpPane(myTypes.get(myType));
+			PopUpPane mySpecificType = new PopUpPane(myTypes.get(myType), myObject);
 			return mySpecificType;
 		}
 		private void createMap(){
@@ -32,7 +32,7 @@ public class PaneChooser {
 				}
 			}
 			catch(Exception e){
-				JOptionPane.showMessageDialog(null, "File SAYWHAT not found");
+				JOptionPane.showMessageDialog(null, "Pane type not found");
 			}
 		}
 	}
