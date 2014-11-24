@@ -12,13 +12,15 @@ import javafx.scene.text.Text;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
+//import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+//import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine.CollisionResult;
 
 public class DecisionTable extends GridPane {
 	public static final int numClasses = GameAuthorEngine.SpriteType.values().length;
 	public static final SpriteType[] types = GameAuthorEngine.SpriteType.values();
-	public static final CollisionResult[] collisions = PhysicsEngine.CollisionResult.values();  
+	public static final CollisionResult[] collisions = CollisionFactory.CollisionResult.values();  
 	public static final int gapSize = 5;
 	private int currentRowColCount;
 	
