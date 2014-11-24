@@ -2,7 +2,7 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
 
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
-public class PhysicsEngineList {
+public class SoloPhysicsGenerator {
 	
 	public enum ProgramPhysicEngine {
 		EarthPhysicsEngine,

@@ -16,6 +16,7 @@ public class ScrollBarPane extends ScrollPane{
 		setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		this.setWidth(((Region) data).getPrefWidth()/2);
 		this.setHeight(((Region) data).getPrefHeight()/2);
+		this.setVisible(false);
 	}
 
 	private void setUpScrollBars(int width, int height, Node data){

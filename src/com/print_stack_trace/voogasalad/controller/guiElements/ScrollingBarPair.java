@@ -16,6 +16,8 @@ public class ScrollingBarPair extends HashSet<ScrollBar> {
 		VerticalScrollingBar vertical=new VerticalScrollingBar(height);
 		HorizontalScrollingBar horizontal=new HorizontalScrollingBar(width);
 		vertical.relocate(width-vertical.getSize(), 5);
+		vertical.setVisible(true);
+		horizontal.setVisible(true);
 		horizontal.relocate(5, height-horizontal.getSize());
 		myPane=data;
 		change(horizontal);
