@@ -15,4 +15,8 @@ public class GoalCharacteristics {
     public GoalCharacteristics(GoalType goalType) {
         myGoalType = goalType;
     }
+    public void setDestination(){
+    	
+    }
+   // public void 
 }

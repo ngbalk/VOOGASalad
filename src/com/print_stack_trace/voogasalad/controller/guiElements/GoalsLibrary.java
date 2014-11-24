@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class GoalsLibrary extends AbstractLibraryPane{
@@ -11,7 +12,9 @@ public class GoalsLibrary extends AbstractLibraryPane{
 
 	@Override
 	protected void loadAndAddData() {
-		// TODO Auto-generated method stub
-		
+		PopUpPane myPopUpPane=new PopUpPane(this.getPrefWidth(), this.getPrefHeight(),"GoalPane",
+				new GoalObject(new ImageView(), (ViewObjectDelegate) this.myMainPane));
+		myPopUpPane.close();
+		this.getChildren().add(myPopUpPane);
 	}
 }
