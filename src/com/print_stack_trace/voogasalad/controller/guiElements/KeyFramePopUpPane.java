@@ -13,7 +13,7 @@ public class KeyFramePopUpPane extends GeneralPane {
 	private Label myCurrentKey;
 	public KeyFramePopUpPane(){
 		super();
-		setPrefSize(this.getWidth(), this.getHeight());
+		setPrefSize(this.getPrefWidth(), this.getPrefHeight());
 		System.out.println(this.getPrefWidth());
 		myBox=new KeyFrameBox(this.getPrefWidth(), this.getPrefHeight()*.1);
 		this.getChildren().add(myBox);
@@ -22,8 +22,8 @@ public class KeyFramePopUpPane extends GeneralPane {
 	public void currentKeyFramePane(){
 		Pane myPane=new Pane();
 		myPane.setStyle("-fx-background-color: BLACK");
-		myPane.setPrefSize(this.getWidth(), this.getHeight()*.2);
-		myPane.relocate(0, this.getHeight()-this.getHeight()*.2);
+		myPane.setPrefSize(this.getPrefWidth(), this.getPrefHeight()*.2);
+		myPane.relocate(0, this.getPrefHeight()-this.getPrefHeight()*.2);
 		getChildren().add(myPane);
 		this.addCurrentKeyLabel(myPane);
 	}
