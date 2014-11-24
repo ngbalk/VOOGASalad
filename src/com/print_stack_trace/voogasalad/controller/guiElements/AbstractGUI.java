@@ -7,12 +7,16 @@ import java.io.IOException;
 
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -82,8 +86,10 @@ public abstract class AbstractGUI extends BorderPane {
 	}
 
 protected Node setCenterPane(){
+	
 	GamePane centerPane=new GamePane(myWidth-400, myHeight-130);
 	setBorderAndBackgroundStyle(centerPane);
+	
 	return centerPane;
 }
 
