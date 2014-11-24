@@ -24,6 +24,9 @@ public class SpriteCharacteristics {
 	public static final double DEFAULT_SPEED = 10;
 	public static final int DEFAULT_VALUE = 0;
 	public static final String DEFAULT_DIRECTION_FACING = "left";
+	public static final String DEFAULT_NAME="";
+	public static final double DEFAULT_WIDTH=100;
+	public static final double DEFAULT_HEIGHT=100;
 	
 	// GAME AUTHORING VARIABLES
 	public Image img;
@@ -37,8 +40,8 @@ public class SpriteCharacteristics {
 	
 	//AUTHOR
 	public String name;
-	public int width;
-	public int height;
+	public double width;
+	public double height;
 	public HashMap<PossibleSpriteAction, KeyCode> myMovements=new HashMap<PossibleSpriteAction,KeyCode>();
 	
 	//-------------------CONSTRUCTORS-------------------//
@@ -56,6 +59,10 @@ public class SpriteCharacteristics {
 		startingSpeed = DEFAULT_SPEED;
 		value = DEFAULT_VALUE;
 		startingDirectionFacing = DEFAULT_DIRECTION_FACING;
+		width=DEFAULT_WIDTH;
+		height=DEFAULT_HEIGHT;
+		name=DEFAULT_NAME;
+		myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
 
 	}
 
