@@ -11,6 +11,7 @@ public class LevelCharacteristics {
 	public File nextLevel = null;
 	private Image backgroundImage = null;
 	public int requiredNumberOfGoals = 0;
+
 	private String myColor;
 	//TODO: More...
 	public String getName() {

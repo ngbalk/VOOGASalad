@@ -6,17 +6,16 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
-import java.awt.Image;
-import java.awt.Point;
-import java.io.File;
-import java.util.Map;
+import javafx.scene.input.KeyEvent;
 
-import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
+	private RuntimeModel runtimeModel;
+	int framesPerSecond;
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -26,37 +25,58 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 */
 	public RuntimeEngine(LevelModel currentLevel) {
 		super(currentLevel);
-		this.currentLevel = currentLevel;
+		runtimeModel = new RuntimeModel(currentLevel);
 		physicsEngine = currentLevel.getPhysicsEngine();
 	}
 	
 	//-------------------PUBLIC METHODS-------------------//
 		
 	/**
-	 * Update all of the data in the current level. Calls PhysicsEngine
-	 * to "animate" sprites and other objects by "moving" sprites and
-	 * handling collisions. Nothing is returned.
+	 * Update all of the data in the current level.
+	 * 1. Calls PhysicsEngine to "animate" sprites.
+	 * 2. Use GoalChecker to check goals
+	 * 3. See if game is over or not
 	 * @param currentLevel
 	 */
 	public void update() {
-		//TODO: Finish implementation
-		physicsEngine.animateAll(currentLevel.getSpriteMap().values());
-	}	
+		physicsEngine.animateAll(runtimeModel, framesPerSecond);
+		
+		GoalChecker goalChecker = new GoalChecker(runtimeModel);
+		int completedCount = 0;
+		for(Goal g : runtimeModel.getGoalMap().values()) {
+			g.acceptChecker(goalChecker);
+			if(g.isCompleted) completedCount++;
+		}
+		int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
+		if (reqGoals > 0) {
+			if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+				runtimeModel.gameOver = true;
+				runtimeModel.gameVictory = true;
+			}
+		}
+	}
+	
+	public void setFramesPerSecond(int framesPerSecond) {
+		this.framesPerSecond = framesPerSecond;
+	}
 	
 	//GAME PLAYER
 	
 	/**
-	 * This is looks like an accessor to everyone else but
-	 * a RuntimeModel should be created at the time it is called and built 
-	 * from the appropriate LevelModel data at time of call
+	 * Get the current state of the level in progress
 	 * @return runtimeModel 
 	 */
 	public RuntimeModel getStatus() {
-		//TODO: update this...very bare bones
-		RuntimeModel runtimeModel = new RuntimeModel(currentLevel);
 		return runtimeModel;
 	}
 	
+	public void handleKeyRelease(KeyEvent event) {
+		
+	}
+	
+	public void handleKeyPress(KeyEvent event) {
+		
+	}
 	
 	//-------------------ACCESSORS-------------------//
 	

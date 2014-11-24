@@ -2,7 +2,7 @@
  * @author Justin Carrao
  * @author Pranava Raparla
  * Date Created: 11/21/14
- * Date Modified: 11/21/14
+ * Date Modified: 11/23/14
  */
 
 package com.print_stack_trace.voogasalad.model.engine.physics;
@@ -10,25 +10,20 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
 import java.util.ArrayList;
 
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
-public class CollisionHandlerTest implements CollisionHandler {
+public class CollisionHandlerTest extends CollisionHandler {
 
 	//-------------------PUBLIC METHODS-------------------//
-
+	
 	@Override
-	public boolean haveCollided(SpriteCharacteristics s1,
-			SpriteCharacteristics s2) {
-		// TODO Auto-generated method stub
-		return boundsOverlap(s1, s2);
-		
-	}
-
-	@Override
-	public void applyCollisionEffects(SpriteCharacteristics s1,
-			SpriteCharacteristics s2) {
+	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
+			RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 	//-------------------PRIVATE METHODS-------------------//
 	
@@ -39,11 +34,12 @@ public class CollisionHandlerTest implements CollisionHandler {
 		double s2XPos = getXPos(s2);
 		double s2YPos = s2.p.getY();
 		
-		double xGapTolerance = (s1.img.getWidth()/2) + (s2.img.getWidth()/2);
+		/*double xGapTolerance = (s1.img.getWidth()/2) + (s2.img.getWidth()/2);
 		double yGapTolerance = (s1.img.getHeight()/2) + (s2.img.getHeight()/2);
 		
 		return (distanceBetween(s1XPos, s2XPos) < xGapTolerance && distanceBetween(s1YPos, s2YPos) < yGapTolerance);
-		
+		*/
+		return false;
 	}
 	
 	private double distanceBetween(double a, double b) {
@@ -56,5 +52,7 @@ public class CollisionHandlerTest implements CollisionHandler {
 	private double getYPos(SpriteCharacteristics s) {
 		return s.p.getY();
 	}
+
+
 
 }

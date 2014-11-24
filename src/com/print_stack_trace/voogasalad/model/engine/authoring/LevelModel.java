@@ -3,6 +3,8 @@ package com.print_stack_trace.voogasalad.model.engine.authoring;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.scene.input.KeyCode;
+
 import com.print_stack_trace.voogasalad.exceptions.ElementLockedException;
 import com.print_stack_trace.voogasalad.exceptions.InvalidNumberOfGoalsException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
@@ -27,12 +29,14 @@ public class LevelModel {
     private CameraType myCameraType;
     private LevelCharacteristics myLevelChars;
     private GoalFactory myGoalFactory;
+    private Map<String, KeyCode> myKeyMap;
 
     public LevelModel(){
         myGoalFactory = new GoalFactory();
         currentID = 0;
         mySpriteMap = new HashMap<>();
         goalMap = new HashMap<>();
+        myKeyMap = new HashMap<>();
     }
 
     public PhysicsEngine getPhysicsEngine() {
@@ -161,4 +165,6 @@ public class LevelModel {
     public Map<Integer, SpriteCharacteristics> getSpriteMap() {
         return mySpriteMap;
     }
+    
+    
 }

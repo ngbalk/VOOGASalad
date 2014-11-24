@@ -4,8 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -14,6 +12,7 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
+
 public class DecisionTable extends GridPane {
 	public static final int numClasses = GameAuthorEngine.SpriteType.values().length;
 	public static final SpriteType[] types = GameAuthorEngine.SpriteType.values();
