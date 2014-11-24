@@ -21,8 +21,9 @@ public class DecisionTableButton extends Button {
 
 	private void showTable(DecisionTable dt) {
 		Stage stage = new Stage();
-		stage.setWidth(500);
-		stage.setHeight(500); 
+		stage.setWidth(600);
+		stage.setHeight(600); 
+		stage.setResizable(false);
 		stage.initStyle(StageStyle.UTILITY);
 		Group root = new Group(); 
 		ScrollPane sp = new ScrollPane();
@@ -30,12 +31,12 @@ public class DecisionTableButton extends Button {
 		sp.setPannable(true);
 		sp.setMaxHeight(10000);
 		sp.setMaxWidth(10000); 
-		sp.setPrefSize(490, 490);
+		sp.setPrefSize(580, 570); 
 		sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		sp.setHbarPolicy(ScrollBarPolicy.ALWAYS);
 		Scene s = new Scene(root);
 		root.getChildren().addAll(sp);
-		stage.setScene(s);
+		stage.setScene(s); 
 		stage.show();
 		return;
 	}
