@@ -26,11 +26,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		this.setHeight(height);
 		myData=new HashMap<ImageView, Number>();
 		this.setPrefSize(width, height);
-		this.setUpScrollingBars();
-	}
-	private void setUpScrollingBars(){
-		ScrollingBarPair myScrollingBars=new ScrollingBarPair((int)myWidth-20,(int) myHeight-14, this);
-		this.getChildren().addAll(myScrollingBars);
 	}
 	public void addGameObject(ImageView gameObjectImageView){
 		if (gameObjectImageView!=null){
