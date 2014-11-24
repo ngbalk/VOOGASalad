@@ -13,7 +13,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.Us
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngineList.ProgramPhysicEngine;
 
-public class GameAuthorEngine implements AbstractGameAuthorEngine {
+public class GameAuthorEngine implements IGameAuthorEngine {
 
 	private List<LevelModel> levelList;
 	private LevelModel currentLevel;
