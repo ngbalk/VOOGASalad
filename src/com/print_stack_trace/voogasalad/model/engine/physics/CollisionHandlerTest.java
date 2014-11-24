@@ -10,6 +10,7 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
 import java.util.ArrayList;
 
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
 public class CollisionHandlerTest extends CollisionHandler {
@@ -17,8 +18,10 @@ public class CollisionHandlerTest extends CollisionHandler {
 	//-------------------PUBLIC METHODS-------------------//
 	
 	@Override
-	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
-		//TODO: Implement this
+	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
+			RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
@@ -31,11 +34,12 @@ public class CollisionHandlerTest extends CollisionHandler {
 		double s2XPos = getXPos(s2);
 		double s2YPos = s2.p.getY();
 		
-		double xGapTolerance = (s1.img.getWidth()/2) + (s2.img.getWidth()/2);
+		/*double xGapTolerance = (s1.img.getWidth()/2) + (s2.img.getWidth()/2);
 		double yGapTolerance = (s1.img.getHeight()/2) + (s2.img.getHeight()/2);
 		
 		return (distanceBetween(s1XPos, s2XPos) < xGapTolerance && distanceBetween(s1YPos, s2YPos) < yGapTolerance);
-		
+		*/
+		return false;
 	}
 	
 	private double distanceBetween(double a, double b) {
@@ -49,11 +53,6 @@ public class CollisionHandlerTest extends CollisionHandler {
 		return s.p.getY();
 	}
 
-	@Override
-	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
-			RuntimeSpriteCharacteristics s2) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }
