@@ -17,7 +17,7 @@ public class SpriteHeightController extends SpriteCharacteristicController{
 			newHeight = Double.parseDouble(newValue);
 		}
 		catch(NumberFormatException e){
-			JOptionPane.showMessageDialog(null, "Not a valid Height");
+			
 		}
 		mySprite.getImage().setFitHeight(newHeight);
 		mySprite.getImage().setPreserveRatio(false);

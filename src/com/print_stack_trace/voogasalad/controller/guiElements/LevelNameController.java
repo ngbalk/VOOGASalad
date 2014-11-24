@@ -8,12 +8,12 @@ public class LevelNameController extends LevelCharacteristicController {
 		super(level);
 	}
 	@Override
-	protected void populateDefaultText() {
+	protected void populateDefaultText(){
 		myTextBox.setText(myLevel.getCharacteristics().getName());
 	}
 	@Override
 	protected void setCharacteristic(String newValue) {
-		(myLevel).getCharacteristics().setName(newValue);
+		myLevel.getCharacteristics().setName(newValue);
 		myLevel.getDelegate().update(myLevel);
 	}
 }
