@@ -48,5 +48,8 @@ public abstract class GeneralPane extends Pane{
 	public void close(){
 		myStage.close();
 	}
+	public boolean isOpen(){
+		return myStage.isShowing();
+	}
 	
 }

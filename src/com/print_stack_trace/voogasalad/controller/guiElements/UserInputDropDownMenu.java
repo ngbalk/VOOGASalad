@@ -6,7 +6,6 @@ import javafx.scene.control.MenuBar;
 public class UserInputDropDownMenu extends UserInputType{
 	protected MenuBar myMenuBar;
 	protected Menu currentMenu=new Menu("\t\t\t");
-	protected ResourceReader myResourceReader;
 	public UserInputDropDownMenu(){
 		myNode=new MenuBar();
 		myMenuBar=(MenuBar)myNode;

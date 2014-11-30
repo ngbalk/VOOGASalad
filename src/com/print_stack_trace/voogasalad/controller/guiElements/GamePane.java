@@ -6,8 +6,20 @@ import java.util.HashMap;
 
 
 
-import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.GameEngine;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleSetProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -16,40 +28,65 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	private double myWidth;
 	private double myHeight;
 	private GameEngine myGameEngine;
-	private HashMap<ImageView, Number> myData;
+	private HashMap<String,HashSet<SpriteObject>> myData;
+	public boolean doubleclick=true;
+	public SimpleSetProperty<SimpleObjectProperty<SpriteObject>> myObservableData=new SimpleSetProperty<SimpleObjectProperty<SpriteObject>>();
+	private HashSet<SimpleObjectProperty<SpriteObject>> userObjects=new HashSet<SimpleObjectProperty<SpriteObject>>();
 	private PaneChooser myPaneChooser=new PaneChooser();
 	private LevelBar myLevelBar;
-	public GamePane(double width, double height){
+	private String myStyle="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
+	public GamePane(double width, double height, GameEngine gameEngine){
 		myWidth=width;
 		myHeight=height;
 		this.setWidth(width);
 		this.setHeight(height);
-		myData=new HashMap<ImageView, Number>();
+		myData=new HashMap<String,HashSet<SpriteObject>>();
 		this.setPrefSize(width, height);
+		myGameEngine=gameEngine;
+		this.getStylesheets().add(myStyle);
+		myObservableData.setValue(FXCollections.observableSet(userObjects));
 	}
 	public void addGameObject(ImageView gameObjectImageView){
 		if (gameObjectImageView!=null){
-			String myMessage=new InputMessage().showInputDialog("What type of object would you like this image to be: (hero, obstacle, enemy, platform or reward");
-			SpriteObject myGameObject=new SpriteObject(0, gameObjectImageView, myMessage, this);
-			Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
-			myGameObject.setID(myID);
-			myGameObject.getCharacteristics().setHeight(myGameObject.getImage().getFitHeight());
-			myGameObject.getCharacteristics().setWidth(myGameObject.getImage().getFitWidth());
-			gameObjectImageView.setOnMouseClicked(event->createPane(myGameObject));
-			DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
-			myData.put(gameObjectImageView, 0);
-			this.getChildren().add(gameObjectImageView);
+			String myMessage=new MessagePopUp(myStyle).showDropDownDialog("What type of object would you like this image to be: ",spriteTypeNames());
+			if (new BlankSpaceTextChecker().checkText(myMessage)){
+				 addSpriteObject(gameObjectImageView, myMessage);
+			}
 		}
+	}
+	private SpriteObject addSpriteObject(ImageView gameObjectImageView, String type){
+		SpriteObject myGameObject=new SpriteObject(0, gameObjectImageView,type, this);
+		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
+		myGameObject.setID(myID);
+		myGameObject.getCharacteristics().setHeight(myGameObject.getImage().getFitHeight());
+		myGameObject.getCharacteristics().setWidth(myGameObject.getImage().getFitWidth());
+		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
+		
+		if (myData.get(myGameObject.getCode())==null)
+			myData.put(myGameObject.getCode(), new HashSet<SpriteObject>());
+		myData.get(myGameObject.getCode()).add(myGameObject);
+		SimpleObjectProperty<SpriteObject> currentSprite=new SimpleObjectProperty<SpriteObject>(myGameObject);
+		System.out.println("MAKE:"+ myGameObject);
+		this.getChildren().add(myGameObject.getImage());
+		System.out.println('H');
+		return myGameObject;
+	}
+	public void addExistingObjectToOtherPane(SpriteObject newSprite){
+		newSprite.changeImageView(newSprite.getImage());
+		SpriteObject spriteOnBoard=this.addSpriteObject(newSprite.getImage(), newSprite.getType());
+		spriteOnBoard.setCharacteristics(newSprite.getCharacteristics());	
+	}
+	public boolean isReady(){
+		if (myLevelBar.getMenus().get(0).getItems().size()>=1){
+			return true;
+		}
+		return false;
 	}
 	public double getGridWidth(){
 		return myWidth;
 	}
 	public double getGridHeight(){
 		return myHeight;
-	}
-	public void createPane(GameObject object){
-		Pane myNewPane=myPaneChooser.createPane(((SpriteObject)object).getType(), object);
-		((GeneralPane) myNewPane).openPane();
 	}
 	public void addBackground(ImageView imgView){
 		LevelObject levelBackground=myLevelBar.getCurrentLevel();
@@ -66,18 +103,32 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		background.relocate(5, 5);
 		levelBackground.getCharacteristics().setBackground(background.getImage());
 		levelUpdate(levelBackground);
-		levelBackground.getImage().setOnMouseClicked(e->createLevelPane(levelBackground));
-		levelBackground.getColorPane().setOnMouseClicked(e->createLevelPane(levelBackground));
+		
+		
 	}
-	public void createLevelPane(LevelObject myLevel){
-			Pane myNewPane=myPaneChooser.createPane("level background", myLevel);
-			((GeneralPane) myNewPane).openPane();
-	}
-	public void addGameEngine(GameEngine gameEngine){
-		myGameEngine=gameEngine;
-	}
+	
 	public void update(SpriteObject myObject){
-		myGameEngine.updateObject(myObject.getId(),myObject.getCharacteristics());
+		SpriteCharacteristics characteristics=myObject.getCharacteristics();
+		if (myData.get(myObject.getCode())==null){
+			myData.put(myObject.getCode(), new HashSet<SpriteObject>());
+			myData.get(myObject.getCode()).add(myObject);
+		}
+		else{
+			if (!myData.get(myObject.getCode()).contains(myObject)){
+				myData.get(myObject.getCode()).add(myObject);
+			}
+		}
+		for (SpriteObject sprite: myData.get(myObject.getCode())){
+			characteristics.setX(sprite.getCharacteristics().getX());
+			characteristics.setY(sprite.getCharacteristics().getY());
+			characteristics.setWidth(sprite.getCharacteristics().getWidth());
+			characteristics.setHeight(sprite.getCharacteristics().getHeight());
+			characteristics.setOrientation(sprite.getCharacteristics().getOrientation());
+			sprite.setImage(myObject.getImage().getImage());
+			System.out.println("NAME"+characteristics.getName());
+			myGameEngine.updateObject(myObject.getId(), characteristics);
+			myObservableData.remove(myObject);
+		}
 	}
 	public void addLevelBar(LevelBar levelBar){
 		myLevelBar=levelBar;
@@ -87,10 +138,12 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 	public void addLevelUpdate(LevelObject myObject){
 		myObject.setDelegate(this);
-		String name=new InputMessage().showInputDialog("Name of Level:");
-		myLevelBar.addLevel(name, myObject).setOnAction(e->levelUpdate(myObject));
-		myObject.getCharacteristics().setName(name);
-		myLevelBar.setCurrentLevel(myObject);
+		String name=new MessagePopUp(myStyle).showInputDialog("Name of Level:");
+		if (new BlankSpaceTextChecker().checkText(name)){
+			myLevelBar.addLevel(name, myObject).setOnAction(e->levelUpdate(myObject));
+			myObject.getCharacteristics().setName(name);
+			levelUpdate(myObject);
+		}
 	}
 	public void levelUpdate(LevelObject currentLevel){
 		myLevelBar.setCurrentLevel(currentLevel);
@@ -105,11 +158,22 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return toBeSize;
 	}
 	public void saveLevel(){
-		
+
 	}
 	public void update(GoalObject myObject){
 		myGameEngine.addGoalToLevel(myObject.getCharacteristics());
-		
 	}
-
+	public String[] spriteTypeNames(){
+		String spriteNames="./com/print_stack_trace/voogasalad/controller/guiResources/PaneTypes.Properties";
+		ResourceReader resourceRead=new ResourceReader(spriteNames);
+		HashMap<String, String> mySpriteMap=resourceRead.getProperties();
+		String[] sprites=new String[SpriteType.values().length];
+		for (int i=0; i<SpriteType.values().length;i++){
+			if (mySpriteMap.get(SpriteType.values()[i].name())!=null){
+				String[] nameOfSprite=mySpriteMap.get(SpriteType.values()[i].name()).split(";");
+				sprites[i]=nameOfSprite[0];
+			}
+		}
+		return sprites;
+	}
 }

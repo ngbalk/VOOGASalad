@@ -21,6 +21,9 @@
 	-fx-background-insets: 0, 0, 2, 10;
 	-fx-text-fill: WHITE;
 }
+.tabPaneTemplate .tab-header-area .tab-header-background{
+	
+}
 .mainlabel1 {
 	-fx-background-color: 
         #000000,
@@ -40,10 +43,68 @@
 	-fx-background-color:
 	 	BLACK,
  		linear-gradient(#FFFFFF, #FFFFFF),
-		
 		linear-gradient(#000000, #0099CC); 
 	-fx-border-color: #0099CC;
 	-fx-background-insets: 0, 0, 2, 10;
 	-fx-text-fill: WHITE;
 	-fx-text-alignment: center;
+}
+.buttonTemplate {
+	-fx-font: 20px "Serif";
+	-fx-background-color:BLACK,
+		linear-gradient(#000000 20%, #0099CC 50%, #000000 100%); 
+	-fx-border-color: #0099CC;
+	-fx-background-insets: 0, 0, 2, 10;
+	-fx-text-fill: WHITE;
+}
+.buttonTemplate2 {
+	-fx-font: 12px "Serif";
+	-fx-border-color:#0099CC;
+	-fx-background-color: #000000;
+	-fx-background-insets: 0, 0, 2, 10;
+	-fx-border-insets: 0, 0, 2, 10;
+	-fx-text-fill: WHITE;
+}
+.labelTemplate{
+	-fx-font: 20px "Serif";
+	-fx-border-color: #0099CC;
+	-fx-background-insets: 0, 0, 2, 10;
+	-fx-text-alignment: center;
+	-fx-text-fill: WHITE;
+}
+.tabTemplate {
+	-fx-font: 12px "Serif";
+	-fx-border-color: #0099CC;
+	-fx-background-color: BLACK;
+	-fx-border-width: 2;
+	-fx-background-insets: 0, 0, 2, 10;
+	-fx-text-alignment: center;
+	-fx-text-fill: WHITE;
+}
+.tabLabelTemplate .tab-label{
+	-fx-text-fill: WHITE;
+}
+.menu-bar{
+	-fx-background-color: BLACK;
+	-fx-border-width: 3;
+	-fx-border-color:#0099CC;
+}
+.menu .label{
+	-fx-text-fill: WHITE;
+}
+.menu-item .label{
+    -fx-font-size: 14pt;
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+    -fx-background-color: transparent;
+}
+.menu-item {
+    -fx-border-color: #0099CC;
+}
+.menu-item:focused {
+	-fx-background-color: #0099CC ;
+}
+.context-menu {
+    -fx-background-color: BLACK;
+   
 }
