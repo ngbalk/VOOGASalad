@@ -13,9 +13,9 @@ public class GreenGUI extends AbstractGUI implements ViewController{
 		myPane.setStyle("-fx-background-color: BLACK");
 	}
 	protected void setBorderStyle(Node myPane){
-		myPane.setStyle("-fx-border-color: BLACK; -fx-border-width: 5");
+		myPane.setStyle("-fx-border-color: BLACK; -fx-border-width: 2");
 	}
 	protected void setBorderAndBackgroundStyle(Node myPane){
-		myPane.setStyle("-fx-background-color: BLACK; -fx-border-color: #0099CC; -fx-border-width: 5");
+		myPane.setStyle("-fx-background-color: BLACK; -fx-border-color: #0099CC; -fx-border-width: 2");
 	}
 }

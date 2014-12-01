@@ -18,7 +18,6 @@ public class DraggableItem {
 	private double myHeight;
 	private double gridWidth;
 	private double gridHeight;
-	private PaneChooser myPaneChooser=new PaneChooser();
 	public DraggableItem(GameObject item, Number width, Number height){
 		myItem=item;
 		myWidth=item.getImage().getFitWidth();
@@ -41,6 +40,7 @@ public class DraggableItem {
 			@Override
 			public void handle(MouseEvent event) {
 				if (!outOfBounds(new Point((int)event.getSceneX(), (int)event.getSceneY()))){
+					myItem.notClicked();
 					myX=event.getSceneX();
 					myY=event.getSceneY();
 					translate();

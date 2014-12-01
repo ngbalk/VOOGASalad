@@ -19,6 +19,7 @@ public abstract class SpriteCharacteristicController extends UserInputText {
 			public void handle(KeyEvent e){
 				if (e.getCode()==KeyCode.ENTER){
 					setCharacteristic(myTextBox.getText());
+					System.out.println(myTextBox.getText());
 				}
 			}
 		});

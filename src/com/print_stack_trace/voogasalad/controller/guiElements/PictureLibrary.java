@@ -23,7 +23,7 @@ public class PictureLibrary extends AbstractLibraryPane{
 		myRows=height.intValue()/pictureSize;
 		this.setStyle("-fx-background-color: BLACK");
 	}
-	
+
 	@Override
 	protected void loadAndAddData() {
 		try {
@@ -41,13 +41,15 @@ public class PictureLibrary extends AbstractLibraryPane{
 			JOptionPane.showMessageDialog(null, "File not found");
 		}
 	}
-	
+
 	protected void addToOtherPane(Image myImage){
 		GamePane gamerPane=(GamePane)myMainPane;
-		gamerPane.addGameObject((ImageView) makeImageView(myImage));
-		
+		if (gamerPane.isReady()){
+			gamerPane.addGameObject((ImageView) makeImageView(myImage));
+		};
+
 	}
-	
+
 	protected void addImageToGrid(ImageView imgView){
 		this.addRow(currentRow, imgView);
 		if (++currentColumn>myColumns){
@@ -62,8 +64,8 @@ public class PictureLibrary extends AbstractLibraryPane{
 			currentColumn++;
 		}
 	}
-		
-	
+
+
 	protected Node makeImageView(Image myImage){
 		ImageView myView=new ImageView(myImage);
 		myView.setFitHeight(pictureSize);

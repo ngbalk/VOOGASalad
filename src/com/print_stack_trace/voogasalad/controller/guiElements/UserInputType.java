@@ -6,6 +6,7 @@ public abstract class UserInputType  {
 	protected Node myNode=null;
 	protected String[] myValues;
 	protected GameObject mySprite;
+	protected ResourceReader myResourceReader;
 	public UserInputType(){
 	}
 	public UserInputType(GameObject object){
