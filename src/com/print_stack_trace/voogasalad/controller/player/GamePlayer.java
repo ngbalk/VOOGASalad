@@ -17,6 +17,7 @@ import javafx.stage.StageStyle;
 
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.controller.ViewController;
+import com.print_stack_trace.voogasalad.controller.guiElements.AbstractSplashScreen;
 import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
 import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
@@ -38,8 +39,9 @@ public class GamePlayer implements ViewController {
 	 */
 	public Group initialize(GameEngine gameEngine) {
 		myGameEngine = gameEngine;
-		myRoot = new Group();
+		myRoot = new Group(); 
 		myRoot.setOnKeyReleased(KeyPad);
+		AbstractSplashScreen splash = new AbstractSplashScreen(myRoot, gameEngine, 500, 500);
 		//initializeGUIElements();
 		//setHandlersForGuiElements();
 		//Add behavior for menu buttons later
@@ -54,29 +56,12 @@ public class GamePlayer implements ViewController {
 		pauseButton.setOnAction(e-> pause());
 		loadGameButton.setOnAction(e -> selectLevelFile());
 		showBestScores.setOnAction(e->extractAndDisplayScores());//e->com.print_stack_trace.voogasalad.model.data.GameData);
-		//Image background = new Image("voogasalad_PrintStackTrace/src/SpriteImages/mushroom.png");
-		//ImageView bg = new ImageView(new Image("../LevelImages/overworld_bg.png"));
-		//bg.setImage(new Image(getClass().getResourceAsStream("../images/boss.png")));
-		//myRoot.getChildren().add(bg);
-		helpButton.setOnAction(e->createTableVisual());
 		toolBar.getItems().addAll(newGameButton, loadGameButton, helpButton, pauseButton, showBestScores);
 		myRoot.getChildren().add(toolBar);
 		
 		return myRoot;
 	}
 	
-	private void createTableVisual() {
-		Stage stage = new Stage();
-		stage.setWidth(500);
-		stage.setHeight(500);
-		stage.initStyle(StageStyle.UTILITY);
-		Group root = new Group();
-		Scene s = new Scene(root);
-		root.getChildren().add(dt);
-		stage.setScene(s);
-		stage.show();
-		return;
-	}
 
 	/**
 	 * update the players view: Engine will change locations/stats on the backend; player will update the scene after changes
