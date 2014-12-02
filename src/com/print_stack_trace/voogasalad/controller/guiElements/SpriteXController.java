@@ -19,14 +19,13 @@ public class SpriteXController extends SpriteCharacteristicController{
 		catch(NumberFormatException e){
 			
 		}
-		mySprite.getImage().setLayoutX(newXValue);
-		((SpriteObject)mySprite).getCharacteristics().setX(newXValue);
-		((SpriteObject)mySprite).getDelegate().update((SpriteObject) mySprite);
+		
+		((SpriteObject)mySprite).setMyX(newXValue);
 	}
 
 	@Override
 	protected void populateDefaultText() {
-		myTextBox.setText(Double.toString(mySprite.getImage().getLayoutX()));
+		this.setObservable(((SpriteObject) mySprite).getObservableX());
 	}
 
 }

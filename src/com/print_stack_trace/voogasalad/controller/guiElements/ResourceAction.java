@@ -5,5 +5,5 @@ import java.util.HashMap;
 import javafx.scene.Node;
 
 public interface ResourceAction {
-	public Node doAction(HashMap<String, String> properties);
+	public String[] doAction(HashMap<String, String> properties);
 }

@@ -1,8 +1,12 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
 
-import com.sun.javafx.geom.BaseBounds;
 
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Bounds;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
@@ -23,5 +27,17 @@ public class ScrollBarPane extends ScrollPane{
 	private void setUpScrollBars(int width, int height, Node data){
 		ScrollingBarPair scrollBars=new ScrollingBarPair(width-15,height-50, data);
 		this.getChildren().addAll(scrollBars);
+	}
+	private void changeViewpoint(){
+		this.viewportBoundsProperty().addListener(new ChangeListener < Bounds>(){
+		
+
+			@Override
+			public void changed(ObservableValue<? extends Bounds> arg0,
+					Bounds arg1, Bounds arg2) {
+				
+			}
+			
+		});
 	}
 }

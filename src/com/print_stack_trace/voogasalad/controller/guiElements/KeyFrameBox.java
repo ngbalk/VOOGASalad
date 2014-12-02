@@ -9,13 +9,7 @@ import java.util.Iterator;
 import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
 import com.sun.glass.events.MouseEvent;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.IntegerPropertyBase;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ObjectPropertyBase;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableObjectValue;
+
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
