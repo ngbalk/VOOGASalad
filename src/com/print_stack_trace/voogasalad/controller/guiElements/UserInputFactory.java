@@ -44,8 +44,6 @@ public class UserInputFactory {
 		catch(Exception e){
 			JOptionPane.showMessageDialog(null, "User Input Types File Not Found");
 		}
-	
-	
 	}
 }
 	

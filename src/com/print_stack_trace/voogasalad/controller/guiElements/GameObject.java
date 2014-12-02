@@ -39,7 +39,6 @@ public abstract class GameObject  {
 	}
 	public abstract void createPane();
 	public void showPane(){
-		System.out.println("SHOW");
 		if (isClicked()&& !((GeneralPane) myPane).isOpen()){
 			((GeneralPane) myPane).openPane();
 		}

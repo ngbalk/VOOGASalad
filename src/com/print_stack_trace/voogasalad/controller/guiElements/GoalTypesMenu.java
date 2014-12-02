@@ -14,14 +14,8 @@ public class GoalTypesMenu extends UserInputDropDownMenu {
 		myGoals=myResourceReader.getProperties();
 		addMenus();
 	}
-	public void addMenus(){
-		for (String menuName: myGoals.keySet()){
-			CheckMenuItem currentMenuItem=new CheckMenuItem(myGoals.get(menuName));
-			currentMenuItem.setOnAction(e->linkAction(myGoals.get(menuName)));
-			this.currentMenu.getItems().add(currentMenuItem);
-		}
-	}
-	public void linkAction(String myName){
+	
+	protected void linkMovement(String myName){
 		for (GoalType name: GoalType.values()){
 			if (name.name().equals(myName)){
 				((GoalObject) mySprite).setCharacteristics(name);

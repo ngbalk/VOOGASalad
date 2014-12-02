@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 public class DraggableItem {
-	private GameObject myItem;
+	private SpriteObject myItem;
 	private double mouseXLocation;
 	private double mouseYLocation;
 	private double myX;
@@ -18,7 +18,7 @@ public class DraggableItem {
 	private double myHeight;
 	private double gridWidth;
 	private double gridHeight;
-	public DraggableItem(GameObject item, Number width, Number height){
+	public DraggableItem(SpriteObject item, Number width, Number height){
 		myItem=item;
 		myWidth=item.getImage().getFitWidth();
 		myHeight=item.getImage().getFitHeight();
@@ -51,7 +51,9 @@ public class DraggableItem {
 		});
 	}
 	private void translate(){
-		myItem.getImage().relocate(myX-myWidth/2, (myY-myHeight/1.5));
+		 
+		myItem.setMyX(myX-myWidth/2);
+		myItem.setMyY(myY-myHeight/1.5);
 	}
 	public Node getMyItem(){
 		return myItem.getImage();

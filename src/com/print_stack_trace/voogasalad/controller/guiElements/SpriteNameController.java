@@ -7,12 +7,11 @@ public class SpriteNameController extends SpriteCharacteristicController {
 	}
 	@Override
 	protected void populateDefaultText() {
-		System.out.println("NAmEFUNCTION:" +mySprite);
 		myTextBox.setText(((SpriteObject)mySprite).getCharacteristics().getName());
 	}
 	@Override
 	protected void setCharacteristic(String newValue) {
-	
+		mySprite.getDelegate().removeSpriteOBjects((SpriteObject) mySprite);
 		((SpriteObject)mySprite).getCharacteristics().setName(newValue);
 		mySprite.getDelegate().update((SpriteObject) mySprite);
 	}

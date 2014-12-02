@@ -1,6 +1,8 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -24,7 +26,18 @@ public abstract class SpriteCharacteristicController extends UserInputText {
 			}
 		});
 	}
+	
 	abstract protected void populateDefaultText();
 	abstract protected void setCharacteristic(String newValue);
-
+	protected void setObservable(SimpleDoubleProperty simpleDoubleProperty){
+		simpleDoubleProperty.addListener(new ChangeListener<Number>(){
+			@Override
+			public void changed(ObservableValue<? extends Number> arg0,
+					Number arg1,Number arg2) {
+					myTextBox.setText(arg2.doubleValue()+"");
+				
+			}
+			
+		});
+	}
 }
