@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameData implements IGameData {
@@ -89,6 +90,7 @@ public class GameData implements IGameData {
 			fileWriter.write(s);
 			fileWriter.close();
 			System.out.println("wrote file to " + file.getCanonicalPath());
+			System.out.println("Test: " + this.getClass().getName().replace(".", "/"));
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -132,6 +134,12 @@ public class GameData implements IGameData {
 		
 		LevelModel loadedLevel = gson.fromJson(br.readLine(), LevelModel.class);
 		System.out.println(loadedLevel.getLevelCharacteristics().getName());
+		SpriteCharacteristics actor = loadedLevel.getSpriteMap().get(0);
+		System.out.println("height:" + actor.getHeight());
+		System.out.println("width:" + actor.getWidth());
+		System.out.println("X: "+ actor.getX());
+		System.out.println("Y: " + actor.getY());
+		System.out.println("Sprite Name: " + actor.getName());
 		
 		return loadedLevel;
 	}
