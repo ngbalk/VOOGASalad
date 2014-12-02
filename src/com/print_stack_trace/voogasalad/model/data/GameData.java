@@ -1,13 +1,16 @@
 package com.print_stack_trace.voogasalad.model.data;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +52,8 @@ public class GameData implements IGameData {
 			 * wrote file to C:\Users\Marcus Cain\AppData\Roaming\Microsoft\Windows\Network Shortcuts\json2.txt
 			 */
 	
-	
+		System.out.println(lvl.getLevelCharacteristics().getName());
+		
 		/* Ensure that levelModel does not contain any javafx objects.
 		 * also ensure that objects within levelModel (SpriteCharacteristics) does
 		 * not contain any javafx primitive or objets
@@ -70,7 +74,8 @@ public class GameData implements IGameData {
 		 *  store json into a file
 		 */
 		
-		File file = new File(System.getProperty("user.dir") + "/src/jsonData.txt");
+		File file = new File(System.getProperty("user.dir")+ "/src/com/print_stack_trace/voogasalad/model/data/" + lvl.getLevelCharacteristics().getName() +".txt");
+				
 		if(file.getCanonicalPath() != null){
 			saveFileMarcus(json,file);
 			return;
@@ -119,6 +124,16 @@ public class GameData implements IGameData {
 		String json = bytes.toString();
 		Object o = cls.cast(gson.fromJson(json, cls));
 		return o;
+	}
+	
+	@Override
+	public LevelModel loadLevelMarcus(File levelName) throws IOException, JsonSyntaxException, ClassNotFoundException{
+		BufferedReader br = new BufferedReader(new FileReader(levelName));
+		
+		LevelModel loadedLevel = gson.fromJson(br.readLine(), LevelModel.class);
+		System.out.println(loadedLevel.getLevelCharacteristics().getName());
+		
+		return loadedLevel;
 	}
 
 	/**

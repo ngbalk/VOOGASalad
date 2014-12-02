@@ -50,8 +50,8 @@ public class GameEngine {
 
 	//-------------------PUBLIC METHODS-------------------//
 	
-	public void loadGame(BufferedInputStream inputStream) throws JsonSyntaxException, ClassNotFoundException, IOException {
-		loadLevel((LevelModel) gameData.loadLevel(inputStream, new LevelModel()));
+	public void loadGame(File levelFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
+		loadLevel((LevelModel) gameData.loadLevelMarcus(levelFile));
 	}
 	
 	public void saveGame() throws IOException {

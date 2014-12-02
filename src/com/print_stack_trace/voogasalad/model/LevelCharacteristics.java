@@ -21,6 +21,7 @@ public class LevelCharacteristics {
 	}
 	public void setName(String name){
 		this.name = name;
+		System.out.println("LevelCharacteristics setting name");
 	}
 	public void setBackground(Image img){
 		myColor=null;

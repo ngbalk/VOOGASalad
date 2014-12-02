@@ -93,6 +93,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		String name=new InputMessage().showInputDialog("Name of Level:");
 		myLevelBar.addLevel(name, myObject).setOnAction(e->levelUpdate(myObject));
 		myObject.getCharacteristics().setName(name);
+		System.out.println("gamePane set name After level created");
 		myLevelBar.setCurrentLevel(myObject);
 	}
 	public void levelUpdate(LevelObject currentLevel){
