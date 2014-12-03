@@ -1,0 +1,1 @@
+{"mySpriteMap":{"0":{"p":{"x":352,"y":321},"interactive":true,"objectType":"HERO","startingHealth":10,"startingSpeed":10.0,"value":0,"orientation":0.0,"name":"Penis","width":120.0,"height":110.0,"myMovements":{"null":"B","CROUCH":"A"}}},"goalMap":{},"currentID":0,"isLocked":false,"myLevelChars":{"name":"Deer","requiredNumberOfGoals":0},"myGoalFactory":{},"myKeyMap":{}}

@@ -145,6 +145,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 	public void addLevelUpdate(LevelObject myObject){
 		myObject.setDelegate(this);
+
 		String name=new MessagePopUp(myStyle).showInputDialog("Name of Level:");
 		if (new BlankSpaceTextChecker().checkText(name)){
 			myLevelBar.addLevel(name, myObject).setOnAction(e->levelUpdate(myObject));
