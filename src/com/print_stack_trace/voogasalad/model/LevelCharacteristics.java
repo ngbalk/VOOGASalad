@@ -13,7 +13,6 @@ public class LevelCharacteristics {
 	public File nextLevel = null;
 	private transient Image backgroundImage = null;
 	public int requiredNumberOfGoals = 0;
-
 	private String myColor;
 	//TODO: More...
 	public String getName() {
@@ -27,9 +26,9 @@ public class LevelCharacteristics {
 		myColor=null;
 		backgroundImage=img;
 	}
-	public void setBackgroundColor(String color){
+	public void setBackgroundColor(String string){
 		backgroundImage=null;
-		myColor=color;
+		myColor=string;
 	}
 	public Image getBackground(){
 		return backgroundImage;

@@ -16,11 +16,14 @@ public class MultipleLibraryPane extends TabPane{
 	private double myHeight;
 	private Pane myMainPane;
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/Tabs.Properties";
-	public MultipleLibraryPane(Number width, Number height, Pane otherPane) {
+	private String STYLE_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
+	public MultipleLibraryPane(Number width, Number height, Pane gamePane) {
 		myWidth=width.doubleValue();
 		myHeight= height.doubleValue();
-		myMainPane=otherPane;
+		myMainPane=gamePane;
 		loadAndAddTabs();
+		this.getStylesheets().add(STYLE_RESOURCE);
+		this.getStyleClass().add("tabPaneTemplate");
 	}
 	private void loadAndAddTabs(){
 		try {
@@ -35,6 +38,8 @@ public class MultipleLibraryPane extends TabPane{
 				ScrollBarPane myPane=new ScrollBarPane(myWidth, myHeight, myLibrary);
 				myNewTab.setContent(myPane);
 				myNewTab.setClosable(false);
+				myNewTab.getStyleClass().add("tabTemplate");
+				myNewTab.getStyleClass().add("tabLabelTemplate");
 				this.getTabs().add(myNewTab);
 			}
 		}

@@ -11,6 +11,7 @@ public class SpriteNameController extends SpriteCharacteristicController {
 	}
 	@Override
 	protected void setCharacteristic(String newValue) {
+		mySprite.getDelegate().removeSpriteOBjects((SpriteObject) mySprite);
 		((SpriteObject)mySprite).getCharacteristics().setName(newValue);
 		mySprite.getDelegate().update((SpriteObject) mySprite);
 	}

@@ -3,10 +3,15 @@ package com.print_stack_trace.voogasalad.controller.player;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Properties;
 
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
@@ -20,16 +25,24 @@ import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
+import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButton;
+import com.print_stack_trace.voogasalad.controller.guiElements.PlayerSaveButton;
+import com.print_stack_trace.voogasalad.controller.guiElements.SaveMenuItem;
 import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
+import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
 	private Group myRoot;
 	private GameEngine myGameEngine;
 	private DecisionTable dt = new DecisionTable();
 	private Score currentScore;
+	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
+	private String DEFAULT_CLASS_PATH="com.print_stack_trace.voogasalad.controller.guiElements.";
+	private String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
+	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
@@ -42,29 +55,50 @@ public class GamePlayer implements ViewController {
 		myGameEngine = gameEngine;
 		myRoot = new Group();
 		myRoot.setOnKeyReleased(KeyPad);
-		//initializeGUIElements();
-		//setHandlersForGuiElements();
-		//Add behavior for menu buttons later
-				
+		
+		//BUILD GUI ELEMENTS
+		
+		//BUILD GUI TOOLBAR
+		
 		ToolBar toolBar = new ToolBar();
-		Button newGameButton= new Button("New Game");
-		Button loadGameButton = new Button("Load Game");
-		Button helpButton = new Button("Help");
-		Button pauseButton = new Button("Pause Game");
-		Button showBestScores = new Button("High Scores");
-		
-		pauseButton.setOnAction(e-> pause());
-		loadGameButton.setOnAction(e -> selectLevelFile());
-		showBestScores.setOnAction(e->extractAndDisplayScores());//e->com.print_stack_trace.voogasalad.model.data.GameData);
-		//Image background = new Image("voogasalad_PrintStackTrace/src/SpriteImages/mushroom.png");
-		//ImageView bg = new ImageView(new Image("../LevelImages/overworld_bg.png"));
-		//bg.setImage(new Image(getClass().getResourceAsStream("../images/boss.png")));
-		//myRoot.getChildren().add(bg);
-		helpButton.setOnAction(e->createTableVisual());
-		toolBar.getItems().addAll(newGameButton, loadGameButton, helpButton, pauseButton, showBestScores);
+		Properties classProp = new Properties();
+		Properties labelProp = new Properties();
+		InputStream classStream = getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE+ELEMENT_RESOURCE_NAME+".Properties");
+		InputStream labelStream = getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE+LABEL_RESOURCE_NAME+".Properties");
+		try {
+			classProp.load(classStream);
+			labelProp.load(labelStream);
+			Iterator it = classProp.keySet().iterator();
+			while(it.hasNext()){
+				Object key = it.next();
+				String classType = (String) key;
+				String className = (String) classProp.get(key);
+				className = DEFAULT_CLASS_PATH + className;
+				Object newClass = Reflection.createInstance(className, myGameEngine);
+				newClass.getClass().getMethod("setLabel", String.class).invoke(newClass, labelProp.get(key));
+				toolBar.getItems().add((Node) newClass);
+			}
+			
+		} catch (Exception e1) {
+			System.out.println(e1.getMessage());
+		}
 		myRoot.getChildren().add(toolBar);
-		
 		return myRoot;
+	}
+	
+	private void setButtonText(){
+		try{
+			Properties prop = new Properties();
+			InputStream stream = getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE+LABEL_RESOURCE_NAME+".Properties");
+			prop.load(stream);
+			for(Object labelName : prop.keySet()){
+				
+				
+			}
+		}
+		catch(Exception e){
+			
+		}
 	}
 	
 	private void createTableVisual() {

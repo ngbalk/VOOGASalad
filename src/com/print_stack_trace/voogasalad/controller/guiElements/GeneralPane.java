@@ -39,13 +39,17 @@ public abstract class GeneralPane extends Pane{
 			myStage.close();
 		}
 		myStage=new Stage();
-		Scene myScene=new Scene(this, myWidth, myHeight);
+		ScrollBarPane myScroll=new ScrollBarPane(myWidth, myHeight, this);
+		Scene myScene=new Scene(myScroll, myWidth, myHeight);
 		myStage.setScene(myScene);
 		myStage.setHeight(myHeight);
 		myStage.setWidth(myWidth+15);
 	}
 	public void close(){
 		myStage.close();
+	}
+	public boolean isOpen(){
+		return myStage.isShowing();
 	}
 	
 }

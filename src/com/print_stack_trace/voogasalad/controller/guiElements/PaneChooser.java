@@ -24,7 +24,7 @@ public class PaneChooser {
 		private void createMap(){
 			try{
 				Properties prop = new Properties();
-				InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/controller/guiResources/PaneTypes.Properties");
+				InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/controller/guiResources/AllPaneTypes.Properties");
 				prop.load(stream);
 				for(Object typeName : prop.keySet()){
 					String values[]=prop.getProperty((String) typeName).split(";");

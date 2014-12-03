@@ -21,4 +21,19 @@ public class GoalObject extends GameObject {
 	public void setCharacteristics(GoalType myType){
 		myCharacteristics=new GoalCharacteristics(myType);
 	}
+	@Override
+	protected void update() {
+		myDelegate.update(this);
+		
+	}
+	@Override
+	public void createPane() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void showPane() {
+		// TODO Auto-generated method stub
+		
+	}
 }

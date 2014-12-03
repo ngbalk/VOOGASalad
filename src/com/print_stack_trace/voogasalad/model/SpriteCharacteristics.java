@@ -1,16 +1,25 @@
+/**
+ * @author 
+ * Date Created: 11/??/14
+ * Date Modified: 11/23/14
+ */
+
 package com.print_stack_trace.voogasalad.model;
 
+
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 
-import javafx.scene.image.Image;
+//import javafx.scene.image.Image;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.*;
 import javafx.scene.input.KeyCode;
 
 import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
-//import com.print_stack_trace.voogasalad.model.engine.physics.ArrayList;
-//import com.print_stack_trace.voogasalad.model.engine.physics.List;
 
 public class SpriteCharacteristics {
 
@@ -22,7 +31,7 @@ public class SpriteCharacteristics {
 	public static final int DEFAULT_HEALTH = 10;
 	public static final double DEFAULT_SPEED = 10;
 	public static final int DEFAULT_VALUE = 0;
-	public static final String DEFAULT_DIRECTION_FACING = "left";
+	public static final double DEFAULT_ORIENTATION = 0;
 	public static final String DEFAULT_NAME="";
 	public static final double DEFAULT_WIDTH=100;
 	public static final double DEFAULT_HEIGHT=100;
@@ -35,7 +44,7 @@ public class SpriteCharacteristics {
 	public int startingHealth;
 	public double startingSpeed;
 	public int value;
-	public String startingDirectionFacing;
+	public double orientation;
 	
 	//AUTHOR
 	public String name;
@@ -57,14 +66,12 @@ public class SpriteCharacteristics {
 		startingHealth = DEFAULT_HEALTH;
 		startingSpeed = DEFAULT_SPEED;
 		value = DEFAULT_VALUE;
-		startingDirectionFacing = DEFAULT_DIRECTION_FACING;
+		orientation = DEFAULT_ORIENTATION;
 		width=DEFAULT_WIDTH;
 		height=DEFAULT_HEIGHT;
 		name=DEFAULT_NAME;
 		myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
-
 	}
-
 	
 	/**
 	 * Constructor that essentially "clones" another spritecharacteristics class
@@ -72,23 +79,37 @@ public class SpriteCharacteristics {
 	 */
 	public SpriteCharacteristics(SpriteCharacteristics obj) {
 		objectType = obj.getObjectType();
-		img = obj.getImage();
+		img = obj.getJavaAWTImage();
 		p = obj.getPoint();
 		interactive = obj.isInteractive();
 		startingHealth = obj.getStartingHealth();
 		startingSpeed = obj.getStartingSpeed();
 		value = obj.getValue();
-		startingDirectionFacing = obj.getStartingDirectionFacing();
+		orientation= obj.getOrientation();
+		width=obj.getWidth();
+		height=obj.getHeight();
+		name=obj.getName();
+		myMovements=obj.getMovements();
 	}
 
 	//-------------------ACCESSORS-------------------//
 	
-    public Image getImage () {
-        return img;
+	public java.awt.Image getJavaAWTImage () {
+		return img;
+	}
+	
+    public javafx.scene.image.Image getImage () {
+    	BufferedImage bufferedImage = (BufferedImage) img;
+    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
+    	return javaFXImage;
+    }
+    
+    public void setJavaAWTImage(Image image) {
+        this.img = image;
     }
 
-    public void setImage(Image img) {
-        this.img = img;
+    public void setImage(javafx.scene.image.Image image) {
+        this.img = SwingFXUtils.fromFXImage(image, null);
     }
 
     public Point getPoint () {
@@ -139,52 +160,62 @@ public class SpriteCharacteristics {
         this.value = value;
     }
 
-    public String getStartingDirectionFacing () {
-        return startingDirectionFacing;
+    public double getOrientation () {
+        return orientation;
     }
 
-    public void setStartingDirectionFacing (String startingDirectionFacing) {
-        this.startingDirectionFacing = startingDirectionFacing;
+    public void setOrientation (double orienation) {
+        this.orientation = orientation;
     }
-	
+    
 	public double getX(){
 		return p.getX();
 	}
+	
 	public double getY(){
 		return p.getY();
 	}
+	
 	public void setX(double xLocation){
 		p.x=(int)xLocation; 
 	}
+	
 	public void setY(double yLocation){
 		p.y=(int) yLocation;
 	}
-
+	
 	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
 		myMovements.put(myAction, myKey);
 	}
+	
 	public HashMap<PossibleSpriteAction, KeyCode> getMovements(){
 		return myMovements;
 	}
-
+	
 	public double getWidth(){
 		return width;
 	}
+	
 	public double getHeight(){
 		return height;
 	}
+	
 	public void setWidth(double width){
 		this.width = width;
 	}
+	
 	public void setHeight(double height){
 		this.height = height;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
-
 	}
+
+	
     
 }

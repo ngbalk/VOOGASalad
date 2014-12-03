@@ -59,8 +59,8 @@ public class PopUpPane extends GeneralPane{
 			prop.load(stream);
 			for(Object labelName : prop.keySet()){
 				String[] value=prop.getProperty((String) labelName).split(";");
-				makeLabelAndTextBox(value,this.getWidth()*Double.parseDouble(value[2]),this.getHeight()*Double.parseDouble(value[3]),
-						this.getWidth()*Double.parseDouble(value[4]),this.getHeight()*Double.parseDouble(value[5]));
+				makeLabelAndTextBox(value,this.getPrefWidth()*Double.parseDouble(value[2]),this.getPrefHeight()*Double.parseDouble(value[3]),
+						this.getPrefWidth()*Double.parseDouble(value[4]),this.getPrefHeight()*Double.parseDouble(value[5]));
 			}
 		}
 		catch(Exception e){

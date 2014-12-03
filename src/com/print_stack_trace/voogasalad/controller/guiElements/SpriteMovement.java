@@ -10,28 +10,22 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class SpriteMovement extends UserInputDropDownMenu{
-	private HashMap<String, String> movements=new HashMap<String, String>();
 	public enum PossibleSpriteAction {UP, DOWN, RIGHT, LEFT, JUMP, CROUCH}
 	public SpriteMovement(GameObject sprite){
 		super(sprite);
 		currentMenu.setText("Pick Types of Movement");
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/"
 				+ "controller/guiResources/MovementTypes.Properties");
-		movements=myResourceReader.getProperties();
+		data=myResourceReader.getProperties();
 		addMenus();
-	}
-	protected void addMenus(){
-		for (String menuName: movements.keySet()){
-			CheckMenuItem currentMenuItem=new CheckMenuItem(movements.get(menuName));
-			currentMenuItem.setOnAction(e->linkMovement(movements.get(menuName)));
-			this.currentMenu.getItems().add(currentMenuItem);
-		}
 	}
 	private void addKeyMenus(String movementType, Menu current, Stage keyStage){
 		for (KeyCode key: KeyCode.values()){
@@ -42,14 +36,14 @@ public class SpriteMovement extends UserInputDropDownMenu{
 			}
 		}
 	}
-	private void linkMovement(String movementType){
+	protected void linkMovement(String movementTypeName){
+		String movementType=data.get(movementTypeName);
 		Stage myStage=new Stage();
-		myStage.setHeight(175);
+		myStage.setHeight(100);
 		myStage.setWidth(305);
 		Scene myNewScene=new Scene(makePopUpPane(movementType, myStage), 305,175);
 		myStage.setScene(myNewScene);
 		myStage.show();
-		System.out.println(mySprite.getDelegate());
 		mySprite.getDelegate().update((SpriteObject)mySprite);
 	}
 	private void linkKeys(String type, KeyCode key, Stage keyStage){
@@ -64,18 +58,19 @@ public class SpriteMovement extends UserInputDropDownMenu{
 		mySprite.getDelegate().update((SpriteObject)mySprite);
 	}
 	private Pane makePopUpPane(String movementType, Stage stage){
-		Pane smallPane=new Pane();
+		VBox smallPane=new VBox();
 		smallPane.setStyle("-fx-background-color: BLACK");
-		Label movementLabel=new Label("    Pick the Key for the Movement");
-		movementLabel.setPrefSize(290, 100);
+		Label movementLabel=new Label(" Pick the Key for the Movement");
+		movementLabel.setPrefSize(290, 70);
 		movementLabel.setTextAlignment(TextAlignment.CENTER);
-		movementLabel.relocate(0, 0);
+		//movementLabel.relocate(0, 0);
 		movementLabel.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
 		movementLabel.getStyleClass().add("keylabel1");
 		MenuBar moveMentFunction=new MenuBar();
+		//moveMentFunction.relocate(0, 70);
 		moveMentFunction.setPrefWidth(290);
 		moveMentFunction.setPrefHeight(75);
-		moveMentFunction.relocate(0, 100);
+		moveMentFunction.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
 		Menu myMovement=new Menu("Key Options");
 		addKeyMenus(movementType, myMovement, stage);
 		moveMentFunction.getMenus().addAll(myMovement);
