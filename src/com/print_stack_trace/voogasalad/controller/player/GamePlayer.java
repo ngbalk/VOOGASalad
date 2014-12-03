@@ -61,7 +61,7 @@ public class GamePlayer implements ViewController {
 		IntroSplashScreen splash = new IntroSplashScreen(gameEngine, 0, 0);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
-		splash.reAsssign(gameEngine, myRoot);
+		splash.continueFromSplashScreen(gameEngine, myRoot);
 		//initializeGUIElements();
 		//setHandlersForGuiElements();
 		//Add behavior for menu buttons later
