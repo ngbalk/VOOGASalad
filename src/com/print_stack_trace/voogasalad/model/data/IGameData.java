@@ -3,6 +3,7 @@ package com.print_stack_trace.voogasalad.model.data;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +21,6 @@ public interface IGameData {
 	public Map<String, HighScore> getHighScores();
 	public void saveHighScore(String name, HighScore highScore);
 	public void writeLevelMarcus(LevelModel lvl) throws IOException;
-	public LevelModel loadLevelMarcus(File levelFile) throws IOException, JsonSyntaxException, ClassNotFoundException;
+	public LevelModel loadLevelMarcus(FileInputStream myFile) throws IOException, JsonSyntaxException, ClassNotFoundException;
 
 }

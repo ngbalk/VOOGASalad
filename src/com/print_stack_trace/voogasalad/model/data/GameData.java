@@ -4,10 +4,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -129,9 +132,9 @@ public class GameData implements IGameData {
 	}
 	
 	@Override
-	public LevelModel loadLevelMarcus(File levelName) throws IOException, JsonSyntaxException, ClassNotFoundException{
-		BufferedReader br = new BufferedReader(new FileReader(levelName));
-		
+	public LevelModel loadLevelMarcus(FileInputStream levelName) throws IOException, JsonSyntaxException, ClassNotFoundException{
+		//BufferedReader br = new BufferedReader(new FileReader(levelName));
+		BufferedReader br = new BufferedReader(new InputStreamReader(levelName));
 		LevelModel loadedLevel = gson.fromJson(br.readLine(), LevelModel.class);
 		System.out.println(loadedLevel.getLevelCharacteristics().getName());
 		SpriteCharacteristics actor = loadedLevel.getSpriteMap().get(0);

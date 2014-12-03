@@ -25,17 +25,23 @@ public class PlayerLoadButton extends PlayerActionButton {
 	void doAction() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Load level");
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
+
 		Stage newStage=new Stage();
-		File file = fileChooser.showSaveDialog(newStage);
+		File file = fileChooser.showOpenDialog(newStage);
 		if (file != null) {
 			try {
-				//FileInputStream myFile=new FileInputStream(file);
-				myGameEngine.loadGame(file);
+				FileInputStream myFile=new FileInputStream(file);
+				myGameEngine.loadGame(myFile);
 			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
 				System.out.println(ex.getMessage());
 			}
 		}
 
 	}
+	
+	
+	
+	
 
 }

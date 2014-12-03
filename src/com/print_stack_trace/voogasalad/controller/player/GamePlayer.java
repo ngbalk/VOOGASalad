@@ -220,7 +220,7 @@ public class GamePlayer implements ViewController {
 		return;
 	}
 
-	private void  selectLevelFile() {
+	/*private void  selectLevelFile() {
 		FileChooser fc = new FileChooser();
 		fc.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
 		File levelFile = fc.showOpenDialog(new Stage());
@@ -238,6 +238,6 @@ public class GamePlayer implements ViewController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 }

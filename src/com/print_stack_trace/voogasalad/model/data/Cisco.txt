@@ -1,0 +1,1 @@
+{"mySpriteMap":{"0":{"p":{"x":356,"y":329},"interactive":true,"objectType":"HERO","startingHealth":10,"startingSpeed":10.0,"value":0,"orientation":0.0,"name":"bowser","width":120.0,"height":110.0,"myMovements":{"null":"E","CROUCH":"A"}}},"goalMap":{},"currentID":0,"isLocked":false,"myLevelChars":{"name":"Cisco","requiredNumberOfGoals":0},"myGoalFactory":{},"myKeyMap":{}}

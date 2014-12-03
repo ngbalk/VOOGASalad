@@ -3,6 +3,7 @@ package com.print_stack_trace.voogasalad.model.engine;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
@@ -50,8 +51,8 @@ public class GameEngine {
 
 	//-------------------PUBLIC METHODS-------------------//
 	
-	public void loadGame(File levelFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
-		loadLevel((LevelModel) gameData.loadLevelMarcus(levelFile));
+	public void loadGame(FileInputStream myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
+		loadLevel((LevelModel) gameData.loadLevelMarcus(myFile));
 	}
 	
 	public void saveGame() throws IOException {
