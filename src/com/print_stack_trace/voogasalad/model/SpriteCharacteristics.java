@@ -29,7 +29,7 @@ public class SpriteCharacteristics {
 	public static final int DEFAULT_HEALTH = 10;
 	public static final double DEFAULT_SPEED = 10;
 	public static final int DEFAULT_VALUE = 0;
-	public static final String DEFAULT_DIRECTION_FACING = "left";
+	public static final double DEFAULT_ORIENTATION = 0;
 	public static final String DEFAULT_NAME="";
 	public static final double DEFAULT_WIDTH=100;
 	public static final double DEFAULT_HEIGHT=100;
@@ -42,7 +42,7 @@ public class SpriteCharacteristics {
 	public int startingHealth;
 	public double startingSpeed;
 	public int value;
-	public String startingDirectionFacing;
+	public double orientation;
 	
 	//AUTHOR
 	public String name;
@@ -64,7 +64,7 @@ public class SpriteCharacteristics {
 		startingHealth = DEFAULT_HEALTH;
 		startingSpeed = DEFAULT_SPEED;
 		value = DEFAULT_VALUE;
-		startingDirectionFacing = DEFAULT_DIRECTION_FACING;
+		orientation = DEFAULT_ORIENTATION;
 		width=DEFAULT_WIDTH;
 		height=DEFAULT_HEIGHT;
 		name=DEFAULT_NAME;
@@ -83,7 +83,7 @@ public class SpriteCharacteristics {
 		startingHealth = obj.getStartingHealth();
 		startingSpeed = obj.getStartingSpeed();
 		value = obj.getValue();
-		startingDirectionFacing = obj.getStartingDirectionFacing();
+		orientation= obj.getOrientation();
 		width=obj.getWidth();
 		height=obj.getHeight();
 		name=obj.getName();
@@ -158,12 +158,12 @@ public class SpriteCharacteristics {
         this.value = value;
     }
 
-    public String getStartingDirectionFacing () {
-        return startingDirectionFacing;
+    public double getOrientation () {
+        return orientation;
     }
 
-    public void setStartingDirectionFacing (String startingDirectionFacing) {
-        this.startingDirectionFacing = startingDirectionFacing;
+    public void setOrientation (double orienation) {
+        this.orientation = orientation;
     }
     
 	public double getX(){
@@ -213,5 +213,7 @@ public class SpriteCharacteristics {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	
     
 }

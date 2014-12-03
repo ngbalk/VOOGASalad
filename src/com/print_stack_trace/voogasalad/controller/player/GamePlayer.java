@@ -2,10 +2,15 @@ package com.print_stack_trace.voogasalad.controller.player;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Properties;
 
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
@@ -17,18 +22,27 @@ import javafx.stage.StageStyle;
 
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.controller.guiElements.AbstractSplashScreen;
 import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
+import com.print_stack_trace.voogasalad.controller.guiElements.IntroSplashScreen;
+import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButton;
+import com.print_stack_trace.voogasalad.controller.guiElements.PlayerSaveButton;
+import com.print_stack_trace.voogasalad.controller.guiElements.PlayerToolBar;
+import com.print_stack_trace.voogasalad.controller.guiElements.SaveMenuItem;
 import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
+import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
 	private Group myRoot;
 	private GameEngine myGameEngine;
 	private DecisionTable dt = new DecisionTable();
 	private Score currentScore;
+	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
+	private String DEFAULT_CLASS_PATH="com.print_stack_trace.voogasalad.controller.guiElements.";
+	private String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
+	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
@@ -41,25 +55,32 @@ public class GamePlayer implements ViewController {
 		myGameEngine = gameEngine;
 		myRoot = new Group(); 
 		myRoot.setOnKeyReleased(KeyPad);
-		AbstractSplashScreen splash = new AbstractSplashScreen(myRoot, gameEngine, 500, 500);
+
+		IntroSplashScreen splash = new IntroSplashScreen(gameEngine, 0, 0);
+		splash.toFront();
+		myRoot.getChildren().add(splash);
+		splash.reAsssign(gameEngine, myRoot);
 		//initializeGUIElements();
 		//setHandlersForGuiElements();
 		//Add behavior for menu buttons later
-				
-		ToolBar toolBar = new ToolBar();
-		Button newGameButton= new Button("New Game");
-		Button loadGameButton = new Button("Load Game");
-		Button helpButton = new Button("Help");
-		Button pauseButton = new Button("Pause Game");
-		Button showBestScores = new Button("High Scores");
-		
-		pauseButton.setOnAction(e-> pause());
-		loadGameButton.setOnAction(e -> selectLevelFile());
-		showBestScores.setOnAction(e->extractAndDisplayScores());//e->com.print_stack_trace.voogasalad.model.data.GameData);
-		toolBar.getItems().addAll(newGameButton, loadGameButton, helpButton, pauseButton, showBestScores);
-		myRoot.getChildren().add(toolBar);
-		
+		//BUILD GUI ELEMENTS	
+		//BUILD GUI TOOLBAR
 		return myRoot;
+	}
+	
+	private void setButtonText(){
+		try{
+			Properties prop = new Properties();
+			InputStream stream = getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE+LABEL_RESOURCE_NAME+".Properties");
+			prop.load(stream);
+			for(Object labelName : prop.keySet()){
+				
+				
+			}
+		}
+		catch(Exception e){
+			
+		}
 	}
 	
 
@@ -97,15 +118,7 @@ public class GamePlayer implements ViewController {
 		//gameEngine.stopGame();
 	}
 	
-	/**
-	 * Initialize all the GUI elements 
-	 * Front End Person reponsible to implement this
-	 * whether CSS or fxml etc.
-	 */
-	private void initializeGUIElements() {
-	
-	}
-	
+
 	/**
 	 * Handler for actions involving KeyPad.  
 	 * add other keyEvents here
@@ -121,18 +134,7 @@ public class GamePlayer implements ViewController {
 			}
 		}
 	};
-	
-	/***
-	 * Handler for actions (buttons or action events)
-	 * add button/action handlers here
-	 */
-	private void setHandlersForGuiElements(){
-		saveGame.setOnAction(ActionEvent -> saveGame());
-		resumeGame.setOnAction(ActionEvent -> resumeGame());
-		pauseGame.setOnAction(ActionEvent -> pauseGame());
-		stopGame.setOnAction(ActionEvent -> stopGame());
-	}
-	
+
 	
 	/***
 	 * Method for Choosing Image --> Front End Person to modify to his/her liking
@@ -147,33 +149,4 @@ public class GamePlayer implements ViewController {
 		}
 		FileInputStream fis;
 	}
-
-	//may need to move this elsewhere to deal with hiding scores after a bit
-	private void extractAndDisplayScores() {
-		ArrayList<HighScore> scores = new ArrayList<HighScore>();
-		scores.add(new HighScore("Dan", 100));
-		scores.add(new HighScore("Tim", 20));
-		Text[] scoreTexts = new Text[scores.size()];
-		for(int i =0; i<scores.size(); i++){
-			String s = String.format("%1$s %2$s", scores.get(i).getPlayerName(), Integer.toString(scores.get(i).getMyScore()));
-			scoreTexts[i] = new Text (500, (i+1)*150, s);
-			System.out.println(s);
-		}
-		myRoot.getChildren().addAll(scoreTexts);
-		//to be implemented once score object is ready to go...backend please update me on this
-		return;
-	}
-
-	private void pause() {
-		// TODO Implement this method -- STOP CALLING update() on gameEngine
-		return;
-	}
-
-	private Object selectLevelFile() {
-		FileChooser fc = new FileChooser();
-		File levelFile = fc.showOpenDialog(new Stage()); 
-		//LevelModel lm = com.print_stack_trace.voogasalad.model.data.GameData.loadLevel(null);
-		return null; 
-	}
-	
 }

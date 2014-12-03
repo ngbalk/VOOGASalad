@@ -1,6 +1,8 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Properties;
 
 import javafx.scene.Node;
@@ -23,7 +25,7 @@ public class PictureLibrary extends AbstractLibraryPane{
 		myRows=height.intValue()/pictureSize;
 		this.setStyle("-fx-background-color: BLACK");
 	}
-	
+
 	@Override
 	protected void loadAndAddData() {
 		try {
@@ -31,7 +33,8 @@ public class PictureLibrary extends AbstractLibraryPane{
 			InputStream stream = getClass().getClassLoader().getResourceAsStream(myResources);
 			prop.load(stream);
 			for (Object pictureName: prop.keySet()){
-				Image myImage=new Image(prop.getProperty((String) pictureName));
+				String imageName=split(prop.getProperty((String) pictureName));
+				Image myImage=new Image(imageName);
 				ImageView myView=(ImageView) makeImageView(myImage);
 				myView.setOnMousePressed(event->addToOtherPane(myImage));
 				addImageToGrid(myView);
@@ -41,13 +44,15 @@ public class PictureLibrary extends AbstractLibraryPane{
 			JOptionPane.showMessageDialog(null, "File not found");
 		}
 	}
-	
+
 	protected void addToOtherPane(Image myImage){
 		GamePane gamerPane=(GamePane)myMainPane;
-		gamerPane.addGameObject((ImageView) makeImageView(myImage));
-		
+		if (gamerPane.isReady()){
+			gamerPane.addGameObject((ImageView) makeImageView(myImage));
+		};
+
 	}
-	
+
 	protected void addImageToGrid(ImageView imgView){
 		this.addRow(currentRow, imgView);
 		if (++currentColumn>myColumns){
@@ -62,8 +67,6 @@ public class PictureLibrary extends AbstractLibraryPane{
 			currentColumn++;
 		}
 	}
-		
-	
 	protected Node makeImageView(Image myImage){
 		ImageView myView=new ImageView(myImage);
 		myView.setFitHeight(pictureSize);
@@ -72,5 +75,11 @@ public class PictureLibrary extends AbstractLibraryPane{
 		myView.setSmooth(true);
 		myView.setVisible(true);
 		return myView;
+	}
+	private String split(String value){
+		String[] values=value.split(";");
+		Iterator<String> nextValue=Arrays.asList(values).iterator();
+		nextValue.next();
+		return nextValue.next();
 	}
 }

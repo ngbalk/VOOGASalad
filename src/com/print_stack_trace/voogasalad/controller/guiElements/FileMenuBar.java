@@ -5,14 +5,19 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import javafx.css.CssMetaData;
+import javafx.css.Styleable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
 public class FileMenuBar extends MenuBar{
 	private final String DEFAULT_MENU_NAMES="./com.print_stack_trace.voogasalad.controller.guiResources/";
-	public FileMenuBar(){
+	private String myStyle="";
+	public FileMenuBar(String style){
 		this.loadMenuNames();
+		myStyle=style;
+		this.getStylesheets().add(myStyle);
 	}
 	
 	private void loadMenuItems(Menu menuName){
@@ -25,6 +30,7 @@ public class FileMenuBar extends MenuBar{
 				Class menuItemClass=Class.forName(value[1]);
 				AbstractMenuItem myItem=(AbstractMenuItem) menuItemClass.getConstructor().newInstance();
 				menuName.getItems().add(myItem);
+
 			}
 		}
 		catch (Exception e) {
@@ -39,6 +45,7 @@ public class FileMenuBar extends MenuBar{
 			prop.load(stream);
 			for(Object menuName : prop.keySet()){
 				Menu myNewMenu=new Menu(prop.getProperty((String)menuName));
+				
 				this.getMenus().add(myNewMenu);
 				loadMenuItems(myNewMenu);
 			}

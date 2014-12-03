@@ -13,13 +13,14 @@ public class LevelsLibrary extends PictureLibrary{
 		myResources="./com/print_stack_trace/voogasalad/controller/guiResources/LevelImages.Properties";
 		loadAndAddData();
 	}
-	
+
 	@Override
 	protected void addToOtherPane(Image myImage){
-		myMainPane.getChildren().removeAll(onGamePane);
-		ImageView myView=(ImageView) makeImageView(myImage);
-		((GamePane) myMainPane).addBackground(myView);
-		onGamePane.add(myView);
-		
+		if (((GamePane)myMainPane).isReady()){
+			myMainPane.getChildren().removeAll(onGamePane);
+			ImageView myView=(ImageView) makeImageView(myImage);
+			((GamePane) myMainPane).addBackground(myView);
+			onGamePane.add(myView);
+		}	
 	}
 }

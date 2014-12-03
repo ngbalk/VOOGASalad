@@ -26,7 +26,6 @@ public class DecisionTable extends GridPane {
 	public static final int gapSize = 5;
 	public static final int maxDimension = 1000;
 	private int currentRowColCount;
-	
 	public DecisionTable(){
 		this.setHgap(gapSize*2);
 		this.setVgap(gapSize);
