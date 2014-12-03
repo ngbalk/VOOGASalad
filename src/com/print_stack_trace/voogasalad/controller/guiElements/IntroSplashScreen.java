@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.google.gson.JsonSyntaxException;
+import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;
@@ -24,7 +25,7 @@ public class IntroSplashScreen extends Pane {
 	protected Button loadButton = new Button("Continue");
 	protected ImageView myBackground = new ImageView("./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png");
 	
-	public IntroSplashScreen( GameEngine GE, int width, int height){
+	public IntroSplashScreen(int width, int height){
 		this.getChildren().addAll(loadButton, myBackground);
 		//root.getChildren().add(myBackground);
 		//root.getChildren().add(this);
@@ -33,12 +34,12 @@ public class IntroSplashScreen extends Pane {
 		System.out.println(this.getLayoutX());
 	}
 	
-	public void reAsssign(GameEngine GE, Group root){
-		loadButton.setOnAction(e -> addPlayerToolBarToNewRoot(root, GE));//GE.loadGame(selectLevelFile()));
+	public void continueFromSplashScreen(GamePlayer gamePlayer, Group root){
+		loadButton.setOnAction(e -> addPlayerToolBarToNewRoot(root, gamePlayer));//GE.loadGame(selectLevelFile()));
 	}
 	
-	private void addPlayerToolBarToNewRoot(Group root, GameEngine GE) {
-		PlayerToolBar ptb = new PlayerToolBar(GE);
+	private void addPlayerToolBarToNewRoot(Group root, GamePlayer gamePlayer) {
+		PlayerToolBar ptb = new PlayerToolBar(gamePlayer);
 		root.getChildren().add(ptb);
 		root.getChildren().remove(this);
 	}

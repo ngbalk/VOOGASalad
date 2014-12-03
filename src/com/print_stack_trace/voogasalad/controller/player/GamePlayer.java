@@ -2,8 +2,8 @@ package com.print_stack_trace.voogasalad.controller.player;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,8 +18,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -62,10 +64,10 @@ public class GamePlayer implements ViewController {
 		myRoot = new Group(); 
 		myRoot.setOnKeyReleased(KeyPad);
 
-		IntroSplashScreen splash = new IntroSplashScreen(gameEngine, 0, 0);
+		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
-		splash.reAsssign(gameEngine, myRoot);
+		splash.continueFromSplashScreen(this, myRoot);
 		return myRoot;
 	}
 	
@@ -77,9 +79,11 @@ public class GamePlayer implements ViewController {
 	 * @param levelCharacteristics 
 	 * @param spriteCharacteristics 
 	 */
-	public void updateScene(Map<Integer, SpriteCharacteristics> spriteCharacteristics, LevelCharacteristics levelCharacteristics){
-		for(Integer id : myGameEngine.getSpriteCharacteristics().keySet()){
-			myRoot.getChildren().add(new ImageView(myGameEngine.getSpriteCharacteristics().get(id).getImage()));
+	public void updateScene(){ 
+		myGameEngine.getLevelCharacteristics();
+		myGameEngine.getSpriteMap();
+		for(Integer id : myGameEngine.getSpriteMap().keySet()){
+			myRoot.getChildren().add(new ImageView(myGameEngine.getSpriteMap().get(id).getImage()));
 		}
 	}
 	
@@ -92,21 +96,62 @@ public class GamePlayer implements ViewController {
 		//(or if we are in charge of scores.. then scores.updateScore()
 	} 
 	
-	private void pauseGame(){ //buttons with handlers
+	public void pauseGame(){ //buttons with handlers
 		//gameEngine.pause();
 		//if gameplayer is the gameloop --> timeline.stop();
 	}
 	
-	private void resumeGame(){ //buttons with handlers
+	public void resumeGame(){ //buttons with handlers
 		//gameEngine.resume();
 		//timeline.resume();
 	}
-	private void saveGame(){   //buttons with handlers
-		//gameEngine.saveGame();
+	public void saveGame(){   
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save Level");
+		Stage newStage=new Stage();
+		File file = fileChooser.showSaveDialog(newStage);
+		if (file != null) {
+			try {
+				FileOutputStream myFile=new FileOutputStream(file);
+				myGameEngine.saveGame();
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
 	}
 	
-	private void stopGame(){
+	public void stopGame(){
 		//gameEngine.stopGame();
+	}
+	public void loadGame(){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Load level");
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
+		Stage newStage=new Stage();
+		File file = fileChooser.showOpenDialog(newStage);
+		if (file != null) {
+			try {
+				FileInputStream myFile=new FileInputStream(file);
+				myGameEngine.loadGame(myFile);
+			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+	}
+	public void showHighScores(){
+		Map<String, HighScore> scores = myGameEngine.getHighScoreList();
+		Group root = new Group();
+		Scene scene = new Scene(root);
+		Stage dialog = new Stage();
+		dialog.setScene(scene);
+		dialog.initModality(Modality.WINDOW_MODAL);
+		VBox scoresVBox = new VBox();
+		for(HighScore score : scores.values()){
+			System.out.println(score.getPlayerName() + ":" + score.getMyScore());
+			scoresVBox.getChildren().add(new Text(score.getPlayerName() + ":" + score.getMyScore()));
+		}
+		root.getChildren().add(scoresVBox);
+		dialog.show();
 	}
 	
 

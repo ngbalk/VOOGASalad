@@ -5,14 +5,13 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 public class PlayerResumeButton extends PlayerActionButton {
 
-	public PlayerResumeButton(GameEngine gameEngine, GamePlayer gamePlayer) {
-		super(gameEngine);
-		// TODO Auto-generated constructor stub
+	public PlayerResumeButton(GamePlayer gamePlayer) {
+		super(gamePlayer);
 	}
 
 	@Override
 	void doAction() {
-		//myGameEngine.resume();
+		myGamePlayer.resumeGame();
 
 	}
 

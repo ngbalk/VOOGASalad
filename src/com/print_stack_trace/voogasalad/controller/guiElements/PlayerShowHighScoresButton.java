@@ -16,26 +16,14 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 public class PlayerShowHighScoresButton extends PlayerActionButton {
 
-	public PlayerShowHighScoresButton(GameEngine gameEngine, GamePlayer gamePlayer) {
-		super(gameEngine);
+	public PlayerShowHighScoresButton(GamePlayer gamePlayer) {
+		super(gamePlayer);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	void doAction() {
-		Map<String, HighScore> scores = myGameEngine.getHighScoreList();
-		Group root = new Group();
-		Scene scene = new Scene(root);
-		Stage dialog = new Stage();
-		dialog.setScene(scene);
-		dialog.initModality(Modality.WINDOW_MODAL);
-		VBox scoresVBox = new VBox();
-		for(HighScore score : scores.values()){
-			System.out.println(score.getPlayerName() + ":" + score.getMyScore());
-			scoresVBox.getChildren().add(new Text(score.getPlayerName() + ":" + score.getMyScore()));
-		}
-		root.getChildren().add(scoresVBox);
-		dialog.show();
+		myGamePlayer.showHighScores();
 	}
 
 }

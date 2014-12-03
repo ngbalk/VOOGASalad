@@ -5,14 +5,13 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 public class PlayerPauseButton extends PlayerActionButton {
 
-	public PlayerPauseButton(GameEngine gameEngine, GamePlayer gamePlayer) {
-		super(gameEngine);
-		// TODO Auto-generated constructor stub
+	public PlayerPauseButton(GamePlayer gamePlayer) {
+		super(gamePlayer);
 	}
 
 	@Override
 	void doAction() {
-		//myGameEngine.pause();
+		myGamePlayer.pauseGame();
 
 	}
 

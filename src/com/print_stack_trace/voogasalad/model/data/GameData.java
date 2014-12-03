@@ -143,7 +143,6 @@ public class GameData implements IGameData {
 		System.out.println("X: "+ actor.getX());
 		System.out.println("Y: " + actor.getY());
 		System.out.println("Sprite Name: " + actor.getName());
-		
 		return loadedLevel;
 	}
 

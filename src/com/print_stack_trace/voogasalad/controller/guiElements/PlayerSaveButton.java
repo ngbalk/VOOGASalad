@@ -13,25 +13,13 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 public class PlayerSaveButton extends PlayerActionButton {
 
-	public PlayerSaveButton(GameEngine gameEngine, GamePlayer gamePlayer) {
-		super(gameEngine);
-		// TODO Auto-generated constructor stub
+	public PlayerSaveButton(GamePlayer gamePlayer) {
+		super(gamePlayer);
 	}
 
 	@Override
 	void doAction() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Save Level");
-		Stage newStage=new Stage();
-		File file = fileChooser.showSaveDialog(newStage);
-		if (file != null) {
-			try {
-				FileOutputStream myFile=new FileOutputStream(file);
-				myGameEngine.saveGame();
-			} catch (IOException ex) {
-				System.out.println(ex.getMessage());
-			}
-		}
+		myGamePlayer.saveGame();
 	
 	}
 

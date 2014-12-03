@@ -7,15 +7,13 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 public class PlayerPlayButton extends PlayerActionButton {
 
-	public PlayerPlayButton(GameEngine gameEngine, GamePlayer gamePlayer) {
-		super(gameEngine, gamePlayer);
-		// TODO Auto-generated constructor stub
+	public PlayerPlayButton(GamePlayer gamePlayer) {
+		super(gamePlayer);
 	}
 
 	@Override
 	void doAction() {
-		myGamePlayer.updateScene(myGameEngine.getSpriteCharacteristics(), myGameEngine.getLevelCharacteristics());
-
+		myGamePlayer.updateScene();
 	}
 
 }
