@@ -3,6 +3,7 @@ package com.print_stack_trace.voogasalad.controller.player;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,6 +21,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
@@ -218,11 +220,24 @@ public class GamePlayer implements ViewController {
 		return;
 	}
 
-	private Object selectLevelFile() {
+	/*private void  selectLevelFile() {
 		FileChooser fc = new FileChooser();
-		File levelFile = fc.showOpenDialog(new Stage()); 
+		fc.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
+		File levelFile = fc.showOpenDialog(new Stage());
+		
 		//LevelModel lm = com.print_stack_trace.voogasalad.model.data.GameData.loadLevel(null);
-		return null; 
-	}
+		 try {
+			myGameEngine.loadGame(levelFile);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
 	
 }

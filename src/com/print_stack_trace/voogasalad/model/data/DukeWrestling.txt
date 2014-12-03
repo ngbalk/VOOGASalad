@@ -1,0 +1,1 @@
+{"mySpriteMap":{"0":{"p":{"x":34,"y":40},"interactive":true,"objectType":"HERO","startingHealth":10,"startingSpeed":10.0,"value":0,"startingDirectionFacing":"left","name":"","width":123.0,"height":133.0,"myMovements":{}}},"goalMap":{},"currentID":0,"isLocked":false,"myLevelChars":{"name":"DukeWrestling","requiredNumberOfGoals":0},"myGoalFactory":{},"myKeyMap":{}}
