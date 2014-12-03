@@ -33,7 +33,7 @@ public class IntroSplashScreen extends Pane {
 		System.out.println(this.getLayoutX());
 	}
 	
-	public void reAsssign(GameEngine GE, Group root){
+	public void continueFromSplashScreen(GameEngine GE, Group root){
 		loadButton.setOnAction(e -> addPlayerToolBarToNewRoot(root, GE));//GE.loadGame(selectLevelFile()));
 	}
 	
