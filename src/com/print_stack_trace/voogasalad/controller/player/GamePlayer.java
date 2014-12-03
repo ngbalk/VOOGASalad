@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 import javafx.event.EventHandler;
@@ -14,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -27,6 +29,8 @@ import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButto
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerSaveButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.SaveMenuItem;
 import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
+import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
@@ -72,7 +76,7 @@ public class GamePlayer implements ViewController {
 				String classType = (String) key;
 				String className = (String) classProp.get(key);
 				className = DEFAULT_CLASS_PATH + className;
-				Object newClass = Reflection.createInstance(className, myGameEngine);
+				Object newClass = Reflection.createInstance(className, myGameEngine, this);
 				newClass.getClass().getMethod("setLabel", String.class).invoke(newClass, labelProp.get(key));
 				toolBar.getItems().add((Node) newClass);
 			}
@@ -84,20 +88,6 @@ public class GamePlayer implements ViewController {
 		return myRoot;
 	}
 	
-	private void setButtonText(){
-		try{
-			Properties prop = new Properties();
-			InputStream stream = getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE+LABEL_RESOURCE_NAME+".Properties");
-			prop.load(stream);
-			for(Object labelName : prop.keySet()){
-				
-				
-			}
-		}
-		catch(Exception e){
-			
-		}
-	}
 	
 	private void createTableVisual() {
 		Stage stage = new Stage();
@@ -115,9 +105,13 @@ public class GamePlayer implements ViewController {
 	/**
 	 * update the players view: Engine will change locations/stats on the backend; player will update the scene after changes
 	 * Maybe use observables to observe when something changes (just a thought)
+	 * @param levelCharacteristics 
+	 * @param spriteCharacteristics 
 	 */
-	public void updateScene(){
-
+	public void updateScene(Map<Integer, SpriteCharacteristics> spriteCharacteristics, LevelCharacteristics levelCharacteristics){
+		for(Integer id : myGameEngine.getSpriteCharacteristics().keySet()){
+			myRoot.getChildren().add(new ImageView(myGameEngine.getSpriteCharacteristics().get(id).getImage()));
+		}
 	}
 	
 	

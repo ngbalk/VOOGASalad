@@ -118,6 +118,12 @@ public class GameEngine {
 
 	//GAME PLAYER
 
+	public Map<Integer, SpriteCharacteristics> getSpriteCharacteristics(){
+		return currentLevel.getSpriteMap();
+	}
+	public LevelCharacteristics getLevelCharacteristics(){
+		return currentLevel.getLevelCharacteristics();
+	}
 	public void update() {
 		runtimeEngine.update();
 	}

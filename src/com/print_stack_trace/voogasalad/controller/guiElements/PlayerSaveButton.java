@@ -8,11 +8,12 @@ import java.io.IOException;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 public class PlayerSaveButton extends PlayerActionButton {
 
-	public PlayerSaveButton(GameEngine gameEngine) {
+	public PlayerSaveButton(GameEngine gameEngine, GamePlayer gamePlayer) {
 		super(gameEngine);
 		// TODO Auto-generated constructor stub
 	}

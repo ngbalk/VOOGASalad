@@ -10,12 +10,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 public class PlayerShowHighScoresButton extends PlayerActionButton {
 
-	public PlayerShowHighScoresButton(GameEngine gameEngine) {
+	public PlayerShowHighScoresButton(GameEngine gameEngine, GamePlayer gamePlayer) {
 		super(gameEngine);
 		// TODO Auto-generated constructor stub
 	}

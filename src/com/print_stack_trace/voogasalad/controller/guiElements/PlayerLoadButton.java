@@ -11,11 +11,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import com.google.gson.JsonSyntaxException;
+import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 public class PlayerLoadButton extends PlayerActionButton {
 
-	public PlayerLoadButton(GameEngine gameEngine) {
+	public PlayerLoadButton(GameEngine gameEngine, GamePlayer gamePlayer) {
 		super(gameEngine);
 		// TODO Auto-generated constructor stub
 	}
