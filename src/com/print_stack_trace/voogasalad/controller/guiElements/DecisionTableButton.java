@@ -11,8 +11,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class DecisionTableButton extends Button {
+	private static final int maxDimensionSize = 10000;
+	private static final int dimension = 600;
+	private static final int barOffset = 30;
 	public static final String text = "Edit Collision Table";
-	//private ScrollBar scroller = new ScrollBar(); 
 	
 	public DecisionTableButton(DecisionTable table){
 		this.setText(text);
@@ -21,22 +23,22 @@ public class DecisionTableButton extends Button {
 
 	private void showTable(DecisionTable dt) {
 		Stage stage = new Stage();
-		stage.setWidth(600);
-		stage.setHeight(600); 
+		stage.setWidth(dimension);
+		stage.setHeight(dimension); 
 		stage.setResizable(false);
 		stage.initStyle(StageStyle.UTILITY);
 		Group root = new Group(); 
 		ScrollPane sp = new ScrollPane();
 		sp.setContent(dt);
 		sp.setPannable(true);
-		sp.setMaxHeight(10000);
-		sp.setMaxWidth(10000); 
-		sp.setPrefSize(580, 570); 
+		sp.setMaxHeight(maxDimensionSize); 
+		sp.setMaxWidth(maxDimensionSize); 
+		sp.setPrefSize(dimension-barOffset, dimension-barOffset); 
 		sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		sp.setHbarPolicy(ScrollBarPolicy.ALWAYS);
 		Scene s = new Scene(root);
-		root.getChildren().addAll(sp);
-		stage.setScene(s); 
+		root.getChildren().add(sp);
+		stage.setScene(s);  
 		stage.show();
 		return;
 	}

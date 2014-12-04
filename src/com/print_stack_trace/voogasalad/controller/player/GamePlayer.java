@@ -58,10 +58,11 @@ public class GamePlayer implements ViewController {
 		myRoot = new Group(); 
 		myRoot.setOnKeyReleased(KeyPad);
 
-		IntroSplashScreen splash = new IntroSplashScreen(gameEngine, 0, 0);
+		//TODO: remove magic numbers...need screen and/or scene dimensions to do so
+		IntroSplashScreen splash = new IntroSplashScreen(gameEngine, 500, 500);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
-		splash.continueFromSplashScreen(gameEngine, myRoot);
+		splash.continueFromSplash(gameEngine, myRoot);
 		//initializeGUIElements();
 		//setHandlersForGuiElements();
 		//Add behavior for menu buttons later
