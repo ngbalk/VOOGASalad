@@ -166,5 +166,8 @@ public class LevelModel {
         return mySpriteMap;
     }
     
-    
+    public String toString(){
+    	//returns name of the level
+    	return this.getLevelCharacteristics().getName();
+    }
 }

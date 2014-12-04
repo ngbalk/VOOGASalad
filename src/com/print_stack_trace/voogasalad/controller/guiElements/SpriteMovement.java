@@ -48,10 +48,9 @@ public class SpriteMovement extends UserInputDropDownMenu{
 	}
 	private void linkKeys(String type, KeyCode key, Stage keyStage){
 		keyStage.close();
-		//how to link
 		PossibleSpriteAction mySpriteAction=null;
 		for (PossibleSpriteAction myAction: PossibleSpriteAction.values()){
-			if (myAction.name().equals(type))
+			if (myAction.name().trim().equals(type.trim()))
 				mySpriteAction=myAction;
 		}
 		((SpriteObject)mySprite).getCharacteristics().addMovement(mySpriteAction, key);
