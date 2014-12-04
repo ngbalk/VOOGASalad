@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import com.google.gson.JsonSyntaxException;
@@ -28,6 +29,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.Co
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
 
 public class GameEngine {
 	private LevelModel currentLevel;
@@ -118,6 +120,23 @@ public class GameEngine {
 	public void setLevelCharacteristics(LevelCharacteristics levelSpecs) {
 		authorEngine.setLevelCharacteristics(levelSpecs);
 	}
+	
+	//Setting Keyboard/Movement
+	public Integer getMainCharacter() {
+		return authorEngine.getMainCharacter();
+	}
+
+	public void setMainCharacter(Integer mainCharacter) {
+		authorEngine.setMainCharacter(mainCharacter);
+	}
+    
+    public void setResultForKey(KeyResult result, KeyCode key) {
+    	authorEngine.setResultForKey(result, key);
+    }
+    
+    public KeyResult getResultOfKey(KeyCode key) {
+    	return authorEngine.getResultOfKey(key);
+    }
 
 	//GAME PLAYER
 

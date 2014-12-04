@@ -16,6 +16,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
@@ -29,7 +30,8 @@ public class LevelModel {
     private CameraType myCameraType;
     private LevelCharacteristics myLevelChars;
     private GoalFactory myGoalFactory;
-    private Map<String, KeyCode> myKeyMap;
+    private Map<KeyCode, KeyResult> myKeyMap = new HashMap<KeyCode, KeyResult>();
+    private Integer mainCharacter;
 
     public LevelModel(){
         myGoalFactory = new GoalFactory();
@@ -165,6 +167,20 @@ public class LevelModel {
     public Map<Integer, SpriteCharacteristics> getSpriteMap() {
         return mySpriteMap;
     }
+
+	public Integer getMainCharacter() {
+		return mainCharacter;
+	}
+
+	public void setMainCharacter(Integer mainCharacter) {
+		this.mainCharacter = mainCharacter;
+	}
     
+    public void setResultForKey(KeyResult result, KeyCode key) {
+    	myKeyMap.put(key, result);
+    }
     
+    public KeyResult getResultOfKey(KeyCode key) {
+    	return myKeyMap.get(key);
+    }
 }
