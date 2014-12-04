@@ -79,6 +79,7 @@ public class GamePlayer implements ViewController {
 		myPlayPane.setLayoutY(100);
 		myGameRoot = new Group(myPlayPane);
 		myRoot.getChildren().add(myGameRoot);
+
 		return myRoot;
 	}
 	
