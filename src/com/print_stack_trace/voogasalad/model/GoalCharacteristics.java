@@ -9,17 +9,19 @@ import javafx.geometry.Point2D;
 
 public class GoalCharacteristics {
 
-    private GoalType myGoalType=null;
-    private Integer myObjectID=0;
-    private Integer myObjectiveID=0;
-    private Integer myPointTotal=0;
-    private Point2D myDestination=new Point2D(0,0);
+
     private String myName="";
+    public GoalType myGoalType;
+    public Integer myObjectID;
+    public Integer myObjectiveID;
+    public Integer myPointTotal;
+    public Point myDestination;
+
     
     public GoalCharacteristics(GoalType goalType) {
         myGoalType = goalType;
     }
-    public void setDestination(Point2D destination){
+    public void setDestination(Point destination){
     	myDestination=destination;
     }
     public void setObjectID(Integer ID){
@@ -40,7 +42,7 @@ public class GoalCharacteristics {
     public GoalType getCharacteristics() {
         return myGoalType;
     }
-    public Point2D getDestination(){
+    public Point getDestination(){
     	return myDestination;
     }
     public Integer getObjectID(){

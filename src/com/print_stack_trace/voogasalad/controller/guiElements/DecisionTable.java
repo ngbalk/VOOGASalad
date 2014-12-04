@@ -1,5 +1,11 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+/**
+ * Table to be used for collisions. Uses enumerations so no code needs to be added on frontend
+ * 
+ * @author danielmacdonald 
+ */
+
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

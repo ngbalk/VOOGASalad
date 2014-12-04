@@ -26,7 +26,7 @@ public class PlayerSaveButton extends PlayerActionButton {
 		if (file != null) {
 			try {
 				FileOutputStream myFile=new FileOutputStream(file);
-				myGameEngine.saveGame(new BufferedOutputStream(myFile));
+				myGameEngine.saveGame();
 			} catch (IOException ex) {
 				System.out.println(ex.getMessage());
 			}
