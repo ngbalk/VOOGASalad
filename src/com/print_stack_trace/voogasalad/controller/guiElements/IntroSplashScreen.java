@@ -36,7 +36,7 @@ public class IntroSplashScreen extends Pane {
 	
 	public void continueFromSplashScreen(GamePlayer gamePlayer, Group root){
 		loadButton.setOnAction(e -> addPlayerToolBarToNewRoot(root, gamePlayer));//GE.loadGame(selectLevelFile()));
-	}
+	} 
 	
 	private void addPlayerToolBarToNewRoot(Group root, GamePlayer gamePlayer) {
 		PlayerToolBar ptb = new PlayerToolBar(gamePlayer);
