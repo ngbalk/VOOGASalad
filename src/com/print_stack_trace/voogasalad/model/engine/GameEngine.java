@@ -59,8 +59,7 @@ public class GameEngine {
 	
 	public void saveGame() throws IOException {
 		LevelModel lvl = authorEngine.getCurrentLevel();
-		System.out.println("Level Name: " + lvl.getLevelCharacteristics().getName());
-		gameData.writeLevelMarcus(lvl);
+		gameData.writeLevel(lvl);
 		
 	}
 

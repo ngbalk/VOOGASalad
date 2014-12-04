@@ -198,4 +198,9 @@ public class LevelModel {
     public KeyResult getResultOfKey(KeyCode key) {
     	return myKeyMap.get(key);
     }
+    
+    public String toString(){
+    	//returns name of the level
+    	return this.getLevelCharacteristics().getName();
+    }
 }
