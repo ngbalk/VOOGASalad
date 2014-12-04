@@ -190,6 +190,15 @@ public class GameEngine {
 
 	private void loadLevel(LevelModel level) {
 		this.currentLevel = level;
+		
+		//FIXME: Remove this work around garbage
+		Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
+		currentLevel.setMainCharacter(first);
+		currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
+		currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
+		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
+		currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
+		
 		runtimeEngine = new RuntimeEngine(currentLevel);
 	}
 

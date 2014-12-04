@@ -64,6 +64,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 				runtimeModel.gameVictory = true;
 			}
 		}
+		
+		updateSpritePositions();
 	}
 	
 	public void setFramesPerSecond(int framesPerSecond) {
@@ -103,9 +105,10 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		}
 	}
 	
-	private void changePositionBasedOnVelocity(){
+	private void updateSpritePositions(){
 		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()){
-			
+			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
+			rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
 		}
 	}
 	
