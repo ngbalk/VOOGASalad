@@ -33,10 +33,10 @@ public class PictureLibrary extends AbstractLibraryPane{
 			InputStream stream = getClass().getClassLoader().getResourceAsStream(myResources);
 			prop.load(stream);
 			for (Object pictureName: prop.keySet()){
-				String imageName=split(prop.getProperty((String) pictureName));
-				Image myImage=new Image(imageName);
-				ImageView myView=(ImageView) makeImageView(myImage);
-				myView.setOnMousePressed(event->addToOtherPane(myImage));
+				String imagePath=split(prop.getProperty((String) pictureName));
+				Image image=new Image(imagePath);
+				ImageView myView=(ImageView) makeImageView(image);
+				myView.setOnMousePressed(event->addToOtherPane(image, imagePath));
 				addImageToGrid(myView);
 			}
 		}
@@ -45,10 +45,10 @@ public class PictureLibrary extends AbstractLibraryPane{
 		}
 	}
 
-	protected void addToOtherPane(Image myImage){
+	protected void addToOtherPane(Image image, String imagePath){
 		GamePane gamerPane=(GamePane)myMainPane;
 		if (gamerPane.isReady()){
-			gamerPane.addGameObject((ImageView) makeImageView(myImage));
+			gamerPane.addGameObject((ImageView) makeImageView(image), imagePath);
 		};
 
 	}

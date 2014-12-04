@@ -20,15 +20,17 @@ public class SpriteObject extends GameObject{
 	private GameEngine myGameEngine;
 	protected SpriteCharacteristics myCharacteristics;
 
-	public SpriteObject(int ID, ImageView image, String type){
-		this(ID, image, type, null);
+	public SpriteObject(int ID, ImageView image, String imagePath, String type){
+		this(ID, image, imagePath, type, null);
 		
 	}
-	public SpriteObject(int ID, ImageView image, String type, ViewObjectDelegate delegate){
-		super(image, delegate);
+	public SpriteObject(int ID, ImageView image, String imagePath, String type, ViewObjectDelegate delegate){
+		super(image, imagePath, delegate);
 		myID=ID;
 		myType=type;
+		//need other types
 		myCharacteristics=new SpriteCharacteristics(SpriteType.valueOf(type.toUpperCase()));
+		myCharacteristics.setImagePath(imagePath);
 		createPane();
 		this.getImage().setOnMouseClicked(e->showPane());
 	}

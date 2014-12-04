@@ -46,7 +46,7 @@ public abstract class AbstractGUI extends BorderPane {
 		LevelBar myLevelBar=new LevelBar(myWidth*.025, 20, myWidth*.2, myHeight*.05);
 		LevelButton myLevelButton=new LevelButton();
 		gamePane.addLevelBar(myLevelBar);
-		myLevelButton.setOnMouseClicked(e->gamePane.addLevelUpdate(new LevelObject(new ImageView())));
+		myLevelButton.setOnMouseClicked(e->gamePane.addLevelUpdate(new LevelObject(new ImageView(), "")));
 		myLevelButton.relocate(myWidth*.25, 20);
 		myLevelButton.setPrefSize(100, 50);
 		myLevelButton.getStyleClass().add("buttonTemplate2"
