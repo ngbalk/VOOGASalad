@@ -31,12 +31,11 @@ public abstract class AbstractGUI extends BorderPane {
 	private double myHeight;
 	private GamePane gamePane;
 	private GameEngine myGameEngine;
-	private String myStyle="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
+	protected String myStyle;
 	public AbstractGUI(Number width, Number height){
 		setPrefSize(width.doubleValue(), height.doubleValue());
 		myWidth= width.doubleValue();
 		myHeight=height.doubleValue();
-		this.getStylesheets().add(myStyle);
 	}
 	//add resources file to fix hard coded numbers, fix repetition
 	protected Node setBottomPane(){
@@ -74,8 +73,9 @@ public abstract class AbstractGUI extends BorderPane {
 			try {
 				FileOutputStream myFile=new FileOutputStream(file);
 				myGameEngine.saveGame(new BufferedOutputStream(myFile));
+				
 			} catch (IOException ex) {
-				System.out.println(ex.getMessage());
+				new MessagePopUp(myStyle).showMessageDialog(ex.getMessage());
 			}
 		}
 	}

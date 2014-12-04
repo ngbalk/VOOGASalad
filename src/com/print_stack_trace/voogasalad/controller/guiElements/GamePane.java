@@ -122,6 +122,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				myData.get(myObject.getCode()).add(myObject);
 			}
 		}
+		if (new BlankSpaceTextChecker().checkText(myObject.getCode()))
 		for (SpriteObject sprite: myData.get(myObject.getCode())){
 			sprite.setCharacteristics(characteristics);
 			sprite.getCharacteristics().setX(sprite.getImage().getLayoutX());
@@ -196,7 +197,10 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public void removeSpriteOBjects(SpriteObject myObject) {
 		if (myData.get(myObject.getCode()).contains(myObject)){
 			myData.get(myObject.getCode()).remove(myObject);
-		}
-		
+		}	
+	}
+	@Override
+	public Set getLevelsAvailable() {
+		return myLevelBar.getLevels();
 	}
 }

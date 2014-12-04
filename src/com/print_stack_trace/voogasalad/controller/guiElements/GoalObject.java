@@ -6,7 +6,7 @@ import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 import javafx.scene.image.ImageView;
 
 public class GoalObject extends GameObject {
-	private GoalCharacteristics myCharacteristics;
+	private GoalCharacteristics myCharacteristics=new GoalCharacteristics(null);
 	public GoalObject(ImageView image, ViewObjectDelegate delegate) {
 		super(image, delegate);
 	}
