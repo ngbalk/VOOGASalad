@@ -23,6 +23,7 @@ import javafx.beans.property.SimpleSetProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -49,20 +50,20 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		this.getStylesheets().add(myStyle);
 		
 	}
-	public void addGameObject(ImageView gameObjectImageView){
-		if (gameObjectImageView!=null){
+	public void addGameObject(ImageView gameObjectImageView, String imagePath){
+		if (imagePath!=null){
 			String myMessage=new MessagePopUp(myStyle).showDropDownDialog("What type of object would you like this image to be: ",spriteTypeNames());
 			if (new BlankSpaceTextChecker().checkText(myMessage)){
-				 addSpriteObject(gameObjectImageView, myMessage);
+				 addSpriteObject(gameObjectImageView, imagePath, myMessage);
 			}
 		}
 	}
-	private SpriteObject addSpriteObject(ImageView gameObjectImageView, String type){
-		SpriteObject myGameObject=new SpriteObject(0, gameObjectImageView,type, this);
-		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
-		myGameObject.setID(myID);
+	private SpriteObject addSpriteObject(ImageView gameObjectImageView, String imagePath, String type){
+		SpriteObject myGameObject=new SpriteObject(0, gameObjectImageView, imagePath, type, this);
 		myGameObject.getCharacteristics().setHeight(myGameObject.getImage().getFitHeight());
 		myGameObject.getCharacteristics().setWidth(myGameObject.getImage().getFitWidth());
+		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
+		myGameObject.setID(myID);
 		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
 		
 		if (myData.get(myGameObject.getCode())==null)
@@ -73,8 +74,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return myGameObject;
 	}
 	public void addExistingObjectToOtherPane(SpriteObject newSprite){
-		newSprite.changeImageView(newSprite.getImage());
-		SpriteObject spriteOnBoard=this.addSpriteObject(newSprite.getImage(), newSprite.getType());
+		SpriteObject spriteOnBoard=this.addSpriteObject(newSprite.getImage(), newSprite.getImagePath(), newSprite.getType());
 		spriteOnBoard.setCharacteristics(newSprite.getCharacteristics());	
 		spriteOnBoard.getImage().setFitHeight(spriteOnBoard.getCharacteristics().getHeight());
 		spriteOnBoard.getImage().setFitWidth(spriteOnBoard.getCharacteristics().getWidth());
@@ -92,10 +92,12 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public double getGridHeight(){
 		return myHeight;
 	}
-	public void addBackground(ImageView imgView){
+	public void addBackground(ImageView imgView, String imagePath){
 		LevelObject levelBackground=myLevelBar.getCurrentLevel();
 		this.getChildren().remove(levelBackground.getImage());
 		levelBackground.setImageView(imgView);
+		levelBackground.setImagePath(imagePath);
+		levelBackground.getCharacteristics().setBackgroundImagePath(imagePath);
 		levelBackground.getColorPane().setVisible(false);
 		this.getChildren().add(0,imgView);
 		ImageView background=levelBackground.getImage();
@@ -130,9 +132,10 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			sprite.getCharacteristics().setHeight(sprite.getImage().getFitHeight());
 			sprite.getCharacteristics().setOrientation(sprite.getImage().getFitWidth());
 			sprite.setImage(myObject.getImage().getImage());
+			sprite.getCharacteristics().setImagePath(sprite.getImagePath());
 			myGameEngine.updateObject(sprite.getId(), sprite.getCharacteristics());
 		}
-		SpriteObject temp=new SpriteObject(0,new ImageView(myObject.getImage().getImage()),myObject.getType(),myObject.getDelegate());
+		SpriteObject temp=new SpriteObject(0,new ImageView(myObject.getImage().getImage()), myObject.getImagePath(), myObject.getType(),myObject.getDelegate());
 		temp.setCharacteristics(myObject.getCharacteristics());
 		changedSprite.set(temp);
 		

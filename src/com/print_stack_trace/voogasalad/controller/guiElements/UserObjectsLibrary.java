@@ -52,7 +52,7 @@ public class UserObjectsLibrary extends PictureLibrary{
 	private void addImage(ObservableSet<? extends SpriteObject> observableSet){
 		for (SpriteObject sprite: observableSet){
 			SpriteObject currentSprite=myMap.get(sprite.getCode());
-			SpriteObject newSprite=new SpriteObject(0, sprite.getImage(), sprite.getType(), (ViewObjectDelegate) myMainPane);
+			SpriteObject newSprite=new SpriteObject(0, sprite.getImage(), sprite.getImagePath(), sprite.getType(), (ViewObjectDelegate) myMainPane);
 			newSprite.setCharacteristics(sprite.getCharacteristics());
 			if (currentSprite!=null&& sprite.getCharacteristics().getName().length()>0){
 				myMap.put(sprite.getCode(), sprite);

@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.player;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -27,9 +29,11 @@ import javafx.stage.StageStyle;
 
 import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.Constants;
+import com.print_stack_trace.voogasalad.VOOGASalad;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
 import com.print_stack_trace.voogasalad.controller.guiElements.IntroSplashScreen;
+import com.print_stack_trace.voogasalad.controller.guiElements.PlayPane;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerSaveButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerToolBar;
@@ -44,7 +48,10 @@ import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
 	private Group myRoot;
+	private Group myGameRoot;
+	private PlayPane myPlayPane;
 	private GameEngine myGameEngine;
+	
 	private DecisionTable dt = new DecisionTable();
 	private Score currentScore;
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
@@ -63,11 +70,15 @@ public class GamePlayer implements ViewController {
 		myGameEngine = gameEngine;
 		myRoot = new Group(); 
 		myRoot.setOnKeyReleased(KeyPad);
-
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
 		splash.continueFromSplashScreen(this, myRoot);
+		myPlayPane = new PlayPane();
+		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
+		myPlayPane.setLayoutY(100);
+		myGameRoot = new Group(myPlayPane);
+		myRoot.getChildren().add(myGameRoot);
 		return myRoot;
 	}
 	
@@ -80,11 +91,31 @@ public class GamePlayer implements ViewController {
 	 * @param spriteCharacteristics 
 	 */
 	public void updateScene(){ 
-		myGameEngine.getLevelCharacteristics();
-		myGameEngine.getSpriteMap();
-		for(Integer id : myGameEngine.getSpriteMap().keySet()){
-			myRoot.getChildren().add(new ImageView(myGameEngine.getSpriteMap().get(id).getImage()));
+		LevelCharacteristics levelCharacteristics = myGameEngine.getLevelCharacteristics();
+		Map<Integer, SpriteCharacteristics> spriteMap = myGameEngine.getSpriteMap();
+		ImageView background = new ImageView(new Image(levelCharacteristics.getBackgroundImagePath()));
+		background.setFitWidth(myPlayPane.getWidth());
+		background.setFitHeight(myPlayPane.getHeight()-10);
+		background.setFitWidth(myPlayPane.getWidth()-10);
+		background.setSmooth(true);
+		background.setPreserveRatio(false);
+		background.relocate(5, 5);
+		myPlayPane.getChildren().add(0,background);
+		for(Integer id : spriteMap.keySet()){
+			System.out.println("detected sprite ID = " + id);
+			SpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
+			ImageView spriteImage = new ImageView(new Image(spriteCharacteristics.getImagePath()));
+			System.out.println("Sprite Image path: " + spriteCharacteristics.getImagePath());
+			System.out.println("Sprite X Location: " + spriteCharacteristics.getX());
+			System.out.println("Sprite Y Location: " + spriteCharacteristics.getY());
+			spriteImage.setFitWidth(spriteCharacteristics.getWidth());
+			spriteImage.setFitHeight(spriteCharacteristics.getHeight());
+			spriteImage.setRotate(spriteCharacteristics.getOrientation());
+			spriteImage.setLayoutX(spriteCharacteristics.getX());
+			spriteImage.setLayoutY(spriteCharacteristics.getY());
+			myGameRoot.getChildren().add(spriteImage);
 		}
+		
 	}
 	
 	

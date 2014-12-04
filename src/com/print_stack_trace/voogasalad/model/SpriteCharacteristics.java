@@ -36,6 +36,7 @@ public class SpriteCharacteristics {
 	
 	// GAME AUTHORING VARIABLES
 	public Image img;
+	public String imagePath;
 	public Point p;
 	public boolean interactive;
 	public SpriteType objectType;
@@ -97,9 +98,9 @@ public class SpriteCharacteristics {
 	}
 	
     public javafx.scene.image.Image getImage () {
-    	BufferedImage bufferedImage = (BufferedImage) img;
-    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
-    	return javaFXImage;
+//    	BufferedImage bufferedImage = (BufferedImage) img;
+//    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
+    	return new javafx.scene.image.Image(imagePath);
     }
     
     public void setJavaAWTImage(Image image) {
@@ -108,6 +109,12 @@ public class SpriteCharacteristics {
 
     public void setImage(javafx.scene.image.Image image) {
         this.img = SwingFXUtils.fromFXImage(image, null);
+    }
+    public void setImagePath(String path){
+    	imagePath = path;
+    }
+    public String getImagePath(){
+    	return imagePath;
     }
 
     public Point getPoint () {

@@ -2,6 +2,7 @@ package com.print_stack_trace.voogasalad.controller.guiElements;
 
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -9,16 +10,16 @@ import javafx.scene.paint.Color;
 public class LevelObject extends GameObject{
 	private LevelCharacteristics myCharacteristics=new LevelCharacteristics();
 	private Pane colorPane;
-	public LevelObject(ImageView image) {
-		super(image);	
+	public LevelObject(ImageView image, String imagePath) {
+		super(image, imagePath);	
 		colorPane=new Pane();
 		colorPane.setVisible(false);
 		createPane();
 		this.getImage().setOnMouseClicked(e->showPane());
 		colorPane.setOnMouseClicked(e->showPane());
 	}
-	public LevelObject(ImageView imgView, ViewObjectDelegate myDelegate) {
-		super(imgView, myDelegate);	
+	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate) {
+		super(imgView, imagePath, myDelegate);	
 	}
 	public LevelCharacteristics getCharacteristics(){
 		return myCharacteristics;
@@ -26,6 +27,9 @@ public class LevelObject extends GameObject{
 	public void setImageView(ImageView myView){
 		myImage=myView;
 		this.getImage().setOnMouseClicked(e->showPane());
+	}
+	public void setImagePath(String imagePath){
+		myImagePath = imagePath;
 	}
 	public void setDelegate(ViewObjectDelegate delegate){
 		myDelegate=delegate;
