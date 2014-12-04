@@ -28,8 +28,7 @@ public class SpriteObject extends GameObject{
 		super(image, delegate);
 		myID=ID;
 		myType=type;
-		//need other types
-		myCharacteristics=new SpriteCharacteristics(SpriteType.HERO);
+		myCharacteristics=new SpriteCharacteristics(SpriteType.valueOf(type.toUpperCase()));
 		createPane();
 		this.getImage().setOnMouseClicked(e->showPane());
 	}
