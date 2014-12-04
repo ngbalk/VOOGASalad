@@ -11,6 +11,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -26,6 +29,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.Constants;
@@ -43,6 +47,8 @@ import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
+import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
@@ -51,6 +57,7 @@ public class GamePlayer implements ViewController {
 	private Group myGameRoot;
 	private PlayPane myPlayPane;
 	private GameEngine myGameEngine;
+	private boolean isPlaying = false;
 	
 	private DecisionTable dt = new DecisionTable();
 	private Score currentScore;
@@ -58,6 +65,7 @@ public class GamePlayer implements ViewController {
 	private String DEFAULT_CLASS_PATH="com.print_stack_trace.voogasalad.controller.guiElements.";
 	private String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
+	private int keyFrameCounter = 0;
 	
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
@@ -79,13 +87,34 @@ public class GamePlayer implements ViewController {
 		myPlayPane = new PlayPane();
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
 		myPlayPane.setLayoutY(100);
-		myGameRoot = new Group(myPlayPane);
+		myGameRoot = new Group(myPlayPane); 
 		myRoot.getChildren().add(myGameRoot);
 
+		KeyFrame frame = start();
+		Timeline animation = new Timeline();
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
 		return myRoot;
 	}
 	
 	
+	/**
+	 * Create the game's frame
+	 */
+	public KeyFrame start () {
+		return new KeyFrame(Duration.millis(1000/60), oneFrame);
+	} 
+	
+	private EventHandler<ActionEvent> oneFrame = new EventHandler<ActionEvent>() {
+		@Override //class note: makes Java check for errors when it normally wouldn't
+		public void handle(ActionEvent evt) {
+			if(isPlaying){
+				myGameEngine.update();
+				updateScene();
+			}
+		}
+	};
 
 	/**
 	 * update the players view: Engine will change locations/stats on the backend; player will update the scene after changes
@@ -94,8 +123,9 @@ public class GamePlayer implements ViewController {
 	 * @param spriteCharacteristics 
 	 */
 	public void updateScene(){ 
-		LevelCharacteristics levelCharacteristics = myGameEngine.getLevelCharacteristics();
-		Map<Integer, SpriteCharacteristics> spriteMap = myGameEngine.getSpriteMap();
+		RuntimeModel r = myGameEngine.getStatus();
+		LevelCharacteristics levelCharacteristics = r.getLevelCharacteristics();
+		Map<Integer, RuntimeSpriteCharacteristics> spriteMap = r.getRuntimeSpriteMap();
 		ImageView background = new ImageView(new Image(levelCharacteristics.getBackgroundImagePath()));
 		background.setFitWidth(myPlayPane.getWidth());
 		background.setFitHeight(myPlayPane.getHeight()-10);
@@ -131,11 +161,14 @@ public class GamePlayer implements ViewController {
 	} 
 	
 	public void pauseGame(){ //buttons with handlers
+		isPlaying = true;
+		System.out.println(isPlaying);
 		//gameEngine.pause();
 		//if gameplayer is the gameloop --> timeline.stop();
 	}
 	
 	public void resumeGame(){ //buttons with handlers
+		isPlaying = true;
 		//gameEngine.resume();
 		//timeline.resume();
 	}
@@ -155,6 +188,7 @@ public class GamePlayer implements ViewController {
 	}
 	
 	public void stopGame(){
+		isPlaying = false;
 		//gameEngine.stopGame();
 	}
 	public void loadGame(){

@@ -103,4 +103,10 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		}
 	}
 	
+	private void changePositionBasedOnVelocity(){
+		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()){
+			
+		}
+	}
+	
 }

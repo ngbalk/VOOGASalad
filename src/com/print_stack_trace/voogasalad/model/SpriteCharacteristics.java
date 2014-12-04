@@ -89,6 +89,7 @@ public class SpriteCharacteristics {
 		height=obj.getHeight();
 		name=obj.getName();
 		myMovements=obj.getMovements();
+		imagePath = obj.getImagePath();
 	}
 
 	//-------------------ACCESSORS-------------------//

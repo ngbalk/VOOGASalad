@@ -39,6 +39,21 @@ public class LevelModel {
         mySpriteMap = new HashMap<>();
         goalMap = new HashMap<>();
         myKeyMap = new HashMap<>();
+        myLevelChars = new LevelCharacteristics();
+        physicsEngine = new PhysicsEngine();
+    }
+    
+    public LevelModel(LevelModel level) {
+    	Map<Integer, SpriteCharacteristics> mySpriteMap=level.mySpriteMap; //good
+        Map<Integer, Goal> goalMap=level.goalMap; //good
+    	currentID=level.currentID;
+        isLocked=level.isLocked;
+        physicsEngine=level.physicsEngine;
+        myCameraType=level.myCameraType;
+        myLevelChars = level.myLevelChars;
+        myGoalFactory = level.myGoalFactory;
+        myKeyMap = level.myKeyMap;
+        mainCharacter = level.mainCharacter;
     }
 
     public PhysicsEngine getPhysicsEngine() {
