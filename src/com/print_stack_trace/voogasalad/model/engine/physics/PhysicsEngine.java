@@ -41,7 +41,12 @@ public class PhysicsEngine {
 	
 	public PhysicsEngine() {
 		decisionMatrix = new CollisionResult[MATRIX_SIZE][MATRIX_SIZE];
-		//Default
+		//Defaults
+		for(int i = 0; i < MATRIX_SIZE; i++) {
+			for(int j = 0; j < MATRIX_SIZE; j++) {
+				decisionMatrix[i][j] = CollisionResult.NoAction;
+			}
+		}
 		soloHandler = SoloPhysicsGenerator.getProgramPhysicEngine(ProgramPhysicEngine.EarthPhysicsEngine);
 	}
 	
@@ -66,20 +71,20 @@ public class PhysicsEngine {
 	public void animateAll(RuntimeModel currentRuntime, int framesPerSecond) {
 		Collection<RuntimeSpriteCharacteristics> allObjects = currentRuntime.getRuntimeSpriteMap().values();
 		for(RuntimeSpriteCharacteristics obj : allObjects) {
-			soloHandler.applyPhysics(obj, framesPerSecond);
+			if(obj.interactive) soloHandler.applyPhysics(obj, framesPerSecond);
 		}
-		/*
-		RuntimeSpriteCharacteristics[] array = (RuntimeSpriteCharacteristics[]) allObjects.toArray();
+		
+		
+		Object[] array = allObjects.toArray();
 		for(int i = 0; i < array.length; i++) {
-			RuntimeSpriteCharacteristics s1 = array[i];
+			RuntimeSpriteCharacteristics s1 = (RuntimeSpriteCharacteristics) array[i];
 			for(int j = i+1; j < array.length; j++) {
-				RuntimeSpriteCharacteristics s2 = array[j];
+				RuntimeSpriteCharacteristics s2 = (RuntimeSpriteCharacteristics) array[j];
 				if(CollisionDetector.haveCollided(s1, s2)) {
-					collisionHandler(s1, s2, currentRuntime);
+					//collisionHandler(s1, s2, currentRuntime);
 				}	
 			}
 		}
-		*/
 		
 		Collection<RuntimeSpriteCharacteristics> toRemove = new ArrayList<RuntimeSpriteCharacteristics>();
 		for(RuntimeSpriteCharacteristics obj : allObjects) {
@@ -122,7 +127,12 @@ public class PhysicsEngine {
 	}
 	
 	private CollisionHandler getHandlerForResult(CollisionResult result) {
-		return handlerMap.get(result);
+		CollisionHandler ret = handlerMap.get(result);
+		if(ret == null) {
+			ret = CollisionFactory.buildCollisionHandler(result);
+			setHandlerForResult(result, ret);
+		}
+		return ret;
 	}
 	
 	public void setHandlerForResult(CollisionResult result, CollisionHandler handler) {
