@@ -12,7 +12,9 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public float v_x;
 	public float v_y;
-	public int decelerationConstant;
+	public boolean isColliding = false;
+	private float decelerationConstant;
+
 	public int health;
 	private boolean remove = false;
 	private float alpha = 1.0f;
@@ -35,6 +37,16 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 		if(alpha < 0.0f) { this.alpha = 0.0f; }
 		else if(alpha > 1.0f) { this.alpha = 1.0f; }
 		else this.alpha = alpha;
+	}
+	
+	public float getDecelerationConstant() {
+		return decelerationConstant;
+	}
+
+	public void setDecelerationConstant(float decelerationConstant) {
+		if(decelerationConstant < 0.0f) { this.decelerationConstant = 0.0f; }
+		else if(decelerationConstant > 1.0f) { this.decelerationConstant = 1.0f; }
+		else this.decelerationConstant = decelerationConstant;
 	}
 
 	public boolean shouldBeRemoved() {
