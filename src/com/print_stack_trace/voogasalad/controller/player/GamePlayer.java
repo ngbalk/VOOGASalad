@@ -53,6 +53,8 @@ import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
+	private final static int FPS = 60;
+	
 	private Group myRoot;
 	private Group myGameRoot;
 	private PlayPane myPlayPane;
@@ -76,6 +78,8 @@ public class GamePlayer implements ViewController {
 	 */
 	public Group initialize(GameEngine gameEngine) {
 		myGameEngine = gameEngine;
+		myGameEngine.setFramesPerSecond(FPS);
+		
 		myRoot = new Group(); 
 		myRoot.setOnKeyReleased(KeyPad);
 
@@ -104,8 +108,8 @@ public class GamePlayer implements ViewController {
 	 * Create the game's frame
 	 */
 	public KeyFrame start () {
-		return new KeyFrame(Duration.millis(1000/60), oneFrame);
-	} 
+		return new KeyFrame(Duration.millis(1000/FPS), oneFrame);
+	}
 	
 	private EventHandler<ActionEvent> oneFrame = new EventHandler<ActionEvent>() {
 		@Override //class note: makes Java check for errors when it normally wouldn't
@@ -124,6 +128,8 @@ public class GamePlayer implements ViewController {
 	 * @param spriteCharacteristics 
 	 */
 	public void updateScene(){ 
+	    
+	    myPlayPane.getChildren().clear();
 		RuntimeModel r = myGameEngine.getStatus();
 		LevelCharacteristics levelCharacteristics = r.getLevelCharacteristics();
 		Map<Integer, RuntimeSpriteCharacteristics> spriteMap = r.getRuntimeSpriteMap();
@@ -147,7 +153,7 @@ public class GamePlayer implements ViewController {
 			spriteImage.setRotate(spriteCharacteristics.getOrientation());
 			spriteImage.setLayoutX(spriteCharacteristics.getX());
 			spriteImage.setLayoutY(spriteCharacteristics.getY());
-			myGameRoot.getChildren().add(spriteImage);
+			myPlayPane.getChildren().add(spriteImage);
 		}
 		
 	}
@@ -164,7 +170,7 @@ public class GamePlayer implements ViewController {
 	public void pauseGame(){ //buttons with handlers
 		isPlaying = true;
 		System.out.println(isPlaying);
-		//gameEngine.pause();
+//		gameEngine.pause();
 		//if gameplayer is the gameloop --> timeline.stop();
 	}
 	

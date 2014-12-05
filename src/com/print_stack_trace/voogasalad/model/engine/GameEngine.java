@@ -36,6 +36,7 @@ public class GameEngine {
 	private RuntimeEngine runtimeEngine;
 	private IGameAuthorEngine authorEngine;
 	private IGameData gameData;
+	private int framesPerSecond;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -176,7 +177,7 @@ public class GameEngine {
 	}
 	
 	public void setFramesPerSecond(int framesPerSecond) {
-		runtimeEngine.setFramesPerSecond(framesPerSecond);
+		this.framesPerSecond = framesPerSecond;
 	}
 	
 	//-------------------ACCESSORS-------------------//
@@ -199,6 +200,7 @@ public class GameEngine {
 		currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
 		
 		runtimeEngine = new RuntimeEngine(currentLevel);
+		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
 
 	public void saveHighScore(String name, HighScore highScore) {
