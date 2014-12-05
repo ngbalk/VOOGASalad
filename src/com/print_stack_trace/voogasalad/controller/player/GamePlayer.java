@@ -59,7 +59,7 @@ public class GamePlayer implements ViewController {
 	private PlayPane myPlayPane;
 	private GameEngine myGameEngine;
 	private boolean isPlaying = false;
-	
+
 	private DecisionTable dt = new DecisionTable();
 	private Score currentScore;
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
@@ -67,10 +67,10 @@ public class GamePlayer implements ViewController {
 	private String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	private int keyFrameCounter = 0;
-	
+
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
-	
+
 	/***
 	 * TODO: Obtain Front End Person to work on graphical elements
 	 * determine which methods needs to be called from backend, so they can create public methods
@@ -78,7 +78,7 @@ public class GamePlayer implements ViewController {
 	public Group initialize(GameEngine gameEngine) {
 		myGameEngine = gameEngine;
 		myGameEngine.setFramesPerSecond(FPS);
-		
+
 		myRoot = new Group(); 
 
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
@@ -101,15 +101,15 @@ public class GamePlayer implements ViewController {
 		animation.play();
 		return myRoot;
 	}
-	
-	
+
+
 	/**
 	 * Create the game's frame
 	 */
 	public KeyFrame start () {
 		return new KeyFrame(Duration.millis(1000/FPS), oneFrame);
 	}
-	
+
 	private EventHandler<ActionEvent> oneFrame = new EventHandler<ActionEvent>() {
 		@Override //class note: makes Java check for errors when it normally wouldn't
 		public void handle(ActionEvent evt) {
@@ -127,8 +127,11 @@ public class GamePlayer implements ViewController {
 	 * @param spriteCharacteristics 
 	 */
 	public void updateScene(){ 
-	    
-	    myPlayPane.getChildren().clear();
+
+		ImageView spriteImage = null;
+		Image img = null;
+
+		myPlayPane.getChildren().clear();
 		RuntimeModel r = myGameEngine.getStatus();
 		LevelCharacteristics levelCharacteristics = r.getLevelCharacteristics();
 		Map<Integer, RuntimeSpriteCharacteristics> spriteMap = r.getRuntimeSpriteMap();
@@ -140,9 +143,11 @@ public class GamePlayer implements ViewController {
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
 		myPlayPane.getChildren().add(0,background);
+
 		for(Integer id : spriteMap.keySet()){
 			SpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
-			ImageView spriteImage = new ImageView(new Image(spriteCharacteristics.getImagePath()));
+			img = new Image(spriteCharacteristics.getImagePath());
+			spriteImage = new ImageView(img);
 			spriteImage.setFitWidth(spriteCharacteristics.getWidth());
 			spriteImage.setFitHeight(spriteCharacteristics.getHeight());
 			spriteImage.setRotate(spriteCharacteristics.getOrientation());
@@ -150,10 +155,10 @@ public class GamePlayer implements ViewController {
 			spriteImage.setLayoutY(spriteCharacteristics.getY());
 			myPlayPane.getChildren().add(spriteImage);
 		}
-		
+
 	}
-	
-	
+
+
 	/*** 
 	 * calls gameEngine to update Score;; need to hash out out we handle scores/coins
 	 */
@@ -161,14 +166,14 @@ public class GamePlayer implements ViewController {
 		//gameEngine.updateScore() 
 		//(or if we are in charge of scores.. then scores.updateScore()
 	} 
-	
+
 	public void pauseGame(){ //buttons with handlers
 		isPlaying = true;
 		System.out.println(isPlaying);
-//		gameEngine.pause();
+		//		gameEngine.pause();
 		//if gameplayer is the gameloop --> timeline.stop();
 	}
-	
+
 	public void resumeGame(){ //buttons with handlers
 		isPlaying = true;
 		//gameEngine.resume();
@@ -188,7 +193,7 @@ public class GamePlayer implements ViewController {
 			}
 		}
 	}
-	
+
 	public void stopGame(){
 		isPlaying = false;
 		//gameEngine.stopGame();
@@ -224,7 +229,7 @@ public class GamePlayer implements ViewController {
 		dialog.show();
 	}
 
-	
+
 	/***
 	 * Method for Choosing Image --> Front End Person to modify to his/her liking
 	 */
