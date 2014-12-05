@@ -5,7 +5,7 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 public class KeyApplicatorFacotry {
 	
 	public static final int V_KEY_CONSTANT = 30;
-	public static final int H_KEY_CONSTANT = 10;
+	public static final int H_KEY_CONSTANT = 20;
 
 
 	

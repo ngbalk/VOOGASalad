@@ -107,7 +107,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
 	private void handleKey(KeyEvent event, boolean press) {
 		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
-		KeyApplicator applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
+		KeyApplicator applicator = applicatorCache.get(res);
 		Integer mainChar = runtimeModel.getMainCharacter();
 		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
 		if(applicator == null) {
