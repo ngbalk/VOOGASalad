@@ -1,64 +1,81 @@
 {
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
-      "p": {
-        "x": 70,
-        "y": 100
-      },
-      "interactive": true,
-      "objectType": "PLATFORM",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {}
-    },
-    "1": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
-      "p": {
-        "x": 70,
-        "y": 100
-      },
-      "interactive": true,
-      "objectType": "PLATFORM",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {}
-    },
-    "2": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
       "p": {
-        "x": 70,
-        "y": 100
+        "x": 0,
+        "y": 0
       },
       "interactive": true,
       "objectType": "HERO",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
-      "orientation": 0.0,
-      "name": "",
+      "orientation": 100.0,
+      "name": "jack",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {}
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
+      "p": {
+        "x": 100,
+        "y": 0
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 100.0,
+      "name": "peach",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {}
+    },
+    "2": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png",
+      "p": {
+        "x": 200,
+        "y": 0
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 100.0,
+      "name": "l",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {}
+    },
+    "3": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
+      "p": {
+        "x": 300,
+        "y": 0
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 100.0,
+      "name": "p",
       "width": 100.0,
       "height": 100.0,
       "myMovements": {}
     }
   },
   "goalMap": {},
-  "currentID": 2,
+  "currentID": 3,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
       [
-        "NoAction",
+        "ObjectOneDisappear",
         "NoAction",
         "NoAction",
         "NoAction",
@@ -96,8 +113,8 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "jack",
-    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
+    "name": "jack\u0027s multiple hero test",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0
   },
   "myGoalFactory": {},
