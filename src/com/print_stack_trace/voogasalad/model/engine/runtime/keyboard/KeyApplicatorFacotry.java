@@ -41,16 +41,21 @@ public class KeyApplicatorFacotry {
 		
 		}
 		return new KeyApplicator() {
+		    private boolean once = false;
+		    
 			@Override
 			public void applyPressActionToRuntimeSprite(
 					RuntimeSpriteCharacteristics sprite) {
+			    if(once) return;
+			    once = true;
 				sprite.v_x += vxnew;
-				sprite.v_y -= vynew;	
+				sprite.v_y -= vynew;
 			}
 
 			@Override
 			public void applyReleaseActionToRuntimeSprite(
 					RuntimeSpriteCharacteristics sprite) {
+			    once = false;
 				sprite.v_x -= vxnew;
 				sprite.v_y += vynew;
 			}

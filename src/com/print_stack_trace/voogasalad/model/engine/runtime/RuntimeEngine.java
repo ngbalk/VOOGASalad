@@ -7,7 +7,9 @@
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.scene.input.KeyEvent;
 
@@ -22,6 +24,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
 	int framesPerSecond;
+	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -101,7 +104,11 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	
 	private void handleKey(KeyEvent event, boolean press) {
 		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
-		KeyApplicator applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
+		KeyApplicator applicator = applicatorCache.get(res);
+		if(applicator == null) {
+		    applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
+		    applicatorCache.put(res, applicator);
+		}
 		Integer mainChar = runtimeModel.getMainCharacter();
 		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
 		if(press) {
