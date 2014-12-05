@@ -18,15 +18,7 @@ public class CollisionDetector {
 	 * @return true if a collision happened, false otherwise
 	 */
 	public static boolean haveCollided(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB) {
-		if(spriteA.interactive && spriteB.interactive) {
-			//TODO: @ethan&nick
-			if (intersection(spriteA, spriteB)) {
-				return true;
-			}
-			return false;
-		} else {
-			return false;
-		}
+		return intersection(spriteA, spriteB);
 	}
 	
 	public static double getDistance(double value1, double value2) {
