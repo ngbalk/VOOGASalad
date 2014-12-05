@@ -25,9 +25,10 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
 	int framesPerSecond;
-	
+	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
+
 	//-------------------CONSTRUCTORS-------------------//
-	
+
 	/**
 	 * Takes in a LevelModel and sets private variables
 	 * @param level
@@ -37,9 +38,9 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		runtimeModel = new RuntimeModel(currentLevel);
 		physicsEngine = currentLevel.getPhysicsEngine();
 	}
-	
+
 	//-------------------PUBLIC METHODS-------------------//
-		
+
 	/**
 	 * Update all of the data in the current level.
 	 * 1. Calls PhysicsEngine to "animate" sprites.
@@ -50,7 +51,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 */
 	public void update() {
 		physicsEngine.animateAll(runtimeModel, framesPerSecond);
-		
+
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
 		int completedCount = 0;
 		for(Goal g : runtimeModel.getGoalMap().values()) {
@@ -64,16 +65,16 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 				runtimeModel.gameVictory = true;
 			}
 		}
-		
+
 		updateSpritePositions();
 	}
-	
+
 	public void setFramesPerSecond(int framesPerSecond) {
 		this.framesPerSecond = framesPerSecond;
 	}
-	
+
 	//GAME PLAYER
-	
+
 	/**
 	 * Get the current state of the level in progress
 	 * @return runtimeModel 
@@ -81,20 +82,20 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	public RuntimeModel getStatus() {
 		return runtimeModel;
 	}
-	
+
 	public void handleKeyRelease(KeyEvent event) {
 		handleKey(event, false);
 	}
-	
+
 	public void handleKeyPress(KeyEvent event) {
 		handleKey(event, true);
 	}
-	
+
 	//-------------------ACCESSORS-------------------//
-	
-	
+
+
 	//-------------------PRIVATE METHODS-------------------//
-	
+
 	private void updateSpritePositions(){
 		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
 			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
@@ -103,16 +104,20 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 			rst.v_y *= (1.0f-rst.getDecelerationConstant());
 		}
 	}
-	
+
 	private void handleKey(KeyEvent event, boolean press) {
 		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
 		KeyApplicator applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
 		Integer mainChar = runtimeModel.getMainCharacter();
 		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
+		if(applicator == null) {
+			applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
+			applicatorCache.put(res, applicator);
+		}
 		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {
 			applicator.applyPressActionToRuntimeSprite(mainCharData);
-			return;
-		} if(!press){
+		}
+		else{
 			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
 			return;
 		}
