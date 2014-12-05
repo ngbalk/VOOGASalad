@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicationChecker;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicator;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
@@ -24,7 +25,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
 	int framesPerSecond;
-	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -101,25 +101,20 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 			rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
 			rst.v_x *= (1.0f-rst.getDecelerationConstant());
 			rst.v_y *= (1.0f-rst.getDecelerationConstant());
-			if(rst.isColliding) {
-				applicatorCache.clear();
-			}
 		}
 	}
 	
 	private void handleKey(KeyEvent event, boolean press) {
 		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
-		KeyApplicator applicator = applicatorCache.get(res);
-		if(applicator == null) {
-		    applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
-		    applicatorCache.put(res, applicator);
-		}
+		KeyApplicator applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
 		Integer mainChar = runtimeModel.getMainCharacter();
 		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
-		if(press) {
+		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {
 			applicator.applyPressActionToRuntimeSprite(mainCharData);
-		} else {
+			return;
+		} if(!press){
 			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
+			return;
 		}
 	}
 }

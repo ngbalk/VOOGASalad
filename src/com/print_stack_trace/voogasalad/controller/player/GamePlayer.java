@@ -53,7 +53,7 @@ import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
-	private final static int FPS = 30;
+	private final static int FPS = 10;
 	private Group myRoot;
 	private Group myGameRoot;
 	private PlayPane myPlayPane;
@@ -107,6 +107,7 @@ public class GamePlayer implements ViewController {
 	 * Create the game's frame
 	 */
 	public KeyFrame start () {
+		isPlaying = false;
 		return new KeyFrame(Duration.millis(1000/FPS), oneFrame);
 	}
 
@@ -168,7 +169,7 @@ public class GamePlayer implements ViewController {
 	} 
 
 	public void pauseGame(){ //buttons with handlers
-		isPlaying = true;
+		isPlaying = false;
 		System.out.println(isPlaying);
 		//		gameEngine.pause();
 		//if gameplayer is the gameloop --> timeline.stop();

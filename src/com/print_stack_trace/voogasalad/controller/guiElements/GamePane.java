@@ -136,7 +136,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				sprite.getCharacteristics().setY(sprite.getImage().getY());
 				sprite.getCharacteristics().setWidth(sprite.getImage().getFitWidth());
 				sprite.getCharacteristics().setHeight(sprite.getImage().getFitHeight());
-				sprite.getCharacteristics().setOrientation(sprite.getImage().getFitWidth());
+				sprite.getCharacteristics().setOrientation(sprite.getCharacteristics().getOrientation());
 				sprite.setImage(myObject.getImage().getImage());
 				sprite.getCharacteristics().setImagePath(sprite.getImagePath());
 				myGameEngine.updateObject(sprite.getId(), sprite.getCharacteristics());

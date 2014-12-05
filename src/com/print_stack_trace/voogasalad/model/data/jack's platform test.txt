@@ -11,25 +11,25 @@
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
-      "orientation": 100.0,
-      "name": "jack",
+      "orientation": 0.0,
+      "name": "a",
       "width": 100.0,
       "height": 100.0,
       "myMovements": {}
     },
     "1": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
         "x": 0,
-        "y": 100
+        "y": 300
       },
-      "interactive": true,
+      "interactive": false,
       "objectType": "PLATFORM",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
-      "orientation": 100.0,
-      "name": "peach",
+      "orientation": 0.0,
+      "name": "b",
       "width": 100.0,
       "height": 100.0,
       "myMovements": {}
@@ -37,73 +37,90 @@
     "2": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 200,
-        "y": 0
+        "x": 300,
+        "y": 300
       },
-      "interactive": true,
+      "interactive": false,
       "objectType": "PLATFORM",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
-      "orientation": 100.0,
-      "name": "l",
+      "orientation": 0.0,
+      "name": "c",
       "width": 100.0,
       "height": 100.0,
       "myMovements": {}
     },
     "3": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
       "p": {
         "x": 300,
         "y": 0
       },
-      "interactive": true,
+      "interactive": false,
       "objectType": "REWARD",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
-      "orientation": 100.0,
-      "name": "p",
+      "orientation": 0.0,
+      "name": "d",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {}
+    },
+    "4": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 600,
+        "y": 300
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "f",
       "width": 100.0,
       "height": 100.0,
       "myMovements": {}
     }
   },
   "goalMap": {},
-  "currentID": 3,
+  "currentID": 4,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
       [
-        "ObjectOneDisappear",
+        "NoAction",
+        "NoAction",
+        "ObjectBothNoDisplacement",
+        "NoAction",
+        "ObjectTwoDisappear"
+      ],
+      [
+         "NoAction",
         "NoAction",
         "NoAction",
         "NoAction",
         "NoAction"
       ],
       [
-        "NoAction",
-        "NoAction",
-        "NoAction",
-        "NoAction",
-        "NoAction"
-      ],
-      [
-        "NoAction",
+         "ObjectBothNoDisplacement",
         "NoAction",
         "NoAction",
         "NoAction",
         "NoAction"
       ],
       [
-        "NoAction",
+      "NoAction",
         "NoAction",
         "NoAction",
         "NoAction",
         "NoAction"
       ],
       [
-        "NoAction",
+   "NoAction",
         "NoAction",
         "NoAction",
         "NoAction",
@@ -113,7 +130,7 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "jack\u0027s multiple hero test",
+    "name": "jack\u0027s platform test",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0
   },

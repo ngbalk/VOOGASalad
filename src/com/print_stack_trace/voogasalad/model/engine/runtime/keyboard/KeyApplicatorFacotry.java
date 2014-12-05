@@ -3,7 +3,11 @@ package com.print_stack_trace.voogasalad.model.engine.runtime.keyboard;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
 public class KeyApplicatorFacotry {
-	public static final int V_KEY_CONSTANT = 50;
+	
+	public static final int V_KEY_CONSTANT = 30;
+	public static final int H_KEY_CONSTANT = 10;
+
+
 	
 	public enum KeyResult {
 		Left,
@@ -27,16 +31,16 @@ public class KeyApplicatorFacotry {
 			vyreleasenew = 0;
 			break;
 		case Left:
-			vxnew = -V_KEY_CONSTANT;
+			vxnew = -H_KEY_CONSTANT;
 			vynew = 0;
-			vxreleasenew = -vynew;
-			vyreleasenew = -vxnew;
+			vxreleasenew = -vxnew;
+			vyreleasenew = -vynew;
 			break;
 		case Right:
-			vxnew = V_KEY_CONSTANT;
+			vxnew = H_KEY_CONSTANT;
 			vynew = 0;
-			vxreleasenew = -vynew;
-			vyreleasenew = -vxnew;
+			vxreleasenew = -vxnew;
+			vyreleasenew = -vynew;
 			break;
 		case Up:
 			vynew = V_KEY_CONSTANT;
@@ -62,6 +66,7 @@ public class KeyApplicatorFacotry {
 			    once = true;
 				sprite.v_x += vxnew;
 				sprite.v_y -= vynew;
+			
 			}
 
 			@Override

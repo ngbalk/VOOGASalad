@@ -46,22 +46,41 @@ public class GameEngine {
 	public GameEngine() {
 		this(new GameAuthorEngine(), new GameData());
 	}
-	
+
 	public GameEngine(IGameAuthorEngine authorEngine, IGameData gameData) {
 		this.authorEngine = authorEngine;
 		this.gameData = gameData;
 	}
 
 	//-------------------PUBLIC METHODS-------------------//
-	
+
 	public void loadGame(FileInputStream myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
 		loadLevel((LevelModel) gameData.loadLevel(myFile, LevelModel.class));
 	}
-	
+
 	public void saveGame() throws IOException {
 		LevelModel lvl = authorEngine.getCurrentLevel();
 		gameData.writeLevel(lvl);
-		
+		debugLevel(lvl);
+
+	}
+
+	public void debugLevel(LevelModel lvl){
+		for(int i=0 ;i < lvl.getPhysicsEngine().decisionMatrix.length ;i++){
+			for(int j=0; j < lvl.getPhysicsEngine().decisionMatrix[0].length; j++){
+				CollisionResult c = lvl.getPhysicsEngine().decisionMatrix[i][j];
+				if(!(c.name().toString().equals(CollisionResult.NoAction.toString()))){
+					System.out.println(c.name());
+				}
+			}
+		}
+		for(Integer i : lvl.getSpriteMap().keySet()){
+			SpriteCharacteristics s = lvl.getSpriteMap().get(i);
+			System.out.println("type = " + s.objectType
+					+ "x,y = " + s.getX() +"," + s.getY()
+					+ "orientation = " + s.getOrientation()
+					+ "name = " + s.getName());
+		}
 	}
 
 	//GAME AUTHORING
@@ -120,7 +139,7 @@ public class GameEngine {
 	public void setLevelCharacteristics(LevelCharacteristics levelSpecs) {
 		authorEngine.setLevelCharacteristics(levelSpecs);
 	}
-	
+
 	//Setting Keyboard/Movement
 	public Integer getMainCharacter() {
 		return authorEngine.getMainCharacter();
@@ -129,14 +148,14 @@ public class GameEngine {
 	public void setMainCharacter(Integer mainCharacter) {
 		authorEngine.setMainCharacter(mainCharacter);
 	}
-    
-    public void setResultForKey(KeyResult result, KeyCode key) {
-    	authorEngine.setResultForKey(result, key);
-    }
-    
-    public KeyResult getResultOfKey(KeyCode key) {
-    	return authorEngine.getResultOfKey(key);
-    }
+
+	public void setResultForKey(KeyResult result, KeyCode key) {
+		authorEngine.setResultForKey(result, key);
+	}
+
+	public KeyResult getResultOfKey(KeyCode key) {
+		return authorEngine.getResultOfKey(key);
+	}
 
 	//GAME PLAYER
 
@@ -157,7 +176,7 @@ public class GameEngine {
 	public Map<String, HighScore> getHighScoreList() {
 		return gameData.getHighScores();
 	}
-	
+
 	public EventHandler<KeyEvent> getRuntimeKeyPressHandler() {
 		return new EventHandler<KeyEvent>() {
 			@Override
@@ -166,7 +185,7 @@ public class GameEngine {
 			}
 		};
 	}
-	
+
 	public EventHandler<KeyEvent> getRuntimeKeyReleaseHandler() {
 		return new EventHandler<KeyEvent>() {
 			@Override
@@ -175,11 +194,11 @@ public class GameEngine {
 			}
 		};
 	}
-	
+
 	public void setFramesPerSecond(int framesPerSecond) {
 		this.framesPerSecond = framesPerSecond;
 	}
-	
+
 	//-------------------ACCESSORS-------------------//
 
 	public LevelModel getCurrentLevel() {
@@ -190,24 +209,16 @@ public class GameEngine {
 
 	private void loadLevel(LevelModel level) {
 		this.currentLevel = level;
-		
-		//FIXME: Remove this work around garbage
+
+//		FIXME: Remove this work around garbage
 		Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
 		currentLevel.setMainCharacter(first);
 		currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
 		currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
 		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
 		currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
-		SpriteCharacteristics a = new SpriteCharacteristics(SpriteType.PLATFORM);
-		a.height = 10;
-		a.width = 1000;
-		a.setX(0);
-		a.setY(500);
-		a.imagePath = "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png";
-		a.interactive = false;
-		currentLevel.addObject(a);
-		currentLevel.setResultOfCollision(CollisionResult.ObjectBothNoDisplacement, SpriteType.HERO, SpriteType.PLATFORM);
-		
+
+
 		runtimeEngine = new RuntimeEngine(currentLevel);
 		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
@@ -215,13 +226,13 @@ public class GameEngine {
 	public void saveHighScore(String name, HighScore highScore) {
 		gameData.saveHighScore(name, highScore);
 	}
-	
+
 	private void handleKeyRelease(KeyEvent event) {
 		if(runtimeEngine != null) {
 			runtimeEngine.handleKeyRelease(event);
 		}
 	}
-	
+
 	private void handleKeyPress(KeyEvent event) {
 		if(runtimeEngine != null) {
 			runtimeEngine.handleKeyPress(event);
