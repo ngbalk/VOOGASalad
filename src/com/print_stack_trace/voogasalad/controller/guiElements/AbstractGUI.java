@@ -12,6 +12,7 @@ public abstract class AbstractGUI extends BorderPane {
 	private double myHeight;
 	private Node gamePane;
 	protected String myStyle;
+	
 	public AbstractGUI(Number width, Number height){
 		setPrefSize(width.doubleValue(), height.doubleValue());
 		myWidth= width.doubleValue();
@@ -29,8 +30,8 @@ public abstract class AbstractGUI extends BorderPane {
 		LayoutNode myTopNode=new GameFileMenuLayoutNode(myWidth, 20, null);
 		return styleNode(myTopNode.show());
 	}
-	protected Node setBottomPane(){
-		LayoutNode myBottomNode=new GameAuthorBottomLayoutNode(myWidth, myHeight, gamePane);
+	protected Node setBottomPane(DecisionTable table){
+		LayoutNode myBottomNode=new GameAuthorBottomLayoutNode(myWidth, myHeight, gamePane, table);
 		return styleNode(myBottomNode.show());
 	}
 	protected Node setLeftPane(){
@@ -52,8 +53,9 @@ public abstract class AbstractGUI extends BorderPane {
 	protected abstract void setStyle(Node stylePane);
 	protected abstract void setBorderStyle(Node stylePane);
 	public Group initialize(GameEngine gameEngine) {
+		DecisionTable dt = new DecisionTable();
 		setCenter(setCenterPane(gameEngine));
-		setBottom(setBottomPane());
+		setBottom(setBottomPane(dt));
 		setLeft(setLeftPane());
 		setRight(setRightPane());
 		setTop(setTopPane());

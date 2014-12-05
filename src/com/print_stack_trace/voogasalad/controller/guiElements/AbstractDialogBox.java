@@ -12,9 +12,10 @@ public abstract class AbstractDialogBox {
 
 	protected Button submitButton = new Button("Submit");
 	protected Node myNode;
+	private Stage stage;
 	
 	public AbstractDialogBox(Node node){
-		Stage stage = new Stage();
+		stage = new Stage();
 		stage.setWidth(250);
 		stage.setHeight(250);
 		stage.initStyle(StageStyle.UTILITY);
@@ -26,10 +27,14 @@ public abstract class AbstractDialogBox {
 		root.getChildren().add(box);
 		submitButton.setOnAction(e->submit());
 		stage.setScene(s);
-		stage.show();
+		stage.show(); 
 	}
 
 	public abstract String submit();
+	
+	protected void close(){
+		stage.close();
+	}
 	
 	
 }
