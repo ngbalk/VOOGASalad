@@ -15,13 +15,13 @@ public class SoloPhysicsGenerator {
 		switch(engineType) {
 		default:
 		case EarthPhysicsEngine:
-			return physicEngineFromParams(9.81f, 0f, 0.0f);
+			return physicEngineFromParams(9.81f, 0f, 3.0f);
 		case HalfGravityEngine:
-			return physicEngineFromParams(4.405f, 0f, 10.0f);
+			return physicEngineFromParams(4.405f, 0f, 3.0f);
 		case InvertedGravityEngine:
-			return physicEngineFromParams(-9.81f, 0f, 10.0f);
+			return physicEngineFromParams(-9.81f, 0f, 3.0f);
 		case WindyCityEngine:
-			return physicEngineFromParams(9.81f, -10.0f, 10.0f);
+			return physicEngineFromParams(9.81f, -10.0f, 3.0f);
 		}
 	}
 	

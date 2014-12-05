@@ -55,6 +55,7 @@ public class KeyApplicatorFacotry {
 			@Override
 			public void applyReleaseActionToRuntimeSprite(
 					RuntimeSpriteCharacteristics sprite) {
+				if(!once) return;
 			    once = false;
 				sprite.v_x -= vxnew;
 				sprite.v_y += vynew;

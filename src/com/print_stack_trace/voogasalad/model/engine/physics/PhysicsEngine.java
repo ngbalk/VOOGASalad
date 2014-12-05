@@ -71,6 +71,8 @@ public class PhysicsEngine {
 	public void animateAll(RuntimeModel currentRuntime, int framesPerSecond) {
 		Collection<RuntimeSpriteCharacteristics> allObjects = currentRuntime.getRuntimeSpriteMap().values();
 		for(RuntimeSpriteCharacteristics obj : allObjects) {
+			obj.setDecelerationConstant(0.0f);
+			obj.isColliding = false;
 			if(obj.interactive) soloHandler.applyPhysics(obj, framesPerSecond);
 		}
 		
@@ -81,7 +83,7 @@ public class PhysicsEngine {
 			for(int j = i+1; j < array.length; j++) {
 				RuntimeSpriteCharacteristics s2 = (RuntimeSpriteCharacteristics) array[j];
 				if(CollisionDetector.haveCollided(s1, s2)) {
-					//collisionHandler(s1, s2, currentRuntime);
+					collisionHandler(s1, s2, currentRuntime);
 				}	
 			}
 		}
@@ -113,6 +115,7 @@ public class PhysicsEngine {
 	 * @see	CollisionHandler, SpriteCharacteristics
 	 */
 	private void collisionHandler(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
+		s1.isColliding = s2.isColliding = true;
 		CollisionResult result = getResultOfCollision(s1, s2);
 		CollisionHandler handler = getHandlerForResult(result);
 		handler.applyCollisionEffects(s1, s2, currentRuntime);

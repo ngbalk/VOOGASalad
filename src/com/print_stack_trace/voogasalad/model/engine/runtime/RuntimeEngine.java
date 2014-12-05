@@ -96,9 +96,14 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	//-------------------PRIVATE METHODS-------------------//
 	
 	private void updateSpritePositions(){
-		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()){
+		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
 			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
 			rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
+			rst.v_x *= (1.0f-rst.getDecelerationConstant());
+			rst.v_y *= (1.0f-rst.getDecelerationConstant());
+			if(rst.isColliding) {
+				applicatorCache.clear();
+			}
 		}
 	}
 	

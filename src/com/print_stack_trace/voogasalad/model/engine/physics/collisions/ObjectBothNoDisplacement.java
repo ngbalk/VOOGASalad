@@ -9,10 +9,12 @@ public class ObjectBothNoDisplacement extends CollisionHandler {
 	@Override
 	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
 			RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
-		s1.v_x = 0;
-		s2.v_x = 0;
-		s1.v_y = 0;
-		s2.v_y = 0;
+		s1.v_x = -s1.v_x;
+		s2.v_x = -s2.v_x;
+		s1.v_y = -s1.v_y;
+		s2.v_y = -s2.v_y;
+		s1.setDecelerationConstant(1.0f);
+		s2.setDecelerationConstant(1.0f);
 	}
 
 }
