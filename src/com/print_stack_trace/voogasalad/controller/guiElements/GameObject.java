@@ -12,6 +12,7 @@ public abstract class GameObject  {
 	protected ViewObjectDelegate myDelegate;
 	private boolean doubleclick=true;
 	protected Pane myPane;
+	private int ID;
 	public GameObject(ImageView image, String imagePath){
 		this(image, imagePath, null);
 	}
@@ -21,7 +22,12 @@ public abstract class GameObject  {
 		myImagePath=imagePath;
 		myDelegate=delegate;
 	}
-	
+	public int getID(){
+		return ID;
+	}
+	public void setID(int id){
+		ID=id;
+	}
 	public ImageView getImage(){
 		return myImage;
 	}

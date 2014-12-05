@@ -1,1 +1,0 @@
-{"mySpriteMap":{},"goalMap":{},"currentID":0,"isLocked":false,"myLevelChars":{"name":"Marcus","requiredNumberOfGoals":0},"myGoalFactory":{},"myKeyMap":{}}

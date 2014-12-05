@@ -35,7 +35,7 @@ public class SpriteCharacteristics {
 	public static final double DEFAULT_HEIGHT=100;
 	
 	// GAME AUTHORING VARIABLES
-	public Image img;
+	public transient Image img;
 	public String imagePath;
 	public Point p;
 	public boolean interactive;
@@ -170,8 +170,10 @@ public class SpriteCharacteristics {
         return orientation;
     }
 
-    public void setOrientation (double orienation) {
-        this.orientation = orientation;
+    public void setOrientation (double newOrientation) {
+    	//System.out.println(newOrientation);
+        this.orientation = newOrientation;
+        //System.out.println(orientation);
     }
     
 	public double getX(){
