@@ -1,8 +1,5 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.scene.control.TextField;
 
 import com.print_stack_trace.voogasalad.controller.ViewController;
@@ -11,7 +8,9 @@ import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.PSTTwillioException;
 
 public class PlayerShareButton extends PlayerActionButton {
-	private final String SHARE_MESSAGE = "Hey come play Print Stack Trace with your friend!";
+	private static final String SHARE_MESSAGE = "Hey come play Print Stack Trace with your friend!";
+	private static final String SHARE_SUCCESS_MESSAGE = "Message sent! Tell your friend to check his phone.";
+	private static final String SHARE_FAIL_MESSAGE = "Whoops there was an error sending to that number.";
 	private TextDialogBox prompt;
 
 	public PlayerShareButton(GamePlayer gamePlayer) {
@@ -26,12 +25,15 @@ public class PlayerShareButton extends PlayerActionButton {
 	}
 	
 	void sendTextTo(String result) {
+		String resultMsg;
 		try {
-			PSTTwillioCore.sendText(result, SHARE_MESSAGE);
+			int response = PSTTwillioCore.sendText(result, SHARE_MESSAGE);
 			prompt.close();
+			resultMsg = (response == 201) ? SHARE_SUCCESS_MESSAGE : SHARE_FAIL_MESSAGE;
 		} catch (PSTTwillioException e) {
-			ViewController.displayError(e.getMessage());
+			resultMsg = e.getMessage();
 		}
+		ViewController.displayError(resultMsg);
 	}
 
 }
