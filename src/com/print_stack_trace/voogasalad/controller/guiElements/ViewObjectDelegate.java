@@ -13,4 +13,5 @@ public interface ViewObjectDelegate {
 	public void setPhysics(ProgramPhysicEngine typeOfGravity);
 	public void removeSpriteOBjects(SpriteObject myObject);
 	public Set getLevelsAvailable();
+	public void saveGame();
 }

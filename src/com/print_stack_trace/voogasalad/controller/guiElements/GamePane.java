@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -203,5 +204,13 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	@Override
 	public Set getLevelsAvailable() {
 		return myLevelBar.getLevels();
+	}
+	public void saveGame(){
+		try {
+			myGameEngine.saveGame();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
