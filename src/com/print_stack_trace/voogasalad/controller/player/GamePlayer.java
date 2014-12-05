@@ -81,12 +81,11 @@ public class GamePlayer implements ViewController {
 		myGameEngine.setFramesPerSecond(FPS);
 		
 		myRoot = new Group(); 
-		myRoot.setOnKeyReleased(KeyPad);
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
 		myRoot.setOnKeyPressed(gameEngine.getRuntimeKeyPressHandler());
-		myRoot.setOnKeyReleased(gameEngine.getRuntimeKeyReleasaeHandler());
+		myRoot.setOnKeyReleased(gameEngine.getRuntimeKeyReleaseHandler());
 		splash.continueFromSplashScreen(this, myRoot);
 		myPlayPane = new PlayPane();
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
@@ -227,23 +226,6 @@ public class GamePlayer implements ViewController {
 		root.getChildren().add(scoresVBox);
 		dialog.show();
 	}
-	
-
-	/**
-	 * Handler for actions involving KeyPad.  
-	 * add other keyEvents here
-	 */
-	private EventHandler<KeyEvent> KeyPad = new EventHandler<KeyEvent>(){
-		public void handle(KeyEvent t){
-			switch(t.getCode()){
-			case UP: //doSomething()  break;
-			case DOWN: //doSomething() break;
-			case LEFT: //doSomething()  break;
-			case RIGHT: //doSomething() break;
-			
-			}
-		}
-	};
 
 	
 	/***

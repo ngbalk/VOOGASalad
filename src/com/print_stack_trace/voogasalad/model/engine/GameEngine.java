@@ -167,7 +167,7 @@ public class GameEngine {
 		};
 	}
 	
-	public EventHandler<KeyEvent> getRuntimeKeyReleasaeHandler() {
+	public EventHandler<KeyEvent> getRuntimeKeyReleaseHandler() {
 		return new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent arg0) {
