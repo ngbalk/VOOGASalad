@@ -13,11 +13,9 @@ import javafx.scene.control.MenuItem;
 
 public class FileMenuBar extends MenuBar{
 	private final String DEFAULT_MENU_NAMES="./com.print_stack_trace.voogasalad.controller.guiResources/";
-	private String myStyle="";
-	public FileMenuBar(String style){
+	
+	public FileMenuBar(){
 		this.loadMenuNames();
-		myStyle=style;
-		this.getStylesheets().add(myStyle);
 	}
 	
 	private void loadMenuItems(Menu menuName){

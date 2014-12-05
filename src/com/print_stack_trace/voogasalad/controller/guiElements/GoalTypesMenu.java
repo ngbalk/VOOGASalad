@@ -7,11 +7,12 @@ import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 import javafx.scene.control.CheckMenuItem;
 
 public class GoalTypesMenu extends UserInputDropDownMenu {
-	private HashMap<String, String> myGoals=new HashMap<String, String>();
+	
 	public GoalTypesMenu(GameObject myObject){
 		super(myObject);
+		currentMenu.setText("Pick type of Goal");
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/controller/guiResources/GoalTypes.Properties");
-		myGoals=myResourceReader.getProperties();
+		data=myResourceReader.getProperties();
 		addMenus();
 	}
 	

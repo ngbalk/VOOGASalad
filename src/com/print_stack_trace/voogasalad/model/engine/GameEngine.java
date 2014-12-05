@@ -167,7 +167,7 @@ public class GameEngine {
 		};
 	}
 	
-	public EventHandler<KeyEvent> getRuntimeKeyReleasaeHandler() {
+	public EventHandler<KeyEvent> getRuntimeKeyReleaseHandler() {
 		return new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent arg0) {
@@ -198,6 +198,15 @@ public class GameEngine {
 		currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
 		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
 		currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
+		SpriteCharacteristics a = new SpriteCharacteristics(SpriteType.PLATFORM);
+		a.height = 10;
+		a.width = 1000;
+		a.setX(0);
+		a.setY(500);
+		a.imagePath = "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png";
+		a.interactive = false;
+		currentLevel.addObject(a);
+		currentLevel.setResultOfCollision(CollisionResult.ObjectBothNoDisplacement, SpriteType.HERO, SpriteType.PLATFORM);
 		
 		runtimeEngine = new RuntimeEngine(currentLevel);
 		runtimeEngine.setFramesPerSecond(framesPerSecond);

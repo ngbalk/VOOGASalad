@@ -53,8 +53,7 @@ import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
-	private final static int FPS = 60;
-	
+	private final static int FPS = 30;
 	private Group myRoot;
 	private Group myGameRoot;
 	private PlayPane myPlayPane;
@@ -81,14 +80,14 @@ public class GamePlayer implements ViewController {
 		myGameEngine.setFramesPerSecond(FPS);
 		
 		myRoot = new Group(); 
-		myRoot.setOnKeyReleased(KeyPad);
 
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
 		myRoot.setOnKeyPressed(gameEngine.getRuntimeKeyPressHandler());
-		myRoot.setOnKeyReleased(gameEngine.getRuntimeKeyReleasaeHandler());
-		splash.continueFromSplash(this, myRoot);
+
+		myRoot.setOnKeyReleased(gameEngine.getRuntimeKeyReleaseHandler());
+		splash.continueFromSplashScreen(this, myRoot);
 		myPlayPane = new PlayPane();
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
 		myPlayPane.setLayoutY(100);
@@ -142,12 +141,8 @@ public class GamePlayer implements ViewController {
 		background.relocate(5, 5);
 		myPlayPane.getChildren().add(0,background);
 		for(Integer id : spriteMap.keySet()){
-			System.out.println("detected sprite ID = " + id);
 			SpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
 			ImageView spriteImage = new ImageView(new Image(spriteCharacteristics.getImagePath()));
-			System.out.println("Sprite Image path: " + spriteCharacteristics.getImagePath());
-			System.out.println("Sprite X Location: " + spriteCharacteristics.getX());
-			System.out.println("Sprite Y Location: " + spriteCharacteristics.getY());
 			spriteImage.setFitWidth(spriteCharacteristics.getWidth());
 			spriteImage.setFitHeight(spriteCharacteristics.getHeight());
 			spriteImage.setRotate(spriteCharacteristics.getOrientation());
@@ -228,23 +223,6 @@ public class GamePlayer implements ViewController {
 		root.getChildren().add(scoresVBox);
 		dialog.show();
 	}
-	
-
-	/**
-	 * Handler for actions involving KeyPad.  
-	 * add other keyEvents here
-	 */
-	private EventHandler<KeyEvent> KeyPad = new EventHandler<KeyEvent>(){
-		public void handle(KeyEvent t){
-			switch(t.getCode()){
-			case UP: //doSomething()  break;
-			case DOWN: //doSomething() break;
-			case LEFT: //doSomething()  break;
-			case RIGHT: //doSomething() break;
-			
-			}
-		}
-	};
 
 	
 	/***

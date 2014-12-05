@@ -8,9 +8,8 @@ public interface GoalElementVisitor {
 	 */
 	boolean visit(KillBoss goal);
 	boolean visit(Points goal);
-	boolean visit(ReachXDistance goal);
+	boolean visit(ReachDistance goal);
 	boolean visit(ReachObject goal);
 	boolean visit(StayAlive goal);
-	boolean visit(ReachYDistance goal);
 
 }

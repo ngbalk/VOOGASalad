@@ -17,7 +17,7 @@ public class ObjectOneFullDisplacement extends CollisionHandler {
 	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
 			RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
 		s1.v_x = -s1.v_x;
-		s2.v_x = -s2.v_x;
+		s1.v_y = -s1.v_y;
 		s1.decelerationConstant = 1;
 	}
 

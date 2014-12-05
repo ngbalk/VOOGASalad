@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -64,8 +65,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myGameObject.getCharacteristics().setWidth(myGameObject.getImage().getFitWidth());
 		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
 		myGameObject.setID(myID);
+		System.out.println(gameObjectImageView);
 		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
-		
 		if (myData.get(myGameObject.getCode())==null)
 			myData.put(myGameObject.getCode(), new HashSet<SpriteObject>());
 		myData.get(myGameObject.getCode()).add(myGameObject);
@@ -74,11 +75,15 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return myGameObject;
 	}
 	public void addExistingObjectToOtherPane(SpriteObject newSprite){
+		newSprite.getImage().setFitHeight(newSprite.getCharacteristics().getHeight());
+		newSprite.getImage().setFitWidth(newSprite.getCharacteristics().getWidth());
 		SpriteObject spriteOnBoard=this.addSpriteObject(newSprite.getImage(), newSprite.getImagePath(), newSprite.getType());
 		spriteOnBoard.setCharacteristics(newSprite.getCharacteristics());	
 		spriteOnBoard.getImage().setFitHeight(spriteOnBoard.getCharacteristics().getHeight());
 		spriteOnBoard.getImage().setFitWidth(spriteOnBoard.getCharacteristics().getWidth());
 		spriteOnBoard.getImage().setRotate(spriteOnBoard.getCharacteristics().getOrientation());
+		
+		
 	}
 	public boolean isReady(){
 		if (myLevelBar.getMenus().get(0).getItems().size()>=1){
@@ -124,6 +129,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				myData.get(myObject.getCode()).add(myObject);
 			}
 		}
+		if (new BlankSpaceTextChecker().checkText(myObject.getCode()))
 		for (SpriteObject sprite: myData.get(myObject.getCode())){
 			sprite.setCharacteristics(characteristics);
 			sprite.getCharacteristics().setX(sprite.getImage().getLayoutX());
@@ -200,7 +206,18 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public void removeSpriteOBjects(SpriteObject myObject) {
 		if (myData.get(myObject.getCode()).contains(myObject)){
 			myData.get(myObject.getCode()).remove(myObject);
+		}	
+	}
+	@Override
+	public Set getLevelsAvailable() {
+		return myLevelBar.getLevels();
+	}
+	public void saveGame(){
+		try {
+			myGameEngine.saveGame();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
 	}
 }
