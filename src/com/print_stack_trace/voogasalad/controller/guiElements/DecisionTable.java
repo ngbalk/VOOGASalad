@@ -36,10 +36,8 @@ public class DecisionTable extends GridPane {
 		b.setOnAction(e->promptForType());//this.addType("fdfs"));
 		for(int i = 0; i<numClasses; i++){
 			String s = types[i].toString()+"   ";
-			Text t = new Text(s); 
-			Text t2 = new Text(s); //have to have this to avoid adding duplicate children
-			this.add(t, i+1, 0);
-			this.add(t2, 0, i+1);
+			this.add(new Text(s), i+1, 0);
+			this.add(new Text(s), 0, i+1);
 			for(int j=0; j<numClasses; j++){
 				ComboBox<String> cb =  createPopulatedBox();
 				int temp1= i+1; int temp2=j+1;
@@ -72,23 +70,21 @@ public class DecisionTable extends GridPane {
 	
 	public void promptForType(){
 		TextDialogBox prompter = new TextDialogBox(new TextField());
-		prompter.submitButton.setOnAction(e->addType(prompter.submit()));
+		prompter.submitButton.setOnAction(e->addType(prompter.submit(), prompter));
 	}
 	
-	private void addType(String s){
+	private void addType(String s, TextDialogBox prompter){
 		Text t = new Text(s);  
 		Text t2 = new Text(s);
 		currentRowColCount++;  
 		this.add(t2, 0, currentRowColCount);
 		this.add(t, currentRowColCount, 0);
 		for(int i = 1; i<currentRowColCount;i++){
-			ComboBox<String> cb = createPopulatedBox();
-			this.add(cb, currentRowColCount, i);
+			this.add(createPopulatedBox(), currentRowColCount, i);
+			this.add(createPopulatedBox(), i, currentRowColCount);
 		}
-		for(int i = 1; i<currentRowColCount+1;i++){
-			ComboBox<String> cb = createPopulatedBox();
-			this.add(cb, i, currentRowColCount);
-		}
+		this.add(createPopulatedBox(), currentRowColCount, currentRowColCount);
+		prompter.close();
 	}
 	
 	private ComboBox<String> createPopulatedBox(){
