@@ -41,6 +41,7 @@ public class UserObjectsLibrary extends PictureLibrary{
 	}
 
 	
+
 	private void observableSpriteObject(SpriteObject sprite){
 		SpriteObject currentSprite=myMap.get(sprite.getCode());
 		if (currentSprite!=null && sprite.getCharacteristics().getName().length()>0){
@@ -56,6 +57,7 @@ public class UserObjectsLibrary extends PictureLibrary{
 			ImageView myView=(ImageView) makeImageView(sprite.getImage().getImage());	
 			this.addImageToGrid(myView);
 			myImages.put(sprite.getCode(), myView);
+			myImages.get(sprite.getCode()).setOnMousePressed(event->((GamePane) myMainPane).addExistingObjectToOtherPane(sprite));
 		}
 		
 	}

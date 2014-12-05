@@ -11,11 +11,11 @@ public class GoalCharacteristics {
 
 
     private String myName="";
-    public GoalType myGoalType;
-    public Integer myObjectID;
-    public Integer myObjectiveID;
-    public Integer myPointTotal;
-    public Point myDestination;
+    public GoalType myGoalType=GoalType.POINTS;
+    public Integer myObjectID=0;
+    public Integer myObjectiveID=0;
+    public Integer myPointTotal=0;
+    public Point myDestination=new Point(0,0);
 
     
     public GoalCharacteristics(GoalType goalType) {

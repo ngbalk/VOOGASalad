@@ -22,4 +22,11 @@ public abstract class GoalCharacteristicController extends UserInputText{
 	}
 	abstract protected void populateDefaultText();
 	abstract protected void setCharacteristic(String newValue);
+	protected boolean isNull(){
+		if (((GoalObject) mySprite).getCharacteristics()==null){
+			return true;
+		}
+		else
+			return false;
+	}
 }

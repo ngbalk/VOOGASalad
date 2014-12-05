@@ -65,8 +65,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myGameObject.getCharacteristics().setWidth(myGameObject.getImage().getFitWidth());
 		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
 		myGameObject.setID(myID);
+		System.out.println(gameObjectImageView);
 		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
-		
 		if (myData.get(myGameObject.getCode())==null)
 			myData.put(myGameObject.getCode(), new HashSet<SpriteObject>());
 		myData.get(myGameObject.getCode()).add(myGameObject);
@@ -75,11 +75,15 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return myGameObject;
 	}
 	public void addExistingObjectToOtherPane(SpriteObject newSprite){
+		newSprite.getImage().setFitHeight(newSprite.getCharacteristics().getHeight());
+		newSprite.getImage().setFitWidth(newSprite.getCharacteristics().getWidth());
 		SpriteObject spriteOnBoard=this.addSpriteObject(newSprite.getImage(), newSprite.getImagePath(), newSprite.getType());
 		spriteOnBoard.setCharacteristics(newSprite.getCharacteristics());	
 		spriteOnBoard.getImage().setFitHeight(spriteOnBoard.getCharacteristics().getHeight());
 		spriteOnBoard.getImage().setFitWidth(spriteOnBoard.getCharacteristics().getWidth());
 		spriteOnBoard.getImage().setRotate(spriteOnBoard.getCharacteristics().getOrientation());
+		
+		
 	}
 	public boolean isReady(){
 		if (myLevelBar.getMenus().get(0).getItems().size()>=1){

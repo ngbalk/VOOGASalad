@@ -7,18 +7,22 @@ public class GoalObjectID extends GoalCharacteristicController{
 	}
 	@Override
 	public void setCharacteristic(String newValue){
-		double newPointsValue =  ((GoalObject) mySprite).getCharacteristics().getObjectID();
-		try{
-			newPointsValue = Double.parseDouble(newValue);
-		}
-		catch(NumberFormatException e){
+		if (!isNull()){
+			double newPointsValue =  ((GoalObject) mySprite).getCharacteristics().getObjectID();
+			try{
+				newPointsValue = Double.parseDouble(newValue);
+			}
+			catch(NumberFormatException e){
 
+			}
+			((GoalObject) mySprite).getCharacteristics().setObjectID(new Integer((int) newPointsValue));
 		}
-		((GoalObject) mySprite).getCharacteristics().setObjectID(new Integer((int) newPointsValue));
 	}
 	@Override
 	protected void populateDefaultText() {
-		this.myTextBox.setText(""+((GoalObject) mySprite).getCharacteristics().getObjectID());
+		if (!isNull()){
+			this.myTextBox.setText(""+((GoalObject) mySprite).getCharacteristics().getObjectID());
+		}
 	}
 }
 

@@ -42,4 +42,5 @@ public class GoalObject extends GameObject {
 	public ImageView getImage() {
 		return this.myImage;
 	}
+	
 }
