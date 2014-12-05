@@ -14,7 +14,7 @@ import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public interface IGameData {
-	public void writeLevel(Object lvl, BufferedOutputStream outputStream) throws IOException;
+	public void writeLevel(Object lvl) throws IOException;
 	public Object loadLevel(BufferedInputStream inputStream, Object o) throws IOException, JsonSyntaxException, ClassNotFoundException;
 	public void saveLevel(String name);
 	public Object loadLevel(BufferedInputStream inputStream, Class<?> cls) throws IOException, JsonSyntaxException, ClassNotFoundException;

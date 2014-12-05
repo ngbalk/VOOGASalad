@@ -39,6 +39,7 @@ public class UserObjectsLibrary extends PictureLibrary{
 
 		});
 	}
+
 	
 	private void observableSpriteObject(SpriteObject sprite){
 		SpriteObject currentSprite=myMap.get(sprite.getCode());

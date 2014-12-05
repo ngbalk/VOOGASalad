@@ -8,23 +8,32 @@ import javafx.scene.layout.Pane;
 
 public abstract class GameObject  {
 	protected ImageView myImage;
+	protected String myImagePath;
 	protected ViewObjectDelegate myDelegate;
 	private boolean doubleclick=true;
 	protected Pane myPane;
-	public GameObject(ImageView image){
-		this(image, null);
+	public GameObject(ImageView image, String imagePath){
+		this(image, imagePath, null);
 	}
 	public GameObject (GoalType goal){};
-	public GameObject(ImageView image, ViewObjectDelegate delegate){
+	public GameObject(ImageView image, String imagePath, ViewObjectDelegate delegate){
 		myImage=image;
+		myImagePath=imagePath;
 		myDelegate=delegate;
 	}
 	
 	public ImageView getImage(){
-		return myImage;	
+		return myImage;
 	}
+	
 	public void setImage(Image img){
 		myImage.setImage(img);
+	}
+	public void setImagePath(String imagePath){
+		myImagePath = imagePath;
+	}
+	public String getImagePath(){
+		return myImagePath;
 	}
 	public ViewObjectDelegate getDelegate(){
 		return myDelegate;

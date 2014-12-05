@@ -6,9 +6,11 @@ import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 import javafx.scene.image.ImageView;
 
 public class GoalObject extends GameObject {
-	private GoalCharacteristics myCharacteristics=new GoalCharacteristics(null);
-	public GoalObject(ImageView image, ViewObjectDelegate delegate) {
-		super(image, delegate);
+
+	private GoalCharacteristics myCharacteristics;
+	public GoalObject(ImageView image, String imagePath, ViewObjectDelegate delegate) {
+		super(image, imagePath, delegate);
+
 	}
 	public GoalObject(GoalType myType, ViewObjectDelegate delegate){
 		super(myType);
@@ -35,5 +37,9 @@ public class GoalObject extends GameObject {
 	public void showPane() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public ImageView getImage() {
+		return this.myImage;
 	}
 }

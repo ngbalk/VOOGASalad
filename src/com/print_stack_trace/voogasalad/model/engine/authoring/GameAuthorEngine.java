@@ -3,6 +3,8 @@ package com.print_stack_trace.voogasalad.model.engine.authoring;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.input.KeyCode;
+
 import com.print_stack_trace.voogasalad.exceptions.ElementLockedException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
@@ -12,6 +14,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.Co
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
 
 public class GameAuthorEngine implements IGameAuthorEngine {
 
@@ -105,5 +108,19 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 		currentLevel.setCollisionHandlerForResult(result, CollisionFactory.collisionEngineFromParams(result, paramType, param));
 	}
 
+	public Integer getMainCharacter() {
+		return currentLevel.getMainCharacter();
+	}
 
+	public void setMainCharacter(Integer mainCharacter) {
+		currentLevel.setMainCharacter(mainCharacter);
+	}
+    
+    public void setResultForKey(KeyResult result, KeyCode key) {
+    	currentLevel.setResultForKey(result, key);
+    }
+    
+    public KeyResult getResultOfKey(KeyCode key) {
+    	return currentLevel.getResultOfKey(key);
+    }
 }

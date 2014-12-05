@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyEvent;
 
+import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
@@ -22,7 +23,7 @@ public class PlayerToolBar extends ToolBar {
 	private static final String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	
-	public PlayerToolBar(GameEngine myEngine){
+	public PlayerToolBar(GamePlayer gamePlayer){
 		Properties classProp = new Properties();
 		Properties labelProp = new Properties();
 		InputStream classStream = getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE+ELEMENT_RESOURCE_NAME+".Properties");
@@ -36,7 +37,7 @@ public class PlayerToolBar extends ToolBar {
 				String classType = (String) key;
 				String className = (String) classProp.get(key);
 				className = DEFAULT_CLASS_PATH + className; 
-				Object newClass = Reflection.createInstance(className, myEngine);
+				Object newClass = Reflection.createInstance(className, gamePlayer);
 				newClass.getClass().getMethod("setLabel", String.class).invoke(newClass, labelProp.get(key));
 				this.getItems().add((Node) newClass);
 			}

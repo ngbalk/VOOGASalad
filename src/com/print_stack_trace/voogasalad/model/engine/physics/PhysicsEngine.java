@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
@@ -40,6 +41,8 @@ public class PhysicsEngine {
 	
 	public PhysicsEngine() {
 		decisionMatrix = new CollisionResult[MATRIX_SIZE][MATRIX_SIZE];
+		//Default
+		soloHandler = SoloPhysicsGenerator.getProgramPhysicEngine(ProgramPhysicEngine.EarthPhysicsEngine);
 	}
 	
 	/**
@@ -65,7 +68,7 @@ public class PhysicsEngine {
 		for(RuntimeSpriteCharacteristics obj : allObjects) {
 			soloHandler.applyPhysics(obj, framesPerSecond);
 		}
-		
+		/*
 		RuntimeSpriteCharacteristics[] array = (RuntimeSpriteCharacteristics[]) allObjects.toArray();
 		for(int i = 0; i < array.length; i++) {
 			RuntimeSpriteCharacteristics s1 = array[i];
@@ -76,6 +79,7 @@ public class PhysicsEngine {
 				}	
 			}
 		}
+		*/
 		
 		Collection<RuntimeSpriteCharacteristics> toRemove = new ArrayList<RuntimeSpriteCharacteristics>();
 		for(RuntimeSpriteCharacteristics obj : allObjects) {

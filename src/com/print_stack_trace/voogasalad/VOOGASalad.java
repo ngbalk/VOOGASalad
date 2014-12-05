@@ -8,8 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public abstract class VOOGASalad extends Application {
-	private static final int DEFAULT_WIDTH = 58*20; //Default Width is 58*20
-	private static final int DEFAULT_HEIGHT = 58*11; //Default Height is 58*20
+	public static final int DEFAULT_WIDTH = 58*20; //Default Width is 58*20
+	public static final int DEFAULT_HEIGHT = 58*11; //Default Height is 58*20
 	protected Stage mainStage;
 
 	@Override

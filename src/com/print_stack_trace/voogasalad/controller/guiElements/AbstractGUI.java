@@ -16,6 +16,7 @@ public abstract class AbstractGUI extends BorderPane {
 		setPrefSize(width.doubleValue(), height.doubleValue());
 		myWidth= width.doubleValue();
 		myHeight=height.doubleValue();
+
 	}
 	protected Node setCenterPane(GameEngine myGameEngine){
 		LayoutNode myCenterNode=new GameMainLayoutNode(myWidth, myHeight, myGameEngine);

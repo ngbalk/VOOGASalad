@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import com.google.gson.JsonSyntaxException;
@@ -28,12 +29,14 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.Co
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
 
 public class GameEngine {
 	private LevelModel currentLevel;
 	private RuntimeEngine runtimeEngine;
 	private IGameAuthorEngine authorEngine;
 	private IGameData gameData;
+	private int framesPerSecond;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -57,8 +60,7 @@ public class GameEngine {
 	
 	public void saveGame() throws IOException {
 		LevelModel lvl = authorEngine.getCurrentLevel();
-		System.out.println("Level Name: " + lvl.getLevelCharacteristics().getName());
-		gameData.writeLevelMarcus(lvl);
+		gameData.writeLevel(lvl);
 		
 	}
 
@@ -118,9 +120,32 @@ public class GameEngine {
 	public void setLevelCharacteristics(LevelCharacteristics levelSpecs) {
 		authorEngine.setLevelCharacteristics(levelSpecs);
 	}
+	
+	//Setting Keyboard/Movement
+	public Integer getMainCharacter() {
+		return authorEngine.getMainCharacter();
+	}
+
+	public void setMainCharacter(Integer mainCharacter) {
+		authorEngine.setMainCharacter(mainCharacter);
+	}
+    
+    public void setResultForKey(KeyResult result, KeyCode key) {
+    	authorEngine.setResultForKey(result, key);
+    }
+    
+    public KeyResult getResultOfKey(KeyCode key) {
+    	return authorEngine.getResultOfKey(key);
+    }
 
 	//GAME PLAYER
 
+	public Map<Integer, SpriteCharacteristics> getSpriteMap(){
+		return currentLevel.getSpriteMap();
+	}
+	public LevelCharacteristics getLevelCharacteristics(){
+		return currentLevel.getLevelCharacteristics();
+	}
 	public void update() {
 		runtimeEngine.update();
 	}
@@ -152,7 +177,7 @@ public class GameEngine {
 	}
 	
 	public void setFramesPerSecond(int framesPerSecond) {
-		runtimeEngine.setFramesPerSecond(framesPerSecond);
+		this.framesPerSecond = framesPerSecond;
 	}
 	
 	//-------------------ACCESSORS-------------------//
@@ -165,7 +190,17 @@ public class GameEngine {
 
 	private void loadLevel(LevelModel level) {
 		this.currentLevel = level;
+		
+		//FIXME: Remove this work around garbage
+		Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
+		currentLevel.setMainCharacter(first);
+		currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
+		currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
+		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
+		currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
+		
 		runtimeEngine = new RuntimeEngine(currentLevel);
+		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
 
 	public void saveHighScore(String name, HighScore highScore) {
