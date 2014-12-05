@@ -26,6 +26,7 @@ public abstract class GeneralPane extends Pane{
 		myWidth=width.doubleValue();
 		myHeight=height.doubleValue();
 		this.setPrefSize(myWidth, myHeight);
+		this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		initiate();
 	}
 	public abstract void createTextFields();

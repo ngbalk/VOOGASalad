@@ -43,19 +43,19 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public GamePane(double width, double height, GameEngine gameEngine){
 		myWidth=width;
 		myHeight=height;
-		this.setWidth(width);
-		this.setHeight(height);
+		this.setWidth(Double.POSITIVE_INFINITY);
+		this.setHeight(Double.POSITIVE_INFINITY);
 		myData=new HashMap<String,HashSet<SpriteObject>>();
 		this.setPrefSize(width, height);
 		myGameEngine=gameEngine;
 		this.getStylesheets().add(myStyle);
-		
+
 	}
 	public void addGameObject(ImageView gameObjectImageView, String imagePath){
 		if (imagePath!=null){
 			String myMessage=new MessagePopUp(myStyle).showDropDownDialog("What type of object would you like this image to be: ",spriteTypeNames());
 			if (new BlankSpaceTextChecker().checkText(myMessage)){
-				 addSpriteObject(gameObjectImageView, imagePath, myMessage);
+				addSpriteObject(gameObjectImageView, imagePath, myMessage);
 			}
 		}
 	}
@@ -82,8 +82,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		spriteOnBoard.getImage().setFitHeight(spriteOnBoard.getCharacteristics().getHeight());
 		spriteOnBoard.getImage().setFitWidth(spriteOnBoard.getCharacteristics().getWidth());
 		spriteOnBoard.getImage().setRotate(spriteOnBoard.getCharacteristics().getOrientation());
-		
-		
+
+
 	}
 	public boolean isReady(){
 		if (myLevelBar.getMenus().get(0).getItems().size()>=1){
@@ -114,10 +114,10 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		background.relocate(5, 5);
 		levelBackground.getCharacteristics().setBackground(background.getImage());
 		levelUpdate(levelBackground);
-		
-		
+
+
 	}
-	
+
 	public void update(SpriteObject myObject){
 		SpriteCharacteristics characteristics=myObject.getCharacteristics();
 		if (myData.get(myObject.getCode())==null){
@@ -129,22 +129,27 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				myData.get(myObject.getCode()).add(myObject);
 			}
 		}
-		if (new BlankSpaceTextChecker().checkText(myObject.getCode()))
-		for (SpriteObject sprite: myData.get(myObject.getCode())){
-			sprite.setCharacteristics(characteristics);
-			sprite.getCharacteristics().setX(sprite.getImage().getLayoutX());
-			sprite.getCharacteristics().setY(sprite.getImage().getLayoutY());
-			sprite.getCharacteristics().setWidth(sprite.getImage().getFitWidth());
-			sprite.getCharacteristics().setHeight(sprite.getImage().getFitHeight());
-			sprite.getCharacteristics().setOrientation(sprite.getImage().getRotate());
-			sprite.setImage(myObject.getImage().getImage());
-			sprite.getCharacteristics().setImagePath(sprite.getImagePath());
-			myGameEngine.updateObject(sprite.getId(), sprite.getCharacteristics());
+		if (new BlankSpaceTextChecker().checkText(myObject.getCode())){
+			for (SpriteObject sprite: myData.get(myObject.getCode())){
+				sprite.setCharacteristics(characteristics);
+				sprite.getCharacteristics().setX(sprite.getImage().getX());
+				sprite.getCharacteristics().setY(sprite.getImage().getY());
+				sprite.getCharacteristics().setWidth(sprite.getImage().getFitWidth());
+				sprite.getCharacteristics().setHeight(sprite.getImage().getFitHeight());
+				sprite.getCharacteristics().setOrientation(sprite.getImage().getFitWidth());
+				sprite.setImage(myObject.getImage().getImage());
+				sprite.getCharacteristics().setImagePath(sprite.getImagePath());
+				myGameEngine.updateObject(sprite.getId(), sprite.getCharacteristics());
+			}
+		}
+		else{
+
+			myGameEngine.updateObject(myObject.getId(), myObject.getCharacteristics());
 		}
 		SpriteObject temp=new SpriteObject(0,new ImageView(myObject.getImage().getImage()), myObject.getImagePath(), myObject.getType(),myObject.getDelegate());
 		temp.setCharacteristics(myObject.getCharacteristics());
 		changedSprite.set(temp);
-		
+
 	}
 	public void addLevelBar(LevelBar levelBar){
 		myLevelBar=levelBar;
@@ -178,6 +183,9 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 
 	}
 	public void update(GoalObject myObject){
+		myGameEngine.updateGoal(myObject.getID(), myObject.getCharacteristics());
+	}
+	public void addGoalToLevel(GoalObject myObject){
 		myGameEngine.addGoalToLevel(myObject.getCharacteristics());
 	}
 	public String[] spriteTypeNames(){
@@ -193,10 +201,10 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		}
 		return sprites;
 	}
-	
+
 	public void setCamera(CameraType cameratype) {
 		myGameEngine.setCameraType(cameratype);
-		
+
 	}
 	@Override
 	public void setPhysics(ProgramPhysicEngine typeOfGravity) {
