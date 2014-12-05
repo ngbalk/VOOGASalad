@@ -127,6 +127,8 @@ public class GamePlayer implements ViewController {
 	 * @param spriteCharacteristics 
 	 */
 	public void updateScene(){ 
+	    
+	    myPlayPane.getChildren().clear();
 		RuntimeModel r = myGameEngine.getStatus();
 		LevelCharacteristics levelCharacteristics = r.getLevelCharacteristics();
 		Map<Integer, RuntimeSpriteCharacteristics> spriteMap = r.getRuntimeSpriteMap();
@@ -150,7 +152,7 @@ public class GamePlayer implements ViewController {
 			spriteImage.setRotate(spriteCharacteristics.getOrientation());
 			spriteImage.setLayoutX(spriteCharacteristics.getX());
 			spriteImage.setLayoutY(spriteCharacteristics.getY());
-			myGameRoot.getChildren().add(spriteImage);
+			myPlayPane.getChildren().add(spriteImage);
 		}
 		
 	}
@@ -167,7 +169,7 @@ public class GamePlayer implements ViewController {
 	public void pauseGame(){ //buttons with handlers
 		isPlaying = true;
 		System.out.println(isPlaying);
-		//gameEngine.pause();
+//		gameEngine.pause();
 		//if gameplayer is the gameloop --> timeline.stop();
 	}
 	
