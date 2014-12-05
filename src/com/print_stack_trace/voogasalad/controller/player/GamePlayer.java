@@ -142,12 +142,8 @@ public class GamePlayer implements ViewController {
 		background.relocate(5, 5);
 		myPlayPane.getChildren().add(0,background);
 		for(Integer id : spriteMap.keySet()){
-			System.out.println("detected sprite ID = " + id);
 			SpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
 			ImageView spriteImage = new ImageView(new Image(spriteCharacteristics.getImagePath()));
-			System.out.println("Sprite Image path: " + spriteCharacteristics.getImagePath());
-			System.out.println("Sprite X Location: " + spriteCharacteristics.getX());
-			System.out.println("Sprite Y Location: " + spriteCharacteristics.getY());
 			spriteImage.setFitWidth(spriteCharacteristics.getWidth());
 			spriteImage.setFitHeight(spriteCharacteristics.getHeight());
 			spriteImage.setRotate(spriteCharacteristics.getOrientation());
