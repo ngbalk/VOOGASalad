@@ -170,8 +170,8 @@ public class SpriteCharacteristics {
         return orientation;
     }
 
-    public void setOrientation (double orienation) {
-        this.orientation = orientation;
+    public void setOrientation (double newOrienation) {
+        this.orientation = newOrienation;
     }
     
 	public double getX(){
