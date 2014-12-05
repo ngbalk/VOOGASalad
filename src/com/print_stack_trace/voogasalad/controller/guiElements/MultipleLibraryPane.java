@@ -22,6 +22,7 @@ public class MultipleLibraryPane extends TabPane{
 		myHeight= height.doubleValue();
 		myMainPane=gamePane;
 		loadAndAddTabs();
+		this.setPrefSize(myWidth, myHeight);
 		this.getStylesheets().add(STYLE_RESOURCE);
 		this.getStyleClass().add("tabPaneTemplate");
 	}

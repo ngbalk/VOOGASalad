@@ -9,11 +9,11 @@ public class LevelNameController extends LevelCharacteristicController {
 	}
 	@Override
 	protected void populateDefaultText(){
-		myTextBox.setText(myLevel.getCharacteristics().getName());
+		myTextBox.setText(((LevelObject) mySprite).getCharacteristics().getName());
 	}
 	@Override
 	protected void setCharacteristic(String newValue) {
-		myLevel.getCharacteristics().setName(newValue);
-		myLevel.getDelegate().update(myLevel);
+		((LevelObject)mySprite).getCharacteristics().setName(newValue);
+		((LevelObject)mySprite).getDelegate().update((LevelObject)mySprite);
 	}
 }
