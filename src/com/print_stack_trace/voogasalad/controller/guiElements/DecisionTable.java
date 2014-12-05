@@ -96,7 +96,7 @@ public class DecisionTable extends GridPane {
 		String[] collisionStrings = new String[collisions.length];
 		for(int i=0; i <collisions.length; i++){
 			collisionStrings[i] = collisions[i].toString();
-		}
+		} 
 		cb.getItems().addAll(collisionStrings);
 		return cb;
 	}

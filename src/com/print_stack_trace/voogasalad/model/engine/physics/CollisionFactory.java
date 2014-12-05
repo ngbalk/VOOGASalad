@@ -10,9 +10,11 @@ import java.lang.reflect.Constructor;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
+import com.print_stack_trace.voogasalad.model.engine.physics.collisions.*;
+
 public class CollisionFactory {
 	//TODO: verify that this path takes us to the right package
-	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.enginge.physics.collisions.";
+	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.engine.physics.collisions.";
 	
 	public enum CollisionResult {
 		ObjectOneFullDisplacement,
@@ -36,10 +38,10 @@ public class CollisionFactory {
         CollisionHandler newCollisionResult = null;
 
         try {
-            String objectType = myCollisionResult.name(); //TODO: explore using toString() instead of name()
+            String objectType = myCollisionResult.toString(); //TODO: explore using toString() instead of name()
             Class<?> newCollisionResultClass = Class.forName(collisionResultPath + objectType);
             try {
-                con = newCollisionResultClass.getConstructor(CollisionHandler.class);
+                con = newCollisionResultClass.getConstructor();
             } catch (NoSuchMethodException | SecurityException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

@@ -8,6 +8,7 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
@@ -36,7 +37,7 @@ public class PhysicsEngine {
 	 */
 	private CollisionResult[][] decisionMatrix;
 	
-	private Map<CollisionResult , CollisionHandler> handlerMap;
+	private Map<CollisionResult , CollisionHandler> handlerMap = new HashMap<CollisionResult , CollisionHandler>();
 	private SoloPhysicsHandler soloHandler;
 	
 	public PhysicsEngine() {
