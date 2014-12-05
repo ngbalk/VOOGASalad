@@ -53,6 +53,8 @@ import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
+	private final static int FPS = 60;
+	
 	private Group myRoot;
 	private Group myGameRoot;
 	private PlayPane myPlayPane;
@@ -76,6 +78,8 @@ public class GamePlayer implements ViewController {
 	 */
 	public Group initialize(GameEngine gameEngine) {
 		myGameEngine = gameEngine;
+		myGameEngine.setFramesPerSecond(FPS);
+		
 		myRoot = new Group(); 
 		myRoot.setOnKeyReleased(KeyPad);
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
@@ -103,8 +107,8 @@ public class GamePlayer implements ViewController {
 	 * Create the game's frame
 	 */
 	public KeyFrame start () {
-		return new KeyFrame(Duration.millis(1000/60), oneFrame);
-	} 
+		return new KeyFrame(Duration.millis(1000/FPS), oneFrame);
+	}
 	
 	private EventHandler<ActionEvent> oneFrame = new EventHandler<ActionEvent>() {
 		@Override //class note: makes Java check for errors when it normally wouldn't

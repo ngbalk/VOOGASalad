@@ -10,8 +10,8 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
 public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
-	public int v_x;
-	public int v_y;
+	public float v_x;
+	public float v_y;
 	public int decelerationConstant;
 	public int health;
 	private boolean remove = false;
