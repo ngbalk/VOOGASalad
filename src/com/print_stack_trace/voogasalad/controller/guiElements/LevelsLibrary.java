@@ -15,12 +15,12 @@ public class LevelsLibrary extends PictureLibrary{
 	}
 
 	@Override
-	protected void addToOtherPane(Image myImage){
+	protected void addToOtherPane(Image image, String imagePath){
 		if (((GamePane)myMainPane).isReady()){
 			myMainPane.getChildren().removeAll(onGamePane);
-			ImageView myView=(ImageView) makeImageView(myImage);
-			((GamePane) myMainPane).addBackground(myView);
-			onGamePane.add(myView);
+			ImageView imageView=(ImageView) makeImageView(image);
+			((GamePane) myMainPane).addBackground(imageView, imagePath);
+			onGamePane.add(imageView);
 		}	
 	}
 }

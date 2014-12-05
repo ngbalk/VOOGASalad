@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.google.gson.JsonSyntaxException;
+import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;
@@ -26,7 +27,7 @@ public class IntroSplashScreen extends AbstractSplashScreen {
 	private static final ImageView myBackground = new ImageView("./com/print_stack_trace/voogasalad/controller/images/marioBackground.jpg");
 	private static final String propFileRoot = "./com/print_stack_trace/voogasalad/controller/guiResources/";
 	
-	public IntroSplashScreen( GameEngine GE, int width, int height){
+	public IntroSplashScreen(int width, int height){
 		super(width, height, myBackground);
 		this.getChildren().addAll(continueButton, myBackground);
 		continueButton.toFront();    
@@ -34,21 +35,22 @@ public class IntroSplashScreen extends AbstractSplashScreen {
 		continueButton.setLayoutY(height/2);
 	}
 	
-	private void continueFromSplashScreen(GameEngine GE, Group root){
-		continueButton.setOnAction(e -> addPlayerToolBarToNewRoot(root, GE));//GE.loadGame(selectLevelFile()));
+	private void continueFromSplashScreen(GamePlayer gp, Group root){
+		continueButton.setOnAction(e -> addPlayerToolBarToNewRoot(root, gp));//GE.loadGame(selectLevelFile()));
 	}
+
 	
-	private void addPlayerToolBarToNewRoot(Group root, GameEngine GE) {
-		PlayerToolBar ptb = new PlayerToolBar(GE);
+	private void addPlayerToolBarToNewRoot(Group root, GamePlayer gamePlayer) {
+		PlayerToolBar ptb = new PlayerToolBar(gamePlayer);
 		root.getChildren().add(ptb);
 		root.getChildren().remove(this);
 	}
 
 	@Override
 	public void continueFromSplash(Object... objects) {
-		GameEngine GE = (GameEngine) objects[0];
+		GamePlayer gp = (GamePlayer) objects[0];
 		Group root = (Group) objects[1];
-		continueFromSplashScreen(GE, root); 
+		continueFromSplashScreen(gp, root); 
 	}
 	
 	

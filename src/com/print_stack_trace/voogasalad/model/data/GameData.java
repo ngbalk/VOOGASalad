@@ -101,15 +101,27 @@ public class GameData implements IGameData {
 		}
 	}
 
-	public void writeLevel(Object lvl, BufferedOutputStream outputStream)
+	public void writeLevel(Object lvl)
 			throws IOException {
 		Gson gson = new GsonBuilder().create();
 		Map<String, Object> objMap = new HashMap<String, Object>();
+		objMap.put(lvl.toString(), lvl);
 		String json = gson.toJson(lvl);
-		byte[] stringInBytes = json.getBytes();
-		outputStream.write(stringInBytes);
-		outputStream.flush();
-		outputStream.close();
+		
+		System.out.println("gson to Json :" +  json);
+		File file = new File(System.getProperty("user.dir")+ "/src/com/print_stack_trace/voogasalad/model/data/" + lvl.toString() +".txt");
+		
+		if(file.getCanonicalPath() != null){
+			saveFileMarcus(json,file);
+			return;
+		}
+		throw new IOException("Application did not specify target location to save");
+
+		
+		//byte[] stringInBytes = json.getBytes();
+		//outputStream.write(stringInBytes);
+		//outputStream.flush();
+		//outputStream.close();
 	}
 
 	/**
@@ -143,7 +155,7 @@ public class GameData implements IGameData {
 		System.out.println("X: "+ actor.getX());
 		System.out.println("Y: " + actor.getY());
 		System.out.println("Sprite Name: " + actor.getName());
-		
+		System.out.println(actor.getImagePath());
 		return loadedLevel;
 	}
 

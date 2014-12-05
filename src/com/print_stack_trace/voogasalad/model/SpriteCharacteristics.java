@@ -12,8 +12,6 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
-
-//import javafx.scene.image.Image;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.*;
 import javafx.scene.input.KeyCode;
@@ -24,7 +22,7 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 public class SpriteCharacteristics {
 
 	// DEFAULT VARIABLES
-	public static final transient Image DEFAULT_IMAGE = null;
+	public static final Image DEFAULT_IMAGE = null;
 	public static final Point DEFAULT_POINT = new Point(0,0);
 	public static final boolean DEFAULT_INTERACTIVE = true;
 	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
@@ -37,7 +35,8 @@ public class SpriteCharacteristics {
 	public static final double DEFAULT_HEIGHT=100;
 	
 	// GAME AUTHORING VARIABLES
-	public transient Image img;
+	public Image img;
+	public String imagePath;
 	public Point p;
 	public boolean interactive;
 	public SpriteType objectType;
@@ -90,6 +89,7 @@ public class SpriteCharacteristics {
 		height=obj.getHeight();
 		name=obj.getName();
 		myMovements=obj.getMovements();
+		imagePath = obj.getImagePath();
 	}
 
 	//-------------------ACCESSORS-------------------//
@@ -99,9 +99,9 @@ public class SpriteCharacteristics {
 	}
 	
     public javafx.scene.image.Image getImage () {
-    	BufferedImage bufferedImage = (BufferedImage) img;
-    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
-    	return javaFXImage;
+//    	BufferedImage bufferedImage = (BufferedImage) img;
+//    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
+    	return new javafx.scene.image.Image(imagePath);
     }
     
     public void setJavaAWTImage(Image image) {
@@ -110,6 +110,12 @@ public class SpriteCharacteristics {
 
     public void setImage(javafx.scene.image.Image image) {
         this.img = SwingFXUtils.fromFXImage(image, null);
+    }
+    public void setImagePath(String path){
+    	imagePath = path;
+    }
+    public String getImagePath(){
+    	return imagePath;
     }
 
     public Point getPoint () {

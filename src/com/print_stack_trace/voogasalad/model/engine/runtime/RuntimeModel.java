@@ -32,6 +32,7 @@ public class RuntimeModel extends LevelModel {
 	 * @param level
 	 */
 	public RuntimeModel(LevelModel level) {
+		super(level);
 		runtimeSpriteMap = new HashMap<Integer, RuntimeSpriteCharacteristics>();
 		for(Integer i: level.getSpriteMap().keySet())
 			runtimeSpriteMap.put(i, new RuntimeSpriteCharacteristics(level.getSpriteMap().get(i)));

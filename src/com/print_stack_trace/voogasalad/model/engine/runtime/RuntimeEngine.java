@@ -6,15 +6,22 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicator;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
+	private List<KeyEvent> currentEvents = new ArrayList<KeyEvent>();
 	int framesPerSecond;
 	
 	//-------------------CONSTRUCTORS-------------------//
@@ -34,12 +41,15 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	/**
 	 * Update all of the data in the current level.
 	 * 1. Calls PhysicsEngine to "animate" sprites.
-	 * 2. Use GoalChecker to check goals
-	 * 3. See if game is over or not
+	 * 2. Apply unexpired key events.
+	 * 3. Use GoalChecker to check goals
+	 * 4. See if game is over or not
 	 * @param currentLevel
 	 */
 	public void update() {
 		physicsEngine.animateAll(runtimeModel, framesPerSecond);
+		
+		applyCurrentKeyEvents();
 		
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
 		int completedCount = 0;
@@ -54,6 +64,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 				runtimeModel.gameVictory = true;
 			}
 		}
+		
+		updateSpritePositions();
 	}
 	
 	public void setFramesPerSecond(int framesPerSecond) {
@@ -71,16 +83,33 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	}
 	
 	public void handleKeyRelease(KeyEvent event) {
-		
+		currentEvents.remove(event);
 	}
 	
 	public void handleKeyPress(KeyEvent event) {
-		
+		currentEvents.add(event);
 	}
 	
 	//-------------------ACCESSORS-------------------//
 	
 	
 	//-------------------PRIVATE METHODS-------------------//
+	
+	private void applyCurrentKeyEvents() {
+		for(KeyEvent e : currentEvents) {
+			KeyResult res = runtimeModel.getResultOfKey(e.getCode());
+			KeyApplicator applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
+			Integer mainChar = runtimeModel.getMainCharacter();
+			RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
+			applicator.applyActionToRuntimeSprite(mainCharData);
+		}
+	}
+	
+	private void updateSpritePositions(){
+		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()){
+			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
+			rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
+		}
+	}
 	
 }
