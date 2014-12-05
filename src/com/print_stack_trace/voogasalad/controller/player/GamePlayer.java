@@ -78,12 +78,13 @@ public class GamePlayer implements ViewController {
 		myGameEngine = gameEngine;
 		myRoot = new Group(); 
 		myRoot.setOnKeyReleased(KeyPad);
+
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
 		myRoot.setOnKeyPressed(gameEngine.getRuntimeKeyPressHandler());
 		myRoot.setOnKeyReleased(gameEngine.getRuntimeKeyReleasaeHandler());
-		splash.continueFromSplashScreen(this, myRoot);
+		splash.continueFromSplash(this, myRoot);
 		myPlayPane = new PlayPane();
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
 		myPlayPane.setLayoutY(100);
