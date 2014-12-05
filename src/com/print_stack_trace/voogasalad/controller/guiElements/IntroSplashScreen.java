@@ -35,7 +35,7 @@ public class IntroSplashScreen extends AbstractSplashScreen {
 		continueButton.setLayoutY(height/2);
 	}
 	
-	private void continueFromSplashScreen(GamePlayer gp, Group root){
+	public void continueFromSplashScreen(GamePlayer gp, Group root){
 		continueButton.setOnAction(e -> addPlayerToolBarToNewRoot(root, gp));//GE.loadGame(selectLevelFile()));
 	}
 

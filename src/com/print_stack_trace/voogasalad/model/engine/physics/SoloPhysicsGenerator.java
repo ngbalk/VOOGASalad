@@ -15,21 +15,19 @@ public class SoloPhysicsGenerator {
 		switch(engineType) {
 		default:
 		case EarthPhysicsEngine:
-			return physicEngineFromParams(9.81f, 0f, 1.0f);
+			return physicEngineFromParams(9.81f, 0f, 0.0f);
 		case HalfGravityEngine:
-			return physicEngineFromParams(4.405f, 0f, 1.0f);
+			return physicEngineFromParams(4.405f, 0f, 10.0f);
 		case InvertedGravityEngine:
-			return physicEngineFromParams(-9.81f, 0f, 1.0f);
+			return physicEngineFromParams(-9.81f, 0f, 10.0f);
 		case WindyCityEngine:
-			return physicEngineFromParams(9.81f, -10.0f, 1.0f);
+			return physicEngineFromParams(9.81f, -10.0f, 10.0f);
 		}
 	}
 	
 	public static SoloPhysicsHandler physicEngineFromParams(float gravity, float drag, float intensity) {
 		final float fgravity = gravity;
 		final float fdrag = drag;
-		if(intensity < 0.0f) { intensity = 0.0f; }
-		else if(intensity > 1.0f) { intensity = 1.0f; }
 		final float fintensity = intensity;
 		return new SoloPhysicsHandler() {
 			@Override

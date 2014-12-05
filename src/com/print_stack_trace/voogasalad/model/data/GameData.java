@@ -1,34 +1,24 @@
 package com.print_stack_trace.voogasalad.model.data;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
-import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameData implements IGameData {
 	private Map<String, HighScore> highScores = new HashMap<String, HighScore>();
 	private Gson gson;
+	private String name;
+
 	/**
 	 * constructor for GameData
 	 */
@@ -36,64 +26,17 @@ public class GameData implements IGameData {
 		gson = new Gson();
 	}
 
-	/**
-	 * Will take in a level written by authoring environment as a parameter,
-	 * write it to a JSON file. location is the directory on user hard drive
-	 * that the user selects to save the file
-	 * 
-	 * @param lvl
-	 *            - level created by the authoring environment
-	 * @param outputStreawm
-	 *            output stream for level to save
-	 * @throws IOException
-	 */
-	@Override
-	public void writeLevelMarcus(LevelModel lvl) throws IOException {
-			/* Tested out my WriteLevel; The following is its ouput
-			 * This is a hero: true
-			 *	Object Added ID: 0
-			 * gson to Json :{"spriteMap":{"0":{"p":{"x":0.5,"y":10.23,"hash":0},"interactive":true,"objectType":"HERO","health":10,"speed":10.0,"value":0,"directionFacing":""}},"currentID":0,"isLocked":false}
-			 * wrote file to C:\Users\Marcus Cain\AppData\Roaming\Microsoft\Windows\Network Shortcuts\json2.txt
-			 */
-	
-		System.out.println(lvl.getLevelCharacteristics().getName());
-		
-		/* Ensure that levelModel does not contain any javafx objects.
-		 * also ensure that objects within levelModel (SpriteCharacteristics) does
-		 * not contain any javafx primitive or objets
-		 * use transient keyword
-		 */
-		String json = gson.toJson(lvl);
-		System.out.println("gson to Json :" +  json);
-		
-		/*
-		 * Possible workoutaround for gson inability to serialize javafx is to create
-		 * classes that extend the javafx class, and implement serialiazable
-		 */
-		
-		/*
-		 * 	front end (authoring environment DOES NOT need to know about FILE or Location of FILE -> completely GameData responsibility
-		 * 
-
-		 *  store json into a file
-		 */
-		
-		File file = new File(System.getProperty("user.dir")+ "/src/com/print_stack_trace/voogasalad/model/data/" + lvl.getLevelCharacteristics().getName() +".txt");
-				
-		if(file.getCanonicalPath() != null){
-			saveFileMarcus(json,file);
-			return;
-		}
-		throw new IOException("Application did not specify target location to save");
-	}
-
-	private void saveFileMarcus(String s, File file) {
+	private void writeToFile(String s, File file) {
 		try {
-			FileWriter fileWriter = new FileWriter(file);
-			fileWriter.write(s);
-			fileWriter.close();
+			BufferedOutputStream bos = new BufferedOutputStream(
+					new FileOutputStream(file));
+			byte[] stringInBytes = s.getBytes();
+			bos.write(stringInBytes);
+			bos.flush();
+			bos.close();
 			System.out.println("wrote file to " + file.getCanonicalPath());
-			System.out.println("Test: " + this.getClass().getName().replace(".", "/"));
+			System.out.println("Test: "
+					+ this.getClass().getName().replace(".", "/"));
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -101,73 +44,51 @@ public class GameData implements IGameData {
 		}
 	}
 
-	public void writeLevel(Object lvl)
-			throws IOException {
-		Gson gson = new GsonBuilder().create();
+	/**
+	 * Takes an object and will save it to the current working directory as a
+	 * json representation in a .txt file
+	 * 
+	 * @param lvl
+	 *            - the object to be saved as a json representation
+	 * 
+	 */
+	public void writeLevel(Object lvl) throws IOException {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		Map<String, Object> objMap = new HashMap<String, Object>();
 		objMap.put(lvl.toString(), lvl);
 		String json = gson.toJson(lvl);
-		
-		System.out.println("gson to Json :" +  json);
-		File file = new File(System.getProperty("user.dir")+ "/src/com/print_stack_trace/voogasalad/model/data/" + lvl.toString() +".txt");
-		
-		if(file.getCanonicalPath() != null){
-			saveFileMarcus(json,file);
+		name = System.getProperty("user.dir")
+				+ "/src/com/print_stack_trace/voogasalad/model/data/"
+				+ lvl.toString() + ".txt";
+		File file = new File(name);
+		if (file.getCanonicalPath() != null) {
+			writeToFile(json, file);
 			return;
 		}
-		throw new IOException("Application did not specify target location to save");
-
-		
-		//byte[] stringInBytes = json.getBytes();
-		//outputStream.write(stringInBytes);
-		//outputStream.flush();
-		//outputStream.close();
+		throw new IOException(
+				"Application did not specify target location to save");
 	}
 
 	/**
+	 * Will look at the file specified by myFile and then return the object type
+	 * that is saved in that file that is specified by c
 	 * 
-	 * @param inputStream
-	 *            input stream for level to load
-	 * @return an instance of the level model that the game engine or game
-	 *         authoring environment will either play or edit
-	 * @throws IOException
-	 * @throws ClassNotFoundException 
-	 * @throws JsonSyntaxException 
-	 */
-	public Object loadLevel(BufferedInputStream inputStream, Class<?> cls) throws IOException, JsonSyntaxException, ClassNotFoundException {
-		Gson gson = new GsonBuilder().create();
-		byte[] bytes = new byte[inputStream.available()];
-		inputStream.read(bytes);
-		String json = bytes.toString();
-		Object o = cls.cast(gson.fromJson(json, cls));
-		return o;
-	}
-	
-	@Override
-	public LevelModel loadLevelMarcus(FileInputStream levelName) throws IOException, JsonSyntaxException, ClassNotFoundException{
-		//BufferedReader br = new BufferedReader(new FileReader(levelName));
-		BufferedReader br = new BufferedReader(new InputStreamReader(levelName));
-		LevelModel loadedLevel = gson.fromJson(br.readLine(), LevelModel.class);
-		System.out.println(loadedLevel.getLevelCharacteristics().getName());
-		SpriteCharacteristics actor = loadedLevel.getSpriteMap().get(0);
-		System.out.println("height:" + actor.getHeight());
-		System.out.println("width:" + actor.getWidth());
-		System.out.println("X: "+ actor.getX());
-		System.out.println("Y: " + actor.getY());
-		System.out.println("Sprite Name: " + actor.getName());
-		System.out.println(actor.getImagePath());
-		return loadedLevel;
-	}
-
-	/**
-	 * saves the current game being edited by the authoring environment, can
-	 * also be used by the engine to update preferences in
+	 * @param myFile
+	 *            - the file to be loaded from
+	 * @param c
+	 *            - the class that is to be returned
 	 * 
-	 * @param name
-	 *            - file that is being overwritten by the save
+	 * @return the object type referred to by c saved in myFile
 	 */
-	public void saveLevel(String name) {
-
+	public Object loadLevel(FileInputStream myFile, Class<?> c)
+			throws IOException, JsonSyntaxException, ClassNotFoundException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(myFile));
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			sb.append(line);
+		}
+		return gson.fromJson(sb.toString(), c);
 	}
 
 	/**
@@ -206,12 +127,5 @@ public class GameData implements IGameData {
 	public void saveHighScore(String name, HighScore highScore) {
 		highScores.put(name, highScore);
 		saveHighScores();
-	}
-
-	@Override
-	public Object loadLevel(BufferedInputStream inputStream, Object o)
-			throws IOException, JsonSyntaxException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

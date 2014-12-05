@@ -7,7 +7,9 @@
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.scene.input.KeyEvent;
 
@@ -21,8 +23,8 @@ import com.print_stack_trace.voogasalad.model.environment.Goal;
 public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
-	private List<KeyEvent> currentEvents = new ArrayList<KeyEvent>();
 	int framesPerSecond;
+	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
 	
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -48,8 +50,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 */
 	public void update() {
 		physicsEngine.animateAll(runtimeModel, framesPerSecond);
-		
-		applyCurrentKeyEvents();
 		
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
 		int completedCount = 0;
@@ -83,27 +83,17 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	}
 	
 	public void handleKeyRelease(KeyEvent event) {
-		currentEvents.remove(event);
+		handleKey(event, false);
 	}
 	
 	public void handleKeyPress(KeyEvent event) {
-		currentEvents.add(event);
+		handleKey(event, true);
 	}
 	
 	//-------------------ACCESSORS-------------------//
 	
 	
 	//-------------------PRIVATE METHODS-------------------//
-	
-	private void applyCurrentKeyEvents() {
-		for(KeyEvent e : currentEvents) {
-			KeyResult res = runtimeModel.getResultOfKey(e.getCode());
-			KeyApplicator applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
-			Integer mainChar = runtimeModel.getMainCharacter();
-			RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
-			applicator.applyActionToRuntimeSprite(mainCharData);
-		}
-	}
 	
 	private void updateSpritePositions(){
 		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()){
@@ -112,4 +102,19 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		}
 	}
 	
+	private void handleKey(KeyEvent event, boolean press) {
+		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
+		KeyApplicator applicator = applicatorCache.get(res);
+		if(applicator == null) {
+		    applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
+		    applicatorCache.put(res, applicator);
+		}
+		Integer mainChar = runtimeModel.getMainCharacter();
+		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
+		if(press) {
+			applicator.applyPressActionToRuntimeSprite(mainCharData);
+		} else {
+			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
+		}
+	}
 }

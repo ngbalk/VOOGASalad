@@ -16,7 +16,6 @@ public class GoalCharacteristics {
     public Integer myObjectiveID=0;
     public Integer myPointTotal=0;
     public Point myDestination=new Point(0,0);
-
     
     public GoalCharacteristics(GoalType goalType) {
         myGoalType = goalType;

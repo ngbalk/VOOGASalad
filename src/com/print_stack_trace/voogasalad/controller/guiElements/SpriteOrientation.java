@@ -12,7 +12,7 @@ public class SpriteOrientation extends SpriteCharacteristicController {
 
 	@Override
 	protected void setCharacteristic(String newValue) {
-		double newOrientationValue = mySprite.getImage().getLayoutX();
+		double newOrientationValue = mySprite.getImage().getRotate();
 		try{
 			newOrientationValue = Double.parseDouble(newValue);
 		}
