@@ -20,9 +20,34 @@ public class CollisionDetector {
 	public static boolean haveCollided(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB) {
 		if(spriteA.interactive && spriteB.interactive) {
 			//TODO: @ethan&nick
+			if (intersection(spriteA, spriteB)) {
+				return true;
+			}
 			return false;
 		} else {
 			return false;
 		}
 	}
+	
+	public static double getDistance(double value1, double value2) {
+		double difference = Math.abs(value1-value2);
+		return difference;
+	}
+	
+	public static boolean intersection(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB) {
+		double xBoundsA = spriteA.width/2;
+		double xBoundsB = spriteB.width/2;
+		double xTolerance = xBoundsA + xBoundsB;
+		double yBoundsA = spriteA.height/2;
+		double yBoundsB = spriteB.height/2;
+		double yTolerance = yBoundsA + yBoundsB;
+		if (getDistance(spriteA.getX(), spriteB.getX()) < xTolerance 
+				&& getDistance(spriteA.getY(), spriteB.getY()) < yTolerance) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
 }
