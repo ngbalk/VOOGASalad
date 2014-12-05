@@ -53,8 +53,7 @@ import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
-	private final static int FPS = 10;
-	
+	private final static int FPS = 30;
 	private Group myRoot;
 	private Group myGameRoot;
 	private PlayPane myPlayPane;
