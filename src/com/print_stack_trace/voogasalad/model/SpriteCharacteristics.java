@@ -35,7 +35,7 @@ public class SpriteCharacteristics {
 	public static final double DEFAULT_HEIGHT=100;
 	
 	// GAME AUTHORING VARIABLES
-	public Image img;
+	public transient Image img;
 	public String imagePath;
 	public Point p;
 	public boolean interactive;

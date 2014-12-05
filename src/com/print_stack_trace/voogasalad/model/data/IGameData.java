@@ -20,7 +20,6 @@ public interface IGameData {
 	public Object loadLevel(BufferedInputStream inputStream, Class<?> cls) throws IOException, JsonSyntaxException, ClassNotFoundException;
 	public Map<String, HighScore> getHighScores();
 	public void saveHighScore(String name, HighScore highScore);
-	public void writeLevelMarcus(LevelModel lvl) throws IOException;
 	public LevelModel loadLevelMarcus(FileInputStream myFile) throws IOException, JsonSyntaxException, ClassNotFoundException;
 
 }
