@@ -60,11 +60,16 @@ public class KeyFramePopUpPane extends GeneralPane {
 		addButton.setText("Add KeyFrame");
 		addButton.relocate(pane.getPrefWidth()/2, pane.getPrefHeight()/4);
 		addButton.getStyleClass().add("buttonTemplate");
-		addButton.setPrefSize(pane.getPrefWidth()/3, pane.getPrefHeight()/2);
+		addButton.setPrefSize(pane.getPrefWidth()/4, pane.getPrefHeight()/2);
 		addButton.setOnAction(e->myBox.addKeyFrame());
 		pane.getChildren().addAll(addButton, myCurrentKey);
 		Button imageButton=new Button();
 		imageButton.setText("Choose Image");
+		imageButton.relocate(pane.getPrefWidth()/4*3, pane.getPrefHeight()/4);
+		imageButton.getStyleClass().add("buttonTemplate");
+		imageButton.setPrefSize(pane.getPrefWidth()/4, pane.getPrefHeight()/2);
+		//addButton.setOnAction(e->myBox.addKeyFrame());
+		pane.getChildren().addAll(imageButton);
 	}
 	private void setObservable(){
 		myBox.getCurrentKeyFrame().addListener(new ChangeListener<KeyFrameBlock>(){

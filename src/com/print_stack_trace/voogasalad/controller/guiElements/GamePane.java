@@ -26,12 +26,14 @@ import javafx.collections.ObservableSet;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
 public class GamePane extends Pane implements ViewObjectDelegate{
 	private double myWidth;
 	private double myHeight;
 	private GameEngine myGameEngine;
+	private ImageView background;
 	private HashMap<String,HashSet<SpriteObject>> myData;
 	public boolean doubleclick=true;
 	public SimpleObjectProperty<SpriteObject> changedSprite=new SimpleObjectProperty<SpriteObject>();
@@ -168,12 +170,17 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		}
 	}
 	public void levelUpdate(LevelObject currentLevel){
+		background=currentLevel.getImage();
 		myLevelBar.setCurrentLevel(currentLevel);
 		this.getChildren().removeAll(myLevelBar.getNonActiveLevels());
 		this.getChildren().removeAll(myLevelBar.getNonActiveColors());
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
 		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
+	}
+	
+	public ImageView getBackgroundImage(){
+		return background;
 	}
 	public Pane sizePane(Pane toBeSize){
 		toBeSize.setPrefSize(this.getWidth(), this.getHeight());
