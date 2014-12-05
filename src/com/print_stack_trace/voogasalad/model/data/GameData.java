@@ -73,8 +73,10 @@ public class GameData implements IGameData {
 	 * Will look at the file specified by myFile and then return the object type
 	 * that is saved in that file that is specified by c
 	 * 
-	 * @param myFile - the file to be loaded from
-	 * @param c - the class that is to be returned
+	 * @param myFile
+	 *            - the file to be loaded from
+	 * @param c
+	 *            - the class that is to be returned
 	 * 
 	 * @return the object type referred to by c saved in myFile
 	 */
