@@ -16,10 +16,11 @@ public abstract class AbstractDialogBox {
 
 	protected Button submitButton = new Button("Submit");
 	protected List<TextField> tfList;
+	private Stage stage;
 	
 	public AbstractDialogBox(List<TextField> nodeList) {
 		this.tfList = nodeList;
-		Stage stage = new Stage();
+		stage = new Stage();
 		stage.setWidth(250);
 		stage.setHeight(250);
 		stage.initStyle(StageStyle.UTILITY);
@@ -32,7 +33,7 @@ public abstract class AbstractDialogBox {
 		root.getChildren().add(box);
 		submitButton.setOnAction(e->submit());
 		stage.setScene(s);
-		stage.show();
+		stage.show(); 
 	}
 	
 	public AbstractDialogBox(TextField node){
@@ -44,12 +45,13 @@ public abstract class AbstractDialogBox {
 		nodeList.add(node);
 		return nodeList;
 	}
-	
-	public void close() {
-		//TODO: close the stage
-	}
 
 	public abstract String submit();
+	
+	protected void close(){
+		stage.close();
+	}
+	
 	public abstract List<String> submitAll();
 	
 }
