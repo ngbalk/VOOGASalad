@@ -17,26 +17,38 @@ public class KeyApplicatorFacotry {
 
 		final int vxnew;
 		final int vynew;
+		final int vxreleasenew;
+		final int vyreleasenew;
 		switch(mykeyResult) {
 		case Down:
 			vynew = -V_KEY_CONSTANT;
 			vxnew = 0;
+			vxreleasenew = 0;
+			vyreleasenew = 0;
 			break;
 		case Left:
 			vxnew = -V_KEY_CONSTANT;
 			vynew = 0;
+			vxreleasenew = -vynew;
+			vyreleasenew = -vxnew;
 			break;
 		case Right:
 			vxnew = V_KEY_CONSTANT;
 			vynew = 0;
+			vxreleasenew = -vynew;
+			vyreleasenew = -vxnew;
 			break;
 		case Up:
 			vynew = V_KEY_CONSTANT;
 			vxnew = 0;
+			vxreleasenew = 0;
+			vyreleasenew = 0;
 			break;
 		default:
 			vynew = 0;
 			vxnew = 0;
+			vxreleasenew = 0;
+			vyreleasenew = 0;
 			break;
 		
 		}
@@ -57,8 +69,8 @@ public class KeyApplicatorFacotry {
 					RuntimeSpriteCharacteristics sprite) {
 				if(!once) return;
 			    once = false;
-				sprite.v_x -= vxnew;
-				sprite.v_y += vynew;
+				sprite.v_x += vxreleasenew;
+				sprite.v_y -= vyreleasenew;
 			}
 		};
        
