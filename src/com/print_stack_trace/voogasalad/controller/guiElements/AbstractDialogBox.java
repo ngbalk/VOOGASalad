@@ -1,25 +1,24 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public abstract class AbstractDialogBox {
+public abstract class AbstractDialogBox<T extends Node> {
 
 	protected Button submitButton = new Button("Submit");
-	protected List<TextField> tfList;
+	protected List<T> nodeList;
 	private Stage stage;
 	
-	public AbstractDialogBox(List<TextField> nodeList) {
-		this.tfList = nodeList;
+	public AbstractDialogBox(List<T> nodeList) {
+		this.nodeList = nodeList;
 		stage = new Stage();
 		stage.setWidth(250);
 		stage.setHeight(250);
@@ -33,25 +32,14 @@ public abstract class AbstractDialogBox {
 		root.getChildren().add(box);
 		submitButton.setOnAction(e->submit());
 		stage.setScene(s);
-		stage.show(); 
+		stage.show();
 	}
 	
-	public AbstractDialogBox(TextField node){
-		this(constructorConverter(node));
-	}
-	
-	private static List<TextField> constructorConverter(TextField node) {
-		List<TextField> nodeList = new ArrayList<TextField>();
-		nodeList.add(node);
-		return nodeList;
+	public void close(){
+		stage.close();
 	}
 
 	public abstract String submit();
-	
-	protected void close(){
-		stage.close();
-	}
-	
 	public abstract List<String> submitAll();
 	
 }
