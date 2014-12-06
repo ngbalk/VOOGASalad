@@ -230,4 +230,12 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			e.printStackTrace();
 		}
 	}
+	
+	//TODO: consider adding to the AbstractGUI shitz
+	public Object loadLevel() {
+		//TODO: implement this!!
+		//LevelModel levelModel = myGameEngine.loadLevelForEditing("");
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
