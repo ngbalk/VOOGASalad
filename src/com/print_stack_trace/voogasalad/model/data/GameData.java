@@ -58,7 +58,7 @@ public class GameData implements IGameData {
 		objMap.put(lvl.toString(), lvl);
 		String json = gson.toJson(lvl);
 		name = System.getProperty("user.dir")
-				+ "/src/com/print_stack_trace/voogasalad/model/data/"
+				+ "/src/com/print_stack_trace/voogasalad/model/data/games/"
 				+ lvl.toString() + ".txt";
 		File file = new File(name);
 		if (file.getCanonicalPath() != null) {
