@@ -10,7 +10,9 @@ package com.print_stack_trace.voogasalad.model;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.*;
@@ -49,8 +51,8 @@ public class SpriteCharacteristics {
 	public String name;
 	public double width;
 	public double height;
-	public HashMap<PossibleSpriteAction, KeyCode> myMovements=new HashMap<PossibleSpriteAction,KeyCode>();
-	
+	public HashMap<PossibleSpriteAction, KeyCode> myMovements;
+	public HashMap<PossibleSpriteAction, ArrayList<Image>> myAnimations;
 	//-------------------CONSTRUCTORS-------------------//
 
 	/**
@@ -70,6 +72,8 @@ public class SpriteCharacteristics {
 		height=DEFAULT_HEIGHT;
 		name=DEFAULT_NAME;
 		myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
+		myAnimations=new HashMap<PossibleSpriteAction, ArrayList<Image>>();
+		this.initiateAnimations();
 	}
 	
 	/**
@@ -90,6 +94,15 @@ public class SpriteCharacteristics {
 		name=obj.getName();
 		myMovements=obj.getMovements();
 		imagePath = obj.getImagePath();
+		myAnimations=obj.getAnimations();
+		
+	}
+	
+	public void initiateAnimations(){
+		for (PossibleSpriteAction action: PossibleSpriteAction.values()){
+			myAnimations.put(action, new ArrayList());
+		}
+		
 	}
 
 	//-------------------ACCESSORS-------------------//
@@ -97,7 +110,9 @@ public class SpriteCharacteristics {
 	public java.awt.Image getJavaAWTImage () {
 		return img;
 	}
-	
+	public HashMap<PossibleSpriteAction, ArrayList<Image>> getAnimations(){
+		return myAnimations;
+	}
     public javafx.scene.image.Image getImage () {
 //    	BufferedImage bufferedImage = (BufferedImage) img;
 //    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
@@ -161,7 +176,17 @@ public class SpriteCharacteristics {
     public int getValue () {
         return value;
     }
-
+    public void addAnimation(PossibleSpriteAction myAction, int index, javafx.scene.image.Image image){
+    	Image img=SwingFXUtils.fromFXImage(image, null);
+    	if (myAnimations.get(myAction).size()>index)
+    		myAnimations.get(myAction).set(index,img);
+    	else {
+    		for (int i=0; i<index; i++){
+    			myAnimations.get(myAction).add(null);
+    		}
+    		myAnimations.get(myAction).add(img);
+    	}
+    }
     public void setValue (int value) {
         this.value = value;
     }
@@ -223,6 +248,8 @@ public class SpriteCharacteristics {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	
 
 	
     

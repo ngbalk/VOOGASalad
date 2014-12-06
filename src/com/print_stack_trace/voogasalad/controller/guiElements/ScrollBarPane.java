@@ -40,12 +40,12 @@ public class ScrollBarPane extends ScrollPane{
 		this.setVmin(0);
 		this.setHmin(0);
 		change((Pane) data);
-		System.out.println("INitial width"+this.getHmax());
+
 
 	}
 	/*
 	private void changeBars(Pane data){
-		
+
 		myWidthDouble.bind(data.prefWidthProperty());
 		myHeightDouble.bind(data.prefHeightProperty());
 		myWidthDouble.addListener(new ChangeListener<Number>(){
@@ -59,35 +59,46 @@ public class ScrollBarPane extends ScrollPane{
 		change(data);
 
 	}
-	*/
+	 */
 	private void change(Pane data){
 		this.hvalueProperty().addListener(new ChangeListener<Number>(){
+
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0,
-					Number arg1, Number newValue) {
-				if(newValue.doubleValue()==getHmax()){
-					data.setPrefSize(data.getPrefWidth()+myWidth*count, data.getPrefHeight());
-					setPrefWidth(getPrefWidth()+myWidth*count);
-					ImageView myImage=((GamePane) data).getBackgroundImage();
-					ImageView copy=new ImageView(myImage.getImage());
-					copy.setFitHeight(myImage.getFitHeight());
-					copy.setFitWidth(myImage.getFitWidth());
-					copy.setPreserveRatio(true);
-					copy.setSmooth(true);
-					copy.relocate(myWidth*count,0);
-					setHmax(getHmax()+myWidth);
-					setHvalue(getHmax()-myWidth);
-					data.getChildren().add(0,copy);
-					count++;
-				}
-
+					Number arg1, Number arg2) {
+					change2(data);
+					//getContent().resize(myWidth+arg2.doubleValue(), myHeight);
+				
 			}
-
+			
 		});
+
 	}
-	private double getHorizontal(){
-		System.out.println("YIKES"+this.getHmax());
-		return this.getHmax();
+	private void change2(Pane data){
+		if(getHvalue()==getHmax()){
+			System.out.println("FUCK"+getHmax());
+			data.setPrefSize(data.getPrefWidth()+myWidth*count, data.getPrefHeight());
+			setPrefWidth(getPrefWidth()+myWidth*count);
+			ImageView myImage=((GamePane) data).getBackgroundImage();
+			ImageView copy=new ImageView(myImage.getImage());
+			copy.setFitHeight(myImage.getFitHeight());
+			copy.setFitWidth(myImage.getFitWidth());
+			copy.setPreserveRatio(true);
+			copy.setSmooth(true);
+			copy.relocate(myWidth*count,0);
+			disableAndEnable();
+			data.getChildren().add(0,copy);
+		}
 	}
+	private void disableAndEnable(){
+		this.setHvalue(0);
+		System.out.println("ME"+getHvalue());
+		setHmax(getHmax()+myWidth);
+		count++;
+		this.setDisable(false);
+		
+		
+	}
+
 
 }
