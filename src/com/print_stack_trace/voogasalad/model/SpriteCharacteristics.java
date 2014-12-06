@@ -48,8 +48,6 @@ public class SpriteCharacteristics {
 	public double startingSpeed;
 	public int value;
 	public double orientation;
-
-	//AUTHOR
 	public String name;
 	public double width;
 	public double height;
