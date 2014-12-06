@@ -1,1 +1,69 @@
-{"mySpriteMap":{"0":{"imagePath":"./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png","p":{"x":241,"y":327},"interactive":true,"objectType":"HERO","startingHealth":10,"startingSpeed":10.0,"value":0,"orientation":0.0,"name":"","width":100.0,"height":100.0,"myMovements":{}}},"goalMap":{},"currentID":2,"isLocked":false,"myLevelChars":{"name":"Level1","backgroundImagePath":"./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png","requiredNumberOfGoals":0},"myGoalFactory":{},"myKeyMap":{}}
+{
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
+      "xPosition": 99,
+      "yPosition": 102,
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 101.0,
+      "height": 103.0,
+      "myMovements": {}
+    }
+  },
+  "goalMap": {},
+  "currentID": 0,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "level1",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
+    "requiredNumberOfGoals": 0
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {}
+}

@@ -1,7 +1,7 @@
 /**
  * @author 
  * Date Created: 11/??/14
- * Date Modified: 11/23/14
+ * Date Modified: 12/06/14
  */
 
 package com.print_stack_trace.voogasalad.model;
@@ -23,7 +23,9 @@ public class SpriteCharacteristics {
 
 	// DEFAULT VARIABLES
 	public static final Image DEFAULT_IMAGE = null;
-	public static final Point DEFAULT_POINT = new Point(0,0);
+	public static final int DEFAULT_X_POSITION = 0;
+	public static final int DEFAULT_Y_POSITION = 0;
+	//public static final Point DEFAULT_POINT = new Point(DEFAULT_X_POSITION,DEFAULT_Y_POSITION);
 	public static final boolean DEFAULT_INTERACTIVE = false;
 	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
 	public static final int DEFAULT_HEALTH = 10;
@@ -37,7 +39,9 @@ public class SpriteCharacteristics {
 	// GAME AUTHORING VARIABLES
 	public transient Image img;
 	public String imagePath;
-	public Point p;
+	//public Point p;
+	public int xPosition;
+	public int yPosition;
 	public boolean interactive;
 	public SpriteType objectType;
 	public int startingHealth;
@@ -60,7 +64,9 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
 		img = DEFAULT_IMAGE;
-		p = DEFAULT_POINT;
+		//p = DEFAULT_POINT;
+		xPosition=DEFAULT_X_POSITION;
+		yPosition=DEFAULT_Y_POSITION;
 		startingHealth = DEFAULT_HEALTH;
 		startingSpeed = DEFAULT_SPEED;
 		value = DEFAULT_VALUE;
@@ -85,7 +91,9 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteCharacteristics obj) {
 		objectType = obj.getObjectType();
 		img = obj.getJavaAWTImage();
-		p = obj.getPoint();
+		//p = obj.getPoint();
+		xPosition=(int)obj.getX();
+		yPosition=(int)obj.getY();
 		interactive = obj.isInteractive();
 		startingHealth = obj.getStartingHealth();
 		startingSpeed = obj.getStartingSpeed();
@@ -125,11 +133,13 @@ public class SpriteCharacteristics {
 	}
 
 	public Point getPoint () {
-		return p;
+		return new Point(xPosition,yPosition);
 	}
 
 	public void setPoint (Point p) {
-		this.p = p;
+		//this.p=p;
+		setX(p.getX());
+		setY(p.getY());
 	}
 
 	public boolean isInteractive () {
@@ -177,25 +187,31 @@ public class SpriteCharacteristics {
 	}
 
 	public void setOrientation (double newOrientation) {
-		//System.out.println(newOrientation);
 		this.orientation = newOrientation;
-		//System.out.println(orientation);
 	}
 
 	public double getX(){
-		return p.getX();
+		return xPosition;
 	}
 
 	public double getY(){
-		return p.getY();
+		return yPosition;
 	}
 
-	public void setX(double xLocation){
-		p.x=(int)xLocation; 
+	public void setX(double xPosition){
+		this.xPosition=(int)xPosition;
 	}
 
-	public void setY(double yLocation){
-		p.y=(int) yLocation;
+	public void setX(int xLocation){
+		this.xPosition=xLocation;
+	}
+	
+	public void setY(double yPosition){
+		this.yPosition=(int)yPosition;
+	}
+	
+	public void setY(int yPosition){
+		this.yPosition=yPosition;
 	}
 
 	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){

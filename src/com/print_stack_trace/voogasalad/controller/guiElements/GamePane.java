@@ -145,7 +145,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			}
 		}
 		else{
-
+			System.out.println(myObject.getCharacteristics().getX());
 			myGameEngine.updateObject(myObject.getId(), myObject.getCharacteristics());
 		}
 		SpriteObject temp=new SpriteObject(0,new ImageView(myObject.getImage().getImage()), myObject.getImagePath(), myObject.getType(),myObject.getDelegate());
