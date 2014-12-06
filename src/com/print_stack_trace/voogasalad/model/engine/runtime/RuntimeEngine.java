@@ -17,8 +17,8 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicationChecker;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicator;
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry;
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 public class RuntimeEngine extends AbstractRuntimeEngine {
@@ -113,7 +113,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		Integer mainChar = runtimeModel.getMainCharacter();
 		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
 		if(applicator == null) {
-			applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
+			applicator = KeyApplicatorFactory.buildKeyApplicator(res);
 			applicatorCache.put(res, applicator);
 		}
 		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {

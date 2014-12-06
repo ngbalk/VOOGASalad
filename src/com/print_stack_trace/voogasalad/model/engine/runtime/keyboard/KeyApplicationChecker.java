@@ -2,7 +2,7 @@ package com.print_stack_trace.voogasalad.model.engine.runtime.keyboard;
 
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 public class KeyApplicationChecker {
 

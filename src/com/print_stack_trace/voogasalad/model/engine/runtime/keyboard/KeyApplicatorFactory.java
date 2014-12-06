@@ -2,7 +2,7 @@ package com.print_stack_trace.voogasalad.model.engine.runtime.keyboard;
 
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
-public class KeyApplicatorFacotry {
+public class KeyApplicatorFactory {
 	
 	public static final int V_KEY_CONSTANT = 30;
 	public static final int H_KEY_CONSTANT = 20;
