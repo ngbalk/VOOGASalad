@@ -50,6 +50,7 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 import com.print_stack_trace.voogasalad.player.Score;
+import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
@@ -59,8 +60,6 @@ public class GamePlayer implements ViewController {
 	private PlayPane myPlayPane;
 	private GameEngine myGameEngine;
 	private boolean isPlaying = false;
-
-	private DecisionTable dt = new DecisionTable();
 	private Score currentScore;
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
 	private String DEFAULT_CLASS_PATH="com.print_stack_trace.voogasalad.controller.guiElements.";
@@ -72,10 +71,13 @@ public class GamePlayer implements ViewController {
 	private Button saveGame, resumeGame, pauseGame,stopGame;
 
 	/***
-	 * TODO: Obtain Front End Person to work on graphical elements
-	 * determine which methods needs to be called from backend, so they can create public methods
+	 * ViewController initializer. Place custom launch code here!
 	 */
 	public Group initialize(GameEngine gameEngine) {
+		//Start up the PSTTwillioCore
+		PSTTwillioCore.initialize("AC09e66285f4f7af231fed2d84c6898fe9",
+				"1c04eedaa6fa6f883fcf54917ee212c2", "+15162521065");
+		
 		myGameEngine = gameEngine;
 		myGameEngine.setFramesPerSecond(FPS);
 
