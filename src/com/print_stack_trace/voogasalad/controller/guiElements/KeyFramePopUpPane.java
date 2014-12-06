@@ -32,7 +32,7 @@ public class KeyFramePopUpPane extends GeneralPane {
 	private Pane keyFramePane;
 	private Pane picturePane;
 	private SpriteObject mySprite;
-	private HashMap<PossibleSpriteAction, ArrayList<Image>> myAnimations=new HashMap<PossibleSpriteAction, ArrayList<Image>>();
+	private HashMap<PossibleSpriteAction, ArrayList<File>> myAnimations=new HashMap<PossibleSpriteAction, ArrayList<File>>();
 	public KeyFramePopUpPane(SpriteObject object){
 		super();
 		mySprite=object;
@@ -46,11 +46,15 @@ public class KeyFramePopUpPane extends GeneralPane {
 		picturePane.setPrefSize(this.getPrefWidth(), this.getPrefHeight()-myBox.getPrefHeight()-keyFramePane.getPrefHeight());
 		this.setStyle("-fx-background-color:BLACK; -fx-border-color: BLUE");
 		this.getChildren().addAll(myBox, picturePane);
+		myCurrentKey.setText("Current KeyFrame: "+ myBox.getCurrentKeyFrame().getValue().getTag()+myBox.getCurrentKeyFrame().getValue().getIndex());	
+		addKeyImage(myBox.getCurrentKeyFrame().getValue().getImagePath());
+
 
 	}
 	private void makeMovementMap(){
 		for (PossibleSpriteAction action: PossibleSpriteAction.values()){
-			myAnimations.put(action, new ArrayList());
+			System.out.println(mySprite.getCharacteristics().getAnimationImages(action));
+			myAnimations.put(action, mySprite.getCharacteristics().getAnimationPath(action));
 		}
 	}
 	public void currentKeyFramePane(){
@@ -72,7 +76,7 @@ public class KeyFramePopUpPane extends GeneralPane {
 		addButton.relocate(pane.getPrefWidth()/2, pane.getPrefHeight()/4);
 		addButton.getStyleClass().add("buttonTemplate");
 		addButton.setPrefSize(pane.getPrefWidth()/5, pane.getPrefHeight()/2);
-		addButton.setOnAction(e->myBox.addKeyFrame());
+		addButton.setOnAction(e->add());
 		pane.getChildren().addAll(addButton, myCurrentKey);
 		ImageUpload imageButton=new ImageUpload();
 		imageButton.getType().relocate(pane.getPrefWidth()/4*3, pane.getPrefHeight()/4);
@@ -87,16 +91,21 @@ public class KeyFramePopUpPane extends GeneralPane {
 			public void changed(ObservableValue<? extends KeyFrameBlock> arg0,
 					KeyFrameBlock oldFrame, KeyFrameBlock newFrame) {
 				myCurrentKey.setText("Current KeyFrame: "+ newFrame.getTag()+newFrame.getIndex());	
-				addKeyImage(newFrame.getImage());
-				
+				addKeyImage(newFrame.getImagePath());
+
 			}
 		});
 	}
-	private void setCurrentKeyImage(Image img){
+	private void add(){
+		myBox.addKeyFrame();
+		setCurrentKeyImage(null, null);
+	}
+	private void setCurrentKeyImage(Image img, File imagePath){
 		myBox.getCurrentKeyFrame().getValue().setImage(img);
+		myBox.getCurrentKeyFrame().getValue().setImagePath(imagePath);
 		for (PossibleSpriteAction action: PossibleSpriteAction.values()){
 			if (action.name().equals(myBox.getCurrentKeyFrame().getValue().getName())&&img!=null){
-				mySprite.getCharacteristics().addAnimation(action,(myBox.getCurrentKeyFrame().getValue().getIndex()-1), img);
+				mySprite.getCharacteristics().addAnimation(action,(myBox.getCurrentKeyFrame().getValue().getIndex()-1), imagePath);
 				mySprite.getDelegate().update(mySprite);
 			}
 		}
@@ -119,7 +128,18 @@ public class KeyFramePopUpPane extends GeneralPane {
 	private void setImageObservable(){
 
 	}
-	private void addKeyImage(Image img){
+	private void addKeyImage(File imgPath){
+		BufferedImage buffer;
+		Image img=null;
+		if (imgPath!=null){
+			try {
+				buffer = ImageIO.read(imgPath);
+				img=SwingFXUtils.toFXImage(buffer, null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Couldn't upload Image");
+			}
+		}
 		ImageView myView=new ImageView(img);
 		myView.setFitHeight(picturePane.getPrefHeight()/2);
 		myView.setFitWidth(picturePane.getPrefWidth()/2);
@@ -127,7 +147,7 @@ public class KeyFramePopUpPane extends GeneralPane {
 		myView.relocate(picturePane.getPrefWidth()/2-myView.getFitWidth()/2, picturePane.getPrefHeight()/2-myView.getFitHeight()/2);
 		picturePane.getChildren().clear();
 		picturePane.getChildren().add(myView);
-		setCurrentKeyImage(myView.getImage());
+		setCurrentKeyImage(myView.getImage(), imgPath);
 
 	}
 	public void setImageOnAction(){

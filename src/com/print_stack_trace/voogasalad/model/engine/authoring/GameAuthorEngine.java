@@ -58,6 +58,7 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 	}
 
 	public void updateObject(Integer modelID, SpriteCharacteristics spriteModel) {
+		System.out.println(modelID+"X"+spriteModel.getX());
 		currentLevel.updateObject(modelID, spriteModel);
 	}
 

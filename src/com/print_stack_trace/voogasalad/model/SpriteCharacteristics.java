@@ -10,12 +10,17 @@ package com.print_stack_trace.voogasalad.model;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import javax.imageio.ImageIO;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 
 import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
@@ -52,7 +57,7 @@ public class SpriteCharacteristics {
 	public double width;
 	public double height;
 	public HashMap<PossibleSpriteAction, KeyCode> myMovements;
-	public HashMap<PossibleSpriteAction, ArrayList<Image>> myAnimations;
+	public HashMap<PossibleSpriteAction, ArrayList<File>> myAnimations;
 	//-------------------CONSTRUCTORS-------------------//
 
 	/**
@@ -72,7 +77,7 @@ public class SpriteCharacteristics {
 		height=DEFAULT_HEIGHT;
 		name=DEFAULT_NAME;
 		myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
-		myAnimations=new HashMap<PossibleSpriteAction, ArrayList<Image>>();
+		myAnimations=new HashMap<PossibleSpriteAction, ArrayList<File>>();
 		this.initiateAnimations();
 	}
 	
@@ -110,7 +115,7 @@ public class SpriteCharacteristics {
 	public java.awt.Image getJavaAWTImage () {
 		return img;
 	}
-	public HashMap<PossibleSpriteAction, ArrayList<Image>> getAnimations(){
+	public HashMap<PossibleSpriteAction, ArrayList<File>> getAnimations(){
 		return myAnimations;
 	}
     public javafx.scene.image.Image getImage () {
@@ -125,6 +130,25 @@ public class SpriteCharacteristics {
 
     public void setImage(javafx.scene.image.Image image) {
         this.img = SwingFXUtils.fromFXImage(image, null);
+    }
+    public ArrayList<File> getAnimationPath(PossibleSpriteAction action){
+    	return myAnimations.get(action);
+    }
+    public ArrayList<javafx.scene.image.Image> getAnimationImages(PossibleSpriteAction action){
+    	ArrayList<javafx.scene.image.Image> myImages=new ArrayList<javafx.scene.image.Image>();
+    	BufferedImage buffer;
+    	for (File path: getAnimationPath(action)){
+    		try {
+				buffer = ImageIO.read(path);
+				javafx.scene.image.Image img=SwingFXUtils.toFXImage(buffer, null);
+				myImages.add(img);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Image couldn't be uploaded");
+			}
+			
+    	}
+    	return myImages;
     }
     public void setImagePath(String path){
     	imagePath = path;
@@ -176,15 +200,14 @@ public class SpriteCharacteristics {
     public int getValue () {
         return value;
     }
-    public void addAnimation(PossibleSpriteAction myAction, int index, javafx.scene.image.Image image){
-    	Image img=SwingFXUtils.fromFXImage(image, null);
+    public void addAnimation(PossibleSpriteAction myAction, int index, File imgPath){
     	if (myAnimations.get(myAction).size()>index)
-    		myAnimations.get(myAction).set(index,img);
+    		myAnimations.get(myAction).set(index,imgPath);
     	else {
     		for (int i=0; i<index; i++){
     			myAnimations.get(myAction).add(null);
     		}
-    		myAnimations.get(myAction).add(img);
+    		myAnimations.get(myAction).add(imgPath);
     	}
     }
     public void setValue (int value) {

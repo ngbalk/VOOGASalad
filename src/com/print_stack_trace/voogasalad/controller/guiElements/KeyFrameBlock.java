@@ -1,5 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.io.File;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
@@ -11,11 +13,12 @@ public class KeyFrameBlock extends Rectangle{
 	private Image myImage;
 	private String myName;
 	private int myIndex;
-	private String myImagePath;
-	public KeyFrameBlock(Image image, String name, int index){
+	private File myImagePath;
+	public KeyFrameBlock(File imgPath,Image image, String name, int index){
 		myImage =image;
 		myName=name;
 		myIndex=index;
+		myImagePath=imgPath;
 	}
 	public String getTag(){
 		if (myName==null){
@@ -38,11 +41,11 @@ public class KeyFrameBlock extends Rectangle{
 	public String getName(){
 		return myName;
 	}
-	public String getImagePath(){
+	public File getImagePath(){
 		return myImagePath;
 	}
-	public void setImagePath(String myString){
-		myImagePath=myString;
+	public void setImagePath(File imagePath){
+		myImagePath=imagePath;
 	}
 
 	
