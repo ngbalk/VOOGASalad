@@ -7,11 +7,15 @@ import javafx.scene.layout.Pane;
 
 public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 
-	//private DecisionTableButton tableButton;
+	//private DecisionTableButton tableButton;// = new DecisionTableButton(new DecisionTable());
 	
 	public GameAuthorBottomLayoutNode(double width, double height, Node node, DecisionTable table) {
 		super(width, height, node);
-		//tableButton= new DecisionTableButton(table);
+		DecisionTableButton tableButton= new DecisionTableButton(table);
+		tableButton.getStyleClass().add("buttonTemplate2");
+		tableButton.relocate(width*.45, 20);
+		tableButton.setPrefSize(200, 50);
+		((Pane) myNode).getChildren().add(tableButton);
 	}
 
 	@Override
@@ -36,11 +40,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		saveButton.setPrefSize(100,50);
 		saveButton.getStyleClass().add("buttonTemplate2");
 		saveButton.setOnMouseClicked(e->((GamePane) myLinkedObject).saveGame());
-		DecisionTableButton tableButton = new DecisionTableButton(new DecisionTable());
-		tableButton.getStyleClass().add("buttonTemplate2");
-		tableButton.relocate(width*.45, 20);
-		tableButton.setPrefSize(200, 50);
-		bottomPane.getChildren().addAll(myLevelBar, myLevelButton, tableButton, saveButton);
+		bottomPane.getChildren().addAll(myLevelBar, myLevelButton, saveButton);
 		myNode=bottomPane;
 		
 	}

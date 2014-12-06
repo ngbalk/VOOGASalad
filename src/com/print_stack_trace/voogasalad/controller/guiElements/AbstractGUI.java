@@ -53,7 +53,7 @@ public abstract class AbstractGUI extends BorderPane {
 	protected abstract void setStyle(Node stylePane);
 	protected abstract void setBorderStyle(Node stylePane);
 	public Group initialize(GameEngine gameEngine) {
-		DecisionTable dt = new DecisionTable();
+		DecisionTable dt = new DecisionTable(gameEngine);
 		setCenter(setCenterPane(gameEngine));
 		setBottom(setBottomPane(dt));
 		setLeft(setLeftPane());
