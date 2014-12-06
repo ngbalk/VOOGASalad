@@ -11,10 +11,8 @@ public class ObjectBothFullDisplacement extends CollisionHandler {
 			RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
 		s1.v_x = -s1.v_x;
 		s2.v_x = -s2.v_x;
-		s1.decelerationConstant = 1;
-		s2.decelerationConstant = 1;
-		
-		
+		s1.setDecelerationConstant(0.1f);
+		s2.setDecelerationConstant(0.1f);
 	}
 
 }

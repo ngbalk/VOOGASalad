@@ -24,7 +24,7 @@ public class SpriteCharacteristics {
 	// DEFAULT VARIABLES
 	public static final Image DEFAULT_IMAGE = null;
 	public static final Point DEFAULT_POINT = new Point(0,0);
-	public static final boolean DEFAULT_INTERACTIVE = true;
+	public static final boolean DEFAULT_INTERACTIVE = false;
 	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
 	public static final int DEFAULT_HEALTH = 10;
 	public static final double DEFAULT_SPEED = 10;
@@ -33,7 +33,7 @@ public class SpriteCharacteristics {
 	public static final String DEFAULT_NAME="";
 	public static final double DEFAULT_WIDTH=100;
 	public static final double DEFAULT_HEIGHT=100;
-	
+
 	// GAME AUTHORING VARIABLES
 	public transient Image img;
 	public String imagePath;
@@ -44,13 +44,13 @@ public class SpriteCharacteristics {
 	public double startingSpeed;
 	public int value;
 	public double orientation;
-	
+
 	//AUTHOR
 	public String name;
 	public double width;
 	public double height;
 	public HashMap<PossibleSpriteAction, KeyCode> myMovements=new HashMap<PossibleSpriteAction,KeyCode>();
-	
+
 	//-------------------CONSTRUCTORS-------------------//
 
 	/**
@@ -61,7 +61,6 @@ public class SpriteCharacteristics {
 		objectType = t;
 		img = DEFAULT_IMAGE;
 		p = DEFAULT_POINT;
-		interactive = DEFAULT_INTERACTIVE;
 		startingHealth = DEFAULT_HEALTH;
 		startingSpeed = DEFAULT_SPEED;
 		value = DEFAULT_VALUE;
@@ -70,8 +69,15 @@ public class SpriteCharacteristics {
 		height=DEFAULT_HEIGHT;
 		name=DEFAULT_NAME;
 		myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
+		interactive = DEFAULT_INTERACTIVE;
+		switch(t){
+		case HERO:
+			interactive = true;
+		case ENEMY:
+			interactive = true;
+		}
 	}
-	
+
 	/**
 	 * Constructor that essentially "clones" another spritecharacteristics class
 	 * @param obj
@@ -93,137 +99,137 @@ public class SpriteCharacteristics {
 	}
 
 	//-------------------ACCESSORS-------------------//
-	
+
 	public java.awt.Image getJavaAWTImage () {
 		return img;
 	}
-	
-    public javafx.scene.image.Image getImage () {
-//    	BufferedImage bufferedImage = (BufferedImage) img;
-//    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
-    	return new javafx.scene.image.Image(imagePath);
-    }
-    
-    public void setJavaAWTImage(Image image) {
-        this.img = image;
-    }
 
-    public void setImage(javafx.scene.image.Image image) {
-        this.img = SwingFXUtils.fromFXImage(image, null);
-    }
-    public void setImagePath(String path){
-    	imagePath = path;
-    }
-    public String getImagePath(){
-    	return imagePath;
-    }
+	public javafx.scene.image.Image getImage () {
+		//    	BufferedImage bufferedImage = (BufferedImage) img;
+		//    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
+		return new javafx.scene.image.Image(imagePath);
+	}
 
-    public Point getPoint () {
-        return p;
-    }
+	public void setJavaAWTImage(Image image) {
+		this.img = image;
+	}
 
-    public void setPoint (Point p) {
-        this.p = p;
-    }
+	public void setImage(javafx.scene.image.Image image) {
+		this.img = SwingFXUtils.fromFXImage(image, null);
+	}
+	public void setImagePath(String path){
+		imagePath = path;
+	}
+	public String getImagePath(){
+		return imagePath;
+	}
 
-    public boolean isInteractive () {
-        return interactive;
-    }
+	public Point getPoint () {
+		return p;
+	}
 
-    public void setInteractive (boolean interactive) {
-        this.interactive = interactive;
-    }
+	public void setPoint (Point p) {
+		this.p = p;
+	}
 
-    public SpriteType getObjectType () {
-        return objectType;
-    }
+	public boolean isInteractive () {
+		return interactive;
+	}
 
-    public void setObjectType (SpriteType objectType) {
-        this.objectType = objectType;
-    }
+	public void setInteractive (boolean interactive) {
+		this.interactive = interactive;
+	}
 
-    public int getStartingHealth () {
-        return startingHealth;
-    }
+	public SpriteType getObjectType () {
+		return objectType;
+	}
 
-    public void setStartingHealth (int startingHealth) {
-        this.startingHealth = startingHealth;
-    }
+	public void setObjectType (SpriteType objectType) {
+		this.objectType = objectType;
+	}
 
-    public double getStartingSpeed () {
-        return startingSpeed;
-    }
+	public int getStartingHealth () {
+		return startingHealth;
+	}
 
-    public void setStartingSpeed (double startingSpeed) {
-        this.startingSpeed = startingSpeed;
-    }
+	public void setStartingHealth (int startingHealth) {
+		this.startingHealth = startingHealth;
+	}
 
-    public int getValue () {
-        return value;
-    }
+	public double getStartingSpeed () {
+		return startingSpeed;
+	}
 
-    public void setValue (int value) {
-        this.value = value;
-    }
+	public void setStartingSpeed (double startingSpeed) {
+		this.startingSpeed = startingSpeed;
+	}
 
-    public double getOrientation () {
-        return orientation;
-    }
+	public int getValue () {
+		return value;
+	}
 
-    public void setOrientation (double newOrientation) {
-    	//System.out.println(newOrientation);
-        this.orientation = newOrientation;
-        //System.out.println(orientation);
-    }
-    
+	public void setValue (int value) {
+		this.value = value;
+	}
+
+	public double getOrientation () {
+		return orientation;
+	}
+
+	public void setOrientation (double newOrientation) {
+		//System.out.println(newOrientation);
+		this.orientation = newOrientation;
+		//System.out.println(orientation);
+	}
+
 	public double getX(){
 		return p.getX();
 	}
-	
+
 	public double getY(){
 		return p.getY();
 	}
-	
+
 	public void setX(double xLocation){
 		p.x=(int)xLocation; 
 	}
-	
+
 	public void setY(double yLocation){
 		p.y=(int) yLocation;
 	}
-	
+
 	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
 		myMovements.put(myAction, myKey);
 	}
-	
+
 	public HashMap<PossibleSpriteAction, KeyCode> getMovements(){
 		return myMovements;
 	}
-	
+
 	public double getWidth(){
 		return width;
 	}
-	
+
 	public double getHeight(){
 		return height;
 	}
-	
+
 	public void setWidth(double width){
 		this.width = width;
 	}
-	
+
 	public void setHeight(double height){
 		this.height = height;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	
-    
+
+
 }
