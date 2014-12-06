@@ -49,4 +49,7 @@ public class LevelBar extends MenuBar{
 		}
 		return nonActiveLevels;
 	}
+	public HashSet getLevels(){
+		return  (HashSet) myLevelMap.keySet();
+	}
 }

@@ -7,6 +7,7 @@
  */
 package com.print_stack_trace.voogasalad.model.engine.physics;
 
+import java.awt.Rectangle;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
 public class CollisionDetector {
@@ -18,11 +19,9 @@ public class CollisionDetector {
 	 * @return true if a collision happened, false otherwise
 	 */
 	public static boolean haveCollided(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB) {
-		if(spriteA.interactive && spriteB.interactive) {
-			//TODO: @ethan&nick
-			return false;
-		} else {
-			return false;
-		}
+            Rectangle rect1 = new Rectangle((int) spriteA.p.getX(), (int) spriteA.p.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
+            Rectangle rect2 = new Rectangle((int) spriteB.p.getX(), (int) spriteB.p.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
+            return rect1.intersects(rect2);
 	}
+	
 }

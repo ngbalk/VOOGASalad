@@ -16,7 +16,6 @@ public class ObjectOneDisappear extends CollisionHandler {
 	@Override
 	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
 			RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
-		s1.interactive = false;
 		s1.setAlpha(0.0f);
 		s1.flagForRemoval();
 	}

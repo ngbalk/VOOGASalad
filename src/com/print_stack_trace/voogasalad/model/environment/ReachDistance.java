@@ -1,31 +1,39 @@
 package com.print_stack_trace.voogasalad.model.environment;
 
+import java.awt.Point;
+
 import javafx.geometry.Point2D;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
-public class ReachXDistance extends Goal implements GoalElement{
+public class ReachDistance extends Goal implements GoalElement{
     
-    private double myXDestination;
+    private double myDestination;
     private Integer myHeroID;
+    private boolean myHorizontal;
 
-    public ReachXDistance (GoalCharacteristics goalCharacteristics) {
+    public ReachDistance (GoalCharacteristics goalCharacteristics) {
         super(goalCharacteristics);
     }
 
-    public double getXDestination() {
-        return myXDestination;
+    public double getDestination() {
+        return myDestination;
     }
     
     public Integer getHeroID() {
         return myHeroID;
     }
+    
+    public boolean isHorizontal(){
+    	return myHorizontal;
+    }
 
     @Override
     protected void setGoalProperties() {
         super.setGoalProperties();
-        myXDestination = myGoalCharacteristics.myDestination.getX();
+        myDestination = myGoalCharacteristics.myDestination;
         myHeroID = myGoalCharacteristics.myObjectID;
+        myHorizontal = myGoalCharacteristics.myHorizontalDestination;
 
     }
 

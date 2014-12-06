@@ -4,10 +4,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 public abstract class LevelCharacteristicController extends UserInputText{
-	protected LevelObject myLevel;
 	protected TextField myTextBox;
 	public LevelCharacteristicController(GameObject level){
-		myLevel = (LevelObject)level;
+		mySprite = (LevelObject)level;
 		myTextBox = (TextField) myNode;
 		populateDefaultText();
 		myTextBox.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
@@ -17,7 +16,6 @@ public abstract class LevelCharacteristicController extends UserInputText{
 				if (e.getCode()==KeyCode.ENTER){
 					setCharacteristic(myTextBox.getText());
 				}
-				
 			}
 			
 		});

@@ -53,12 +53,13 @@ import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
+	private final static int FPS = 10;
 	private Group myRoot;
 	private Group myGameRoot;
 	private PlayPane myPlayPane;
 	private GameEngine myGameEngine;
 	private boolean isPlaying = false;
-	
+
 	private DecisionTable dt = new DecisionTable();
 	private Score currentScore;
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
@@ -66,23 +67,26 @@ public class GamePlayer implements ViewController {
 	private String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	private int keyFrameCounter = 0;
-	
+
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
-	
+
 	/***
 	 * TODO: Obtain Front End Person to work on graphical elements
 	 * determine which methods needs to be called from backend, so they can create public methods
 	 */
 	public Group initialize(GameEngine gameEngine) {
 		myGameEngine = gameEngine;
+		myGameEngine.setFramesPerSecond(FPS);
+
 		myRoot = new Group(); 
-		myRoot.setOnKeyReleased(KeyPad);
+
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
 		myRoot.setOnKeyPressed(gameEngine.getRuntimeKeyPressHandler());
-		myRoot.setOnKeyReleased(gameEngine.getRuntimeKeyReleasaeHandler());
+
+		myRoot.setOnKeyReleased(gameEngine.getRuntimeKeyReleaseHandler());
 		splash.continueFromSplashScreen(this, myRoot);
 		myPlayPane = new PlayPane();
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
@@ -97,15 +101,16 @@ public class GamePlayer implements ViewController {
 		animation.play();
 		return myRoot;
 	}
-	
-	
+
+
 	/**
 	 * Create the game's frame
 	 */
 	public KeyFrame start () {
-		return new KeyFrame(Duration.millis(1000/60), oneFrame);
-	} 
-	
+		isPlaying = false;
+		return new KeyFrame(Duration.millis(1000/FPS), oneFrame);
+	}
+
 	private EventHandler<ActionEvent> oneFrame = new EventHandler<ActionEvent>() {
 		@Override //class note: makes Java check for errors when it normally wouldn't
 		public void handle(ActionEvent evt) {
@@ -123,6 +128,11 @@ public class GamePlayer implements ViewController {
 	 * @param spriteCharacteristics 
 	 */
 	public void updateScene(){ 
+
+		ImageView spriteImage = null;
+		Image img = null;
+
+		myPlayPane.getChildren().clear();
 		RuntimeModel r = myGameEngine.getStatus();
 		LevelCharacteristics levelCharacteristics = r.getLevelCharacteristics();
 		Map<Integer, RuntimeSpriteCharacteristics> spriteMap = r.getRuntimeSpriteMap();
@@ -134,24 +144,22 @@ public class GamePlayer implements ViewController {
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
 		myPlayPane.getChildren().add(0,background);
+
 		for(Integer id : spriteMap.keySet()){
-			System.out.println("detected sprite ID = " + id);
 			SpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
-			ImageView spriteImage = new ImageView(new Image(spriteCharacteristics.getImagePath()));
-			System.out.println("Sprite Image path: " + spriteCharacteristics.getImagePath());
-			System.out.println("Sprite X Location: " + spriteCharacteristics.getX());
-			System.out.println("Sprite Y Location: " + spriteCharacteristics.getY());
+			img = new Image(spriteCharacteristics.getImagePath());
+			spriteImage = new ImageView(img);
 			spriteImage.setFitWidth(spriteCharacteristics.getWidth());
 			spriteImage.setFitHeight(spriteCharacteristics.getHeight());
 			spriteImage.setRotate(spriteCharacteristics.getOrientation());
 			spriteImage.setLayoutX(spriteCharacteristics.getX());
 			spriteImage.setLayoutY(spriteCharacteristics.getY());
-			myGameRoot.getChildren().add(spriteImage);
+			myPlayPane.getChildren().add(spriteImage);
 		}
-		
+
 	}
-	
-	
+
+
 	/*** 
 	 * calls gameEngine to update Score;; need to hash out out we handle scores/coins
 	 */
@@ -159,14 +167,14 @@ public class GamePlayer implements ViewController {
 		//gameEngine.updateScore() 
 		//(or if we are in charge of scores.. then scores.updateScore()
 	} 
-	
+
 	public void pauseGame(){ //buttons with handlers
-		isPlaying = true;
+		isPlaying = false;
 		System.out.println(isPlaying);
-		//gameEngine.pause();
+		//		gameEngine.pause();
 		//if gameplayer is the gameloop --> timeline.stop();
 	}
-	
+
 	public void resumeGame(){ //buttons with handlers
 		isPlaying = true;
 		//gameEngine.resume();
@@ -186,7 +194,7 @@ public class GamePlayer implements ViewController {
 			}
 		}
 	}
-	
+
 	public void stopGame(){
 		isPlaying = false;
 		//gameEngine.stopGame();
@@ -221,25 +229,8 @@ public class GamePlayer implements ViewController {
 		root.getChildren().add(scoresVBox);
 		dialog.show();
 	}
-	
 
-	/**
-	 * Handler for actions involving KeyPad.  
-	 * add other keyEvents here
-	 */
-	private EventHandler<KeyEvent> KeyPad = new EventHandler<KeyEvent>(){
-		public void handle(KeyEvent t){
-			switch(t.getCode()){
-			case UP: //doSomething()  break;
-			case DOWN: //doSomething() break;
-			case LEFT: //doSomething()  break;
-			case RIGHT: //doSomething() break;
-			
-			}
-		}
-	};
 
-	
 	/***
 	 * Method for Choosing Image --> Front End Person to modify to his/her liking
 	 */

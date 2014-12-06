@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -42,19 +43,19 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public GamePane(double width, double height, GameEngine gameEngine){
 		myWidth=width;
 		myHeight=height;
-		this.setWidth(width);
-		this.setHeight(height);
+		this.setWidth(Double.POSITIVE_INFINITY);
+		this.setHeight(Double.POSITIVE_INFINITY);
 		myData=new HashMap<String,HashSet<SpriteObject>>();
 		this.setPrefSize(width, height);
 		myGameEngine=gameEngine;
 		this.getStylesheets().add(myStyle);
-		
+
 	}
 	public void addGameObject(ImageView gameObjectImageView, String imagePath){
 		if (imagePath!=null){
 			String myMessage=new MessagePopUp(myStyle).showDropDownDialog("What type of object would you like this image to be: ",spriteTypeNames());
 			if (new BlankSpaceTextChecker().checkText(myMessage)){
-				 addSpriteObject(gameObjectImageView, imagePath, myMessage);
+				addSpriteObject(gameObjectImageView, imagePath, myMessage);
 			}
 		}
 	}
@@ -66,8 +67,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myGameObject.getCharacteristics().setY(myGameObject.getImage().getLayoutY());
 		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
 		myGameObject.setID(myID);
+		System.out.println(gameObjectImageView);
 		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
-		
 		if (myData.get(myGameObject.getCode())==null)
 			myData.put(myGameObject.getCode(), new HashSet<SpriteObject>());
 		myData.get(myGameObject.getCode()).add(myGameObject);
@@ -76,11 +77,15 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return myGameObject;
 	}
 	public void addExistingObjectToOtherPane(SpriteObject newSprite){
+		newSprite.getImage().setFitHeight(newSprite.getCharacteristics().getHeight());
+		newSprite.getImage().setFitWidth(newSprite.getCharacteristics().getWidth());
 		SpriteObject spriteOnBoard=this.addSpriteObject(newSprite.getImage(), newSprite.getImagePath(), newSprite.getType());
 		spriteOnBoard.setCharacteristics(newSprite.getCharacteristics());	
 		spriteOnBoard.getImage().setFitHeight(spriteOnBoard.getCharacteristics().getHeight());
 		spriteOnBoard.getImage().setFitWidth(spriteOnBoard.getCharacteristics().getWidth());
 		spriteOnBoard.getImage().setRotate(spriteOnBoard.getCharacteristics().getOrientation());
+
+
 	}
 	public boolean isReady(){
 		if (myLevelBar.getMenus().get(0).getItems().size()>=1){
@@ -111,10 +116,10 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		background.relocate(5, 5);
 		levelBackground.getCharacteristics().setBackground(background.getImage());
 		levelUpdate(levelBackground);
-		
-		
+
+
 	}
-	
+
 	public void update(SpriteObject myObject){
 		SpriteCharacteristics characteristics=myObject.getCharacteristics();
 		if (myData.get(myObject.getCode())==null){
@@ -126,21 +131,27 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				myData.get(myObject.getCode()).add(myObject);
 			}
 		}
-		for (SpriteObject sprite: myData.get(myObject.getCode())){
-			sprite.setCharacteristics(characteristics);
-			sprite.getCharacteristics().setX(sprite.getImage().getLayoutX());
-			sprite.getCharacteristics().setY(sprite.getImage().getLayoutY());
-			sprite.getCharacteristics().setWidth(sprite.getImage().getFitWidth());
-			sprite.getCharacteristics().setHeight(sprite.getImage().getFitHeight());
-			sprite.getCharacteristics().setOrientation(sprite.getImage().getFitWidth());
-			sprite.setImage(myObject.getImage().getImage());
-			sprite.getCharacteristics().setImagePath(sprite.getImagePath());
-			myGameEngine.updateObject(sprite.getId(), sprite.getCharacteristics());
+		if (new BlankSpaceTextChecker().checkText(myObject.getCode())){
+			for (SpriteObject sprite: myData.get(myObject.getCode())){
+				sprite.setCharacteristics(characteristics);
+				sprite.getCharacteristics().setX(sprite.getImage().getX());
+				sprite.getCharacteristics().setY(sprite.getImage().getY());
+				sprite.getCharacteristics().setWidth(sprite.getImage().getFitWidth());
+				sprite.getCharacteristics().setHeight(sprite.getImage().getFitHeight());
+				sprite.getCharacteristics().setOrientation(sprite.getCharacteristics().getOrientation());
+				sprite.setImage(myObject.getImage().getImage());
+				sprite.getCharacteristics().setImagePath(sprite.getImagePath());
+				myGameEngine.updateObject(sprite.getId(), sprite.getCharacteristics());
+			}
+		}
+		else{
+
+			myGameEngine.updateObject(myObject.getId(), myObject.getCharacteristics());
 		}
 		SpriteObject temp=new SpriteObject(0,new ImageView(myObject.getImage().getImage()), myObject.getImagePath(), myObject.getType(),myObject.getDelegate());
 		temp.setCharacteristics(myObject.getCharacteristics());
 		changedSprite.set(temp);
-		
+
 	}
 	public void addLevelBar(LevelBar levelBar){
 		myLevelBar=levelBar;
@@ -174,6 +185,9 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 
 	}
 	public void update(GoalObject myObject){
+		myGameEngine.updateGoal(myObject.getID(), myObject.getCharacteristics());
+	}
+	public void addGoalToLevel(GoalObject myObject){
 		myGameEngine.addGoalToLevel(myObject.getCharacteristics());
 	}
 	public String[] spriteTypeNames(){
@@ -189,10 +203,10 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		}
 		return sprites;
 	}
-	
+
 	public void setCamera(CameraType cameratype) {
 		myGameEngine.setCameraType(cameratype);
-		
+
 	}
 	@Override
 	public void setPhysics(ProgramPhysicEngine typeOfGravity) {
@@ -202,7 +216,18 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public void removeSpriteOBjects(SpriteObject myObject) {
 		if (myData.get(myObject.getCode()).contains(myObject)){
 			myData.get(myObject.getCode()).remove(myObject);
+		}	
+	}
+	@Override
+	public Set getLevelsAvailable() {
+		return myLevelBar.getLevels();
+	}
+	public void saveGame(){
+		try {
+			myGameEngine.saveGame();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
 	}
 }

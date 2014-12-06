@@ -8,6 +8,7 @@ package com.print_stack_trace.voogasalad.model.engine.physics;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
@@ -18,7 +19,7 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 
 public class PhysicsEngine {
 	private static final int MATRIX_SIZE = SpriteType.values().length;
-	
+
 	/**
 	 * The decision Matrix is the basis for determining HOW to handle a given collision.
 	 * 
@@ -34,17 +35,22 @@ public class PhysicsEngine {
 	 * For example, if a sprite of type A collides with another sprite of type A,
 	 * we know we must apply an "explode" type collision to them both.
 	 */
-	private CollisionResult[][] decisionMatrix;
-	
-	private Map<CollisionResult , CollisionHandler> handlerMap;
+	public CollisionResult[][] decisionMatrix;
+
+	private Map<CollisionResult , CollisionHandler> handlerMap = new HashMap<CollisionResult , CollisionHandler>();
 	private SoloPhysicsHandler soloHandler;
-	
+
 	public PhysicsEngine() {
 		decisionMatrix = new CollisionResult[MATRIX_SIZE][MATRIX_SIZE];
-		//Default
+		//Defaults
+		for(int i = 0; i < MATRIX_SIZE; i++) {
+			for(int j = 0; j < MATRIX_SIZE; j++) {
+				decisionMatrix[i][j] = CollisionResult.NoAction;
+			}
+		}
 		soloHandler = SoloPhysicsGenerator.getProgramPhysicEngine(ProgramPhysicEngine.EarthPhysicsEngine);
 	}
-	
+
 	/**
 	 * Public method for animating the level.
 	 * The lifecycle is as follows:
@@ -66,28 +72,53 @@ public class PhysicsEngine {
 	public void animateAll(RuntimeModel currentRuntime, int framesPerSecond) {
 		Collection<RuntimeSpriteCharacteristics> allObjects = currentRuntime.getRuntimeSpriteMap().values();
 		for(RuntimeSpriteCharacteristics obj : allObjects) {
-			soloHandler.applyPhysics(obj, framesPerSecond);
+			obj.setDecelerationConstant(0.0f);
+			obj.isColliding = false;
+			if(obj.interactive) soloHandler.applyPhysics(obj, framesPerSecond);
 		}
-		/*
-		RuntimeSpriteCharacteristics[] array = (RuntimeSpriteCharacteristics[]) allObjects.toArray();
+
+
+		Object[] array = allObjects.toArray();
 		for(int i = 0; i < array.length; i++) {
-			RuntimeSpriteCharacteristics s1 = array[i];
+			RuntimeSpriteCharacteristics s1 = (RuntimeSpriteCharacteristics) array[i];
 			for(int j = i+1; j < array.length; j++) {
-				RuntimeSpriteCharacteristics s2 = array[j];
-				if(CollisionDetector.haveCollided(s1, s2)) {
+				RuntimeSpriteCharacteristics s2 = (RuntimeSpriteCharacteristics) array[j];
+
+
+				RuntimeSpriteCharacteristics copys1 = new RuntimeSpriteCharacteristics(s1);
+				RuntimeSpriteCharacteristics copys2 = new RuntimeSpriteCharacteristics(s2);
+				copys1.setX(s1.getX());
+				copys1.v_x = s1.v_x;
+				copys1.setY(s1.getY());
+				copys1.v_y = s1.v_y;
+
+				copys2.setX(s2.getX());
+				copys2.v_x = s2.v_x;
+				copys2.setY(s2.getY());
+				copys2.v_y = s2.v_y;
+
+				this.moveSpritesForward(copys1, copys2, framesPerSecond);
+				if(CollisionDetector.haveCollided(copys1, copys2)) {
 					collisionHandler(s1, s2, currentRuntime);
 				}	
 			}
 		}
-		*/
-		
+
 		Collection<RuntimeSpriteCharacteristics> toRemove = new ArrayList<RuntimeSpriteCharacteristics>();
 		for(RuntimeSpriteCharacteristics obj : allObjects) {
 			if (obj.shouldBeRemoved()) toRemove.add(obj);
 		}
 		allObjects.removeAll(toRemove);
 	}
-		
+
+	public void moveSpritesForward(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2, int framesPerSecond){
+		s1.setX(s1.getX()+(2*(double)s1.v_x/(double)framesPerSecond));
+		s1.setY(s1.getY()+(2*(double)s1.v_y/(double)framesPerSecond));
+		s2.setX(s2.getX()+(2*(double)s2.v_x/(double)framesPerSecond));
+		s2.setY(s2.getY()+(2*(double)s2.v_y/(double)framesPerSecond));
+
+	}
+
 	/**
 	 * Private method to assist in the proper collision handling lifecycle.
 	 * Once it has been confirmed that two SpriteCharacteristics are colliding, 
@@ -108,27 +139,33 @@ public class PhysicsEngine {
 	 * @see	CollisionHandler, SpriteCharacteristics
 	 */
 	private void collisionHandler(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
+		s1.isColliding = s2.isColliding = true;
 		CollisionResult result = getResultOfCollision(s1, s2);
 		CollisionHandler handler = getHandlerForResult(result);
 		handler.applyCollisionEffects(s1, s2, currentRuntime);
 	}
-	
+
 	private CollisionResult getResultOfCollision(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
 		return decisionMatrix[s1.objectType.ordinal()][s2.objectType.ordinal()];
 	}
-	
+
 	public void setResultOfCollision(CollisionResult result, SpriteType s1, SpriteType s2) {
-		 decisionMatrix[s1.ordinal()][s2.ordinal()] = result;
+		decisionMatrix[s1.ordinal()][s2.ordinal()] = result;
 	}
-	
+
 	private CollisionHandler getHandlerForResult(CollisionResult result) {
-		return handlerMap.get(result);
+		CollisionHandler ret = handlerMap.get(result);
+		if(ret == null) {
+			ret = CollisionFactory.buildCollisionHandler(result);
+			setHandlerForResult(result, ret);
+		}
+		return ret;
 	}
-	
+
 	public void setHandlerForResult(CollisionResult result, CollisionHandler handler) {
 		handlerMap.put(result, handler);
 	}
-	
+
 	public SoloPhysicsHandler getSoloHandler() {
 		return soloHandler;
 	}

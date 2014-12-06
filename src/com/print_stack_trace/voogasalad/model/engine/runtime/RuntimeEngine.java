@@ -7,12 +7,15 @@
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicationChecker;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicator;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
@@ -21,11 +24,11 @@ import com.print_stack_trace.voogasalad.model.environment.Goal;
 public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
-	private List<KeyEvent> currentEvents = new ArrayList<KeyEvent>();
 	int framesPerSecond;
-	
+	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
+
 	//-------------------CONSTRUCTORS-------------------//
-	
+
 	/**
 	 * Takes in a LevelModel and sets private variables
 	 * @param level
@@ -35,9 +38,9 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		runtimeModel = new RuntimeModel(currentLevel);
 		physicsEngine = currentLevel.getPhysicsEngine();
 	}
-	
+
 	//-------------------PUBLIC METHODS-------------------//
-		
+
 	/**
 	 * Update all of the data in the current level.
 	 * 1. Calls PhysicsEngine to "animate" sprites.
@@ -48,9 +51,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 */
 	public void update() {
 		physicsEngine.animateAll(runtimeModel, framesPerSecond);
-		
-		applyCurrentKeyEvents();
-		
+
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
 		int completedCount = 0;
 		for(Goal g : runtimeModel.getGoalMap().values()) {
@@ -64,14 +65,16 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 				runtimeModel.gameVictory = true;
 			}
 		}
+
+		updateSpritePositions();
 	}
-	
+
 	public void setFramesPerSecond(int framesPerSecond) {
 		this.framesPerSecond = framesPerSecond;
 	}
-	
+
 	//GAME PLAYER
-	
+
 	/**
 	 * Get the current state of the level in progress
 	 * @return runtimeModel 
@@ -79,34 +82,44 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	public RuntimeModel getStatus() {
 		return runtimeModel;
 	}
-	
+
 	public void handleKeyRelease(KeyEvent event) {
-		currentEvents.remove(event);
+		handleKey(event, false);
 	}
-	
+
 	public void handleKeyPress(KeyEvent event) {
-		currentEvents.add(event);
+		handleKey(event, true);
 	}
-	
+
 	//-------------------ACCESSORS-------------------//
-	
-	
+
+
 	//-------------------PRIVATE METHODS-------------------//
-	
-	private void applyCurrentKeyEvents() {
-		for(KeyEvent e : currentEvents) {
-			KeyResult res = runtimeModel.getResultOfKey(e.getCode());
-			KeyApplicator applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
-			Integer mainChar = runtimeModel.getMainCharacter();
-			RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
-			applicator.applyActionToRuntimeSprite(mainCharData);
+
+	private void updateSpritePositions(){
+		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
+			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
+			rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
+			rst.v_x *= (1.0f-rst.getDecelerationConstant());
+			rst.v_y *= (1.0f-rst.getDecelerationConstant());
 		}
 	}
-	
-	private void changePositionBasedOnVelocity(){
-		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()){
-			
+
+	private void handleKey(KeyEvent event, boolean press) {
+		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
+		KeyApplicator applicator = applicatorCache.get(res);
+		Integer mainChar = runtimeModel.getMainCharacter();
+		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
+		if(applicator == null) {
+			applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
+			applicatorCache.put(res, applicator);
+		}
+		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {
+			applicator.applyPressActionToRuntimeSprite(mainCharData);
+		}
+		else{
+			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
+			return;
 		}
 	}
-	
 }
