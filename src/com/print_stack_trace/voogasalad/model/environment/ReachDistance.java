@@ -8,7 +8,7 @@ import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
 public class ReachDistance extends Goal implements GoalElement{
     
-    private Point myDestination;
+    private double myDestination;
     private Integer myHeroID;
     private boolean myHorizontal;
 
@@ -16,7 +16,7 @@ public class ReachDistance extends Goal implements GoalElement{
         super(goalCharacteristics);
     }
 
-    public Point getDestination() {
+    public double getDestination() {
         return myDestination;
     }
     

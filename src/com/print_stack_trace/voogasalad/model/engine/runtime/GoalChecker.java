@@ -28,16 +28,16 @@ public class GoalChecker implements GoalElementVisitor {
 
 	@Override
 	public boolean visit(ReachDistance goal) {
+		double heroPosition = 0;
 		if(goal.isHorizontal()){
-			double heroXPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).p.getX();
-			return (heroXPosition > (goal.getDestination().getX() - GOAL_DESTINATION_BUFFER)) 
-					&& (heroXPosition < (goal.getDestination().getX() + GOAL_DESTINATION_BUFFER )); 
+			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).p.getX();
 		}
 		else{
-			double heroYPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).p.getY();
-			return (heroYPosition > (goal.getDestination().getY() - GOAL_DESTINATION_BUFFER)) 
-					&& (heroYPosition < (goal.getDestination().getY() + GOAL_DESTINATION_BUFFER )); 
+			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).p.getY();
 		}
+		return (heroPosition > (goal.getDestination() - GOAL_DESTINATION_BUFFER)) 
+				&& (heroPosition < (goal.getDestination() + GOAL_DESTINATION_BUFFER )); 
+
 	}
 
 

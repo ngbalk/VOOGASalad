@@ -65,6 +65,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		SpriteObject myGameObject=new SpriteObject(0, gameObjectImageView, imagePath, type, this);
 		myGameObject.getCharacteristics().setHeight(myGameObject.getImage().getFitHeight());
 		myGameObject.getCharacteristics().setWidth(myGameObject.getImage().getFitWidth());
+		myGameObject.getCharacteristics().setX(myGameObject.getImage().getLayoutX());
+		myGameObject.getCharacteristics().setY(myGameObject.getImage().getLayoutY());
 		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
 		myGameObject.setID(myID);
 		System.out.println(gameObjectImageView);
@@ -138,7 +140,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				sprite.getCharacteristics().setY(sprite.getImage().getY());
 				sprite.getCharacteristics().setWidth(sprite.getImage().getFitWidth());
 				sprite.getCharacteristics().setHeight(sprite.getImage().getFitHeight());
-				sprite.getCharacteristics().setOrientation(sprite.getImage().getFitWidth());
+				sprite.getCharacteristics().setOrientation(sprite.getCharacteristics().getOrientation());
 				sprite.setImage(myObject.getImage().getImage());
 				sprite.getCharacteristics().setImagePath(sprite.getImagePath());
 				myGameEngine.updateObject(sprite.getId(), sprite.getCharacteristics());

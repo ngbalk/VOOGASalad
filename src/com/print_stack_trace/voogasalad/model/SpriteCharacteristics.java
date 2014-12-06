@@ -31,7 +31,7 @@ public class SpriteCharacteristics {
 	// DEFAULT VARIABLES
 	public static final Image DEFAULT_IMAGE = null;
 	public static final Point DEFAULT_POINT = new Point(0,0);
-	public static final boolean DEFAULT_INTERACTIVE = true;
+	public static final boolean DEFAULT_INTERACTIVE = false;
 	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
 	public static final int DEFAULT_HEALTH = 10;
 	public static final double DEFAULT_SPEED = 10;
@@ -40,7 +40,7 @@ public class SpriteCharacteristics {
 	public static final String DEFAULT_NAME="";
 	public static final double DEFAULT_WIDTH=100;
 	public static final double DEFAULT_HEIGHT=100;
-	
+
 	// GAME AUTHORING VARIABLES
 	public transient Image img;
 	public String imagePath;
@@ -51,13 +51,16 @@ public class SpriteCharacteristics {
 	public double startingSpeed;
 	public int value;
 	public double orientation;
-	
+
 	//AUTHOR
 	public String name;
 	public double width;
 	public double height;
+
 	public HashMap<PossibleSpriteAction, KeyCode> myMovements;
 	public HashMap<PossibleSpriteAction, ArrayList<File>> myAnimations;
+
+
 	//-------------------CONSTRUCTORS-------------------//
 
 	/**
@@ -68,7 +71,6 @@ public class SpriteCharacteristics {
 		objectType = t;
 		img = DEFAULT_IMAGE;
 		p = DEFAULT_POINT;
-		interactive = DEFAULT_INTERACTIVE;
 		startingHealth = DEFAULT_HEALTH;
 		startingSpeed = DEFAULT_SPEED;
 		value = DEFAULT_VALUE;
@@ -77,10 +79,20 @@ public class SpriteCharacteristics {
 		height=DEFAULT_HEIGHT;
 		name=DEFAULT_NAME;
 		myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
+
 		myAnimations=new HashMap<PossibleSpriteAction, ArrayList<File>>();
 		this.initiateAnimations();
+
+		interactive = DEFAULT_INTERACTIVE;
+		switch(t){
+		case HERO:
+			interactive = true;
+		case ENEMY:
+			interactive = true;
+		}
+
 	}
-	
+
 	/**
 	 * Constructor that essentially "clones" another spritecharacteristics class
 	 * @param obj
@@ -111,7 +123,7 @@ public class SpriteCharacteristics {
 	}
 
 	//-------------------ACCESSORS-------------------//
-	
+
 	public java.awt.Image getJavaAWTImage () {
 		return img;
 	}
@@ -134,6 +146,7 @@ public class SpriteCharacteristics {
     public ArrayList<File> getAnimationPath(PossibleSpriteAction action){
     	return myAnimations.get(action);
     }
+    
     public ArrayList<javafx.scene.image.Image> getAnimationImages(PossibleSpriteAction action){
     	ArrayList<javafx.scene.image.Image> myImages=new ArrayList<javafx.scene.image.Image>();
     	BufferedImage buffer;
@@ -149,12 +162,6 @@ public class SpriteCharacteristics {
 			
     	}
     	return myImages;
-    }
-    public void setImagePath(String path){
-    	imagePath = path;
-    }
-    public String getImagePath(){
-    	return imagePath;
     }
 
     public Point getPoint () {
@@ -218,62 +225,67 @@ public class SpriteCharacteristics {
         return orientation;
     }
 
-    public void setOrientation (double newOrientation) {
-    	//System.out.println(newOrientation);
-        this.orientation = newOrientation;
-        //System.out.println(orientation);
-    }
-    
+	public void setImagePath(String path){
+		imagePath = path;
+	}
+	
+	public String getImagePath(){
+		return imagePath;
+	}
+
+	public void setOrientation (double newOrientation) {
+		//System.out.println(newOrientation);
+		this.orientation = newOrientation;
+		//System.out.println(orientation);
+	}
+
 	public double getX(){
 		return p.getX();
 	}
-	
+
 	public double getY(){
 		return p.getY();
 	}
-	
+
 	public void setX(double xLocation){
 		p.x=(int)xLocation; 
 	}
-	
+
 	public void setY(double yLocation){
 		p.y=(int) yLocation;
 	}
-	
+
 	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
 		myMovements.put(myAction, myKey);
 	}
-	
+
 	public HashMap<PossibleSpriteAction, KeyCode> getMovements(){
 		return myMovements;
 	}
-	
+
 	public double getWidth(){
 		return width;
 	}
-	
+
 	public double getHeight(){
 		return height;
 	}
-	
+
 	public void setWidth(double width){
 		this.width = width;
 	}
-	
+
 	public void setHeight(double height){
 		this.height = height;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	
 
-	
-    
 }
