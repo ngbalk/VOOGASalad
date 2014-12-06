@@ -61,7 +61,6 @@ public class GamePlayer implements ViewController {
 	private GameEngine myGameEngine;
 	private boolean isPlaying = false;
 	
-	private DecisionTable dt = new DecisionTable();
 	private Score currentScore;
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
 	private String DEFAULT_CLASS_PATH="com.print_stack_trace.voogasalad.controller.guiElements.";
