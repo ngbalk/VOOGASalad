@@ -46,7 +46,7 @@ public class DecisionTable extends GridPane {
 				ComboBox<String> cb =  createPopulatedBox();
 				int temp1= i+1; int temp2=j+1; //cannot use i and j because they are changing each iteration
 				cb.setOnAction(e-> engine.setResultOfCollision(getValForObjectTypes(temp2,temp1)
-						, types[temp1-1], types[temp2-2]));
+						, types[temp1-1], types[temp2-1]));
 				this.add(cb, i+1, j+1);
 			} 
 		} 
