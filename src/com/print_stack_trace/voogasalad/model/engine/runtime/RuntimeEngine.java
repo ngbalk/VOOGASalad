@@ -95,7 +95,9 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
 
 	//-------------------PRIVATE METHODS-------------------//
-
+	
+	//Sprites move around even when this method is commented out
+	//why is that? this method should be the one controlling movement
 	private void updateSpritePositions(){
 		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
 			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
