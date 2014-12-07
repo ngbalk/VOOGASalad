@@ -30,6 +30,9 @@ import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerato
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 
 public class GameEngine {
 	private LevelModel currentLevel;
@@ -218,7 +221,15 @@ public class GameEngine {
 		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
 		currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
 
+		GoalCharacteristics g = new GoalCharacteristics(GoalType.REACH_OBJECT);
+		g.myDestination = 100;
+		g.myObjectID = 2;	
+		currentLevel.setGoal(g);
 
+		LevelCharacteristics l = currentLevel.getLevelCharacteristics();
+		l.requiredNumberOfGoals = 1;
+		currentLevel.setLevelCharacteristics(l);
+		
 		runtimeEngine = new RuntimeEngine(currentLevel);
 		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}

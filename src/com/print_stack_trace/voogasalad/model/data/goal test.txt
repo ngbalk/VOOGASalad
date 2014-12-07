@@ -1,24 +1,20 @@
 {
-  "mySpriteMap": {
+  "mySpriteMap": {},
+  "goalMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
-      "p": {
-        "x": 239,
-        "y": 136
+      "isCompleted": false,
+      "myGoalCharacteristics": {
+        "myName": "",
+        "myGoalType": "REACH_DISTANCE",
+        "myObjectID": 0,
+        "myObjectiveID": 0,
+        "myPointTotal": 100,
+        "myDestination": 0.0,
+        "myHorizontalDestination": true
       },
-      "interactive": true,
-      "objectType": "ENEMY",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {}
+      "myGoalType": "REACH_DISTANCE"
     }
   },
-  "goalMap": {},
   "currentID": 0,
   "isLocked": false,
   "physicsEngine": {
@@ -62,7 +58,7 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "jack\u0027s enemy test",
+    "name": "goal test",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0
   },

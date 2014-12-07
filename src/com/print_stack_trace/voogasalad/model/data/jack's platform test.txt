@@ -4,7 +4,7 @@
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
       "p": {
         "x": 0,
-        "y": 0
+        "y": 200
       },
       "interactive": true,
       "objectType": "HERO",
@@ -21,7 +21,7 @@
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
         "x": 0,
-        "y": 300
+        "y": 400
       },
       "interactive": false,
       "objectType": "PLATFORM",
@@ -30,15 +30,15 @@
       "value": 0,
       "orientation": 0.0,
       "name": "b",
-      "width": 100.0,
+      "width": 1000.0,
       "height": 100.0,
       "myMovements": {}
     },
     "2": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 300,
-        "y": 300
+        "x": 0,
+        "y": 0
       },
       "interactive": false,
       "objectType": "PLATFORM",
@@ -71,8 +71,8 @@
     "4": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 600,
-        "y": 300
+        "x": 200,
+        "y": 200
       },
       "interactive": false,
       "objectType": "PLATFORM",

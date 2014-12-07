@@ -5,9 +5,8 @@ import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 
 public abstract class Goal implements GoalElement {
 	public boolean isCompleted = false;
-    
-    protected GoalCharacteristics myGoalCharacteristics;
-    protected GoalType myGoalType;
+    public GoalCharacteristics myGoalCharacteristics;
+    public GoalType myGoalType;
     
     public Goal(GoalCharacteristics goalCharacteristics) {
         myGoalCharacteristics = goalCharacteristics;

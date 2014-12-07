@@ -56,7 +56,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		int completedCount = 0;
 		for(Goal g : runtimeModel.getGoalMap().values()) {
 			g.acceptChecker(goalChecker);
-			if(g.isCompleted) completedCount++;
+			if(g.isCompleted)completedCount++;
 		}
 		int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
 		if (reqGoals > 0) {
@@ -95,7 +95,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
 
 	//-------------------PRIVATE METHODS-------------------//
-	
+
 	//Sprites move around even when this method is commented out
 	//why is that? this method should be the one controlling movement
 	private void updateSpritePositions(){
