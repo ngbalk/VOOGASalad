@@ -18,6 +18,7 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
 public class PhysicsEngine {
+
 	private static final int MATRIX_SIZE = SpriteType.values().length;
 
 	/**
@@ -78,6 +79,8 @@ public class PhysicsEngine {
 		}
 
 
+		performEnemyAI(allObjects.toArray());
+		
 		Object[] array = allObjects.toArray();
 		for(int i = 0; i < array.length; i++) {
 			RuntimeSpriteCharacteristics s1 = (RuntimeSpriteCharacteristics) array[i];
@@ -99,8 +102,10 @@ public class PhysicsEngine {
 
 				this.moveSpritesForward(copys1, copys2, framesPerSecond);
 				if(CollisionDetector.haveCollided(copys1, copys2)) {
+					
 					stickSpriteToSide(s1,s2);
 					collisionHandler(s1, s2, currentRuntime);
+				
 				}	
 			}
 		}
@@ -112,8 +117,36 @@ public class PhysicsEngine {
 		allObjects.removeAll(toRemove);
 	}
 	
+	private void performEnemyAI(Object[] array) {
+
+		for(int i = 0; i < array.length; i ++){
+			RuntimeSpriteCharacteristics sprite = (RuntimeSpriteCharacteristics) array[i];
+			if(sprite.objectType.equals(SpriteType.ENEMY)){
+				patrolEnemy(sprite);
+			}
+		}
+	}
+	
+	private void patrolEnemy(RuntimeSpriteCharacteristics enemy){
+		if(enemy.isPatrollingLeft){
+			enemy.setX(enemy.getX() + enemy.startingSpeed);
+		}
+		else{
+			enemy.setX(enemy.getX() + -enemy.startingSpeed);
+		}
+		if(enemy.isCollidingHorizontally) enemy.isPatrollingLeft = !enemy.isPatrollingLeft;
+	}
+
 	public void stickSpriteToSide(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2){
 
+		if((s2.objectType.equals(SpriteType.HERO) || s2.objectType.equals(SpriteType.ENEMY))
+				&& s1.objectType.equals(SpriteType.PLATFORM)){
+		RuntimeSpriteCharacteristics copys1 = s1;
+		s1 = s2;
+		s2 = copys1;
+	}
+
+		
 		if(CollisionDetector.haveCollidedFromTop(s1, s2)){
 			s1.setY(s2.getY() - s1.getHeight());
 			return;

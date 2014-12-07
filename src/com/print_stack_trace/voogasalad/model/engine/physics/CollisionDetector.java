@@ -42,7 +42,7 @@ public class CollisionDetector {
 
 	public static boolean haveCollidedFromTop(RuntimeSpriteCharacteristics hero,
 			RuntimeSpriteCharacteristics block){
-		if(!hero.objectType.equals(SpriteType.HERO)) return false;
+		if(!((hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))))) return false;
 		Rectangle top = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
 		Rectangle bottom = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
 		Rectangle intersect = top.intersection(bottom); 
@@ -55,7 +55,7 @@ public class CollisionDetector {
 
 	public static boolean haveCollidedFromBottom(RuntimeSpriteCharacteristics hero,
 			RuntimeSpriteCharacteristics block){
-		if(!hero.objectType.equals(SpriteType.HERO)) return false;
+		if(!((hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))))) return false;
 		Rectangle bottom = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
 		Rectangle top = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
 		Rectangle intersect = top.intersection(bottom);        
@@ -69,7 +69,7 @@ public class CollisionDetector {
 	
 	public static boolean haveCollidedFromLeft(RuntimeSpriteCharacteristics hero,
 			RuntimeSpriteCharacteristics block){
-		if(!hero.objectType.equals(SpriteType.HERO)) return false;
+		if(!((hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))))) return false;
 		Rectangle left = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
 		Rectangle right = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
 		Rectangle intersect = left.intersection(right);  
@@ -81,7 +81,7 @@ public class CollisionDetector {
 	
 	public static boolean haveCollidedFromRight(RuntimeSpriteCharacteristics hero,
 			RuntimeSpriteCharacteristics block){
-		if(!hero.objectType.equals(SpriteType.HERO)) return false;
+		if(!((hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))))) return false;
 		Rectangle right = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
 		Rectangle left = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
 		Rectangle intersect = left.intersection(right);       
