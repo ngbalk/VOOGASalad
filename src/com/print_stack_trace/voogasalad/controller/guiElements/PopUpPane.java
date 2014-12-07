@@ -38,11 +38,10 @@ public class PopUpPane extends GeneralPane{
 		submit.setOnAction(e->this.close());
 		submit.setPrefSize(80,20);
 //		this.getChildren().add(submit);
-		Button delete = new Button("Delete");
+		DeleteButton delete = new DeleteButton(myObject, myObject.getDelegate());
 		delete.setPrefSize(80, 20);
-//		this.getChildren().add(delete);
 		HBox buttonBox = new HBox();
-		buttonBox.getChildren().addAll(submit, delete);
+		buttonBox.getChildren().addAll(delete.getButton(), submit);
 		buttonBox.toFront();
 		buttonBox.relocate(0, 0);//yCoord);
 		this.getChildren().add(buttonBox);

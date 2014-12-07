@@ -248,6 +248,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 	@Override
 	public void deleteObject(SpriteObject object) {
+		System.out.println("DELETE");
 		myGameEngine.deleteObject(object.getId());
+		this.getChildren().remove(object.getImage());
 	}
 }
