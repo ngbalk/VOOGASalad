@@ -19,14 +19,11 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleSetProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
 public class GamePane extends Pane implements ViewObjectDelegate{
@@ -41,8 +38,9 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public ObservableSet<SpriteObject> myObservableData=FXCollections.observableSet(userObjects);
 	private PaneChooser myPaneChooser=new PaneChooser();
 	private LevelBar myLevelBar;
+	private SimpleDoubleProperty xVal=new SimpleDoubleProperty(0);
+	private SimpleDoubleProperty yVal=new SimpleDoubleProperty(0);
 	private String myStyle="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
-	
 	public GamePane(double width, double height, GameEngine gameEngine){
 		myWidth=width;
 		myHeight=height;
@@ -53,6 +51,13 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myGameEngine=gameEngine;
 		this.getStylesheets().add(myStyle);
 
+	}
+	public void setXProperty(double val){
+		xVal.setValue(val);
+		System.out.print(val);
+	}
+	public void setYProperty(double val){
+		yVal.setValue(val);
 	}
 	public void addGameObject(ImageView gameObjectImageView, String imagePath){
 		if (imagePath!=null){
@@ -70,8 +75,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myGameObject.getCharacteristics().setY(myGameObject.getImage().getLayoutY());
 		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
 		myGameObject.setID(myID);
-		System.out.println(gameObjectImageView);
-		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
+		System.out.println("HEY"+xVal.doubleValue());
+		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight(),xVal, yVal);
 		if (myData.get(myGameObject.getCode())==null)
 			myData.put(myGameObject.getCode(), new HashSet<SpriteObject>());
 		myData.get(myGameObject.getCode()).add(myGameObject);
@@ -148,7 +153,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			}
 		}
 		else{
-			System.out.println(myObject.getCharacteristics().getX());
 			myGameEngine.updateObject(myObject.getId(), myObject.getCharacteristics());
 		}
 		SpriteObject temp=new SpriteObject(0,new ImageView(myObject.getImage().getImage()), myObject.getImagePath(), myObject.getType(),myObject.getDelegate());

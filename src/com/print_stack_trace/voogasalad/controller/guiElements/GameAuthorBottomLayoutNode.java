@@ -66,4 +66,15 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		
 	}
 
+	@Override
+	public Number getHeight() {
+		return ((Pane) myNode).getPrefHeight();
+	}
+
+	@Override
+	public Number getWidth() {
+		return ((Pane) myNode).getPrefWidth();
+	}
+	
+
 }
