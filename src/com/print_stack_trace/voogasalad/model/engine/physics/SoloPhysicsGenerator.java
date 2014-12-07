@@ -35,13 +35,10 @@ public class SoloPhysicsGenerator {
             @Override
             public void applyPhysics(RuntimeSpriteCharacteristics s1, int framesPerSecond) {
 
-                if(s1.isColliding) {
-                    s1.v_x -= (1.0f/(float)framesPerSecond)*fdrag*fintensity;
-                }
-                else {
-                    s1.v_y += (1.0f/(float)framesPerSecond)*fgravity*fintensity;
-                    s1.v_x -= (1.0f/(float)framesPerSecond)*fdrag*fintensity;
-                }
+
+                s1.v_y += (1.0f/(float)framesPerSecond)*fgravity*fintensity;
+                s1.v_x -= (1.0f/(float)framesPerSecond)*fdrag*fintensity;
+
             }
         };
     }

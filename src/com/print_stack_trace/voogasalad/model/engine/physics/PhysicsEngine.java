@@ -74,8 +74,8 @@ public class PhysicsEngine {
         Collection<RuntimeSpriteCharacteristics> allObjects = currentRuntime.getRuntimeSpriteMap().values();
         for(RuntimeSpriteCharacteristics obj : allObjects) {
             obj.setDecelerationConstant(0.0f);
-            if(obj.interactive) soloHandler.applyPhysics(obj, framesPerSecond);
             obj.isColliding = false;
+            if(obj.interactive) soloHandler.applyPhysics(obj, framesPerSecond);
 
         }
 
@@ -137,7 +137,7 @@ public class PhysicsEngine {
         if(enemy.isCollidingHorizontally) enemy.isPatrollingLeft = !enemy.isPatrollingLeft;
     }
 
-    public void stickSpriteToSide(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2){
+    private void stickSpriteToSide(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2){
 
         //		ugly fixes!!!
         if((s2.objectType.equals(SpriteType.HERO) || s2.objectType.equals(SpriteType.ENEMY))
@@ -155,7 +155,7 @@ public class PhysicsEngine {
         }
 
         if(CollisionDetector.haveCollidedFromBottom(s1, s2)){
-            s1.setY(s2.getY() + s2.getHeight()-1);
+            s1.setY(s2.getY() + s2.getHeight()+5);
             return;
         }
 
