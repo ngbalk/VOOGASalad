@@ -22,7 +22,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.Co
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 import javafx.beans.property.SimpleDoubleProperty;
@@ -272,6 +272,13 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 	
 	@Override
+	public void deleteObject(SpriteObject object) {
+		System.out.println("DELETE");
+		myGameEngine.deleteObject(object.getId());
+		this.getChildren().remove(object.getImage());
+		this.levelTracker.removeSprite(object);
+	}
+
 	public void extendRight() {
 		
 		LevelCharacteristics levelCharacteristics = levelTracker.getCurrentLevel().getCharacteristics();
@@ -293,7 +300,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 
 	@Override
-	public void extendDown() {
+	public void extendDown(){
 		LevelCharacteristics levelCharacteristics = levelTracker.getCurrentLevel().getCharacteristics();
 		int newVerticalPaneCount = levelCharacteristics.incrementVerticalPaneCount();
 		int currentHorizontalPaneCount = levelCharacteristics.getHorizontalPaneCount();
@@ -339,8 +346,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			File file = fileChooser.showOpenDialog(newStage);
 			if (file != null) {
 				try {
-					FileInputStream myFile=new FileInputStream(file);
-					return myGameEngine.loadLevelForEditing(myFile);
+					//FileInputStream myFile=new FileInputStream(file);
+					return myGameEngine.loadLevelForEditing(file);
 				} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
 					System.out.println(ex.getMessage());
 				}
@@ -376,5 +383,4 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				goalObject.update();
 			}
 		}
-
 }

@@ -32,7 +32,7 @@ public class CollisionHandlerTest extends CollisionHandler {
 		double s1XPos = getXPos(s1);
 		double s1YPos = getYPos(s1);
 		double s2XPos = getXPos(s2);
-		double s2YPos = s2.p.getY();
+		double s2YPos = s2.getY();
 		
 		/*double xGapTolerance = (s1.img.getWidth()/2) + (s2.img.getWidth()/2);
 		double yGapTolerance = (s1.img.getHeight()/2) + (s2.img.getHeight()/2);
@@ -47,10 +47,10 @@ public class CollisionHandlerTest extends CollisionHandler {
 	}
 	
 	private double getXPos(SpriteCharacteristics s) {
-		return s.p.getX();
+		return s.getX();
 	}
 	private double getYPos(SpriteCharacteristics s) {
-		return s.p.getY();
+		return s.getY();
 	}
 
 
