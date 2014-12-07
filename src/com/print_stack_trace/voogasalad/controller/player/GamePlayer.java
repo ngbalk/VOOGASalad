@@ -56,6 +56,7 @@ import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
 	private final static int FPS = 10;
+	private static final double ANIMATION_DURATION = .005;
 	private Group myRoot;
 	private Group myGameRoot;
 	private PlayPane myPlayPane;
@@ -157,7 +158,6 @@ public class GamePlayer implements ViewController {
 			spriteImageView.setRotate(spriteCharacteristics.getOrientation());
 			spriteImageView.setLayoutX(spriteCharacteristics.getX());
 			spriteImageView.setLayoutY(spriteCharacteristics.getY());
-			myPlayPane.getChildren().add(spriteImageView);
 			/*
 			 * ANIMATIONS TODO:
 			 * 1)Once an animation is detected (i.e. SpriteCharacteristics.currentAction is set to an action,
@@ -173,24 +173,21 @@ public class GamePlayer implements ViewController {
 	private void executeAnimation(ImageView currentSpriteImageView, RuntimeSpriteCharacteristics spriteCharacteristics){
 		PossibleSpriteAction animationType = spriteCharacteristics.getCurrentAnimation();
 		if(animationType==null){
+			myPlayPane.getChildren().add(currentSpriteImageView);
 			return;
 		}
 		ArrayList<Image> animationImages = spriteCharacteristics.getAnimationImages(animationType);
 		Timeline animationTimeline = new Timeline();
 		animationTimeline.setCycleCount(1);
-		System.out.println("before for loop");
 		for(Image spriteImage : animationImages){
-			System.out.println("found animation image");
-			KeyFrame updateSprite = new KeyFrame(Duration.seconds(.500), e->animateSprite(currentSpriteImageView, spriteImage, spriteCharacteristics));
+			KeyFrame updateSprite = new KeyFrame(Duration.seconds(ANIMATION_DURATION), e->animateSprite(currentSpriteImageView, spriteImage, spriteCharacteristics));
 			animationTimeline.getKeyFrames().add(updateSprite);
 		}
-		System.out.println("after for loop");
 		animationTimeline.play();
 	
 			
 	}
 	private void animateSprite(ImageView currentSpriteImageView, Image spriteImage, SpriteCharacteristics spriteCharacteristics){
-		System.out.println("changing sprite");
 		ImageView spriteImageView = new ImageView(spriteImage);
 		spriteImageView.setFitWidth(spriteCharacteristics.getWidth());
 		spriteImageView.setFitHeight(spriteCharacteristics.getHeight());
@@ -199,8 +196,9 @@ public class GamePlayer implements ViewController {
 		spriteImageView.setLayoutY(spriteCharacteristics.getY());
 		
 		//REPLACE OLD SPRITE WITH NEW ANIMATION SPRITE
-		this.myGameRoot.getChildren().remove(currentSpriteImageView); 
-		this.myGameRoot.getChildren().add(spriteImageView);
+		currentSpriteImageView.setImage(spriteImageView.getImage());
+		this.myPlayPane.getChildren().remove(currentSpriteImageView); 
+		this.myPlayPane.getChildren().add(spriteImageView);
 	}
 
 

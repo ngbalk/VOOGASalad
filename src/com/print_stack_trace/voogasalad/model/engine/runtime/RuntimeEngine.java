@@ -50,8 +50,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 * @param currentLevel
 	 */
 	public void update() {
-		//RESET POSSIBLE SPRITE MOVEMENT TO NULL
-		//runtimeModel.getRuntimeSpriteMap().get(runtimeModel.getMainCharacter()).currentSpriteAction=null;
+		
 		
 		physicsEngine.animateAll(runtimeModel, framesPerSecond);
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
@@ -69,6 +68,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		}
 
 		updateSpritePositions();
+		
+		
 	}
 
 	public void setFramesPerSecond(int framesPerSecond) {
@@ -114,20 +115,23 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		Integer mainChar = runtimeModel.getMainCharacter();
 		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
 		
-		//SET POSSIBLE SPRITE ACTION OF MAIN CHARACTER
-		mainCharData.setPossibleSpriteAction(event.getCode());
-		System.out.println(mainCharData.currentSpriteAction);
-		
 		if(applicator == null) {
 			applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
 			applicatorCache.put(res, applicator);
 		}
 		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {
 			applicator.applyPressActionToRuntimeSprite(mainCharData);
+			
+			//SET POSSIBLE SPRITE ACTION OF MAIN CHARACTER
+			mainCharData.setPossibleSpriteAction(event.getCode());
 		}
 		else{
 			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
+			
+			//RESET SPRITE ACTION AFTER KEY RELEASE
+			mainCharData.setPossibleSpriteAction(null);
 			return;
+			
 		}
 	}
 }

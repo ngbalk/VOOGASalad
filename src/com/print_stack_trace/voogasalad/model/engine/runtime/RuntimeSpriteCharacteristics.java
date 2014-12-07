@@ -66,12 +66,15 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	}
 	
 	public void setPossibleSpriteAction(KeyCode keyCode) {
-			for(PossibleSpriteAction action : myMovements.keySet()){
-				if(myMovements.get(action).equals(keyCode)){
-					System.out.println("valid key pressed --> maps to animation");
-					this.currentSpriteAction = action;
-				}
+		if(keyCode==null){
+			this.currentSpriteAction=null;
+		}
+		for(PossibleSpriteAction action : myMovements.keySet()){
+			if(myMovements.get(action).equals(keyCode)){
+				System.out.println("valid key pressed --> maps to animation");
+				this.currentSpriteAction = action;
 			}
+		}
 	}
 
 }
