@@ -15,7 +15,8 @@ public class LevelCharacteristics {
 	private String backgroundImagePath;
 	public int requiredNumberOfGoals = 0;
 	private String myColor;
-	//TODO: More...
+	private int myHorizontalPaneCount=1;
+	private int myVerticalPaneCount=1;
 	public String getName() {
 		return name;
 	}
@@ -42,6 +43,20 @@ public class LevelCharacteristics {
 	}
 	public String getColor(){
 		return myColor;
+	}
+	public int incrementHorizontalPaneCount(){
+		this.myHorizontalPaneCount++;
+		return this.myHorizontalPaneCount;
+	}
+	public int incrementVerticalPaneCount() {
+		this.myVerticalPaneCount++;
+		return this.myVerticalPaneCount;
+	}
+	public int getVerticalPaneCount(){
+		return this.myVerticalPaneCount;
+	}
+	public int getHorizontalPaneCount(){
+		return this.myHorizontalPaneCount;
 	}
 	
 }
