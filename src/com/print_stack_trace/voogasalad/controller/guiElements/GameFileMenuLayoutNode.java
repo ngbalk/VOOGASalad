@@ -4,21 +4,21 @@ import javafx.scene.Node;
 
 public class GameFileMenuLayoutNode extends AbstractLayoutNode{
 
-	public GameFileMenuLayoutNode(double width, double height, Object myNode) {
-		super(width, height, myNode);
+	public GameFileMenuLayoutNode(double width, double height, Node focus, Object engine, AbstractViewDelegate delegate) {
+		super(width, height, focus, engine, delegate);
 		
 	}
 
 	@Override
 	public void initialize(double width, double height) {
-		FileMenuBar file=new FileMenuBar();
-		file.setPrefSize(width, height);
-		myNode=file;
+		
 	}
 
 	@Override
-	public void initialize(double width, double height, Object myLinkedObject) {
-		initialize(width, height);
+	public void initialize(double width, double height, Node myLinkedObject, Object engine, AbstractViewDelegate delegate) {
+		FileMenuBar file=new FileMenuBar(delegate);
+		file.setPrefSize(width, height);
+		myNode=file;
 		
 	}
 

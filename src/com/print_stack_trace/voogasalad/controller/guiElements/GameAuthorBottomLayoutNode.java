@@ -1,5 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import com.print_stack_trace.voogasalad.model.engine.GameEngine;
+
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -9,9 +11,10 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 
 	//private DecisionTableButton tableButton;// = new DecisionTableButton(new DecisionTable());
 	
-	public GameAuthorBottomLayoutNode(double width, double height, Node node, DecisionTable table) {
-		super(width, height, node);
-		DecisionTableButton tableButton= new DecisionTableButton(table);
+	public GameAuthorBottomLayoutNode(double width, double height, Node toBeLinked, Object engine, AbstractViewDelegate delegate) {
+		super(width, height, toBeLinked, engine, delegate);
+		DecisionTable decisiontable=new DecisionTable((GameEngine) engine);
+		DecisionTableButton tableButton= new DecisionTableButton(decisiontable);
 		tableButton.getStyleClass().add("buttonTemplate2");
 		tableButton.relocate(width*.45, 20);
 		tableButton.setPrefSize(200, 50);
@@ -24,7 +27,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 	}
 
 	@Override
-	public void initialize(double width, double height, Object myLinkedObject) {
+	public void initialize(double width, double height, Node myLinkedObject, Object engine, AbstractViewDelegate delegate) {
 		Pane bottomPane=new Pane();
 		bottomPane.setPrefSize(width,height*.2);
 		LevelBar myLevelBar=new LevelBar(width*.025, 20, width*.2, height*.05);

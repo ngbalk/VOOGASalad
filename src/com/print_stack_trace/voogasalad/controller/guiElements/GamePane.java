@@ -42,6 +42,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	private PaneChooser myPaneChooser=new PaneChooser();
 	private LevelBar myLevelBar;
 	private String myStyle="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
+	
 	public GamePane(double width, double height, GameEngine gameEngine){
 		myWidth=width;
 		myHeight=height;
@@ -180,7 +181,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
 		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
 	}
-	
+
 	public ImageView getBackgroundImage(){
 		return background;
 	}
