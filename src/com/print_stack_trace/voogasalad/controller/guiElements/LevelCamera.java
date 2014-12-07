@@ -3,8 +3,8 @@ package com.print_stack_trace.voogasalad.controller.guiElements;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
 
 public class LevelCamera extends UserInputDropDownMenu{
-	public LevelCamera(GameObject myObject){
-		super(myObject);
+	public LevelCamera(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 		currentMenu.setText("Pick Types of Movement");
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/"
 				+ "controller/guiResources/CameraTypes.Properties");

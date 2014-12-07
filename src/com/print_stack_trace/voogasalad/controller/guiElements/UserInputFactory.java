@@ -15,14 +15,15 @@ public class UserInputFactory {
 	public UserInputFactory(){
 		createMap();
 	}
-	public UserInputType createUserInput(String myType, String[] values, GameObject sprite){
+	public UserInputType createUserInput(String myType, String[] values,  double width, double height, double x, double y,GameObject sprite){
 		Class<? extends UserInputType> typeOfInput=myTypes.get(myType);
 		if (typeOfInput==null){
 			return null;
 		}
 		UserInputType mySpecificType;
+		System.out.println(typeOfInput);
 		try {
-			mySpecificType = typeOfInput.getConstructor(GameObject.class).newInstance(sprite);
+			mySpecificType = typeOfInput.getConstructor(String[].class, double.class, double.class, double.class, double.class, GameObject.class).newInstance(values, width, height, x, y, sprite);
 			return mySpecificType;
 		} catch (InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException

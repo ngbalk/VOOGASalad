@@ -7,8 +7,9 @@ import javafx.scene.input.KeyEvent;
 
 public abstract class GoalCharacteristicController extends UserInputText{
 	protected TextField myTextBox;
-	public GoalCharacteristicController(GameObject goal){
-		mySprite = goal;
+	public GoalCharacteristicController(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
+		mySprite = object;
 		myTextBox = (TextField) myNode;
 		populateDefaultText();
 		myTextBox.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){

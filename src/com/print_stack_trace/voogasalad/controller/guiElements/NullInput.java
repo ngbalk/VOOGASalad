@@ -4,8 +4,9 @@ public class NullInput extends UserInputType{
 	public NullInput(){
 		myNode=null;
 	}
-	public NullInput(GameObject object){
-		this();
+	public NullInput(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 		mySprite=object;
+		myNode=null;
 	}
 }

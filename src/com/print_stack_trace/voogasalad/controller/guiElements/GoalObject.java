@@ -10,7 +10,6 @@ public class GoalObject extends GameObject {
 	private GoalCharacteristics myCharacteristics;
 	public GoalObject(ImageView image, String imagePath, ViewObjectDelegate delegate) {
 		super(image, imagePath, delegate);
-
 	}
 	public GoalObject(GoalType myType, ViewObjectDelegate delegate){
 		super(myType);
@@ -26,17 +25,14 @@ public class GoalObject extends GameObject {
 	@Override
 	protected void update() {
 		myDelegate.update(this);
-		
 	}
 	@Override
 	public void createPane() {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void showPane() {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public ImageView getImage() {

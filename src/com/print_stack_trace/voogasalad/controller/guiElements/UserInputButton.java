@@ -7,9 +7,11 @@ public class UserInputButton extends UserInputType {
 	public UserInputButton(){
 		myNode=new Button();
 	}
-	public UserInputButton(GameObject object){
-		this();
+	public UserInputButton(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 		mySprite=object;
+		myNode=new Button();
+		
 	}
 	
 }

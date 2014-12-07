@@ -10,8 +10,8 @@ import javafx.scene.image.Image;
 
 public class SetBackground extends UserInputDropDownMenu{
 
-	public SetBackground(GameObject object){
-		super(object);
+	public SetBackground(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/controller/guiResources/LevelImages.Properties");
 		data=myResourceReader.getProperties();
 		addMenus();
