@@ -19,6 +19,7 @@ public abstract class LevelCharacteristicController extends UserInputText{
 			}
 			
 		});
+		
 	}
 	abstract protected void populateDefaultText();
 	abstract protected void setCharacteristic(String newValue);

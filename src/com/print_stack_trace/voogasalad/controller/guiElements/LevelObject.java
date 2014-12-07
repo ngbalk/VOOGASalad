@@ -14,6 +14,7 @@ public class LevelObject extends GameObject{
 		super(image, imagePath);	
 		colorPane=new Pane();
 		colorPane.setVisible(false);
+		myCharacteristics=new LevelCharacteristics();
 		createPane();
 		this.getImage().setOnMouseClicked(e->showPane());
 		colorPane.setOnMouseClicked(e->showPane());

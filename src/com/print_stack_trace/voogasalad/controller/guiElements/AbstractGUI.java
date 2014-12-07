@@ -113,7 +113,6 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 	public void open(){};
 	public void save(){};
 	public void switchRightAndLeftNode(){
-		System.out.println("WHAT");
 		Node myRight=this.getRight();
 		Node myLeft=this.getLeft();
 		this.getChildren().remove(myRight);
