@@ -7,7 +7,7 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplica
 public class KeyApplicationChecker {
 
 	public static boolean doesKeyApply(KeyResult key, RuntimeSpriteCharacteristics s){
-		if(key.equals(KeyResult.Up) && !s.isColliding) return false;
+		if(key.equals(KeyResult.Up) && !s.isColliding && !s.canMultipleJump) return false;
 		if(key.equals(KeyResult.Down) && s.isColliding) return false;
 		if(key.equals(KeyResult.Up) && s.isCollidingHorizontally) return false;
 		if((key.equals(KeyResult.Right) || key.equals(KeyResult.Left)) && s.isCollidingHorizontally) return false;

@@ -61,6 +61,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
 		if (reqGoals > 0) {
 			if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+				System.out.println("YOU WIN");
 				runtimeModel.gameOver = true;
 				runtimeModel.gameVictory = true;
 			}
