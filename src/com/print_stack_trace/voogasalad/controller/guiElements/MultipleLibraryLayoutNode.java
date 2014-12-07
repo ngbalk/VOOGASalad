@@ -24,13 +24,11 @@ public class MultipleLibraryLayoutNode extends AbstractLayoutNode{
 	@Override
 	public Number getHeight() {
 		return((MultipleLibraryPane) myNode).getPrefHeight();
-		
 	}
-
+	
 	@Override
 	public Number getWidth() {
-		return ((MultipleLibraryPane) myNode).getPrefWidth();
-		
+		return ((MultipleLibraryPane) myNode).getPrefWidth();	
 	}
 	
 }
