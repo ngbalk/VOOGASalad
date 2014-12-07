@@ -74,6 +74,9 @@ public class LevelTracker {
 		}
 		return activeSprites;
 	}
+	public void removeSprite(SpriteObject sprite){
+		myLevels.get(currentLevel.getValue()).remove(sprite);
+	}
 
 
 }
