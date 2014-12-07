@@ -58,6 +58,19 @@ public class GameData implements IGameData {
 		writeToFile(gson.toJson(o), filePath);
 	}
 
+	/**
+	 * Takes in an object and stores that object as a json representation and
+	 * will label it with the associated property. The file that it is being
+	 * saved to is an extension of the file that is currently loaded, hence this
+	 * will just save a file that is associated with a main file.
+	 * 
+	 * @param o
+	 *            - The object to be stored
+	 * @param property
+	 *            - a short modifier that is used to describe this particular
+	 *            object for the purpose of the current open file.
+	 */
+
 	public void storeObject(Object o, String property) throws IOException {
 		filePath = filePath + property + ".txt";
 		writeToFile(gson.toJson(o), filePath);
@@ -81,6 +94,17 @@ public class GameData implements IGameData {
 		filePath = filePath.substring(0, filePath.length() - 4);
 		return convertFromFile(c, myFile);
 	}
+
+	/**
+	 * Returns an associated object that has been saved under the certain
+	 * property as a particular class.
+	 * 
+	 * @param property
+	 *            - the modifier that is used to describe how this particular
+	 *            object refers to the current file
+	 * @param c
+	 *            - the class of the object that is to be returned
+	 */
 
 	public Object getObject(String property, Class<?> c) throws IOException {
 		File myFile = new File(filePath + property + ".txt");
