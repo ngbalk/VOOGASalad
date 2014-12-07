@@ -74,13 +74,10 @@ public class PhysicsEngine {
         Collection<RuntimeSpriteCharacteristics> allObjects = currentRuntime.getRuntimeSpriteMap().values();
         for(RuntimeSpriteCharacteristics obj : allObjects) {
             obj.setDecelerationConstant(0.0f);
-            obj.isColliding = false;
+            obj.isColliding = obj.isCollidingHorizontally = obj.isCollidingVertically = false;
             if(obj.interactive) soloHandler.applyPhysics(obj, framesPerSecond);
 
         }
-
-
-        performEnemyAI(allObjects.toArray());
 
         Object[] array = allObjects.toArray();
         for(int i = 0; i < array.length; i++) {
@@ -109,6 +106,7 @@ public class PhysicsEngine {
                 }	
             }
         }
+        performEnemyAI(allObjects.toArray());
 
         Collection<RuntimeSpriteCharacteristics> toRemove = new ArrayList<RuntimeSpriteCharacteristics>();
         for(RuntimeSpriteCharacteristics obj : allObjects) {
@@ -128,13 +126,13 @@ public class PhysicsEngine {
     }
 
     private void patrolEnemy(RuntimeSpriteCharacteristics enemy){
+        if(enemy.isCollidingHorizontally) enemy.isPatrollingLeft = !enemy.isPatrollingLeft;
         if(enemy.isPatrollingLeft){
             enemy.setX(enemy.getX() + enemy.startingSpeed);
         }
         else{
             enemy.setX(enemy.getX() + -enemy.startingSpeed);
         }
-        if(enemy.isCollidingHorizontally) enemy.isPatrollingLeft = !enemy.isPatrollingLeft;
     }
 
     private void stickSpriteToSide(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2){
