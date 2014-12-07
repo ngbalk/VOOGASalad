@@ -196,6 +196,9 @@ public class LevelModel {
     }
     
     public KeyResult getResultOfKey(KeyCode key) {
+        if(!myKeyMap.containsKey(key)) {
+            return KeyResult.Default;
+        }
     	return myKeyMap.get(key);
     }
     

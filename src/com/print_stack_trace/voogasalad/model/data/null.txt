@@ -1,10 +1,10 @@
 {
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
       "p": {
-        "x": 248,
-        "y": 99
+        "x": 153,
+        "y": 321
       },
       "interactive": true,
       "objectType": "HERO",
@@ -17,19 +17,43 @@
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "JUMP": [],
-        "UP": [],
-        "RIGHT": [],
-        "CROUCH": [],
-        "DOWN": [],
-        "LEFT": []
+        "DOWN": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario_crouching.png"
+          }
+        ],
+        "LEFT": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-left-1.png"
+          }
+        ],
+        "RIGHT": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-right-2.png"
+          }
+        ],
+        "UP": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-jumping.png"
+          }
+        ],
+        "JUMP": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-jumping.png"
+          }
+        ],
+        "CROUCH": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario_crouching.png"
+          }
+        ]
       }
     },
     "1": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 249,
-        "y": 260
+        "x": 6,
+        "y": 440
       },
       "interactive": false,
       "objectType": "PLATFORM",
@@ -38,20 +62,36 @@
       "value": 0,
       "orientation": 0.0,
       "name": "",
-      "width": 100.0,
+      "width": 400.0,
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "JUMP": [],
-        "UP": [],
-        "RIGHT": [],
-        "CROUCH": [],
         "DOWN": [],
-        "LEFT": []
+        "LEFT": [],
+        "RIGHT": [],
+        "UP": [],
+        "JUMP": [],
+        "CROUCH": []
       }
     }
   },
-  "goalMap": {},
+  "goalMap": {
+    "0": {
+      "mySpriteID": 0,
+      "myObjectiveID": 0,
+      "isCompleted": false,
+      "myGoalCharacteristics": {
+        "myName": "",
+        "myGoalType": "REACH_OBJECT",
+        "myObjectID": 0,
+        "myObjectiveID": 0,
+        "myPointTotal": 0,
+        "myDestination": 0.0,
+        "myHorizontalDestination": true
+      },
+      "myGoalType": "REACH_OBJECT"
+    }
+  },
   "currentID": 1,
   "isLocked": false,
   "physicsEngine": {
@@ -95,6 +135,8 @@
     "handlerMap": {}
   },
   "myLevelChars": {
+    "name": "jack is based",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 1
   },
   "myGoalFactory": {},
