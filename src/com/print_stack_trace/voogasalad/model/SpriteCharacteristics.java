@@ -30,8 +30,6 @@ public class SpriteCharacteristics {
 
 	// DEFAULT VARIABLES
 	public static final Image DEFAULT_IMAGE = null;
-	public static final int DEFAULT_X_POSITION = 0;
-	public static final int DEFAULT_Y_POSITION = 0;
 	public static final boolean DEFAULT_INTERACTIVE = false;
 	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
 	public static final int DEFAULT_HEALTH = 10;
@@ -71,7 +69,7 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
 		img = DEFAULT_IMAGE;
-		p = new Point(DEFAULT_X_POSITION,DEFAULT_Y_POSITION);
+		p = new Point(0,0);
 		//xPosition=DEFAULT_X_POSITION;
 		//yPosition=DEFAULT_Y_POSITION;
 		startingHealth = DEFAULT_HEALTH;
@@ -254,29 +252,23 @@ public class SpriteCharacteristics {
 
 	public double getY(){
 		//return yPosition;
-		return p.getX();
+		return p.getY();
 	}
 
 	public void setX(double xPosition){
 		//this.xPosition=(int)xPosition;
-		p.setLocation(xPosition, p.getY());
-	}
-
-	public void setX(int xPosition){
-		//this.xPosition=xLocation;
-		p.setLocation(xPosition, p.getY());
+		System.out.println("XLoc original: "+p.getX());
+		//p.setLocation(xPosition, p.getY());
+		p.x=(int)xPosition;
+		System.out.println("XLoc changed: "+p.getY());
 	}
 	
 	public void setY(double yPosition){
 		//this.yPosition=(int)yPosition;
-		p.setLocation(p.getX(), yPosition);
+		//p.setLocation(p.getX(), yPosition);
+		p.y=(int)yPosition;
 	}
 	
-	public void setY(int yPosition){
-		//this.yPosition=yPosition;
-		p.setLocation(p.getX(), yPosition);
-	}
-
 	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
 		myMovements.put(myAction, myKey);
 	}
