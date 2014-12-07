@@ -26,12 +26,14 @@ import javafx.collections.ObservableSet;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
 public class GamePane extends Pane implements ViewObjectDelegate{
 	private double myWidth;
 	private double myHeight;
 	private GameEngine myGameEngine;
+	private ImageView background;
 	private HashMap<String,HashSet<SpriteObject>> myData;
 	public boolean doubleclick=true;
 	public SimpleObjectProperty<SpriteObject> changedSprite=new SimpleObjectProperty<SpriteObject>();
@@ -40,6 +42,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	private PaneChooser myPaneChooser=new PaneChooser();
 	private LevelBar myLevelBar;
 	private String myStyle="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
+	
 	public GamePane(double width, double height, GameEngine gameEngine){
 		myWidth=width;
 		myHeight=height;
@@ -145,7 +148,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			}
 		}
 		else{
-
+			System.out.println(myObject.getCharacteristics().getX());
 			myGameEngine.updateObject(myObject.getId(), myObject.getCharacteristics());
 		}
 		SpriteObject temp=new SpriteObject(0,new ImageView(myObject.getImage().getImage()), myObject.getImagePath(), myObject.getType(),myObject.getDelegate());
@@ -170,12 +173,17 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		}
 	}
 	public void levelUpdate(LevelObject currentLevel){
+		background=currentLevel.getImage();
 		myLevelBar.setCurrentLevel(currentLevel);
 		this.getChildren().removeAll(myLevelBar.getNonActiveLevels());
 		this.getChildren().removeAll(myLevelBar.getNonActiveColors());
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
 		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
+	}
+
+	public ImageView getBackgroundImage(){
+		return background;
 	}
 	public Pane sizePane(Pane toBeSize){
 		toBeSize.setPrefSize(this.getWidth(), this.getHeight());
@@ -229,5 +237,13 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	//TODO: consider adding to the AbstractGUI shitz
+	public Object loadLevel() {
+		//TODO: implement this!!
+		//LevelModel levelModel = myGameEngine.loadLevelForEditing("");
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

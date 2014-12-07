@@ -4,8 +4,8 @@ import javafx.scene.Node;
 
 public abstract class AbstractLayoutNode implements LayoutNode {
 	protected Node myNode;
-	public AbstractLayoutNode(double width, double height, Object node){
-		this.initialize(width, height, node);
+	public AbstractLayoutNode(double width, double height, Node focus, Object engine, AbstractViewDelegate delegate){
+		this.initialize(width, height, focus, engine, delegate);
 	}
 	@Override
 	public Node show(){
@@ -14,7 +14,7 @@ public abstract class AbstractLayoutNode implements LayoutNode {
 	@Override
 	public abstract void initialize(double width, double height);
 	@Override
-	public abstract void initialize(double width, double height, Object myLinkedObject);
+	public abstract void initialize(double width, double height, Node myLinkedObject, Object engine, AbstractViewDelegate delegate);
 	
 
 }

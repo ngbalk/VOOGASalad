@@ -8,19 +8,26 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class LevelObject extends GameObject{
-	private LevelCharacteristics myCharacteristics=new LevelCharacteristics();
+	private LevelCharacteristics myCharacteristics;
 	private Pane colorPane;
 	public LevelObject(ImageView image, String imagePath) {
 		super(image, imagePath);	
 		colorPane=new Pane();
 		colorPane.setVisible(false);
+		myCharacteristics=new LevelCharacteristics();
 		createPane();
 		this.getImage().setOnMouseClicked(e->showPane());
 		colorPane.setOnMouseClicked(e->showPane());
 	}
 	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate) {
 		super(imgView, imagePath, myDelegate);	
+		myCharacteristics=new LevelCharacteristics();
 	}
+	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate, LevelCharacteristics levelCharacteristics) {
+		super(imgView, imagePath, myDelegate);
+		myCharacteristics = levelCharacteristics;
+	}
+	
 	public LevelCharacteristics getCharacteristics(){
 		return myCharacteristics;
 	}
