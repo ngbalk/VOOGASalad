@@ -88,7 +88,7 @@ public class CollisionDetector {
 		hero.isCollidingHorizontally = true;
 		hero.isCollidingVertically = false;
 		
-		return(right.getX() > intersect.getX() && intersect.getHeight() > intersect.getWidth());
+		return(right.getX() >= intersect.getX() && intersect.getHeight() > intersect.getWidth());
 	}
 	
 }

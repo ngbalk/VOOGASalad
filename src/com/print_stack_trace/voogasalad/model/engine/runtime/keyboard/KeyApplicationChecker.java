@@ -10,6 +10,7 @@ public class KeyApplicationChecker {
 		if(key.equals(KeyResult.Up) && !s.isColliding) return false;
 		if(key.equals(KeyResult.Down) && s.isColliding) return false;
 		if(key.equals(KeyResult.Up) && s.isCollidingHorizontally) return false;
+		if((key.equals(KeyResult.Right) || key.equals(KeyResult.Left)) && s.isCollidingHorizontally) return false;
 		return true;
 	}
 	
