@@ -92,13 +92,13 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myGameObject.getCharacteristics().setY(myGameObject.getImage().getLayoutY());
 		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
 		myGameObject.setID(myID);
-		System.out.println("HEY"+xVal.doubleValue());
 		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight(),xVal, yVal);
 		if (myData.get(myGameObject.getCode())==null)
 			myData.put(myGameObject.getCode(), new HashSet<SpriteObject>());
 		myData.get(myGameObject.getCode()).add(myGameObject);
 		SimpleObjectProperty<SpriteObject> currentSprite=new SimpleObjectProperty<SpriteObject>(myGameObject);
 		this.getChildren().add(myGameObject.getImage());
+		levelTracker.addSprite(myGameObject);
 		return myGameObject;
 	}
 	public void addExistingObjectToOtherPane(SpriteObject newSprite){
@@ -140,7 +140,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
 		levelBackground.getCharacteristics().setBackground(background.getImage());
-		levelUpdate(levelBackground);
+		levelChange(levelBackground);
 
 
 	}
@@ -181,7 +181,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myLevelBar=levelBar;
 	}
 	public void update(LevelObject currentLevel){
-		levelUpdate(currentLevel);
+		levelChange(currentLevel);
 	}
 	public void addLevelUpdate(LevelObject myObject){
 		myObject.setDelegate(this);
@@ -189,16 +189,17 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		String name=new MessagePopUp(myStyle).showInputDialog("Name of Level:");
 		if (new BlankSpaceTextChecker().checkText(name)){
 			myObject.getCharacteristics().setName(name);
-			levelTracker.addLevel(myObject, e->levelUpdate(myObject));
-			
-			levelUpdate(myObject);
+			levelTracker.addLevel(myObject, e->levelChange(myObject));
+			levelChange(myObject);
 		}
 	}
-	public void levelUpdate(LevelObject currentLevel){
+	private void levelChange(LevelObject currentLevel){
 		background=currentLevel.getImage();
 		levelTracker.setCurrentLevel(currentLevel);
 		this.getChildren().removeAll(levelTracker.getNonActiveLevels());
 		this.getChildren().removeAll(levelTracker.getNonActiveColors());
+		this.getChildren().removeAll(levelTracker.removableSprites());
+		this.getChildren().addAll(levelTracker.activeSprites());
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
 		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());

@@ -15,7 +15,7 @@ public class LevelTracker {
 	private SimpleObjectProperty<LevelObject>addLevel=new SimpleObjectProperty<LevelObject>(null);
 	private SimpleObjectProperty<EventHandler> myAddEvent=new SimpleObjectProperty<EventHandler>(null);
 	public LevelTracker(){
-		
+
 	}
 	public void addLevel(LevelObject newLevel, EventHandler myEvent){
 		myLevels.put(newLevel, new HashSet<GameObject>());
@@ -41,20 +41,39 @@ public class LevelTracker {
 	public HashSet<ImageView> getNonActiveLevels(){
 		HashSet<ImageView> nonActiveLevels=new HashSet<ImageView>();
 		for (LevelObject isActive: myLevels.keySet()){
-				nonActiveLevels.add(isActive.getImage());
+			nonActiveLevels.add(isActive.getImage());
 		}
 		return nonActiveLevels;
 	}
 	public HashSet<Pane> getNonActiveColors(){
 		HashSet<Pane> nonActiveLevels=new HashSet<Pane>();
 		for (LevelObject isActive: myLevels.keySet()){
-				nonActiveLevels.add(isActive.getColorPane());	
+			nonActiveLevels.add(isActive.getColorPane());	
 		}
 		return nonActiveLevels;
 	}
 	public Set getLevels(){
 		return   myLevels.keySet();
 	}
-	
-	
+	public void addSprite(SpriteObject sprite){
+		myLevels.get(currentLevel.getValue()).add(sprite);
+	}
+	public HashSet<ImageView> removableSprites(){
+		HashSet<ImageView> nonActiveSprites=new HashSet<ImageView>();
+		for (LevelObject isActive: myLevels.keySet()){
+			for (GameObject image: myLevels.get(isActive)){
+				nonActiveSprites.add(image.getImage());
+			}
+		}
+		return nonActiveSprites;
+	}
+	public HashSet<ImageView> activeSprites(){
+		HashSet<ImageView> activeSprites=new HashSet<ImageView>();
+		for (GameObject isActive: myLevels.get(currentLevel.getValue())){
+				activeSprites.add(isActive.getImage());
+		}
+		return activeSprites;
+	}
+
+
 }
