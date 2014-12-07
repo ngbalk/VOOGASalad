@@ -1,14 +1,65 @@
 {
-  "mySpriteMap": {},
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "p": {
+        "x": 248,
+        "y": 99
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "JUMP": [],
+        "UP": [],
+        "RIGHT": [],
+        "CROUCH": [],
+        "DOWN": [],
+        "LEFT": []
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 249,
+        "y": 260
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "JUMP": [],
+        "UP": [],
+        "RIGHT": [],
+        "CROUCH": [],
+        "DOWN": [],
+        "LEFT": []
+      }
+    }
+  },
   "goalMap": {},
-  "currentID": 0,
+  "currentID": 1,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
       [
         "NoAction",
         "NoAction",
-        "NoAction",
+        "ObjectBothNoDisplacement",
         "NoAction",
         "NoAction"
       ],
@@ -44,7 +95,7 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "requiredNumberOfGoals": 0
+    "requiredNumberOfGoals": 1
   },
   "myGoalFactory": {},
   "myKeyMap": {}

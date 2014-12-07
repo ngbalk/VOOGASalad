@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;

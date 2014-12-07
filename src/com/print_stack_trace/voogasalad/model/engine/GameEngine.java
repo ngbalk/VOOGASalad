@@ -221,10 +221,10 @@ public class GameEngine {
 		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
 		currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
 
-		GoalCharacteristics g = new GoalCharacteristics(GoalType.REACH_OBJECT);
-		g.myDestination = 100;
-		g.myObjectID = 2;	
-		currentLevel.setGoal(g);
+//		GoalCharacteristics g = new GoalCharacteristics(GoalType.REACH_OBJECT);
+//		g.myDestination = 100;
+//		g.myObjectID = 2;	
+//		currentLevel.setGoal(g);
 
 		LevelCharacteristics l = currentLevel.getLevelCharacteristics();
 		l.requiredNumberOfGoals = 1;

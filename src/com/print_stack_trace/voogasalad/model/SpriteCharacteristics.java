@@ -102,8 +102,6 @@ public class SpriteCharacteristics {
 		objectType = obj.getObjectType();
 		img = obj.getJavaAWTImage();
 		p = obj.getPoint();
-		//xPosition=(int)obj.getX();
-		//yPosition=(int)obj.getY();
 		interactive = obj.isInteractive();
 		startingHealth = obj.getStartingHealth();
 		startingSpeed = obj.getStartingSpeed();
