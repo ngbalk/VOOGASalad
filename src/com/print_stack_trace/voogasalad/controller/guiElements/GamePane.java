@@ -354,9 +354,9 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 					this, 
 					levelCharacteristics);
 			levelObject.getCharacteristics().setName(levelCharacteristics.getName());
-			myLevelBar.addLevel(levelCharacteristics.getName(), levelObject).setOnAction(e->levelUpdate(levelObject));
-			myLevelBar.setCurrentLevel(levelObject);
+			levelTracker.addLevel(levelObject, e->levelChange(levelObject));
 			levelObject.update();
+			levelChange(levelObject);
 		}
 		private void loadSpriteObjectsFromLevel(Map<Integer,SpriteCharacteristics> spriteMap) {
 			for(SpriteCharacteristics sc : spriteMap.values()){
