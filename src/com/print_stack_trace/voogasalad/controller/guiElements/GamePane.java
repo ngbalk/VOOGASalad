@@ -1,26 +1,29 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
-
-
-
-
-
-
-
-
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+import com.google.gson.JsonSyntaxException;
+import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
+import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
-
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -28,7 +31,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GamePane extends Pane implements ViewObjectDelegate{
 	private double myWidth;
@@ -242,6 +249,9 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public void setPhysics(ProgramPhysicEngine typeOfGravity) {
 		myGameEngine.setProgramPhysicsEngine(typeOfGravity);	
 	}
+	public void setPhysics(PhysicsEngine physicsEngine) {
+		myGameEngine.setPhysicsEngine(physicsEngine);
+	}
 	@Override
 	public void removeSpriteOBjects(SpriteObject myObject) {
 		if (myData.get(myObject.getCode()).contains(myObject)){
@@ -261,14 +271,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		}
 	}
 	
-	//TODO: consider adding to the AbstractGUI shitz
-	public Object loadLevel() {
-		//TODO: implement this!!
-		//LevelModel levelModel = myGameEngine.loadLevelForEditing("");
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public void deleteObject(SpriteObject object) {
 		System.out.println("DELETE");
@@ -313,6 +315,77 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			backgroundImageViewCopy.setSmooth(true);
 			backgroundImageViewCopy.relocate(backgroundImageView.getFitWidth()*i,backgroundImageView.getFitHeight()*(newVerticalPaneCount-1));
 			this.getChildren().add(0,backgroundImageViewCopy);
-		}	
+		}
 	}
+		
+		//TODO: consider adding to the AbstractGUI shitz
+		public void loadLevel() {
+			
+			//load in level from game data
+			LevelModel levelModel = loadLevelModelFromFile();
+			if(levelModel == null)
+				return;
+			LevelCharacteristics levelCharacteristics = levelModel.getLevelCharacteristics();
+			//transfer general level data in
+			loadLevelObjectFromLevel(levelCharacteristics);
+			//transfer sprite data in
+			loadSpriteObjectsFromLevel(levelModel.getSpriteMap());
+			//transfer goal data in
+			loadGoalObjectsFromLevel(levelModel.getGoalMap());
+			//transfer other things in
+			setCamera(levelModel.getCameraType());
+			setPhysics(levelModel.getPhysicsEngine());
+			
+			//TODO: add more here if necessary
+		}
+		private LevelModel loadLevelModelFromFile() {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Load level");
+			fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
+			Stage newStage=new Stage();
+			File file = fileChooser.showOpenDialog(newStage);
+			if (file != null) {
+				try {
+					//FileInputStream myFile=new FileInputStream(file);
+					return myGameEngine.loadLevelForEditing(file);
+				} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
+					System.out.println(ex.getMessage());
+				}
+			}
+			return null;
+		}
+		private void loadLevelObjectFromLevel(LevelCharacteristics levelCharacteristics) {
+			LevelObject levelObject = new LevelObject(new ImageView(
+					levelCharacteristics.getBackground()), 
+					levelCharacteristics.getBackgroundImagePath(), 
+					this, 
+					levelCharacteristics);
+			levelObject.getCharacteristics().setName(levelCharacteristics.getName());
+			levelTracker.addLevel(levelObject, e->levelChange(levelObject));
+			levelObject.update();
+			levelChange(levelObject);
+		}
+		private void loadSpriteObjectsFromLevel(Map<Integer,SpriteCharacteristics> spriteMap) {
+			for(SpriteCharacteristics sc : spriteMap.values()){
+				SpriteObject spriteObject = addSpriteObject(
+						new ImageView(sc.getImage()), 
+						sc.getImagePath(), 
+						sc.getObjectType().toString());
+				spriteObject.setCharacteristics(sc);
+				spriteObject.update();
+			}
+		}
+		private void loadGoalObjectsFromLevel(Map<Integer,Goal> goalMap) {
+			for(Goal goal : goalMap.values()){
+				GoalObject goalObject = new GoalObject(goal.getGoalType(),this);
+				goalObject.setCharacteristics(goal.getGoalCharacteristics());
+				addGoalToLevel(goalObject);
+				goalObject.update();
+			}
+		}
+		
+		@Override
+		public HashSet<GameObject> getCurrentLevelSprites() {
+			return levelTracker.currentLevelSprites();
+		}
 }

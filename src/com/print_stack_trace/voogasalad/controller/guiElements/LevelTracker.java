@@ -70,7 +70,18 @@ public class LevelTracker {
 	public HashSet<ImageView> activeSprites(){
 		HashSet<ImageView> activeSprites=new HashSet<ImageView>();
 		for (GameObject isActive: myLevels.get(currentLevel.getValue())){
-				activeSprites.add(isActive.getImage());
+			activeSprites.add(isActive.getImage());
+		}
+		return activeSprites;
+	}
+	public HashSet<GameObject> currentLevelSprites(){
+
+		HashSet<GameObject> activeSprites=new HashSet<GameObject>();
+		
+		if (myLevels.size()!=0){
+			for (GameObject isActive: myLevels.get(currentLevel.getValue())){
+				activeSprites.add(isActive);
+			}
 		}
 		return activeSprites;
 	}

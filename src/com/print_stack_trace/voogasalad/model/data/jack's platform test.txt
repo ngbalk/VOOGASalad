@@ -87,40 +87,40 @@
     }
   },
   "goalMap": {},
-  "currentID": 4,
+  "currentID": 0,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
       [
         "NoAction",
         "NoAction",
-        "ObjectBothNoDisplacement",
         "NoAction",
-        "ObjectTwoDisappear"
+        "NoAction",
+        "NoAction"
       ],
       [
-         "NoAction",
+        "NoAction",
         "NoAction",
         "NoAction",
         "NoAction",
         "NoAction"
       ],
       [
-         "ObjectBothNoDisplacement",
         "NoAction",
-        "NoAction",
-        "NoAction",
-        "NoAction"
-      ],
-      [
-      "NoAction",
         "NoAction",
         "NoAction",
         "NoAction",
         "NoAction"
       ],
       [
-   "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
         "NoAction",
         "NoAction",
         "NoAction",
@@ -131,7 +131,6 @@
   },
   "myLevelChars": {
     "name": "jack\u0027s platform test",
-    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0
   },
   "myGoalFactory": {},

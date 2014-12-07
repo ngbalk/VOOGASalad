@@ -12,10 +12,10 @@ import javafx.scene.input.KeyEvent;
 
 public abstract class SpriteCharacteristicController extends UserInputText {
 	protected TextField myTextBox;
-	public SpriteCharacteristicController(GameObject sprite) {
-		super(sprite);
+	public SpriteCharacteristicController(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 		myTextBox = (TextField) myNode;
-		mySprite = sprite;
+		mySprite = object;
 		populateDefaultText();
 		myTextBox.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
 			public void handle(KeyEvent e){
@@ -25,6 +25,7 @@ public abstract class SpriteCharacteristicController extends UserInputText {
 				}
 			}
 		});
+		
 	}
 	
 	abstract protected void populateDefaultText();

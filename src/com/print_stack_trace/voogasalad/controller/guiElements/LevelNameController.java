@@ -4,8 +4,9 @@ package com.print_stack_trace.voogasalad.controller.guiElements;
 
 public class LevelNameController extends LevelCharacteristicController {
 	
-	public LevelNameController(GameObject level) {
-		super(level);
+	public LevelNameController(String[] values,  double width, double height, double x, double y, GameObject object){
+		
+		super(values, width, height, x, y, object);
 	}
 	@Override
 	protected void populateDefaultText(){
