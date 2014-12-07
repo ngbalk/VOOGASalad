@@ -1,7 +1,7 @@
 /**
  * @author 
  * Date Created: 11/??/14
- * Date Modified: 11/23/14
+ * Date Modified: 12/06/14
  */
 
 package com.print_stack_trace.voogasalad.model;
@@ -10,10 +10,17 @@ package com.print_stack_trace.voogasalad.model;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+
+import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 
 import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
@@ -23,7 +30,9 @@ public class SpriteCharacteristics {
 
 	// DEFAULT VARIABLES
 	public static final Image DEFAULT_IMAGE = null;
-	public static final Point DEFAULT_POINT = new Point(0,0);
+	public static final int DEFAULT_X_POSITION = 0;
+	public static final int DEFAULT_Y_POSITION = 0;
+	//public static final Point DEFAULT_POINT = new Point(DEFAULT_X_POSITION,DEFAULT_Y_POSITION);
 	public static final boolean DEFAULT_INTERACTIVE = false;
 	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
 	public static final int DEFAULT_HEALTH = 10;
@@ -37,19 +46,22 @@ public class SpriteCharacteristics {
 	// GAME AUTHORING VARIABLES
 	public transient Image img;
 	public String imagePath;
-	public Point p;
+	//public Point p;
+	public int xPosition;
+	public int yPosition;
 	public boolean interactive;
 	public SpriteType objectType;
 	public int startingHealth;
 	public double startingSpeed;
 	public int value;
 	public double orientation;
-
-	//AUTHOR
 	public String name;
 	public double width;
 	public double height;
-	public HashMap<PossibleSpriteAction, KeyCode> myMovements=new HashMap<PossibleSpriteAction,KeyCode>();
+
+	public HashMap<PossibleSpriteAction, KeyCode> myMovements;
+	public HashMap<PossibleSpriteAction, ArrayList<File>> myAnimations;
+
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -60,7 +72,9 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
 		img = DEFAULT_IMAGE;
-		p = DEFAULT_POINT;
+		//p = DEFAULT_POINT;
+		xPosition=DEFAULT_X_POSITION;
+		yPosition=DEFAULT_Y_POSITION;
 		startingHealth = DEFAULT_HEALTH;
 		startingSpeed = DEFAULT_SPEED;
 		value = DEFAULT_VALUE;
@@ -69,6 +83,10 @@ public class SpriteCharacteristics {
 		height=DEFAULT_HEIGHT;
 		name=DEFAULT_NAME;
 		myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
+
+		myAnimations=new HashMap<PossibleSpriteAction, ArrayList<File>>();
+		this.initiateAnimations();
+
 		interactive = DEFAULT_INTERACTIVE;
 		switch(t){
 		case HERO:
@@ -76,6 +94,7 @@ public class SpriteCharacteristics {
 		case ENEMY:
 			interactive = true;
 		}
+
 	}
 
 	/**
@@ -85,7 +104,9 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteCharacteristics obj) {
 		objectType = obj.getObjectType();
 		img = obj.getJavaAWTImage();
-		p = obj.getPoint();
+		//p = obj.getPoint();
+		xPosition=(int)obj.getX();
+		yPosition=(int)obj.getY();
 		interactive = obj.isInteractive();
 		startingHealth = obj.getStartingHealth();
 		startingSpeed = obj.getStartingSpeed();
@@ -96,6 +117,15 @@ public class SpriteCharacteristics {
 		name=obj.getName();
 		myMovements=obj.getMovements();
 		imagePath = obj.getImagePath();
+		myAnimations=obj.getAnimations();
+		
+	}
+	
+	public void initiateAnimations(){
+		for (PossibleSpriteAction action: PossibleSpriteAction.values()){
+			myAnimations.put(action, new ArrayList());
+		}
+		
 	}
 
 	//-------------------ACCESSORS-------------------//
@@ -103,33 +133,70 @@ public class SpriteCharacteristics {
 	public java.awt.Image getJavaAWTImage () {
 		return img;
 	}
-
-	public javafx.scene.image.Image getImage () {
-		//    	BufferedImage bufferedImage = (BufferedImage) img;
-		//    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
-		return new javafx.scene.image.Image(imagePath);
+	public HashMap<PossibleSpriteAction, ArrayList<File>> getAnimations(){
+		return myAnimations;
 	}
+    public javafx.scene.image.Image getImage () {
+//    	BufferedImage bufferedImage = (BufferedImage) img;
+//    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
+    	return new javafx.scene.image.Image(imagePath);
+    }
+    
+    public void setJavaAWTImage(Image image) {
+        this.img = image;
+    }
 
-	public void setJavaAWTImage(Image image) {
-		this.img = image;
-	}
+    public void setImage(javafx.scene.image.Image image) {
+        this.img = SwingFXUtils.fromFXImage(image, null);
+    }
+    public ArrayList<File> getAnimationPath(PossibleSpriteAction action){
+    	return myAnimations.get(action);
+    }
+    
+    public ArrayList<javafx.scene.image.Image> getAnimationImages(PossibleSpriteAction action){
+    	ArrayList<javafx.scene.image.Image> myImages=new ArrayList<javafx.scene.image.Image>();
+    	BufferedImage buffer;
+    	for (File path: getAnimationPath(action)){
+    		try {
+				buffer = ImageIO.read(path);
+				javafx.scene.image.Image img=SwingFXUtils.toFXImage(buffer, null);
+				myImages.add(img);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Image couldn't be uploaded");
+			}
+			
+    	}
+    	return myImages;
+    }
 
-	public void setImage(javafx.scene.image.Image image) {
-		this.img = SwingFXUtils.fromFXImage(image, null);
-	}
+    public void addAnimation(PossibleSpriteAction myAction, int index, File imgPath){
+    	if (myAnimations.get(myAction).size()>index)
+    		myAnimations.get(myAction).set(index,imgPath);
+    	else {
+    		for (int i=0; i<index; i++){
+    			myAnimations.get(myAction).add(null);
+    		}
+    		myAnimations.get(myAction).add(imgPath);
+    	}
+    }
+
 	public void setImagePath(String path){
 		imagePath = path;
 	}
+	
 	public String getImagePath(){
 		return imagePath;
 	}
 
 	public Point getPoint () {
-		return p;
+		return new Point(xPosition,yPosition);
 	}
 
 	public void setPoint (Point p) {
-		this.p = p;
+		//this.p=p;
+		setX(p.getX());
+		setY(p.getY());
 	}
 
 	public boolean isInteractive () {
@@ -177,25 +244,31 @@ public class SpriteCharacteristics {
 	}
 
 	public void setOrientation (double newOrientation) {
-		//System.out.println(newOrientation);
 		this.orientation = newOrientation;
-		//System.out.println(orientation);
 	}
 
 	public double getX(){
-		return p.getX();
+		return xPosition;
 	}
 
 	public double getY(){
-		return p.getY();
+		return yPosition;
 	}
 
-	public void setX(double xLocation){
-		p.x=(int)xLocation; 
+	public void setX(double xPosition){
+		this.xPosition=(int)xPosition;
 	}
 
-	public void setY(double yLocation){
-		p.y=(int) yLocation;
+	public void setX(int xLocation){
+		this.xPosition=xLocation;
+	}
+	
+	public void setY(double yPosition){
+		this.yPosition=(int)yPosition;
+	}
+	
+	public void setY(int yPosition){
+		this.yPosition=yPosition;
 	}
 
 	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
@@ -229,7 +302,6 @@ public class SpriteCharacteristics {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 
 }
