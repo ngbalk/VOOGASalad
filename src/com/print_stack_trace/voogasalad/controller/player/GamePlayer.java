@@ -158,18 +158,17 @@ public class GamePlayer implements ViewController {
 			spriteImageView.setRotate(spriteCharacteristics.getOrientation());
 			spriteImageView.setLayoutX(spriteCharacteristics.getX());
 			spriteImageView.setLayoutY(spriteCharacteristics.getY());
-			/*
-			 * ANIMATIONS TODO:
-			 * 1)Once an animation is detected (i.e. SpriteCharacteristics.currentAction is set to an action,
-			 * it is constantly set.  We need to refresh this so animations are not constantly happening after
-			 * we just press a button once.
-			 * 2)Figure out how to refresh the sprite on screen.  Currently I am trying to remove the previous image
-			 * and add the new image (creating the animation), but this is not currently working.  New method...
-			 */
+
 			executeAnimation(spriteImageView, spriteCharacteristics);
 		}
 
 	}
+	/**
+	 * Check if there is an animation for the current movement, and if so, do it.  Else, just render the normal 
+	 * sprite image.
+	 * @param currentSpriteImageView
+	 * @param spriteCharacteristics
+	 */
 	private void executeAnimation(ImageView currentSpriteImageView, RuntimeSpriteCharacteristics spriteCharacteristics){
 		PossibleSpriteAction animationType = spriteCharacteristics.getCurrentAnimation();
 		if(animationType==null){
@@ -187,18 +186,15 @@ public class GamePlayer implements ViewController {
 	
 			
 	}
+	/**
+	 * Replace old sprite image with new sprite image
+	 * @param currentSpriteImageView
+	 * @param spriteImage
+	 * @param spriteCharacteristics
+	 */
 	private void animateSprite(ImageView currentSpriteImageView, Image spriteImage, SpriteCharacteristics spriteCharacteristics){
-		ImageView spriteImageView = new ImageView(spriteImage);
-		spriteImageView.setFitWidth(spriteCharacteristics.getWidth());
-		spriteImageView.setFitHeight(spriteCharacteristics.getHeight());
-		spriteImageView.setRotate(spriteCharacteristics.getOrientation());
-		spriteImageView.setLayoutX(spriteCharacteristics.getX());
-		spriteImageView.setLayoutY(spriteCharacteristics.getY());
-		
-		//REPLACE OLD SPRITE WITH NEW ANIMATION SPRITE
-		currentSpriteImageView.setImage(spriteImageView.getImage());
-		this.myPlayPane.getChildren().remove(currentSpriteImageView); 
-		this.myPlayPane.getChildren().add(spriteImageView);
+		currentSpriteImageView.setImage(spriteImage);
+		this.myPlayPane.getChildren().add(currentSpriteImageView);
 	}
 
 
