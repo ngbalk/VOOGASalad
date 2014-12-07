@@ -5,18 +5,18 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 
 	//private DecisionTableButton tableButton;// = new DecisionTableButton(new DecisionTable());
-	
 	public GameAuthorBottomLayoutNode(double width, double height, Node toBeLinked, Object engine, AbstractViewDelegate delegate) {
 		super(width, height, toBeLinked, engine, delegate);
 		DecisionTable decisiontable=new DecisionTable((GameEngine) engine);
 		DecisionTableButton tableButton= new DecisionTableButton(decisiontable);
 		tableButton.getStyleClass().add("buttonTemplate2");
-		tableButton.relocate(width*.45, 20);
+		tableButton.relocate(width*.80, 20);
 		tableButton.setPrefSize(200, 50);
 		((Pane) myNode).getChildren().add(tableButton);
 	}
@@ -59,9 +59,19 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		//LOAD GAME WORLD BUTTON
 		//TODO: Abstract this to load gameworld data button
 
+		//EXTEND BACKGROUND BUTTONS
+		LevelSpaceExtenderButton levelExtendRightButton = new LevelExtendRightButton((ViewObjectDelegate) myLinkedObject);
+		levelExtendRightButton.relocate(width*.45, 20);
+		levelExtendRightButton.setPrefSize(100,50);
+		levelExtendRightButton.getStyleClass().add("buttonTemplate2");
+		
+		LevelSpaceExtenderButton levelExtendUpButton = new LevelExtendDownButton((ViewObjectDelegate) myLinkedObject);
+		levelExtendUpButton.relocate(width*.50, 20);
+		levelExtendUpButton.setPrefSize(100,50);
+		levelExtendUpButton.getStyleClass().add("buttonTemplate2");
 		
 		//ADD ALL BUTTONS TO BOTTOM PANE
-		bottomPane.getChildren().addAll(myLevelBar, myLevelButton, loadLevelButton, saveButton);
+		bottomPane.getChildren().add(new HBox(myLevelBar, myLevelButton, loadLevelButton, saveButton, levelExtendRightButton, levelExtendUpButton));
 		
 		
 	}
