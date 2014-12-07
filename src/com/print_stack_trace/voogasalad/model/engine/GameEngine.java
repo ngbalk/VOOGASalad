@@ -54,7 +54,7 @@ public class GameEngine {
 
 	//-------------------PUBLIC METHODS-------------------//
 
-	public void loadGame(FileInputStream myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
+	public void loadGame(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
 		loadLevel((LevelModel) gameData.loadLevel(myFile, LevelModel.class));
 	}
 

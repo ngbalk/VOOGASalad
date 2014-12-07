@@ -209,8 +209,7 @@ public class GamePlayer implements ViewController {
 		File file = fileChooser.showOpenDialog(newStage);
 		if (file != null) {
 			try {
-				FileInputStream myFile=new FileInputStream(file);
-				myGameEngine.loadGame(myFile);
+				myGameEngine.loadGame(file);
 			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
 				System.out.println(ex.getMessage());
 			}
