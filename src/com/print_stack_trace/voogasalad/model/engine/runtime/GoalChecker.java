@@ -1,6 +1,7 @@
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionDetector;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalElementVisitor;
 import com.print_stack_trace.voogasalad.model.environment.KillBoss;
 import com.print_stack_trace.voogasalad.model.environment.Points;
@@ -51,6 +52,11 @@ public class GoalChecker implements GoalElementVisitor {
 	@Override
 	public boolean visit(StayAlive goal) {
 		return myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).health <= 0;
+	}
+
+	@Override
+	public boolean visit(Goal goal) {
+		return false;
 	}
 
 }
