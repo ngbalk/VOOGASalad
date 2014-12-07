@@ -2,8 +2,10 @@
   "mySpriteMap": {
     "0": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
-      "xPosition": 99,
-      "yPosition": 102,
+      "p": {
+        "x": 40,
+        "y": 50
+      },
       "interactive": true,
       "objectType": "HERO",
       "startingHealth": 10,
@@ -11,9 +13,17 @@
       "value": 0,
       "orientation": 0.0,
       "name": "",
-      "width": 101.0,
-      "height": 103.0,
-      "myMovements": {}
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "LEFT": [],
+        "RIGHT": [],
+        "CROUCH": [],
+        "UP": [],
+        "DOWN": [],
+        "JUMP": []
+      }
     }
   },
   "goalMap": {},
@@ -60,8 +70,7 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "level1",
-    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
+    "name": "kd",
     "requiredNumberOfGoals": 0
   },
   "myGoalFactory": {},

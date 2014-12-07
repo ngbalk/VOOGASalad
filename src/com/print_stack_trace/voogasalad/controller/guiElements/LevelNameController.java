@@ -1,6 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
-import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
+
 
 public class LevelNameController extends LevelCharacteristicController {
 	

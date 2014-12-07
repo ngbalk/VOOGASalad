@@ -10,7 +10,7 @@ public class KeyFrameButton extends UserInputButton{
 		((Button) myNode).setOnAction(event->makePopUpPane());
 	}
 	private void makePopUpPane(){
-		Pane myPopUp=new KeyFramePopUpPane();
+		Pane myPopUp=new KeyFramePopUpPane((SpriteObject)mySprite);
 		((GeneralPane) myPopUp).openPane();
 		
 	}

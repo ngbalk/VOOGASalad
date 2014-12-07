@@ -2,8 +2,10 @@
   "mySpriteMap": {
     "0": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
-      "xPosition": 99,
-      "yPosition": 102,
+      "p": {
+        "x": 545,
+        "y": 72
+      },
       "interactive": true,
       "objectType": "HERO",
       "startingHealth": 10,
@@ -11,13 +13,46 @@
       "value": 0,
       "orientation": 0.0,
       "name": "",
-      "width": 101.0,
-      "height": 103.0,
-      "myMovements": {}
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "UP": [],
+        "CROUCH": [],
+        "JUMP": [],
+        "RIGHT": [],
+        "LEFT": [],
+        "DOWN": []
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
+      "p": {
+        "x": 545,
+        "y": 72
+      },
+      "interactive": true,
+      "objectType": "ENEMY",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "UP": [],
+        "CROUCH": [],
+        "JUMP": [],
+        "RIGHT": [],
+        "LEFT": [],
+        "DOWN": []
+      }
     }
   },
   "goalMap": {},
-  "currentID": 0,
+  "currentID": 1,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
@@ -60,7 +95,7 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "level1",
+    "name": "s",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
     "requiredNumberOfGoals": 0
   },

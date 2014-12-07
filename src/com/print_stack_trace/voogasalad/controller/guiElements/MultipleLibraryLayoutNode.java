@@ -5,12 +5,14 @@ import javafx.scene.layout.Pane;
 
 public class MultipleLibraryLayoutNode extends AbstractLayoutNode{
 	
-	public MultipleLibraryLayoutNode(double width, double height, Node myNode) {
-		super(width, height, myNode);
-	}
 	
+	
+	public MultipleLibraryLayoutNode(double width, double height, Node toBeLinked,Object engine, AbstractViewDelegate delegate) {
+		super(width,height,toBeLinked,engine, delegate);
+	}
+
 	@Override
-	public void initialize(double width, double height, Object toBeLinked) {
+	public void initialize(double width, double height, Node toBeLinked, Object engine, AbstractViewDelegate delegate) {
 		MultipleLibraryPane myTabPane=new MultipleLibraryPane(width, height, (Pane)toBeLinked);
 		myNode=myTabPane;
 	}

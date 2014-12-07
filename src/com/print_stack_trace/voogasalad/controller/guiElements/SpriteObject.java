@@ -15,8 +15,8 @@ import javafx.scene.layout.Pane;
 public class SpriteObject extends GameObject{
 	private int myID;
 	private String myType;
-	private SimpleDoubleProperty xProp=new SimpleDoubleProperty(0); 
-	private SimpleDoubleProperty yProp=new SimpleDoubleProperty(0); ;
+	private SimpleDoubleProperty xProp; 
+	private SimpleDoubleProperty yProp;
 	private GameEngine myGameEngine;
 	protected SpriteCharacteristics myCharacteristics;
 
@@ -28,6 +28,8 @@ public class SpriteObject extends GameObject{
 		super(image, imagePath, delegate);
 		myID=ID;
 		myType=type;
+		xProp=new SimpleDoubleProperty(0); 
+		yProp=new SimpleDoubleProperty(0);
 		//need other types
 		myCharacteristics=new SpriteCharacteristics(SpriteType.valueOf(type.toUpperCase()));
 		myCharacteristics.setImagePath(imagePath);

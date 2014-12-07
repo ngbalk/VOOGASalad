@@ -21,7 +21,6 @@ public class UserInputFactory {
 			return null;
 		}
 		UserInputType mySpecificType;
-		
 		try {
 			mySpecificType = typeOfInput.getConstructor(GameObject.class).newInstance(sprite);
 			return mySpecificType;
