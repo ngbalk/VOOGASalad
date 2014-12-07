@@ -246,4 +246,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public void deleteObject(SpriteObject object) {
+		myGameEngine.deleteObject(object.getId());
+	}
 }

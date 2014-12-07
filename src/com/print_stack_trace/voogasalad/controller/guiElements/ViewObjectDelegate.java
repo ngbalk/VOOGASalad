@@ -14,4 +14,5 @@ public interface ViewObjectDelegate {
 	public void removeSpriteOBjects(SpriteObject myObject);
 	public Set getLevelsAvailable();
 	public void saveGame();
+	public void deleteObject(SpriteObject object);
 }

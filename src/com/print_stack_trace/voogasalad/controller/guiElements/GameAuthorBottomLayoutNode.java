@@ -19,6 +19,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		tableButton.relocate(width*.45, 20);
 		tableButton.setPrefSize(200, 50);
 		((Pane) myNode).getChildren().add(tableButton);
+		//DeleteButton deleteButton = new DeleteButton(null, null);
 	}
 
 	@Override
@@ -59,6 +60,8 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		//LOAD GAME WORLD BUTTON
 		//TODO: Abstract this to load gameworld data button
 
+		//DELETE OBJECT BUTTON...for things we hate/don't want anymore
+		
 		
 		//ADD ALL BUTTONS TO BOTTOM PANE
 		bottomPane.getChildren().addAll(myLevelBar, myLevelButton, loadLevelButton, saveButton);

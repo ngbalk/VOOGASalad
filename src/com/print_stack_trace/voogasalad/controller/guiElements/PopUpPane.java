@@ -10,7 +10,9 @@ import com.print_stack_trace.voogasalad.controller.gameElements.Sprite;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 public class PopUpPane extends GeneralPane{
@@ -32,6 +34,18 @@ public class PopUpPane extends GeneralPane{
 		this.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
 		this.setStyle("-fx-background-color: BLACK");
 		makeLabels();
+		Button submit = new Button("Submit");
+		submit.setOnAction(e->this.close());
+		submit.setPrefSize(80,20);
+//		this.getChildren().add(submit);
+		Button delete = new Button("Delete");
+		delete.setPrefSize(80, 20);
+//		this.getChildren().add(delete);
+		HBox buttonBox = new HBox();
+		buttonBox.getChildren().addAll(submit, delete);
+		buttonBox.toFront();
+		buttonBox.relocate(0, 0);//yCoord);
+		this.getChildren().add(buttonBox);
 	}
 	public void createTextFields(){}
 	public void makeObservable(Collection toObserve){}
