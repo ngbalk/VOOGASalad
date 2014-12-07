@@ -3,8 +3,8 @@
     "0": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
       "p": {
-        "x": 18,
-        "y": 66
+        "x": 28,
+        "y": 223
       },
       "interactive": true,
       "objectType": "HERO",
@@ -17,112 +17,162 @@
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
         "LEFT": [],
         "CROUCH": [],
+        "RIGHT": [],
+        "UP": [],
         "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
+        "JUMP": []
       }
     },
     "1": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 18,
-        "y": 199
+        "x": 4,
+        "y": 452
       },
       "interactive": false,
       "objectType": "PLATFORM",
       "startingHealth": 10,
       "startingSpeed": 10.0,
-      "value": 100,
+      "value": 0,
       "orientation": 0.0,
       "name": "",
       "width": 2000.0,
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
         "LEFT": [],
         "CROUCH": [],
+        "RIGHT": [],
+        "UP": [],
         "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
+        "JUMP": []
       }
     },
     "2": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 152,
-        "y": 82
+        "x": 38,
+        "y": 353
       },
       "interactive": false,
-      "objectType": "REWARD",
+      "objectType": "PLATFORM",
       "startingHealth": 10,
       "startingSpeed": 10.0,
-      "value": 100,
+      "value": 0,
       "orientation": 0.0,
       "name": "",
       "width": 100.0,
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
         "LEFT": [],
         "CROUCH": [],
+        "RIGHT": [],
+        "UP": [],
         "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
+        "JUMP": []
       }
     },
     "3": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 310,
-        "y": 89
+        "x": 676,
+        "y": 353
       },
       "interactive": false,
-      "objectType": "REWARD",
+      "objectType": "PLATFORM",
       "startingHealth": 10,
       "startingSpeed": 10.0,
-      "value": 100,
+      "value": 0,
       "orientation": 0.0,
       "name": "",
       "width": 100.0,
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
         "LEFT": [],
         "CROUCH": [],
+        "RIGHT": [],
+        "UP": [],
         "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
+        "JUMP": []
+      }
+    },
+    "4": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
+      "p": {
+        "x": 464,
+        "y": 348
+      },
+      "interactive": true,
+      "objectType": "ENEMY",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "LEFT": [],
+        "CROUCH": [],
+        "RIGHT": [],
+        "UP": [],
+        "DOWN": [],
+        "JUMP": []
+      }
+    },
+    "5": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
+      "p": {
+        "x": 165,
+        "y": 346
+      },
+      "interactive": true,
+      "objectType": "ENEMY",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "LEFT": [],
+        "CROUCH": [],
+        "RIGHT": [],
+        "UP": [],
+        "DOWN": [],
+        "JUMP": []
       }
     }
   },
   "goalMap": {},
-  "currentID": 3,
+  "currentID": 5,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
       [
         "NoAction",
-        "NoAction",
+        "HeroDamageCollision",
         "ObjectBothNoDisplacement",
-        "NoAction",
-        "HeroGetsRewards"
-      ],
-      [
-        "NoAction",
-        "NoAction",
-        "NoAction",
         "NoAction",
         "NoAction"
       ],
       [
         "NoAction",
         "NoAction",
+        "ObjectBothNoDisplacement",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "ObjectBothNoDisplacement",
         "NoAction",
         "NoAction",
         "NoAction"
@@ -147,9 +197,7 @@
   "myLevelChars": {
     "name": "jack\u0027s badder ass level",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
-    "requiredNumberOfGoals": 1,
-    "myHorizontalPaneCount": 1,
-    "myVerticalPaneCount": 1
+    "requiredNumberOfGoals": 0
   },
   "myGoalFactory": {},
   "myKeyMap": {}

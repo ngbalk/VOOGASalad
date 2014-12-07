@@ -3,8 +3,8 @@
     "0": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
       "p": {
-        "x": 131,
-        "y": 22
+        "x": 18,
+        "y": 66
       },
       "interactive": true,
       "objectType": "HERO",
@@ -18,21 +18,71 @@
       "myMovements": {},
       "myAnimations": {
         "UP": [],
-        "JUMP": [],
+        "LEFT": [],
         "CROUCH": [],
-        "RIGHT": [],
         "DOWN": [],
-        "LEFT": []
+        "JUMP": [],
+        "RIGHT": []
       }
     },
     "1": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 129,
-        "y": 340
+        "x": 18,
+        "y": 199
       },
       "interactive": false,
       "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 100,
+      "orientation": 0.0,
+      "name": "",
+      "width": 2000.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "UP": [],
+        "LEFT": [],
+        "CROUCH": [],
+        "DOWN": [],
+        "JUMP": [],
+        "RIGHT": []
+      }
+    },
+    "2": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
+      "p": {
+        "x": 152,
+        "y": 82
+      },
+      "interactive": false,
+      "objectType": "REWARD",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 100,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "UP": [],
+        "LEFT": [],
+        "CROUCH": [],
+        "DOWN": [],
+        "JUMP": [],
+        "RIGHT": []
+      }
+    },
+    "3": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
+      "p": {
+        "x": 310,
+        "y": 89
+      },
+      "interactive": false,
+      "objectType": "REWARD",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
@@ -43,25 +93,25 @@
       "myMovements": {},
       "myAnimations": {
         "UP": [],
-        "JUMP": [],
+        "LEFT": [],
         "CROUCH": [],
-        "RIGHT": [],
         "DOWN": [],
-        "LEFT": []
+        "JUMP": [],
+        "RIGHT": []
       }
     }
   },
   "goalMap": {},
-  "currentID": 1,
+  "currentID": 3,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
       [
         "NoAction",
         "NoAction",
+        "ObjectBothNoDisplacement",
         "NoAction",
-        "NoAction",
-        "NoAction"
+        "HeroGetsRewards"
       ],
       [
         "NoAction",
@@ -95,9 +145,11 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "jack you piece of shit",
+    "name": "jack\u0027s badder ass level",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
-    "requiredNumberOfGoals": 0
+    "requiredNumberOfGoals": 1,
+    "myHorizontalPaneCount": 1,
+    "myVerticalPaneCount": 1
   },
   "myGoalFactory": {},
   "myKeyMap": {}
