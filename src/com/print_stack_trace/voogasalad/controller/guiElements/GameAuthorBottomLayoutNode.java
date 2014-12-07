@@ -1,11 +1,15 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.io.File;
+
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 

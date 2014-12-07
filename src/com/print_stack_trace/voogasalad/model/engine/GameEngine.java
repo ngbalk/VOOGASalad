@@ -26,6 +26,7 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
@@ -117,6 +118,10 @@ public class GameEngine {
 	}
 
 	//Global Physics
+	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
+		authorEngine.setPhysicsEngine(physicsEngine);
+	}
+
 	public void setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
 		authorEngine.setProgramPhysicsEngine(engineType);
 	}
@@ -243,4 +248,5 @@ public class GameEngine {
 			runtimeEngine.handleKeyPress(event);
 		}
 	}
+
 }
