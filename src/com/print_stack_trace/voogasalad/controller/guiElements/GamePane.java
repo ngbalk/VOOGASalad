@@ -268,7 +268,15 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
+	public void deleteObject(SpriteObject object) {
+		System.out.println("DELETE");
+		myGameEngine.deleteObject(object.getId());
+		this.getChildren().remove(object.getImage());
+		this.levelTracker.removeSprite(object);
+	}
+
 	public void extendRight() {
 		
 		LevelCharacteristics levelCharacteristics = levelTracker.getCurrentLevel().getCharacteristics();
@@ -290,7 +298,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 
 	@Override
-	public void extendDown() {
+	public void extendDown(){
 		LevelCharacteristics levelCharacteristics = levelTracker.getCurrentLevel().getCharacteristics();
 		int newVerticalPaneCount = levelCharacteristics.incrementVerticalPaneCount();
 		int currentHorizontalPaneCount = levelCharacteristics.getHorizontalPaneCount();
@@ -305,10 +313,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			backgroundImageViewCopy.setSmooth(true);
 			backgroundImageViewCopy.relocate(backgroundImageView.getFitWidth()*i,backgroundImageView.getFitHeight()*(newVerticalPaneCount-1));
 			this.getChildren().add(0,backgroundImageViewCopy);
-		}
-		
-		
-		
+		}	
 	}
-
 }

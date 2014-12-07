@@ -27,7 +27,6 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 		currentMenu.setText(myName);
 	}
 	protected void addMenus(){
-
 		for (String menuName: data.keySet()){
 			CheckMenuItem currentMenuItem=new CheckMenuItem(returnStringName(data.get(menuName)));
 			currentMenuItem.setOnAction(e->checkCorrectMenu(currentMenuItem,menuName));

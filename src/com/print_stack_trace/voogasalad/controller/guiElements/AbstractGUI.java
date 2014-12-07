@@ -17,6 +17,7 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 	private double myWidth;
 	private double myHeight;
 	private Node focusPane=new Pane();
+//	private ViewObjectDelegate myViewObjectDelegate;
 	protected String myStyle;
 	HashMap<String, String> locations=new HashMap<String, String>();
 	HashMap<LayoutNodeLocation, LayoutNode> layouts=new HashMap<LayoutNodeLocation, LayoutNode>();
@@ -43,6 +44,7 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 	}
 
 	protected Node setCenterPane(Object engine){
+
 		focusPane=styleNode(createNode(LayoutNodeLocation.CENTER,locations.get(LayoutNodeLocation.CENTER.name()), engine));
 		ScrollBarPane myScroll=new ScrollBarPane(myWidth, myHeight, focusPane);
 		setBorderAndBackgroundStyle(focusPane);
