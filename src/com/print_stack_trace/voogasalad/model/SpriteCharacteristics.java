@@ -257,12 +257,14 @@ public class SpriteCharacteristics {
 		//this.xPosition=(int)xPosition;
 		//p.setLocation(xPosition, p.getY());
 		p.x=(int)xPosition;
+		System.out.println("Original:" + p.x + "\nNew: "+xPosition);
 	}
 	
 	public void setY(double yPosition){
 		//this.yPosition=(int)yPosition;
 		//p.setLocation(p.getX(), yPosition);
 		p.y=(int)yPosition;
+		System.out.println("Original:" + p.y + "\nNew: "+yPosition);
 	}
 	
 	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
