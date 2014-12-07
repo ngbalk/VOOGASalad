@@ -99,6 +99,7 @@ public class PhysicsEngine {
 
 				this.moveSpritesForward(copys1, copys2, framesPerSecond);
 				if(CollisionDetector.haveCollided(copys1, copys2)) {
+					stickSpriteToSide(s1,s2);
 					collisionHandler(s1, s2, currentRuntime);
 				}	
 			}
@@ -109,6 +110,29 @@ public class PhysicsEngine {
 			if (obj.shouldBeRemoved()) toRemove.add(obj);
 		}
 		allObjects.removeAll(toRemove);
+	}
+	
+	public void stickSpriteToSide(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2){
+
+		if(CollisionDetector.haveCollidedFromTop(s1, s2)){
+			s1.setY(s2.getY() - s1.getHeight());
+			return;
+		}
+		
+		if(CollisionDetector.haveCollidedFromBottom(s1, s2)){
+			s1.setY(s2.getY() + s2.getHeight());
+			return;
+		}
+		
+
+		if(CollisionDetector.haveCollidedFromLeft(s1, s2)){
+			s1.setX(s2.getX() - s1.getWidth());
+			return;
+		}
+		if(CollisionDetector.haveCollidedFromRight(s1, s2)){
+			s1.setX(s2.getX() + s2.getWidth());
+			return;
+		}
 	}
 
 	public void moveSpritesForward(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2, int framesPerSecond){

@@ -1,6 +1,20 @@
 {
   "mySpriteMap": {},
-  "goalMap": {},
+  "goalMap": {
+    "0": {
+      "isCompleted": false,
+      "myGoalCharacteristics": {
+        "myName": "",
+        "myGoalType": "REACH_DISTANCE",
+        "myObjectID": 0,
+        "myObjectiveID": 0,
+        "myPointTotal": 100,
+        "myDestination": 0.0,
+        "myHorizontalDestination": true
+      },
+      "myGoalType": "REACH_DISTANCE"
+    }
+  },
   "currentID": 0,
   "isLocked": false,
   "physicsEngine": {
@@ -44,7 +58,8 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "adf",
+    "name": "goal test",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0
   },
   "myGoalFactory": {},

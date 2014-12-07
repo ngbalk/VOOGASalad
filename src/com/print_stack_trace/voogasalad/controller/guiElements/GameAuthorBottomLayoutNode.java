@@ -1,5 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.io.File;
+
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Node;
@@ -7,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 
@@ -19,6 +23,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		tableButton.relocate(width*.80, 20);
 		tableButton.setPrefSize(200, 50);
 		((Pane) myNode).getChildren().add(tableButton);
+		//DeleteButton deleteButton = new DeleteButton(null, null);
 	}
 
 	@Override
@@ -59,6 +64,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		//LOAD GAME WORLD BUTTON
 		//TODO: Abstract this to load gameworld data button
 
+		
 		//EXTEND BACKGROUND BUTTONS
 		LevelSpaceExtenderButton levelExtendRightButton = new LevelExtendRightButton((ViewObjectDelegate) myLinkedObject);
 		levelExtendRightButton.relocate(width*.45, 20);

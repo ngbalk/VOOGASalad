@@ -16,7 +16,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
@@ -60,6 +60,10 @@ public class LevelModel {
         return physicsEngine;
     }
 
+    public void setPhysicsEngine(PhysicsEngine physicsEngine) {
+        this.physicsEngine = physicsEngine;
+    }
+    
     private Integer generateID(Map map) {
         while(map.keySet().contains(currentID)) {
             currentID++;
@@ -196,6 +200,9 @@ public class LevelModel {
     }
     
     public KeyResult getResultOfKey(KeyCode key) {
+        if(!myKeyMap.containsKey(key)) {
+            return KeyResult.Default;
+        }
     	return myKeyMap.get(key);
     }
     

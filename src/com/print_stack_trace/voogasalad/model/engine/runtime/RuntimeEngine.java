@@ -11,14 +11,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicationChecker;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicator;
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry;
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 public class RuntimeEngine extends AbstractRuntimeEngine {
@@ -56,11 +57,12 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		int completedCount = 0;
 		for(Goal g : runtimeModel.getGoalMap().values()) {
 			g.acceptChecker(goalChecker);
-			if(g.isCompleted) completedCount++;
+			if(g.isCompleted)completedCount++;
 		}
 		int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
 		if (reqGoals > 0) {
 			if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+				System.out.println("YOU WIN");
 				runtimeModel.gameOver = true;
 				runtimeModel.gameVictory = true;
 			}
@@ -96,6 +98,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
 	//-------------------PRIVATE METHODS-------------------//
 
+	//Sprites move around even when this method is commented out
+	//why is that? this method should be the one controlling movement
 	private void updateSpritePositions(){
 		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
 			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
@@ -111,7 +115,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		Integer mainChar = runtimeModel.getMainCharacter();
 		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
 		if(applicator == null) {
-			applicator = KeyApplicatorFacotry.buildKeyApplicator(res);
+			applicator = KeyApplicatorFactory.buildKeyApplicator(res);
 			applicatorCache.put(res, applicator);
 		}
 		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {

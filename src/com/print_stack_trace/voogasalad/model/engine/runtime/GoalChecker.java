@@ -1,6 +1,7 @@
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionDetector;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalElementVisitor;
 import com.print_stack_trace.voogasalad.model.environment.KillBoss;
 import com.print_stack_trace.voogasalad.model.environment.Points;
@@ -30,19 +31,18 @@ public class GoalChecker implements GoalElementVisitor {
 	public boolean visit(ReachDistance goal) {
 		double heroPosition = 0;
 		if(goal.isHorizontal()){
-			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).p.getX();
+			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getX();
 		}
 		else{
-			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).p.getY();
+			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getY();
 		}
 		return (heroPosition > (goal.getDestination() - GOAL_DESTINATION_BUFFER)) 
-				&& (heroPosition < (goal.getDestination() + GOAL_DESTINATION_BUFFER )); 
-
-	}
+				&& (heroPosition < (goal.getDestination() + GOAL_DESTINATION_BUFFER )); }
 
 
 	@Override
 	public boolean visit(ReachObject goal) {
+		System.out.println("OBJECT REACHED!!!!!!!!!!!!!!!");
 		return CollisionDetector.haveCollided(myLevel.getRuntimeSpriteMap().get(goal.getMySpriteID()), 
 				myLevel.getRuntimeSpriteMap().get(goal.getMyObjectiveID()));
 	}
@@ -51,6 +51,11 @@ public class GoalChecker implements GoalElementVisitor {
 	@Override
 	public boolean visit(StayAlive goal) {
 		return myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).health <= 0;
+	}
+
+	@Override
+	public boolean visit(Goal goal) {
+		return false;
 	}
 
 }

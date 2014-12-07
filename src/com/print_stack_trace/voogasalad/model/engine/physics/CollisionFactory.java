@@ -25,6 +25,7 @@ public class CollisionFactory {
 		ObjectOneDisappear,
 		ObjectTwoDisappear,
 		ObjectBothDisappear,
+		HeroDamageCollision,
 	};
 	
 	public enum UserDefinedCollisionParams {

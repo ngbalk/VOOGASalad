@@ -22,6 +22,9 @@ public class GoalObject extends GameObject {
 	public void setCharacteristics(GoalType myType){
 		myCharacteristics=new GoalCharacteristics(myType);
 	}
+	public void setCharacteristics(GoalCharacteristics goalCharacteristics){
+		myCharacteristics=goalCharacteristics;
+	}
 	@Override
 	protected void update() {
 		myDelegate.update(this);
