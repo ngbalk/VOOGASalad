@@ -13,21 +13,21 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
+
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleSetProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
+import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
 public class GamePane extends Pane implements ViewObjectDelegate{
@@ -35,18 +35,20 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	private double myHeight;
 	private GameEngine myGameEngine;
 	private ImageView background;
-	private HashMap<String,HashSet<SpriteObject>> myData;
+	private HashMap<String, HashSet<SpriteObject>> myData;
 	public boolean doubleclick=true;
 	public SimpleObjectProperty<SpriteObject> changedSprite=new SimpleObjectProperty<SpriteObject>();
 	private HashSet<SpriteObject> userObjects=new HashSet<SpriteObject>();
 	public ObservableSet<SpriteObject> myObservableData=FXCollections.observableSet(userObjects);
-	private PaneChooser myPaneChooser=new PaneChooser();
-	private LevelBar myLevelBar;
+	private LevelTracker levelTracker;
+	private SimpleDoubleProperty xVal=new SimpleDoubleProperty(0);
+	private SimpleDoubleProperty yVal=new SimpleDoubleProperty(0);
 	private String myStyle="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
-	
+	private GameWorldCharacteristics gameWorld=new GameWorldCharacteristics();
 	public GamePane(double width, double height, GameEngine gameEngine){
 		myWidth=width;
 		myHeight=height;
+		levelTracker=new LevelTracker();
 		this.setWidth(Double.POSITIVE_INFINITY);
 		this.setHeight(Double.POSITIVE_INFINITY);
 		myData=new HashMap<String,HashSet<SpriteObject>>();
@@ -55,6 +57,15 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		this.getStylesheets().add(myStyle);
 
 	}
+	public void setXProperty(double val){
+		xVal.setValue(val);
+		System.out.print(val);
+	}
+	
+	public void setYProperty(double val){
+		yVal.setValue(val);
+	}
+	
 	public void addGameObject(ImageView gameObjectImageView, String imagePath){
 		if (imagePath!=null){
 			String myMessage=new MessagePopUp(myStyle).showDropDownDialog("What type of object would you like this image to be: ",spriteTypeNames());
@@ -63,6 +74,17 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			}
 		}
 	}
+	
+	public SimpleObjectProperty<LevelObject> currentLevelProperty(){
+		return levelTracker.getCurrentLevelProperty();
+	}
+	public SimpleObjectProperty<LevelObject> addLevelProperty(){
+		return levelTracker.getAddLevelProperty();
+	}
+	public SimpleObjectProperty<EventHandler> eventLevelProperty(){
+		return levelTracker.getEventProperty();
+	}
+	
 	private SpriteObject addSpriteObject(ImageView gameObjectImageView, String imagePath, String type){
 		SpriteObject myGameObject=new SpriteObject(0, gameObjectImageView, imagePath, type, this);
 		myGameObject.getCharacteristics().setHeight(myGameObject.getImage().getFitHeight());
@@ -71,13 +93,13 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		myGameObject.getCharacteristics().setY(myGameObject.getImage().getLayoutY());
 		Integer myID=myGameEngine.addObjectToLevel(myGameObject.getCharacteristics());
 		myGameObject.setID(myID);
-		System.out.println(gameObjectImageView);
-		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight());
+		DraggableItem copyNode=new DraggableItem(myGameObject, getWidth(), getHeight(),xVal, yVal);
 		if (myData.get(myGameObject.getCode())==null)
 			myData.put(myGameObject.getCode(), new HashSet<SpriteObject>());
 		myData.get(myGameObject.getCode()).add(myGameObject);
 		SimpleObjectProperty<SpriteObject> currentSprite=new SimpleObjectProperty<SpriteObject>(myGameObject);
 		this.getChildren().add(myGameObject.getImage());
+		levelTracker.addSprite(myGameObject);
 		return myGameObject;
 	}
 	public void addExistingObjectToOtherPane(SpriteObject newSprite){
@@ -92,7 +114,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 
 	}
 	public boolean isReady(){
-		if (myLevelBar.getMenus().get(0).getItems().size()>=1){
+		if (levelTracker.getLevels().size()>0){
 			return true;
 		}
 		return false;
@@ -104,7 +126,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return myHeight;
 	}
 	public void addBackground(ImageView imgView, String imagePath){
-		LevelObject levelBackground=myLevelBar.getCurrentLevel();
+		LevelObject levelBackground=levelTracker.getCurrentLevel();
 		this.getChildren().remove(levelBackground.getImage());
 		levelBackground.setImageView(imgView);
 		levelBackground.setImagePath(imagePath);
@@ -119,7 +141,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
 		levelBackground.getCharacteristics().setBackground(background.getImage());
-		levelUpdate(levelBackground);
+		levelChange(levelBackground);
 
 
 	}
@@ -149,7 +171,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			}
 		}
 		else{
-			System.out.println(myObject.getCharacteristics().getX());
 			myGameEngine.updateObject(myObject.getId(), myObject.getCharacteristics());
 		}
 		SpriteObject temp=new SpriteObject(0,new ImageView(myObject.getImage().getImage()), myObject.getImagePath(), myObject.getType(),myObject.getDelegate());
@@ -157,27 +178,27 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		changedSprite.set(temp);
 
 	}
-	public void addLevelBar(LevelBar levelBar){
-		myLevelBar=levelBar;
-	}
+	
 	public void update(LevelObject currentLevel){
-		levelUpdate(currentLevel);
+		levelChange(currentLevel);
 	}
 	public void addLevelUpdate(LevelObject myObject){
 		myObject.setDelegate(this);
 
 		String name=new MessagePopUp(myStyle).showInputDialog("Name of Level:");
 		if (new BlankSpaceTextChecker().checkText(name)){
-			myLevelBar.addLevel(name, myObject).setOnAction(e->levelUpdate(myObject));
 			myObject.getCharacteristics().setName(name);
-			levelUpdate(myObject);
+			levelTracker.addLevel(myObject, e->levelChange(myObject));
+			levelChange(myObject);
 		}
 	}
-	public void levelUpdate(LevelObject currentLevel){
+	private void levelChange(LevelObject currentLevel){
 		background=currentLevel.getImage();
-		myLevelBar.setCurrentLevel(currentLevel);
-		this.getChildren().removeAll(myLevelBar.getNonActiveLevels());
-		this.getChildren().removeAll(myLevelBar.getNonActiveColors());
+		levelTracker.setCurrentLevel(currentLevel);
+		this.getChildren().removeAll(levelTracker.getNonActiveLevels());
+		this.getChildren().removeAll(levelTracker.getNonActiveColors());
+		this.getChildren().removeAll(levelTracker.removableSprites());
+		this.getChildren().addAll(levelTracker.activeSprites());
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
 		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
@@ -229,7 +250,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 	@Override
 	public Set getLevelsAvailable() {
-		return myLevelBar.getLevels();
+		return levelTracker.getLevels();
 	}
 	public void saveGame(){
 		try {
@@ -247,10 +268,18 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
+	public void deleteObject(SpriteObject object) {
+		System.out.println("DELETE");
+		myGameEngine.deleteObject(object.getId());
+		this.getChildren().remove(object.getImage());
+		this.levelTracker.removeSprite(object);
+	}
+
 	public void extendRight() {
 		
-		LevelCharacteristics levelCharacteristics = myLevelBar.getCurrentLevel().getCharacteristics();
+		LevelCharacteristics levelCharacteristics = levelTracker.getCurrentLevel().getCharacteristics();
 		int newHorizontalPaneCount = levelCharacteristics.incrementHorizontalPaneCount();
 		int currentVerticalPaneCount = levelCharacteristics.getVerticalPaneCount();
 		this.setPrefWidth(this.getBackgroundImage().getFitWidth()*newHorizontalPaneCount);
@@ -269,8 +298,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 
 	@Override
-	public void extendDown() {
-		LevelCharacteristics levelCharacteristics = myLevelBar.getCurrentLevel().getCharacteristics();
+	public void extendDown(){
+		LevelCharacteristics levelCharacteristics = levelTracker.getCurrentLevel().getCharacteristics();
 		int newVerticalPaneCount = levelCharacteristics.incrementVerticalPaneCount();
 		int currentHorizontalPaneCount = levelCharacteristics.getHorizontalPaneCount();
 		this.setPrefHeight(this.getBackgroundImage().getFitHeight()*newVerticalPaneCount);
@@ -284,10 +313,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			backgroundImageViewCopy.setSmooth(true);
 			backgroundImageViewCopy.relocate(backgroundImageView.getFitWidth()*i,backgroundImageView.getFitHeight()*(newVerticalPaneCount-1));
 			this.getChildren().add(0,backgroundImageViewCopy);
-		}
-		
-		
-		
+		}	
 	}
-
 }

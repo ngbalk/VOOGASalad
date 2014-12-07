@@ -55,7 +55,7 @@ import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
-	private final static int FPS = 10;
+	private final static int FPS = 15;
 	private static final double ANIMATION_DURATION = .005;
 	private Group myRoot;
 	private Group myGameRoot;
@@ -249,8 +249,7 @@ public class GamePlayer implements ViewController {
 		File file = fileChooser.showOpenDialog(newStage);
 		if (file != null) {
 			try {
-				FileInputStream myFile=new FileInputStream(file);
-				myGameEngine.loadGame(myFile);
+				myGameEngine.loadGame(file);
 			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
 				System.out.println(ex.getMessage());
 			}

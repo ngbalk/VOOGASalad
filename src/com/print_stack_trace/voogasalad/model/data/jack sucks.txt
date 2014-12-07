@@ -1,47 +1,13 @@
 {
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
-      "p": {
-        "x": 139,
-        "y": 136
-      },
-      "interactive": true,
-      "objectType": "HERO",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {}
-    },
-    "1": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png",
-      "p": {
-        "x": 239,
-        "y": 136
-      },
-      "interactive": true,
-      "objectType": "HERO",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {}
-    },
-    "2": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
       "p": {
-        "x": 339,
-        "y": 136
+        "x": 121,
+        "y": 318
       },
       "interactive": true,
-      "objectType": "ENEMY",
+      "objectType": "HERO",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
@@ -49,11 +15,44 @@
       "name": "",
       "width": 100.0,
       "height": 100.0,
-      "myMovements": {}
+      "myMovements": {},
+      "myAnimations": {
+        "DOWN": [],
+        "CROUCH": [],
+        "UP": [],
+        "JUMP": [],
+        "RIGHT": [],
+        "LEFT": []
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 4,
+        "y": 537
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 500.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "DOWN": [],
+        "CROUCH": [],
+        "UP": [],
+        "JUMP": [],
+        "RIGHT": [],
+        "LEFT": []
+      }
     }
   },
   "goalMap": {},
-  "currentID": 2,
+  "currentID": 1,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
@@ -72,7 +71,7 @@
         "NoAction"
       ],
       [
-        "NoAction",
+        "ObjectBothNoDisplacement",
         "NoAction",
         "NoAction",
         "NoAction",
@@ -96,7 +95,7 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "jack\u0027s third test",
+    "name": "jack sucks",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0
   },

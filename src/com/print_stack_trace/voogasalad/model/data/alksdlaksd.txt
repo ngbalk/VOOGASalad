@@ -1,21 +1,29 @@
 {
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
       "p": {
-        "x": 239,
-        "y": 136
+        "x": 0,
+        "y": 0
       },
       "interactive": true,
-      "objectType": "ENEMY",
+      "objectType": "HERO",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {}
+      "orientation": 20.0,
+      "name": "ksgdij",
+      "width": 200.0,
+      "height": 200.0,
+      "myMovements": {},
+      "myAnimations": {
+        "LEFT": [],
+        "DOWN": [],
+        "RIGHT": [],
+        "UP": [],
+        "CROUCH": [],
+        "JUMP": []
+      }
     }
   },
   "goalMap": {},
@@ -62,7 +70,7 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "jack\u0027s enemy test",
+    "name": "alksdlaksd",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0
   },
