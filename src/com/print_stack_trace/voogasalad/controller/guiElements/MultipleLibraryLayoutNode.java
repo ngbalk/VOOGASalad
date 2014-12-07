@@ -20,5 +20,17 @@ public class MultipleLibraryLayoutNode extends AbstractLayoutNode{
 	public void initialize(double width, double height) {
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	public Number getHeight() {
+		return((MultipleLibraryPane) myNode).getPrefHeight();
+		
+	}
+
+	@Override
+	public Number getWidth() {
+		return ((MultipleLibraryPane) myNode).getPrefWidth();
+		
+	}
 	
 }

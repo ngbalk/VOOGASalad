@@ -15,6 +15,7 @@ public abstract class AbstractLayoutNode implements LayoutNode {
 	public abstract void initialize(double width, double height);
 	@Override
 	public abstract void initialize(double width, double height, Node myLinkedObject, Object engine, AbstractViewDelegate delegate);
-	
+	public abstract Number getHeight();
+	public abstract Number getWidth();
 
 }
