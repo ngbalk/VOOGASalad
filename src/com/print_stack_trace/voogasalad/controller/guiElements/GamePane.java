@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
+import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
+
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
@@ -38,7 +40,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	public SimpleObjectProperty<SpriteObject> changedSprite=new SimpleObjectProperty<SpriteObject>();
 	private HashSet<SpriteObject> userObjects=new HashSet<SpriteObject>();
 	public ObservableSet<SpriteObject> myObservableData=FXCollections.observableSet(userObjects);
-	private LevelBar myLevelBar;
 	private LevelTracker levelTracker;
 	private SimpleDoubleProperty xVal=new SimpleDoubleProperty(0);
 	private SimpleDoubleProperty yVal=new SimpleDoubleProperty(0);
@@ -177,9 +178,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		changedSprite.set(temp);
 
 	}
-	public void addLevelBar(LevelBar levelBar){
-		myLevelBar=levelBar;
-	}
+	
 	public void update(LevelObject currentLevel){
 		levelChange(currentLevel);
 	}
@@ -269,4 +268,47 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public void extendRight() {
+		
+		LevelCharacteristics levelCharacteristics = levelTracker.getCurrentLevel().getCharacteristics();
+		int newHorizontalPaneCount = levelCharacteristics.incrementHorizontalPaneCount();
+		int currentVerticalPaneCount = levelCharacteristics.getVerticalPaneCount();
+		this.setPrefWidth(this.getBackgroundImage().getFitWidth()*newHorizontalPaneCount);
+		
+		for(int i=0;i<=currentVerticalPaneCount;i++){
+			//DUPLICATE BACKGROUND IMAGE
+			ImageView backgroundImageView=this.getBackgroundImage();
+			ImageView backgroundImageViewCopy=new ImageView(backgroundImageView.getImage());
+			backgroundImageViewCopy.setFitHeight(backgroundImageView.getFitHeight());
+			backgroundImageViewCopy.setFitWidth(backgroundImageView.getFitWidth());
+			backgroundImageViewCopy.setSmooth(true);
+			backgroundImageViewCopy.relocate(backgroundImageView.getFitWidth()*(newHorizontalPaneCount-1),backgroundImageView.getFitHeight()*i);
+			this.getChildren().add(0,backgroundImageViewCopy);
+		}
+		
+	}
+
+	@Override
+	public void extendDown() {
+		LevelCharacteristics levelCharacteristics = levelTracker.getCurrentLevel().getCharacteristics();
+		int newVerticalPaneCount = levelCharacteristics.incrementVerticalPaneCount();
+		int currentHorizontalPaneCount = levelCharacteristics.getHorizontalPaneCount();
+		this.setPrefHeight(this.getBackgroundImage().getFitHeight()*newVerticalPaneCount);
+		
+		for(int i=0;i<=currentHorizontalPaneCount;i++){
+			//DUPLICATE BACKGROUND IMAGE
+			ImageView backgroundImageView=this.getBackgroundImage();
+			ImageView backgroundImageViewCopy=new ImageView(backgroundImageView.getImage());
+			backgroundImageViewCopy.setFitHeight(backgroundImageView.getFitHeight());
+			backgroundImageViewCopy.setFitWidth(backgroundImageView.getFitWidth());
+			backgroundImageViewCopy.setSmooth(true);
+			backgroundImageViewCopy.relocate(backgroundImageView.getFitWidth()*i,backgroundImageView.getFitHeight()*(newVerticalPaneCount-1));
+			this.getChildren().add(0,backgroundImageViewCopy);
+		}
+		
+		
+		
+	}
+
 }
