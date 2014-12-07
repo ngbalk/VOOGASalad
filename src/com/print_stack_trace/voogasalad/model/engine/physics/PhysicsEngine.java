@@ -139,12 +139,14 @@ public class PhysicsEngine {
 
 	public void stickSpriteToSide(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2){
 
+//		ugly fixes!!!
 		if((s2.objectType.equals(SpriteType.HERO) || s2.objectType.equals(SpriteType.ENEMY))
 				&& s1.objectType.equals(SpriteType.PLATFORM)){
 		RuntimeSpriteCharacteristics copys1 = s1;
 		s1 = s2;
 		s2 = copys1;
 	}
+		if(s1.objectType.equals(s2.objectType)) return;
 
 		
 		if(CollisionDetector.haveCollidedFromTop(s1, s2)){
@@ -159,6 +161,7 @@ public class PhysicsEngine {
 		
 
 		if(CollisionDetector.haveCollidedFromLeft(s1, s2)){
+			System.out.println(s1.objectType);
 			s1.setX(s2.getX() - s1.getWidth());
 			return;
 		}
