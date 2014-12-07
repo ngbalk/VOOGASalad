@@ -148,7 +148,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			}
 		}
 		else{
-
+			System.out.println(myObject.getCharacteristics().getX());
 			myGameEngine.updateObject(myObject.getId(), myObject.getCharacteristics());
 		}
 		SpriteObject temp=new SpriteObject(0,new ImageView(myObject.getImage().getImage()), myObject.getImagePath(), myObject.getType(),myObject.getDelegate());
@@ -237,5 +237,13 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	//TODO: consider adding to the AbstractGUI shitz
+	public Object loadLevel() {
+		//TODO: implement this!!
+		//LevelModel levelModel = myGameEngine.loadLevelForEditing("");
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
