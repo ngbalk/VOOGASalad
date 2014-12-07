@@ -1,0 +1,79 @@
+{
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "p": {
+        "x": 0,
+        "y": 0
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 20.0,
+      "name": "asjdakshd",
+      "width": 200.0,
+      "height": 200.0,
+      "myMovements": {},
+      "myAnimations": {
+        "LEFT": [],
+        "UP": [],
+        "RIGHT": [],
+        "CROUCH": [],
+        "DOWN": [],
+        "JUMP": []
+      }
+    }
+  },
+  "goalMap": {},
+  "currentID": 0,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "naming test 2",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "requiredNumberOfGoals": 0
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {}
+}

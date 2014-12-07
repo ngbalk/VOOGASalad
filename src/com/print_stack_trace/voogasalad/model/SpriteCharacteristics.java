@@ -257,10 +257,8 @@ public class SpriteCharacteristics {
 
 	public void setX(double xPosition){
 		//this.xPosition=(int)xPosition;
-		System.out.println("XLoc original: "+p.getX());
 		//p.setLocation(xPosition, p.getY());
 		p.x=(int)xPosition;
-		System.out.println("XLoc changed: "+p.getY());
 	}
 	
 	public void setY(double yPosition){
