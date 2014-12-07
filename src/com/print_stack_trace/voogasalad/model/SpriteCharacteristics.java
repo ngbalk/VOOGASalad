@@ -32,7 +32,6 @@ public class SpriteCharacteristics {
 	public static final Image DEFAULT_IMAGE = null;
 	public static final int DEFAULT_X_POSITION = 0;
 	public static final int DEFAULT_Y_POSITION = 0;
-	public static final Point DEFAULT_POINT = new Point(DEFAULT_X_POSITION,DEFAULT_Y_POSITION);
 	public static final boolean DEFAULT_INTERACTIVE = false;
 	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
 	public static final int DEFAULT_HEALTH = 10;
@@ -72,7 +71,7 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
 		img = DEFAULT_IMAGE;
-		p = DEFAULT_POINT;
+		p = new Point(DEFAULT_X_POSITION,DEFAULT_Y_POSITION);
 		//xPosition=DEFAULT_X_POSITION;
 		//yPosition=DEFAULT_Y_POSITION;
 		startingHealth = DEFAULT_HEALTH;
