@@ -153,10 +153,10 @@ public class LevelModel {
     public void setLevelCharacteristics(LevelCharacteristics levelSpecs)
             throws ElementLockedException {
         if (isLocked) throw new ElementLockedException();
-        if (levelSpecs.requiredNumberOfGoals<0 || levelSpecs.requiredNumberOfGoals > goalMap.size()) {
-            throw new InvalidNumberOfGoalsException();
-        }
-        //in what context can you not set a certain cameraType
+//        if (levelSpecs.requiredNumberOfGoals<0 || levelSpecs.requiredNumberOfGoals > goalMap.size()) {
+//            throw new InvalidNumberOfGoalsException();
+//        }
+//        in what context can you not set a certain cameraType
         myLevelChars = levelSpecs;
     }
 

@@ -241,10 +241,10 @@ public class GameEngine {
 //		g.myDestination = 100;
 //		g.myObjectID = 2;	
 //		currentLevel.setGoal(g);
-
-		LevelCharacteristics l = currentLevel.getLevelCharacteristics();
-		l.requiredNumberOfGoals = 1;
-		currentLevel.setLevelCharacteristics(l);
+//
+//		LevelCharacteristics l = currentLevel.getLevelCharacteristics();
+//		l.requiredNumberOfGoals = 1;
+//		currentLevel.setLevelCharacteristics(l);
 		
 		runtimeEngine = new RuntimeEngine(currentLevel);
 		runtimeEngine.setFramesPerSecond(framesPerSecond);

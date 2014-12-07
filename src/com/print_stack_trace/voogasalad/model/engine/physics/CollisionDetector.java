@@ -14,85 +14,80 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 
 public class CollisionDetector {
 
-    /**
-     * Take in two sprite characteristics, spriteA and spriteB, and determine if a collision happened
-     * @param spriteA
-     * @param spriteB
-     * @return true if a collision happened, false otherwise
-     */
-    public static boolean haveCollided(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB) {
-        if(spriteA== null || spriteB==null) { //why does this work
-            return false;
-        }
+	/**
+	 * Take in two sprite characteristics, spriteA and spriteB, and determine if a collision happened
+	 * @param spriteA
+	 * @param spriteB
+	 * @return true if a collision happened, false otherwise
+	 */
+	public static boolean haveCollided(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB) {
+		Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
+		Rectangle rect2 = new Rectangle((int) spriteB.getX(), (int) spriteB.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
+		return rect1.intersects(rect2);
+	}
 
-        Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
-        Rectangle rect2 = new Rectangle((int) spriteB.getX(), (int) spriteB.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
-        return rect1.intersects(rect2);
-    }
+	public static boolean haveCollidedHorizontally(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB){
+		Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
+		Rectangle rect2 = new Rectangle((int) spriteB.getX(), (int) spriteB.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
+		Rectangle rect3 = rect1.intersection(rect2);
+		return rect3.getHeight() > rect3.getWidth();
+	}
 
-    public static boolean haveCollidedHorizontally(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB){
-        Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
-        Rectangle rect2 = new Rectangle((int) spriteB.getX(), (int) spriteB.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
-        Rectangle rect3 = rect1.intersection(rect2);
-        return rect3.getHeight() > rect3.getWidth();
-    }
+	public static boolean haveCollidedVertically(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB){
+		Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
+		Rectangle rect2 = new Rectangle((int) spriteB.getX(), (int) spriteB.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
+		Rectangle rect3 = rect1.intersection(rect2);
+		return rect3.getWidth() >= rect3.getHeight();
+	}
 
-    public static boolean haveCollidedVertically(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB){
-        Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
-        Rectangle rect2 = new Rectangle((int) spriteB.getX(), (int) spriteB.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
-        Rectangle rect3 = rect1.intersection(rect2);
-        return rect3.getWidth() >= rect3.getHeight();
-    }
+	public static boolean haveCollidedFromTop(RuntimeSpriteCharacteristics hero,
+			RuntimeSpriteCharacteristics block){
+		if(!((hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))))) return false;
+		Rectangle top = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
+		Rectangle bottom = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
+		Rectangle intersect = top.intersection(bottom); 
+		
+		hero.isCollidingHorizontally = false;
+		hero.isCollidingVertically = true;
+		
+		return(top.getY() < intersect.getY() && intersect.getWidth() > intersect.getHeight());
+	}
 
-    public static boolean haveCollidedFromTop(RuntimeSpriteCharacteristics hero,
-            RuntimeSpriteCharacteristics block){
-        if(!hero.objectType.equals(SpriteType.HERO)) return false;
-        Rectangle top = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
-        Rectangle bottom = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
-        Rectangle intersect = top.intersection(bottom); 
+	public static boolean haveCollidedFromBottom(RuntimeSpriteCharacteristics hero,
+			RuntimeSpriteCharacteristics block){
+		if(!((hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))))) return false;
+		Rectangle bottom = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
+		Rectangle top = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
+		Rectangle intersect = top.intersection(bottom);        
+		
+		hero.isCollidingHorizontally = false;
+		hero.isCollidingVertically = true;
 
-        hero.isCollidingHorizontally = false;
-        hero.isCollidingVertically = true;
+		
+		return(bottom.getY() < intersect.getY() + intersect.getHeight() && intersect.getWidth() > intersect.getHeight());
+	}
+	
+	public static boolean haveCollidedFromLeft(RuntimeSpriteCharacteristics hero,
+			RuntimeSpriteCharacteristics block){
+		if(!((hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))))) return false;
+		Rectangle left = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
+		Rectangle right = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
+		Rectangle intersect = left.intersection(right);  
+		hero.isCollidingHorizontally = true;
+		hero.isCollidingVertically = false;
 
-        return(top.getY() < intersect.getY() && intersect.getWidth() > intersect.getHeight());
-    }
-
-    public static boolean haveCollidedFromBottom(RuntimeSpriteCharacteristics hero,
-            RuntimeSpriteCharacteristics block){
-        if(!hero.objectType.equals(SpriteType.HERO)) return false;
-        Rectangle bottom = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
-        Rectangle top = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
-        Rectangle intersect = top.intersection(bottom);        
-
-        hero.isCollidingHorizontally = false;
-        hero.isCollidingVertically = true;
-
-
-        return(bottom.getY() < intersect.getY() + intersect.getHeight() && intersect.getWidth() > intersect.getHeight());
-    }
-
-    public static boolean haveCollidedFromLeft(RuntimeSpriteCharacteristics hero,
-            RuntimeSpriteCharacteristics block){
-        if(!hero.objectType.equals(SpriteType.HERO)) return false;
-        Rectangle left = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
-        Rectangle right = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
-        Rectangle intersect = left.intersection(right);  
-        hero.isCollidingHorizontally = true;
-        hero.isCollidingVertically = false;
-
-        return(left.getX() < intersect.getX() && intersect.getHeight() > intersect.getWidth());
-    }
-
-    public static boolean haveCollidedFromRight(RuntimeSpriteCharacteristics hero,
-            RuntimeSpriteCharacteristics block){
-        if(!hero.objectType.equals(SpriteType.HERO)) return false;
-        Rectangle right = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
-        Rectangle left = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
-        Rectangle intersect = left.intersection(right);       
-        hero.isCollidingHorizontally = true;
-        hero.isCollidingVertically = false;
-
-        return(right.getX() >= intersect.getX() && intersect.getHeight() > intersect.getWidth());
-    }
-
+		return(left.getX() < intersect.getX() && intersect.getHeight() > intersect.getWidth());
+	}
+	
+	public static boolean haveCollidedFromRight(RuntimeSpriteCharacteristics hero,
+			RuntimeSpriteCharacteristics block){
+		if(!((hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))))) return false;
+		Rectangle right = new Rectangle((int) hero.getX(), (int) hero.getY(), (int) hero.getWidth(), (int) hero.getHeight());
+		Rectangle left = new Rectangle((int) block.getX(), (int) block.getY(), (int) block.getWidth(), (int) block.getHeight());
+		Rectangle intersect = left.intersection(right);       
+		hero.isCollidingHorizontally = true;
+		hero.isCollidingVertically = false;
+		
+		return(right.getX() >= intersect.getX() && intersect.getHeight() > intersect.getWidth());
+	}
 }
