@@ -6,6 +6,7 @@ public interface GoalElementVisitor {
 	 * @param goal
 	 * @return
 	 */
+	boolean visit(Goal goal);
 	boolean visit(KillBoss goal);
 	boolean visit(Points goal);
 	boolean visit(ReachDistance goal);

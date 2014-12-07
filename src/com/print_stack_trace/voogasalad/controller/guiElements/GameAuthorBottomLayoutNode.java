@@ -19,6 +19,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		tableButton.relocate(width*.80, 20);
 		tableButton.setPrefSize(200, 50);
 		((Pane) myNode).getChildren().add(tableButton);
+		//DeleteButton deleteButton = new DeleteButton(null, null);
 	}
 
 	@Override
@@ -30,11 +31,11 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 	public void initialize(double width, double height, Node myLinkedObject, Object engine, AbstractViewDelegate delegate) {
 		Pane bottomPane=new Pane();
 		bottomPane.setPrefSize(width,height*.2);
-		LevelBar myLevelBar=new LevelBar(width*.025, 20, width*.2, height*.05);
+		LevelBar myLevelBar=new LevelBar(width*.025, 20, width*.2, height*.05, ((GamePane) myLinkedObject).currentLevelProperty(), 
+				((GamePane) myLinkedObject).addLevelProperty(), ((GamePane) myLinkedObject).eventLevelProperty());
 		
 		//LEVEL BUTTON
 		LevelButton myLevelButton=new LevelButton();
-		((GamePane)myLinkedObject).addLevelBar(myLevelBar);
 		myLevelButton.setOnMouseClicked(e->(((GamePane)myLinkedObject).addLevelUpdate(new LevelObject(new ImageView(), null))));
 		myLevelButton.relocate(width*.25, 20);
 		myLevelButton.setPrefSize(100, 50); 
@@ -59,6 +60,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		//LOAD GAME WORLD BUTTON
 		//TODO: Abstract this to load gameworld data button
 
+		
 		//EXTEND BACKGROUND BUTTONS
 		LevelSpaceExtenderButton levelExtendRightButton = new LevelExtendRightButton((ViewObjectDelegate) myLinkedObject);
 		levelExtendRightButton.relocate(width*.45, 20);
@@ -75,5 +77,16 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		
 		
 	}
+
+	@Override
+	public Number getHeight() {
+		return ((Pane) myNode).getPrefHeight();
+	}
+
+	@Override
+	public Number getWidth() {
+		return ((Pane) myNode).getPrefWidth();
+	}
+	
 
 }

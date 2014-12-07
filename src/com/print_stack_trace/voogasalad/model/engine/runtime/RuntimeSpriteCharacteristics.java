@@ -16,6 +16,9 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public float v_x;
 	public float v_y;
 	public boolean isColliding = false;
+	public boolean isCollidingHorizontally = false;
+	public boolean isCollidingVertically = false;
+	public boolean canMultipleJump = false;
 	private float decelerationConstant;
 	public PossibleSpriteAction currentSpriteAction;
 	

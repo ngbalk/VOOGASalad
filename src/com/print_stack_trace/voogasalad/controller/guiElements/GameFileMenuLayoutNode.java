@@ -22,4 +22,14 @@ public class GameFileMenuLayoutNode extends AbstractLayoutNode{
 		
 	}
 
+	@Override
+	public Number getHeight() {
+		return ((FileMenuBar) myNode).getPrefHeight();
+	}
+
+	@Override
+	public Number getWidth() {
+		return ((FileMenuBar) myNode).getPrefWidth();
+	}
+
 }

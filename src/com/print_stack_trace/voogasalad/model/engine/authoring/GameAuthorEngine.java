@@ -14,7 +14,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.Co
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 public class GameAuthorEngine implements IGameAuthorEngine {
 
