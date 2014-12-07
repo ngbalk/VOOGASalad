@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
@@ -23,6 +24,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
+import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -31,19 +33,21 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	private double myHeight;
 	private GameEngine myGameEngine;
 	private ImageView background;
-	private HashMap<String,HashSet<SpriteObject>> myData;
+	private HashMap<String, HashSet<SpriteObject>> myData;
 	public boolean doubleclick=true;
 	public SimpleObjectProperty<SpriteObject> changedSprite=new SimpleObjectProperty<SpriteObject>();
 	private HashSet<SpriteObject> userObjects=new HashSet<SpriteObject>();
 	public ObservableSet<SpriteObject> myObservableData=FXCollections.observableSet(userObjects);
-	private PaneChooser myPaneChooser=new PaneChooser();
 	private LevelBar myLevelBar;
+	private LevelTracker levelTracker;
 	private SimpleDoubleProperty xVal=new SimpleDoubleProperty(0);
 	private SimpleDoubleProperty yVal=new SimpleDoubleProperty(0);
 	private String myStyle="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
+	private GameWorldCharacteristics gameWorld=new GameWorldCharacteristics();
 	public GamePane(double width, double height, GameEngine gameEngine){
 		myWidth=width;
 		myHeight=height;
+		levelTracker=new LevelTracker();
 		this.setWidth(Double.POSITIVE_INFINITY);
 		this.setHeight(Double.POSITIVE_INFINITY);
 		myData=new HashMap<String,HashSet<SpriteObject>>();
@@ -56,9 +60,11 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		xVal.setValue(val);
 		System.out.print(val);
 	}
+	
 	public void setYProperty(double val){
 		yVal.setValue(val);
 	}
+	
 	public void addGameObject(ImageView gameObjectImageView, String imagePath){
 		if (imagePath!=null){
 			String myMessage=new MessagePopUp(myStyle).showDropDownDialog("What type of object would you like this image to be: ",spriteTypeNames());
@@ -67,6 +73,17 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			}
 		}
 	}
+	
+	public SimpleObjectProperty<LevelObject> currentLevelProperty(){
+		return levelTracker.getCurrentLevelProperty();
+	}
+	public SimpleObjectProperty<LevelObject> addLevelProperty(){
+		return levelTracker.getAddLevelProperty();
+	}
+	public SimpleObjectProperty<EventHandler> eventLevelProperty(){
+		return levelTracker.getEventProperty();
+	}
+	
 	private SpriteObject addSpriteObject(ImageView gameObjectImageView, String imagePath, String type){
 		SpriteObject myGameObject=new SpriteObject(0, gameObjectImageView, imagePath, type, this);
 		myGameObject.getCharacteristics().setHeight(myGameObject.getImage().getFitHeight());
@@ -96,7 +113,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 
 	}
 	public boolean isReady(){
-		if (myLevelBar.getMenus().get(0).getItems().size()>=1){
+		if (levelTracker.getLevels().size()>0){
 			return true;
 		}
 		return false;
@@ -108,7 +125,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return myHeight;
 	}
 	public void addBackground(ImageView imgView, String imagePath){
-		LevelObject levelBackground=myLevelBar.getCurrentLevel();
+		LevelObject levelBackground=levelTracker.getCurrentLevel();
 		this.getChildren().remove(levelBackground.getImage());
 		levelBackground.setImageView(imgView);
 		levelBackground.setImagePath(imagePath);
@@ -171,16 +188,17 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 
 		String name=new MessagePopUp(myStyle).showInputDialog("Name of Level:");
 		if (new BlankSpaceTextChecker().checkText(name)){
-			myLevelBar.addLevel(name, myObject).setOnAction(e->levelUpdate(myObject));
 			myObject.getCharacteristics().setName(name);
+			levelTracker.addLevel(myObject, e->levelUpdate(myObject));
+			
 			levelUpdate(myObject);
 		}
 	}
 	public void levelUpdate(LevelObject currentLevel){
 		background=currentLevel.getImage();
-		myLevelBar.setCurrentLevel(currentLevel);
-		this.getChildren().removeAll(myLevelBar.getNonActiveLevels());
-		this.getChildren().removeAll(myLevelBar.getNonActiveColors());
+		levelTracker.setCurrentLevel(currentLevel);
+		this.getChildren().removeAll(levelTracker.getNonActiveLevels());
+		this.getChildren().removeAll(levelTracker.getNonActiveColors());
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
 		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
@@ -232,7 +250,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 	@Override
 	public Set getLevelsAvailable() {
-		return myLevelBar.getLevels();
+		return levelTracker.getLevels();
 	}
 	public void saveGame(){
 		try {
