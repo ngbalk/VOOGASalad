@@ -78,7 +78,7 @@ public class KeyApplicatorFactory {
                     RuntimeSpriteCharacteristics sprite) {
                 if(!once) return;
                 once = false;
-                if(!sprite.isCollidingHorizontally) sprite.v_x += vxreleasenew;
+                if(!sprite.isCollidingHorizontally) sprite.v_x = 0;
                 sprite.v_y -= vyreleasenew;
             }
         };
