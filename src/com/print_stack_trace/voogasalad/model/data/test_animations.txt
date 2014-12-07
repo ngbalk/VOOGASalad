@@ -2,8 +2,8 @@
   "mySpriteMap": {
     "0": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
-      "xPosition": 305,
-      "yPosition": 426,
+      "xPosition": 230,
+      "yPosition": 191,
       "interactive": true,
       "objectType": "HERO",
       "startingHealth": 10,
@@ -17,37 +17,37 @@
         "UP": "UP"
       },
       "myAnimations": {
-        "DOWN": [
+        "JUMP": [],
+        "LEFT": [],
+        "UP": [
           {
             "path": "/Users/nickbalkissoon/Documents/workspace/voogasalad_PrintStackTrace/src/com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png"
           }
         ],
-        "LEFT": [],
-        "JUMP": [],
-        "UP": [],
+        "DOWN": [],
         "CROUCH": [],
         "RIGHT": []
       }
     },
     "1": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
-      "xPosition": 90,
-      "yPosition": 528,
+      "xPosition": 230,
+      "yPosition": 296,
       "interactive": false,
-      "objectType": "OBSTACLE",
+      "objectType": "PLATFORM",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
       "orientation": 0.0,
       "name": "",
-      "width": 500.0,
+      "width": 100.0,
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "DOWN": [],
-        "LEFT": [],
         "JUMP": [],
+        "LEFT": [],
         "UP": [],
+        "DOWN": [],
         "CROUCH": [],
         "RIGHT": []
       }
@@ -97,7 +97,7 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "first",
+    "name": "test_animations",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0,
     "myHorizontalPaneCount": 1,

@@ -157,6 +157,7 @@ public class SpriteCharacteristics {
     	ArrayList<javafx.scene.image.Image> myImages=new ArrayList<javafx.scene.image.Image>();
     	BufferedImage buffer;
     	for (File path: getAnimationPath(action)){
+    		System.out.println(path);
     		try {
 				buffer = ImageIO.read(path);
 				javafx.scene.image.Image img=SwingFXUtils.toFXImage(buffer, null);
@@ -302,6 +303,7 @@ public class SpriteCharacteristics {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 
 }

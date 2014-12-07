@@ -6,6 +6,8 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
+import javafx.scene.input.KeyCode;
+
 import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
@@ -63,9 +65,13 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 		return currentSpriteAction;
 	}
 	
-	public void setPossibleSpriteAction(PossibleSpriteAction spriteAction) {
-		currentSpriteAction = spriteAction;
-		//TODO: implement this on back end.
+	public void setPossibleSpriteAction(KeyCode keyCode) {
+			for(PossibleSpriteAction action : myMovements.keySet()){
+				if(myMovements.get(action).equals(keyCode)){
+					System.out.println("valid key pressed --> maps to animation");
+					this.currentSpriteAction = action;
+				}
+			}
 	}
 
 }

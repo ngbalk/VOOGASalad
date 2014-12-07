@@ -42,6 +42,7 @@ import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButto
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerSaveButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerToolBar;
 import com.print_stack_trace.voogasalad.controller.guiElements.SaveMenuItem;
+import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
 import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -131,7 +132,7 @@ public class GamePlayer implements ViewController {
 	 */
 	public void updateScene(){ 
 
-		ImageView spriteImage = null;
+		ImageView spriteImageView = null;
 		Image img = null;
 
 		myPlayPane.getChildren().clear();
@@ -148,17 +149,58 @@ public class GamePlayer implements ViewController {
 		myPlayPane.getChildren().add(0,background);
 
 		for(Integer id : spriteMap.keySet()){
-			SpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
+			RuntimeSpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
 			img = new Image(spriteCharacteristics.getImagePath());
-			spriteImage = new ImageView(img);
-			spriteImage.setFitWidth(spriteCharacteristics.getWidth());
-			spriteImage.setFitHeight(spriteCharacteristics.getHeight());
-			spriteImage.setRotate(spriteCharacteristics.getOrientation());
-			spriteImage.setLayoutX(spriteCharacteristics.getX());
-			spriteImage.setLayoutY(spriteCharacteristics.getY());
-			myPlayPane.getChildren().add(spriteImage);
+			spriteImageView = new ImageView(img);
+			spriteImageView.setFitWidth(spriteCharacteristics.getWidth());
+			spriteImageView.setFitHeight(spriteCharacteristics.getHeight());
+			spriteImageView.setRotate(spriteCharacteristics.getOrientation());
+			spriteImageView.setLayoutX(spriteCharacteristics.getX());
+			spriteImageView.setLayoutY(spriteCharacteristics.getY());
+			myPlayPane.getChildren().add(spriteImageView);
+			/*
+			 * ANIMATIONS TODO:
+			 * 1)Once an animation is detected (i.e. SpriteCharacteristics.currentAction is set to an action,
+			 * it is constantly set.  We need to refresh this so animations are not constantly happening after
+			 * we just press a button once.
+			 * 2)Figure out how to refresh the sprite on screen.  Currently I am trying to remove the previous image
+			 * and add the new image (creating the animation), but this is not currently working.  New method...
+			 */
+			executeAnimation(spriteImageView, spriteCharacteristics);
 		}
 
+	}
+	private void executeAnimation(ImageView currentSpriteImageView, RuntimeSpriteCharacteristics spriteCharacteristics){
+		PossibleSpriteAction animationType = spriteCharacteristics.getCurrentAnimation();
+		if(animationType==null){
+			return;
+		}
+		ArrayList<Image> animationImages = spriteCharacteristics.getAnimationImages(animationType);
+		Timeline animationTimeline = new Timeline();
+		animationTimeline.setCycleCount(1);
+		System.out.println("before for loop");
+		for(Image spriteImage : animationImages){
+			System.out.println("found animation image");
+			KeyFrame updateSprite = new KeyFrame(Duration.seconds(.500), e->animateSprite(currentSpriteImageView, spriteImage, spriteCharacteristics));
+			animationTimeline.getKeyFrames().add(updateSprite);
+		}
+		System.out.println("after for loop");
+		animationTimeline.play();
+	
+			
+	}
+	private void animateSprite(ImageView currentSpriteImageView, Image spriteImage, SpriteCharacteristics spriteCharacteristics){
+		System.out.println("changing sprite");
+		ImageView spriteImageView = new ImageView(spriteImage);
+		spriteImageView.setFitWidth(spriteCharacteristics.getWidth());
+		spriteImageView.setFitHeight(spriteCharacteristics.getHeight());
+		spriteImageView.setRotate(spriteCharacteristics.getOrientation());
+		spriteImageView.setLayoutX(spriteCharacteristics.getX());
+		spriteImageView.setLayoutY(spriteCharacteristics.getY());
+		
+		//REPLACE OLD SPRITE WITH NEW ANIMATION SPRITE
+		this.myGameRoot.getChildren().remove(currentSpriteImageView); 
+		this.myGameRoot.getChildren().add(spriteImageView);
 	}
 
 
