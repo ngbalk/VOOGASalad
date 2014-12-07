@@ -2,7 +2,7 @@ package com.print_stack_trace.voogasalad.model.engine.runtime.keyboard;
 
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
-public class KeyApplicatorFacotry {
+public class KeyApplicatorFactory {
 	
 	public static final int V_KEY_CONSTANT = 30;
 	public static final int H_KEY_CONSTANT = 20;
@@ -13,7 +13,8 @@ public class KeyApplicatorFacotry {
 		Left,
 		Right,
 		Up,
-		Down
+		Down,
+		Default
 	};
 	
 	public static KeyApplicator buildKeyApplicator(KeyResult mykeyResult) {
@@ -23,6 +24,9 @@ public class KeyApplicatorFacotry {
 		final int vynew;
 		final int vxreleasenew;
 		final int vyreleasenew;
+		if(mykeyResult == null) {
+		    mykeyResult = KeyResult.Default;
+		}
 		switch(mykeyResult) {
 		case Down:
 			vynew = -V_KEY_CONSTANT;

@@ -1,27 +1,35 @@
 {
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 174,
-        "y": 125
+        "x": 0,
+        "y": 300
       },
-      "interactive": true,
-      "objectType": "HERO",
+      "interactive": false,
+      "objectType": "PLATFORM",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
       "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
+      "name": "asdf",
+      "width": 500.0,
       "height": 100.0,
-      "myMovements": {}
+      "myMovements": {},
+      "myAnimations": {
+        "UP": [],
+        "DOWN": [],
+        "LEFT": [],
+        "JUMP": [],
+        "CROUCH": [],
+        "RIGHT": []
+      }
     },
     "1": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
       "p": {
-        "x": 274,
-        "y": 125
+        "x": 38,
+        "y": 25
       },
       "interactive": true,
       "objectType": "HERO",
@@ -29,10 +37,18 @@
       "startingSpeed": 10.0,
       "value": 0,
       "orientation": 0.0,
-      "name": "",
+      "name": "pranava",
       "width": 100.0,
       "height": 100.0,
-      "myMovements": {}
+      "myMovements": {},
+      "myAnimations": {
+        "UP": [],
+        "DOWN": [],
+        "LEFT": [],
+        "JUMP": [],
+        "CROUCH": [],
+        "RIGHT": []
+      }
     }
   },
   "goalMap": {},
@@ -43,19 +59,19 @@
       [
         "NoAction",
         "NoAction",
-        "NoAction",
-        "NoAction",
-        "NoAction"
-      ],
-      [
-        "NoAction",
-        "NoAction",
-        "NoAction",
+        "ObjectBothNoDisplacement",
         "NoAction",
         "NoAction"
       ],
       [
         "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "ObjectBothNoDisplacement",
         "NoAction",
         "NoAction",
         "NoAction",
@@ -79,8 +95,8 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "jack\u0027s second test",
-    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
+    "name": "animations pls work",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0
   },
   "myGoalFactory": {},

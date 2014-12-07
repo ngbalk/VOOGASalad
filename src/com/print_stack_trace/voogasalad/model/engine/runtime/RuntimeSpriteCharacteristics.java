@@ -6,6 +6,7 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
+import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
@@ -13,8 +14,12 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public float v_x;
 	public float v_y;
 	public boolean isColliding = false;
+	public boolean isCollidingHorizontally = false;
+	public boolean isCollidingVertically = false;
+	public boolean canMultipleJump = false;
 	private float decelerationConstant;
-
+	public PossibleSpriteAction currentSpriteAction;
+	
 	public int health;
 	private boolean remove = false;
 	private float alpha = 1.0f;
@@ -56,4 +61,14 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public void flagForRemoval() {
 		this.remove = true;
 	}	
+	
+	public PossibleSpriteAction getCurrentAnimation() {
+		return currentSpriteAction;
+	}
+	
+	public void setPossibleSpriteAction(PossibleSpriteAction spriteAction) {
+		currentSpriteAction = spriteAction;
+		//TODO: implement this on back end.
+	}
+
 }

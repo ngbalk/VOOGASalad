@@ -6,8 +6,8 @@ import javafx.scene.Node;
 
 public class GameMainLayoutNode extends AbstractLayoutNode{
 
-	public GameMainLayoutNode(double width, double height, Object myGameEngine) {
-		super(width, height, myGameEngine);
+	public GameMainLayoutNode(double width, double height, Node toBeLinked, Object myGameEngine, AbstractViewDelegate delegate) {
+		super(width, height, toBeLinked,myGameEngine, delegate);
 	}
 
 	@Override
@@ -17,11 +17,21 @@ public class GameMainLayoutNode extends AbstractLayoutNode{
 	}
 
 	@Override
-	public void initialize(double width, double height, Object myLinkedObject) {
-		GamePane centerPane=new GamePane(width, height, (GameEngine)myLinkedObject);
-	
+	public void initialize(double width, double height, Node myLinkedObject, Object engine, AbstractViewDelegate delegate) {
+		GamePane centerPane=new GamePane(width, height, (GameEngine) engine);
 		myNode=centerPane;
 		
+	}
+
+	@Override
+	public Number getHeight() {
+		return ((GamePane) myNode).getPrefHeight();
+	}
+
+	@Override
+	public Number getWidth() {
+		// TODO Auto-generated method stub
+		return ((GamePane) myNode).getPrefWidth();
 	}
 
 }

@@ -3,8 +3,10 @@ package com.print_stack_trace.voogasalad.controller.guiElements;
 import javafx.scene.Node;
 
 public class NullLayoutNode extends AbstractLayoutNode{
-	public NullLayoutNode(double width, double height, Node myNode) {
-		super(width, height, myNode);
+	
+
+	public NullLayoutNode(double myWidth, double myHeight, Node toBeLinked,Object engine, AbstractViewDelegate delegate) {
+		super(myWidth, myHeight, toBeLinked,engine, delegate);
 	}
 
 	@Override
@@ -14,9 +16,21 @@ public class NullLayoutNode extends AbstractLayoutNode{
 	}
 
 	@Override
-	public void initialize(double width, double height, Object myLinkedObject) {
+	public void initialize(double width, double height, Node myLinkedObject, Object engine, AbstractViewDelegate delegate) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Number getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Number getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
