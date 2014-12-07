@@ -38,13 +38,13 @@ public class KeyApplicatorFactory {
 			vxnew = -H_KEY_CONSTANT;
 			vynew = 0;
 			vxreleasenew = -vxnew;
-			vyreleasenew = -vynew;
+			vyreleasenew = 0;
 			break;
 		case Right:
 			vxnew = H_KEY_CONSTANT;
 			vynew = 0;
 			vxreleasenew = -vxnew;
-			vyreleasenew = -vynew;
+			vyreleasenew = 0;
 			break;
 		case Up:
 			vynew = V_KEY_CONSTANT;
