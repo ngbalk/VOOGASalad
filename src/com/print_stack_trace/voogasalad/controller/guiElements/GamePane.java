@@ -259,6 +259,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	
 	//TODO: consider adding to the AbstractGUI shitz
 	public void loadLevel() {
+		
 		//load in level from game data
 		LevelModel levelModel = loadLevelModelFromFile();
 		if(levelModel == null)
