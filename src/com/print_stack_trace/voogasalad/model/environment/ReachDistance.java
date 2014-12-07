@@ -33,7 +33,7 @@ public class ReachDistance extends Goal implements GoalElement{
         super.setGoalProperties();
         myDestination = myGoalCharacteristics.myDestination;
         myHeroID = myGoalCharacteristics.myObjectID;
-        myHorizontal = myGoalCharacteristics.myHorizontalDestination;
+        myHorizontal = myGoalCharacteristics.getHorizontalDestination();
 
     }
 

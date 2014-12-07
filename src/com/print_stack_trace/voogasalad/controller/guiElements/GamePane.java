@@ -383,4 +383,9 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				goalObject.update();
 			}
 		}
+		
+		@Override
+		public HashSet<GameObject> getCurrentLevelSprites() {
+			return levelTracker.currentLevelSprites();
+		}
 }

@@ -1,5 +1,9 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -29,5 +33,16 @@ public abstract class GoalCharacteristicController extends UserInputText{
 		}
 		else
 			return false;
+	}
+	protected void setObservable(SimpleIntegerProperty simpleIntProperty){
+		simpleIntProperty.addListener(new ChangeListener<Number>(){
+			@Override
+			public void changed(ObservableValue<? extends Number> arg0,
+					Number arg1,Number arg2) {
+					myTextBox.setText(arg2.doubleValue()+"");
+				
+			}
+			
+		});
 	}
 }

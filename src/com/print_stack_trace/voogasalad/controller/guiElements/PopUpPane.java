@@ -7,18 +7,9 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.controller.gameElements.Sprite;
-import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+
 
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-
-import javafx.scene.layout.Pane;
-
-import javafx.scene.layout.HBox;
-
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class PopUpPane extends GeneralPane{
@@ -26,41 +17,25 @@ public class PopUpPane extends GeneralPane{
 	private String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
 	protected String myResourceName="";
 	protected String myName="";
-	protected VBox myNode=new VBox();
 	protected HashMap<Integer, Node> myObjects=new HashMap<Integer, Node>();
 	public PopUpPane(String resource, GameObject myObject){
-		super();
-		initiate(resource, myObject);
-		this.getChildren().add(myNode);
+		this(GeneralPane.DEFAULT_WIDTH, GeneralPane.DEFAULT_HEIGHT,resource, myObject);
 	}
 	public PopUpPane(Number width, Number height, String name, GameObject gameObject){
-		super(width, height, name);
-		myNode.setPrefSize(width.doubleValue(), height.doubleValue());
-		initiate(name, gameObject);
-		this.getChildren().add(myNode);
-	}
-	private void initiate(String resource, GameObject myObject){
-		myResourceName=resource;
-		myGameObject=myObject;
-		myNode.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
+		super();
+		myNode=new VBox();
+		((VBox)myNode).setPrefSize(width.doubleValue(), height.doubleValue());
+		((VBox)myNode).getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
 		myNode.setStyle("-fx-background-color: BLACK");
+		myResourceName=name;
+		myGameObject=gameObject;
+		this.createNodePreferences(width, height, name);
+		this.initiate();
 		makeLabels();
-
 		addNodes();
-
-		Button submit = new Button("Submit");
-		submit.setOnAction(e->this.close());
-		submit.setPrefSize(80,20);
-//		this.getChildren().add(submit);
-		//DeleteButton delete = new DeleteButton(myObject);
-		//delete.setPrefSize(80, 20);
-		HBox buttonBox = new HBox();
-		buttonBox.getChildren().addAll(submit);
-		buttonBox.toFront();
-		buttonBox.relocate(0, 0);//yCoord);
-		myNode.getChildren().add(buttonBox);
-
+		
 	}
+	
 	public void createTextFields(){}
 	public void makeObservable(Collection toObserve){}
 	public void loadInData(Collection myData){}
@@ -68,7 +43,6 @@ public class PopUpPane extends GeneralPane{
 		UserInputFactory myInput=new UserInputFactory();
 		UserInputType typeOfInput=myInput.createUserInput(values[6], values,  this.getPrefWidth(), this.getPrefHeight(),  x, y, myGameObject);
 		Node myInputType=typeOfInput.getLabelAndType();
-		
 		if (typeOfInput.getType()!=null){
 			myObjects.put(Integer.parseInt(values[7]), myInputType);
 			
@@ -86,7 +60,8 @@ public class PopUpPane extends GeneralPane{
 		}
 		for (int i=0; i<=max; i++){
 			if (myObjects.get(i)!=null){
-				myNode.getChildren().add(myObjects.get(i));
+				((VBox)myNode).getChildren().add(myObjects.get(i));
+				System.out.println("HEY");
 			}
 		}
 	}
@@ -98,8 +73,8 @@ public class PopUpPane extends GeneralPane{
 			for(Object labelName : prop.keySet()){
 				
 				String[] value=prop.getProperty((String) labelName).split(";");
-				makeLabelAndTextBox(value,myNode.getPrefWidth()*Double.parseDouble(value[2]),myNode.getPrefHeight()*Double.parseDouble(value[3]),
-						myNode.getPrefWidth()*Double.parseDouble(value[4]),myNode.getPrefHeight()*Double.parseDouble(value[5]));
+				makeLabelAndTextBox(value,((VBox)myNode).getPrefWidth()*Double.parseDouble(value[2]),((VBox)myNode).getPrefHeight()*Double.parseDouble(value[3]),
+						((VBox)myNode).getPrefWidth()*Double.parseDouble(value[4]),((VBox)myNode).getPrefHeight()*Double.parseDouble(value[5]));
 			}
 		}
 		catch(Exception e){
