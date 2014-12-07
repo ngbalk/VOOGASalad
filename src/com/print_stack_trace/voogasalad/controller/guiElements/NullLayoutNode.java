@@ -21,4 +21,16 @@ public class NullLayoutNode extends AbstractLayoutNode{
 		
 	}
 
+	@Override
+	public Number getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Number getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
