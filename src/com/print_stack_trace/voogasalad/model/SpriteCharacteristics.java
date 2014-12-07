@@ -32,7 +32,7 @@ public class SpriteCharacteristics {
 	public static final Image DEFAULT_IMAGE = null;
 	public static final int DEFAULT_X_POSITION = 0;
 	public static final int DEFAULT_Y_POSITION = 0;
-	//public static final Point DEFAULT_POINT = new Point(DEFAULT_X_POSITION,DEFAULT_Y_POSITION);
+	public static final Point DEFAULT_POINT = new Point(DEFAULT_X_POSITION,DEFAULT_Y_POSITION);
 	public static final boolean DEFAULT_INTERACTIVE = false;
 	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
 	public static final int DEFAULT_HEALTH = 10;
@@ -46,9 +46,9 @@ public class SpriteCharacteristics {
 	// GAME AUTHORING VARIABLES
 	public transient Image img;
 	public String imagePath;
-	//public Point p;
-	public int xPosition;
-	public int yPosition;
+	public Point p;
+	//public int xPosition;
+	//public int yPosition;
 	public boolean interactive;
 	public SpriteType objectType;
 	public int startingHealth;
@@ -72,9 +72,9 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteType t){
 		objectType = t;
 		img = DEFAULT_IMAGE;
-		//p = DEFAULT_POINT;
-		xPosition=DEFAULT_X_POSITION;
-		yPosition=DEFAULT_Y_POSITION;
+		p = DEFAULT_POINT;
+		//xPosition=DEFAULT_X_POSITION;
+		//yPosition=DEFAULT_Y_POSITION;
 		startingHealth = DEFAULT_HEALTH;
 		startingSpeed = DEFAULT_SPEED;
 		value = DEFAULT_VALUE;
@@ -104,9 +104,9 @@ public class SpriteCharacteristics {
 	public SpriteCharacteristics(SpriteCharacteristics obj) {
 		objectType = obj.getObjectType();
 		img = obj.getJavaAWTImage();
-		//p = obj.getPoint();
-		xPosition=(int)obj.getX();
-		yPosition=(int)obj.getY();
+		p = obj.getPoint();
+		//xPosition=(int)obj.getX();
+		//yPosition=(int)obj.getY();
 		interactive = obj.isInteractive();
 		startingHealth = obj.getStartingHealth();
 		startingSpeed = obj.getStartingSpeed();
@@ -190,13 +190,14 @@ public class SpriteCharacteristics {
 	}
 
 	public Point getPoint () {
-		return new Point(xPosition,yPosition);
+		//return new Point(xPosition,yPosition);
+		return p;
 	}
 
 	public void setPoint (Point p) {
-		//this.p=p;
-		setX(p.getX());
-		setY(p.getY());
+		this.p=p;
+		//setX(p.getX());
+		//setY(p.getY());
 	}
 
 	public boolean isInteractive () {
@@ -248,27 +249,33 @@ public class SpriteCharacteristics {
 	}
 
 	public double getX(){
-		return xPosition;
+		//return xPosition;
+		return p.getX();
 	}
 
 	public double getY(){
-		return yPosition;
+		//return yPosition;
+		return p.getX();
 	}
 
 	public void setX(double xPosition){
-		this.xPosition=(int)xPosition;
+		//this.xPosition=(int)xPosition;
+		p.setLocation(xPosition, p.getY());
 	}
 
-	public void setX(int xLocation){
-		this.xPosition=xLocation;
+	public void setX(int xPosition){
+		//this.xPosition=xLocation;
+		p.setLocation(xPosition, p.getY());
 	}
 	
 	public void setY(double yPosition){
-		this.yPosition=(int)yPosition;
+		//this.yPosition=(int)yPosition;
+		p.setLocation(p.getX(), yPosition);
 	}
 	
 	public void setY(int yPosition){
-		this.yPosition=yPosition;
+		//this.yPosition=yPosition;
+		p.setLocation(p.getX(), yPosition);
 	}
 
 	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
