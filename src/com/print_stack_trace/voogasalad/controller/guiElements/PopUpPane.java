@@ -52,13 +52,13 @@ public class PopUpPane extends GeneralPane{
 		submit.setOnAction(e->this.close());
 		submit.setPrefSize(80,20);
 //		this.getChildren().add(submit);
-		DeleteButton delete = new DeleteButton(myObject, myObject.getDelegate());
-		delete.setPrefSize(80, 20);
+		//DeleteButton delete = new DeleteButton(myObject);
+		//delete.setPrefSize(80, 20);
 		HBox buttonBox = new HBox();
-		buttonBox.getChildren().addAll(delete.getButton(), submit);
+		buttonBox.getChildren().addAll(submit);
 		buttonBox.toFront();
 		buttonBox.relocate(0, 0);//yCoord);
-		this.getChildren().add(buttonBox);
+		myNode.getChildren().add(buttonBox);
 
 	}
 	public void createTextFields(){}

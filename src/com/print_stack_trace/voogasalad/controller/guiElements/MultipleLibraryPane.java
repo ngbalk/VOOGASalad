@@ -45,7 +45,7 @@ public class MultipleLibraryPane extends TabPane{
 			}
 		}
 		catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "File not found");
+			JOptionPane.showMessageDialog(null, DEFAULT_RESOURCE+"not found");
 		}
 	}
 	
