@@ -102,8 +102,6 @@ public class SpriteCharacteristics {
 		objectType = obj.getObjectType();
 		img = obj.getJavaAWTImage();
 		p = obj.getPoint();
-		//xPosition=(int)obj.getX();
-		//yPosition=(int)obj.getY();
 		interactive = obj.isInteractive();
 		startingHealth = obj.getStartingHealth();
 		startingSpeed = obj.getStartingSpeed();
@@ -257,10 +255,8 @@ public class SpriteCharacteristics {
 
 	public void setX(double xPosition){
 		//this.xPosition=(int)xPosition;
-		System.out.println("XLoc original: "+p.getX());
 		//p.setLocation(xPosition, p.getY());
 		p.x=(int)xPosition;
-		System.out.println("XLoc changed: "+p.getY());
 	}
 	
 	public void setY(double yPosition){
