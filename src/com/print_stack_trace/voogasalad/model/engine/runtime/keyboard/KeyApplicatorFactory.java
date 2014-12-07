@@ -4,7 +4,7 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 
 public class KeyApplicatorFactory {
 	
-	public static final int V_KEY_CONSTANT = 30;
+	public static final int V_KEY_CONSTANT = 50;
 	public static final int H_KEY_CONSTANT = 20;
 
 
@@ -78,7 +78,7 @@ public class KeyApplicatorFactory {
                     RuntimeSpriteCharacteristics sprite) {
                 if(!once) return;
                 once = false;
-                if(!sprite.isCollidingHorizontally) sprite.v_x += vxreleasenew;
+                if(!sprite.isCollidingHorizontally) sprite.v_x = 0;
                 sprite.v_y -= vyreleasenew;
             }
         };

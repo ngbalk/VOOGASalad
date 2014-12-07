@@ -119,7 +119,7 @@ public class PhysicsEngine {
 
         for(int i = 0; i < array.length; i ++){
             RuntimeSpriteCharacteristics sprite = (RuntimeSpriteCharacteristics) array[i];
-            if(sprite.objectType.equals(SpriteType.ENEMY)){
+            if(sprite.objectType.equals(SpriteType.ENEMY) && sprite.enemyPatrols){
                 patrolEnemy(sprite);
             }
         }
