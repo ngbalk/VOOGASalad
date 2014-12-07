@@ -3,57 +3,31 @@
     "0": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
       "p": {
-        "x": 464,
-        "y": 154
+        "x": 0,
+        "y": 0
       },
       "interactive": true,
       "objectType": "HERO",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {}
-    },
-    "1": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
-      "p": {
-        "x": 464,
-        "y": 154
-      },
-      "interactive": true,
-      "objectType": "ENEMY",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {}
-    },
-    "2": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png",
-      "p": {
-        "x": 464,
-        "y": 154
-      },
-      "interactive": true,
-      "objectType": "PLATFORM",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {}
+      "orientation": 20.0,
+      "name": "asjdakshd",
+      "width": 200.0,
+      "height": 200.0,
+      "myMovements": {},
+      "myAnimations": {
+        "LEFT": [],
+        "UP": [],
+        "RIGHT": [],
+        "CROUCH": [],
+        "DOWN": [],
+        "JUMP": []
+      }
     }
   },
   "goalMap": {},
-  "currentID": 2,
+  "currentID": 0,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
@@ -96,7 +70,7 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "jak",
+    "name": "naming test 2",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 0
   },

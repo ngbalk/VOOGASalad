@@ -29,7 +29,10 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.Co
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFacotry.KeyResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 
 public class GameEngine {
 	private LevelModel currentLevel;
@@ -54,11 +57,6 @@ public class GameEngine {
 
 	//-------------------PUBLIC METHODS-------------------//
 
-	public LevelModel loadLevelForEditing(FileInputStream myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
-		//TODO: consider integrating this with IGameAuthorEngine or with the existing loadGame/loadLevel methods 
-		return (LevelModel) gameData.loadLevel(myFile, LevelModel.class);
-	}
-	
 	public void loadGame(FileInputStream myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
 		loadLevel((LevelModel) gameData.loadLevel(myFile, LevelModel.class));
 	}
@@ -223,7 +221,15 @@ public class GameEngine {
 		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
 		currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
 
+//		GoalCharacteristics g = new GoalCharacteristics(GoalType.REACH_OBJECT);
+//		g.myDestination = 100;
+//		g.myObjectID = 2;	
+//		currentLevel.setGoal(g);
 
+		LevelCharacteristics l = currentLevel.getLevelCharacteristics();
+		l.requiredNumberOfGoals = 1;
+		currentLevel.setLevelCharacteristics(l);
+		
 		runtimeEngine = new RuntimeEngine(currentLevel);
 		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
