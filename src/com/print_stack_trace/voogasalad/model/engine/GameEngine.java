@@ -40,6 +40,7 @@ public class GameEngine {
 	private IGameAuthorEngine authorEngine;
 	private IGameData gameData;
 	private int framesPerSecond;
+	private Map<String, HighScore> highScores;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -57,7 +58,7 @@ public class GameEngine {
 
 	//-------------------PUBLIC METHODS-------------------//
 
-	public void loadGame(FileInputStream myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
+	public void loadGame(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
 		loadLevel((LevelModel) gameData.loadLevel(myFile, LevelModel.class));
 	}
 
@@ -176,8 +177,14 @@ public class GameEngine {
 		return runtimeEngine.getStatus();
 	}
 
-	public Map<String, HighScore> getHighScoreList() {
-		return gameData.getHighScores();
+	public Map<String, HighScore> getHighScoreList(){
+		try {
+			highScores = (Map<String, HighScore>) gameData.getObject("HighScores", highScores.getClass());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		return highScores;
 	}
 
 	public EventHandler<KeyEvent> getRuntimeKeyPressHandler() {
@@ -234,8 +241,9 @@ public class GameEngine {
 		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
 
-	public void saveHighScore(String name, HighScore highScore) {
-		gameData.saveHighScore(name, highScore);
+	public void saveHighScore(String name, HighScore highScore) throws IOException {
+		highScores.put(name, highScore);
+		gameData.storeObject(highScores, "HighScores");
 	}
 
 	private void handleKeyRelease(KeyEvent event) {
