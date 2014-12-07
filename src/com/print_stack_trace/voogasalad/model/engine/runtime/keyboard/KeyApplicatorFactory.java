@@ -13,7 +13,8 @@ public class KeyApplicatorFactory {
 		Left,
 		Right,
 		Up,
-		Down
+		Down,
+		Default
 	};
 	
 	public static KeyApplicator buildKeyApplicator(KeyResult mykeyResult) {
@@ -23,6 +24,9 @@ public class KeyApplicatorFactory {
 		final int vynew;
 		final int vxreleasenew;
 		final int vyreleasenew;
+		if(mykeyResult == null) {
+		    mykeyResult = KeyResult.Default;
+		}
 		switch(mykeyResult) {
 		case Down:
 			vynew = -V_KEY_CONSTANT;

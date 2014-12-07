@@ -90,5 +90,4 @@ public class CollisionDetector {
 		
 		return(right.getX() >= intersect.getX() && intersect.getHeight() > intersect.getWidth());
 	}
-	
 }

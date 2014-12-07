@@ -6,4 +6,6 @@ public interface  LayoutNode {
 	void initialize(double width, double height);
 	void initialize(double width, double height, Node myLinkedObject,
 			Object engine, AbstractViewDelegate delegate);
+	Number getHeight();
+	Number getWidth();
 }
