@@ -57,11 +57,6 @@ public class GameEngine {
 
 	//-------------------PUBLIC METHODS-------------------//
 
-	public LevelModel loadLevelForEditing(FileInputStream myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
-		//TODO: consider integrating this with IGameAuthorEngine or with the existing loadGame/loadLevel methods 
-		return (LevelModel) gameData.loadLevel(myFile, LevelModel.class);
-	}
-	
 	public void loadGame(FileInputStream myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
 		loadLevel((LevelModel) gameData.loadLevel(myFile, LevelModel.class));
 	}
