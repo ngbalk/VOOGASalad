@@ -6,6 +6,7 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
+import java.awt.Point;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class RuntimeModel extends LevelModel {
 	public Date currentTime;
 	public boolean gameOver = false;
 	public boolean gameVictory = false;
+	public Point camera;
 
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -40,6 +42,7 @@ public class RuntimeModel extends LevelModel {
 		goalMap = level.getGoalMap();
 		currentPoints = 0;
 		currentTime = new Date();
+		camera = level.getLevelCharacteristics().cameraStart;
 	}
 	
 	//-------------------ACCESSORS-------------------//

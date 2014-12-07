@@ -23,12 +23,13 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.IGameAuthorEngine
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
@@ -135,7 +136,7 @@ public class GameEngine {
 
 	//Viewport/Camera Parameters
 
-	public void setCameraType(CameraType cameraType) {
+	public void setCameraType(CameraFactory.CameraType cameraType) {
 		authorEngine.setCameraType(cameraType);
 	}
 

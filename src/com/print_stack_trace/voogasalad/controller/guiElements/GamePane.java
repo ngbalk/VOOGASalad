@@ -15,12 +15,12 @@ import java.util.Set;
 
 import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
-
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -234,7 +234,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return sprites;
 	}
 
-	public void setCamera(CameraType cameratype) {
+	public void setCamera(CameraFactory.CameraType cameratype) {
 		myGameEngine.setCameraType(cameratype);
 
 	}
