@@ -378,26 +378,26 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			for(GoalCharacteristics goal : goalMap.values()){
 				GoalObject goalObject = new GoalObject(goal.myGoalType,this);
 				goalObject.setCharacteristics(goal);
-//=======
-//		private String capitalize(String line) {
-//			/*
-//			String[] strArray = line.split(" ");
-//			String capitalizedString = "";
-//			for(int i=0; i<strArray.length; i++)
-//				capitalizedString += Character.toUpperCase(strArray[i].charAt(0))+strArray[i].substring(1).toLowerCase() + " ";
-//			return capitalizedString
-//			*/
-//			return Character.toUpperCase(line.charAt(0)) + line.substring(1).toLowerCase();
-//		}
+				addGoalToLevel(goalObject);
+				goalObject.update();
+			}
+		}
+		private String capitalize(String line) {
+			/*
+			String[] strArray = line.split(" ");
+			String capitalizedString = "";
+			for(int i=0; i<strArray.length; i++)
+				capitalizedString += Character.toUpperCase(strArray[i].charAt(0))+strArray[i].substring(1).toLowerCase() + " ";
+			return capitalizedString
+			*/
+			return Character.toUpperCase(line.charAt(0)) + line.substring(1).toLowerCase();
+		}
 //		private void loadGoalObjectsFromLevel(Map<Integer,Goal> goalMap) {
 //			for(Goal goal : goalMap.values()){
 //				GoalObject goalObject = new GoalObject(goal.getGoalType(),this);
 //				goalObject.setCharacteristics(goal.getGoalCharacteristics());
 //>>>>>>> c324255721f46eff4ab50040883387b89e926517
-				addGoalToLevel(goalObject);
-				goalObject.update();
-			}
-		}
+		
 		
 		@Override
 		public HashSet<GameObject> getCurrentLevelSprites() {

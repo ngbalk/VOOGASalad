@@ -1,10 +1,40 @@
 {
+  "goalMap": {
+    "0": {
+      "myName": "",
+      "myGoalType": "STAY_ALIVE",
+      "myObjectID": 0,
+      "myObjectiveID": 0,
+      "myPointTotal": 0,
+      "myDestination": 0.0,
+      "myHorizontalDestination": true,
+      "pointsProperty": {
+        "name": "",
+        "value": 0,
+        "valid": true
+      }
+    },
+    "4": {
+      "myName": "",
+      "myGoalType": "REACH_OBJECT",
+      "myObjectID": 0,
+      "myObjectiveID": 4,
+      "myPointTotal": 0,
+      "myDestination": 0.0,
+      "myHorizontalDestination": true,
+      "pointsProperty": {
+        "name": "",
+        "value": 0,
+        "valid": true
+      }
+    }
+  },
   "mySpriteMap": {
     "0": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
       "p": {
-        "x": 17,
-        "y": 83
+        "x": 61,
+        "y": 217
       },
       "interactive": true,
       "objectType": "HERO",
@@ -18,11 +48,11 @@
       "doubleJump": true,
       "myMovements": {},
       "myAnimations": {
+        "Default": [],
+        "Up": [],
+        "Right": [],
         "Left": [],
         "Jump": [],
-        "Default": [],
-        "Right": [],
-        "Up": [],
         "Down": []
       }
     },
@@ -44,11 +74,11 @@
       "doubleJump": false,
       "myMovements": {},
       "myAnimations": {
+        "Default": [],
+        "Up": [],
+        "Right": [],
         "Left": [],
         "Jump": [],
-        "Default": [],
-        "Right": [],
-        "Up": [],
         "Down": []
       }
     },
@@ -70,11 +100,11 @@
       "doubleJump": false,
       "myMovements": {},
       "myAnimations": {
+        "Default": [],
+        "Up": [],
+        "Right": [],
         "Left": [],
         "Jump": [],
-        "Default": [],
-        "Right": [],
-        "Up": [],
         "Down": []
       }
     },
@@ -96,19 +126,19 @@
       "doubleJump": false,
       "myMovements": {},
       "myAnimations": {
+        "Default": [],
+        "Up": [],
+        "Right": [],
         "Left": [],
         "Jump": [],
-        "Default": [],
-        "Right": [],
-        "Up": [],
         "Down": []
       }
     },
     "4": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
       "p": {
-        "x": 1500,
-        "y": 234
+        "x": 312,
+        "y": 104
       },
       "interactive": false,
       "objectType": "REWARD",
@@ -122,28 +152,12 @@
       "doubleJump": false,
       "myMovements": {},
       "myAnimations": {
+        "Default": [],
+        "Up": [],
+        "Right": [],
         "Left": [],
         "Jump": [],
-        "Default": [],
-        "Right": [],
-        "Up": [],
         "Down": []
-      }
-    }
-  },
-  "goalMap": {
-    "0": {
-      "myName": "",
-      "myGoalType": "REACH_OBJECT",
-      "myObjectID": 0,
-      "myObjectiveID": 4,
-      "myPointTotal": 0,
-      "myDestination": 0.0,
-      "myHorizontalDestination": true,
-      "pointsProperty": {
-        "name": "",
-        "value": 0,
-        "valid": true
       }
     }
   },
@@ -198,7 +212,7 @@
       "y": 0
     },
     "cameraSpeed": 20,
-    "myHorizontalPaneCount": 2,
+    "myHorizontalPaneCount": 4,
     "myVerticalPaneCount": 1,
     "cameraType": "ConstantHorizontalScroll"
   },
