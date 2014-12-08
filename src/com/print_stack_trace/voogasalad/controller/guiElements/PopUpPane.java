@@ -9,9 +9,7 @@ import javax.swing.JOptionPane;
 
 
 
-
 import javafx.scene.Node;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class PopUpPane extends GeneralPane{
@@ -51,11 +49,11 @@ public class PopUpPane extends GeneralPane{
 		}
 		else{
 			myObjects.put(Integer.parseInt(values[7]),typeOfInput.getLabel());
-		}	
+			
+		}
+		
 	}
-	
 	private void addNodes(){
-		((VBox)myNode).setPrefSize(0, 0);
 		int max=0;
 		for (Integer index: myObjects.keySet()){
 			max=Math.max(max, index.intValue());
@@ -63,11 +61,8 @@ public class PopUpPane extends GeneralPane{
 		for (int i=0; i<=max; i++){
 			if (myObjects.get(i)!=null){
 				((VBox)myNode).getChildren().add(myObjects.get(i));
-				((VBox) myNode).setPrefSize(((VBox) myNode).getPrefWidth()+((VBox)myObjects.get(i)).getPrefWidth(),((VBox) myNode).getPrefHeight()+((VBox)myObjects.get(i)).getPrefHeight());
+				System.out.println("HEY");
 			}
-		}
-		if (((Region) myNode).getPrefHeight()<this.getPrefHeight()||((Region) myNode).getPrefWidth()<this.getPrefWidth()){
-			((Region)myNode).setPrefSize(this.getPrefWidth(), this.getPrefHeight());
 		}
 	}
 	private void makeLabels(){

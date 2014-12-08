@@ -2,8 +2,6 @@ package com.print_stack_trace.voogasalad.controller.guiElements;
 
 import java.util.HashMap;
 
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
@@ -20,7 +18,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class SpriteMovement extends UserInputDropDownMenu{
-	
+	public enum PossibleSpriteAction {UP, DOWN, RIGHT, LEFT, JUMP, CROUCH}
 	public SpriteMovement(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 		currentMenu.setText("Pick Types of Movement");
@@ -50,8 +48,8 @@ public class SpriteMovement extends UserInputDropDownMenu{
 	}
 	private void linkKeys(String type, KeyCode key, Stage keyStage){
 		keyStage.close();
-		KeyResult mySpriteAction=null;
-		for (KeyResult myAction: KeyResult.values()){
+		PossibleSpriteAction mySpriteAction=null;
+		for (PossibleSpriteAction myAction: PossibleSpriteAction.values()){
 			if (myAction.name().trim().equals(type.trim()))
 				mySpriteAction=myAction;
 		}
