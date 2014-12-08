@@ -153,7 +153,7 @@ public class LevelModel {
 //        if (levelSpecs.requiredNumberOfGoals<0 || levelSpecs.requiredNumberOfGoals > goalMap.size()) {
 //            throw new InvalidNumberOfGoalsException();
 //        }
-//        in what context can you not set a certain cameraType
+        //in what context can you not set a certain cameraType
         myLevelChars = levelSpecs;
     }
 

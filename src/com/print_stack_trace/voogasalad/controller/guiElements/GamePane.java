@@ -29,6 +29,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerato
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 
+
 public class GamePane extends Pane implements ViewObjectDelegate{
 	private double myWidth;
 	private double myHeight;
