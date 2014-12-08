@@ -79,10 +79,8 @@ public class GameWorldModel {
         if(index < 0 || index >= levelMap.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        if(levelMap != null) {
-	        if(levelMap.get(index)!= null){
-	            currentLevelIndex = index;
-	        }
+        if(levelMap.get(index)!= null){
+            currentLevelIndex = index;
         }
     }
     
