@@ -7,8 +7,10 @@
 package com.print_stack_trace.voogasalad.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
@@ -18,7 +20,7 @@ public class GameWorldCharacteristics {
 
     // GAME AUTHORING VARIABLES
     private String gameTitle;
-    private List<LevelModel> levels;
+    private Map<Integer, LevelModel> levels;
     private List<LevelModel> levelSequence;
     private int currentLevel;
 
@@ -26,7 +28,7 @@ public class GameWorldCharacteristics {
 
     //-------------------CONSTRUCTORS-------------------//
     public GameWorldCharacteristics() {
-        levels = new ArrayList<>();
+        levels = new HashMap<>();
         levelSequence = new LinkedList<>();
         currentLevel = 0;
     }
@@ -37,12 +39,7 @@ public class GameWorldCharacteristics {
     public void setGameTitle(String gameTitle) {
         this.gameTitle = gameTitle;
     }
-    public List<LevelModel> getLevels() {
-        return levels;
-    }
-    public void setLevels(List<LevelModel> levels) {
-        this.levels = levels;
-    }
+
     public int getNumberOfLevels() {
         return levels.size();
     }
@@ -50,8 +47,8 @@ public class GameWorldCharacteristics {
 
     //-------------------ACCESSORS-------------------//
 
-    public void addLevel(LevelModel level) {
-        levels.add(level);
+    public void addLevel(Integer id, LevelModel level) {
+        levels.put(id, level);
     }
 
     public LevelModel getNextLevel() {
@@ -65,6 +62,9 @@ public class GameWorldCharacteristics {
         return levelSequence.get(0);
     }
     
+    public LevelModel getLevelModel(int id) {
+        return levels.get(id);
+    }
     
     public boolean verifyWorldIntegrity() {
         return levels.size() == levelSequence.size();
@@ -72,18 +72,22 @@ public class GameWorldCharacteristics {
     
     public void createGameSequence() {
         LevelModel currentLevel = new LevelModel();
-        for(LevelModel level: levels) {
-            if(level.getLevelCharacteristics().previousLevel == null) {
-                currentLevel = level;
+        for(Integer id: levels.keySet()) {
+            if(levels.get(id).getLevelCharacteristics().previousLevel == null) {
+                currentLevel = levels.get(id);
                 levelSequence.add(currentLevel);
                 break;
             }
         }
         for(int i =0; i< levels.size(); i++) {
             for(int j=0; j< levels.size(); j++) {
-                if(levels.get(j).getLevelCharacteristics().ID == currentLevel.getLevelCharacteristics().nextLevel) {
+                if(levels.get(levels.get(j)).getLevelCharacteristics().ID == currentLevel.getLevelCharacteristics().nextLevel) {
                     currentLevel = levels.get(j);
+                    break;
                 }
+            }
+            if(currentLevel.getLevelCharacteristics().nextLevel == null) {
+                break;
             }
         }
     }
