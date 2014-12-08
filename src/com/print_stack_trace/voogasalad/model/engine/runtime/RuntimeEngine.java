@@ -6,6 +6,7 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +35,9 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 * Takes in a LevelModel and sets private variables
 	 * @param level
 	 */
-	public RuntimeEngine(LevelModel currentLevel) {
+	public RuntimeEngine(LevelModel currentLevel, Dimension viewport) {
 		super(currentLevel);
-		runtimeModel = new RuntimeModel(currentLevel);
+		runtimeModel = new RuntimeModel(currentLevel, viewport);
 		physicsEngine = currentLevel.getPhysicsEngine();
 	}
 

@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.model.engine;
 
+import java.awt.Dimension;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -42,19 +43,21 @@ public class GameEngine {
 	private IGameData gameData;
 	private int framesPerSecond;
 	private Map<String, HighScore> highScores;
+	private Dimension viewport;
 
 	//-------------------CONSTRUCTORS-------------------//
 
 	/**
 	 * Constructor Method.
 	 */
-	public GameEngine() {
-		this(new GameAuthorEngine(), new GameData());
+	public GameEngine(Dimension viewport) {
+		this(viewport, new GameAuthorEngine(), new GameData());
 	}
 
-	public GameEngine(IGameAuthorEngine authorEngine, IGameData gameData) {
+	public GameEngine(Dimension viewport, IGameAuthorEngine authorEngine, IGameData gameData) {
 		this.authorEngine = authorEngine;
 		this.gameData = gameData;
+		this.viewport = viewport;
 	}
 
 	//-------------------PUBLIC METHODS-------------------//
@@ -238,7 +241,7 @@ public class GameEngine {
 		l.requiredNumberOfGoals = 1;
 		currentLevel.setLevelCharacteristics(l);
 		
-		runtimeEngine = new RuntimeEngine(currentLevel);
+		runtimeEngine = new RuntimeEngine(currentLevel, viewport);
 		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
 

@@ -6,8 +6,7 @@ public class ConstantVerticalScroll implements CameraHandler {
 
 	@Override
 	public void updateCamera(RuntimeModel runtimeModel) {
-		// TODO Auto-generated method stub
-		
+		runtimeModel.camera.y -= runtimeModel.getLevelCharacteristics().cameraSpeed;
 	}
 
 }
