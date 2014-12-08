@@ -21,7 +21,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 
 public class DecisionTable extends GridPane {
-	private static final CollisionResult DEFAULT_COLLISION = CollisionFactory.CollisionResult.NoAction;
+	private static final CollisionResult DEFAULT_COLLISION = CollisionFactory.CollisionResult.ObjectBothNoDisplacement;
 	public static final int numClasses = GameAuthorEngine.SpriteType.values().length;
 	public static final SpriteType[] types = GameAuthorEngine.SpriteType.values();
 	public static final CollisionResult[] collisions = CollisionFactory.CollisionResult.values();  
