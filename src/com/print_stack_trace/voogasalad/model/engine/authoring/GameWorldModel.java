@@ -14,73 +14,78 @@ import java.util.Map;
 import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 
 public class GameWorldModel {
-	private GameWorldCharacteristics gameWorldCharacteristics;
+    private GameWorldCharacteristics gameWorldCharacteristics;
     private Map<Integer, LevelModel> levelMap;
     private Integer currentLevelIndex;
-	
-	//-------------------CONSTRUCTORS-------------------//
-	public GameWorldModel() {
-		levelMap = new HashMap<Integer, LevelModel>();
-		gameWorldCharacteristics = new GameWorldCharacteristics();
-	}
-	
-	//-------------------ACCESSORS-------------------//
-	public GameWorldCharacteristics getGameWorldCharacteristics() {
-		return gameWorldCharacteristics;
-	}
 
-	public void setGameWorldCharacteristics(
-			GameWorldCharacteristics gameWorldCharacteristics) {
-		this.gameWorldCharacteristics = gameWorldCharacteristics;
-	}
+    //-------------------CONSTRUCTORS-------------------//
+    public GameWorldModel() {
+        this(null);
+    }
 
-	public LevelModel getLevelModel(int id) {
+    public GameWorldModel(GameWorldCharacteristics gameWorldCharacteristics) {
+        this.gameWorldCharacteristics = gameWorldCharacteristics;
+        levelMap = new HashMap<Integer, LevelModel>();
+        gameWorldCharacteristics = new GameWorldCharacteristics();
+    }
+
+    //-------------------ACCESSORS-------------------//
+    public GameWorldCharacteristics getGameWorldCharacteristics() {
+        return gameWorldCharacteristics;
+    }
+
+    public void setGameWorldCharacteristics(
+            GameWorldCharacteristics gameWorldCharacteristics) {
+        this.gameWorldCharacteristics = gameWorldCharacteristics;
+    }
+
+    public LevelModel getLevelModel(int id) {
         return levelMap.get(id);
     }
 
     public List<LevelModel> getLevels() {
-		List<LevelModel> levelSequence = new ArrayList<LevelModel>();
-    	for(int i=0; i<levelMap.size(); i++)
-			levelSequence.add(i,levelMap.get(i));
-		return levelSequence;
-	}
-	
-	public Integer getNumberOfLevels() {
-		return levelMap.size();
-	}
-	
+        List<LevelModel> levelSequence = new ArrayList<LevelModel>();
+        for(int i=0; i<levelMap.size(); i++)
+            levelSequence.add(i,levelMap.get(i));
+        return levelSequence;
+    }
+
+    public Integer getNumberOfLevels() {
+        return levelMap.size();
+    }
+
     public void addLevel(Integer id, LevelModel level) {
         levelMap.put(id, level);
     }
 
-	public LevelModel getCurrentLevel() {
-		return levelMap.get(currentLevelIndex);
-	}
-	
-	public LevelModel getNextLevel() {
+    public LevelModel getCurrentLevel() {
+        return levelMap.get(currentLevelIndex);
+    }
+
+    public LevelModel getNextLevel() {
         currentLevelIndex++;
         return levelMap.get(currentLevelIndex);
     }
 
-    
-	//-------------------PUBLIC METHODS-------------------//	
+
+    //-------------------PUBLIC METHODS-------------------//	
     public boolean verifyWorldIntegrity() {
         //TODO: implement this!
-    	return false;
+        return false;
     }
-        
+
     public LevelModel startNewGame() {
-    	currentLevelIndex = 0;
+        currentLevelIndex = 0;
         return levelMap.get(currentLevelIndex);
     }
 
-	public void setCurrentLevel(int index) {
-	    if(index < 0 || index >= levelMap.size()) {
-	        throw new ArrayIndexOutOfBoundsException();
-	    }
-		if(levelMap.get(index)!= null){
-			currentLevelIndex = index;
-		}
-	}
-	
+    public void setCurrentLevel(int index) {
+        if(index < 0 || index >= levelMap.size()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        if(levelMap.get(index)!= null){
+            currentLevelIndex = index;
+        }
+    }
+
 }
