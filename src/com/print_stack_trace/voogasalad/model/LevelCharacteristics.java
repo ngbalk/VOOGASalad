@@ -51,6 +51,22 @@ public class LevelCharacteristics {
 	public String getColor(){
 		return myColor;
 	}
+	public Point getCameraStartPosition(){
+		return cameraStart;
+	}
+	public void setCameraX(double x){
+		cameraStart.setLocation(x, cameraStart.getY());
+	}
+	public void setCameraY(double y){
+		cameraStart.setLocation(cameraStart.getX(), y);
+	}
+	public double getCameraSpeed(){
+		return cameraSpeed;
+	}
+	public void setCameraSpeed(int speed){
+		cameraSpeed=speed;
+	}
+	
 	public int incrementHorizontalPaneCount(){
 		this.myHorizontalPaneCount++;
 		return this.myHorizontalPaneCount;

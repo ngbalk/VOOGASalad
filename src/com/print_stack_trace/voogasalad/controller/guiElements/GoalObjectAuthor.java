@@ -6,10 +6,9 @@ import java.util.HashSet;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
 
-public class GoalObjectID extends UserInputDropDownMenu{
+public class GoalObjectAuthor extends UserInputDropDownMenu{
 	protected HashMap<String, ArrayList<SpriteObject>> mySpriteData=new HashMap<String, ArrayList<SpriteObject>>();
-	
-	public GoalObjectID (String[] values,  double width, double height, double x, double y, GameObject object){
+	public GoalObjectAuthor (String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 		createDataMap();
 		addMenus();
