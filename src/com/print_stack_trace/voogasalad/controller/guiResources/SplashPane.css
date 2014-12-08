@@ -1,0 +1,17 @@
+
+.button{
+	-fx-font: 20px "Serif";
+	-fx-background-color:BLACK,
+		linear-gradient(#000000 20%, #0099CC 50%, #000000 100%); 
+	-fx-border-color: #ff1493;
+	-fx-background-insets: 0, 0, 2, 10;
+	-fx-text-fill: WHITE;
+}
+.label{
+  	-fx-font: 40px "Serif";
+	-fx-background-color: BLACK; 
+	-fx-width: 100;
+	-fx-border-color: #ff1493;
+	-fx-border-width: 5px;
+	-fx-text-fill: WHITE;
+}
