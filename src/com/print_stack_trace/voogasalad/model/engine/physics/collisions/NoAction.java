@@ -17,10 +17,10 @@ public class NoAction extends CollisionHandler {
 	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
 			RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
 		// No Action Taken
-		int newHealth = (int) s2.getHealthProperty();
+		int newHealth = (int) s2.getPropertyReadOnlyHealth().getValue();
 		newHealth--;
 		s2.setHealthProperty(newHealth);
-		int newHealth2 = (int) s1.getHealthProperty();
+		int newHealth2 = (int) s1.getPropertyReadOnlyHealth().getValue();
 		newHealth2--;
 		s1.setHealthProperty(newHealth2);
 		return;

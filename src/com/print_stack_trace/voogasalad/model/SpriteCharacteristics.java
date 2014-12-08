@@ -119,7 +119,6 @@ public class SpriteCharacteristics {
 		imagePath = obj.getImagePath();
 		myAnimations=obj.getAnimations();
 		doubleJump=obj.canDoubleJump();
-		damageDealt =obj.getDamageDealt();
 		
 	}
 	
@@ -182,14 +181,6 @@ public class SpriteCharacteristics {
     		}
     		myAnimations.get(myAction).add(imgPath);
     	}
-    }
-    
-    public void setDamageDealt(int d){
-        damageDealt = d;
-    }
-    
-    public int getDamageDealt(){
-        return damageDealt;
     }
 
 	public void setImagePath(String path){

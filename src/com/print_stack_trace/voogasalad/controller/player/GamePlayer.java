@@ -149,7 +149,9 @@ public class GamePlayer implements ViewController {
 		myGameRoot.setTranslateY(-r.camera.y);
 		LevelCharacteristics levelCharacteristics = r.getLevelCharacteristics();
 		Map<Integer, RuntimeSpriteCharacteristics> spriteMap = r.getRuntimeSpriteMap();
-		myHud.updateHealth((int) spriteMap.get(r.getMainCharacter()).getPropertyReadOnlyHealth().getValue());
+		RuntimeSpriteCharacteristics mainCharCharacteristics = spriteMap.get(r.getMainCharacter());
+		myHud.updateHealth((int) mainCharCharacteristics.getPropertyReadOnlyHealth().getValue());
+		myHud.updatePoints(mainCharCharacteristics.getPropertyReadOnlyPoints().getValue());
 		ImageView background = new ImageView(new Image(levelCharacteristics.getBackgroundImagePath()));
 		background.setFitWidth(myPlayPane.getWidth()); 
 		background.setFitHeight(myPlayPane.getHeight()-10);

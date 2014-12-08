@@ -12,7 +12,7 @@ public class ObjectBothNoDisplacement extends CollisionHandler {
     public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
             RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
 
-		int newHealth = (int) s2.getHealthProperty();
+		int newHealth = (int) s2.getPropertyReadOnlyHealth().getValue();
 		newHealth--;
 		s2.setHealthProperty(newHealth);
 		int newHealth2 = (int) s1.getPropertyReadOnlyHealth().getValue();

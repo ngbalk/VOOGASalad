@@ -25,6 +25,7 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	private float decelerationConstant;
 	public KeyResult currentSpriteAction;
 	public ReadOnlyIntegerWrapper healthProperty=new ReadOnlyIntegerWrapper(this.startingHealth);
+	public ReadOnlyIntegerWrapper pointsProperty=new ReadOnlyIntegerWrapper(0);
 	
 	public int health;
 	private boolean remove = false;
@@ -34,20 +35,29 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 		super(t);
 	}
 	
-	public void setWritableHealthProperty(int newHealth){
-		healthProperty.setValue(newHealth);
-	}
+//	public void setWritableHealthProperty(int newHealth){
+//		healthProperty.setValue(newHealth);
+//	}
 	
 	public ReadOnlyIntegerProperty getPropertyReadOnlyHealth(){
 		return this.healthProperty.getReadOnlyProperty();
 	}
 	
-	public Number getHealthProperty(){
-		return healthProperty.getReadOnlyProperty().getValue();
+//	public void setWritablePointsProperty(int newPoints){
+//		pointsProperty.setValue(newPoints);
+//	}
+	
+	public ReadOnlyIntegerProperty getPropertyReadOnlyPoints(){
+		return this.pointsProperty.getReadOnlyProperty();
 	}
+	
 	
 	public void setHealthProperty(int newHealth){
 		this.healthProperty.setValue(newHealth);
+	}
+	
+	public void setPointsProperty(int newPoints){
+		this.pointsProperty.setValue(newPoints);
 	}
 	
 	public RuntimeSpriteCharacteristics(SpriteCharacteristics obj) {
