@@ -16,23 +16,24 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 
 public class GameWorldCharacteristics {
     // DEFAULT VARIABLES
-
-
+	
+	
     // GAME AUTHORING VARIABLES
     private String gameTitle;
     private Map<Integer, LevelModel> levels;
     private List<LevelModel> levelSequence;
     private int currentLevel;
-
+    
     //TODO: More...
-
+    
     //-------------------CONSTRUCTORS-------------------//
     public GameWorldCharacteristics() {
         levels = new HashMap<>();
         levelSequence = new LinkedList<>();
         currentLevel = 0;
     }
-
+    
+	//-------------------PUBLIC METHODS-------------------//
     public String getGameTitle() {
         return gameTitle;
     }
@@ -43,8 +44,8 @@ public class GameWorldCharacteristics {
     public int getNumberOfLevels() {
         return levels.size();
     }
-
-
+    
+    
     //-------------------ACCESSORS-------------------//
 
     public void addLevel(Integer id, LevelModel level) {
