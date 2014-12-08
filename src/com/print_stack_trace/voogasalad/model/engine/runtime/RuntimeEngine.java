@@ -17,6 +17,8 @@ import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraHandler;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicationChecker;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicator;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory;
@@ -28,6 +30,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	private RuntimeModel runtimeModel;
 	int framesPerSecond;
 	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
+	private CameraHandler cameraHandler;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -39,6 +42,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		super(currentLevel);
 		runtimeModel = new RuntimeModel(currentLevel, viewport);
 		physicsEngine = currentLevel.getPhysicsEngine();
+		cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
 	}
 
 	//-------------------PUBLIC METHODS-------------------//
@@ -49,6 +53,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 * 2. Apply unexpired key events.
 	 * 3. Use GoalChecker to check goals
 	 * 4. See if game is over or not
+	 * 5. Move camera
 	 * @param currentLevel
 	 */
 	public void update() {
@@ -70,6 +75,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		}
 
 		updateSpritePositions();
+		
+		cameraHandler.updateCamera(runtimeModel);
 	}
 
 	public void setFramesPerSecond(int framesPerSecond) {
