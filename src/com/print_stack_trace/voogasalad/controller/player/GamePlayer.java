@@ -87,7 +87,7 @@ public class GamePlayer implements ViewController {
 		
 		myGameEngine = gameEngine;
 		myGameEngine.setFramesPerSecond(FPS);
-
+		
 		myRoot = new Group(); 
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
 		splash.toFront();
@@ -103,8 +103,7 @@ public class GamePlayer implements ViewController {
 		myGameRoot = new Group(myPlayPane); 
 		myRoot.getChildren().add(myGameRoot);
 		myRoot.getChildren().add(myHud);
-		myHud.setTranslateY(20);
-		
+		myHud.setTranslateY(40);
 
 		KeyFrame frame = start();
 		Timeline animation = new Timeline();
@@ -122,7 +121,7 @@ public class GamePlayer implements ViewController {
 		isPlaying = false;
 		return new KeyFrame(Duration.millis(1000/FPS), oneFrame);
 	}
-
+	
 	private EventHandler<ActionEvent> oneFrame = new EventHandler<ActionEvent>() {
 		@Override //class note: makes Java check for errors when it normally wouldn't
 		public void handle(ActionEvent evt) {
@@ -150,8 +149,9 @@ public class GamePlayer implements ViewController {
 		myGameRoot.setTranslateY(-r.camera.y);
 		LevelCharacteristics levelCharacteristics = r.getLevelCharacteristics();
 		Map<Integer, RuntimeSpriteCharacteristics> spriteMap = r.getRuntimeSpriteMap();
+		myHud.updateHealth((int) spriteMap.get(r.getMainCharacter()).getPropertyReadOnlyHealth().getValue());
 		ImageView background = new ImageView(new Image(levelCharacteristics.getBackgroundImagePath()));
-		background.setFitWidth(myPlayPane.getWidth());
+		background.setFitWidth(myPlayPane.getWidth()); 
 		background.setFitHeight(myPlayPane.getHeight()-10);
 		background.setFitWidth(myPlayPane.getWidth()-10);
 		background.setSmooth(true);
