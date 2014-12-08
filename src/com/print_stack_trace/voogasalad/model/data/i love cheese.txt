@@ -1,0 +1,114 @@
+{
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
+      "p": {
+        "x": 0,
+        "y": 0
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "it\u0027s a me. Mario",
+      "width": 100.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "myMovements": {},
+      "myAnimations": {
+        "Right": [],
+        "Default": [],
+        "Up": [],
+        "Down": [],
+        "Left": [],
+        "Jump": []
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 4,
+        "y": 374
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 2000.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "myMovements": {},
+      "myAnimations": {
+        "Right": [],
+        "Default": [],
+        "Up": [],
+        "Down": [],
+        "Left": [],
+        "Jump": []
+      }
+    }
+  },
+  "goalMap": {},
+  "currentID": 1,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "NoAction",
+        "NoAction",
+        "ObjectBothNoDisplacement",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "ObjectBothNoDisplacement",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "i love cheese",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "requiredNumberOfGoals": 1,
+    "cameraStart": {
+      "x": 0,
+      "y": 0
+    },
+    "cameraSpeed": 3,
+    "myHorizontalPaneCount": 2,
+    "myVerticalPaneCount": 1,
+    "cameraType": "PlayerFollow"
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {}
+}
