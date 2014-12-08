@@ -90,6 +90,9 @@ public class GameEngine {
 					+ "orientation = " + s.getOrientation()
 					+ "name = " + s.getName());
 		}
+		for(GoalCharacteristics g : lvl.getGoalMap().values()){
+			System.out.println(g.myGoalType);
+		}
 	}
 
 	//GAME AUTHORING
