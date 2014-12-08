@@ -102,6 +102,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
                 System.out.println("YOU WIN");
                 runtimeModel.gameOver = true;
                 runtimeModel.gameVictory = true;
+                getNextLevel();
             }
         }
 
