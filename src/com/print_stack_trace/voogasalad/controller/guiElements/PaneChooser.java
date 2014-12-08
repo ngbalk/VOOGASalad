@@ -3,7 +3,6 @@ package com.print_stack_trace.voogasalad.controller.guiElements;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import javafx.scene.layout.Pane;
@@ -11,9 +10,8 @@ import javafx.scene.layout.Pane;
 import javax.swing.JOptionPane;
 
 public class PaneChooser {
-		private Map<String, String> myTypes;
+		private HashMap<String, String> myTypes=new HashMap<String, String>();
 		public PaneChooser(){
-			myTypes = new HashMap<String, String>();
 			createMap();
 		}
 		public Pane createPane(String myType, GameObject myObject){
