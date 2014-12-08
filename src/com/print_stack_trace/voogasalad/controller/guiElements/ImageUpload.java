@@ -15,10 +15,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 
-public class ImageUpload extends UserInputButton {
+public class ImageUpload extends Button {
 	public ImageUpload(){
 		super();
-		((Button) myNode).setText("Upload Image");
+		setText("Upload Image");
 	}
 	public File doAction(){
 		Stage stage=new Stage();
