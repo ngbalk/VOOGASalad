@@ -375,10 +375,10 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				spriteObject.update();
 			}
 		}
-		private void loadGoalObjectsFromLevel(Map<Integer,Goal> goalMap) {
-			for(Goal goal : goalMap.values()){
-				GoalObject goalObject = new GoalObject(goal.getGoalType(),this);
-				goalObject.setCharacteristics(goal.getGoalCharacteristics());
+		private void loadGoalObjectsFromLevel(Map<Integer,GoalCharacteristics> goalMap) {
+			for(GoalCharacteristics goal : goalMap.values()){
+				GoalObject goalObject = new GoalObject(goal.myGoalType,this);
+				goalObject.setCharacteristics(goal);
 				addGoalToLevel(goalObject);
 				goalObject.update();
 			}

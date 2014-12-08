@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
@@ -19,7 +20,7 @@ public class RuntimeModel extends LevelModel {
 	//-------------------VARIABLES-------------------//
 
 	private Map<Integer, RuntimeSpriteCharacteristics> runtimeSpriteMap;
-	private Map<Integer,Goal> goalMap;
+	private Map<Integer,GoalCharacteristics> goalMap;
 	public int currentPoints;
 	public Date currentTime;
 	public boolean gameOver = false;
@@ -56,7 +57,7 @@ public class RuntimeModel extends LevelModel {
 	 * Return the goal associated with a given level
 	 * @return goal
 	 */
-	public Map<Integer,Goal> getGoalMap() {
+	public Map<Integer,GoalCharacteristics> getGoalMap() {
 		//consider returning a string instead of the entire goal
 		return goalMap;
 	}

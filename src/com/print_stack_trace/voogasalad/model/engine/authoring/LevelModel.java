@@ -23,7 +23,7 @@ import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 public class LevelModel {
 
     Map<Integer, SpriteCharacteristics> mySpriteMap; //good
-    Map<Integer, Goal> goalMap; //good
+    Map<Integer, GoalCharacteristics> goalMap; //good
 	private Integer currentID;
     private boolean isLocked;
     private PhysicsEngine physicsEngine;
@@ -45,7 +45,7 @@ public class LevelModel {
     
     public LevelModel(LevelModel level) {
     	Map<Integer, SpriteCharacteristics> mySpriteMap=level.mySpriteMap; //good
-        Map<Integer, Goal> goalMap=level.goalMap; //good
+        Map<Integer, GoalCharacteristics> goalMap=level.goalMap; //good
     	currentID=level.currentID;
         isLocked=level.isLocked;
         physicsEngine=level.physicsEngine;
@@ -109,7 +109,7 @@ public class LevelModel {
         if (isLocked) throw new ElementLockedException();
 
         int newID = generateID(goalMap);
-        goalMap.put(newID, myGoalFactory.buildGoal(goal));
+        goalMap.put(newID, goal);
         return newID;
 
     }
@@ -118,7 +118,7 @@ public class LevelModel {
             throws ElementLockedException{
         if(isLocked) throw new ElementLockedException();
         goalMap.remove(goalID);
-        goalMap.put(goalID, myGoalFactory.buildGoal(goal));
+        goalMap.put(goalID, goal);
 
     }
 
@@ -131,11 +131,11 @@ public class LevelModel {
 
     }
 
-    public Goal getGoal(Integer id) {
+    public GoalCharacteristics getGoal(Integer id) {
         return goalMap.get(id);
     }
     
-    public Map<Integer, Goal> getGoalMap() {
+    public Map<Integer, GoalCharacteristics> getGoalMap() {
 		return goalMap;
 	}
 

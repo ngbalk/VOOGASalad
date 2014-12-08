@@ -1,0 +1,152 @@
+{
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "p": {
+        "x": 51,
+        "y": 158
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "DOWN": [],
+        "JUMP": [],
+        "CROUCH": [],
+        "UP": [],
+        "RIGHT": [],
+        "LEFT": []
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 43,
+        "y": 296
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 2000.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "DOWN": [],
+        "JUMP": [],
+        "CROUCH": [],
+        "UP": [],
+        "RIGHT": [],
+        "LEFT": []
+      }
+    },
+    "2": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
+      "p": {
+        "x": 254,
+        "y": 153
+      },
+      "interactive": false,
+      "objectType": "REWARD",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "DOWN": [],
+        "JUMP": [],
+        "CROUCH": [],
+        "UP": [],
+        "RIGHT": [],
+        "LEFT": []
+      }
+    }
+  },
+  "goalMap": {
+    "0": {
+      "mySpriteID": 0,
+      "myObjectiveID": 0,
+      "isCompleted": false,
+      "myGoalCharacteristics": {
+        "myName": "",
+        "myGoalType": "REACH_OBJECT",
+        "myObjectID": 0,
+        "myObjectiveID": 0,
+        "myPointTotal": 0,
+        "myDestination": 0.0,
+        "myHorizontalDestination": true,
+        "pointsProperty": {
+          "name": "",
+          "value": 0,
+          "valid": true
+        }
+      },
+      "myGoalType": "REACH_OBJECT"
+    }
+  },
+  "currentID": 2,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "NoAction",
+        "NoAction",
+        "ObjectBothNoDisplacement",
+        "NoAction",
+        "ObjectTwoDisappear"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "goal test",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "requiredNumberOfGoals": 1,
+    "myHorizontalPaneCount": 1,
+    "myVerticalPaneCount": 1
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {}
+}

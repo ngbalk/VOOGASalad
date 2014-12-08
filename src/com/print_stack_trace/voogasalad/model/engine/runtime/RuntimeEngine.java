@@ -14,6 +14,7 @@ import java.util.Map;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicationChecker;
@@ -21,12 +22,14 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplica
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
 public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
 	int framesPerSecond;
 	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
+	private GoalFactory goalFactory;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -38,6 +41,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		super(currentLevel);
 		runtimeModel = new RuntimeModel(currentLevel);
 		physicsEngine = currentLevel.getPhysicsEngine();
+		goalFactory = new GoalFactory();
 	}
 
 	//-------------------PUBLIC METHODS-------------------//
@@ -55,7 +59,9 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
 		int completedCount = 0;
-		for(Goal g : runtimeModel.getGoalMap().values()) {
+		for(GoalCharacteristics gc : runtimeModel.getGoalMap().values()) {
+			System.out.println("GOAL CHECKING");
+			Goal g = goalFactory.buildGoal(gc);
 			g.acceptChecker(goalChecker);
 			if(g.isCompleted)completedCount++;
 		}
