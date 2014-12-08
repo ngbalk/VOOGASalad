@@ -140,11 +140,11 @@ public class LevelModel {
             throws ElementLockedException {
         if (isLocked) throw new ElementLockedException();
         //in what context can you not set a certain cameraType
-        myLevelChars.cameraType = cameraType;
+        myLevelChars.setCamera(cameraType); 
     }
 
     public CameraFactory.CameraType getCameraType() {
-        return myLevelChars.cameraType;
+        return myLevelChars.getCameraType();
     }
 
     public void setLevelCharacteristics(LevelCharacteristics levelSpecs)
