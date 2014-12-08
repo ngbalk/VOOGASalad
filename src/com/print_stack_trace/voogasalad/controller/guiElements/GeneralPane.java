@@ -21,7 +21,7 @@ public abstract class GeneralPane extends Pane{
 	protected Node myNode;
 	private Collection<TextField> myTextFields=new HashSet<TextField>();
 	public GeneralPane(){
-
+		createNodePreferences(DEFAULT_WIDTH, DEFAULT_HEIGHT,"");
 	}
 	public void createNodePreferences(Number width, Number height, String name){
 		myWidth=width.doubleValue();

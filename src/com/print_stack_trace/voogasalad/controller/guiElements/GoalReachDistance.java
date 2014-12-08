@@ -13,7 +13,7 @@ public class GoalReachDistance extends GoalCharacteristicController {
 	}
 	@Override
 	protected void populateDefaultText() {
-		this.setObservable(((GoalObject) mySprite).getCharacteristics().getPointsProperty());
+		this.setObservable(((GoalObject) mySprite).getPointsProperty());
 	}
 
 	@Override

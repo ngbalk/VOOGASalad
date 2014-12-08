@@ -22,6 +22,7 @@ public class GameWorldModel {
     public GameWorldModel() {
         levelMap = new HashMap<Integer, LevelModel>();
         levelMap.put(0, new LevelModel());
+        currentLevelIndex = 0;
         gameWorldCharacteristics = new GameWorldCharacteristics();
     }
 
