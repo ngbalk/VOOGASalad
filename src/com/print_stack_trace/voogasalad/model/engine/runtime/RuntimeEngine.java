@@ -30,6 +30,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	int framesPerSecond;
 	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
 	private GoalFactory goalFactory;
+	private Map<Integer, Goal> goalMap;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -42,6 +43,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		runtimeModel = new RuntimeModel(currentLevel);
 		physicsEngine = currentLevel.getPhysicsEngine();
 		goalFactory = new GoalFactory();
+		goalMap = new HashMap<>();
+		populateGoalMap();
 	}
 
 	//-------------------PUBLIC METHODS-------------------//
@@ -59,9 +62,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
 		int completedCount = 0;
-		for(GoalCharacteristics gc : runtimeModel.getGoalMap().values()) {
-			System.out.println("GOAL CHECKING");
-			Goal g = goalFactory.buildGoal(gc);
+		for(Goal g : goalMap.values()) {
 			g.acceptChecker(goalChecker);
 			if(g.isCompleted)completedCount++;
 		}
@@ -130,6 +131,11 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		else{
 			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
 			return;
+		}
+	}
+	public void populateGoalMap(){
+		for(Integer i : runtimeModel.getGoalMap().keySet()){
+			goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
 		}
 	}
 }
