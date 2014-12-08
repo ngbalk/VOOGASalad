@@ -14,7 +14,6 @@ public class KeyApplicatorFactory {
 		Right,
 		Up,
 		Down,
-		Jump,
 		Default
 	};
 	
