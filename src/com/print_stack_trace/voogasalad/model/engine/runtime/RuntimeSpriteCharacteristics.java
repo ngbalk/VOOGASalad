@@ -6,9 +6,9 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public float v_x;
@@ -20,7 +20,7 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public boolean enemyPatrols = true;
 	public boolean isPatrollingLeft = true;
 	private float decelerationConstant;
-	public PossibleSpriteAction currentSpriteAction;
+	public KeyResult currentSpriteAction;
 	
 	public int health;
 	private boolean remove = false;
@@ -64,11 +64,11 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 		this.remove = true;
 	}	
 	
-	public PossibleSpriteAction getCurrentAnimation() {
+	public KeyResult getCurrentAnimation() {
 		return currentSpriteAction;
 	}
 	
-	public void setPossibleSpriteAction(PossibleSpriteAction spriteAction) {
+	public void setPossibleSpriteAction(KeyResult spriteAction) {
 		currentSpriteAction = spriteAction;
 		//TODO: implement this on back end.
 	}
