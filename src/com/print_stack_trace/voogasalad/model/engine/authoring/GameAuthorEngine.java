@@ -21,7 +21,6 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplica
 public class GameAuthorEngine implements IGameAuthorEngine {
 	
 	private GameWorldModel gameWorldModel;
-	private List<LevelModel> levelList;
 	private LevelModel currentLevel;
 
 	public enum SpriteType {
@@ -34,18 +33,20 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 
 	public GameAuthorEngine(){
 		gameWorldModel = new GameWorldModel();
-		levelList = gameWorldModel.getLevels();
-		currentLevel = new LevelModel();
-		levelList.add(currentLevel);
+		currentLevel = gameWorldModel.getCurrentLevel();
+	}
+	
+	public GameWorldModel getGameWorldModel() {
+		return gameWorldModel;
+	}
+	
+	public void setGameWorldModel(GameWorldModel gameWorldModel) {
+		this.gameWorldModel = gameWorldModel;
 	}
 
 	public void setCurrentLevel(int index){
-	    if(index < 0 || index >= levelList.size()) {
-	        throw new ArrayIndexOutOfBoundsException();
-	    }
-		if(levelList.get(index)!= null){
-			currentLevel = levelList.get(index);
-		}
+		gameWorldModel.setCurrentLevel(index);
+		currentLevel = gameWorldModel.getCurrentLevel();
 	}
 
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) {
@@ -63,8 +64,9 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 	public LevelModel getCurrentLevel(){
 		return currentLevel;
 	}
+	
 	public List<LevelModel> getAllLevels(){
-		return levelList;
+		return gameWorldModel.getLevels();
 	}
 
 	public Integer addGoalToLevel(GoalCharacteristics goalModel) {

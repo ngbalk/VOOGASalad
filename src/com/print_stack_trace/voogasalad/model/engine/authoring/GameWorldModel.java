@@ -16,47 +16,13 @@ import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 public class GameWorldModel {
 	private GameWorldCharacteristics gameWorldCharacteristics;
     private Map<Integer, LevelModel> levelMap;
-    private List<LevelModel> levelSequence;
     private Integer currentLevelIndex;
 	
 	//-------------------CONSTRUCTORS-------------------//
 	public GameWorldModel() {
 		levelMap = new HashMap<Integer, LevelModel>();
-		levelSequence = new ArrayList<LevelModel>();
 		gameWorldCharacteristics = new GameWorldCharacteristics();
 	}
-	
-	//-------------------PUBLIC METHODS-------------------//	
-    public boolean verifyWorldIntegrity() {
-        return levelMap.size() == levelSequence.size();
-    }
-    
-    public void createGameSequence() {
-        LevelModel currentLevel = new LevelModel();
-        for(Integer id: levelMap.keySet()) {
-            if(levelMap.get(id).getLevelCharacteristics().previousLevel == null) {
-                currentLevel = levelMap.get(id);
-                levelSequence.add(currentLevel);
-                break;
-            }
-        }
-        for(int i =0; i< levelMap.size(); i++) {
-            for(int j=0; j< levelMap.size(); j++) {
-                if(levelMap.get(levelMap.get(j)).getLevelCharacteristics().ID == currentLevel.getLevelCharacteristics().nextLevel) {
-                    currentLevel = levelMap.get(j);
-                    break;
-                }
-            }
-            if(currentLevel.getLevelCharacteristics().nextLevel == null) {
-                break;
-            }
-        }
-    }
-    
-    public LevelModel startNewGame() {
-    	currentLevelIndex = 0;
-        return levelSequence.get(0);
-    }
 	
 	//-------------------ACCESSORS-------------------//
 	public GameWorldCharacteristics getGameWorldCharacteristics() {
@@ -73,6 +39,9 @@ public class GameWorldModel {
     }
 
     public List<LevelModel> getLevels() {
+		List<LevelModel> levelSequence = new ArrayList<LevelModel>();
+    	for(int i=0; i<levelMap.size(); i++)
+			levelSequence.add(i,levelMap.get(i));
 		return levelSequence;
 	}
 	
@@ -84,11 +53,34 @@ public class GameWorldModel {
         levelMap.put(id, level);
     }
 
-    public LevelModel getNextLevel() {
-        LevelModel nextLevel = levelSequence.get(currentLevelIndex);
+	public LevelModel getCurrentLevel() {
+		return levelMap.get(currentLevelIndex);
+	}
+	
+	public LevelModel getNextLevel() {
         currentLevelIndex++;
-        return nextLevel;
+        return levelMap.get(currentLevelIndex);
     }
+
     
+	//-------------------PUBLIC METHODS-------------------//	
+    public boolean verifyWorldIntegrity() {
+        //TODO: implement this!
+    	return false;
+    }
+        
+    public LevelModel startNewGame() {
+    	currentLevelIndex = 0;
+        return levelMap.get(currentLevelIndex);
+    }
+
+	public void setCurrentLevel(int index) {
+	    if(index < 0 || index >= levelMap.size()) {
+	        throw new ArrayIndexOutOfBoundsException();
+	    }
+		if(levelMap.get(index)!= null){
+			currentLevelIndex = index;
+		}
+	}
 	
 }
