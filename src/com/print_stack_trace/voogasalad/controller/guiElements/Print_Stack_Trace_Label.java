@@ -16,7 +16,7 @@ public class Print_Stack_Trace_Label extends LabelSplashObject{
 
 	@Override
 	public boolean update() {
-		int speed=20;
+		int speed=1;
 		if(myLabel.getLayoutX()>=200){
 			myLabel.setLayoutX(myLabel.getLayoutX()-speed*2);
 			return true;

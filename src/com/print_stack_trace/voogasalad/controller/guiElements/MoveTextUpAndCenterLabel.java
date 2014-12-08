@@ -9,15 +9,14 @@ public class MoveTextUpAndCenterLabel extends LabelSplashObject{
 	public MoveTextUpAndCenterLabel(String source, double width, double height,
 			Group group) {
 		super(source, width, height, group);
-		myLabel.setPrefSize(500, 100);
-		myLabel.relocate(width/2-myLabel.getPrefWidth(), height);
+		myLabel.relocate(width/2-myLabel.getPrefWidth()/2, height);
 	}
 
 	@Override
 	public boolean update() {
 
-		if (myLabel.getLayoutX()!=(myHeight-myHeight/2-myHeight/2)){
-			myLabel.setLayoutX(myLabel.getLayoutX()-30);
+		if (myLabel.getLayoutY()>=(myHeight-myHeight/2-myLabel.getPrefHeight()/2)){
+			myLabel.setLayoutY(myLabel.getLayoutY()-1);
 			return true;
 		}
 		return false;

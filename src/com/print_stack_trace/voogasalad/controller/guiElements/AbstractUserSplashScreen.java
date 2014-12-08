@@ -18,24 +18,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class AbstractUserSplashScreen {
+public abstract class AbstractUserSplashScreen {
 	protected Group myGroup=new Group();
 	protected Timeline myTimeline=new Timeline();
-	protected int DEFAULT_FPS=4;
+	protected int DEFAULT_FPS=300;
 	protected HashMap<String, String> myData;
 	protected Scene myScene;
 	protected HashMap<Integer,SplashScreenObject> myNodes=new HashMap<Integer,SplashScreenObject>();
 	protected EventHandler myEvent;
-	public AbstractUserSplashScreen(HashMap<String, String> resource, Number width, Number height){
-		this(resource, width, height, null);
+	public AbstractUserSplashScreen(String resourceName, Number width, Number height){
+		this(resourceName, width, height, null);
 		
 	}
-	public AbstractUserSplashScreen(HashMap<String, String> resource, Number width, Number height, EventHandler event){
+	public AbstractUserSplashScreen(String resource, Number width, Number height, EventHandler event){
 		this.initialize(width.doubleValue(), height.doubleValue());
 		myTimeline.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame myKeyFrame=new KeyFrame(Duration.millis(1000/DEFAULT_FPS), e->update());
 		myTimeline.getKeyFrames().add(myKeyFrame);
-		myData=resource;
+		myData=new ResourceReader(resource).getProperties();
 		myEvent=event;
 		myTimeline.play();
 		makeNode();

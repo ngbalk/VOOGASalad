@@ -16,7 +16,7 @@ public class DuvallImage extends SplashScreenObject{
 
 	@Override
 	public boolean update() {
-		int speed=20;
+		int speed=1;
 		if(myImageView.getFitWidth()<=300){
 			myImageView.setVisible(true);
 			myImageView.setFitHeight(myImageView.getFitHeight()+speed);
@@ -25,9 +25,13 @@ public class DuvallImage extends SplashScreenObject{
 			myImageView.setRotate(myImageView.getRotate()+speed);
 			return true;
 		}
-		else
-			return false;
-		
+		else if (myImageView.getRotate()<=360){
+			myImageView.setRotate(myImageView.getRotate()+speed);
+			return true;
+		}
+
+		return false;
+
 
 	}
 
@@ -38,7 +42,6 @@ public class DuvallImage extends SplashScreenObject{
 		startButton.setPrefSize(100, 100);
 		startButton.setOnAction(event);
 		startButton.getStylesheets().add(myStyle);
-		System.out.println("HEY");
 		root.getChildren().add(startButton);
 
 	}

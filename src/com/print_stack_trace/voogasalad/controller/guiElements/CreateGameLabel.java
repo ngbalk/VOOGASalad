@@ -15,7 +15,7 @@ public class CreateGameLabel extends LabelSplashObject{
 
 	@Override
 	public boolean update() {
-		int speed=20;
+		int speed=1;
 		if(myLabel.getLayoutX()<=400){
 			myLabel.setLayoutX(myLabel.getLayoutX()+speed);
 			return true;
