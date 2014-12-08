@@ -15,10 +15,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,9 +57,10 @@ import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
-	private final static int FPS = 15;
+	private final static int FPS = 10;
 	private Group myRoot;
 	private Group myGameRoot;
+	private ScrollPane myViewPort = new ScrollPane();
 	private PlayPane myPlayPane;
 	private GameEngine myGameEngine;
 	private boolean isPlaying = false;
@@ -82,7 +86,6 @@ public class GamePlayer implements ViewController {
 		myGameEngine.setFramesPerSecond(FPS);
 
 		myRoot = new Group(); 
-
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
@@ -93,6 +96,16 @@ public class GamePlayer implements ViewController {
 		myPlayPane = new PlayPane();
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
 		myPlayPane.setLayoutY(100);
+		myPlayPane.toBack();
+//		myViewPort.setContent(myPlayPane);
+//		myViewPort.toBack();
+//		myViewPort.setLayoutY(200);
+//		myViewPort.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+//		myViewPort.setPannable(true);
+//		myViewPort.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+//		myViewPort.setTranslateY(10);
+//		myViewPort.setPrefSize(400, 400);
+		//myGameRoot = new Group(myViewPort);
 		myGameRoot = new Group(myPlayPane); 
 		myRoot.getChildren().add(myGameRoot);
 
@@ -159,6 +172,10 @@ public class GamePlayer implements ViewController {
 			myPlayPane.getChildren().add(spriteImage);
 		}
 
+	}
+	
+	private void updateViewPort(){
+		//myPlayPane
 	}
 
 

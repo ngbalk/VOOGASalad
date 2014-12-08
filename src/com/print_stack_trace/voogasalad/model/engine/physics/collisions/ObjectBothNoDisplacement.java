@@ -8,15 +8,18 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 
 public class ObjectBothNoDisplacement extends CollisionHandler {
 
-        @Override
-        public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
-                        RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
-                s2.v_x = 0;
-                s1.v_y = 0;
-                s2.v_y = 0;
-                
-                //s1.setDecelerationConstant(1.0f);
-                //s2.setDecelerationConstant(1.0f);
+    @Override
+    public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
+            RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
+
+        if(s1.isCollidingHorizontally) {
+            s1.v_x = 0;
+            s2.v_x = 0;
         }
+        s1.v_y = 0;
+        s2.v_y = 0;
+        //s1.setDecelerationConstant(1.0f);
+        //s2.setDecelerationConstant(1.0f);
+    }
 
 }

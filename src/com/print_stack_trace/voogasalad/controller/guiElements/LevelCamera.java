@@ -1,6 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
 
 public class LevelCamera extends UserInputDropDownMenu{
 	public LevelCamera(String[] values,  double width, double height, double x, double y, GameObject object){
@@ -14,8 +15,8 @@ public class LevelCamera extends UserInputDropDownMenu{
 
 	@Override
 	protected void linkMovement(String dataValue) {
-		CameraType scroll=null;
-		for (CameraType camera: CameraType.values()){
+		CameraFactory.CameraType scroll=null;
+		for (CameraFactory.CameraType camera: CameraFactory.CameraType.values()){
 			if (camera.name().equals(dataValue));
 				this.setCurrent(data.get(dataValue));
 				scroll=camera;

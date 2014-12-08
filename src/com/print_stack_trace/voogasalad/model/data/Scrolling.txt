@@ -1,35 +1,10 @@
 {
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
-      "p": {
-        "x": 131,
-        "y": 22
-      },
-      "interactive": true,
-      "objectType": "HERO",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {},
-      "myAnimations": {
-        "UP": [],
-        "JUMP": [],
-        "CROUCH": [],
-        "RIGHT": [],
-        "DOWN": [],
-        "LEFT": []
-      }
-    },
-    "1": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 129,
-        "y": 340
+        "x": 0,
+        "y": 400
       },
       "interactive": false,
       "objectType": "PLATFORM",
@@ -37,17 +12,46 @@
       "startingSpeed": 10.0,
       "value": 0,
       "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
+      "name": "ground",
+      "width": 1900.0,
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "JUMP": [],
-        "CROUCH": [],
         "RIGHT": [],
+        "LEFT": [],
+        "UP": [],
+        "CROUCH": [],
         "DOWN": [],
-        "LEFT": []
+        "JUMP": []
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png",
+      "p": {
+        "x": 0,
+        "y": 0
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "hero",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {
+        "RIGHT": "RIGHT",
+        "LEFT": "LEFT",
+        "JUMP": "UP"
+      },
+      "myAnimations": {
+        "RIGHT": [],
+        "LEFT": [],
+        "UP": [],
+        "CROUCH": [],
+        "DOWN": [],
+        "JUMP": []
       }
     }
   },
@@ -94,10 +98,13 @@
     ],
     "handlerMap": {}
   },
+  "myCameraType": "SCROLLING_RIGHT_TO_LEFT",
   "myLevelChars": {
-    "name": "jack you piece of shit",
-    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
-    "requiredNumberOfGoals": 0
+    "name": "Scrolling",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
+    "requiredNumberOfGoals": 1,
+    "myHorizontalPaneCount": 2,
+    "myVerticalPaneCount": 1
   },
   "myGoalFactory": {},
   "myKeyMap": {}
