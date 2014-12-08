@@ -1,5 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.util.ArrayList;
+
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 
 import javafx.scene.image.Image;
@@ -10,24 +12,25 @@ import javafx.scene.paint.Color;
 public class LevelObject extends GameObject{
 	private LevelCharacteristics myCharacteristics;
 	private Pane colorPane;
-	public LevelObject(ImageView image, String imagePath) {
-		this(image, imagePath, null, new LevelCharacteristics());	
+	private ArrayList<ImageView> myImages=new ArrayList<ImageView>();
+	private ArrayList<Pane> myColorPanes=new ArrayList<Pane>();
+	
+	public LevelObject(String imagePath, ViewObjectDelegate myDelegate) {
+		this(imagePath, myDelegate, new LevelCharacteristics());
 		
 	}
-	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate) {
-		this(imgView, imagePath, myDelegate, new LevelCharacteristics());
-		
-	}
-	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate, LevelCharacteristics levelCharacteristics) {
-		super(imgView, imagePath, myDelegate);
+	public LevelObject(String imagePath, ViewObjectDelegate myDelegate, LevelCharacteristics levelCharacteristics) {
+		super(imagePath, myDelegate);
 		this.myDelegate=myDelegate;
 		myCharacteristics = levelCharacteristics;
 		colorPane=new Pane();
 		colorPane.setVisible(false);
-		myCharacteristics=new LevelCharacteristics();
 		createPane();
 		this.getImage().setOnMouseClicked(e->showPane());
 		colorPane.setOnMouseClicked(e->showPane());
+	}
+	public LevelObject(String imagePath) {
+		super(imagePath);
 	}
 	
 	public LevelCharacteristics getCharacteristics(){

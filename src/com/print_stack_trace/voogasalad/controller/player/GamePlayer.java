@@ -73,6 +73,7 @@ public class GamePlayer implements ViewController {
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	private int keyFrameCounter = 0;
 	private HUD myHud = new HUD();
+	private File myFile = null;
 
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
@@ -231,6 +232,7 @@ public class GamePlayer implements ViewController {
 				System.out.println(ex.getMessage());
 			}
 		}
+		myFile = file;
 	}
 	public void showHighScores(){
 		Map<String, HighScore> scores = myGameEngine.getHighScoreList();
@@ -261,5 +263,16 @@ public class GamePlayer implements ViewController {
 			return; 
 		}
 		FileInputStream fis;
+	}
+
+
+	public void restartCurrentLevel() {
+		if (myFile != null) {
+			try {
+				myGameEngine.loadGame(myFile);
+			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
 	}
 }
