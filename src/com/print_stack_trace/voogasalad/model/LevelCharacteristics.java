@@ -14,7 +14,9 @@ public class LevelCharacteristics {
 	private static final int DEFAULT_CAMERA_SPEED = 3;
 	
 	private String name;
-	public File nextLevel = null;
+	public Integer nextLevel = null;
+	public Integer previousLevel = null;
+	public Integer ID = null;
 	private transient Image backgroundImage = null;
 	private String backgroundImagePath;
 	public int requiredNumberOfGoals = 1;

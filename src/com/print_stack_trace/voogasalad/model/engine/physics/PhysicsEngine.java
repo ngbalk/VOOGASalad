@@ -169,10 +169,10 @@ public class PhysicsEngine {
     }
 
     public void moveSpritesForward(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2, int framesPerSecond){
-        s1.setX(s1.getX()+(2*(double)s1.v_x/(double)framesPerSecond));
-        s1.setY(s1.getY()+(2*(double)s1.v_y/(double)framesPerSecond));
-        s2.setX(s2.getX()+(2*(double)s2.v_x/(double)framesPerSecond));
-        s2.setY(s2.getY()+(2*(double)s2.v_y/(double)framesPerSecond));
+        s1.setX(s1.getX()+((double)s1.v_x/(double)framesPerSecond));
+        s1.setY(s1.getY()+((double)s1.v_y/(double)framesPerSecond));
+        s2.setX(s2.getX()+((double)s2.v_x/(double)framesPerSecond));
+        s2.setY(s2.getY()+((double)s2.v_y/(double)framesPerSecond));
 
     }
 
