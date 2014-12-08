@@ -119,10 +119,11 @@ public class SpriteCharacteristics {
 		imagePath = obj.getImagePath();
 		myAnimations=obj.getAnimations();
 		doubleJump=obj.canDoubleJump();
+		damageDealt = obj.getDamageDealt();
 		
 	}
-	
-	public void initiateAnimations(){
+
+    public void initiateAnimations(){
 		for (KeyResult action: KeyResult.values()){
 			myAnimations.put(action, new ArrayList());
 		}
@@ -310,6 +311,12 @@ public class SpriteCharacteristics {
 	}
 	public void setDoubleJump(boolean jump){
 		doubleJump=jump;
+	}
+	public void setDamageDealt(int d){
+	    damageDealt = d;
+	}
+	public int getDamageDealt(){
+	    return damageDealt;
 	}
 
 

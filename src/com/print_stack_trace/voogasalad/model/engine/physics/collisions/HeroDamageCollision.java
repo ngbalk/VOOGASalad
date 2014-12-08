@@ -20,7 +20,7 @@ public class HeroDamageCollision extends CollisionHandler {
                 s1.setPointsProperty(points);
             }
             else{
-                s1.setHealthProperty(s1.getPropertyReadOnlyHealth().getValue() - s2.damageDealt);
+                s1.setHealthProperty(s1.getPropertyReadOnlyHealth().getValue() - s2.getDamageDealt());
                 s1.v_x = -s1.v_x;
                 s2.v_x = -s2.v_x;
             }
