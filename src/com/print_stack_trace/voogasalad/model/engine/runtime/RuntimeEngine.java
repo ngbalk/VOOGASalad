@@ -29,6 +29,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	private GoalFactory goalFactory;
 	private Map<Integer, Goal> goalMap;
 	private CameraHandler cameraHandler;
+	private int completedGoalCount = 0;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -61,16 +62,15 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		physicsEngine.animateAll(runtimeModel, framesPerSecond);
 
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
-		int completedCount = 0;
 		for(Goal g : goalMap.values()) {
 
 			g.acceptChecker(goalChecker);
-			if(g.isCompleted)completedCount++;
+			if(g.isCompleted)completedGoalCount++;
 		}
 
 		int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
 		if (reqGoals > 0) {
-			if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+			if(completedGoalCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
 				System.out.println("YOU WIN!!!!");
 				runtimeModel.gameOver = true;
 				runtimeModel.gameVictory = true;
@@ -152,7 +152,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	}
 	
 	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
-	    return(mainChar.health <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height)
-                    || !runtimeModel.getRuntimeSpriteMap().containsKey(mainChar));
+	    if(mainChar == null) return false;
+	    return(mainChar.health <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
+                    
 	}
 }
