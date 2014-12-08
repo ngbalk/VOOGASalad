@@ -19,9 +19,12 @@ public class GoalChecker implements GoalElementVisitor {
 
 	@Override
 	public boolean visit(KillBoss goal) {
+	    Integer copy = 0;
 		for(Integer i : goal.getBossID()){
-			if(myLevel.getRuntimeSpriteMap().get(i).startingHealth <= 0) goal.getBossID().remove(i);
+		    if(!myLevel.getRuntimeSpriteMap().containsKey(i))
+			copy = i;
 		}
+		if (copy != 0) goal.getBossID().remove(copy);
 		return goal.getBossID().isEmpty();
 	}
 
