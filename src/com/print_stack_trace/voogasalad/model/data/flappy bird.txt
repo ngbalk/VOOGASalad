@@ -2,6 +2,23 @@
   "goalMap": {
     "0": {
       "myName": "",
+      "myGoalType": "REACH_DISTANCE",
+      "myObjectID": 0,
+      "myObjectiveID": 0,
+      "myPointTotal": 0,
+      "myDestination": -200.0,
+      "myHorizontalDestination": false,
+      "pointsProperty": {
+        "name": "",
+        "value": 0,
+        "valid": true,
+        "helper": {
+          "observable": {}
+        }
+      }
+    },
+    "4": {
+      "myName": "",
       "myGoalType": "STAY_ALIVE",
       "myObjectID": 0,
       "myObjectiveID": 0,
@@ -14,7 +31,7 @@
         "valid": true
       }
     },
-    "4": {
+    "5": {
       "myName": "",
       "myGoalType": "REACH_OBJECT",
       "myObjectID": 0,
@@ -161,7 +178,7 @@
       }
     }
   },
-  "currentID": 4,
+  "currentID": 5,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
