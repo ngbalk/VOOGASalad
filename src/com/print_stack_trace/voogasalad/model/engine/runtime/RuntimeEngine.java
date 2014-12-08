@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
@@ -69,17 +70,26 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
 		int completedCount = 0;
 		for(Goal g : goalMap.values()) {
+
 			g.acceptChecker(goalChecker);
 			if(g.isCompleted)completedCount++;
 		}
+
 		int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
 		if (reqGoals > 0) {
 			if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+				System.out.println("YOU WIN!!!!");
 				runtimeModel.gameOver = true;
 				runtimeModel.gameVictory = true;
 			}
 		}
 
+		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
+		if(gameOver(mainChar)){
+			System.out.println("YOU DIED BITCH");
+			runtimeModel.gameOver = true;
+			runtimeModel.gameVictory = false;
+		}
 		updateSpritePositions();
 		
 		cameraHandler.updateCamera(runtimeModel);
@@ -115,12 +125,14 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	//Sprites move around even when this method is commented out
 	//why is that? this method should be the one controlling movement
 	private void updateSpritePositions(){
+
 		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
 			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
 			rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
 			rst.v_x *= (1.0f-rst.getDecelerationConstant());
 			rst.v_y *= (1.0f-rst.getDecelerationConstant());
 		}
+
 	}
 
 	private void handleKey(KeyEvent event, boolean press) {
@@ -144,5 +156,10 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		for(Integer i : runtimeModel.getGoalMap().keySet()){
 			goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
 		}
+	}
+	
+	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
+	    return(mainChar.health <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height)
+                    || !runtimeModel.getRuntimeSpriteMap().containsKey(mainChar));
 	}
 }

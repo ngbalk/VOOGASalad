@@ -1,6 +1,7 @@
 package com.print_stack_trace.voogasalad.model.environment;
 
 import java.awt.Point;
+import java.util.List;
 
 import javafx.geometry.Point2D;
 

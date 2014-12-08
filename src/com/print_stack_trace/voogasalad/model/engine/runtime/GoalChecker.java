@@ -19,7 +19,13 @@ public class GoalChecker implements GoalElementVisitor {
 
 	@Override
 	public boolean visit(KillBoss goal) {
-		return myLevel.getRuntimeSpriteMap().get(goal.getBossID()).startingHealth <= 0;
+	    Integer copy = 0;
+		for(Integer i : goal.getBossID()){
+		    if(!myLevel.getRuntimeSpriteMap().containsKey(i))
+			copy = i;
+		}
+		if (copy != 0) goal.getBossID().remove(copy);
+		return goal.getBossID().isEmpty();
 	}
 
 	@Override
@@ -42,8 +48,14 @@ public class GoalChecker implements GoalElementVisitor {
 
 	@Override
 	public boolean visit(ReachObject goal) {
-		return CollisionDetector.haveCollided(myLevel.getRuntimeSpriteMap().get(goal.getMySpriteID()), 
-				myLevel.getRuntimeSpriteMap().get(goal.getMyObjectiveID()));
+		Integer copy = 0;
+		for(Integer i : goal.getMyObjectiveID()){
+			if(!myLevel.getRuntimeSpriteMap().containsKey(i)){
+				copy = i;
+			}
+		}
+		if(copy != 0) goal.getMyObjectiveID().remove(copy);
+		return goal.getMyObjectiveID().isEmpty();
 	}
 
 
