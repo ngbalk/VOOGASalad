@@ -73,8 +73,13 @@ public class GameEngine {
 	}
 	
 	public GameWorldModel loadGameFromFile(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
-		return (GameWorldModel) gameData.load(myFile, LevelModel.class);
+		return (GameWorldModel) gameData.load(myFile, GameWorldModel.class);
 	}
+	
+	public LevelModel loadLevelFromFile(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
+		return (LevelModel) gameData.load(myFile, LevelModel.class);
+	}
+	
 
 	public void saveGame() throws IOException {
 		GameWorldModel game = authorEngine.getGameWorldModel();

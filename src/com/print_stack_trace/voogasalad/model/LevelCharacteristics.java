@@ -30,6 +30,9 @@ public class LevelCharacteristics {
 	public String getName() {
 		return name;
 	}
+	public Integer getID() {
+		return ID;
+	}
 	public void setName(String name){
 		this.name = name;
 	}

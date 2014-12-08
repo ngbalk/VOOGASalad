@@ -38,6 +38,10 @@ public class GameWorldModel {
             GameWorldCharacteristics gameWorldCharacteristics) {
         this.gameWorldCharacteristics = gameWorldCharacteristics;
     }
+    
+    public Map<Integer, LevelModel> getLevelMap() {
+    	return levelMap;
+    }
 
     public LevelModel getLevelModel(int id) {
         return levelMap.get(id);

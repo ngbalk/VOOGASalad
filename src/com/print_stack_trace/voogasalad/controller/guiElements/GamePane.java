@@ -24,6 +24,7 @@ import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameWorldModel;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
@@ -313,16 +314,51 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 		
 		//TODO: consider adding to the AbstractGUI shitz
-		public void loadLevel() {
-			
+		
+		public void loadGame() {
 			//load in level from game data
-			LevelModel levelModel = loadLevelModelFromFile();
+			GameWorldModel gameWorldModel = loadGameWorldModelFromFile();
+			if(gameWorldModel == null)
+				return;
+			GameWorldCharacteristics gameWorldCharacteristics = gameWorldModel.getGameWorldCharacteristics();
+			//TODO: HAVE FRONT END HANDLE GAMEWORLDCHARACTERISTICS
+			
+			//loop through and load each level
+			Map<Integer,LevelModel> levelMap = gameWorldModel.getLevelMap();
+			for(int i=0; i<levelMap.size(); i++) {
+				loadLevel(levelMap.get(i));
+			}
+		}
+		
+		public GameWorldModel loadGameWorldModelFromFile() {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Load Game");
+			fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
+			Stage newStage=new Stage();
+			File file = fileChooser.showOpenDialog(newStage);
+			if (file != null) {
+				try {
+					return myGameEngine.loadGameFromFile(file);
+				} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
+					System.out.println(ex.getMessage());
+				}
+			}
+			return null;
+		}
+		
+		//If we want it...will eventually not be necessary
+		//TODO: remove this once game worl loading is done
+		public void loadLevel() {
+			loadLevel(loadLevelModelFromFile());
+		}
+		public void loadLevel(LevelModel levelModel) {
+			//load in level from game data
+			//LevelModel levelModel = loadLevelModelFromFile();
 			if(levelModel == null)
 				return;
 			Integer first = levelModel.getSpriteMap().keySet().iterator().next();
 			levelModel.setMainCharacter(first);
 			LevelCharacteristics levelCharacteristics = levelModel.getLevelCharacteristics();
-			System.out.println("fjkgho" + levelCharacteristics);
 			//transfer general level data in
 			loadLevelObjectFromLevel(levelCharacteristics);
 			//transfer sprite data in
@@ -335,6 +371,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			
 			//TODO: add more here if necessary
 		}
+		//Below method not necessary anymore
 		private LevelModel loadLevelModelFromFile() {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Load level");
@@ -343,7 +380,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			File file = fileChooser.showOpenDialog(newStage);
 			if (file != null) {
 				try {
-					return myGameEngine.loadLevelForEditing(file);
+					return myGameEngine.loadLevelFromFile(file);
 				} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
 					System.out.println(ex.getMessage());
 				}
@@ -392,12 +429,11 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			*/
 			return Character.toUpperCase(line.charAt(0)) + line.substring(1).toLowerCase();
 		}
+		
 //		private void loadGoalObjectsFromLevel(Map<Integer,Goal> goalMap) {
 //			for(Goal goal : goalMap.values()){
 //				GoalObject goalObject = new GoalObject(goal.getGoalType(),this);
-//				goalObject.setCharacteristics(goal.getGoalCharacteristics());
-//>>>>>>> c324255721f46eff4ab50040883387b89e926517
-		
+//				goalObject.setCharacteristics(goal.getGoalCharacteristics());		
 		
 		@Override
 		public HashSet<GameObject> getCurrentLevelSprites() {
