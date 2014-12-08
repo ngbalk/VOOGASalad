@@ -85,7 +85,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		}
 
 		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
-		if(mainChar.startingHealth <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height)){
+		if(gameOver(mainChar)){
 			System.out.println("YOU DIED BITCH");
 			runtimeModel.gameOver = true;
 			runtimeModel.gameVictory = false;
@@ -156,5 +156,10 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		for(Integer i : runtimeModel.getGoalMap().keySet()){
 			goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
 		}
+	}
+	
+	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
+	    return(mainChar.health <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height)
+                    || !runtimeModel.getRuntimeSpriteMap().containsKey(mainChar));
 	}
 }
