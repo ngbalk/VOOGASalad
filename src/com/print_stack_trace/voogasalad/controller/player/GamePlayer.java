@@ -26,6 +26,7 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -39,6 +40,7 @@ import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.VOOGASalad;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
+import com.print_stack_trace.voogasalad.controller.guiElements.HUD;
 import com.print_stack_trace.voogasalad.controller.guiElements.IntroSplashScreen;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayPane;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButton;
@@ -70,6 +72,7 @@ public class GamePlayer implements ViewController {
 	private String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	private int keyFrameCounter = 0;
+	private HUD myHud = new HUD();
 
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
@@ -97,17 +100,11 @@ public class GamePlayer implements ViewController {
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
 		myPlayPane.setLayoutY(100);
 		myPlayPane.toBack();
-//		myViewPort.setContent(myPlayPane);
-//		myViewPort.toBack();
-//		myViewPort.setLayoutY(200);
-//		myViewPort.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-//		myViewPort.setPannable(true);
-//		myViewPort.setHbarPolicy(ScrollBarPolicy.ALWAYS);
-//		myViewPort.setTranslateY(10);
-//		myViewPort.setPrefSize(400, 400);
-		//myGameRoot = new Group(myViewPort);
 		myGameRoot = new Group(myPlayPane); 
 		myRoot.getChildren().add(myGameRoot);
+		myRoot.getChildren().add(myHud);
+		myHud.setTranslateY(20);
+		
 
 		KeyFrame frame = start();
 		Timeline animation = new Timeline();
@@ -160,7 +157,7 @@ public class GamePlayer implements ViewController {
 		background.setSmooth(true);
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
-		myPlayPane.getChildren().add(0,background);
+		myPlayPane.getChildren().add(0,background); 
 
 		for(Integer id : spriteMap.keySet()){
 			SpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
