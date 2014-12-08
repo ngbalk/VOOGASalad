@@ -52,7 +52,6 @@ import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
-import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
 import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
@@ -71,7 +70,6 @@ public class GamePlayer implements ViewController {
 	private String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	private int keyFrameCounter = 0;
-	private CameraType myCamera;
 
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
@@ -99,6 +97,15 @@ public class GamePlayer implements ViewController {
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
 		myPlayPane.setLayoutY(100);
 		myPlayPane.toBack();
+//		myViewPort.setContent(myPlayPane);
+//		myViewPort.toBack();
+//		myViewPort.setLayoutY(200);
+//		myViewPort.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+//		myViewPort.setPannable(true);
+//		myViewPort.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+//		myViewPort.setTranslateY(10);
+//		myViewPort.setPrefSize(400, 400);
+		//myGameRoot = new Group(myViewPort);
 		myGameRoot = new Group(myPlayPane); 
 		myRoot.getChildren().add(myGameRoot);
 
