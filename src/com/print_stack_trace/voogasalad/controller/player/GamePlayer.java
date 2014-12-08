@@ -56,7 +56,7 @@ import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
 	private final static int FPS = 15;
-	private static final double ANIMATION_DURATION = .005;
+	private static final double ANIMATION_DURATION = 0.001;
 	private Group myRoot;
 	private Group myGameRoot;
 	private PlayPane myPlayPane;
@@ -68,6 +68,7 @@ public class GamePlayer implements ViewController {
 	private String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	private int keyFrameCounter = 0;
+	int animationIndex=0;
 
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
@@ -177,15 +178,34 @@ public class GamePlayer implements ViewController {
 		}
 		ArrayList<Image> animationImages = spriteCharacteristics.getAnimationImages(animationType);
 		Timeline animationTimeline = new Timeline();
-		animationTimeline.setCycleCount(1);
+		animationTimeline.setCycleCount(Timeline.INDEFINITE);
+		/*
 		for(Image spriteImage : animationImages){
+		    System.out.println(spriteImage);
+		    if(spriteImage == null) {
+		        continue;
+		    }
 			KeyFrame updateSprite = new KeyFrame(Duration.seconds(ANIMATION_DURATION), e->animateSprite(currentSpriteImageView, spriteImage, spriteCharacteristics));
 			animationTimeline.getKeyFrames().add(updateSprite);
 		}
+		*/
+		
+		KeyFrame updateSprite=new KeyFrame(Duration.seconds(ANIMATION_DURATION), e->animateSprite(currentSpriteImageView, animationImages, spriteCharacteristics, animationIndex));
+		animationTimeline.getKeyFrames().add(updateSprite);
 		animationTimeline.play();
 	
 			
 	}
+	private void animateSprite(ImageView currentSpriteImageView, ArrayList<Image> spriteImage, SpriteCharacteristics spriteCharacteristics, int index){
+        System.out.println(spriteImage.size());
+	    if (animationIndex>=spriteImage.size())
+            animationIndex=0;
+	    currentSpriteImageView.setImage(spriteImage.get(index));
+	    System.out.println(spriteImage.get(index));
+	    spriteCharacteristics.setImage(spriteImage.get(index));
+        animationIndex++;
+        //this.myPlayPane.getChildren().add(currentSpriteImageView);
+    }
 	/**
 	 * Replace old sprite image with new sprite image
 	 * @param currentSpriteImageView
@@ -194,7 +214,7 @@ public class GamePlayer implements ViewController {
 	 */
 	private void animateSprite(ImageView currentSpriteImageView, Image spriteImage, SpriteCharacteristics spriteCharacteristics){
 		currentSpriteImageView.setImage(spriteImage);
-		this.myPlayPane.getChildren().add(currentSpriteImageView);
+		//this.myPlayPane.getChildren().add(currentSpriteImageView);
 	}
 
 

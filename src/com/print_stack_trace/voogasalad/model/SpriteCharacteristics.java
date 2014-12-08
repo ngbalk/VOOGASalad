@@ -132,8 +132,8 @@ public class SpriteCharacteristics {
 		return myAnimations;
 	}
     public javafx.scene.image.Image getImage () {
-//    	BufferedImage bufferedImage = (BufferedImage) img;
-//    	javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
+        //BufferedImage bufferedImage = (BufferedImage) img;
+        //javafx.scene.image.Image javaFXImage = SwingFXUtils.toFXImage(bufferedImage, null);
     	return new javafx.scene.image.Image(imagePath);
     }
     
@@ -145,18 +145,25 @@ public class SpriteCharacteristics {
         this.img = SwingFXUtils.fromFXImage(image, null);
     }
     public ArrayList<File> getAnimationPath(PossibleSpriteAction action){
-    	return myAnimations.get(action);
+        ArrayList<File> myMovements=new ArrayList<File>();
+        for(File move: myAnimations.get(action)){
+            if (move!=null){
+                myMovements.add(move);
+            }
+        }
+    	return myMovements;
     }
     
     public ArrayList<javafx.scene.image.Image> getAnimationImages(PossibleSpriteAction action){
     	ArrayList<javafx.scene.image.Image> myImages=new ArrayList<javafx.scene.image.Image>();
     	BufferedImage buffer;
     	for (File path: getAnimationPath(action)){
-    		System.out.println(path);
     		try {
 				buffer = ImageIO.read(path);
 				javafx.scene.image.Image img=SwingFXUtils.toFXImage(buffer, null);
-				myImages.add(img);
+				if (!img.equals(null)){
+				    myImages.add(img);
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				System.out.println("Image couldn't be uploaded");
@@ -167,13 +174,12 @@ public class SpriteCharacteristics {
     }
 
     public void addAnimation(PossibleSpriteAction myAction, int index, File imgPath){
-    	if (myAnimations.get(myAction).size()>index)
+    	if (myAnimations.get(myAction).size()>index&&myAnimations.get(myAction).get(index)==null)
+    		myAnimations.get(myAction).add(index,imgPath);
+    	else if (myAnimations.get(myAction).size()>index)
     		myAnimations.get(myAction).set(index,imgPath);
-    	else {
-    		for (int i=0; i<index; i++){
-    			myAnimations.get(myAction).add(null);
-    		}
-    		myAnimations.get(myAction).add(imgPath);
+    	else{
+    	    myAnimations.get(myAction).add(imgPath);
     	}
     }
 

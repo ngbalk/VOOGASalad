@@ -1,0 +1,100 @@
+{
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
+      "p": {
+        "x": 78,
+        "y": 252
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {
+        "LEFT": "LEFT",
+        "RIGHT": "RIGHT"
+      },
+      "myAnimations": {
+        "DOWN": [],
+        "LEFT": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-left-1.png"
+          },
+          null,
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-left-2.png"
+          }
+        ],
+        "CROUCH": [],
+        "RIGHT": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-right-1.png"
+          },
+          null,
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-right-2.png"
+          }
+        ],
+        "UP": [],
+        "JUMP": []
+      }
+    }
+  },
+  "goalMap": {},
+  "currentID": 0,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "asdfadsfads",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "requiredNumberOfGoals": 1,
+    "myHorizontalPaneCount": 1,
+    "myVerticalPaneCount": 1
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {}
+}
