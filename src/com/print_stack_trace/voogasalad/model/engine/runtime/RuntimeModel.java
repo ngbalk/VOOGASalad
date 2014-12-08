@@ -6,6 +6,8 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
+import java.awt.Dimension;
+import java.awt.Point;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +27,10 @@ public class RuntimeModel extends LevelModel {
 	public Date currentTime;
 	public boolean gameOver = false;
 	public boolean gameVictory = false;
+	public Point camera;
+	public int width;
+	public int height;
+	public Dimension viewport;
 
 	//-------------------CONSTRUCTORS-------------------//
 	
@@ -32,7 +38,7 @@ public class RuntimeModel extends LevelModel {
 	 * Constructor that takes in a level as a parameter and populates the runtime data
 	 * @param level
 	 */
-	public RuntimeModel(LevelModel level) {
+	public RuntimeModel(LevelModel level, Dimension viewport) {
 		super(level);
 		runtimeSpriteMap = new HashMap<Integer, RuntimeSpriteCharacteristics>();
 		for(Integer i: level.getSpriteMap().keySet())
@@ -41,6 +47,8 @@ public class RuntimeModel extends LevelModel {
 		goalMap = level.getGoalMap();
 		currentPoints = 0;
 		currentTime = new Date();
+		camera = level.getLevelCharacteristics().cameraStart;
+		this.viewport = viewport;
 	}
 	
 	//-------------------ACCESSORS-------------------//

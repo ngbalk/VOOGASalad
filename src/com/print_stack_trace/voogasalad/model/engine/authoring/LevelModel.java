@@ -6,16 +6,15 @@ import java.util.Map;
 import javafx.scene.input.KeyCode;
 
 import com.print_stack_trace.voogasalad.exceptions.ElementLockedException;
-import com.print_stack_trace.voogasalad.exceptions.InvalidNumberOfGoalsException;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsHandler;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
@@ -27,7 +26,6 @@ public class LevelModel {
 	private Integer currentID;
     private boolean isLocked;
     private PhysicsEngine physicsEngine;
-    private CameraType myCameraType;
     private LevelCharacteristics myLevelChars;
     private GoalFactory myGoalFactory;
     private Map<KeyCode, KeyResult> myKeyMap = new HashMap<KeyCode, KeyResult>();
@@ -49,7 +47,6 @@ public class LevelModel {
     	currentID=level.currentID;
         isLocked=level.isLocked;
         physicsEngine=level.physicsEngine;
-        myCameraType=level.myCameraType;
         myLevelChars = level.myLevelChars;
         myGoalFactory = level.myGoalFactory;
         myKeyMap = level.myKeyMap;
@@ -139,15 +136,15 @@ public class LevelModel {
 		return goalMap;
 	}
 
-    public void setCameraType(CameraType cameraType)
+    public void setCameraType(CameraFactory.CameraType cameraType)
             throws ElementLockedException {
         if (isLocked) throw new ElementLockedException();
         //in what context can you not set a certain cameraType
-        myCameraType = cameraType;
+        myLevelChars.cameraType = cameraType;
     }
 
-    public CameraType getCameraType() {
-        return myCameraType;
+    public CameraFactory.CameraType getCameraType() {
+        return myLevelChars.cameraType;
     }
 
     public void setLevelCharacteristics(LevelCharacteristics levelSpecs)
@@ -156,7 +153,7 @@ public class LevelModel {
 //        if (levelSpecs.requiredNumberOfGoals<0 || levelSpecs.requiredNumberOfGoals > goalMap.size()) {
 //            throw new InvalidNumberOfGoalsException();
 //        }
-//        in what context can you not set a certain cameraType
+        //in what context can you not set a certain cameraType
         myLevelChars = levelSpecs;
     }
 

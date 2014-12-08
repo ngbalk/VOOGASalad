@@ -1,5 +1,7 @@
 package com.print_stack_trace.voogasalad;
 
+import java.awt.Dimension;
+
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
@@ -15,7 +17,7 @@ public abstract class VOOGASalad extends Application {
 	@Override
 	public void start(Stage arg0) throws Exception {
 		mainStage = arg0;
-		GameEngine gameEngine = new GameEngine();
+		GameEngine gameEngine = new GameEngine(new Dimension((int)getWidth(), (int)getHeight()));
 		ViewController authorGUI = getMainGUI();
 		Scene scene = new Scene(authorGUI.initialize(gameEngine), getWidth(), getHeight());
 		mainStage.setScene(scene);
