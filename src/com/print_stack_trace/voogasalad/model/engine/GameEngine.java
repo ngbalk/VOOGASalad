@@ -75,7 +75,6 @@ public class GameEngine {
 		LevelModel lvl = authorEngine.getCurrentLevel();
 		gameData.writeLevel(lvl);
 		debugLevel(lvl);
-
 	}
 
 	public void debugLevel(LevelModel lvl){
@@ -239,6 +238,7 @@ public class GameEngine {
 //		FIXME: Remove this work around garbage
 		Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
 		currentLevel.setMainCharacter(first);
+		//ReadOnlyIntegerWrapper readOnlyHealth = currentLevel.mySpriteMap.get(currentLevel.getMainCharacter());
 		currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
 		currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
 		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);

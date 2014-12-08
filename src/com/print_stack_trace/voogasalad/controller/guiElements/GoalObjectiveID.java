@@ -19,7 +19,7 @@ public class GoalObjectiveID extends UserInputDropDownMenu{
 	@Override
 	protected void linkMovement(String dataValue) {
 		for (SpriteObject sprite: mySpriteData.get(dataValue)){
-			((GoalObject)mySprite).getCharacteristics().setObjectiveID(sprite.getID());;
+			((GoalObject)mySprite).getCharacteristics().getObjectiveID().add(sprite.getID());
 			((GoalObject) mySprite).getDelegate().update(((GoalObject)mySprite));
 		}
 

@@ -1,26 +1,10 @@
 {
-  "goalMap": {
-    "0": {
-      "myName": "",
-      "myGoalType": "REACH_OBJECT",
-      "myObjectID": 0,
-      "myObjectiveID": 0,
-      "myPointTotal": 0,
-      "myDestination": 0.0,
-      "myHorizontalDestination": true,
-      "pointsProperty": {
-        "name": "",
-        "value": 0,
-        "valid": true
-      }
-    }
-  },
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
       "p": {
-        "x": 40,
-        "y": 60
+        "x": 0,
+        "y": 0
       },
       "interactive": true,
       "objectType": "HERO",
@@ -28,25 +12,25 @@
       "startingSpeed": 10.0,
       "value": 0,
       "orientation": 0.0,
-      "name": "",
+      "name": "it\u0027s a me. Mario",
       "width": 100.0,
       "height": 100.0,
       "doubleJump": false,
       "myMovements": {},
       "myAnimations": {
-        "Down": [],
-        "Jump": [],
+        "Right": [],
         "Default": [],
-        "Left": [],
         "Up": [],
-        "Right": []
+        "Down": [],
+        "Left": [],
+        "Jump": []
       }
     },
     "1": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 40,
-        "y": 217
+        "x": 4,
+        "y": 374
       },
       "interactive": false,
       "objectType": "PLATFORM",
@@ -60,42 +44,17 @@
       "doubleJump": false,
       "myMovements": {},
       "myAnimations": {
-        "Down": [],
-        "Jump": [],
+        "Right": [],
         "Default": [],
-        "Left": [],
         "Up": [],
-        "Right": []
-      }
-    },
-    "2": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
-      "p": {
-        "x": 380,
-        "y": 84
-      },
-      "interactive": false,
-      "objectType": "REWARD",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "doubleJump": false,
-      "myMovements": {},
-      "myAnimations": {
         "Down": [],
-        "Jump": [],
-        "Default": [],
         "Left": [],
-        "Up": [],
-        "Right": []
+        "Jump": []
       }
     }
   },
-  "currentID": 2,
+  "goalMap": {},
+  "currentID": 1,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
@@ -104,7 +63,7 @@
         "NoAction",
         "ObjectBothNoDisplacement",
         "NoAction",
-        "ObjectTwoDisappear"
+        "NoAction"
       ],
       [
         "NoAction",
@@ -114,7 +73,7 @@
         "NoAction"
       ],
       [
-        "NoAction",
+        "ObjectBothNoDisplacement",
         "NoAction",
         "NoAction",
         "NoAction",
@@ -138,17 +97,17 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "newest bad A level",
-    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
+    "name": "i love cheese",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 1,
     "cameraStart": {
       "x": 0,
       "y": 0
     },
     "cameraSpeed": 3,
-    "myHorizontalPaneCount": 4,
+    "myHorizontalPaneCount": 2,
     "myVerticalPaneCount": 1,
-    "cameraType": "ConstantHorizontalScroll"
+    "cameraType": "PlayerFollow"
   },
   "myGoalFactory": {},
   "myKeyMap": {}

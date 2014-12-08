@@ -1,0 +1,330 @@
+{
+  "goalMap": {
+    "0": {
+      "myName": "",
+      "myGoalType": "KILL_BOSS",
+      "myObjectID": 0,
+      "myObjectiveID": [
+        9
+      ],
+      "myPointTotal": 0,
+      "myDestination": 0.0,
+      "myHorizontalDestination": true
+    },
+    "3": {
+      "myName": "",
+      "myGoalType": "REACH_OBJECT",
+      "myObjectID": 0,
+      "myObjectiveID": [
+        2,
+        3
+      ],
+      "myPointTotal": 0,
+      "myDestination": 0.0,
+      "myHorizontalDestination": true
+    }
+  },
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "p": {
+        "x": 0,
+        "y": 0
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "jack",
+      "width": 100.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "damageDealt": 0,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Left": [],
+        "Down": [],
+        "Right": [],
+        "Default": []
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 19,
+        "y": 187
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 1000.0,
+      "height": 50.0,
+      "doubleJump": false,
+      "damageDealt": 0,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Left": [],
+        "Down": [],
+        "Right": [],
+        "Default": []
+      }
+    },
+    "3": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 1200,
+        "y": 487
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 1000.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Left": [],
+        "Down": [],
+        "Right": [],
+        "Default": []
+      }
+    },
+    "4": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 1200,
+        "y": 364
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 200.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Left": [],
+        "Down": [],
+        "Right": [],
+        "Default": []
+      }
+    },
+    "5": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 2100,
+        "y": 400
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 200.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Left": [],
+        "Down": [],
+        "Right": [],
+        "Default": []
+      }
+    },
+    "6": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png",
+      "p": {
+        "x": 1600,
+        "y": 350
+      },
+      "interactive": true,
+      "objectType": "ENEMY",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Left": [],
+        "Down": [],
+        "Right": [],
+        "Default": []
+      }
+    },
+    "7": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png",
+      "p": {
+        "x": 1400,
+        "y": 100
+      },
+      "interactive": true,
+      "objectType": "ENEMY",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 120.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Left": [],
+        "Down": [],
+        "Right": [],
+        "Default": []
+      }
+    },
+    "8": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png",
+      "p": {
+        "x": 324,
+        "y": 68
+      },
+      "interactive": true,
+      "objectType": "ENEMY",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 120.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Left": [],
+        "Down": [],
+        "Right": [],
+        "Default": []
+      }
+    },
+    "9": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
+      "p": {
+        "x": 1800,
+        "y": 200
+      },
+      "interactive": true,
+      "objectType": "ENEMY",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "boss",
+      "width": 200.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Left": [],
+        "Down": [],
+        "Right": [],
+        "Default": []
+      }
+    }
+  },
+  "currentID": 9,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "NoAction",
+        "HeroDamageCollision",
+        "ObjectBothNoDisplacement",
+        "NoAction",
+        "ObjectTwoDisappear"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "ObjectBothNoDisplacement",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "ObjectBothNoDisplacement",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "goalsavertest",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
+    "requiredNumberOfGoals": 1,
+    "cameraStart": {
+      "x": 5,
+      "y": 0
+    },
+    "cameraSpeed": 5,
+    "myHorizontalPaneCount": 8,
+    "myVerticalPaneCount": 1,
+    "cameraType": "ConstantHorizontalScroll"
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {},
+  "mainCharacter": 0
+}
