@@ -17,7 +17,7 @@ public class GoalCharacteristics {
     public Integer myPointTotal=0;
     public double myDestination=0;
     private boolean myHorizontalDestination=true;
-    public SimpleIntegerProperty pointsProperty=new SimpleIntegerProperty(myPointTotal);
+
 
     
     public GoalCharacteristics(GoalType goalType) {
@@ -32,19 +32,14 @@ public class GoalCharacteristics {
     public void setDestination(double destination){
     	myDestination=destination;
     }
-    public SimpleIntegerProperty getPointsProperty(){
-    	return pointsProperty;
-    }
+    
     public void setObjectID(Integer ID){
     	myObjectID=ID;
     }
     public void setObjectiveID(Integer ID){
     	myObjectiveID=ID;
     }
-    public void setPointsTotal(Integer points){
-    	myPointTotal=points;
-    	pointsProperty.setValue(points);
-    }
+  
     public void setName(String name){
     	myName=name;
     }
@@ -65,6 +60,9 @@ public class GoalCharacteristics {
     }
     public Integer getPointsTotal(){
     	return myPointTotal;
+    }
+    public void setPointsTotal(int points){
+    	myPointTotal=points;
     }
    // public void 
 }
