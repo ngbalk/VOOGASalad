@@ -154,7 +154,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	
 	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
 	    if(mainChar == null) return false;
-	    return(mainChar.health <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
+	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
                     
 	}
 }
