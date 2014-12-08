@@ -1,7 +1,7 @@
 voogasalad
 ==========
 
-Game Authoring Engine Project
+Team Print Stack Trace
 
 Team Members:
 Nick Balkissoon
