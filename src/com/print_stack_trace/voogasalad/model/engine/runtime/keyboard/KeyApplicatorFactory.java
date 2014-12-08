@@ -6,6 +6,7 @@ public class KeyApplicatorFactory {
 	
 	public static final int V_KEY_CONSTANT = 30;
 	public static final int H_KEY_CONSTANT = 20;
+	public static final int V_TERMINAL_VELOCITY = 50;
 
 
 	
@@ -14,6 +15,7 @@ public class KeyApplicatorFactory {
 		Right,
 		Up,
 		Down,
+		Jump,
 		Default
 	};
 	
@@ -38,13 +40,13 @@ public class KeyApplicatorFactory {
 			vxnew = -H_KEY_CONSTANT;
 			vynew = 0;
 			vxreleasenew = -vxnew;
-			vyreleasenew = -vynew;
+			vyreleasenew = 0;
 			break;
 		case Right:
 			vxnew = H_KEY_CONSTANT;
 			vynew = 0;
 			vxreleasenew = -vxnew;
-			vyreleasenew = -vynew;
+			vyreleasenew = 0;
 			break;
 		case Up:
 			vynew = V_KEY_CONSTANT;
@@ -61,27 +63,29 @@ public class KeyApplicatorFactory {
 		
 		}
 		return new KeyApplicator() {
-		    private boolean once = false;
-		    
-			@Override
-			public void applyPressActionToRuntimeSprite(
-					RuntimeSpriteCharacteristics sprite) {
-			    if(once) return;
-			    once = true;
-				sprite.v_x += vxnew;
-				sprite.v_y -= vynew;
-			
-			}
+            private boolean once = false;
+            
+            @Override
+            public void applyPressActionToRuntimeSprite(
+                    RuntimeSpriteCharacteristics sprite) {
+                if(once) return;
+                once = true;
+                sprite.v_x += vxnew;
+                sprite.v_y -= vynew;
+                
+                if(sprite.v_y > V_TERMINAL_VELOCITY) sprite.v_y = V_TERMINAL_VELOCITY;
+            
+            }
 
-			@Override
-			public void applyReleaseActionToRuntimeSprite(
-					RuntimeSpriteCharacteristics sprite) {
-				if(!once) return;
-			    once = false;
-				sprite.v_x += vxreleasenew;
-				sprite.v_y -= vyreleasenew;
-			}
-		};
+            @Override
+            public void applyReleaseActionToRuntimeSprite(
+                    RuntimeSpriteCharacteristics sprite) {
+                if(!once) return;
+                once = false;
+                if(!sprite.isCollidingHorizontally) sprite.v_x = 0;
+                sprite.v_y -= vyreleasenew;
+            }
+        };
        
     }
 }

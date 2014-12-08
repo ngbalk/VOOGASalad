@@ -12,8 +12,10 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 public class GameAuthorEngine implements IGameAuthorEngine {
@@ -27,15 +29,6 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 		PLATFORM,
 		OBSTACLE,
 		REWARD
-	}
-
-	public enum CameraType {
-		SCROLLING_RIGHT_TO_LEFT,
-		SCROLLING_LEFT_TO_RIGHT,
-		SCROLLING_TOP_TO_BOTTOM,
-		SCROLLING_BOTTOM_TO_TOP,
-		CENTERED_ON_PLAYER,
-		SCROLL_WHEN_EDGE_REACHED
 	}
 
 	public GameAuthorEngine(){
@@ -84,12 +77,16 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 		currentLevel.deleteGoal(goalID);
 	}
 
-	public void setCameraType(CameraType c){
+	public void setCameraType(CameraFactory.CameraType c){
 		currentLevel.setCameraType(c);
 	}
 
 	public void setLevelCharacteristics(LevelCharacteristics levelSpecs) {
 		currentLevel.setLevelCharacteristics(levelSpecs);
+	}
+
+	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
+		currentLevel.setPhysicsEngine(physicsEngine);
 	}
 
 	public void setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
@@ -123,4 +120,5 @@ public class GameAuthorEngine implements IGameAuthorEngine {
     public KeyResult getResultOfKey(KeyCode key) {
     	return currentLevel.getResultOfKey(key);
     }
+
 }

@@ -1,11 +1,13 @@
 package com.print_stack_trace.voogasalad.model.environment;
 
+import java.util.List;
+
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
 public class ReachObject extends Goal implements GoalElement{
 
     private Integer mySpriteID;
-    private Integer myObjectiveID;
+    private List<Integer> myObjectiveID;
 
     public ReachObject (GoalCharacteristics goalCharacteristics) {
         super(goalCharacteristics);
@@ -16,7 +18,7 @@ public class ReachObject extends Goal implements GoalElement{
         return mySpriteID;
     }
     
-    public Integer getMyObjectiveID() {
+    public List<Integer> getMyObjectiveID() {
         return myObjectiveID;
     }
 

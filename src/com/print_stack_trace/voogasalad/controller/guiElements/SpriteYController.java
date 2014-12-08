@@ -7,13 +7,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
 public class SpriteYController extends SpriteCharacteristicController{
-	public SpriteYController (GameObject sprite){
-		super(sprite);
+	public SpriteYController(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 	}
 	@Override
 	public void setCharacteristic(String newValue){
 	
-		double newYValue = mySprite.getImage().getLayoutY();
+		double newYValue = ((SpriteObject)mySprite).getCharacteristics().getY();
 		try{
 			newYValue = Double.parseDouble(newValue);
 		}

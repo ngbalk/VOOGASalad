@@ -4,8 +4,8 @@ import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerato
 
 
 public class LevelPhysics extends UserInputDropDownMenu {
-	public LevelPhysics(GameObject object){
-		super(object);
+	public LevelPhysics(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 		currentMenu.setText("Pick Types of Physics");
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/"
 				+ "controller/guiResources/PhysicsTypes.Properties");

@@ -6,9 +6,13 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public float v_x;
@@ -16,9 +20,12 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public boolean isColliding = false;
 	public boolean isCollidingHorizontally = false;
 	public boolean isCollidingVertically = false;
-	public boolean canMultipleJump = false;
+	public boolean enemyPatrols = true;
+	public boolean isPatrollingLeft = true;
 	private float decelerationConstant;
-	public PossibleSpriteAction currentSpriteAction;
+	public KeyResult currentSpriteAction;
+	public ReadOnlyIntegerWrapper healthProperty=new ReadOnlyIntegerWrapper(this.startingHealth);
+	public ReadOnlyIntegerWrapper pointsProperty=new ReadOnlyIntegerWrapper(0);
 	
 	public int health;
 	private boolean remove = false;
@@ -26,12 +33,41 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	
 	public RuntimeSpriteCharacteristics(SpriteType t) {
 		super(t);
-		
+	}
+	
+//	public void setWritableHealthProperty(int newHealth){
+//		healthProperty.setValue(newHealth);
+//	}
+	
+	public ReadOnlyIntegerProperty getPropertyReadOnlyHealth(){
+		return this.healthProperty.getReadOnlyProperty();
+	}
+	
+//	public void setWritablePointsProperty(int newPoints){
+//		pointsProperty.setValue(newPoints);
+//	}
+	
+	public ReadOnlyIntegerProperty getPropertyReadOnlyPoints(){
+		return this.pointsProperty.getReadOnlyProperty();
+	}
+	
+	
+	public void setHealthProperty(int newHealth){
+		this.healthProperty.setValue(newHealth);
+	}
+	
+	public void setPointsProperty(int newPoints){
+		this.pointsProperty.setValue(newPoints);
 	}
 	
 	public RuntimeSpriteCharacteristics(SpriteCharacteristics obj) {
 		super(obj);
 		health = startingHealth;
+		healthProperty.setValue(health);
+	}
+	public void setStartingHealth(int health){
+		healthProperty.setValue(health);
+		this.setStartingHealth(health);
 	}
 
 	public float getAlpha() {
@@ -62,11 +98,11 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 		this.remove = true;
 	}	
 	
-	public PossibleSpriteAction getCurrentAnimation() {
+	public KeyResult getCurrentAnimation() {
 		return currentSpriteAction;
 	}
 	
-	public void setPossibleSpriteAction(PossibleSpriteAction spriteAction) {
+	public void setPossibleSpriteAction(KeyResult spriteAction) {
 		currentSpriteAction = spriteAction;
 		//TODO: implement this on back end.
 	}

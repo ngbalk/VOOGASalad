@@ -1,5 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.io.File;
+
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Node;
@@ -7,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 
@@ -36,7 +40,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		
 		//LEVEL BUTTON
 		LevelButton myLevelButton=new LevelButton();
-		myLevelButton.setOnMouseClicked(e->(((GamePane)myLinkedObject).addLevelUpdate(new LevelObject(new ImageView(), null))));
+		myLevelButton.setOnMouseClicked(e->(((GamePane)myLinkedObject).addLevelUpdate(new LevelObject(""))));
 		myLevelButton.relocate(width*.25, 20);
 		myLevelButton.setPrefSize(100, 50); 
 		myLevelButton.getStyleClass().add("buttonTemplate2"+ "");

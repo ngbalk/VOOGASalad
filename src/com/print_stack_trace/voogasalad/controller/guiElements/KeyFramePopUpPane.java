@@ -11,7 +11,9 @@ import java.util.HashSet;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
+
+
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -32,27 +34,31 @@ public class KeyFramePopUpPane extends GeneralPane {
 	private Pane keyFramePane;
 	private Pane picturePane;
 	private SpriteObject mySprite;
-	private HashMap<PossibleSpriteAction, ArrayList<File>> myAnimations=new HashMap<PossibleSpriteAction, ArrayList<File>>();
-	public KeyFramePopUpPane(SpriteObject object){
+	private HashMap<KeyResult, ArrayList<File>> myAnimations=new HashMap<KeyResult, ArrayList<File>>();
+	public KeyFramePopUpPane(GameObject object){
 		super();
-		mySprite=object;
+		Pane mainPane=new Pane();
+		myNode=mainPane;
+		mySprite=(SpriteObject) object;
 		picturePane=new Pane();
 		makeMovementMap();
-		this.getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
+		((Pane)myNode).getStylesheets().add("./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css");
 		setPrefSize(this.getPrefWidth(), this.getPrefHeight());
 		myBox=new KeyFrameBox(myAnimations,this.getPrefWidth(), this.getPrefHeight()*.1);
 		currentKeyFramePane();
-		picturePane.relocate(0,myBox.getPrefHeight());
-		picturePane.setPrefSize(this.getPrefWidth(), this.getPrefHeight()-myBox.getPrefHeight()-keyFramePane.getPrefHeight());
 		this.setStyle("-fx-background-color:BLACK; -fx-border-color: BLUE");
 		this.getChildren().addAll(myBox, picturePane);
 		myCurrentKey.setText("Current KeyFrame: "+ myBox.getCurrentKeyFrame().getValue().getTag()+myBox.getCurrentKeyFrame().getValue().getIndex());	
 		addKeyImage(myBox.getCurrentKeyFrame().getValue().getImagePath());
-
-
+		picturePane.relocate(0,myBox.getPrefHeight());
+		picturePane.setPrefSize(this.getPrefWidth(), this.getPrefHeight()-myBox.getPrefHeight()-keyFramePane.getPrefHeight());
+		mainPane.getChildren().addAll(picturePane, keyFramePane, myBox);
+		System.out.println(GeneralPane.DEFAULT_WIDTH);
+		mainPane.setPrefSize(GeneralPane.DEFAULT_WIDTH,GeneralPane.DEFAULT_HEIGHT);
+		this.initiate();
 	}
 	private void makeMovementMap(){
-		for (PossibleSpriteAction action: PossibleSpriteAction.values()){
+		for (KeyResult action: KeyResult.values()){
 			System.out.println(mySprite.getCharacteristics().getAnimationImages(action));
 			myAnimations.put(action, mySprite.getCharacteristics().getAnimationPath(action));
 		}
@@ -62,7 +68,6 @@ public class KeyFramePopUpPane extends GeneralPane {
 		keyFramePane.setStyle("-fx-background-color: BLACK");
 		keyFramePane.setPrefSize(this.getPrefWidth(), this.getPrefHeight()*.3);
 		keyFramePane.relocate(0, this.getPrefHeight()-this.getPrefHeight()*.3);
-		getChildren().add(keyFramePane);
 		this.addCurrentKeyLabel(keyFramePane);
 	}
 	private void addCurrentKeyLabel(Pane pane){
@@ -79,11 +84,11 @@ public class KeyFramePopUpPane extends GeneralPane {
 		addButton.setOnAction(e->add());
 		pane.getChildren().addAll(addButton, myCurrentKey);
 		ImageUpload imageButton=new ImageUpload();
-		imageButton.getType().relocate(pane.getPrefWidth()/4*3, pane.getPrefHeight()/4);
-		imageButton.getType().getStyleClass().add("buttonTemplate");
-		((Button) imageButton.getType()).setPrefSize(pane.getPrefWidth()/5, pane.getPrefHeight()/2);
-		((Button)imageButton.getType()).setOnAction(e->addKeyImage(imageButton.doAction()));
-		pane.getChildren().add(imageButton.getType());
+		imageButton.relocate(pane.getPrefWidth()/4*3, pane.getPrefHeight()/4);
+		imageButton.getStyleClass().add("buttonTemplate");
+		imageButton.setPrefSize(pane.getPrefWidth()/5, pane.getPrefHeight()/2);
+		imageButton.setOnAction(e->addKeyImage(imageButton.doAction()));
+		pane.getChildren().add(imageButton);
 	}
 	private void setObservable(){
 		myBox.getCurrentKeyFrame().addListener(new ChangeListener<KeyFrameBlock>(){
@@ -103,7 +108,7 @@ public class KeyFramePopUpPane extends GeneralPane {
 	private void setCurrentKeyImage(Image img, File imagePath){
 		myBox.getCurrentKeyFrame().getValue().setImage(img);
 		myBox.getCurrentKeyFrame().getValue().setImagePath(imagePath);
-		for (PossibleSpriteAction action: PossibleSpriteAction.values()){
+		for (KeyResult action: KeyResult.values()){
 			if (action.name().equals(myBox.getCurrentKeyFrame().getValue().getName())&&img!=null){
 				mySprite.getCharacteristics().addAnimation(action,(myBox.getCurrentKeyFrame().getValue().getIndex()-1), imagePath);
 				mySprite.getDelegate().update(mySprite);
