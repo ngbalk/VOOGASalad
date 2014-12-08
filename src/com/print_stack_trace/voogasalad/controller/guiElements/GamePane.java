@@ -406,7 +406,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				ImageView imageView = new ImageView(sc.getImage());
 				imageView.relocate(sc.getX(), sc.getY());
 				SpriteObject spriteObject = addSpriteObject(
-						imageView, 
+						imageView,
 						sc.getImagePath(), 
 						capitalize(sc.getObjectType().name()));
 				spriteObject.setCharacteristics(sc);
