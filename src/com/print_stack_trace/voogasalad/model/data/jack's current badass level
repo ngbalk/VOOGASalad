@@ -2,10 +2,11 @@
   "goalMap": {
     "0": {
       "myName": "",
-      "myGoalType": "KILL_BOSS",
+      "myGoalType": "REACH_OBJECT",
       "myObjectID": 0,
       "myObjectiveID": [
-        9
+        2,
+        3
       ],
       "myPointTotal": 0,
       "myDestination": 0.0,
@@ -201,7 +202,7 @@
       "orientation": 0.0,
       "name": "",
       "width": 100.0,
-      "height": 120.0,
+      "height": 300.0,
       "doubleJump": false,
       "damageDealt": 5,
       "myMovements": {},
@@ -228,33 +229,6 @@
       "orientation": 0.0,
       "name": "",
       "width": 100.0,
-      "height": 120.0,
-      "doubleJump": false,
-      "damageDealt": 5,
-      "myMovements": {},
-      "myAnimations": {
-        "Up": [],
-        "Jump": [],
-        "Left": [],
-        "Down": [],
-        "Right": [],
-        "Default": []
-      }
-    },
-    "9": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
-      "p": {
-        "x": 1800,
-        "y": 200
-      },
-      "interactive": true,
-      "objectType": "ENEMY",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 0,
-      "orientation": 0.0,
-      "name": "boss",
-      "width": 200.0,
       "height": 100.0,
       "doubleJump": false,
       "damageDealt": 5,
@@ -269,7 +243,7 @@
       }
     }
   },
-  "currentID": 9,
+  "currentID": 8,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
@@ -319,7 +293,7 @@
       "x": 5,
       "y": 0
     },
-    "cameraSpeed": 5,
+    "cameraSpeed": 3,
     "myHorizontalPaneCount": 8,
     "myVerticalPaneCount": 1,
     "cameraType": "ConstantHorizontalScroll"
