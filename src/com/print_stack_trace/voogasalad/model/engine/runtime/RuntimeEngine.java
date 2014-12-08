@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
@@ -83,6 +84,12 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 			}
 		}
 
+		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
+		if(mainChar.startingHealth <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height)){
+			System.out.println("YOU DIED BITCH");
+			runtimeModel.gameOver = true;
+			runtimeModel.gameVictory = false;
+		}
 		updateSpritePositions();
 		
 		cameraHandler.updateCamera(runtimeModel);
