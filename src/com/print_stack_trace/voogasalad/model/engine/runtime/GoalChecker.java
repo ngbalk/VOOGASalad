@@ -10,7 +10,7 @@ import com.print_stack_trace.voogasalad.model.environment.ReachObject;
 import com.print_stack_trace.voogasalad.model.environment.StayAlive;
 
 public class GoalChecker implements GoalElementVisitor {
-	private static final int GOAL_DESTINATION_BUFFER = 2;
+	private static final int GOAL_DESTINATION_BUFFER = 20;
 	private RuntimeModel myLevel;
 
 	public GoalChecker(RuntimeModel level) {
@@ -38,10 +38,12 @@ public class GoalChecker implements GoalElementVisitor {
 		double heroPosition = 0;
 		if(goal.isHorizontal()){
 			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getX();
+			System.out.println("HERO X POS:    " + heroPosition);
 		}
 		else{
 			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getY();
 		}
+		System.out.print("GOAL DEST:   " + goal.getDestination());
 		return (heroPosition > (goal.getDestination() - GOAL_DESTINATION_BUFFER)) 
 				&& (heroPosition < (goal.getDestination() + GOAL_DESTINATION_BUFFER )); }
 
