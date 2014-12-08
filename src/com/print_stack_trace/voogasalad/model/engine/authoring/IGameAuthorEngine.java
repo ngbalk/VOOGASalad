@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.scene.input.KeyCode;
 
 import com.print_stack_trace.voogasalad.exceptions.ElementLockedException;
+import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -19,6 +20,11 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactor
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 public interface IGameAuthorEngine {
+
+	public GameWorldModel getGameWorldModel();
+	public void setGameWorldModel(GameWorldModel gameWorldModel) throws ElementLockedException;
+	public GameWorldCharacteristics getGameWorldCharacteristics();
+	public void setGameWorldCharacteristics(GameWorldCharacteristics gameSpecs) throws ElementLockedException;
 	public void setCurrentLevel(int index) throws ElementLockedException, ArrayIndexOutOfBoundsException;
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) throws ElementLockedException;
 	public void updateObject(Integer modelID, SpriteCharacteristics spriteModel) throws ElementLockedException;

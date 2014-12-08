@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import com.google.gson.JsonSyntaxException;
+import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -72,14 +73,15 @@ public class GameEngine {
 	}
 	
 	public GameWorldModel loadGameFromFile(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
-		return (GameWorldModel) gameData.loadGame(myFile, LevelModel.class);
+		return (GameWorldModel) gameData.load(myFile, LevelModel.class);
 	}
 
 	public void saveGame() throws IOException {
-		LevelModel lvl = authorEngine.getCurrentLevel();
-		gameData.writeLevel(lvl);
-		debugLevel(lvl);
-
+		GameWorldModel game = authorEngine.getGameWorldModel();
+		gameData.write(game);
+		for(LevelModel level: game.getLevels()) {
+			debugLevel(level);
+		}
 	}
 
 	public void debugLevel(LevelModel lvl){
@@ -104,6 +106,11 @@ public class GameEngine {
 	}
 
 	//GAME AUTHORING
+	
+	//GameWorld data
+	public void setGameWorldCharacteristics(GameWorldCharacteristics gameWorldCharacteristics) {
+		authorEngine.setGameWorldCharacteristics(gameWorldCharacteristics);
+	}
 
 	//Adding, Removing, and Updating Sprites
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) {
@@ -193,8 +200,6 @@ public class GameEngine {
 		runtimeEngine.update();
 	}
 	
-	//-------------------ACCESSORS-------------------//
-
 	public LevelModel getCurrentLevel() {
 		return currentLevel;
 	}
@@ -237,6 +242,30 @@ public class GameEngine {
 
 	//-------------------PRIVATE METHODS-------------------//
 
+	private void initializeLevel(LevelModel level) {
+		this.currentLevel = level;
+
+//		FIXME: Remove this work around garbage
+		Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
+		currentLevel.setMainCharacter(first);
+		currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
+		currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
+		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
+		currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
+
+//		GoalCharacteristics g = new GoalCharacteristics(GoalType.REACH_OBJECT);
+//		g.myDestination = 100;
+//		g.myObjectID = 2;	
+//		currentLevel.setGoal(g);
+//
+//		LevelCharacteristics l = currentLevel.getLevelCharacteristics();
+//		l.requiredNumberOfGoals = 1;
+//		currentLevel.setLevelCharacteristics(l);
+		
+		runtimeEngine = new RuntimeEngine(currentLevel, viewport);
+		runtimeEngine.setFramesPerSecond(framesPerSecond);
+	}
+	
 	private void initializeGame(GameWorldModel gameWorld) {
 		this.currentLevel = gameWorld.getCurrentLevel();
 
@@ -260,6 +289,7 @@ public class GameEngine {
 		runtimeEngine = new RuntimeEngine(currentLevel, viewport);
 		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
+
 
 	public void saveHighScore(String name, HighScore highScore) throws IOException {
 		highScores.put(name, highScore);

@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.scene.input.KeyCode;
 
 import com.print_stack_trace.voogasalad.exceptions.ElementLockedException;
+import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -42,6 +43,14 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 	
 	public void setGameWorldModel(GameWorldModel gameWorldModel) {
 		this.gameWorldModel = gameWorldModel;
+	}
+	
+	public GameWorldCharacteristics getGameWorldCharacteristics() {
+		return gameWorldModel.getGameWorldCharacteristics();
+	}
+	
+	public void setGameWorldCharacteristics(GameWorldCharacteristics gameSpecs) {
+		gameWorldModel.setGameWorldCharacteristics(gameSpecs);
 	}
 
 	public void setCurrentLevel(int index){
