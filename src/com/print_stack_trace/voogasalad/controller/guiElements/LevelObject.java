@@ -11,22 +11,23 @@ public class LevelObject extends GameObject{
 	private LevelCharacteristics myCharacteristics;
 	private Pane colorPane;
 	public LevelObject(ImageView image, String imagePath) {
-		super(image, imagePath);	
+		this(image, imagePath, null, new LevelCharacteristics());	
+		
+	}
+	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate) {
+		this(imgView, imagePath, myDelegate, new LevelCharacteristics());
+		
+	}
+	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate, LevelCharacteristics levelCharacteristics) {
+		super(imgView, imagePath, myDelegate);
+		this.myDelegate=myDelegate;
+		myCharacteristics = levelCharacteristics;
 		colorPane=new Pane();
 		colorPane.setVisible(false);
 		myCharacteristics=new LevelCharacteristics();
 		createPane();
 		this.getImage().setOnMouseClicked(e->showPane());
 		colorPane.setOnMouseClicked(e->showPane());
-	}
-	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate) {
-		super(imgView, imagePath, myDelegate);	
-		myCharacteristics=new LevelCharacteristics();
-	}
-	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate, LevelCharacteristics levelCharacteristics) {
-		this(imgView, imagePath);
-		this.myDelegate = myDelegate;
-		myCharacteristics = levelCharacteristics;
 	}
 	
 	public LevelCharacteristics getCharacteristics(){

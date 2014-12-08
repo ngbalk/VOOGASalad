@@ -40,7 +40,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		
 		//LEVEL BUTTON
 		LevelButton myLevelButton=new LevelButton();
-		myLevelButton.setOnMouseClicked(e->(((GamePane)myLinkedObject).addLevelUpdate(new LevelObject(new ImageView(), null))));
+		myLevelButton.setOnMouseClicked(e->(((GamePane)myLinkedObject).addLevelUpdate(new LevelObject(new ImageView(),"", (ViewObjectDelegate) myLinkedObject))));
 		myLevelButton.relocate(width*.25, 20);
 		myLevelButton.setPrefSize(100, 50); 
 		myLevelButton.getStyleClass().add("buttonTemplate2"+ "");

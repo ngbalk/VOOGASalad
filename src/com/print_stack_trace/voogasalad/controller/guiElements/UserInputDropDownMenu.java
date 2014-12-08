@@ -33,10 +33,13 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 	}
 	protected void addMenus(){
 		for (String menuName: data.keySet()){
-			CheckMenuItem currentMenuItem=new CheckMenuItem(returnStringName(data.get(menuName)));
-			currentMenuItem.setOnAction(e->checkCorrectMenu(currentMenuItem,menuName));
-			this.currentMenu.getItems().add(currentMenuItem);
+			addMenu(menuName);
 		}
+	}
+	protected void addMenu(String menuName){
+		CheckMenuItem currentMenuItem=new CheckMenuItem(returnStringName(data.get(menuName)));
+		currentMenuItem.setOnAction(e->checkCorrectMenu(currentMenuItem,menuName));
+		this.currentMenu.getItems().add(currentMenuItem);
 	}
 	private String returnStringName(String value){
 		String toReturn;

@@ -52,7 +52,7 @@ public class LevelTracker {
 		}
 		return nonActiveLevels;
 	}
-	public Set getLevels(){
+	public Set<LevelObject> getLevels(){
 		return   myLevels.keySet();
 	}
 	public void addSprite(SpriteObject sprite){

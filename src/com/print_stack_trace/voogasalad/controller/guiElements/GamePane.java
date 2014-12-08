@@ -206,7 +206,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		return background;
 	}
 	public Pane sizePane(Pane toBeSize){
-		toBeSize.setPrefSize(this.getWidth(), this.getHeight());
+		toBeSize.setPrefSize(this.getPrefWidth(), this.getPrefHeight());
 		return toBeSize;
 	}
 	public void saveLevel(){
