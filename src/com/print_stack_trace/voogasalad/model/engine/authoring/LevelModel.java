@@ -39,6 +39,7 @@ public class LevelModel {
         myKeyMap = new HashMap<>();
         myLevelChars = new LevelCharacteristics();
         physicsEngine = new PhysicsEngine();
+        mainCharacter = 0;
     }
     
     public LevelModel(LevelModel level) {

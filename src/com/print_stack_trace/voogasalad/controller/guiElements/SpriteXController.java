@@ -6,7 +6,7 @@ public class SpriteXController extends SpriteCharacteristicController{
 	}
 	@Override
 	public void setCharacteristic(String newValue){
-		double newXValue = mySprite.getImage().getLayoutX();
+		double newXValue = ((SpriteObject) mySprite).getCharacteristics().getX();
 		try{
 			newXValue = Double.parseDouble(newValue);
 		}

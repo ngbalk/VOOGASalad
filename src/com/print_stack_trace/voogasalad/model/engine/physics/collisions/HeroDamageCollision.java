@@ -17,7 +17,10 @@ public class HeroDamageCollision extends CollisionHandler {
                 s2.flagForRemoval();
             }
             else{
-                s1.flagForRemoval();
+                s1.health -= s2.damageDealt;
+                System.out.println("NEW HEALTH     " + s1.health);
+                s1.v_x = -s1.v_x;
+                s2.v_x = -s2.v_x;
             }
         }
         

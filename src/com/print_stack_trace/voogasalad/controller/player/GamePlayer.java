@@ -188,7 +188,6 @@ public class GamePlayer implements ViewController {
 
 	public void pauseGame(){ //buttons with handlers
 		isPlaying = false;
-		System.out.println(isPlaying);
 		//		gameEngine.pause();
 		//if gameplayer is the gameloop --> timeline.stop();
 	}

@@ -41,6 +41,7 @@ public class SpriteCharacteristics {
 	public static final double DEFAULT_WIDTH=100;
 	public static final double DEFAULT_HEIGHT=100;
 	public static final boolean DEFAULT_DOUBLE_JUMP=false;
+	public static final int DEFAULT_DAMAGE_DEALT = 5;
 
 	// GAME AUTHORING VARIABLES
 	public transient Image img;
@@ -58,6 +59,7 @@ public class SpriteCharacteristics {
 	public double width;
 	public double height;
 	public boolean doubleJump;
+	public int damageDealt;
 	public HashMap<KeyCode,KeyResult> myMovements;
 	public HashMap<KeyResult, ArrayList<File>> myAnimations;
 
@@ -81,6 +83,7 @@ public class SpriteCharacteristics {
 		width=DEFAULT_WIDTH;
 		height=DEFAULT_HEIGHT;
 		name=DEFAULT_NAME;
+		damageDealt = DEFAULT_DAMAGE_DEALT;
 		myMovements=new HashMap<KeyCode, KeyResult>();
 		doubleJump=DEFAULT_DOUBLE_JUMP;
 		myAnimations=new HashMap<KeyResult, ArrayList<File>>();
@@ -116,6 +119,7 @@ public class SpriteCharacteristics {
 		imagePath = obj.getImagePath();
 		myAnimations=obj.getAnimations();
 		doubleJump=obj.canDoubleJump();
+		damageDealt =obj.getDamageDealt();
 		
 	}
 	
@@ -178,6 +182,14 @@ public class SpriteCharacteristics {
     		}
     		myAnimations.get(myAction).add(imgPath);
     	}
+    }
+    
+    public void setDamageDealt(int d){
+        damageDealt = d;
+    }
+    
+    public int getDamageDealt(){
+        return damageDealt;
     }
 
 	public void setImagePath(String path){
