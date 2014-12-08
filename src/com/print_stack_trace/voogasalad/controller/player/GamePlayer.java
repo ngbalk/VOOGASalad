@@ -171,10 +171,6 @@ public class GamePlayer implements ViewController {
 			spriteImage.setRotate(spriteCharacteristics.getOrientation());
 			spriteImage.setLayoutX(spriteCharacteristics.getX());
 			spriteImage.setLayoutY(spriteCharacteristics.getY());
-			System.out.println("sprite characteristics x: " + spriteCharacteristics.getX());
-			System.out.println("sprite image x: " + spriteImage.getX());
-			System.out.println("sprite characteristics y: " + spriteCharacteristics.getY());
-			System.out.println("sprite image y: " + spriteImage.getY());
 			myPlayPane.getChildren().add(spriteImage);
 		}
 
