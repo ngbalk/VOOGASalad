@@ -1,8 +1,8 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
 public class SpriteOrientation extends SpriteCharacteristicController {
-	public SpriteOrientation(GameObject sprite) {
-		super(sprite);
+	public SpriteOrientation(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 	}
 	@Override
 	protected void populateDefaultText() {

@@ -16,10 +16,12 @@ public class BackgroundColorScheme extends UserInputType{
 	public BackgroundColorScheme(){
 		myNode= new ColorPicker();
 	}
-	public BackgroundColorScheme(GameObject object){
-		this();
+	public BackgroundColorScheme(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
+		myNode= new ColorPicker();
 		mySprite=object;
 		((ColorPicker) myNode).setOnAction(e -> changeColor(((ColorPicker) myNode).getValue()));
+		this.makeInitialNode();
 	}
 	private void changeColor(Color color){
 		((LevelObject) mySprite).setColorPane(Integer.toHexString(color.hashCode()));

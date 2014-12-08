@@ -19,8 +19,8 @@ import javafx.stage.Stage;
 
 public class SpriteMovement extends UserInputDropDownMenu{
 	public enum PossibleSpriteAction {UP, DOWN, RIGHT, LEFT, JUMP, CROUCH}
-	public SpriteMovement(GameObject sprite){
-		super(sprite);
+	public SpriteMovement(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 		currentMenu.setText("Pick Types of Movement");
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/"
 				+ "controller/guiResources/MovementTypes.Properties");

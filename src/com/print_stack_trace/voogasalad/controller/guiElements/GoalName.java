@@ -1,8 +1,8 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
 public class GoalName extends GoalCharacteristicController{
-	public GoalName(GameObject object){
-		super(object);
+	public GoalName(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 
 	}
 	@Override

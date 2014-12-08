@@ -8,7 +8,6 @@ public class Goal implements GoalElement {
     public GoalCharacteristics myGoalCharacteristics;
     public GoalType myGoalType;
     
-    
     public Goal(GoalCharacteristics goalCharacteristics) {
         myGoalCharacteristics = goalCharacteristics;
         setGoalProperties();
@@ -29,4 +28,12 @@ public class Goal implements GoalElement {
 		isCompleted = visitor.visit(this);
 	}
     
+    public GoalCharacteristics getGoalCharacteristics() {
+		return myGoalCharacteristics;
+	}
+
+	public GoalType getGoalType() {
+		return myGoalType;
+	}
+
 }

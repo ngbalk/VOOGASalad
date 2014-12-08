@@ -14,8 +14,8 @@ import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 public class ImageChangeDropDown extends UserInputDropDownMenu{
-	public ImageChangeDropDown(GameObject myObject){
-		super(myObject);
+	public ImageChangeDropDown(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/controller/guiResources/SpriteImages.Properties");
 		data=myResourceReader.getProperties();
 		addMenus();

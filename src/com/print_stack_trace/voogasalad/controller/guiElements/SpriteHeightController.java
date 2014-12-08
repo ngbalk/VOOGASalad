@@ -7,8 +7,8 @@ import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 
 public class SpriteHeightController extends SpriteCharacteristicController{
-	public SpriteHeightController(GameObject sprite){
-		super(sprite);
+	public SpriteHeightController(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
 	}
 	@Override	
 	protected void setCharacteristic(String newValue){
