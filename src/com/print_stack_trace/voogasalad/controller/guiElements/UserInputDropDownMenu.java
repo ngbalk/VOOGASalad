@@ -18,10 +18,15 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 		myNode=new MenuBar();
 		myMenuBar=(MenuBar)myNode;
 		myMenuBar.getMenus().add(currentMenu);
+		this.makeInitialNode();
 	}
-	public UserInputDropDownMenu(GameObject object){
-		this();
+	public UserInputDropDownMenu(String[] values,  double width, double height, double x, double y, GameObject object){
+		super(values, width, height, x, y, object);
+		myNode=new MenuBar();
+		myMenuBar=(MenuBar)myNode;
+		myMenuBar.getMenus().add(currentMenu);
 		mySprite=object;
+		this.makeInitialNode();
 	}
 	protected void setCurrent(String myName){
 		currentMenu.setText(myName);
@@ -35,7 +40,7 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 	}
 	private String returnStringName(String value){
 		String toReturn;
-		if (value.contains(";"))
+		if (canSplit(value))
 			toReturn=Arrays.asList(value.split(";")).iterator().next();
 		else
 			toReturn=value;
@@ -43,6 +48,12 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 	}
 	protected String[] split(String value){
 		return value.split(";");
+	}
+	protected boolean canSplit(String value){
+		if (value.contains(";")){
+			return true;
+		}
+		return false;
 	}
 	protected void checkCorrectMenu(CheckMenuItem currentItem, String menuName){
 		for (MenuItem item: currentMenu.getItems()){

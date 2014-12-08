@@ -12,6 +12,7 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
@@ -84,6 +85,10 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 		currentLevel.setLevelCharacteristics(levelSpecs);
 	}
 
+	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
+		currentLevel.setPhysicsEngine(physicsEngine);
+	}
+
 	public void setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
 		currentLevel.setSoloHandler(SoloPhysicsGenerator.getProgramPhysicEngine(engineType));
 	}
@@ -115,4 +120,5 @@ public class GameAuthorEngine implements IGameAuthorEngine {
     public KeyResult getResultOfKey(KeyCode key) {
     	return currentLevel.getResultOfKey(key);
     }
+
 }

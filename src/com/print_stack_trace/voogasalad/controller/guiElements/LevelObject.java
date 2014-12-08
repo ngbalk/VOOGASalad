@@ -24,7 +24,8 @@ public class LevelObject extends GameObject{
 		myCharacteristics=new LevelCharacteristics();
 	}
 	public LevelObject(ImageView imgView, String imagePath, ViewObjectDelegate myDelegate, LevelCharacteristics levelCharacteristics) {
-		super(imgView, imagePath, myDelegate);
+		this(imgView, imagePath);
+		this.myDelegate = myDelegate;
 		myCharacteristics = levelCharacteristics;
 	}
 	

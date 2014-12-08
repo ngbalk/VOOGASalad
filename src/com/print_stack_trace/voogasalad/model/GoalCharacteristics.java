@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Point2D;
 
 
@@ -15,14 +16,24 @@ public class GoalCharacteristics {
     public Integer myObjectiveID=0;
     public Integer myPointTotal=0;
     public double myDestination=0;
-    public boolean myHorizontalDestination=true;
+    private boolean myHorizontalDestination=true;
+    public SimpleIntegerProperty pointsProperty=new SimpleIntegerProperty(myPointTotal);
 
     
     public GoalCharacteristics(GoalType goalType) {
         myGoalType = goalType;
     }
+    public void setHorizontalDestination(boolean dest){
+    	myHorizontalDestination=dest;
+    }
+    public boolean getHorizontalDestination(){
+    	return myHorizontalDestination;
+    }
     public void setDestination(double destination){
     	myDestination=destination;
+    }
+    public SimpleIntegerProperty getPointsProperty(){
+    	return pointsProperty;
     }
     public void setObjectID(Integer ID){
     	myObjectID=ID;
@@ -32,6 +43,7 @@ public class GoalCharacteristics {
     }
     public void setPointsTotal(Integer points){
     	myPointTotal=points;
+    	pointsProperty.setValue(points);
     }
     public void setName(String name){
     	myName=name;

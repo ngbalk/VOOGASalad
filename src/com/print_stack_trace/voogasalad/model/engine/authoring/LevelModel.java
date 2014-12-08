@@ -57,6 +57,10 @@ public class LevelModel {
         return physicsEngine;
     }
 
+    public void setPhysicsEngine(PhysicsEngine physicsEngine) {
+        this.physicsEngine = physicsEngine;
+    }
+    
     private Integer generateID(Map map) {
         while(map.keySet().contains(currentID)) {
             currentID++;
@@ -149,7 +153,11 @@ public class LevelModel {
 //        if (levelSpecs.requiredNumberOfGoals<0 || levelSpecs.requiredNumberOfGoals > goalMap.size()) {
 //            throw new InvalidNumberOfGoalsException();
 //        }
+<<<<<<< HEAD
         //in what context can you not set a certain cameraType
+=======
+//        in what context can you not set a certain cameraType
+>>>>>>> master
         myLevelChars = levelSpecs;
     }
 

@@ -57,7 +57,7 @@ import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
-	private final static int FPS = 15;
+	private final static int FPS = 10;
 	private Group myRoot;
 	private Group myGameRoot;
 	private ScrollPane myViewPort = new ScrollPane();

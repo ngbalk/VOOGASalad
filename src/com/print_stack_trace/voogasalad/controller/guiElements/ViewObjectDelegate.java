@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
@@ -18,4 +19,5 @@ public interface ViewObjectDelegate {
 	public void deleteObject(SpriteObject object);
 	public void extendRight();
 	public void extendDown();
+	public HashSet<GameObject> getCurrentLevelSprites();
 }

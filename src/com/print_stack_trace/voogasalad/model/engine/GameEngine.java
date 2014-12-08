@@ -26,6 +26,7 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
@@ -61,6 +62,10 @@ public class GameEngine {
 	}
 
 	//-------------------PUBLIC METHODS-------------------//
+
+	public LevelModel loadLevelForEditing(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
+		return (LevelModel) gameData.loadLevel(myFile, LevelModel.class);
+	}
 
 	public void loadGame(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
 		loadLevel((LevelModel) gameData.loadLevel(myFile, LevelModel.class));
@@ -120,6 +125,10 @@ public class GameEngine {
 	}
 
 	//Global Physics
+	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
+		authorEngine.setPhysicsEngine(physicsEngine);
+	}
+
 	public void setProgramPhysicsEngine(ProgramPhysicEngine engineType) {
 		authorEngine.setProgramPhysicsEngine(engineType);
 	}
@@ -236,10 +245,10 @@ public class GameEngine {
 //		g.myDestination = 100;
 //		g.myObjectID = 2;	
 //		currentLevel.setGoal(g);
-
-		LevelCharacteristics l = currentLevel.getLevelCharacteristics();
-		l.requiredNumberOfGoals = 1;
-		currentLevel.setLevelCharacteristics(l);
+//
+//		LevelCharacteristics l = currentLevel.getLevelCharacteristics();
+//		l.requiredNumberOfGoals = 1;
+//		currentLevel.setLevelCharacteristics(l);
 		
 		runtimeEngine = new RuntimeEngine(currentLevel, viewport);
 		runtimeEngine.setFramesPerSecond(framesPerSecond);
@@ -261,4 +270,5 @@ public class GameEngine {
 			runtimeEngine.handleKeyPress(event);
 		}
 	}
+
 }

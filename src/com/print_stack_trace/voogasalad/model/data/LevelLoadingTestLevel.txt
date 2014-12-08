@@ -1,11 +1,9 @@
 {
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
-      "p": {
-        "x": 41,
-        "y": 257
-      },
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
+      "xPosition": 20,
+      "yPosition": 253,
       "interactive": true,
       "objectType": "HERO",
       "startingHealth": 10,
@@ -17,22 +15,20 @@
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "LEFT": [],
         "RIGHT": [],
         "DOWN": [],
+        "LEFT": [],
+        "UP": [],
         "CROUCH": [],
         "JUMP": []
       }
     },
     "1": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
-      "p": {
-        "x": 583,
-        "y": 67
-      },
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "xPosition": 5,
+      "yPosition": 359,
       "interactive": false,
-      "objectType": "REWARD",
+      "objectType": "OBSTACLE",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
@@ -42,47 +38,43 @@
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "LEFT": [],
         "RIGHT": [],
         "DOWN": [],
+        "LEFT": [],
+        "UP": [],
         "CROUCH": [],
         "JUMP": []
       }
     },
     "2": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
-      "p": {
-        "x": 8,
-        "y": 439
-      },
+      "xPosition": 104,
+      "yPosition": 359,
       "interactive": false,
-      "objectType": "PLATFORM",
+      "objectType": "OBSTACLE",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
       "orientation": 0.0,
       "name": "",
-      "width": 1000.0,
+      "width": 100.0,
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "LEFT": [],
         "RIGHT": [],
         "DOWN": [],
+        "LEFT": [],
+        "UP": [],
         "CROUCH": [],
         "JUMP": []
       }
     },
     "3": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
-      "p": {
-        "x": 376,
-        "y": 340
-      },
+      "xPosition": 203,
+      "yPosition": 359,
       "interactive": false,
-      "objectType": "PLATFORM",
+      "objectType": "OBSTACLE",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
@@ -92,22 +84,20 @@
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "LEFT": [],
         "RIGHT": [],
         "DOWN": [],
+        "LEFT": [],
+        "UP": [],
         "CROUCH": [],
         "JUMP": []
       }
     },
     "4": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
-      "p": {
-        "x": 475,
-        "y": 243
-      },
+      "xPosition": 302,
+      "yPosition": 359,
       "interactive": false,
-      "objectType": "PLATFORM",
+      "objectType": "OBSTACLE",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
@@ -117,22 +107,20 @@
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "LEFT": [],
         "RIGHT": [],
         "DOWN": [],
+        "LEFT": [],
+        "UP": [],
         "CROUCH": [],
         "JUMP": []
       }
     },
     "5": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
-      "p": {
-        "x": 576,
-        "y": 339
-      },
+      "xPosition": 295,
+      "yPosition": 135,
       "interactive": false,
-      "objectType": "PLATFORM",
+      "objectType": "OBSTACLE",
       "startingHealth": 10,
       "startingSpeed": 10.0,
       "value": 0,
@@ -142,32 +130,16 @@
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "LEFT": [],
         "RIGHT": [],
         "DOWN": [],
+        "LEFT": [],
+        "UP": [],
         "CROUCH": [],
         "JUMP": []
       }
     }
   },
-  "goalMap": {
-    "0": {
-      "mySpriteID": 0,
-      "myObjectiveID": 1,
-      "isCompleted": false,
-      "myGoalCharacteristics": {
-        "myName": "",
-        "myGoalType": "REACH_OBJECT",
-        "myObjectID": 1,
-        "myObjectiveID": 0,
-        "myPointTotal": 0,
-        "myDestination": 0.0,
-        "myHorizontalDestination": true
-      },
-      "myGoalType": "REACH_OBJECT"
-    }
-  },
+  "goalMap": {},
   "currentID": 5,
   "isLocked": false,
   "physicsEngine": {
@@ -175,19 +147,12 @@
       [
         "NoAction",
         "NoAction",
-        "ObjectBothNoDisplacement",
-        "NoAction",
-        "ObjectTwoDisappear"
-      ],
-      [
-        "NoAction",
-        "NoAction",
         "NoAction",
         "NoAction",
         "NoAction"
       ],
       [
-        "ObjectBothNoDisplacement",
+        "NoAction",
         "NoAction",
         "NoAction",
         "NoAction",
@@ -201,7 +166,14 @@
         "NoAction"
       ],
       [
-        "ObjectTwoDisappear",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
         "NoAction",
         "NoAction",
         "NoAction",
@@ -211,9 +183,11 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "best level ever",
+    "name": "LevelLoadingTestLevel",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
-    "requiredNumberOfGoals": 0
+    "requiredNumberOfGoals": 0,
+    "myHorizontalPaneCount": 1,
+    "myVerticalPaneCount": 1
   },
   "myGoalFactory": {},
   "myKeyMap": {}
