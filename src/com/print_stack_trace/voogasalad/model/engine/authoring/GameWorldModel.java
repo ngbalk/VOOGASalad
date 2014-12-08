@@ -27,6 +27,8 @@ public class GameWorldModel {
         this.gameWorldCharacteristics = gameWorldCharacteristics;
         levelMap = new HashMap<Integer, LevelModel>();
         gameWorldCharacteristics = new GameWorldCharacteristics();
+        levelMap.put(0, new LevelModel());
+        currentLevelIndex = 0;
     }
 
     //-------------------ACCESSORS-------------------//

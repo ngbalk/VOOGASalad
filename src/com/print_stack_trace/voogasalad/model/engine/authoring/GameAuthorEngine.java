@@ -95,6 +95,7 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 	}
 
 	public void setLevelCharacteristics(LevelCharacteristics levelSpecs) {
+	    
 		currentLevel.setLevelCharacteristics(levelSpecs);
 	}
 
