@@ -60,7 +60,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	}
 	public void setXProperty(double val){
 		xVal.setValue(val);
-		System.out.print(val);
 	}
 	
 	public void setYProperty(double val){
@@ -161,8 +160,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		if (new BlankSpaceTextChecker().checkText(myObject.getCode())){
 			for (SpriteObject sprite: myData.get(myObject.getCode())){
 				sprite.setCharacteristics(characteristics);
-				sprite.getCharacteristics().setX(sprite.getImage().getX());
-				sprite.getCharacteristics().setY(sprite.getImage().getY());
 				sprite.getCharacteristics().setWidth(sprite.getImage().getFitWidth());
 				sprite.getCharacteristics().setHeight(sprite.getImage().getFitHeight());
 				sprite.getCharacteristics().setOrientation(sprite.getCharacteristics().getOrientation());
@@ -322,7 +319,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			Integer first = levelModel.getSpriteMap().keySet().iterator().next();
 			levelModel.setMainCharacter(first);
 			LevelCharacteristics levelCharacteristics = levelModel.getLevelCharacteristics();
-			System.out.println("fjkgho" + levelCharacteristics);
 			//transfer general level data in
 			loadLevelObjectFromLevel(levelCharacteristics);
 			//transfer sprite data in
@@ -364,14 +360,17 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		private void loadSpriteObjectsFromLevel(Map<Integer,SpriteCharacteristics> spriteMap) {
 			for(SpriteCharacteristics sc : spriteMap.values()){
 				ImageView imageView = new ImageView(sc.getImage());
-				imageView.relocate(sc.getX(), sc.getY());
+				
 				SpriteObject spriteObject = addSpriteObject(
 						imageView, 
 						sc.getImagePath(), 
 						capitalize(sc.getObjectType().name()));
 				spriteObject.setCharacteristics(sc);
+				spriteObject.getImage().relocate(sc.getX(), sc.getY());
+				spriteObject.getImage().setFitWidth(sc.getWidth());
+				spriteObject.getImage().setFitHeight(sc.getHeight());
+				spriteObject.getImage().setRotate(sc.getOrientation());
 				myGameEngine.updateObject(spriteObject.getId(), spriteObject.getCharacteristics());
-				System.out.println("ID: " + spriteObject.getId());
 			}
 		}
 		private void loadGoalObjectsFromLevel(Map<Integer,GoalCharacteristics> goalMap) {
