@@ -46,7 +46,7 @@ public class PhysicsEngine {
         //Defaults
         for(int i = 0; i < MATRIX_SIZE; i++) {
             for(int j = 0; j < MATRIX_SIZE; j++) {
-                decisionMatrix[i][j] = CollisionResult.NoAction;
+                decisionMatrix[i][j] = CollisionResult.ObjectBothNoDisplacement;
             }
         }
         soloHandler = SoloPhysicsGenerator.getProgramPhysicEngine(ProgramPhysicEngine.EarthPhysicsEngine);
@@ -71,13 +71,15 @@ public class PhysicsEngine {
      * @see	CollisionDetector, RuntimeSpriteCharacteristics
      */
     public void animateAll(RuntimeModel currentRuntime, int framesPerSecond) {
+    	
         Collection<RuntimeSpriteCharacteristics> allObjects = currentRuntime.getRuntimeSpriteMap().values();
         for(RuntimeSpriteCharacteristics obj : allObjects) {
             obj.setDecelerationConstant(0.0f);
             obj.isColliding = obj.isCollidingHorizontally = obj.isCollidingVertically = false;
             if(obj.interactive) soloHandler.applyPhysics(obj, framesPerSecond);
-
         }
+        
+
 
         Object[] array = allObjects.toArray();
         for(int i = 0; i < array.length; i++) {
@@ -113,6 +115,7 @@ public class PhysicsEngine {
             if (obj.shouldBeRemoved()) toRemove.add(obj);
         }
         allObjects.removeAll(toRemove);
+
     }
 
     private void performEnemyAI(Object[] array) {
