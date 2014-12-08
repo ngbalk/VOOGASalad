@@ -46,7 +46,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 	private SimpleDoubleProperty xVal=new SimpleDoubleProperty(0);
 	private SimpleDoubleProperty yVal=new SimpleDoubleProperty(0);
 	private String myStyle="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
-	private GameWorldCharacteristics gameWorld=new GameWorldCharacteristics();
+	private GameWorldCharacteristics gameWorldCharacteristics=new GameWorldCharacteristics();
 	public GamePane(double width, double height, GameEngine gameEngine){
 		myWidth=width;
 		myHeight=height;
@@ -191,6 +191,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		if (new BlankSpaceTextChecker().checkText(name)){
 			myObject.getCharacteristics().setName(name);
 			levelTracker.addLevel(myObject, e->levelChange(myObject));
+			myObject.getCharacteristics().setID(levelTracker.getLevels().size());
 			levelChange(myObject);
 		}
 	}
@@ -203,7 +204,9 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		this.getChildren().addAll(levelTracker.activeSprites());
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
-		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
+		myGameEngine.addLevel(levelTracker.getLevels().size(),currentLevel.getCharacteristics());
+		myGameEngine.setCurrentLevel(levelTracker.getLevels().size());
+		//myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
 	}
 
 	public ImageView getBackgroundImage(){

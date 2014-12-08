@@ -116,6 +116,14 @@ public class GameEngine {
 	public void setGameWorldCharacteristics(GameWorldCharacteristics gameWorldCharacteristics) {
 		authorEngine.setGameWorldCharacteristics(gameWorldCharacteristics);
 	}
+	
+	public void addLevel(Integer levelIndex, LevelCharacteristics levelCharacteristics) {
+		authorEngine.addLevel(levelIndex, levelCharacteristics);
+	}
+	
+	public void setCurrentLevel(int levelIndex) {
+		authorEngine.setCurrentLevel(levelIndex);
+	}
 
 	//Adding, Removing, and Updating Sprites
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) {

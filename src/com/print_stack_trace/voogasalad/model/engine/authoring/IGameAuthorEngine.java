@@ -25,6 +25,7 @@ public interface IGameAuthorEngine {
 	public void setGameWorldModel(GameWorldModel gameWorldModel) throws ElementLockedException;
 	public GameWorldCharacteristics getGameWorldCharacteristics();
 	public void setGameWorldCharacteristics(GameWorldCharacteristics gameSpecs) throws ElementLockedException;
+	public void addLevel(Integer levelIndex, LevelCharacteristics levelSpecs) throws ElementLockedException;
 	public void setCurrentLevel(int index) throws ElementLockedException, ArrayIndexOutOfBoundsException;
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) throws ElementLockedException;
 	public void updateObject(Integer modelID, SpriteCharacteristics spriteModel) throws ElementLockedException;

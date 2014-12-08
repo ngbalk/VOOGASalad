@@ -33,6 +33,9 @@ public class LevelCharacteristics {
 	public Integer getID() {
 		return ID;
 	}
+	public void setID(int ID) {
+		this.ID=ID;
+	}
 	public void setName(String name){
 		this.name = name;
 	}

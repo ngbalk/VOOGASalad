@@ -52,7 +52,11 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 	public void setGameWorldCharacteristics(GameWorldCharacteristics gameSpecs) {
 		gameWorldModel.setGameWorldCharacteristics(gameSpecs);
 	}
-
+	
+	public void addLevel(Integer levelIndex, LevelCharacteristics levelCharacteristics) {
+		gameWorldModel.addLevel(levelIndex, levelCharacteristics);
+	}
+	
 	public void setCurrentLevel(int index){
 		gameWorldModel.setCurrentLevel(index);
 		currentLevel = gameWorldModel.getCurrentLevel();

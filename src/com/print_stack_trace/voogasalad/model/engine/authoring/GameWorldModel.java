@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
+import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 
 public class GameWorldModel {
     private GameWorldCharacteristics gameWorldCharacteristics;
@@ -60,9 +61,15 @@ public class GameWorldModel {
         return levelMap.size();
     }
 
-    public void addLevel(Integer id, LevelModel level) {
-        levelMap.put(id, level);
+    public void addLevel(Integer id, LevelModel levelModel) {
+        levelMap.put(id, levelModel);
     }
+    
+    public void addLevel(Integer id, LevelCharacteristics levelCharacteristics) {
+        LevelModel levelModel = new LevelModel();
+        levelModel.setLevelCharacteristics(levelCharacteristics);
+    	levelMap.put(id, levelModel);
+   }
 
     public LevelModel getCurrentLevel() {
     	return levelMap.get(currentLevelIndex);
