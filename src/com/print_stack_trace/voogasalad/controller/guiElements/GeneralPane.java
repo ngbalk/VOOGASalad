@@ -43,6 +43,7 @@ public abstract class GeneralPane extends Pane{
 			myStage.close();
 		}
 		myStage=new Stage();
+		
 		ScrollBarPane myScroll=new ScrollBarPane(myWidth, myHeight, myNode);
 		Scene myScene=new Scene(myScroll, myWidth, myHeight);
 		myStage.setScene(myScene);
