@@ -325,7 +325,10 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			LevelModel levelModel = loadLevelModelFromFile();
 			if(levelModel == null)
 				return;
+			Integer first = levelModel.getSpriteMap().keySet().iterator().next();
+			levelModel.setMainCharacter(first);
 			LevelCharacteristics levelCharacteristics = levelModel.getLevelCharacteristics();
+			System.out.println("fjkgho" + levelCharacteristics);
 			//transfer general level data in
 			loadLevelObjectFromLevel(levelCharacteristics);
 			//transfer sprite data in
@@ -346,7 +349,6 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			File file = fileChooser.showOpenDialog(newStage);
 			if (file != null) {
 				try {
-					//FileInputStream myFile=new FileInputStream(file);
 					return myGameEngine.loadLevelForEditing(file);
 				} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
 					System.out.println(ex.getMessage());
@@ -367,13 +369,26 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		}
 		private void loadSpriteObjectsFromLevel(Map<Integer,SpriteCharacteristics> spriteMap) {
 			for(SpriteCharacteristics sc : spriteMap.values()){
+				ImageView imageView = new ImageView(sc.getImage());
+				imageView.relocate(sc.getX(), sc.getY());
 				SpriteObject spriteObject = addSpriteObject(
-						new ImageView(sc.getImage()), 
+						imageView, 
 						sc.getImagePath(), 
-						sc.getObjectType().toString());
+						capitalize(sc.getObjectType().name()));
 				spriteObject.setCharacteristics(sc);
-				spriteObject.update();
+				myGameEngine.updateObject(spriteObject.getId(), spriteObject.getCharacteristics());
+				System.out.println("ID: " + spriteObject.getId());
 			}
+		}
+		private String capitalize(String line) {
+			/*
+			String[] strArray = line.split(" ");
+			String capitalizedString = "";
+			for(int i=0; i<strArray.length; i++)
+				capitalizedString += Character.toUpperCase(strArray[i].charAt(0))+strArray[i].substring(1).toLowerCase() + " ";
+			return capitalizedString
+			*/
+			return Character.toUpperCase(line.charAt(0)) + line.substring(1).toLowerCase();
 		}
 		private void loadGoalObjectsFromLevel(Map<Integer,Goal> goalMap) {
 			for(Goal goal : goalMap.values()){
