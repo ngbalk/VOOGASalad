@@ -19,7 +19,8 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactor
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 public class GameAuthorEngine implements IGameAuthorEngine {
-
+	
+	private GameWorldModel gameWorldModel;
 	private List<LevelModel> levelList;
 	private LevelModel currentLevel;
 
@@ -32,7 +33,8 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 	}
 
 	public GameAuthorEngine(){
-		levelList = new ArrayList<>();
+		gameWorldModel = new GameWorldModel();
+		levelList = gameWorldModel.getLevels();
 		currentLevel = new LevelModel();
 		levelList.add(currentLevel);
 	}
