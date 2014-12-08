@@ -20,6 +20,7 @@ import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.data.IGameData;
 import com.print_stack_trace.voogasalad.model.data.GameData;
 import com.print_stack_trace.voogasalad.model.data.HighScore;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameWorldModel;
 import com.print_stack_trace.voogasalad.model.engine.authoring.IGameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
@@ -38,6 +39,7 @@ import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 
 public class GameEngine {
+	private GameWorldModel gameWorldModel;
 	private LevelModel currentLevel;
 	private RuntimeEngine runtimeEngine;
 	private IGameAuthorEngine authorEngine;
@@ -48,27 +50,29 @@ public class GameEngine {
 
 	//-------------------CONSTRUCTORS-------------------//
 
-	/**
-	 * Constructor Method.
-	 */
-	public GameEngine(Dimension viewport) {
-		this(viewport, new GameAuthorEngine(), new GameData());
+	public GameEngine() {
+		gameWorldModel = new GameWorldModel();
 	}
-
+	
 	public GameEngine(Dimension viewport, IGameAuthorEngine authorEngine, IGameData gameData) {
+		this();
 		this.authorEngine = authorEngine;
 		this.gameData = gameData;
 		this.viewport = viewport;
 	}
-
+	
+	public GameEngine(Dimension viewport) {
+		this(viewport, new GameAuthorEngine(), new GameData());
+	}
+	
 	//-------------------PUBLIC METHODS-------------------//
 
-	public LevelModel loadLevelForEditing(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
-		return (LevelModel) gameData.loadLevel(myFile, LevelModel.class);
-	}
-
 	public void loadGame(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
-		loadLevel((LevelModel) gameData.loadLevel(myFile, LevelModel.class));
+		initializeGame(loadGameFromFile(myFile));
+	}
+	
+	public GameWorldModel loadGameFromFile(File myFile) throws JsonSyntaxException, ClassNotFoundException, IOException {
+		return (GameWorldModel) gameData.loadGame(myFile, LevelModel.class);
 	}
 
 	public void saveGame() throws IOException {
@@ -188,7 +192,13 @@ public class GameEngine {
 	public void update() {
 		runtimeEngine.update();
 	}
+	
+	//-------------------ACCESSORS-------------------//
 
+	public LevelModel getCurrentLevel() {
+		return currentLevel;
+	}
+	
 	public RuntimeModel getStatus() {
 		return runtimeEngine.getStatus();
 	}
@@ -225,16 +235,10 @@ public class GameEngine {
 		this.framesPerSecond = framesPerSecond;
 	}
 
-	//-------------------ACCESSORS-------------------//
-
-	public LevelModel getCurrentLevel() {
-		return currentLevel;
-	}
-
 	//-------------------PRIVATE METHODS-------------------//
 
-	private void loadLevel(LevelModel level) {
-		this.currentLevel = level;
+	private void initializeGame(GameWorldModel gameWorld) {
+		this.currentLevel = gameWorld.getCurrentLevel();
 
 //		FIXME: Remove this work around garbage
 		Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
