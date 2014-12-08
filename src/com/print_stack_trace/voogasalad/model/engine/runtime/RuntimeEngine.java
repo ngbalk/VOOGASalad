@@ -42,7 +42,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		super(currentLevel);
 		runtimeModel = new RuntimeModel(currentLevel, viewport);
 		physicsEngine = currentLevel.getPhysicsEngine();
-		cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
+		cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().getCameraType());
 	}
 
 	//-------------------PUBLIC METHODS-------------------//

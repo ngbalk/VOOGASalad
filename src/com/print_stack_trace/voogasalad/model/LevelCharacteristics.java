@@ -23,7 +23,7 @@ public class LevelCharacteristics {
 	private String myColor;
 	private int myHorizontalPaneCount=1;
 	private int myVerticalPaneCount=1;
-	public CameraType cameraType = CameraType.PlayerFollow; 
+	private CameraType cameraType = CameraType.PlayerFollow; 
 	
 	public String getName() {
 		return name;
@@ -64,6 +64,14 @@ public class LevelCharacteristics {
 	}
 	public int getHorizontalPaneCount(){
 		return this.myHorizontalPaneCount;
+	}
+	
+	public CameraType getCameraType(){
+		return this.cameraType;
+	}
+	
+	public void setCamera(CameraType camType){
+		this.cameraType = camType;
 	}
 	
 }
