@@ -33,7 +33,6 @@ public class GoalTypesMenu extends UserInputDropDownMenu {
 				Label myLabel=null;
 				if (this.canSplit(data.get(myName))){
 					myIterator=Arrays.asList(data.get(myName).split(";")).iterator();
-					System.out.println(data.get(myName));
 					myIterator.next();
 					String className=myIterator.next();
 					if (root.size()>=2){
@@ -43,7 +42,7 @@ public class GoalTypesMenu extends UserInputDropDownMenu {
 					this.makeLabel(myName,value[1],myWidth,myHeight, myX, myY, myType);
 				}
 				else{
-					if (root.size()>=1){
+					if (root.size()>=2){
 						this.myPanes.getChildren().remove(this.root.get(root.size()-1));
 					}
 				}

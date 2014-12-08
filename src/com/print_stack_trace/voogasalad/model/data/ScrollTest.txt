@@ -1,10 +1,10 @@
 {
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
       "p": {
-        "x": 18,
-        "y": 66
+        "x": 0,
+        "y": 0
       },
       "interactive": true,
       "objectType": "HERO",
@@ -12,97 +12,51 @@
       "startingSpeed": 10.0,
       "value": 0,
       "orientation": 0.0,
-      "name": "",
+      "name": "mario",
       "width": 100.0,
       "height": 100.0,
-      "myMovements": {},
+      "myMovements": {
+        "RIGHT": "RIGHT",
+        "LEFT": "LEFT",
+        "JUMP": "UP"
+      },
       "myAnimations": {
-        "UP": [],
+        "RIGHT": [],
         "LEFT": [],
-        "CROUCH": [],
+        "UP": [],
         "DOWN": [],
         "JUMP": [],
-        "RIGHT": []
+        "CROUCH": []
       }
     },
     "1": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 18,
-        "y": 199
+        "x": 3,
+        "y": 453
       },
       "interactive": false,
       "objectType": "PLATFORM",
       "startingHealth": 10,
       "startingSpeed": 10.0,
-      "value": 100,
+      "value": 0,
       "orientation": 0.0,
       "name": "",
       "width": 2000.0,
       "height": 100.0,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
+        "RIGHT": [],
         "LEFT": [],
-        "CROUCH": [],
+        "UP": [],
         "DOWN": [],
         "JUMP": [],
-        "RIGHT": []
-      }
-    },
-    "2": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
-      "p": {
-        "x": 152,
-        "y": 82
-      },
-      "interactive": false,
-      "objectType": "REWARD",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 100,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {},
-      "myAnimations": {
-        "UP": [],
-        "LEFT": [],
-        "CROUCH": [],
-        "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
-      }
-    },
-    "3": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
-      "p": {
-        "x": 310,
-        "y": 89
-      },
-      "interactive": false,
-      "objectType": "REWARD",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 100,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {},
-      "myAnimations": {
-        "UP": [],
-        "LEFT": [],
-        "CROUCH": [],
-        "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
+        "CROUCH": []
       }
     }
   },
   "goalMap": {},
-  "currentID": 3,
+  "currentID": 1,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
@@ -111,7 +65,7 @@
         "NoAction",
         "ObjectBothNoDisplacement",
         "NoAction",
-        "HeroGetsRewards"
+        "NoAction"
       ],
       [
         "NoAction",
@@ -121,7 +75,7 @@
         "NoAction"
       ],
       [
-        "NoAction",
+        "ObjectBothNoDisplacement",
         "NoAction",
         "NoAction",
         "NoAction",
@@ -144,11 +98,12 @@
     ],
     "handlerMap": {}
   },
+  "myCameraType": "SCROLLING_RIGHT_TO_LEFT",
   "myLevelChars": {
-    "name": "jack\u0027s badder ass level",
+    "name": "ScrollTest",
     "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
     "requiredNumberOfGoals": 1,
-    "myHorizontalPaneCount": 1,
+    "myHorizontalPaneCount": 2,
     "myVerticalPaneCount": 1
   },
   "myGoalFactory": {},

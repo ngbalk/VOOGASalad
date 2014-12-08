@@ -65,6 +65,7 @@ public abstract class UserInputType  {
 	}
 	
 	protected void makeLabel(String name, String style, double width, double height, double x, double y, UserInputType type){
+		
 		makeLabel(name, style, width, height, x, y);
 		this.makeNode(type.getType());
 		

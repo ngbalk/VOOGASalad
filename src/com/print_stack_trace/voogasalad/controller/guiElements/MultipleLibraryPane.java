@@ -31,10 +31,12 @@ public class MultipleLibraryPane extends TabPane{
 			Properties prop = new Properties();
 			InputStream stream = getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE);
 			prop.load(stream);
+			
 			for(Object pictureName : prop.keySet()){
 				Tab myNewTab=new Tab();
 				myNewTab.setText((String) pictureName);
 				Class myClass=Class.forName(prop.getProperty((String) pictureName));
+				
 				AbstractLibraryPane myLibrary=(AbstractLibraryPane) myClass.getConstructor(Number.class, Number.class, Pane.class).newInstance(myWidth, myHeight, myMainPane);
 				ScrollBarPane myPane=new ScrollBarPane(myWidth, myHeight, myLibrary);
 				myNewTab.setContent(myPane);

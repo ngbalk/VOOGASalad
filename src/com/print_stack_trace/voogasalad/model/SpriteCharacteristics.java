@@ -23,8 +23,9 @@ import javafx.scene.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
+
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 public class SpriteCharacteristics {
 
@@ -39,6 +40,7 @@ public class SpriteCharacteristics {
 	public static final String DEFAULT_NAME="";
 	public static final double DEFAULT_WIDTH=100;
 	public static final double DEFAULT_HEIGHT=100;
+	public static final boolean DEFAULT_DOUBLE_JUMP=false;
 
 	// GAME AUTHORING VARIABLES
 	public transient Image img;
@@ -55,9 +57,9 @@ public class SpriteCharacteristics {
 	public String name;
 	public double width;
 	public double height;
-
-	public HashMap<PossibleSpriteAction, KeyCode> myMovements;
-	public HashMap<PossibleSpriteAction, ArrayList<File>> myAnimations;
+	public boolean doubleJump;
+	public HashMap<KeyCode,KeyResult> myMovements;
+	public HashMap<KeyResult, ArrayList<File>> myAnimations;
 
 
 	//-------------------CONSTRUCTORS-------------------//
@@ -79,9 +81,9 @@ public class SpriteCharacteristics {
 		width=DEFAULT_WIDTH;
 		height=DEFAULT_HEIGHT;
 		name=DEFAULT_NAME;
-		myMovements=new HashMap<PossibleSpriteAction, KeyCode>();
-
-		myAnimations=new HashMap<PossibleSpriteAction, ArrayList<File>>();
+		myMovements=new HashMap<KeyCode, KeyResult>();
+		doubleJump=DEFAULT_DOUBLE_JUMP;
+		myAnimations=new HashMap<KeyResult, ArrayList<File>>();
 		this.initiateAnimations();
 
 		interactive = DEFAULT_INTERACTIVE;
@@ -113,11 +115,12 @@ public class SpriteCharacteristics {
 		myMovements=obj.getMovements();
 		imagePath = obj.getImagePath();
 		myAnimations=obj.getAnimations();
+		doubleJump=obj.canDoubleJump();
 		
 	}
 	
 	public void initiateAnimations(){
-		for (PossibleSpriteAction action: PossibleSpriteAction.values()){
+		for (KeyResult action: KeyResult.values()){
 			myAnimations.put(action, new ArrayList());
 		}
 		
@@ -128,7 +131,7 @@ public class SpriteCharacteristics {
 	public java.awt.Image getJavaAWTImage () {
 		return img;
 	}
-	public HashMap<PossibleSpriteAction, ArrayList<File>> getAnimations(){
+	public HashMap<KeyResult, ArrayList<File>> getAnimations(){
 		return myAnimations;
 	}
     public javafx.scene.image.Image getImage () {
@@ -144,11 +147,12 @@ public class SpriteCharacteristics {
     public void setImage(javafx.scene.image.Image image) {
         this.img = SwingFXUtils.fromFXImage(image, null);
     }
-    public ArrayList<File> getAnimationPath(PossibleSpriteAction action){
+    public ArrayList<File> getAnimationPath(KeyResult action){
     	return myAnimations.get(action);
     }
     
-    public ArrayList<javafx.scene.image.Image> getAnimationImages(PossibleSpriteAction action){
+    
+    public ArrayList<javafx.scene.image.Image> getAnimationImages(KeyResult action){
     	ArrayList<javafx.scene.image.Image> myImages=new ArrayList<javafx.scene.image.Image>();
     	BufferedImage buffer;
     	for (File path: getAnimationPath(action)){
@@ -165,7 +169,7 @@ public class SpriteCharacteristics {
     	return myImages;
     }
 
-    public void addAnimation(PossibleSpriteAction myAction, int index, File imgPath){
+    public void addAnimation(KeyResult myAction, int index, File imgPath){
     	if (myAnimations.get(myAction).size()>index)
     		myAnimations.get(myAction).set(index,imgPath);
     	else {
@@ -269,11 +273,11 @@ public class SpriteCharacteristics {
 		System.out.println("Original:" + p.y + "\nNew: "+yPosition);
 	}
 	
-	public void addMovement(PossibleSpriteAction myAction, KeyCode myKey){
-		myMovements.put(myAction, myKey);
+	public void addMovement(KeyResult myAction, KeyCode myKey){
+		myMovements.put(myKey, myAction);
 	}
 
-	public HashMap<PossibleSpriteAction, KeyCode> getMovements(){
+	public HashMap<KeyCode, KeyResult> getMovements(){
 		return myMovements;
 	}
 
@@ -299,6 +303,12 @@ public class SpriteCharacteristics {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	public boolean canDoubleJump(){
+		return doubleJump;
+	}
+	public void setDoubleJump(boolean jump){
+		doubleJump=jump;
 	}
 
 
