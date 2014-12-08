@@ -1,10 +1,26 @@
 {
+  "goalMap": {
+    "0": {
+      "myName": "",
+      "myGoalType": "REACH_OBJECT",
+      "myObjectID": 0,
+      "myObjectiveID": 0,
+      "myPointTotal": 0,
+      "myDestination": 0.0,
+      "myHorizontalDestination": true,
+      "pointsProperty": {
+        "name": "",
+        "value": 0,
+        "valid": true
+      }
+    }
+  },
   "mySpriteMap": {
     "0": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png",
       "p": {
-        "x": 18,
-        "y": 66
+        "x": 40,
+        "y": 60
       },
       "interactive": true,
       "objectType": "HERO",
@@ -15,71 +31,48 @@
       "name": "",
       "width": 100.0,
       "height": 100.0,
+      "doubleJump": false,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "LEFT": [],
-        "CROUCH": [],
-        "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
+        "Down": [],
+        "Jump": [],
+        "Default": [],
+        "Left": [],
+        "Up": [],
+        "Right": []
       }
     },
     "1": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
       "p": {
-        "x": 18,
-        "y": 199
+        "x": 40,
+        "y": 217
       },
       "interactive": false,
       "objectType": "PLATFORM",
       "startingHealth": 10,
       "startingSpeed": 10.0,
-      "value": 100,
+      "value": 0,
       "orientation": 0.0,
       "name": "",
       "width": 2000.0,
       "height": 100.0,
+      "doubleJump": false,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "LEFT": [],
-        "CROUCH": [],
-        "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
+        "Down": [],
+        "Jump": [],
+        "Default": [],
+        "Left": [],
+        "Up": [],
+        "Right": []
       }
     },
     "2": {
       "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
       "p": {
-        "x": 152,
-        "y": 82
-      },
-      "interactive": false,
-      "objectType": "REWARD",
-      "startingHealth": 10,
-      "startingSpeed": 10.0,
-      "value": 100,
-      "orientation": 0.0,
-      "name": "",
-      "width": 100.0,
-      "height": 100.0,
-      "myMovements": {},
-      "myAnimations": {
-        "UP": [],
-        "LEFT": [],
-        "CROUCH": [],
-        "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
-      }
-    },
-    "3": {
-      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
-      "p": {
-        "x": 310,
-        "y": 89
+        "x": 380,
+        "y": 84
       },
       "interactive": false,
       "objectType": "REWARD",
@@ -90,19 +83,19 @@
       "name": "",
       "width": 100.0,
       "height": 100.0,
+      "doubleJump": false,
       "myMovements": {},
       "myAnimations": {
-        "UP": [],
-        "LEFT": [],
-        "CROUCH": [],
-        "DOWN": [],
-        "JUMP": [],
-        "RIGHT": []
+        "Down": [],
+        "Jump": [],
+        "Default": [],
+        "Left": [],
+        "Up": [],
+        "Right": []
       }
     }
   },
-  "goalMap": {},
-  "currentID": 3,
+  "currentID": 2,
   "isLocked": false,
   "physicsEngine": {
     "decisionMatrix": [
@@ -111,7 +104,7 @@
         "NoAction",
         "ObjectBothNoDisplacement",
         "NoAction",
-        "HeroGetsRewards"
+        "ObjectTwoDisappear"
       ],
       [
         "NoAction",
@@ -145,11 +138,17 @@
     "handlerMap": {}
   },
   "myLevelChars": {
-    "name": "jack\u0027s badder ass level",
-    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "name": "newest bad A level",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
     "requiredNumberOfGoals": 1,
-    "myHorizontalPaneCount": 1,
-    "myVerticalPaneCount": 1
+    "cameraStart": {
+      "x": 0,
+      "y": 0
+    },
+    "cameraSpeed": 3,
+    "myHorizontalPaneCount": 4,
+    "myVerticalPaneCount": 1,
+    "cameraType": "ConstantHorizontalScroll"
   },
   "myGoalFactory": {},
   "myKeyMap": {}

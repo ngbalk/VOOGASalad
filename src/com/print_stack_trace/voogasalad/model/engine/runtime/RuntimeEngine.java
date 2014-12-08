@@ -15,6 +15,7 @@ import java.util.Map;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
@@ -24,12 +25,15 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplica
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
 public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
 	int framesPerSecond;
 	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
+	private GoalFactory goalFactory;
+	private Map<Integer, Goal> goalMap;
 	private CameraHandler cameraHandler;
 
 	//-------------------CONSTRUCTORS-------------------//
@@ -42,6 +46,9 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		super(currentLevel);
 		runtimeModel = new RuntimeModel(currentLevel, viewport);
 		physicsEngine = currentLevel.getPhysicsEngine();
+		goalFactory = new GoalFactory();
+		goalMap = new HashMap<>();
+		populateGoalMap();
 		cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
 	}
 
@@ -61,7 +68,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
 		int completedCount = 0;
-		for(Goal g : runtimeModel.getGoalMap().values()) {
+		for(Goal g : goalMap.values()) {
 			g.acceptChecker(goalChecker);
 			if(g.isCompleted)completedCount++;
 		}
@@ -132,6 +139,11 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		else{
 			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
 			return;
+		}
+	}
+	public void populateGoalMap(){
+		for(Integer i : runtimeModel.getGoalMap().keySet()){
+			goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
 		}
 	}
 }
