@@ -148,7 +148,7 @@
     "cameraSpeed": 3,
     "myHorizontalPaneCount": 4,
     "myVerticalPaneCount": 1,
-    "cameraType": "PlayerFollow"
+    "cameraType": "ConstantHorizontalScroll"
   },
   "myGoalFactory": {},
   "myKeyMap": {}

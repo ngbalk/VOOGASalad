@@ -42,7 +42,6 @@ public class GoalChecker implements GoalElementVisitor {
 
 	@Override
 	public boolean visit(ReachObject goal) {
-		System.out.println("OBJECT REACHED!!!!!!!!!!!!!!!");
 		return CollisionDetector.haveCollided(myLevel.getRuntimeSpriteMap().get(goal.getMySpriteID()), 
 				myLevel.getRuntimeSpriteMap().get(goal.getMyObjectiveID()));
 	}
