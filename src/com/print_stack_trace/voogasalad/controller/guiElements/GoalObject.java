@@ -7,11 +7,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.ImageView;
 
 public class GoalObject extends GameObject {
-
 	private GoalCharacteristics myCharacteristics;
 	private SimpleIntegerProperty pointsProperty=new SimpleIntegerProperty(0);
-	public GoalObject(ImageView image, String imagePath, ViewObjectDelegate delegate) {
-		super(image, imagePath, delegate);
+	public GoalObject(String imagePath, ViewObjectDelegate delegate) {
+		super(imagePath, delegate);
 	}
 	public GoalObject(GoalType myType, ViewObjectDelegate delegate){
 		super(myType);
@@ -47,9 +46,6 @@ public class GoalObject extends GameObject {
 	public void showPane() {
 		// TODO Auto-generated method stub
 	}
-	@Override
-	public ImageView getImage() {
-		return this.myImage;
-	}
+	
 	
 }
