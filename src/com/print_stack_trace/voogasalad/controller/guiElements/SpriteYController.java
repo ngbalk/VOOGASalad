@@ -13,7 +13,7 @@ public class SpriteYController extends SpriteCharacteristicController{
 	@Override
 	public void setCharacteristic(String newValue){
 	
-		double newYValue = mySprite.getImage().getLayoutY();
+		double newYValue = ((SpriteObject)mySprite).getCharacteristics().getY();
 		try{
 			newYValue = Double.parseDouble(newValue);
 		}

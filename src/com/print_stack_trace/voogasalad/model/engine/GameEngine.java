@@ -75,7 +75,6 @@ public class GameEngine {
 		LevelModel lvl = authorEngine.getCurrentLevel();
 		gameData.writeLevel(lvl);
 		debugLevel(lvl);
-
 	}
 
 	public void debugLevel(LevelModel lvl){

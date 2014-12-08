@@ -88,6 +88,9 @@ public class SpriteObject extends GameObject{
 	}
 	public void setCharacteristics(SpriteCharacteristics characteristics){
 		myCharacteristics=characteristics;	
+		xProp.setValue(characteristics.getX());
+		yProp.setValue(characteristics.getY());
+		
 	}
 	@Override
 	protected void update() {
