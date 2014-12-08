@@ -20,12 +20,12 @@ public class SpriteObject extends GameObject{
 	private GameEngine myGameEngine;
 	protected SpriteCharacteristics myCharacteristics;
 
-	public SpriteObject(int ID, ImageView image, String imagePath, String type){
-		this(ID, image, imagePath, type, null);
+	public SpriteObject(int ID, String imagePath, String type){
+		this(ID, imagePath, type, null);
 		
 	}
-	public SpriteObject(int ID, ImageView image, String imagePath, String type, ViewObjectDelegate delegate){
-		super(image, imagePath, delegate);
+	public SpriteObject(int ID, String imagePath, String type, ViewObjectDelegate delegate){
+		super(imagePath, delegate);
 		myID=ID;
 		myType=type;
 		xProp=new SimpleDoubleProperty(0); 

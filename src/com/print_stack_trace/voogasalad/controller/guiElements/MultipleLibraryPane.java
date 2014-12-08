@@ -38,6 +38,7 @@ public class MultipleLibraryPane extends TabPane{
 				Class myClass=Class.forName(prop.getProperty((String) pictureName));
 				
 				AbstractLibraryPane myLibrary=(AbstractLibraryPane) myClass.getConstructor(Number.class, Number.class, Pane.class).newInstance(myWidth, myHeight, myMainPane);
+				
 				ScrollBarPane myPane=new ScrollBarPane(myWidth, myHeight, myLibrary);
 				myNewTab.setContent(myPane);
 				myNewTab.setClosable(false);
