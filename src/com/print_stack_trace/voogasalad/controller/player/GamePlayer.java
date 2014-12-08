@@ -149,6 +149,8 @@ public class GamePlayer implements ViewController {
 
 		myPlayPane.getChildren().clear();
 		RuntimeModel r = myGameEngine.getStatus();
+		myGameRoot.setTranslateX(-r.camera.x);
+		myGameRoot.setTranslateY(-r.camera.y);
 		LevelCharacteristics levelCharacteristics = r.getLevelCharacteristics();
 		Map<Integer, RuntimeSpriteCharacteristics> spriteMap = r.getRuntimeSpriteMap();
 		ImageView background = new ImageView(new Image(levelCharacteristics.getBackgroundImagePath()));

@@ -11,7 +11,8 @@ import java.util.HashSet;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
+
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -32,7 +33,7 @@ public class KeyFramePopUpPane extends GeneralPane {
 	private Pane keyFramePane;
 	private Pane picturePane;
 	private SpriteObject mySprite;
-	private HashMap<PossibleSpriteAction, ArrayList<File>> myAnimations=new HashMap<PossibleSpriteAction, ArrayList<File>>();
+	private HashMap<KeyResult, ArrayList<File>> myAnimations=new HashMap<KeyResult, ArrayList<File>>();
 	public KeyFramePopUpPane(SpriteObject object){
 		super();
 		mySprite=object;
@@ -52,7 +53,7 @@ public class KeyFramePopUpPane extends GeneralPane {
 
 	}
 	private void makeMovementMap(){
-		for (PossibleSpriteAction action: PossibleSpriteAction.values()){
+		for (KeyResult action: KeyResult.values()){
 			System.out.println(mySprite.getCharacteristics().getAnimationImages(action));
 			myAnimations.put(action, mySprite.getCharacteristics().getAnimationPath(action));
 		}
@@ -103,7 +104,7 @@ public class KeyFramePopUpPane extends GeneralPane {
 	private void setCurrentKeyImage(Image img, File imagePath){
 		myBox.getCurrentKeyFrame().getValue().setImage(img);
 		myBox.getCurrentKeyFrame().getValue().setImagePath(imagePath);
-		for (PossibleSpriteAction action: PossibleSpriteAction.values()){
+		for (KeyResult action: KeyResult.values()){
 			if (action.name().equals(myBox.getCurrentKeyFrame().getValue().getName())&&img!=null){
 				mySprite.getCharacteristics().addAnimation(action,(myBox.getCurrentKeyFrame().getValue().getIndex()-1), imagePath);
 				mySprite.getDelegate().update(mySprite);

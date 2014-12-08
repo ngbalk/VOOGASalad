@@ -21,7 +21,10 @@ public class CollisionDetector {
 	 * @return true if a collision happened, false otherwise
 	 */
 	public static boolean haveCollided(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB) {
-		Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
+	    if(spriteA== null || spriteB==null) { //why does this work
+	                return false;
+	          }
+	    Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
 		Rectangle rect2 = new Rectangle((int) spriteB.getX(), (int) spriteB.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
 		return rect1.intersects(rect2);
 	}

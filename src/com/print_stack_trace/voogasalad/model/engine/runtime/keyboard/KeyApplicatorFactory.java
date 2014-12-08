@@ -4,8 +4,9 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 
 public class KeyApplicatorFactory {
 	
-	public static final int V_KEY_CONSTANT = 50;
+	public static final int V_KEY_CONSTANT = 30;
 	public static final int H_KEY_CONSTANT = 20;
+	public static final int V_TERMINAL_VELOCITY = 50;
 
 
 	
@@ -14,6 +15,7 @@ public class KeyApplicatorFactory {
 		Right,
 		Up,
 		Down,
+		Jump,
 		Default
 	};
 	
@@ -70,6 +72,8 @@ public class KeyApplicatorFactory {
                 once = true;
                 sprite.v_x += vxnew;
                 sprite.v_y -= vynew;
+                
+                if(sprite.v_y > V_TERMINAL_VELOCITY) sprite.v_y = V_TERMINAL_VELOCITY;
             
             }
 
