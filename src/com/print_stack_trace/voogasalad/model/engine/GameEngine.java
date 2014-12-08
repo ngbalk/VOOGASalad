@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.model.engine;
 
+import java.awt.Dimension;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -23,13 +24,14 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.IGameAuthorEngine
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
@@ -42,19 +44,21 @@ public class GameEngine {
 	private IGameData gameData;
 	private int framesPerSecond;
 	private Map<String, HighScore> highScores;
+	private Dimension viewport;
 
 	//-------------------CONSTRUCTORS-------------------//
 
 	/**
 	 * Constructor Method.
 	 */
-	public GameEngine() {
-		this(new GameAuthorEngine(), new GameData());
+	public GameEngine(Dimension viewport) {
+		this(viewport, new GameAuthorEngine(), new GameData());
 	}
 
-	public GameEngine(IGameAuthorEngine authorEngine, IGameData gameData) {
+	public GameEngine(Dimension viewport, IGameAuthorEngine authorEngine, IGameData gameData) {
 		this.authorEngine = authorEngine;
 		this.gameData = gameData;
+		this.viewport = viewport;
 	}
 
 	//-------------------PUBLIC METHODS-------------------//
@@ -89,6 +93,9 @@ public class GameEngine {
 					+ "x,y = " + s.getX() +"," + s.getY()
 					+ "orientation = " + s.getOrientation()
 					+ "name = " + s.getName());
+		}
+		for(GoalCharacteristics g : lvl.getGoalMap().values()){
+			System.out.println(g.myGoalType);
 		}
 	}
 
@@ -144,7 +151,7 @@ public class GameEngine {
 
 	//Viewport/Camera Parameters
 
-	public void setCameraType(CameraType cameraType) {
+	public void setCameraType(CameraFactory.CameraType cameraType) {
 		authorEngine.setCameraType(cameraType);
 	}
 
@@ -246,7 +253,7 @@ public class GameEngine {
 //		l.requiredNumberOfGoals = 1;
 //		currentLevel.setLevelCharacteristics(l);
 		
-		runtimeEngine = new RuntimeEngine(currentLevel);
+		runtimeEngine = new RuntimeEngine(currentLevel, viewport);
 		runtimeEngine.setFramesPerSecond(framesPerSecond);
 	}
 
