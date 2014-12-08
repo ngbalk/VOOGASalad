@@ -1,33 +1,11 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import com.google.gson.JsonSyntaxException;
-import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
-import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
-import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
-import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
-import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
-import com.print_stack_trace.voogasalad.model.engine.GameEngine;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
-import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.UserDefinedCollisionParams;
-import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
-import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
-<<<<<<< HEAD
-import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
-import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
-=======
-import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
-import com.print_stack_trace.voogasalad.model.environment.Goal;
->>>>>>> master
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -35,11 +13,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import com.google.gson.JsonSyntaxException;
+import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
+import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.GameEngine;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
+import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
+import com.print_stack_trace.voogasalad.model.environment.Goal;
+
 
 public class GamePane extends Pane implements ViewObjectDelegate{
 	private double myWidth;
