@@ -1,6 +1,21 @@
 {
   "mySpriteMap": {},
-  "goalMap": {},
+  "goalMap": {
+    "0": {
+      "myName": "",
+      "myGoalType": "REACH_OBJECT",
+      "myObjectID": 0,
+      "myObjectiveID": 0,
+      "myPointTotal": 0,
+      "myDestination": 0.0,
+      "myHorizontalDestination": true,
+      "pointsProperty": {
+        "name": "",
+        "value": 0,
+        "valid": true
+      }
+    }
+  },
   "currentID": 0,
   "isLocked": false,
   "physicsEngine": {
@@ -43,9 +58,13 @@
     ],
     "handlerMap": {}
   },
+  "myCameraType": "SCROLLING_RIGHT_TO_LEFT",
   "myLevelChars": {
-    "name": "fhjdaosk",
-    "requiredNumberOfGoals": 0
+    "name": "goaltest",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "requiredNumberOfGoals": 1,
+    "myHorizontalPaneCount": 1,
+    "myVerticalPaneCount": 1
   },
   "myGoalFactory": {},
   "myKeyMap": {}

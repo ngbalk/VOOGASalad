@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
+import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
@@ -373,6 +374,14 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 				System.out.println("ID: " + spriteObject.getId());
 			}
 		}
+		private void loadGoalObjectsFromLevel(Map<Integer,GoalCharacteristics> goalMap) {
+			for(GoalCharacteristics goal : goalMap.values()){
+				GoalObject goalObject = new GoalObject(goal.myGoalType,this);
+				goalObject.setCharacteristics(goal);
+				addGoalToLevel(goalObject);
+				goalObject.update();
+			}
+		}
 		private String capitalize(String line) {
 			/*
 			String[] strArray = line.split(" ");
@@ -383,14 +392,12 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			*/
 			return Character.toUpperCase(line.charAt(0)) + line.substring(1).toLowerCase();
 		}
-		private void loadGoalObjectsFromLevel(Map<Integer,Goal> goalMap) {
-			for(Goal goal : goalMap.values()){
-				GoalObject goalObject = new GoalObject(goal.getGoalType(),this);
-				goalObject.setCharacteristics(goal.getGoalCharacteristics());
-				addGoalToLevel(goalObject);
-				goalObject.update();
-			}
-		}
+//		private void loadGoalObjectsFromLevel(Map<Integer,Goal> goalMap) {
+//			for(Goal goal : goalMap.values()){
+//				GoalObject goalObject = new GoalObject(goal.getGoalType(),this);
+//				goalObject.setCharacteristics(goal.getGoalCharacteristics());
+//>>>>>>> c324255721f46eff4ab50040883387b89e926517
+		
 		
 		@Override
 		public HashSet<GameObject> getCurrentLevelSprites() {

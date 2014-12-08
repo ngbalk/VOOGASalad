@@ -262,7 +262,6 @@ public class SpriteCharacteristics {
 		//p.setLocation(xPosition, p.getY());
 		p.x=(int)xPosition;
 		//p = new Point((int)xPosition,p.y);
-		System.out.println("Original:" + p.x + "\nNew: "+xPosition);
 	}
 	
 	public void setY(double yPosition){
@@ -270,7 +269,6 @@ public class SpriteCharacteristics {
 		//p.setLocation(p.getX(), yPosition);
 		p.y=(int)yPosition;
 		//p = new Point(p.x,(int)yPosition);
-		System.out.println("Original:" + p.y + "\nNew: "+yPosition);
 	}
 	
 	public void addMovement(KeyResult myAction, KeyCode myKey){
