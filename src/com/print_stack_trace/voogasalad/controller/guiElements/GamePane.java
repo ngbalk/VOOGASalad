@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
+import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
