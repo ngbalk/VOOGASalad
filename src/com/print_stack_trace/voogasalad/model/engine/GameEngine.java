@@ -124,6 +124,10 @@ public class GameEngine {
 	public void setCurrentLevel(int levelIndex) {
 		authorEngine.setCurrentLevel(levelIndex);
 	}
+	
+	public void getNumberOfLevels() {
+	    authorEngine.getGameWorldModel().getLevelMap().size();
+	}
 
 	//Adding, Removing, and Updating Sprites
 	public Integer addObjectToLevel(SpriteCharacteristics spriteModel) {
@@ -283,8 +287,7 @@ public class GameEngine {
 		this.currentLevel = gameWorld.getCurrentLevel();
 
 //		FIXME: Remove this work around garbage
-		Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
-		currentLevel.setMainCharacter(first);
+		currentLevel.setMainCharacter(0);
 		currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
 		currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
 		currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);

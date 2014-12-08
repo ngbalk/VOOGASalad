@@ -190,9 +190,16 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		String name=new MessagePopUp(myStyle).showInputDialog("Name of Level:");
 		if (new BlankSpaceTextChecker().checkText(name)){
 			myObject.getCharacteristics().setName(name);
-			levelTracker.addLevel(myObject, e->levelChange(myObject));
-			myObject.getCharacteristics().setID(levelTracker.getLevels().size());
-			levelChange(myObject);
+
+            myObject.getCharacteristics().setID(levelTracker.getLevels().size());
+
+            System.out.println("Initial GameWorld Level Size: " + levelTracker.getLevels() + " size: " + levelTracker.getLevels().size());
+            levelTracker.addLevel(myObject, e->levelChange(myObject));
+            System.out.println("Size after adding: " + levelTracker.getLevels().size());
+
+            myGameEngine.addLevel(levelTracker.getLevels().size(),new LevelCharacteristics());
+
+            levelChange(myObject);
 		}
 	}
 	private void levelChange(LevelObject currentLevel){
@@ -204,9 +211,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 		this.getChildren().addAll(levelTracker.activeSprites());
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
-		myGameEngine.addLevel(levelTracker.getLevels().size(),currentLevel.getCharacteristics());
-		myGameEngine.setCurrentLevel(levelTracker.getLevels().size());
-		//myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
+		myGameEngine.setCurrentLevel(currentLevel.getCharacteristics().ID);
 	}
 
 	public ImageView getBackgroundImage(){
@@ -359,8 +364,8 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			//LevelModel levelModel = loadLevelModelFromFile();
 			if(levelModel == null)
 				return;
-			Integer first = levelModel.getSpriteMap().keySet().iterator().next();
-			levelModel.setMainCharacter(first);
+			//Integer first = levelModel.getSpriteMap().keySet().iterator().next();
+			//levelModel.setMainCharacter(first);
 			LevelCharacteristics levelCharacteristics = levelModel.getLevelCharacteristics();
 			//transfer general level data in
 			loadLevelObjectFromLevel(levelCharacteristics);
@@ -396,10 +401,14 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 					levelCharacteristics.getBackgroundImagePath(), 
 					this, 
 					levelCharacteristics);
-			levelObject.getCharacteristics().setName(levelCharacteristics.getName());
+			//levelObject.getCharacteristics().setName(levelCharacteristics.getName());
+            System.out.println("Initial Level Tracker: " + levelTracker.getLevels() + " size: " + levelTracker.getLevels().size());
+            levelObject.getCharacteristics().setID(levelTracker.getLevels().size());
 			levelTracker.addLevel(levelObject, e->levelChange(levelObject));
+            System.out.println("Size after adding: " + levelTracker.getLevels().size());
+	        myGameEngine.addLevel(levelTracker.getLevels().size(),levelObject.getCharacteristics());
+	        myGameEngine.setCurrentLevel(levelTracker.getLevels().size()-1);
 			levelObject.update();
-			levelChange(levelObject);
 		}
 		private void loadSpriteObjectsFromLevel(Map<Integer,SpriteCharacteristics> spriteMap) {
 			for(SpriteCharacteristics sc : spriteMap.values()){

@@ -22,8 +22,6 @@ public class GameWorldModel {
     //-------------------CONSTRUCTORS-------------------//
     public GameWorldModel() {
         levelMap = new HashMap<Integer, LevelModel>();
-        levelMap.put(0, new LevelModel());
-        currentLevelIndex = 0;
         gameWorldCharacteristics = new GameWorldCharacteristics();
     }
 
@@ -47,6 +45,8 @@ public class GameWorldModel {
     }
 
     public LevelModel getLevelModel(int id) {
+        if(levelMap.size()==0)
+            return null;
         return levelMap.get(id);
     }
 
@@ -67,6 +67,7 @@ public class GameWorldModel {
     
     public void addLevel(Integer id, LevelCharacteristics levelCharacteristics) {
         LevelModel levelModel = new LevelModel();
+        levelCharacteristics.setID(id);
         levelModel.setLevelCharacteristics(levelCharacteristics);
     	levelMap.put(id, levelModel);
    }
@@ -76,12 +77,14 @@ public class GameWorldModel {
     }
     
     public void setCurrentLevel(int index) {
-        if(index < 0 || index >= levelMap.size()) {
+        System.out.println("INdex: " + index);
+        if(index < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        if(levelMap.get(index)!= null){
-            currentLevelIndex = index;
+        if(levelMap.get(index) == null) {
+            levelMap.put(index,new LevelModel());
         }
+        currentLevelIndex = index;
     }
     
     public LevelModel getNextLevel() {
