@@ -66,11 +66,11 @@
         "0": {
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
           "p": {
-            "x": 413,
-            "y": 140
+            "x": 281,
+            "y": 186
           },
           "interactive": true,
-          "objectType": "HERO",
+          "objectType": "ENEMY",
           "startingHealth": 10,
           "startingSpeed": 10.0,
           "value": 0,
@@ -92,8 +92,8 @@
         "1": {
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
           "p": {
-            "x": 411,
-            "y": 338
+            "x": 279,
+            "y": 328
           },
           "interactive": false,
           "objectType": "PLATFORM",
@@ -177,87 +177,8 @@
     },
     "2": {
       "goalMap": {},
-      "mySpriteMap": {
-        "0": {
-          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
-          "p": {
-            "x": 175,
-            "y": 236
-          },
-          "interactive": true,
-          "objectType": "HERO",
-          "startingHealth": 10,
-          "startingSpeed": 10.0,
-          "value": 0,
-          "orientation": 0.0,
-          "name": "",
-          "width": 100.0,
-          "height": 100.0,
-          "doubleJump": false,
-          "myMovements": {},
-          "myAnimations": {
-            "Default": [],
-            "Up": [],
-            "Right": [],
-            "Down": [],
-            "Left": [],
-            "Jump": []
-          }
-        },
-        "1": {
-          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
-          "p": {
-            "x": 174,
-            "y": 341
-          },
-          "interactive": false,
-          "objectType": "PLATFORM",
-          "startingHealth": 10,
-          "startingSpeed": 10.0,
-          "value": 0,
-          "orientation": 0.0,
-          "name": "",
-          "width": 100.0,
-          "height": 100.0,
-          "doubleJump": false,
-          "myMovements": {},
-          "myAnimations": {
-            "Default": [],
-            "Up": [],
-            "Right": [],
-            "Down": [],
-            "Left": [],
-            "Jump": []
-          }
-        },
-        "2": {
-          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
-          "p": {
-            "x": 273,
-            "y": 341
-          },
-          "interactive": false,
-          "objectType": "PLATFORM",
-          "startingHealth": 10,
-          "startingSpeed": 10.0,
-          "value": 0,
-          "orientation": 0.0,
-          "name": "",
-          "width": 100.0,
-          "height": 100.0,
-          "doubleJump": false,
-          "myMovements": {},
-          "myAnimations": {
-            "Default": [],
-            "Up": [],
-            "Right": [],
-            "Down": [],
-            "Left": [],
-            "Jump": []
-          }
-        }
-      },
-      "currentID": 2,
+      "mySpriteMap": {},
+      "currentID": 0,
       "isLocked": false,
       "physicsEngine": {
         "decisionMatrix": [

@@ -359,8 +359,7 @@ public class GamePane extends Pane implements ViewObjectDelegate{
 			//LevelModel levelModel = loadLevelModelFromFile();
 			if(levelModel == null)
 				return;
-			Integer first = levelModel.getSpriteMap().keySet().iterator().next();
-			levelModel.setMainCharacter(first);
+			levelModel.setMainCharacter(0);
 			LevelCharacteristics levelCharacteristics = levelModel.getLevelCharacteristics();
 			//transfer general level data in
 			loadLevelObjectFromLevel(levelCharacteristics);
