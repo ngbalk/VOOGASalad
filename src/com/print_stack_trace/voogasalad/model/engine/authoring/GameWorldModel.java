@@ -20,13 +20,14 @@ public class GameWorldModel {
 
     //-------------------CONSTRUCTORS-------------------//
     public GameWorldModel() {
-        this(null);
+        levelMap = new HashMap<Integer, LevelModel>();
+        levelMap.put(0, new LevelModel());
+        gameWorldCharacteristics = new GameWorldCharacteristics();
     }
 
     public GameWorldModel(GameWorldCharacteristics gameWorldCharacteristics) {
-        this.gameWorldCharacteristics = gameWorldCharacteristics;
-        levelMap = new HashMap<Integer, LevelModel>();
-        gameWorldCharacteristics = new GameWorldCharacteristics();
+        this();
+    	this.gameWorldCharacteristics = gameWorldCharacteristics;
     }
 
     //-------------------ACCESSORS-------------------//
@@ -63,9 +64,18 @@ public class GameWorldModel {
     }
 
     public LevelModel getCurrentLevel() {
-        return levelMap.get(currentLevelIndex);
+    	return levelMap.get(currentLevelIndex);
     }
-
+    
+    public void setCurrentLevel(int index) {
+        if(index < 0 || index >= levelMap.size()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        if(levelMap.get(index)!= null){
+            currentLevelIndex = index;
+        }
+    }
+    
     public LevelModel getNextLevel() {
         currentLevelIndex++;
         return levelMap.get(currentLevelIndex);
@@ -81,15 +91,6 @@ public class GameWorldModel {
     public LevelModel startNewGame() {
         currentLevelIndex = 0;
         return levelMap.get(currentLevelIndex);
-    }
-
-    public void setCurrentLevel(int index) {
-        if(index < 0 || index >= levelMap.size()) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
-        if(levelMap.get(index)!= null){
-            currentLevelIndex = index;
-        }
     }
 
 }

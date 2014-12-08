@@ -59,14 +59,14 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		loadLevelButton.setPrefSize(100,50);
 		loadLevelButton.getStyleClass().add("buttonTemplate2");
 		loadLevelButton.setOnMouseClicked(e->((GamePane) myLinkedObject).loadLevel());
-		myNode=bottomPane;
+		//myNode=bottomPane;
 
 		//LOAD GAME WORLD BUTTON
 		Button loadGameWorldButton=new Button("Load Game");
-		loadLevelButton.relocate(width*.40, 20);
-		loadLevelButton.setPrefSize(100,50);
-		loadLevelButton.getStyleClass().add("buttonTemplate2");
-		loadLevelButton.setOnMouseClicked(e->((GamePane) myLinkedObject).loadGame());
+		loadGameWorldButton.relocate(width*.40, 20);
+		loadGameWorldButton.setPrefSize(100,50);
+		loadGameWorldButton.getStyleClass().add("buttonTemplate2");
+		loadGameWorldButton.setOnMouseClicked(e->((GamePane) myLinkedObject).loadGame());
 		myNode=bottomPane;
 		
 		//EXTEND BACKGROUND BUTTONS
