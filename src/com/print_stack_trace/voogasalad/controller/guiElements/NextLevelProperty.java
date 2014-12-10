@@ -10,15 +10,15 @@ import javafx.beans.value.ObservableValue;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
-public class PreviousLevelProperty extends UserInputDropDownMenu{
-	public PreviousLevelProperty (String[] values,  double width, double height, double x, double y, GameObject object){
+public class NextLevelProperty extends UserInputDropDownMenu{
+	public NextLevelProperty (String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 		createDataMap();
 	}
 
 	@Override
 	protected void linkMovement(String dataValue) {
-		((LevelObject)mySprite).getCharacteristics().setPreviousLevel(Integer.parseInt(dataValue));
+		((LevelObject)mySprite).getCharacteristics().setNextLevel(Integer.parseInt(dataValue));
 		((LevelObject) mySprite).getDelegate().update(((LevelObject)mySprite));
 
 
@@ -35,6 +35,7 @@ public class PreviousLevelProperty extends UserInputDropDownMenu{
 					for(GameObject object: (Set<GameObject>) mySprite.getDelegate().getLevelsAvailable()){
 						if (object instanceof LevelObject){
 							LevelObject myObject=(LevelObject)object;
+
 							data.put(myObject.getID()+"",myObject.getCharacteristics().getName());
 							addMenu(myObject.getID()+"");
 
@@ -49,6 +50,7 @@ public class PreviousLevelProperty extends UserInputDropDownMenu{
 	}
 
 }
+
 
 
 

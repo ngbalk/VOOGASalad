@@ -14,7 +14,8 @@ public class LevelCharacteristics {
 	private static final int DEFAULT_CAMERA_SPEED = 3;
 	
 	private String name;
-	public File nextLevel = null;
+	public int nextLevel=-1;
+	public int previousLevel=-1;
 	private transient Image backgroundImage = null;
 	private String backgroundImagePath;
 	public int requiredNumberOfGoals = 1;
@@ -66,7 +67,18 @@ public class LevelCharacteristics {
 	public void setCameraSpeed(int speed){
 		cameraSpeed=speed;
 	}
-	
+	public int getNextLevel(){
+		return nextLevel;
+	}
+	public int getPreviousLevel(){
+		return previousLevel;
+	}
+	public void setNextLevel(int next){
+		nextLevel=next;
+	}
+	public void setPreviousLevel(int prev){
+		previousLevel=prev;
+	}
 	public int incrementHorizontalPaneCount(){
 		this.myHorizontalPaneCount++;
 		return this.myHorizontalPaneCount;
