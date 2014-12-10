@@ -1,0 +1,183 @@
+{
+  "goalMap": {
+    "0": {
+      "myName": "",
+      "myGoalType": "KILL_BOSS",
+      "myObjectID": 0,
+      "myObjectiveID": [
+        0
+      ],
+      "myPointTotal": 0,
+      "myDestination": 0.0,
+      "myHorizontalDestination": true
+    }
+  },
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "p": {
+        "x": 29,
+        "y": 223
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Default": [],
+        "Right": [],
+        "Down": [],
+        "Left": []
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 20,
+        "y": 396
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 1000.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Default": [],
+        "Right": [],
+        "Down": [],
+        "Left": []
+      }
+    },
+    "2": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
+      "p": {
+        "x": 463,
+        "y": 294
+      },
+      "interactive": true,
+      "objectType": "ENEMY",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "adda",
+      "width": 100.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Default": [],
+        "Right": [],
+        "Down": [],
+        "Left": []
+      }
+    },
+    "3": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 632,
+        "y": 292
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "doubleJump": false,
+      "damageDealt": 5,
+      "myMovements": {},
+      "myAnimations": {
+        "Up": [],
+        "Jump": [],
+        "Default": [],
+        "Right": [],
+        "Down": [],
+        "Left": []
+      }
+    }
+  },
+  "currentID": 3,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "ObjectBothNoDisplacement",
+        "HeroDamageCollision",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "HeroDamageCollision"
+      ],
+      [
+        "HeroDamageCollision",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement"
+      ],
+      [
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement"
+      ],
+      [
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement"
+      ],
+      [
+        "HeroDamageCollision",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement",
+        "ObjectBothNoDisplacement"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "shitty level",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "requiredNumberOfGoals": 1,
+    "cameraStart": {
+      "x": 0,
+      "y": 0
+    },
+    "cameraSpeed": 3,
+    "myHorizontalPaneCount": 1,
+    "myVerticalPaneCount": 1,
+    "cameraType": "PlayerFollow"
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {},
+  "mainCharacter": 0
+}

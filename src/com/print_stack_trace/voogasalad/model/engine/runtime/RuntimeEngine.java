@@ -6,27 +6,31 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
-import java.util.ArrayList;
+import java.awt.Dimension;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraHandler;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicationChecker;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicator;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
+import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
 public class RuntimeEngine extends AbstractRuntimeEngine {
 	private PhysicsEngine physicsEngine;
 	private RuntimeModel runtimeModel;
 	int framesPerSecond;
 	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
+	private GoalFactory goalFactory;
+	private Map<Integer, Goal> goalMap;
+	private CameraHandler cameraHandler;
+	private int completedGoalCount = 0;
 
 	//-------------------CONSTRUCTORS-------------------//
 
@@ -34,10 +38,14 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 * Takes in a LevelModel and sets private variables
 	 * @param level
 	 */
-	public RuntimeEngine(LevelModel currentLevel) {
+	public RuntimeEngine(LevelModel currentLevel, Dimension viewport) {
 		super(currentLevel);
-		runtimeModel = new RuntimeModel(currentLevel);
+		runtimeModel = new RuntimeModel(currentLevel, viewport);
 		physicsEngine = currentLevel.getPhysicsEngine();
+		goalFactory = new GoalFactory();
+		goalMap = new HashMap<>();
+		populateGoalMap();
+		cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
 	}
 
 	//-------------------PUBLIC METHODS-------------------//
@@ -48,6 +56,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	 * 2. Apply unexpired key events.
 	 * 3. Use GoalChecker to check goals
 	 * 4. See if game is over or not
+	 * 5. Move camera
 	 * @param currentLevel
 	 */
 	public void update() {
@@ -55,23 +64,29 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		
 		physicsEngine.animateAll(runtimeModel, framesPerSecond);
 		GoalChecker goalChecker = new GoalChecker(runtimeModel);
-		int completedCount = 0;
-		for(Goal g : runtimeModel.getGoalMap().values()) {
+		for(Goal g : goalMap.values()) {
+
 			g.acceptChecker(goalChecker);
-			if(g.isCompleted)completedCount++;
+			if(g.isCompleted)completedGoalCount++;
 		}
+
 		int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
 		if (reqGoals > 0) {
-			if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
-				System.out.println("YOU WIN");
+			if(completedGoalCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+				System.out.println("YOU WIN!!!!");
 				runtimeModel.gameOver = true;
 				runtimeModel.gameVictory = true;
 			}
 		}
 
+		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
+		if(gameOver(mainChar)){
+			System.out.println("YOU DIED BITCH");
+			runtimeModel.gameOver = true;
+			runtimeModel.gameVictory = false;
+		}
 		updateSpritePositions();
-		
-		
+		cameraHandler.updateCamera(runtimeModel);
 	}
 
 	public void setFramesPerSecond(int framesPerSecond) {
@@ -104,12 +119,14 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	//Sprites move around even when this method is commented out
 	//why is that? this method should be the one controlling movement
 	private void updateSpritePositions(){
+
 		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
 			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
 			rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
 			rst.v_x *= (1.0f-rst.getDecelerationConstant());
 			rst.v_y *= (1.0f-rst.getDecelerationConstant());
 		}
+
 	}
 
 	private void handleKey(KeyEvent event, boolean press) {
@@ -127,7 +144,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 			applicator.applyPressActionToRuntimeSprite(mainCharData);
 			
 			//SET POSSIBLE SPRITE ACTION OF MAIN CHARACTER
-			mainCharData.setPossibleSpriteAction(event.getCode());
+			mainCharData.setPossibleSpriteAction(res);
 		}
 		else{
 			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
@@ -137,5 +154,16 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 			return;
 			
 		}
+	}
+	public void populateGoalMap(){
+		for(Integer i : runtimeModel.getGoalMap().keySet()){
+			goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
+		}
+	}
+	
+	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
+	    if(mainChar == null) return false;
+	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
+                    
 	}
 }

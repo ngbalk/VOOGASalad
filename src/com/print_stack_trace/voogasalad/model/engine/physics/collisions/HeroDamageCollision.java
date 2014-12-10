@@ -15,9 +15,14 @@ public class HeroDamageCollision extends CollisionHandler {
         if(s1.getObjectType().equals(SpriteType.HERO) && s2.getObjectType().equals(SpriteType.ENEMY)){
             if(CollisionDetector.haveCollidedFromTop(s1, s2)){
                 s2.flagForRemoval();
+                int points = s1.getPropertyReadOnlyPoints().getValue();
+                points++;
+                s1.setPointsProperty(points);
             }
             else{
-                s1.flagForRemoval();
+                s1.setHealthProperty(s1.getPropertyReadOnlyHealth().getValue() - s2.getDamageDealt());
+                s1.v_x = -s1.v_x;
+                s2.v_x = -s2.v_x;
             }
         }
         

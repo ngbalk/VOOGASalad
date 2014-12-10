@@ -15,14 +15,18 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -36,13 +40,14 @@ import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.VOOGASalad;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
+import com.print_stack_trace.voogasalad.controller.guiElements.HUD;
 import com.print_stack_trace.voogasalad.controller.guiElements.IntroSplashScreen;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayPane;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerSaveButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerToolBar;
 import com.print_stack_trace.voogasalad.controller.guiElements.SaveMenuItem;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement.PossibleSpriteAction;
+import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement;
 import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -50,15 +55,18 @@ import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
+
 	private final static int FPS = 15;
 	private static final double ANIMATION_DURATION = 0.001;
 	private Group myRoot;
 	private Group myGameRoot;
+	private ScrollPane myViewPort = new ScrollPane();
 	private PlayPane myPlayPane;
 	private GameEngine myGameEngine;
 	private boolean isPlaying = false;
@@ -69,6 +77,9 @@ public class GamePlayer implements ViewController {
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	private int keyFrameCounter = 0;
 	int animationIndex=0;
+	private HUD myHud = new HUD();
+	private File myFile = null;
+
 
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
@@ -83,9 +94,8 @@ public class GamePlayer implements ViewController {
 		
 		myGameEngine = gameEngine;
 		myGameEngine.setFramesPerSecond(FPS);
-
+		
 		myRoot = new Group(); 
-
 		IntroSplashScreen splash = new IntroSplashScreen(0, 0);
 		splash.toFront();
 		myRoot.getChildren().add(splash);
@@ -96,8 +106,11 @@ public class GamePlayer implements ViewController {
 		myPlayPane = new PlayPane();
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
 		myPlayPane.setLayoutY(100);
+		myPlayPane.toBack();
 		myGameRoot = new Group(myPlayPane); 
 		myRoot.getChildren().add(myGameRoot);
+		myRoot.getChildren().add(myHud);
+		myHud.setTranslateY(40);
 
 		KeyFrame frame = start();
 		Timeline animation = new Timeline();
@@ -115,7 +128,7 @@ public class GamePlayer implements ViewController {
 		isPlaying = false;
 		return new KeyFrame(Duration.millis(1000/FPS), oneFrame);
 	}
-
+	
 	private EventHandler<ActionEvent> oneFrame = new EventHandler<ActionEvent>() {
 		@Override //class note: makes Java check for errors when it normally wouldn't
 		public void handle(ActionEvent evt) {
@@ -139,16 +152,21 @@ public class GamePlayer implements ViewController {
 
 		myPlayPane.getChildren().clear();
 		RuntimeModel r = myGameEngine.getStatus();
+		myGameRoot.setTranslateX(-r.camera.x);
+		myGameRoot.setTranslateY(-r.camera.y);
 		LevelCharacteristics levelCharacteristics = r.getLevelCharacteristics();
 		Map<Integer, RuntimeSpriteCharacteristics> spriteMap = r.getRuntimeSpriteMap();
+		RuntimeSpriteCharacteristics mainCharCharacteristics = spriteMap.get(r.getMainCharacter());
+		myHud.updateHealth((int) mainCharCharacteristics.getPropertyReadOnlyHealth().getValue());
+		myHud.updatePoints(mainCharCharacteristics.getPropertyReadOnlyPoints().getValue());
 		ImageView background = new ImageView(new Image(levelCharacteristics.getBackgroundImagePath()));
-		background.setFitWidth(myPlayPane.getWidth());
+		background.setFitWidth(myPlayPane.getWidth()); 
 		background.setFitHeight(myPlayPane.getHeight()-10);
 		background.setFitWidth(myPlayPane.getWidth()-10);
 		background.setSmooth(true);
 		background.setPreserveRatio(false);
 		background.relocate(5, 5);
-		myPlayPane.getChildren().add(0,background);
+		myPlayPane.getChildren().add(0,background); 
 
 		for(Integer id : spriteMap.keySet()){
 			RuntimeSpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
@@ -171,7 +189,7 @@ public class GamePlayer implements ViewController {
 	 * @param spriteCharacteristics
 	 */
 	private void executeAnimation(ImageView currentSpriteImageView, RuntimeSpriteCharacteristics spriteCharacteristics){
-		PossibleSpriteAction animationType = spriteCharacteristics.getCurrentAnimation();
+		KeyResult animationType = spriteCharacteristics.getCurrentAnimation();
 		if(animationType==null){
 			myPlayPane.getChildren().add(currentSpriteImageView);
 			return;
@@ -216,6 +234,10 @@ public class GamePlayer implements ViewController {
 		currentSpriteImageView.setImage(spriteImage);
 		//this.myPlayPane.getChildren().add(currentSpriteImageView);
 	}
+	
+	private void updateViewPort(){
+		//myPlayPane
+	}
 
 
 	/*** 
@@ -228,7 +250,6 @@ public class GamePlayer implements ViewController {
 
 	public void pauseGame(){ //buttons with handlers
 		isPlaying = false;
-		System.out.println(isPlaying);
 		//		gameEngine.pause();
 		//if gameplayer is the gameloop --> timeline.stop();
 	}
@@ -270,6 +291,7 @@ public class GamePlayer implements ViewController {
 				System.out.println(ex.getMessage());
 			}
 		}
+		myFile = file;
 	}
 	public void showHighScores(){
 		Map<String, HighScore> scores = myGameEngine.getHighScoreList();
@@ -300,5 +322,16 @@ public class GamePlayer implements ViewController {
 			return; 
 		}
 		FileInputStream fis;
+	}
+
+
+	public void restartCurrentLevel() {
+		if (myFile != null) {
+			try {
+				myGameEngine.loadGame(myFile);
+			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
 	}
 }

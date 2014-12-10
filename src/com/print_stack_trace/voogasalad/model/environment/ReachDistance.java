@@ -1,6 +1,7 @@
 package com.print_stack_trace.voogasalad.model.environment;
 
 import java.awt.Point;
+import java.util.List;
 
 import javafx.geometry.Point2D;
 
@@ -33,7 +34,7 @@ public class ReachDistance extends Goal implements GoalElement{
         super.setGoalProperties();
         myDestination = myGoalCharacteristics.myDestination;
         myHeroID = myGoalCharacteristics.myObjectID;
-        myHorizontal = myGoalCharacteristics.myHorizontalDestination;
+        myHorizontal = myGoalCharacteristics.getHorizontalDestination();
 
     }
 

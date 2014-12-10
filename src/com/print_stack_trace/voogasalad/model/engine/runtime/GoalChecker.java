@@ -10,7 +10,7 @@ import com.print_stack_trace.voogasalad.model.environment.ReachObject;
 import com.print_stack_trace.voogasalad.model.environment.StayAlive;
 
 public class GoalChecker implements GoalElementVisitor {
-	private static final int GOAL_DESTINATION_BUFFER = 2;
+	private static final int GOAL_DESTINATION_BUFFER = 20;
 	private RuntimeModel myLevel;
 
 	public GoalChecker(RuntimeModel level) {
@@ -19,7 +19,13 @@ public class GoalChecker implements GoalElementVisitor {
 
 	@Override
 	public boolean visit(KillBoss goal) {
-		return myLevel.getRuntimeSpriteMap().get(goal.getBossID()).startingHealth <= 0;
+	    Integer copy = 0;
+		for(Integer i : goal.getBossID()){
+		    if(!myLevel.getRuntimeSpriteMap().containsKey(i))
+			copy = i;
+		}
+		if (copy != 0) goal.getBossID().remove(copy);
+		return goal.getBossID().isEmpty();
 	}
 
 	@Override
@@ -32,19 +38,26 @@ public class GoalChecker implements GoalElementVisitor {
 		double heroPosition = 0;
 		if(goal.isHorizontal()){
 			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getX();
+			System.out.println("HERO X POS:    " + heroPosition);
 		}
 		else{
 			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getY();
 		}
+		System.out.print("GOAL DEST:   " + goal.getDestination());
 		return (heroPosition > (goal.getDestination() - GOAL_DESTINATION_BUFFER)) 
 				&& (heroPosition < (goal.getDestination() + GOAL_DESTINATION_BUFFER )); }
 
 
 	@Override
 	public boolean visit(ReachObject goal) {
-		System.out.println("OBJECT REACHED!!!!!!!!!!!!!!!");
-		return CollisionDetector.haveCollided(myLevel.getRuntimeSpriteMap().get(goal.getMySpriteID()), 
-				myLevel.getRuntimeSpriteMap().get(goal.getMyObjectiveID()));
+		Integer copy = 0;
+		for(Integer i : goal.getMyObjectiveID()){
+			if(!myLevel.getRuntimeSpriteMap().containsKey(i)){
+				copy = i;
+			}
+		}
+		if(copy != 0) goal.getMyObjectiveID().remove(copy);
+		return goal.getMyObjectiveID().isEmpty();
 	}
 
 
@@ -55,7 +68,9 @@ public class GoalChecker implements GoalElementVisitor {
 
 	@Override
 	public boolean visit(Goal goal) {
+		// TODO Auto-generated method stub
 		return false;
 	}
+
 
 }
