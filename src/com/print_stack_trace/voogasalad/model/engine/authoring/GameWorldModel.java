@@ -88,6 +88,7 @@ public class GameWorldModel {
     }
     
     public LevelModel getNextLevel() {
+        System.out.println(currentLevelIndex);
         currentLevelIndex++;
         return levelMap.get(currentLevelIndex);
     }

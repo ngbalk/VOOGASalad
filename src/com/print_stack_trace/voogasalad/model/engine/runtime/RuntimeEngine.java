@@ -74,6 +74,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     //-------------------PUBLIC METHODS-------------------//
 
     private void getNextLevel() {
+        System.out.println(gameWorld);
         currentLevel = gameWorld.getNextLevel();
         createRuntimeState(currentLevel, viewport);
     }
