@@ -1,0 +1,138 @@
+{
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
+      "p": {
+        "x": 65,
+        "y": 294
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {
+        "LEFT": "LEFT",
+        "RIGHT": "RIGHT",
+        "UP": "UP"
+      },
+      "myAnimations": {
+        "JUMP": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-jumping.png"
+          }
+        ],
+        "LEFT": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-left-1.png"
+          },
+          null,
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-left-2.png"
+          }
+        ],
+        "DOWN": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario_crouching.png"
+          }
+        ],
+        "CROUCH": [],
+        "RIGHT": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-right-1.png"
+          },
+          null,
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-right-2.png"
+          }
+        ],
+        "UP": [
+          {
+            "path": "/Users/ethanchang/Desktop/mario sprites/mario-jumping.png"
+          }
+        ]
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 9,
+        "y": 472
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 300.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "JUMP": [],
+        "LEFT": [],
+        "DOWN": [],
+        "CROUCH": [],
+        "RIGHT": [],
+        "UP": []
+      }
+    }
+  },
+  "goalMap": {},
+  "currentID": 1,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "NoAction",
+        "NoAction",
+        "ObjectBothNoDisplacement",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "animationfixmaybe",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "requiredNumberOfGoals": 1,
+    "myHorizontalPaneCount": 1,
+    "myVerticalPaneCount": 1
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {}
+}
