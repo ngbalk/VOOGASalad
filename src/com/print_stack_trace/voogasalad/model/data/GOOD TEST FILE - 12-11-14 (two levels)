@@ -1,14 +1,26 @@
 {
   "gameWorldCharacteristics": {},
   "levelMap": {
-    "0": {
-      "goalMap": {},
+    "1": {
+      "goalMap": {
+        "0": {
+          "myName": "goal",
+          "myGoalType": "REACH_DISTANCE",
+          "myObjectID": 0,
+          "myObjectiveID": [
+            0
+          ],
+          "myPointTotal": 0,
+          "myDestination": 200.0,
+          "myHorizontalDestination": false
+        }
+      },
       "mySpriteMap": {
         "0": {
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
           "p": {
-            "x": 277,
-            "y": 151
+            "x": 401,
+            "y": 124
           },
           "interactive": true,
           "objectType": "HERO",
@@ -23,12 +35,12 @@
           "damageDealt": 5,
           "myMovements": {},
           "myAnimations": {
-            "Left": [],
             "Right": [],
-            "Jump": [],
+            "Down": [],
             "Up": [],
-            "Default": [],
-            "Down": []
+            "Left": [],
+            "Jump": [],
+            "Default": []
           }
         }
       },
@@ -75,103 +87,11 @@
         "handlerMap": {}
       },
       "myLevelChars": {
-        "name": "",
-        "nextLevel": -1,
-        "previousLevel": -1,
-        "backgroundImagePath": "",
-        "requiredNumberOfGoals": 1,
-        "cameraStart": {
-          "x": 0,
-          "y": 0
-        },
-        "cameraSpeed": 3,
-        "myHorizontalPaneCount": 1,
-        "myVerticalPaneCount": 1,
-        "cameraType": "PlayerFollow"
-      },
-      "myGoalFactory": {},
-      "myKeyMap": {},
-      "mainCharacter": 0
-    },
-    "1": {
-      "goalMap": {},
-      "mySpriteMap": {
-        "0": {
-          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
-          "p": {
-            "x": 242,
-            "y": 104
-          },
-          "interactive": false,
-          "objectType": "OBSTACLE",
-          "startingHealth": 10,
-          "startingSpeed": 10.0,
-          "value": 0,
-          "orientation": 0.0,
-          "name": "",
-          "width": 0.0,
-          "height": 0.0,
-          "doubleJump": false,
-          "damageDealt": 5,
-          "myMovements": {},
-          "myAnimations": {
-            "Left": [],
-            "Right": [],
-            "Jump": [],
-            "Up": [],
-            "Default": [],
-            "Down": []
-          }
-        }
-      },
-      "currentID": 0,
-      "isLocked": false,
-      "physicsEngine": {
-        "decisionMatrix": [
-          [
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement"
-          ],
-          [
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement"
-          ],
-          [
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement"
-          ],
-          [
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement"
-          ],
-          [
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement"
-          ]
-        ],
-        "handlerMap": {}
-      },
-      "myLevelChars": {
-        "name": "",
+        "name": "level1",
         "nextLevel": -1,
         "previousLevel": -1,
         "ID": 1,
-        "backgroundImagePath": "",
+        "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/donkey_kong.jpg",
         "requiredNumberOfGoals": 1,
         "cameraStart": {
           "x": 0,
@@ -188,8 +108,63 @@
     },
     "2": {
       "goalMap": {},
-      "mySpriteMap": {},
-      "currentID": 0,
+      "mySpriteMap": {
+        "0": {
+          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+          "p": {
+            "x": 323,
+            "y": 146
+          },
+          "interactive": false,
+          "objectType": "OBSTACLE",
+          "startingHealth": 10,
+          "startingSpeed": 10.0,
+          "value": 0,
+          "orientation": 0.0,
+          "name": "",
+          "width": 0.0,
+          "height": 0.0,
+          "doubleJump": false,
+          "damageDealt": 5,
+          "myMovements": {},
+          "myAnimations": {
+            "Right": [],
+            "Down": [],
+            "Up": [],
+            "Left": [],
+            "Jump": [],
+            "Default": []
+          }
+        },
+        "1": {
+          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
+          "p": {
+            "x": 405,
+            "y": 28
+          },
+          "interactive": false,
+          "objectType": "REWARD",
+          "startingHealth": 10,
+          "startingSpeed": 10.0,
+          "value": 0,
+          "orientation": 0.0,
+          "name": "",
+          "width": 0.0,
+          "height": 0.0,
+          "doubleJump": false,
+          "damageDealt": 5,
+          "myMovements": {},
+          "myAnimations": {
+            "Right": [],
+            "Down": [],
+            "Up": [],
+            "Left": [],
+            "Jump": [],
+            "Default": []
+          }
+        }
+      },
+      "currentID": 1,
       "isLocked": false,
       "physicsEngine": {
         "decisionMatrix": [
@@ -232,11 +207,11 @@
         "handlerMap": {}
       },
       "myLevelChars": {
-        "name": "",
+        "name": "level2",
         "nextLevel": -1,
         "previousLevel": -1,
         "ID": 2,
-        "backgroundImagePath": "",
+        "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
         "requiredNumberOfGoals": 1,
         "cameraStart": {
           "x": 0,
@@ -252,5 +227,5 @@
       "mainCharacter": 0
     }
   },
-  "currentLevelIndex": 0
+  "currentLevelIndex": 1
 }
