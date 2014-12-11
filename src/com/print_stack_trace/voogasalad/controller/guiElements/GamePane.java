@@ -160,12 +160,10 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		this.getChildren().add(0, imgView);
 		ImageView background = levelBackground.getImage();
 		background.setFitWidth(getWidth());
-		System.out.println("this width: " + getWidth());
 		background.setFitHeight(getHeight() - 10);
 		background.setFitWidth(getWidth() - 10);
 		background.setSmooth(true);
 		background.setPreserveRatio(false);
-		background.relocate(5, 5);
 		levelBackground.getCharacteristics().setBackground(
 				background.getImage());
 		levelChange(levelBackground);
@@ -220,12 +218,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 			myObject.getCharacteristics().setName(name);
 			myObject.getCharacteristics()
 					.setID(levelTracker.getLevels().size());
-			System.out.println("Initial GameWorld Level Size: "
-					+ levelTracker.getLevels() + " size: "
-					+ levelTracker.getLevels().size());
 			levelTracker.addLevel(myObject, e -> levelChange(myObject));
-			System.out.println("Size after adding: "
-					+ levelTracker.getLevels().size());
 			myGameEngine.addLevel(levelTracker.getLevels().size(),
 					myObject.getCharacteristics());
 			levelChange(myObject);
@@ -453,9 +446,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		int verticalPaneCount = levelObject.getCharacteristics()
 				.getVerticalPaneCount();
 		this.setPrefHeight(verticalPaneCount * this.getPrefHeight());
-		System.out.println("pref height: " + this.getPrefHeight()
-				+ "pref width: " + this.getPrefWidth());
-
 		for (int i = 0; i < horizontalPaneCount; i++) {
 			for (int j = 0; j < verticalPaneCount; j++) {
 				ImageView levelImageView = new ImageView(levelObject.getImage()
