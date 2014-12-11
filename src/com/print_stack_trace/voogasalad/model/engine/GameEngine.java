@@ -48,7 +48,7 @@ public class GameEngine {
     private int framesPerSecond;
     private Map<String, HighScore> highScores;
     private Dimension viewport;
-
+    private int INITIAL_GAME_LEVEL = 1;
     //-------------------CONSTRUCTORS-------------------//
 
     public GameEngine() {
@@ -84,13 +84,15 @@ public class GameEngine {
 
     public void saveGame() throws IOException {
         GameWorldModel game = authorEngine.getGameWorldModel();
+        game.setCurrentLevel(INITIAL_GAME_LEVEL);
         gameData.write(game);
-        for(LevelModel level: game.getLevels()) {
+        for(LevelModel level: game.getLevelMap().values()) {
             debugLevel(level);
         }
     }
 
     public void debugLevel(LevelModel lvl){
+        System.out.println(lvl.getPhysicsEngine().decisionMatrix);
         for(int i=0 ;i < lvl.getPhysicsEngine().decisionMatrix.length ;i++){
             for(int j=0; j < lvl.getPhysicsEngine().decisionMatrix[0].length; j++){
                 CollisionResult c = lvl.getPhysicsEngine().decisionMatrix[i][j];
@@ -325,6 +327,10 @@ public class GameEngine {
         if(runtimeEngine != null) {
             runtimeEngine.handleKeyPress(event);
         }
+    }
+
+    public void startNewGame () {
+        currentLevel = runtimeEngine.startNewGame();
     }
 
 }

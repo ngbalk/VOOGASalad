@@ -172,4 +172,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
             goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
         }
     }
+
+    public LevelModel startNewGame () {
+        return gameWorld.startNewGame();
+    }
 }

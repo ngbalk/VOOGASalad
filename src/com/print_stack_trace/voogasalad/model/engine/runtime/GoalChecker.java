@@ -10,7 +10,7 @@ import com.print_stack_trace.voogasalad.model.environment.ReachObject;
 import com.print_stack_trace.voogasalad.model.environment.StayAlive;
 
 public class GoalChecker implements GoalElementVisitor {
-	private static final int GOAL_DESTINATION_BUFFER = 2;
+	private static final int GOAL_DESTINATION_BUFFER = 15;
 	private RuntimeModel myLevel;
 
 	public GoalChecker(RuntimeModel level) {

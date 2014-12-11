@@ -264,4 +264,8 @@ public class GamePlayer implements ViewController {
 		}
 		FileInputStream fis;
 	}
+	
+	public void startNewGame() {
+	    myGameEngine.startNewGame();
+	}
 }
