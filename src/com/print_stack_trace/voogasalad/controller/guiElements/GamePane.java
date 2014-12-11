@@ -160,6 +160,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		this.getChildren().add(0, imgView);
 		ImageView background = levelBackground.getImage();
 		background.setFitWidth(getWidth());
+		System.out.println("this width: " + getWidth());
 		background.setFitHeight(getHeight() - 10);
 		background.setFitWidth(getWidth() - 10);
 		background.setSmooth(true);
@@ -196,9 +197,9 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 						sprite.getCharacteristics());
 			}
 		} else {
-				myGameEngine.updateObject(myObject.getId(),
-				myObject.getCharacteristics());
-			}
+			myGameEngine.updateObject(myObject.getId(),
+					myObject.getCharacteristics());
+		}
 		SpriteObject temp = new SpriteObject(0, myObject.getImagePath(),
 				myObject.getType(), myObject.getDelegate());
 		temp.setCharacteristics(myObject.getCharacteristics());
@@ -217,12 +218,17 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 				.showInputDialog("Name of Level:");
 		if (new BlankSpaceTextChecker().checkText(name)) {
 			myObject.getCharacteristics().setName(name);
-            myObject.getCharacteristics().setID(levelTracker.getLevels().size());
-            System.out.println("Initial GameWorld Level Size: " + levelTracker.getLevels() + " size: " + levelTracker.getLevels().size());
-            levelTracker.addLevel(myObject, e->levelChange(myObject));
-            System.out.println("Size after adding: " + levelTracker.getLevels().size());
-            myGameEngine.addLevel(levelTracker.getLevels().size(), myObject.getCharacteristics());
-            levelChange(myObject);
+			myObject.getCharacteristics()
+					.setID(levelTracker.getLevels().size());
+			System.out.println("Initial GameWorld Level Size: "
+					+ levelTracker.getLevels() + " size: "
+					+ levelTracker.getLevels().size());
+			levelTracker.addLevel(myObject, e -> levelChange(myObject));
+			System.out.println("Size after adding: "
+					+ levelTracker.getLevels().size());
+			myGameEngine.addLevel(levelTracker.getLevels().size(),
+					myObject.getCharacteristics());
+			levelChange(myObject);
 		}
 	}
 
@@ -242,9 +248,8 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		return background;
 	}
 
-	public Pane sizePane(Pane toBeSize){
+	public Pane sizePane(Pane toBeSize) {
 		toBeSize.setPrefSize(this.getPrefWidth(), this.getPrefHeight());
-
 
 		return toBeSize;
 	}
@@ -269,7 +274,8 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		String[] sprites = new String[SpriteType.values().length];
 		for (int i = 0; i < SpriteType.values().length; i++) {
 			if (mySpriteMap.get(SpriteType.values()[i].name()) != null) {
-				String[] nameOfSprite = mySpriteMap.get(SpriteType.values()[i].name()).split(";");
+				String[] nameOfSprite = mySpriteMap.get(
+						SpriteType.values()[i].name()).split(";");
 				sprites[i] = nameOfSprite[0];
 			}
 		}
@@ -371,116 +377,134 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 			this.getChildren().add(0, backgroundImageViewCopy);
 		}
 	}
-	
-		//TODO: consider adding to the AbstractGUI shitz
-		public void loadGame() {
-			//load in level from game data
-			GameWorldModel gameWorldModel = loadGameWorldModelFromFile();
-			if(gameWorldModel == null)
-				return;
-			GameWorldCharacteristics gameWorldCharacteristics = gameWorldModel.getGameWorldCharacteristics();
-			//TODO: HAVE FRONT END HANDLE GAMEWORLDCHARACTERISTICS
-			
-			//loop through and load each level
-			Map<Integer,LevelModel> levelMap = gameWorldModel.getLevelMap();
-			for(LevelModel level: levelMap.values()) {
-				loadLevel(level);
+
+	// TODO: consider adding to the AbstractGUI shitz
+	public void loadGame() {
+		// load in level from game data
+		GameWorldModel gameWorldModel = loadGameWorldModelFromFile();
+		if (gameWorldModel == null)
+			return;
+		GameWorldCharacteristics gameWorldCharacteristics = gameWorldModel
+				.getGameWorldCharacteristics();
+		// TODO: HAVE FRONT END HANDLE GAMEWORLDCHARACTERISTICS
+
+		// loop through and load each level
+		Map<Integer, LevelModel> levelMap = gameWorldModel.getLevelMap();
+		for (LevelModel level : levelMap.values()) {
+			loadLevel(level);
+		}
+	}
+
+	public GameWorldModel loadGameWorldModelFromFile() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Load Game");
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")
+				+ "/src/com/print_stack_trace/voogasalad/model/data/"));
+		Stage newStage = new Stage();
+		File file = fileChooser.showOpenDialog(newStage);
+		if (file != null) {
+			try {
+				return myGameEngine.loadGameFromFile(file);
+			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
+				System.out.println(ex.getMessage());
 			}
 		}
-		public GameWorldModel loadGameWorldModelFromFile() {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Load Game");
-			fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
-			Stage newStage=new Stage();
-			File file = fileChooser.showOpenDialog(newStage);
-			if (file != null) {
-				try {
-					return myGameEngine.loadGameFromFile(file);
-				} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
-					System.out.println(ex.getMessage());
-				}
-			}
-			return null;
-		}	
-		public void loadLevel(LevelModel levelModel) {
-			//load in level from game data
-			//LevelModel levelModel = loadLevelModelFromFile();
-			if(levelModel == null)
-				return;
-			//Integer first = levelModel.getSpriteMap().keySet().iterator().next();
-			//levelModel.setMainCharacter(first);
-			LevelCharacteristics levelCharacteristics = levelModel.getLevelCharacteristics();
-			//transfer general level data in
-			loadLevelObjectFromLevel(levelCharacteristics);
-			//transfer sprite data in
-			loadSpriteObjectsFromLevel(levelModel.getSpriteMap());
-			//transfer goal data in
-			loadGoalObjectsFromLevel(levelModel.getGoalMap());
-			//transfer other things in
-			setCamera(levelModel.getCameraType());
-			setPhysics(levelModel.getPhysicsEngine());
-			
-			//TODO: add more here if necessary
-		}
-		private void loadLevelObjectFromLevel(LevelCharacteristics levelCharacteristics) {
-			LevelObject levelObject = new LevelObject(
-					levelCharacteristics.getBackgroundImagePath(), this,
-					levelCharacteristics);
-			//levelObject.getCharacteristics().setName(levelCharacteristics.getName());
-			levelTracker.addLevel(levelObject, e -> levelChange(levelObject));
-	        myGameEngine.addLevel(levelTracker.getLevels().size(),levelObject.getCharacteristics());
-	        myGameEngine.setCurrentLevel(levelTracker.getLevels().size());
-			levelObject.update();
-			double width = this.getPrefWidth();
-			double height = this.getPrefHeight();
-			int horizontalPaneCount = levelObject.getCharacteristics()
-					.getHorizontalPaneCount();
-			this.setPrefWidth(horizontalPaneCount * this.getPrefWidth());
-			int verticalPaneCount = levelObject.getCharacteristics()
-					.getVerticalPaneCount();
-			this.setPrefHeight(verticalPaneCount * this.getPrefHeight());
-			for (int i = 0; i < horizontalPaneCount; i++) {
-				for (int j = 0; j < verticalPaneCount; j++) {
-					ImageView levelImageView = new ImageView(levelObject.getImage()
-							.getImage());
-					levelImageView.setFitHeight(height);
-					levelImageView.setFitWidth(width);
-					levelImageView.relocate(i * width, height * j);
-					this.getChildren().add(0, levelImageView);
-				}
-			}
-			levelObject.update();
-		}
-		private void loadSpriteObjectsFromLevel(Map<Integer, SpriteCharacteristics> spriteMap) {
-			for (SpriteCharacteristics sc : spriteMap.values()) {
-				ImageView imageView = new ImageView(sc.getImage());
-				SpriteObject spriteObject = addSpriteObject(imageView,
-						sc.getImagePath(), capitalize(sc.getObjectType().name()));
-				spriteObject.setCharacteristics(sc);
-				spriteObject.getImage().relocate(sc.getX(), sc.getY());
-				spriteObject.getImage().setFitWidth(sc.getWidth());
-				spriteObject.getImage().setFitHeight(sc.getHeight());
-				spriteObject.getImage().setRotate(sc.getOrientation());
-				myGameEngine.updateObject(spriteObject.getId(), spriteObject.getCharacteristics());
+		return null;
+	}
+
+	public void loadLevel(LevelModel levelModel) {
+		// load in level from game data
+		// LevelModel levelModel = loadLevelModelFromFile();
+		if (levelModel == null)
+			return;
+		// Integer first = levelModel.getSpriteMap().keySet().iterator().next();
+		// levelModel.setMainCharacter(first);
+		LevelCharacteristics levelCharacteristics = levelModel
+				.getLevelCharacteristics();
+		// transfer general level data in
+		loadLevelObjectFromLevel(levelCharacteristics);
+		// transfer sprite data in
+		loadSpriteObjectsFromLevel(levelModel.getSpriteMap());
+		// transfer goal data in
+		loadGoalObjectsFromLevel(levelModel.getGoalMap());
+		// transfer other things in
+		setCamera(levelModel.getCameraType());
+		setPhysics(levelModel.getPhysicsEngine());
+
+		// TODO: add more here if necessary
+	}
+
+	private void loadLevelObjectFromLevel(
+			LevelCharacteristics levelCharacteristics) {
+		LevelObject levelObject = new LevelObject(
+				levelCharacteristics.getBackgroundImagePath(), this,
+				levelCharacteristics);
+		// levelObject.getCharacteristics().setName(levelCharacteristics.getName());
+		levelTracker.addLevel(levelObject, e -> levelChange(levelObject));
+		myGameEngine.addLevel(levelTracker.getLevels().size(),
+				levelObject.getCharacteristics());
+		myGameEngine.setCurrentLevel(levelTracker.getLevels().size());
+		levelObject.update();
+		double width = this.getPrefWidth();
+		double height = this.getPrefHeight();
+		int horizontalPaneCount = levelObject.getCharacteristics()
+				.getHorizontalPaneCount();
+		this.setPrefWidth(horizontalPaneCount * this.getPrefWidth());
+		int verticalPaneCount = levelObject.getCharacteristics()
+				.getVerticalPaneCount();
+		this.setPrefHeight(verticalPaneCount * this.getPrefHeight());
+		System.out.println("pref height: " + this.getPrefHeight()
+				+ "pref width: " + this.getPrefWidth());
+
+		for (int i = 0; i < horizontalPaneCount; i++) {
+			for (int j = 0; j < verticalPaneCount; j++) {
+				ImageView levelImageView = new ImageView(levelObject.getImage()
+						.getImage());
+				levelImageView.setFitHeight(height);
+				levelImageView.setFitWidth(width);
+				levelImageView.relocate(i * width, j * height);
+				this.getChildren().add(0, levelImageView);
 			}
 		}
-		private void loadGoalObjectsFromLevel(Map<Integer,GoalCharacteristics> goalMap) {
-			for(GoalCharacteristics goalChars : goalMap.values()){
-				GoalObject goalObject = new GoalObject(goalChars.getGoalType(),this);
-				goalObject.setCharacteristics(goalChars);
-			}
+		levelObject.update();
+	}
+
+	private void loadSpriteObjectsFromLevel(
+			Map<Integer, SpriteCharacteristics> spriteMap) {
+		for (SpriteCharacteristics sc : spriteMap.values()) {
+			ImageView imageView = new ImageView(sc.getImage());
+			SpriteObject spriteObject = addSpriteObject(imageView,
+					sc.getImagePath(), capitalize(sc.getObjectType().name()));
+			spriteObject.setCharacteristics(sc);
+			spriteObject.getImage().relocate(sc.getX(), sc.getY());
+			spriteObject.getImage().setFitWidth(sc.getWidth());
+			spriteObject.getImage().setFitHeight(sc.getHeight());
+			spriteObject.getImage().setRotate(sc.getOrientation());
+			myGameEngine.updateObject(spriteObject.getId(),
+					spriteObject.getCharacteristics());
 		}
-		private String capitalize(String line) {
-			/*
-			 * String[] strArray = line.split(" "); String capitalizedString = "";
-			 * for(int i=0; i<strArray.length; i++) capitalizedString +=
-			 * Character.toUpperCase
-			 * (strArray[i].charAt(0))+strArray[i].substring(1).toLowerCase() + " ";
-			 * return capitalizedString
-			 */
-			return Character.toUpperCase(line.charAt(0))
-					+ line.substring(1).toLowerCase();
+	}
+
+	private void loadGoalObjectsFromLevel(
+			Map<Integer, GoalCharacteristics> goalMap) {
+		for (GoalCharacteristics goalChars : goalMap.values()) {
+			GoalObject goalObject = new GoalObject(goalChars.getGoalType(),
+					this);
+			goalObject.setCharacteristics(goalChars);
 		}
+	}
+
+	private String capitalize(String line) {
+		/*
+		 * String[] strArray = line.split(" "); String capitalizedString = "";
+		 * for(int i=0; i<strArray.length; i++) capitalizedString +=
+		 * Character.toUpperCase
+		 * (strArray[i].charAt(0))+strArray[i].substring(1).toLowerCase() + " ";
+		 * return capitalizedString
+		 */
+		return Character.toUpperCase(line.charAt(0))
+				+ line.substring(1).toLowerCase();
+	}
 
 	@Override
 	public HashSet<GameObject> getCurrentLevelSprites() {
