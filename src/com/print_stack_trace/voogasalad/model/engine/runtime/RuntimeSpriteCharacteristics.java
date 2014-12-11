@@ -6,10 +6,11 @@
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
+
+import javafx.scene.input.KeyCode;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
-
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
@@ -102,9 +103,11 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 		return currentSpriteAction;
 	}
 	
+
 	public void setPossibleSpriteAction(KeyResult spriteAction) {
 		currentSpriteAction = spriteAction;
 		//TODO: implement this on back end.
+
 	}
 
 }

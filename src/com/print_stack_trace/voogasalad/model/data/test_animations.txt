@@ -1,0 +1,162 @@
+{
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "xPosition": 188,
+      "yPosition": 435,
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "RIGHT": [],
+        "DOWN": [],
+        "JUMP": [],
+        "UP": [],
+        "CROUCH": [],
+        "LEFT": []
+      }
+    },
+    "1": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "xPosition": 288,
+      "yPosition": 436,
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "RIGHT": [],
+        "DOWN": [],
+        "JUMP": [],
+        "UP": [],
+        "CROUCH": [],
+        "LEFT": []
+      }
+    },
+    "2": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "xPosition": 388,
+      "yPosition": 437,
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "RIGHT": [],
+        "DOWN": [],
+        "JUMP": [],
+        "UP": [],
+        "CROUCH": [],
+        "LEFT": []
+      }
+    },
+    "3": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "xPosition": 289,
+      "yPosition": 335,
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {
+        "UP": "UP"
+      },
+      "myAnimations": {
+        "RIGHT": [
+          {
+            "path": "/Users/nickbalkissoon/Documents/workspace/voogasalad_PrintStackTrace/src/com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png"
+          },
+          null,
+          {
+            "path": "/Users/nickbalkissoon/Documents/workspace/voogasalad_PrintStackTrace/src/com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png"
+          }
+        ],
+        "DOWN": [],
+        "JUMP": [],
+        "UP": [
+          {
+            "path": "/Users/nickbalkissoon/Documents/workspace/voogasalad_PrintStackTrace/src/com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png"
+          }
+        ],
+        "CROUCH": [],
+        "LEFT": []
+      }
+    }
+  },
+  "goalMap": {},
+  "currentID": 3,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "test_animations",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "requiredNumberOfGoals": 0,
+    "myHorizontalPaneCount": 1,
+    "myVerticalPaneCount": 1
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {}
+}
