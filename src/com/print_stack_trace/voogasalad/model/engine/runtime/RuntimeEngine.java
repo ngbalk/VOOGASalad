@@ -7,12 +7,8 @@
 package com.print_stack_trace.voogasalad.model.engine.runtime;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
@@ -37,6 +33,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     private Map<Integer, Goal> goalMap;
     private CameraHandler cameraHandler;
     private Dimension viewport;
+   	private int completedGoalCount = 0;
+
 
     //-------------------CONSTRUCTORS-------------------//
 
@@ -54,7 +52,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
         this.viewport = viewport;
     }
-
+    
     public RuntimeEngine(GameWorldModel gameWorld, Dimension viewport) {
         super(gameWorld);
         this.viewport = viewport;
@@ -77,7 +75,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         currentLevel = gameWorld.getNextLevel();
         createRuntimeState(currentLevel, viewport);
     }
-
+    
     /**
      * Update all of the data in the current level.
      * 1. Calls PhysicsEngine to "animate" sprites.
@@ -105,10 +103,16 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
                 getNextLevel();
             }
         }
-
-        updateSpritePositions();
-
-        cameraHandler.updateCamera(runtimeModel);
+        
+		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
+		if(gameOver(mainChar)){
+			System.out.println("YOU DIED BITCH");
+			runtimeModel.gameOver = true;
+			runtimeModel.gameVictory = false;
+		}
+		updateSpritePositions();
+		
+		cameraHandler.updateCamera(runtimeModel);
     }
 
     public void setFramesPerSecond(int framesPerSecond) {
@@ -132,7 +136,14 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     public void handleKeyPress(KeyEvent event) {
         handleKey(event, true);
     }
-
+    
+    public void populateGoalMap(){
+        for(Integer i : runtimeModel.getGoalMap().keySet()){
+            goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
+        }
+    }
+	
+    
     //-------------------ACCESSORS-------------------//
 
 
@@ -166,9 +177,10 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
             return;
         }
     }
-    public void populateGoalMap(){
-        for(Integer i : runtimeModel.getGoalMap().keySet()){
-            goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
-        }
-    }
+    
+	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
+	    if(mainChar == null) return false;
+	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
+                    
+	}
 }

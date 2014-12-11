@@ -11,7 +11,7 @@ public class ObjectBothNoDisplacement extends CollisionHandler {
     @Override
     public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
             RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
-
+		
         if(s1.isCollidingHorizontally) {
             s1.v_x = 0;
             s2.v_x = 0;

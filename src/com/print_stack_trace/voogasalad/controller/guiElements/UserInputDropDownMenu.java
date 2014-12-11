@@ -33,27 +33,25 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 	}
 	protected void addMenus(){
 		for (String menuName: data.keySet()){
-			CheckMenuItem currentMenuItem=new CheckMenuItem(returnStringName(data.get(menuName)));
-			currentMenuItem.setOnAction(e->checkCorrectMenu(currentMenuItem,menuName));
-			this.currentMenu.getItems().add(currentMenuItem);
+			addMenu(menuName);
 		}
 	}
+	protected void addMenu(String menuName){
+		CheckMenuItem currentMenuItem=new CheckMenuItem(returnStringName(data.get(menuName)));
+		currentMenuItem.setOnAction(e->checkCorrectMenu(currentMenuItem,menuName));
+		this.currentMenu.getItems().add(currentMenuItem);
+	}
 	private String returnStringName(String value){
-		String toReturn;
+		String toReturn = value;
 		if (canSplit(value))
 			toReturn=Arrays.asList(value.split(";")).iterator().next();
-		else
-			toReturn=value;
 		return toReturn;
 	}
 	protected String[] split(String value){
 		return value.split(";");
 	}
 	protected boolean canSplit(String value){
-		if (value.contains(";")){
-			return true;
-		}
-		return false;
+		return (value.contains(";"));
 	}
 	protected void checkCorrectMenu(CheckMenuItem currentItem, String menuName){
 		for (MenuItem item: currentMenu.getItems()){

@@ -1,6 +1,8 @@
 package com.print_stack_trace.voogasalad.model;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 
@@ -12,8 +14,8 @@ public class GoalCharacteristics {
 
     private String myName="";
     public GoalType myGoalType=GoalType.POINTS;
-    public Integer myObjectID=0;
-    public Integer myObjectiveID=0;
+    public Integer myObjectID = 0;
+    public List<Integer> myObjectiveID = new ArrayList<>();
     public Integer myPointTotal=0;
     public double myDestination=0;
     private boolean myHorizontalDestination=true;
@@ -22,6 +24,7 @@ public class GoalCharacteristics {
     
     public GoalCharacteristics(GoalType goalType) {
         myGoalType = goalType;
+        myObjectiveID.add(0);
     }
     public void setHorizontalDestination(boolean dest){
     	myHorizontalDestination=dest;
@@ -36,7 +39,7 @@ public class GoalCharacteristics {
     public void setObjectID(Integer ID){
     	myObjectID=ID;
     }
-    public void setObjectiveID(Integer ID){
+    public void setObjectiveID(List<Integer> ID){
     	myObjectiveID=ID;
     }
   
@@ -55,7 +58,7 @@ public class GoalCharacteristics {
     public Integer getObjectID(){
     	return myObjectID;
     }
-    public Integer getObjectiveID(){
+    public List<Integer> getObjectiveID(){
     	return myObjectiveID;
     }
     public Integer getPointsTotal(){
@@ -64,5 +67,7 @@ public class GoalCharacteristics {
     public void setPointsTotal(int points){
     	myPointTotal=points;
     }
-   // public void 
+	public GoalType getGoalType() {
+		return myGoalType;
+	}
 }

@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
@@ -19,6 +20,7 @@ public class SpriteWidthController extends SpriteCharacteristicController{
 		catch(NumberFormatException e){
 			
 		}
+		System.out.println(newWidth);
 		mySprite.getImage().setFitWidth(newWidth);
 		mySprite.getImage().setPreserveRatio(false);
 		((SpriteObject)mySprite).getCharacteristics().setWidth(newWidth);

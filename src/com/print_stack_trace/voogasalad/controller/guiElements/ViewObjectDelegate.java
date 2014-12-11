@@ -3,6 +3,8 @@ package com.print_stack_trace.voogasalad.controller.guiElements;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.beans.property.SimpleObjectProperty;
+
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
@@ -20,4 +22,5 @@ public interface ViewObjectDelegate {
 	public void extendRight();
 	public void extendDown();
 	public HashSet<GameObject> getCurrentLevelSprites();
+	public SimpleObjectProperty<LevelObject> currentLevelProperty();
 }

@@ -21,172 +21,185 @@ import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
 public class LevelModel {
 
-    public Map<Integer, GoalCharacteristics> goalMap; //good
-    public Map<Integer, SpriteCharacteristics> mySpriteMap; //good
+	public Map<Integer, GoalCharacteristics> goalMap; // good
+	public Map<Integer, SpriteCharacteristics> mySpriteMap; // good
 	private Integer currentID;
-    private boolean isLocked;
-    private PhysicsEngine physicsEngine;
-    private LevelCharacteristics myLevelChars;
-    private GoalFactory myGoalFactory;
-    private Map<KeyCode, KeyResult> myKeyMap = new HashMap<KeyCode, KeyResult>();
-    private Integer mainCharacter;
+	private boolean isLocked;
+	private PhysicsEngine physicsEngine;
+	private LevelCharacteristics myLevelChars;
+	private GoalFactory myGoalFactory;
+	private Map<KeyCode, KeyResult> myKeyMap = new HashMap<KeyCode, KeyResult>();
+	private Integer mainCharacter;
 
-    public LevelModel(){
-        myGoalFactory = new GoalFactory();
-        currentID = 0;
-        mySpriteMap = new HashMap<>();
-        goalMap = new HashMap<>();
-        myKeyMap = new HashMap<>();
-        myLevelChars = new LevelCharacteristics();
-        physicsEngine = new PhysicsEngine();
-    }
-    
-    public LevelModel(LevelModel level) {
-    	Map<Integer, SpriteCharacteristics> mySpriteMap=level.mySpriteMap; //good
-        Map<Integer, GoalCharacteristics> goalMap=level.goalMap; //good
-    	currentID=level.currentID;
-        isLocked=level.isLocked;
-        physicsEngine=level.physicsEngine;
-        myLevelChars = level.myLevelChars;
-        myGoalFactory = level.myGoalFactory;
-        myKeyMap = level.myKeyMap;
-        mainCharacter = level.mainCharacter;
-    }
+	public LevelModel() {
+		myGoalFactory = new GoalFactory();
+		currentID = 0;
+		mySpriteMap = new HashMap<>();
+		goalMap = new HashMap<>();
+		myKeyMap = new HashMap<>();
+		myLevelChars = new LevelCharacteristics();
+		physicsEngine = new PhysicsEngine();
+		mainCharacter = 0;
+	}
 
-    public PhysicsEngine getPhysicsEngine() {
-        return physicsEngine;
-    }
+	public LevelModel(LevelModel level) {
+		Map<Integer, SpriteCharacteristics> mySpriteMap = level.mySpriteMap; // good
+		Map<Integer, GoalCharacteristics> goalMap = level.goalMap; // good
+		currentID = level.currentID;
+		isLocked = level.isLocked;
+		physicsEngine = level.physicsEngine;
+		myLevelChars = level.myLevelChars;
+		myGoalFactory = level.myGoalFactory;
+		myKeyMap = level.myKeyMap;
+		mainCharacter = level.mainCharacter;
+	}
 
-    public void setPhysicsEngine(PhysicsEngine physicsEngine) {
-        this.physicsEngine = physicsEngine;
-    }
-    
-    private Integer generateID(Map map) {
-        while(map.keySet().contains(currentID)) {
-            currentID++;
-        }
-        return currentID;
-    }
+	public PhysicsEngine getPhysicsEngine() {
+		return physicsEngine;
+	}
 
-    public void setLocked() {
-        isLocked = true;
-    }
+	public void setPhysicsEngine(PhysicsEngine physicsEngine) {
+		this.physicsEngine = physicsEngine;
+	}
 
-    public void setUnlocked() {
-        isLocked = false;
-    }
+	private Integer generateID(Map map) {
+		while (map.keySet().contains(currentID)) {
+			currentID++;
+		}
+		return currentID;
+	}
 
-    public Integer addObject (SpriteCharacteristics chars) throws ElementLockedException {
-        if (isLocked){
-            throw new ElementLockedException();
-        }
+	public void setLocked() {
+		isLocked = true;
+	}
 
-        int newID = generateID(mySpriteMap);
-        mySpriteMap.put(newID, chars);
-        return newID;
-    }
+	public void setUnlocked() {
+		isLocked = false;
+	}
 
-    public void deleteObject (Integer ModelID) throws ElementLockedException {
-        if (isLocked){
-            throw new ElementLockedException();
-        }
-        mySpriteMap.remove(ModelID);
-    }
+	public Integer addObject(SpriteCharacteristics chars)
+			throws ElementLockedException {
+		if (isLocked) {
+			throw new ElementLockedException();
+		}
 
-    public void updateObject (Integer ModelID, SpriteCharacteristics chars) 
-            throws ElementLockedException {
-        if (isLocked) throw new ElementLockedException();
-        //if it passes other logic tests including: no collisions
-        mySpriteMap.remove(ModelID);
-        mySpriteMap.put(ModelID, chars);
-    }
+		int newID = generateID(mySpriteMap);
+		mySpriteMap.put(newID, chars);
+		return newID;
+	}
 
+	public void deleteObject(Integer ModelID) throws ElementLockedException {
+		if (isLocked) {
+			throw new ElementLockedException();
+		}
+		mySpriteMap.remove(ModelID);
+	}
 
-    public Integer setGoal(GoalCharacteristics goal) throws ElementLockedException  {
-        if (isLocked) throw new ElementLockedException();
+	public void updateObject(Integer ModelID, SpriteCharacteristics chars)
+			throws ElementLockedException {
+		if (isLocked)
+			throw new ElementLockedException();
+		// if it passes other logic tests including: no collisions
+		mySpriteMap.remove(ModelID);
+		mySpriteMap.put(ModelID, chars);
+	}
 
-        int newID = generateID(goalMap);
-        goalMap.put(newID, goal);
-        return newID;
+	public Integer setGoal(GoalCharacteristics goal)
+			throws ElementLockedException {
+		if (isLocked)
+			throw new ElementLockedException();
 
-    }
+		int newID = generateID(goalMap);
+		goalMap.put(newID, goal);
+		return newID;
 
-    public void updateGoal(Integer goalID, GoalCharacteristics goal)
-            throws ElementLockedException{
-        if(isLocked) throw new ElementLockedException();
-        goalMap.remove(goalID);
-        goalMap.put(goalID, goal);
+	}
 
-    }
+	public void updateGoal(Integer goalID, GoalCharacteristics goal)
+			throws ElementLockedException {
+		if (isLocked)
+			throw new ElementLockedException();
+		goalMap.remove(goalID);
+		if (!goalMap.containsValue(goal))
+			goalMap.put(goalID, goal);
 
-    public void deleteGoal(Integer goalID) throws ElementLockedException{
-        if(isLocked) throw new ElementLockedException();
-        goalMap.remove(goalID);
-        if(myLevelChars.requiredNumberOfGoals>goalMap.size()) {
-            myLevelChars.requiredNumberOfGoals = myLevelChars.requiredNumberOfGoals - 1;
-        }
+	}
 
-    }
+	public void deleteGoal(Integer goalID) throws ElementLockedException {
+		if (isLocked)
+			throw new ElementLockedException();
+		goalMap.remove(goalID);
+		if (myLevelChars.requiredNumberOfGoals > goalMap.size()) {
+			myLevelChars.requiredNumberOfGoals = myLevelChars.requiredNumberOfGoals - 1;
+		}
 
-    public GoalCharacteristics getGoal(Integer id) {
-        return goalMap.get(id);
-    }
-    
-    public Map<Integer, GoalCharacteristics> getGoalMap() {
+	}
+
+	public GoalCharacteristics getGoal(Integer id) {
+		return goalMap.get(id);
+	}
+
+	public Map<Integer, GoalCharacteristics> getGoalMap() {
 		return goalMap;
 	}
 
-    public void setCameraType(CameraFactory.CameraType cameraType)
-            throws ElementLockedException {
-        if (isLocked) throw new ElementLockedException();
-        //in what context can you not set a certain cameraType
-        myLevelChars.cameraType = cameraType;
-    }
+	public void setCameraType(CameraFactory.CameraType cameraType)
+			throws ElementLockedException {
+		if (isLocked)
+			throw new ElementLockedException();
+		// in what context can you not set a certain cameraType
+		myLevelChars.cameraType = cameraType;
+	}
 
-    public CameraFactory.CameraType getCameraType() {
-        return myLevelChars.cameraType;
-    }
+	public CameraFactory.CameraType getCameraType() {
+		return myLevelChars.cameraType;
+	}
 
-    public void setLevelCharacteristics(LevelCharacteristics levelSpecs)
-            throws ElementLockedException {
-        if (isLocked) throw new ElementLockedException();
-//        if (levelSpecs.requiredNumberOfGoals<0 || levelSpecs.requiredNumberOfGoals > goalMap.size()) {
-//            throw new InvalidNumberOfGoalsException();
-//        }
-        //in what context can you not set a certain cameraType
-        myLevelChars = levelSpecs;
-    }
+	public void setLevelCharacteristics(LevelCharacteristics levelSpecs)
+			throws ElementLockedException {
+		if (isLocked)
+			throw new ElementLockedException();
+		// if (levelSpecs.requiredNumberOfGoals<0 ||
+		// levelSpecs.requiredNumberOfGoals > goalMap.size()) {
+		// throw new InvalidNumberOfGoalsException();
+		// }
+		// in what context can you not set a certain cameraType
+		myLevelChars = levelSpecs;
+	}
 
-    public LevelCharacteristics getLevelCharacteristics() {
-        return myLevelChars;
-    }
+	public LevelCharacteristics getLevelCharacteristics() {
+		return myLevelChars;
+	}
 
-    public void setSoloHandler(SoloPhysicsHandler soloHandler)
-            throws ElementLockedException {
-        if (isLocked) throw new ElementLockedException();
-        physicsEngine.setSoloHandler(soloHandler);
+	public void setSoloHandler(SoloPhysicsHandler soloHandler)
+			throws ElementLockedException {
+		if (isLocked)
+			throw new ElementLockedException();
+		physicsEngine.setSoloHandler(soloHandler);
 
-    }
+	}
 
-    public void setCollisionHandlerForResult(CollisionResult result,
-            CollisionHandler handler) throws ElementLockedException  {
-        if (isLocked) throw new ElementLockedException();
-        physicsEngine.setHandlerForResult(result, handler);
-    }
+	public void setCollisionHandlerForResult(CollisionResult result,
+			CollisionHandler handler) throws ElementLockedException {
+		if (isLocked)
+			throw new ElementLockedException();
+		physicsEngine.setHandlerForResult(result, handler);
+	}
 
-    public void setResultOfCollision(CollisionResult result, SpriteType s1,
-            SpriteType s2) throws ElementLockedException {
-        if (isLocked) throw new ElementLockedException();
-        physicsEngine.setResultOfCollision(result, s1, s2);
-    }
+	public void setResultOfCollision(CollisionResult result, SpriteType s1,
+			SpriteType s2) throws ElementLockedException {
+		if (isLocked)
+			throw new ElementLockedException();
+		physicsEngine.setResultOfCollision(result, s1, s2);
+	}
 
-    public Map<Integer, SpriteCharacteristics> getSpriteMap() {
-        return mySpriteMap;
-    }
+	public Map<Integer, SpriteCharacteristics> getSpriteMap() {
+		return mySpriteMap;
+	}
 
-    public void setSpriteMap(Map<Integer, SpriteCharacteristics> spriteMap) {
-        this.mySpriteMap = spriteMap;
-    }
+	public void setSpriteMap(Map<Integer, SpriteCharacteristics> spriteMap) {
+		this.mySpriteMap = spriteMap;
+	}
 
 	public Integer getMainCharacter() {
 		return mainCharacter;
@@ -195,20 +208,20 @@ public class LevelModel {
 	public void setMainCharacter(Integer mainCharacter) {
 		this.mainCharacter = mainCharacter;
 	}
-    
-    public void setResultForKey(KeyResult result, KeyCode key) {
-    	myKeyMap.put(key, result);
-    }
-    
-    public KeyResult getResultOfKey(KeyCode key) {
-        if(!myKeyMap.containsKey(key)) {
-            return KeyResult.Default;
-        }
-    	return myKeyMap.get(key);
-    }
-    
-    public String toString(){
-    	//returns name of the level
-    	return this.getLevelCharacteristics().getName();
-    }
+
+	public void setResultForKey(KeyResult result, KeyCode key) {
+		myKeyMap.put(key, result);
+	}
+
+	public KeyResult getResultOfKey(KeyCode key) {
+		if (!myKeyMap.containsKey(key)) {
+			return KeyResult.Default;
+		}
+		return myKeyMap.get(key);
+	}
+
+	public String toString() {
+		// returns name of the level
+		return this.getLevelCharacteristics().getName();
+	}
 }
