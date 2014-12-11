@@ -309,7 +309,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 
 	@Override
 	public void deleteObject(SpriteObject object) {
-		System.out.println("DELETE");
 		myGameEngine.deleteObject(object.getId());
 		this.getChildren().remove(object.getImage());
 		this.levelTracker.removeSprite(object);
@@ -407,7 +406,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 			try {
 				return myGameEngine.loadLevelForEditing(file);
 			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
-				System.out.println(ex.getMessage());
+				new MessagePopUp(myStyle).showMessageDialog((ex.getMessage()));
 			}
 		}
 		return null;
