@@ -310,7 +310,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 
 	@Override
 	public void deleteObject(SpriteObject object) {
-		System.out.println("DELETE");
 		myGameEngine.deleteObject(object.getId());
 		this.getChildren().remove(object.getImage());
 		this.levelTracker.removeSprite(object);
@@ -374,7 +373,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	}
 	
 		//TODO: consider adding to the AbstractGUI shitz
-		
 		public void loadGame() {
 			//load in level from game data
 			GameWorldModel gameWorldModel = loadGameWorldModelFromFile();
@@ -385,11 +383,10 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 			
 			//loop through and load each level
 			Map<Integer,LevelModel> levelMap = gameWorldModel.getLevelMap();
-			for(int i=0; i<levelMap.size(); i++) {
-				loadLevel(levelMap.get(i));
+			for(LevelModel level: levelMap.values()) {
+				loadLevel(level);
 			}
 		}
-		
 		public GameWorldModel loadGameWorldModelFromFile() {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Load Game");
@@ -404,13 +401,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 				}
 			}
 			return null;
-		}
-		
-		//If we want it...will eventually not be necessary
-		//TODO: remove this once game worl loading is done
-		public void loadLevel() {
-			loadLevel(loadLevelModelFromFile());
-		}
+		}	
 		public void loadLevel(LevelModel levelModel) {
 			//load in level from game data
 			//LevelModel levelModel = loadLevelModelFromFile();
@@ -430,22 +421,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 			setPhysics(levelModel.getPhysicsEngine());
 			
 			//TODO: add more here if necessary
-		}
-		//Below method not necessary anymore
-		private LevelModel loadLevelModelFromFile() {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Load level");
-			fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
-			Stage newStage=new Stage();
-			File file = fileChooser.showOpenDialog(newStage);
-			if (file != null) {
-				try {
-					return myGameEngine.loadLevelFromFile(file);
-				} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
-					System.out.println(ex.getMessage());
-				}
-			}
-			return null;
 		}
 		private void loadLevelObjectFromLevel(LevelCharacteristics levelCharacteristics) {
 			LevelObject levelObject = new LevelObject(
@@ -476,7 +451,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 			}
 			levelObject.update();
 		}
-		
 		private void loadSpriteObjectsFromLevel(Map<Integer, SpriteCharacteristics> spriteMap) {
 			for (SpriteCharacteristics sc : spriteMap.values()) {
 				ImageView imageView = new ImageView(sc.getImage());

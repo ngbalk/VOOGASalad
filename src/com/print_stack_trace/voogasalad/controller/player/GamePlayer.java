@@ -47,6 +47,7 @@ import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButto
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerSaveButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerToolBar;
 import com.print_stack_trace.voogasalad.controller.guiElements.SaveMenuItem;
+import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement;
 import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -54,12 +55,15 @@ import com.print_stack_trace.voogasalad.model.data.HighScore;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.player.Score;
 import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
-	private final static int FPS = 10;
+
+	private final static int FPS = 15;
+	private static final double ANIMATION_DURATION = 0.001;
 	private Group myRoot;
 	private Group myGameRoot;
 	private ScrollPane myViewPort = new ScrollPane();
@@ -72,8 +76,10 @@ public class GamePlayer implements ViewController {
 	private String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	private int keyFrameCounter = 0;
+	int animationIndex=0;
 	private HUD myHud = new HUD();
 	private File myFile = null;
+
 
 	/* instance of buttons */
 	private Button saveGame, resumeGame, pauseGame,stopGame;
@@ -141,7 +147,7 @@ public class GamePlayer implements ViewController {
 	 */
 	public void updateScene(){ 
 
-		ImageView spriteImage = null;
+		ImageView spriteImageView = null;
 		Image img = null;
 
 		myPlayPane.getChildren().clear();
@@ -163,17 +169,70 @@ public class GamePlayer implements ViewController {
 		myPlayPane.getChildren().add(0,background); 
 
 		for(Integer id : spriteMap.keySet()){
-			SpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
+			RuntimeSpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
 			img = new Image(spriteCharacteristics.getImagePath());
-			spriteImage = new ImageView(img);
-			spriteImage.setFitWidth(spriteCharacteristics.getWidth());
-			spriteImage.setFitHeight(spriteCharacteristics.getHeight());
-			spriteImage.setRotate(spriteCharacteristics.getOrientation());
-			spriteImage.setLayoutX(spriteCharacteristics.getX());
-			spriteImage.setLayoutY(spriteCharacteristics.getY());
-			myPlayPane.getChildren().add(spriteImage);
+			spriteImageView = new ImageView(img);
+			spriteImageView.setFitWidth(spriteCharacteristics.getWidth());
+			spriteImageView.setFitHeight(spriteCharacteristics.getHeight());
+			spriteImageView.setRotate(spriteCharacteristics.getOrientation());
+			spriteImageView.setLayoutX(spriteCharacteristics.getX());
+			spriteImageView.setLayoutY(spriteCharacteristics.getY());
+
+			executeAnimation(spriteImageView, spriteCharacteristics);
 		}
 
+	}
+	/**
+	 * Check if there is an animation for the current movement, and if so, do it.  Else, just render the normal 
+	 * sprite image.
+	 * @param currentSpriteImageView
+	 * @param spriteCharacteristics
+	 */
+	private void executeAnimation(ImageView currentSpriteImageView, RuntimeSpriteCharacteristics spriteCharacteristics){
+		KeyResult animationType = spriteCharacteristics.getCurrentAnimation();
+		if(animationType==null){
+			myPlayPane.getChildren().add(currentSpriteImageView);
+			return;
+		}
+		ArrayList<Image> animationImages = spriteCharacteristics.getAnimationImages(animationType);
+		Timeline animationTimeline = new Timeline();
+		animationTimeline.setCycleCount(Timeline.INDEFINITE);
+		/*
+		for(Image spriteImage : animationImages){
+		    System.out.println(spriteImage);
+		    if(spriteImage == null) {
+		        continue;
+		    }
+			KeyFrame updateSprite = new KeyFrame(Duration.seconds(ANIMATION_DURATION), e->animateSprite(currentSpriteImageView, spriteImage, spriteCharacteristics));
+			animationTimeline.getKeyFrames().add(updateSprite);
+		}
+		*/
+		
+		KeyFrame updateSprite=new KeyFrame(Duration.seconds(ANIMATION_DURATION), e->animateSprite(currentSpriteImageView, animationImages, spriteCharacteristics, animationIndex));
+		animationTimeline.getKeyFrames().add(updateSprite);
+		animationTimeline.play();
+	
+			
+	}
+	private void animateSprite(ImageView currentSpriteImageView, ArrayList<Image> spriteImage, SpriteCharacteristics spriteCharacteristics, int index){
+        System.out.println(spriteImage.size());
+	    if (animationIndex>=spriteImage.size())
+            animationIndex=0;
+	    currentSpriteImageView.setImage(spriteImage.get(index));
+	    System.out.println(spriteImage.get(index));
+	    spriteCharacteristics.setImage(spriteImage.get(index));
+        animationIndex++;
+        //this.myPlayPane.getChildren().add(currentSpriteImageView);
+    }
+	/**
+	 * Replace old sprite image with new sprite image
+	 * @param currentSpriteImageView
+	 * @param spriteImage
+	 * @param spriteCharacteristics
+	 */
+	private void animateSprite(ImageView currentSpriteImageView, Image spriteImage, SpriteCharacteristics spriteCharacteristics){
+		currentSpriteImageView.setImage(spriteImage);
+		//this.myPlayPane.getChildren().add(currentSpriteImageView);
 	}
 	
 	private void updateViewPort(){

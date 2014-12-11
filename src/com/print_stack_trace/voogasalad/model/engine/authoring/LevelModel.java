@@ -143,6 +143,7 @@ public class LevelModel {
 		return goalMap;
 	}
 
+
 	public void setCameraType(CameraFactory.CameraType cameraType)
 			throws ElementLockedException {
 		if (isLocked)

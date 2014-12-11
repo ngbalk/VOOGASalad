@@ -72,7 +72,6 @@ public abstract class AbstractUserSplashScreen {
 		for (int i=0; i<=max; i++){
 			if (myNodes.containsKey(i)){
 				myGroup.getChildren().add(myNodes.get(i).getNode());
-				System.out.println(myNodes.get(i));
 			}
 		}
 	}

@@ -25,7 +25,6 @@ public class ScrollingBarPair extends HashSet<ScrollBar> {
 		add(horizontal);
 	}
 	private void change(ScrollBar myBar){
-		System.out.println(myBar.getValue());
 		myBar.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov,
 					Number old_val, Number new_val) {

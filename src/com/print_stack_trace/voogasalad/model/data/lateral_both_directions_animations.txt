@@ -1,0 +1,114 @@
+{
+  "mySpriteMap": {
+    "0": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+      "p": {
+        "x": 203,
+        "y": 398
+      },
+      "interactive": true,
+      "objectType": "HERO",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 100.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "UP": [],
+        "DOWN": [],
+        "CROUCH": [],
+        "LEFT": [
+          {
+            "path": "/Users/nickbalkissoon/Documents/workspace/voogasalad_PrintStackTrace/src/com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png"
+          }
+        ],
+        "RIGHT": [
+          {
+            "path": "/Users/nickbalkissoon/Documents/workspace/voogasalad_PrintStackTrace/src/com/print_stack_trace/voogasalad/controller/images/SpriteImages/PrincessPeach.png"
+          }
+        ],
+        "JUMP": []
+      }
+    },
+    "2": {
+      "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+      "p": {
+        "x": 202,
+        "y": 512
+      },
+      "interactive": false,
+      "objectType": "PLATFORM",
+      "startingHealth": 10,
+      "startingSpeed": 10.0,
+      "value": 0,
+      "orientation": 0.0,
+      "name": "",
+      "width": 500.0,
+      "height": 100.0,
+      "myMovements": {},
+      "myAnimations": {
+        "UP": [],
+        "DOWN": [],
+        "CROUCH": [],
+        "LEFT": [],
+        "RIGHT": [],
+        "JUMP": []
+      }
+    }
+  },
+  "goalMap": {},
+  "currentID": 2,
+  "isLocked": false,
+  "physicsEngine": {
+    "decisionMatrix": [
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ],
+      [
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction",
+        "NoAction"
+      ]
+    ],
+    "handlerMap": {}
+  },
+  "myLevelChars": {
+    "name": "lateral_both_directions_animations",
+    "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+    "requiredNumberOfGoals": 1,
+    "myHorizontalPaneCount": 1,
+    "myVerticalPaneCount": 1
+  },
+  "myGoalFactory": {},
+  "myKeyMap": {}
+}

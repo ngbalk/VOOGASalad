@@ -88,7 +88,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
      */
     public void update() {
         physicsEngine.animateAll(runtimeModel, framesPerSecond);
-
         GoalChecker goalChecker = new GoalChecker(runtimeModel);
         int completedCount = 0;
         for(Goal g : goalMap.values()) {
@@ -104,7 +103,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
                 getNextLevel();
             }
         }
-        
 		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
 		if(gameOver(mainChar)){
 			System.out.println("YOU DIED BITCH");
@@ -112,7 +110,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 			runtimeModel.gameVictory = false;
 		}
 		updateSpritePositions();
-		
 		cameraHandler.updateCamera(runtimeModel);
     }
 
@@ -143,42 +140,46 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
             goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
         }
     }
-	
-    
-    //-------------------ACCESSORS-------------------//
+
+	//-------------------ACCESSORS-------------------//
 
 
-    //-------------------PRIVATE METHODS-------------------//
+	//-------------------PRIVATE METHODS-------------------//
 
-    //Sprites move around even when this method is commented out
-    //why is that? this method should be the one controlling movement
-    private void updateSpritePositions(){
-        for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
-            rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
-            rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
-            rst.v_x *= (1.0f-rst.getDecelerationConstant());
-            rst.v_y *= (1.0f-rst.getDecelerationConstant());
-        }
-    }
+	//Sprites move around even when this method is commented out
+	//why is that? this method should be the one controlling movement
+	private void updateSpritePositions(){
+		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
+			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
+			rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
+			rst.v_x *= (1.0f-rst.getDecelerationConstant());
+			rst.v_y *= (1.0f-rst.getDecelerationConstant());
+		}
+	}
 
-    private void handleKey(KeyEvent event, boolean press) {
-        KeyResult res = runtimeModel.getResultOfKey(event.getCode());
-        KeyApplicator applicator = applicatorCache.get(res);
-        Integer mainChar = runtimeModel.getMainCharacter();
-        RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
-        if(applicator == null) {
-            applicator = KeyApplicatorFactory.buildKeyApplicator(res);
-            applicatorCache.put(res, applicator);
-        }
-        if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {
-            applicator.applyPressActionToRuntimeSprite(mainCharData);
-        }
-        else{
-            applicator.applyReleaseActionToRuntimeSprite(mainCharData);
-            return;
-        }
-    }
-    
+	private void handleKey(KeyEvent event, boolean press) {
+		System.out.println("checking keycode");
+		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
+		KeyApplicator applicator = applicatorCache.get(res);
+		Integer mainChar = runtimeModel.getMainCharacter();
+		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
+		if(applicator == null) {
+			applicator = KeyApplicatorFactory.buildKeyApplicator(res);
+			applicatorCache.put(res, applicator);
+		}
+		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {
+			applicator.applyPressActionToRuntimeSprite(mainCharData);
+			//SET POSSIBLE SPRITE ACTION OF MAIN CHARACTER
+			//mainCharData.setPossibleSpriteAction(res);
+		}
+		else{
+			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
+			//RESET SPRITE ACTION AFTER KEY RELEASE
+			//mainCharData.setPossibleSpriteAction(null);
+			return;
+		}
+	}
+	    
 	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
 	    if(mainChar == null) return false;
 	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
