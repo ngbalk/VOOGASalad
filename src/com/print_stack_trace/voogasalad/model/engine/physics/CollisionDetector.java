@@ -26,7 +26,12 @@ public class CollisionDetector {
 	          }
 	    Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
 		Rectangle rect2 = new Rectangle((int) spriteB.getX(), (int) spriteB.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
-		return rect1.intersects(rect2);
+//        System.out.print("Does SpriteA: " + spriteA.getName() + spriteA.getY() + " collide SpriteB: " + spriteB.getY() + spriteB.getHeight()+ "? ");
+//		if(rect1.intersects(rect2))
+//		    System.out.println("Yes.");
+//		else
+//		    System.out.println("No.");
+        return rect1.intersects(rect2);
 	}
 
 	public static boolean haveCollidedHorizontally(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB){

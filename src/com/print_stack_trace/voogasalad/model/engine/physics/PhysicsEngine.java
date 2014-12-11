@@ -101,7 +101,6 @@ public class PhysicsEngine {
                 copys2.v_y = s2.v_y;
                 this.moveSpritesForward(copys1, copys2, framesPerSecond);
                 if(CollisionDetector.haveCollided(copys1, copys2)) {
-
                     stickSpriteToSide(s1,s2);
                     collisionHandler(s1, s2, currentRuntime);
 

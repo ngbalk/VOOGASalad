@@ -158,7 +158,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	}
 
 	private void handleKey(KeyEvent event, boolean press) {
-		System.out.println("checking keycode");
+//		System.out.println("checking keycode");
 		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
 		KeyApplicator applicator = applicatorCache.get(res);
 		Integer mainChar = runtimeModel.getMainCharacter();
