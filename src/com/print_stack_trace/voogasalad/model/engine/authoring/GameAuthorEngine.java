@@ -76,7 +76,10 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 	}
 	
 	public List<LevelModel> getAllLevels(){
-		return gameWorldModel.getLevels();
+	    List<LevelModel> allLevels = new ArrayList<LevelModel>();
+	    for(Integer i : gameWorldModel.getLevelMap().keySet())
+	        allLevels.add(i,gameWorldModel.getLevelMap().get(i));
+		return allLevels;
 	}
 
 	public Integer addGoalToLevel(GoalCharacteristics goalModel) {

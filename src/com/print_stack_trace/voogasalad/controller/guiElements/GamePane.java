@@ -221,7 +221,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
             System.out.println("Initial GameWorld Level Size: " + levelTracker.getLevels() + " size: " + levelTracker.getLevels().size());
             levelTracker.addLevel(myObject, e->levelChange(myObject));
             System.out.println("Size after adding: " + levelTracker.getLevels().size());
-            myGameEngine.addLevel(levelTracker.getLevels().size(),new LevelCharacteristics());
+            myGameEngine.addLevel(levelTracker.getLevels().size(), myObject.getCharacteristics());
             levelChange(myObject);
 		}
 	}

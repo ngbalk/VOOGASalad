@@ -72,6 +72,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     //-------------------PUBLIC METHODS-------------------//
 
     private void getNextLevel() {
+        System.out.println(gameWorld);
         currentLevel = gameWorld.getNextLevel();
         createRuntimeState(currentLevel, viewport);
     }
@@ -183,4 +184,8 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
                     
 	}
+
+    public LevelModel startNewGame () {
+        return gameWorld.startNewGame();
+    }
 }

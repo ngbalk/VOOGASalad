@@ -264,8 +264,7 @@ public class GamePlayer implements ViewController {
 		}
 		FileInputStream fis;
 	}
-
-
+	
 	public void restartCurrentLevel() {
 		if (myFile != null) {
 			try {
@@ -274,5 +273,9 @@ public class GamePlayer implements ViewController {
 				System.out.println(ex.getMessage());
 			}
 		}
+	}
+	
+	public void startNewGame() {
+	    myGameEngine.startNewGame();
 	}
 }

@@ -18,6 +18,7 @@ public class GameWorldModel {
     private GameWorldCharacteristics gameWorldCharacteristics;
     private Map<Integer, LevelModel> levelMap;
     private Integer currentLevelIndex;
+    private static final int FIRST_LEVEL_INDEX = 1;
 
     //-------------------CONSTRUCTORS-------------------//
     public GameWorldModel() {
@@ -50,13 +51,6 @@ public class GameWorldModel {
         return levelMap.get(id);
     }
 
-    public List<LevelModel> getLevels() {
-        List<LevelModel> levelSequence = new ArrayList<LevelModel>();
-        for(int i=0; i<levelMap.size(); i++)
-            levelSequence.add(i,levelMap.get(i));
-        return levelSequence;
-    }
-
     public Integer getNumberOfLevels() {
         return levelMap.size();
     }
@@ -78,7 +72,7 @@ public class GameWorldModel {
     
     public void setCurrentLevel(int index) {
         System.out.println("INdex: " + index);
-        if(index < 0) {
+        if(index < FIRST_LEVEL_INDEX) {
             throw new ArrayIndexOutOfBoundsException();
         }
         if(levelMap.get(index) == null) {
@@ -88,6 +82,7 @@ public class GameWorldModel {
     }
     
     public LevelModel getNextLevel() {
+        System.out.println(currentLevelIndex);
         currentLevelIndex++;
         return levelMap.get(currentLevelIndex);
     }
@@ -100,7 +95,7 @@ public class GameWorldModel {
     }
 
     public LevelModel startNewGame() {
-        currentLevelIndex = 0;
+        currentLevelIndex = FIRST_LEVEL_INDEX;
         return levelMap.get(currentLevelIndex);
     }
 
