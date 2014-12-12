@@ -104,7 +104,7 @@ public class GamePlayer implements ViewController {
 		myRoot.setOnKeyReleased(gameEngine.getRuntimeKeyReleaseHandler());
 		splash.continueFromSplashScreen(this, myRoot);
 		myPlayPane = new PlayPane();
-		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT-150);
+		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT);
 		myPlayPane.setLayoutY(100);
 		myPlayPane.toBack();
 		myGameRoot = new Group(myPlayPane); 
@@ -159,14 +159,24 @@ public class GamePlayer implements ViewController {
 		RuntimeSpriteCharacteristics mainCharCharacteristics = spriteMap.get(r.getMainCharacter());
 		myHud.updateHealth((int) mainCharCharacteristics.getPropertyReadOnlyHealth().getValue());
 		myHud.updatePoints(mainCharCharacteristics.getPropertyReadOnlyPoints().getValue());
-		ImageView background = new ImageView(new Image(levelCharacteristics.getBackgroundImagePath()));
-		background.setFitWidth(myPlayPane.getWidth()); 
-		background.setFitHeight(myPlayPane.getHeight()-10);
-		background.setFitWidth(myPlayPane.getWidth()-10);
-		background.setSmooth(true);
-		background.setPreserveRatio(false);
-		background.relocate(5, 5);
-		myPlayPane.getChildren().add(0,background); 
+		
+		for(int i = 0; i < levelCharacteristics.getHorizontalPaneCount(); i++){
+			for(int j = 0; j< levelCharacteristics.getVerticalPaneCount(); j++){
+				ImageView background = new ImageView(new Image(levelCharacteristics.getBackgroundImagePath()));
+				background.setFitWidth(myPlayPane.getPrefWidth()); 
+				background.setFitHeight(myPlayPane.getPrefHeight());
+				background.setSmooth(true);
+				background.setPreserveRatio(false);	
+				background.relocate(i * background.getFitWidth(), j*background.getFitHeight());
+				myPlayPane.getChildren().add(0,background); 
+			}
+		}	
+		
+		//background.relocate(5,5);
+//		System.out.println("fit height: " + background.getFitHeight());
+//		System.out.println("fit width: " + background.getFitWidth());
+//		System.out.println("pref height: " + myPlayPane.getPrefHeight());
+//		System.out.println("pref width: " + myPlayPane.getPrefWidth());
 
 		for(Integer id : spriteMap.keySet()){
 			RuntimeSpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
@@ -324,8 +334,7 @@ public class GamePlayer implements ViewController {
 		}
 		FileInputStream fis;
 	}
-
-
+	
 	public void restartCurrentLevel() {
 		if (myFile != null) {
 			try {
@@ -334,5 +343,9 @@ public class GamePlayer implements ViewController {
 				System.out.println(ex.getMessage());
 			}
 		}
+	}
+	
+	public void startNewGame() {
+	    myGameEngine.startNewGame();
 	}
 }

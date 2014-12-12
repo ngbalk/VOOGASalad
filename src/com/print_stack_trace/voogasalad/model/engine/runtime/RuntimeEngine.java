@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.input.KeyEvent;
 
+import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameWorldModel;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
@@ -23,62 +25,84 @@ import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
 public class RuntimeEngine extends AbstractRuntimeEngine {
-	private PhysicsEngine physicsEngine;
-	private RuntimeModel runtimeModel;
-	int framesPerSecond;
-	private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
-	private GoalFactory goalFactory;
-	private Map<Integer, Goal> goalMap;
-	private CameraHandler cameraHandler;
-	private int completedGoalCount = 0;
+    private PhysicsEngine physicsEngine;
+    private RuntimeModel runtimeModel;
+    int framesPerSecond;
+    private Map<KeyResult, KeyApplicator> applicatorCache = new HashMap<KeyResult, KeyApplicator>();
+    private GoalFactory goalFactory;
+    private Map<Integer, Goal> goalMap;
+    private CameraHandler cameraHandler;
+    private Dimension viewport;
+   	private int completedGoalCount = 0;
 
-	//-------------------CONSTRUCTORS-------------------//
 
-	/**
-	 * Takes in a LevelModel and sets private variables
-	 * @param level
-	 */
-	public RuntimeEngine(LevelModel currentLevel, Dimension viewport) {
-		super(currentLevel);
-		runtimeModel = new RuntimeModel(currentLevel, viewport);
-		physicsEngine = currentLevel.getPhysicsEngine();
-		goalFactory = new GoalFactory();
-		goalMap = new HashMap<>();
-		populateGoalMap();
-		cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
-	}
+    //-------------------CONSTRUCTORS-------------------//
 
-	//-------------------PUBLIC METHODS-------------------//
+    /**
+     * Takes in a LevelModel and sets private variables
+     * @param level
+     */
+    public RuntimeEngine(LevelModel currentLevel, Dimension viewport) {
+        super(currentLevel);
+        runtimeModel = new RuntimeModel(currentLevel, viewport);
+        physicsEngine = currentLevel.getPhysicsEngine();
+        goalFactory = new GoalFactory();
+        goalMap = new HashMap<>();
+        populateGoalMap();
+        cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
+        this.viewport = viewport;
+    }
+    
+    public RuntimeEngine(GameWorldModel gameWorld, Dimension viewport) {
+        super(gameWorld);
+        this.viewport = viewport;
+        currentLevel = gameWorld.getCurrentLevel();
+        createRuntimeState(currentLevel, viewport);
+    }
 
-	/**
-	 * Update all of the data in the current level.
-	 * 1. Calls PhysicsEngine to "animate" sprites.
-	 * 2. Apply unexpired key events.
-	 * 3. Use GoalChecker to check goals
-	 * 4. See if game is over or not
-	 * 5. Move camera
-	 * @param currentLevel
-	 */
-	public void update() {
-		
-		
-		physicsEngine.animateAll(runtimeModel, framesPerSecond);
-		GoalChecker goalChecker = new GoalChecker(runtimeModel);
-		for(Goal g : goalMap.values()) {
+    private void createRuntimeState(LevelModel levelModel, Dimension viewport) {
+        runtimeModel = new RuntimeModel(gameWorld.getCurrentLevel(), viewport);
+        physicsEngine = gameWorld.getCurrentLevel().getPhysicsEngine();
+        goalFactory = new GoalFactory();
+        goalMap = new HashMap<>();
+        populateGoalMap();
+        cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
+    }
 
-			g.acceptChecker(goalChecker);
-			if(g.isCompleted)completedGoalCount++;
-		}
+    //-------------------PUBLIC METHODS-------------------//
 
-		int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
-		if (reqGoals > 0) {
-			if(completedGoalCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
-				System.out.println("YOU WIN!!!!");
-				runtimeModel.gameOver = true;
-				runtimeModel.gameVictory = true;
-			}
-		}
-
+    private void getNextLevel() {
+        System.out.println(gameWorld);
+        currentLevel = gameWorld.getNextLevel();
+        createRuntimeState(currentLevel, viewport);
+    }
+    
+    /**
+     * Update all of the data in the current level.
+     * 1. Calls PhysicsEngine to "animate" sprites.
+     * 2. Apply unexpired key events.
+     * 3. Use GoalChecker to check goals
+     * 4. See if game is over or not
+     * 5. Move camera
+     * @param currentLevel
+     */
+    public void update() {
+        physicsEngine.animateAll(runtimeModel, framesPerSecond);
+        GoalChecker goalChecker = new GoalChecker(runtimeModel);
+        int completedCount = 0;
+        for(Goal g : goalMap.values()) {
+            g.acceptChecker(goalChecker);
+            if(g.isCompleted)completedCount++;
+        }
+        int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
+        if (reqGoals > 0) {
+            if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+                System.out.println("YOU WIN");
+                runtimeModel.gameOver = true;
+                runtimeModel.gameVictory = true;
+                getNextLevel();
+            }
+        }
 		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
 		if(gameOver(mainChar)){
 			System.out.println("YOU DIED BITCH");
@@ -87,29 +111,35 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		}
 		updateSpritePositions();
 		cameraHandler.updateCamera(runtimeModel);
-	}
+    }
 
-	public void setFramesPerSecond(int framesPerSecond) {
-		this.framesPerSecond = framesPerSecond;
-	}
+    public void setFramesPerSecond(int framesPerSecond) {
+        this.framesPerSecond = framesPerSecond;
+    }
 
-	//GAME PLAYER
+    //GAME PLAYER
 
-	/**
-	 * Get the current state of the level in progress
-	 * @return runtimeModel 
-	 */
-	public RuntimeModel getStatus() {
-		return runtimeModel;
-	}
+    /**
+     * Get the current state of the level in progress
+     * @return runtimeModel 
+     */
+    public RuntimeModel getStatus() {
+        return runtimeModel;
+    }
 
-	public void handleKeyRelease(KeyEvent event) {
-		handleKey(event, false);
-	}
+    public void handleKeyRelease(KeyEvent event) {
+        handleKey(event, false);
+    }
 
-	public void handleKeyPress(KeyEvent event) {
-		handleKey(event, true);
-	}
+    public void handleKeyPress(KeyEvent event) {
+        handleKey(event, true);
+    }
+    
+    public void populateGoalMap(){
+        for(Integer i : runtimeModel.getGoalMap().keySet()){
+            goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
+        }
+    }
 
 	//-------------------ACCESSORS-------------------//
 
@@ -119,51 +149,44 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	//Sprites move around even when this method is commented out
 	//why is that? this method should be the one controlling movement
 	private void updateSpritePositions(){
-
 		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
 			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
 			rst.setY(rst.getY()+((double)rst.v_y/(double)framesPerSecond));
 			rst.v_x *= (1.0f-rst.getDecelerationConstant());
 			rst.v_y *= (1.0f-rst.getDecelerationConstant());
 		}
-
 	}
 
 	private void handleKey(KeyEvent event, boolean press) {
-		System.out.println("checking keycode");
+//		System.out.println("checking keycode");
 		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
 		KeyApplicator applicator = applicatorCache.get(res);
 		Integer mainChar = runtimeModel.getMainCharacter();
 		RuntimeSpriteCharacteristics mainCharData = runtimeModel.getRuntimeSpriteMap().get(mainChar);
-		
 		if(applicator == null) {
 			applicator = KeyApplicatorFactory.buildKeyApplicator(res);
 			applicatorCache.put(res, applicator);
 		}
 		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {
 			applicator.applyPressActionToRuntimeSprite(mainCharData);
-			
 			//SET POSSIBLE SPRITE ACTION OF MAIN CHARACTER
-			mainCharData.setPossibleSpriteAction(res);
+			//mainCharData.setPossibleSpriteAction(res);
 		}
 		else{
 			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
-			
 			//RESET SPRITE ACTION AFTER KEY RELEASE
-			mainCharData.setPossibleSpriteAction(null);
+			//mainCharData.setPossibleSpriteAction(null);
 			return;
-			
 		}
 	}
-	public void populateGoalMap(){
-		for(Integer i : runtimeModel.getGoalMap().keySet()){
-			goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
-		}
-	}
-	
+	    
 	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
 	    if(mainChar == null) return false;
 	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
                     
 	}
+
+    public LevelModel startNewGame () {
+        return gameWorld.startNewGame();
+    }
 }

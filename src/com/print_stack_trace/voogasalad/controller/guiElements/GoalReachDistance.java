@@ -31,7 +31,7 @@ public class GoalReachDistance extends GoalCharacteristicController {
 		}
 		else if (direction.equals("DOWN")){
 			((GoalObject) mySprite).getCharacteristics().setHorizontalDestination(false);
-			((GoalObject)mySprite).getCharacteristics().setDestination(-1*dest);
+			((GoalObject)mySprite).getCharacteristics().setDestination(dest);
 		}
 		else if (direction.equals("RIGHT")){
 			((GoalObject) mySprite).getCharacteristics().setHorizontalDestination(true);
@@ -39,7 +39,7 @@ public class GoalReachDistance extends GoalCharacteristicController {
 		}
 		else {
 			((GoalObject) mySprite).getCharacteristics().setHorizontalDestination(true);
-			((GoalObject)mySprite).getCharacteristics().setDestination(-1*dest);
+			((GoalObject)mySprite).getCharacteristics().setDestination(dest);
 		}		
 
 		mySprite.getDelegate().update((GoalObject) mySprite);

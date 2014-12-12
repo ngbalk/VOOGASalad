@@ -7,13 +7,14 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 public class PlayerPlayButton extends PlayerActionButton {
 
-	public PlayerPlayButton(GamePlayer gamePlayer) {
-		super(gamePlayer);
-	}
+    public PlayerPlayButton(GamePlayer gamePlayer) {
+        super(gamePlayer);
+    }
 
-	@Override
-	void doAction() {
-		myGamePlayer.updateScene();
-	}
+    @Override
+    void doAction() {
+        myGamePlayer.startNewGame();
+        myGamePlayer.resumeGame();
+    }
 
 }

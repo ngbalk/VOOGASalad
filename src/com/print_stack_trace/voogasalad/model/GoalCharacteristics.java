@@ -67,5 +67,7 @@ public class GoalCharacteristics {
     public void setPointsTotal(int points){
     	myPointTotal=points;
     }
-   // public void 
+	public GoalType getGoalType() {
+		return myGoalType;
+	}
 }

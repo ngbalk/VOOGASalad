@@ -13,11 +13,12 @@ import javafx.scene.image.Image; //change to java awt
 public class LevelCharacteristics {
 	private static final int DEFAULT_CAMERA_SPEED = 3;
 	
-	private String name;
-	public int nextLevel=-1;
-	public int previousLevel=-1;
+	private String name = "";
+	public Integer nextLevel = -1;
+	public Integer previousLevel = -1;
+	public Integer ID = null;
 	private transient Image backgroundImage = null;
-	private String backgroundImagePath;
+	private String backgroundImagePath = "";
 	public int requiredNumberOfGoals = 1;
 	public Point cameraStart = new Point(0, 0);
 	public int cameraSpeed = DEFAULT_CAMERA_SPEED;
@@ -28,6 +29,12 @@ public class LevelCharacteristics {
 	
 	public String getName() {
 		return name;
+	}
+	public Integer getID() {
+		return ID;
+	}
+	public void setID(int ID) {
+		this.ID=ID;
 	}
 	public void setName(String name){
 		this.name = name;
