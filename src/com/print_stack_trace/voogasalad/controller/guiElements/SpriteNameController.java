@@ -1,5 +1,10 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 public class SpriteNameController extends SpriteCharacteristicController {
 
 	public SpriteNameController(String[] values,  double width, double height, double x, double y, GameObject object){
@@ -15,5 +20,5 @@ public class SpriteNameController extends SpriteCharacteristicController {
 		((SpriteObject)mySprite).getCharacteristics().setName(newValue);
 		mySprite.getDelegate().update((SpriteObject) mySprite);
 	}
-
+	
 }

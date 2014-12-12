@@ -49,7 +49,6 @@ public class GoalReachDistance extends GoalCharacteristicController {
 	private String[] getResource(){
 		ResourceReader myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/controller/guiResources/TypeOfDistancesToReach.Properties");
 		HashMap<String, String> myDataMap=myResourceReader.getProperties();
-		System.out.println(myDataMap.size());
 		Iterator<String> myIterator=myDataMap.keySet().iterator();
 		String[] menuNames=new String[myDataMap.keySet().size()];
 		for (int i=0; i<menuNames.length; i++){

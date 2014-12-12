@@ -20,7 +20,6 @@ public class ScrollingBarPair extends HashSet<ScrollBar> {
 		horizontal.relocate(5, height-horizontal.getSize());
 		change(horizontal);
 		change(vertical);
-		
 		add(vertical);
 		add(horizontal);
 	}
@@ -28,10 +27,8 @@ public class ScrollingBarPair extends HashSet<ScrollBar> {
 		myBar.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov,
 					Number old_val, Number new_val) {
-				System.out.println(((Region)myPane).getPrefWidth());
 				if (new_val.doubleValue()>0){
 					((Region) myPane).setPrefWidth(((Region) myPane).getPrefWidth()+(new_val.doubleValue()-old_val.doubleValue()));
-					
 					Node background=((Pane) myPane).getChildren().get(0);
 					background.relocate(((Region) myPane).getPrefWidth(), ((Region) myPane).getPrefHeight());
 					((Pane) myPane).getChildren().add(0, background);

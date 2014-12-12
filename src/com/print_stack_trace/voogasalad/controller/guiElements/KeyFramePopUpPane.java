@@ -53,13 +53,11 @@ public class KeyFramePopUpPane extends GeneralPane {
 		picturePane.relocate(0,myBox.getPrefHeight());
 		picturePane.setPrefSize(this.getPrefWidth(), this.getPrefHeight()-myBox.getPrefHeight()-keyFramePane.getPrefHeight());
 		mainPane.getChildren().addAll(picturePane, keyFramePane, myBox);
-		System.out.println(GeneralPane.DEFAULT_WIDTH);
 		mainPane.setPrefSize(GeneralPane.DEFAULT_WIDTH,GeneralPane.DEFAULT_HEIGHT);
 		this.initiate();
 	}
 	private void makeMovementMap(){
 		for (KeyResult action: KeyResult.values()){
-			System.out.println(mySprite.getCharacteristics().getAnimationImages(action));
 			myAnimations.put(action, mySprite.getCharacteristics().getAnimationPath(action));
 		}
 	}
@@ -142,7 +140,7 @@ public class KeyFramePopUpPane extends GeneralPane {
 				img=SwingFXUtils.toFXImage(buffer, null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Couldn't upload Image");
+				new MessagePopUp().showMessageDialog("Couldn't upload Image");
 			}
 		}
 		ImageView myView=new ImageView(img);

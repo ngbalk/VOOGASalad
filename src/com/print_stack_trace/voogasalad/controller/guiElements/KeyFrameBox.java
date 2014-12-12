@@ -52,9 +52,7 @@ public class KeyFrameBox extends ScrollPane{
 		while(myAction!=null&& count<=DEFAULT_NUM_RECTANGLES*KeyResult.values().length){//(startX+rectangleSize)<this.getPrefWidth()&&myAction!=null){
 			if (nextMovementIndex!=0){
 				KeyFrameBlock myRectangle;
-				System.out.println("INDEX"+index+myAction+movementMap.get(myAction).size());
 				if (index<movementMap.get(myAction).size() && nextMovementIndex!=1){
-					System.out.println("HATER"+movementMap.get(myAction).get(index));
 					myRectangle=new KeyFrameBlock(movementMap.get(myAction).get(index), null, myAction.name(),(index+1));
 				}
 				else{

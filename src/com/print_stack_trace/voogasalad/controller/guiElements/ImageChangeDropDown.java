@@ -24,11 +24,11 @@ public class ImageChangeDropDown extends UserInputDropDownMenu{
 	@Override
 	protected void linkMovement(String image) {
 		Iterator<String> myValue=Arrays.asList(this.split(data.get(image))).iterator();
-		System.out.println(image);
 		currentMenu.setText(myValue.next());
-		Image imageLinked=new Image(myValue.next());
-		System.out.println(imageLinked);
+		String imgPath=myValue.next();
+		Image imageLinked=new Image(imgPath);
 		mySprite.getImage().setImage(imageLinked);
+		mySprite.setImagePath(imgPath);
 		((SpriteObject)mySprite).getCharacteristics().setImage(imageLinked);
 		mySprite.getDelegate().update((SpriteObject)mySprite);
 		

@@ -20,33 +20,28 @@ public class UserObjectsLibrary extends PictureLibrary{
 		super(width, height, otherPane);
 		loadAndAddData();
 	}
-
 	@Override
 	protected void loadAndAddData() {
-		setObservable2();
-
+		setObservable();
 	}
 	
-	private void setObservable2(){
+	private void setObservable(){
 		((GamePane) myMainPane).changedSprite.addListener(new ChangeListener<SpriteObject>(){
 
 			@Override
 			public void changed(ObservableValue<? extends SpriteObject> arg0,
 					SpriteObject arg1, SpriteObject arg2) {
 				observableSpriteObject(arg2);
-
 			}
-
 		});
 	}
-
-	
 
 	private void observableSpriteObject(SpriteObject sprite){
 		SpriteObject currentSprite=myMap.get(sprite.getCode());
 		if (currentSprite!=null && sprite.getCharacteristics().getName().length()>0){
 			myMap.put(sprite.getCode(), sprite);
 			myImages.get(sprite.getCode()).setImage(sprite.getImage().getImage());
+			myImages.get(sprite.getCode()).setOnMousePressed(event->((GamePane) myMainPane).addExistingObjectToOtherPane(sprite));
 			currentImage=null;
 		}
 		else if(sprite.getCharacteristics().getName().length()>0){

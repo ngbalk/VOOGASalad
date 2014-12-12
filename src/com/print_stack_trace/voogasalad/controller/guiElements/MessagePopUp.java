@@ -23,15 +23,19 @@ public class MessagePopUp extends Stage{
 	protected double height=200;
 	private String dropDownString="";
 	public MessagePopUp(String style){
+		this();
+		myMessagePane.getStylesheets().add(style);
+	}
+	public MessagePopUp() {
 		myMessagePane=new Pane();
 		myMessagePane.setStyle("-fx-background-color: BLACK");
 		myMessagePane.setPrefSize(width, height);
-		myMessagePane.getStylesheets().add(style);
 		setWidth(width);
 		setHeight(height);
 		Scene myScene=new Scene(myMessagePane, width, height);
 		setScene(myScene);
 		makeMessage("");
+		
 	}
 	protected void add(Node toAdd){
 		myMessagePane.getChildren().add(toAdd);

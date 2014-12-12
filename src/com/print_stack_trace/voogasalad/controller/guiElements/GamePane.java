@@ -75,6 +75,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 					spriteTypeNames());
 			if (new BlankSpaceTextChecker().checkText(myMessage)) {
 				addSpriteObject(gameObjectImageView, imagePath, myMessage);
+				
 			}
 		}
 	}
@@ -131,7 +132,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 				spriteOnBoard.getCharacteristics().getWidth());
 		spriteOnBoard.getImage().setRotate(
 				spriteOnBoard.getCharacteristics().getOrientation());
-
 	}
 
 	public boolean isReady() {
@@ -171,6 +171,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	}
 
 	public void update(SpriteObject myObject) {
+		System.out.println("AHH"+myObject.getImagePath());
 		SpriteCharacteristics characteristics = myObject.getCharacteristics();
 		if (myData.get(myObject.getCode()) == null) {
 			myData.put(myObject.getCode(), new HashSet<SpriteObject>());
@@ -244,10 +245,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		return toBeSize;
 	}
 
-	public void saveLevel() {
-
-	}
-
+	
 	public void update(GoalObject myObject) {
 		myGameEngine
 				.updateGoal(myObject.getID(), myObject.getCharacteristics());

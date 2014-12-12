@@ -171,14 +171,14 @@ public class GamePlayer implements ViewController {
 		for(Integer id : spriteMap.keySet()){
 			RuntimeSpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
 			img = new Image(spriteCharacteristics.getImagePath());
-			spriteImageView = new ImageView(img);
+			spriteImageView = new ImageView();
 			spriteImageView.setFitWidth(spriteCharacteristics.getWidth());
 			spriteImageView.setFitHeight(spriteCharacteristics.getHeight());
 			spriteImageView.setRotate(spriteCharacteristics.getOrientation());
 			spriteImageView.setLayoutX(spriteCharacteristics.getX());
 			spriteImageView.setLayoutY(spriteCharacteristics.getY());
 
-			executeAnimation(spriteImageView, spriteCharacteristics);
+			executeAnimation(img,spriteImageView, spriteCharacteristics);
 		}
 
 	}
@@ -188,9 +188,10 @@ public class GamePlayer implements ViewController {
 	 * @param currentSpriteImageView
 	 * @param spriteCharacteristics
 	 */
-	private void executeAnimation(ImageView currentSpriteImageView, RuntimeSpriteCharacteristics spriteCharacteristics){
+	private void executeAnimation(Image img, ImageView currentSpriteImageView, RuntimeSpriteCharacteristics spriteCharacteristics){
 		KeyResult animationType = spriteCharacteristics.getCurrentAnimation();
 		if(animationType==null){
+			currentSpriteImageView.setImage(img);
 			myPlayPane.getChildren().add(currentSpriteImageView);
 			return;
 		}

@@ -23,7 +23,6 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		tableButton.relocate(width*.80, 20);
 		tableButton.setPrefSize(200, 50);
 		((Pane) myNode).getChildren().add(tableButton);
-		//DeleteButton deleteButton = new DeleteButton(null, null);
 	}
 
 	@Override
@@ -40,9 +39,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		
 		//LEVEL BUTTON
 		LevelButton myLevelButton=new LevelButton();
-
 		myLevelButton.setOnMouseClicked(e->(((GamePane)myLinkedObject).addLevelUpdate(new LevelObject("", (ViewObjectDelegate) myLinkedObject))));
-
 		myLevelButton.relocate(width*.25, 20);
 		myLevelButton.setPrefSize(100, 50); 
 		myLevelButton.getStyleClass().add("buttonTemplate2"+ "");

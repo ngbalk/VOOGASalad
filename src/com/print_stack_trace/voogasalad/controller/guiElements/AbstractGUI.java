@@ -17,7 +17,6 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 	private double myWidth;
 	private double myHeight;
 	private Node focusPane=new Pane();
-//	private ViewObjectDelegate myViewObjectDelegate;
 	protected String myStyle;
 	HashMap<String, String> locations=new HashMap<String, String>();
 	HashMap<LayoutNodeLocation, LayoutNode> layouts=new HashMap<LayoutNodeLocation, LayoutNode>();

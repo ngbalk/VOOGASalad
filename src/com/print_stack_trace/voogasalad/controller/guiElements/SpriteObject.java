@@ -6,6 +6,7 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +19,7 @@ public class SpriteObject extends GameObject{
 	private SimpleDoubleProperty xProp; 
 	private SimpleDoubleProperty yProp;
 	private GameEngine myGameEngine;
-	protected SpriteCharacteristics myCharacteristics;
+	protected SimpleObjectProperty<SpriteCharacteristics> myCharacteristics=new SimpleObjectProperty<SpriteCharacteristics>();
 
 	public SpriteObject(int ID, String imagePath, String type){
 		this(ID, imagePath, type, null);
@@ -31,8 +32,8 @@ public class SpriteObject extends GameObject{
 		xProp=new SimpleDoubleProperty(0); 
 		yProp=new SimpleDoubleProperty(0);
 		//need other types
-		myCharacteristics=new SpriteCharacteristics(SpriteType.valueOf(type.toUpperCase()));
-		myCharacteristics.setImagePath(imagePath);
+		myCharacteristics.setValue(new SpriteCharacteristics(SpriteType.valueOf(type.toUpperCase())));
+		myCharacteristics.getValue().setImagePath(imagePath);
 		createPane();
 		this.getImage().setOnMouseClicked(e->showPane());
 	}
@@ -56,7 +57,7 @@ public class SpriteObject extends GameObject{
 		return yProp;
 	}
 	public SpriteCharacteristics getCharacteristics(){
-		return myCharacteristics;
+		return myCharacteristics.getValue();
 	}
 	public void createPane(){
 		PaneChooser myPaneChooser=new PaneChooser();
@@ -87,14 +88,22 @@ public class SpriteObject extends GameObject{
 		return this.getCharacteristics().getName();
 	}
 	public void setCharacteristics(SpriteCharacteristics characteristics){
-		myCharacteristics=characteristics;	
+		myCharacteristics.setValue(characteristics);
 		xProp.setValue(characteristics.getX());
 		yProp.setValue(characteristics.getY());
 		
 	}
+	public SimpleObjectProperty<SpriteCharacteristics> characteristicsProperty(){
+		return myCharacteristics;
+	}
 	@Override
 	protected void update() {
 		myDelegate.update(this);
+	}
+	@Override
+	public void setImagePath(String imagePath){
+		myImagePath=imagePath;
+		myCharacteristics.getValue().setImagePath(imagePath);
 	}
 
 	
