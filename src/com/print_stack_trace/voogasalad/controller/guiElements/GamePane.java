@@ -24,6 +24,7 @@ import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
+import com.print_stack_trace.voogasalad.model.engine.authoring.GameWorldModel;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
@@ -45,7 +46,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	private SimpleDoubleProperty xVal = new SimpleDoubleProperty(0);
 	private SimpleDoubleProperty yVal = new SimpleDoubleProperty(0);
 	private String myStyle = "./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
-	private GameWorldCharacteristics gameWorld = new GameWorldCharacteristics();
+	private GameWorldCharacteristics gameWorldCharacteristics = new GameWorldCharacteristics();
 
 	public GamePane(double width, double height, GameEngine gameEngine) {
 		myWidth = width;
@@ -163,7 +164,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		background.setFitWidth(getWidth() - 10);
 		background.setSmooth(true);
 		background.setPreserveRatio(false);
-		background.relocate(5, 5);
 		levelBackground.getCharacteristics().setBackground(
 				background.getImage());
 		levelChange(levelBackground);
@@ -216,7 +216,11 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 				.showInputDialog("Name of Level:");
 		if (new BlankSpaceTextChecker().checkText(name)) {
 			myObject.getCharacteristics().setName(name);
+			myObject.getCharacteristics()
+					.setID(levelTracker.getLevels().size());
 			levelTracker.addLevel(myObject, e -> levelChange(myObject));
+			myGameEngine.addLevel(levelTracker.getLevels().size(),
+					myObject.getCharacteristics());
 			levelChange(myObject);
 		}
 	}
@@ -230,16 +234,15 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		this.getChildren().addAll(levelTracker.activeSprites());
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
-		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
+		myGameEngine.setCurrentLevel(currentLevel.getCharacteristics().ID);
 	}
 
 	public ImageView getBackgroundImage() {
 		return background;
 	}
 
-	public Pane sizePane(Pane toBeSize){
+	public Pane sizePane(Pane toBeSize) {
 		toBeSize.setPrefSize(this.getPrefWidth(), this.getPrefHeight());
-
 
 		return toBeSize;
 	}
@@ -274,7 +277,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 
 	public void setCamera(CameraFactory.CameraType cameratype) {
 		myGameEngine.setCameraType(cameratype);
-
 	}
 
 	@Override
@@ -288,9 +290,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 
 	@Override
 	public void removeSpriteOBjects(SpriteObject myObject) {
-		if (myData.get(myObject.getCode()).contains(myObject)) {
-			myData.get(myObject.getCode()).remove(myObject);
-		}
+		myData.get(myObject.getCode()).remove(myObject);
 	}
 
 	@Override
@@ -372,14 +372,46 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	}
 
 	// TODO: consider adding to the AbstractGUI shitz
-	public void loadLevel() {
-
+	public void loadGame() {
 		// load in level from game data
-		LevelModel levelModel = loadLevelModelFromFile();
+		GameWorldModel gameWorldModel = loadGameWorldModelFromFile();
+		if (gameWorldModel == null)
+			return;
+		GameWorldCharacteristics gameWorldCharacteristics = gameWorldModel
+				.getGameWorldCharacteristics();
+		// TODO: HAVE FRONT END HANDLE GAMEWORLDCHARACTERISTICS
+
+		// loop through and load each level
+		Map<Integer, LevelModel> levelMap = gameWorldModel.getLevelMap();
+		for (LevelModel level : levelMap.values()) {
+			loadLevel(level);
+		}
+	}
+
+	public GameWorldModel loadGameWorldModelFromFile() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Load Game");
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")
+				+ "/src/com/print_stack_trace/voogasalad/model/data/"));
+		Stage newStage = new Stage();
+		File file = fileChooser.showOpenDialog(newStage);
+		if (file != null) {
+			try {
+				return myGameEngine.loadGameFromFile(file);
+			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return null;
+	}
+
+	public void loadLevel(LevelModel levelModel) {
+		// load in level from game data
+		// LevelModel levelModel = loadLevelModelFromFile();
 		if (levelModel == null)
 			return;
-		Integer first = levelModel.getSpriteMap().keySet().iterator().next();
-		levelModel.setMainCharacter(first);
+		// Integer first = levelModel.getSpriteMap().keySet().iterator().next();
+		// levelModel.setMainCharacter(first);
 		LevelCharacteristics levelCharacteristics = levelModel
 				.getLevelCharacteristics();
 		// transfer general level data in
@@ -395,31 +427,16 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		// TODO: add more here if necessary
 	}
 
-	private LevelModel loadLevelModelFromFile() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Load level");
-		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")
-				+ "/src/com/print_stack_trace/voogasalad/model/data/"));
-		Stage newStage = new Stage();
-		File file = fileChooser.showOpenDialog(newStage);
-		if (file != null) {
-			try {
-				return myGameEngine.loadLevelForEditing(file);
-			} catch (IOException | JsonSyntaxException | ClassNotFoundException ex) {
-				new MessagePopUp(myStyle).showMessageDialog((ex.getMessage()));
-			}
-		}
-		return null;
-	}
-
 	private void loadLevelObjectFromLevel(
 			LevelCharacteristics levelCharacteristics) {
 		LevelObject levelObject = new LevelObject(
 				levelCharacteristics.getBackgroundImagePath(), this,
 				levelCharacteristics);
-		levelObject.getCharacteristics()
-				.setName(levelCharacteristics.getName());
+		// levelObject.getCharacteristics().setName(levelCharacteristics.getName());
 		levelTracker.addLevel(levelObject, e -> levelChange(levelObject));
+		myGameEngine.addLevel(levelTracker.getLevels().size(),
+				levelObject.getCharacteristics());
+		myGameEngine.setCurrentLevel(levelTracker.getLevels().size());
 		levelObject.update();
 		double width = this.getPrefWidth();
 		double height = this.getPrefHeight();
@@ -435,18 +452,17 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 						.getImage());
 				levelImageView.setFitHeight(height);
 				levelImageView.setFitWidth(width);
-				levelImageView.relocate(i * width, height * j);
+				levelImageView.relocate(i * width, j * height);
 				this.getChildren().add(0, levelImageView);
 			}
 		}
-		levelChange(levelObject);
+		levelObject.update();
 	}
 
 	private void loadSpriteObjectsFromLevel(
 			Map<Integer, SpriteCharacteristics> spriteMap) {
 		for (SpriteCharacteristics sc : spriteMap.values()) {
 			ImageView imageView = new ImageView(sc.getImage());
-
 			SpriteObject spriteObject = addSpriteObject(imageView,
 					sc.getImagePath(), capitalize(sc.getObjectType().name()));
 			spriteObject.setCharacteristics(sc);
@@ -461,11 +477,10 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 
 	private void loadGoalObjectsFromLevel(
 			Map<Integer, GoalCharacteristics> goalMap) {
-		for (GoalCharacteristics goal : goalMap.values()) {
-			GoalObject goalObject = new GoalObject(goal.myGoalType, this);
-			goalObject.setCharacteristics(goal);
-			addGoalToLevel(goalObject);
-			goalObject.update();
+		for (GoalCharacteristics goalChars : goalMap.values()) {
+			GoalObject goalObject = new GoalObject(goalChars.getGoalType(),
+					this);
+			goalObject.setCharacteristics(goalChars);
 		}
 	}
 
@@ -480,12 +495,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		return Character.toUpperCase(line.charAt(0))
 				+ line.substring(1).toLowerCase();
 	}
-
-	// private void loadGoalObjectsFromLevel(Map<Integer,Goal> goalMap) {
-	// for(Goal goal : goalMap.values()){
-	// GoalObject goalObject = new GoalObject(goal.getGoalType(),this);
-	// goalObject.setCharacteristics(goal.getGoalCharacteristics());
-	// >>>>>>> c324255721f46eff4ab50040883387b89e926517
 
 	@Override
 	public HashSet<GameObject> getCurrentLevelSprites() {

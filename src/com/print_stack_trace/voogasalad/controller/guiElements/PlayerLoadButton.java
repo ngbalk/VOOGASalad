@@ -25,7 +25,7 @@ public class PlayerLoadButton extends PlayerActionButton {
 	@Override
 	void doAction() {
 		myGamePlayer.loadGame();
-		myGamePlayer.updateScene();
+//		myGamePlayer.updateScene();
 	}
 	
 	

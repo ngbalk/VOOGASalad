@@ -51,7 +51,7 @@ public class GameData implements IGameData {
 	 *            - the object to be saved as a json representation
 	 * 
 	 */
-	public void writeLevel(Object o) {
+	public void write(Object o) {
 		filePath = System.getProperty("user.dir")
 				+ "/src/com/print_stack_trace/voogasalad/model/data/"
 				+ o.toString() + ".txt";
@@ -87,7 +87,7 @@ public class GameData implements IGameData {
 	 * 
 	 * @return the object type referred to by c saved in myFile
 	 */
-	public Object loadLevel(File myFile, Class<?> c) throws IOException,
+	public Object load(File myFile, Class<?> c) throws IOException,
 			JsonSyntaxException, ClassNotFoundException {
 		filePath = myFile.getPath();
 		System.out.println(filePath);

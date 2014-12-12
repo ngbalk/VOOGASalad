@@ -25,6 +25,8 @@ public class LevelObject extends GameObject{
 		myCharacteristics = levelCharacteristics;
 		colorPane=new Pane();
 		colorPane.setVisible(false);
+		myCharacteristics=new LevelCharacteristics();
+		myCharacteristics.setBackgroundImagePath(imagePath);
 		createPane();
 		this.getImage().setOnMouseClicked(e->showPane());
 		colorPane.setOnMouseClicked(e->showPane());
@@ -42,6 +44,7 @@ public class LevelObject extends GameObject{
 	}
 	public void setImagePath(String imagePath){
 		myImagePath = imagePath;
+		myCharacteristics.setBackgroundImagePath(imagePath);
 	}
 	public void setDelegate(ViewObjectDelegate delegate){
 		myDelegate=delegate;

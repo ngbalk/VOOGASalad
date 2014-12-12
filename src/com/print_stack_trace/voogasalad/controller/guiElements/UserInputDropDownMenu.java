@@ -42,21 +42,16 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 		this.currentMenu.getItems().add(currentMenuItem);
 	}
 	private String returnStringName(String value){
-		String toReturn;
+		String toReturn = value;
 		if (canSplit(value))
 			toReturn=Arrays.asList(value.split(";")).iterator().next();
-		else
-			toReturn=value;
 		return toReturn;
 	}
 	protected String[] split(String value){
 		return value.split(";");
 	}
 	protected boolean canSplit(String value){
-		if (value.contains(";")){
-			return true;
-		}
-		return false;
+		return (value.contains(";"));
 	}
 	protected void checkCorrectMenu(CheckMenuItem currentItem, String menuName){
 		for (MenuItem item: currentMenu.getItems()){

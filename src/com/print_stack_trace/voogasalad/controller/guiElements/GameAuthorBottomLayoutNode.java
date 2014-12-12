@@ -56,16 +56,22 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		myNode=bottomPane;
 		
 		//LOAD LEVEL DATA BUTTON
+		/*
 		Button loadLevelButton=new Button("Load Level");
 		loadLevelButton.relocate(width*.40, 20);
 		loadLevelButton.setPrefSize(100,50);
 		loadLevelButton.getStyleClass().add("buttonTemplate2");
 		loadLevelButton.setOnMouseClicked(e->((GamePane) myLinkedObject).loadLevel());
 		myNode=bottomPane;
+		*/
 
 		//LOAD GAME WORLD BUTTON
-		//TODO: Abstract this to load gameworld data button
-
+		Button loadGameWorldButton=new Button("Load Game");
+		loadGameWorldButton.relocate(width*.40, 20);
+		loadGameWorldButton.setPrefSize(100,50);
+		loadGameWorldButton.getStyleClass().add("buttonTemplate2");
+		loadGameWorldButton.setOnMouseClicked(e->((GamePane) myLinkedObject).loadGame());
+		myNode=bottomPane;
 		
 		//EXTEND BACKGROUND BUTTONS
 		LevelSpaceExtenderButton levelExtendRightButton = new LevelExtendRightButton((ViewObjectDelegate) myLinkedObject);
@@ -79,7 +85,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		levelExtendUpButton.getStyleClass().add("buttonTemplate2");
 		
 		//ADD ALL BUTTONS TO BOTTOM PANE
-		bottomPane.getChildren().add(new HBox(myLevelBar, myLevelButton, loadLevelButton, saveButton, levelExtendRightButton, levelExtendUpButton));
+		bottomPane.getChildren().add(new HBox(myLevelBar, myLevelButton, loadGameWorldButton, saveButton, levelExtendRightButton, levelExtendUpButton));
 		
 		
 	}
