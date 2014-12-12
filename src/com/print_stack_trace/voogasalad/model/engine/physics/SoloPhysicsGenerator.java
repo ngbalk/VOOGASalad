@@ -6,22 +6,28 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 public class SoloPhysicsGenerator {
 
     public enum ProgramPhysicEngine {
-        EarthPhysicsEngine,
+    	EarthPhysicsEngine,
         HalfGravityEngine,
-        WindyCityEngine,
-        InvertedGravityEngine
+        ZeroGravityEngine,
+        InvertedGravityEngine,
+        InvertedHalfGravityEngine,
+        WindyCityEngine
     }
 
 
     public static SoloPhysicsHandler getProgramPhysicEngine(ProgramPhysicEngine engineType) {
-        switch(engineType) {
+    	switch(engineType) {
         default:
         case EarthPhysicsEngine:
             return physicEngineFromParams(9.81f, 0f, 6.0f);
         case HalfGravityEngine:
             return physicEngineFromParams(4.405f, 0f, 3.0f);
+        case ZeroGravityEngine:
+        	return physicEngineFromParams(0.0f, 0f, 3.0f);
         case InvertedGravityEngine:
             return physicEngineFromParams(-9.81f, 0f, 3.0f);
+        case InvertedHalfGravityEngine:
+        	return physicEngineFromParams(-4.405f, 0f, 3.0f);
         case WindyCityEngine:
             return physicEngineFromParams(9.81f, -10.0f, 3.0f);
         }
