@@ -202,7 +202,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		SpriteObject temp = new SpriteObject(0, myObject.getImagePath(),
 				myObject.getType(), myObject.getDelegate());
 		temp.setCharacteristics(myObject.getCharacteristics());
-		changedSprite.set(temp);
+		getChangedSprite().set(temp);
 
 	}
 
@@ -497,5 +497,13 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	@Override
 	public HashSet<GameObject> getCurrentLevelSprites() {
 		return levelTracker.currentLevelSprites();
+	}
+
+	public SimpleObjectProperty<SpriteObject> getChangedSprite() {
+		return changedSprite;
+	}
+
+	public void setChangedSprite(SimpleObjectProperty<SpriteObject> changedSprite) {
+		this.changedSprite = changedSprite;
 	}
 }

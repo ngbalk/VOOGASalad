@@ -89,7 +89,7 @@ public class SpriteMovement extends SpriteUserInputDropDown{
 		for (KeyResult myAction: KeyResult.values()){
 			if (myMovements.values().contains(myAction)){
 				checkSelectBox(name);
-				setCurrent(data.get(name));
+				currentMenu.setText("Pick Types of Movement");
 			}
 			else
 				uncheckSelectBox(name);

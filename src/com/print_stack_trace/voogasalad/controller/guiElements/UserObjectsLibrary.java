@@ -26,7 +26,7 @@ public class UserObjectsLibrary extends PictureLibrary{
 	}
 	
 	private void setObservable(){
-		((GamePane) myMainPane).changedSprite.addListener(new ChangeListener<SpriteObject>(){
+		((GamePane) myMainPane).getChangedSprite().addListener(new ChangeListener<SpriteObject>(){
 
 			@Override
 			public void changed(ObservableValue<? extends SpriteObject> arg0,
