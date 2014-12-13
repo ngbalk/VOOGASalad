@@ -16,14 +16,16 @@ public class GoalObjectiveID extends UserInputDropDownMenu{
 		addMenus();
 	}
 
-	@Override
-	protected void linkMovement(String dataValue) {
-		for (SpriteObject sprite: mySpriteData.get(dataValue)){
-			((GoalObject)mySprite).getCharacteristics().getObjectiveID().add(sprite.getID());
-			((GoalObject) mySprite).getDelegate().update(((GoalObject)mySprite));
-		}
+        @Override
+        protected void linkMovement(String dataValue) {
+            ((GoalObject)mySprite).getCharacteristics().getObjectiveID().clear();
+                for (SpriteObject sprite: mySpriteData.get(dataValue)){
+                        ((GoalObject)mySprite).getCharacteristics().getObjectiveID().add(sprite.getId());
+                        ((GoalObject) mySprite).getDelegate().update(((GoalObject)mySprite));
+                }
 
-	}
+        }
+        
 	private void createDataMap(){
 		for(GameObject object: (HashSet<GameObject>)mySprite.getDelegate().getCurrentLevelSprites()){
 			if (object instanceof SpriteObject){
