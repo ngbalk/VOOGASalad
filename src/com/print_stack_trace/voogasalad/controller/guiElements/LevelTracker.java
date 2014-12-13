@@ -53,7 +53,7 @@ public class LevelTracker {
 		return nonActiveLevels;
 	}
 	public Set<LevelObject> getLevels(){
-		return   myLevels.keySet();
+		return myLevels.keySet();
 	}
 	public void addSprite(SpriteObject sprite){
 		myLevels.get(currentLevel.getValue()).add(sprite);

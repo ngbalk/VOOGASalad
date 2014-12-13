@@ -47,7 +47,7 @@ import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButto
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerSaveButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.PlayerToolBar;
 import com.print_stack_trace.voogasalad.controller.guiElements.SaveMenuItem;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.sprite.SpriteMovement;
 import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;

@@ -14,6 +14,7 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 	protected HashMap<String, String> data=new HashMap<String, String>();
 	protected MenuBar myMenuBar;
 	protected Menu currentMenu=new Menu("\t\t\t");
+	protected HashMap<String, CheckMenuItem> menuMap=new HashMap<String, CheckMenuItem>();
 	public UserInputDropDownMenu(){
 		myNode=new MenuBar();
 		myMenuBar=(MenuBar)myNode;
@@ -39,6 +40,7 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 	protected void addMenu(String menuName){
 		CheckMenuItem currentMenuItem=new CheckMenuItem(returnStringName(data.get(menuName)));
 		currentMenuItem.setOnAction(e->checkCorrectMenu(currentMenuItem,menuName));
+		menuMap.put(menuName, currentMenuItem);
 		this.currentMenu.getItems().add(currentMenuItem);
 	}
 	private String returnStringName(String value){
@@ -61,4 +63,12 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 		this.linkMovement(menuName);
 	}
 	protected abstract void linkMovement(String dataValue);
+	protected void checkSelectBox(String name){
+		menuMap.get(name).setSelected(true);
+		setCurrent(data.get(name));
+	}
+	protected void uncheckSelectBox(String name){
+		menuMap.get(name).setSelected(false);
+
+	}
 }

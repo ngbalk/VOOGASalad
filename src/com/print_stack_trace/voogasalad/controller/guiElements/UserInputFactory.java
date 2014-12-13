@@ -33,6 +33,7 @@ public class UserInputFactory {
 		return null;
 	}
 	private void createMap(){
+		
 		try{
 			Properties prop = new Properties();
 			InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/controller/guiResources/InputTypes.Properties");
@@ -41,6 +42,7 @@ public class UserInputFactory {
 				myTypes.put((String)typeName,  Class.forName((String)prop.get((String)typeName)));
 			}
 		}
+		
 		catch(Exception e){
 			JOptionPane.showMessageDialog(null, "User Input Types File Not Found");
 		}

@@ -18,6 +18,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import com.google.gson.JsonSyntaxException;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.goal.GoalObject;
 import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
@@ -37,10 +38,10 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	private GameEngine myGameEngine;
 	private ImageView background;
 	private HashMap<String, HashSet<SpriteObject>> myData;
-	public boolean doubleclick = true;
-	public SimpleObjectProperty<SpriteObject> changedSprite = new SimpleObjectProperty<SpriteObject>();
+	private boolean doubleclick = true;
+	private SimpleObjectProperty<SpriteObject> changedSprite = new SimpleObjectProperty<SpriteObject>();
 	private HashSet<SpriteObject> userObjects = new HashSet<SpriteObject>();
-	public ObservableSet<SpriteObject> myObservableData = FXCollections
+	private ObservableSet<SpriteObject> myObservableData = FXCollections
 			.observableSet(userObjects);
 	private LevelTracker levelTracker;
 	private SimpleDoubleProperty xVal = new SimpleDoubleProperty(0);
@@ -171,7 +172,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	}
 
 	public void update(SpriteObject myObject) {
-		System.out.println("AHH"+myObject.getImagePath());
 		SpriteCharacteristics characteristics = myObject.getCharacteristics();
 		if (myData.get(myObject.getCode()) == null) {
 			myData.put(myObject.getCode(), new HashSet<SpriteObject>());

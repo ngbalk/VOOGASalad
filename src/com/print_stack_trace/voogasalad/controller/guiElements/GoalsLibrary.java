@@ -1,5 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.goal.GoalObject;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
