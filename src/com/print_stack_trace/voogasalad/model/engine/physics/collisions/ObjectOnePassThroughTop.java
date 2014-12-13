@@ -15,9 +15,7 @@ public class ObjectOnePassThroughTop extends CollisionHandler {
                 System.out.println("jkasbdjasd");
                 return;
             }
-                //s2.v_x = 0;
-            s1.v_y = 0;
-                //s2.v_y = 0;
+
     }
 	
 }
