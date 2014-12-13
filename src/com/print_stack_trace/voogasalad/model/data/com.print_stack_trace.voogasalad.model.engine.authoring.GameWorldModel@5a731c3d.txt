@@ -7,8 +7,8 @@
         "0": {
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
           "p": {
-            "x": 4,
-            "y": 297
+            "x": 29,
+            "y": 253
           },
           "interactive": false,
           "objectType": "PLATFORM",
@@ -16,19 +16,19 @@
           "startingSpeed": 10.0,
           "value": 0,
           "orientation": 0.0,
-          "name": "",
+          "name": "1",
           "width": 100.0,
           "height": 100.0,
           "doubleJump": false,
           "damageDealt": 5,
           "myMovements": {},
           "myAnimations": {
-            "Down": [],
-            "Jump": [],
-            "Right": [],
             "Left": [],
+            "Jump": [],
+            "Up": [],
+            "Down": [],
             "Default": [],
-            "Up": []
+            "Right": []
           }
         },
         "1": {
@@ -52,12 +52,12 @@
             "D": "Right"
           },
           "myAnimations": {
-            "Down": [],
-            "Jump": [],
-            "Right": [],
             "Left": [],
+            "Jump": [],
+            "Up": [],
+            "Down": [],
             "Default": [],
-            "Up": []
+            "Right": []
           }
         }
       },
@@ -104,7 +104,7 @@
         "handlerMap": {}
       },
       "myLevelChars": {
-        "name": "123",
+        "name": "12345",
         "nextLevel": -1,
         "previousLevel": -1,
         "ID": 1,
