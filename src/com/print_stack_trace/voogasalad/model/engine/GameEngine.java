@@ -267,8 +267,9 @@ public class GameEngine {
         this.currentLevel = level;
 
         //		FIXME: Remove this work around garbage
-        Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
-        currentLevel.setMainCharacter(first);
+        //Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
+        //Integer hero = findHero();
+        //currentLevel.setMainCharacter(hero);
         currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
         currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
         currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
@@ -286,11 +287,21 @@ public class GameEngine {
         runtimeEngine = new RuntimeEngine(currentLevel, viewport);
         runtimeEngine.setFramesPerSecond(framesPerSecond);
     }
+    /*
+    private Integer findHero() {
+    	for (Integer id: this.currentLevel.mySpriteMap.keySet()) {
+    		if (this.currentLevel.mySpriteMap.get(id).DEFAULT_OBJECT_TYPE == SpriteType.HERO) {
+    			return id;
+    		}
+    	}
+    	return 0;
+    }
+    */
 	
     private void initializeGame() {
         //		FIXME: Remove this work around garbage
         for(LevelModel currentLevel : gameWorldModel.getLevelMap().values()) {
-            currentLevel.setMainCharacter(0);
+            currentLevel.setMainCharacter(currentLevel.getMainCharacter());
             currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
             currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
             currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
