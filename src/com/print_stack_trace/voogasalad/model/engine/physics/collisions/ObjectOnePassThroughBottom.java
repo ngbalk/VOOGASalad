@@ -7,7 +7,8 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
 public class ObjectOnePassThroughBottom extends CollisionHandler {
-
+	
+	
     @Override
     public void applyCollisionEffects (RuntimeSpriteCharacteristics s1,
                                        RuntimeSpriteCharacteristics s2,
@@ -16,9 +17,7 @@ public class ObjectOnePassThroughBottom extends CollisionHandler {
                 System.out.println("jkasbdjasd");
                 return;
             }
-                //s2.v_x = 0;
-            s1.v_y = 0;
-                //s2.v_y = 0;
+
     }
         
 }

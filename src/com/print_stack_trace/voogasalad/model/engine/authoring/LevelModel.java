@@ -39,7 +39,7 @@ public class LevelModel {
 		myKeyMap = new HashMap<>();
 		myLevelChars = new LevelCharacteristics();
 		physicsEngine = new PhysicsEngine();
-		mainCharacter = 0;
+		//mainCharacter = 0;
 	}
 
 	public LevelModel(LevelModel level) {
@@ -85,6 +85,9 @@ public class LevelModel {
 
 		int newID = generateID(mySpriteMap);
 		mySpriteMap.put(newID, chars);
+		if (chars.getObjectType() == SpriteType.HERO) {
+			setMainCharacter(newID);
+		}
 		return newID;
 	}
 
@@ -102,6 +105,9 @@ public class LevelModel {
 		// if it passes other logic tests including: no collisions
 		mySpriteMap.remove(ModelID);
 		mySpriteMap.put(ModelID, chars);
+		if (chars.getObjectType() == SpriteType.HERO) {
+			setMainCharacter(ModelID);
+		}
 	}
 
 	public Integer setGoal(GoalCharacteristics goal)
