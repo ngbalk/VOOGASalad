@@ -211,6 +211,14 @@ public class PhysicsEngine {
     public void setResultOfCollision(CollisionResult result, SpriteType s1, SpriteType s2) {
         decisionMatrix[s1.ordinal()][s2.ordinal()] = result;
     }
+    
+    public void setDecisionMatrix(CollisionResult[][] decision){
+        decisionMatrix = decision;
+    }
+    
+    public CollisionResult[][] getDecisionMatrix(){
+        return decisionMatrix;
+    }
 
     private CollisionHandler getHandlerForResult(CollisionResult result) {
         CollisionHandler ret = handlerMap.get(result);
