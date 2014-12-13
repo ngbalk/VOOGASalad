@@ -98,16 +98,14 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         if (reqGoals > 0) {
             if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
                 System.out.println("YOU WIN");
-                runtimeModel.gameOver = true;
-                runtimeModel.gameVictory = true;
+                winGame();
                 getNextLevel();
             }
         }
 		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
 		if(gameOver(mainChar)){
 			System.out.println("YOU DIED BITCH");
-			runtimeModel.gameOver = true;
-			runtimeModel.gameVictory = false;
+			loseGame();
 		}
 		updateSpritePositions();
 		cameraHandler.updateCamera(runtimeModel);
@@ -145,6 +143,16 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
 
 	//-------------------PRIVATE METHODS-------------------//
+    
+    private void winGame() {
+    	runtimeModel.gameOver = true;
+        runtimeModel.gameVictory = true;
+    }
+    
+    private void loseGame() {
+    	runtimeModel.gameOver = true;
+        runtimeModel.gameVictory = false;
+    }
 
 	//Sprites move around even when this method is commented out
 	//why is that? this method should be the one controlling movement
