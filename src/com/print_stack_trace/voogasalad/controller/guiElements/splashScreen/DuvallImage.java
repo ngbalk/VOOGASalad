@@ -23,16 +23,12 @@ public class DuvallImage extends SplashScreenObject{
 			myImageView.relocate(myWidth/2-myImageView.getFitWidth()/2, myHeight/2-myImageView.getFitHeight()/2);
 			myImageView.setFitWidth(myImageView.getFitWidth()+speed);
 			myImageView.setRotate(myImageView.getRotate()+speed);
-			return true;
 		}
 		else if (myImageView.getRotate()<=360){
 			myImageView.setRotate(myImageView.getRotate()+speed);
-			return true;
 		}
-
-		return false;
-
-
+		
+		return (myImageView.getFitHeight()<=300||myImageView.getRotate()<=300);
 	}
 
 	@Override

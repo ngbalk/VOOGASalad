@@ -27,32 +27,40 @@ public abstract class AbstractUserSplashScreen {
 	protected Scene myScene;
 	protected HashMap<Integer,SplashScreenObject> myNodes=new HashMap<Integer,SplashScreenObject>();
 	protected EventHandler myEvent;
+	
 	public AbstractUserSplashScreen(String resourceName, Number width, Number height){
 		this(resourceName, width, height, null);
 		
 	}
 	public AbstractUserSplashScreen(String resource, Number width, Number height, EventHandler event){
+		
 		this.initialize(width.doubleValue(), height.doubleValue());
-		myTimeline.setCycleCount(Timeline.INDEFINITE);
-		KeyFrame myKeyFrame=new KeyFrame(Duration.millis(1000/DEFAULT_FPS), e->update());
-		myTimeline.getKeyFrames().add(myKeyFrame);
 		myData=new ResourceReader(resource).getProperties();
 		myEvent=event;
+		
+		KeyFrame myKeyFrame=new KeyFrame(Duration.millis(1000/DEFAULT_FPS), e->update());
+		myTimeline.setCycleCount(Timeline.INDEFINITE);
+		myTimeline.getKeyFrames().add(myKeyFrame);
 		myTimeline.play();
+		
 		makeNode();
 		add();
 		update();
 	}
+	
 	public Scene getScene(){
 		return myScene;
 	}
-	public Scene  initialize(double width, double height){
+	
+	public Scene initialize(double width, double height){
 		myScene=new Scene(myGroup,width, height);
 		return myScene;	
 	}
+	
 	private EventHandler stopAnimation(){
 		return myEvent;
 	}
+	
 	private void update(){
 		int count=0;
 		for (Integer node: myNodes.keySet()){
@@ -65,6 +73,7 @@ public abstract class AbstractUserSplashScreen {
 			myTimeline.stop();
 		}
 	}
+	
 	private void add(){
 		int max=0;
 		for (Integer index: myNodes.keySet()){
@@ -76,6 +85,7 @@ public abstract class AbstractUserSplashScreen {
 			}
 		}
 	}
+	
 	private void makeNode(){
 		for (String key: myData.keySet()){
 			String [] values=myData.get(key).split(";");
