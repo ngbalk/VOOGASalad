@@ -18,24 +18,34 @@ public class LevelTracker {
 	private SimpleObjectProperty<LevelObject>currentLevel=new SimpleObjectProperty<LevelObject>(null);
 	private SimpleObjectProperty<LevelObject>addLevel=new SimpleObjectProperty<LevelObject>(null);
 	private SimpleObjectProperty<EventHandler> myAddEvent=new SimpleObjectProperty<EventHandler>(null);
+	private SimpleObjectProperty<String> myLevelName=new SimpleObjectProperty<String>(null);
 	public LevelTracker(){}
 	public void addLevel(LevelObject newLevel, EventHandler myEvent){
 		myLevels.put(newLevel, new HashSet<GameObject>());
 		myAddEvent.setValue(myEvent);
 		addLevel.setValue(newLevel);
 		currentLevel.setValue(newLevel);
+		myLevelName.setValue(newLevel.getCharacteristics().getName());
 	}
 	public LevelObject getCurrentLevel(){
 		return currentLevel.getValue();
 	}
+	public String getCurrentName(){
+		return myLevelName.getValue();
+	}
+	
 	public SimpleObjectProperty<LevelObject> getAddLevelProperty(){
 		return addLevel;
 	}
 	public SimpleObjectProperty<EventHandler> getEventProperty(){
 		return myAddEvent;
 	}
+	public SimpleObjectProperty<String> nameProperty(){
+		return myLevelName;
+	}
 	public void setCurrentLevel(LevelObject newLevel){
 		currentLevel.setValue(newLevel);
+		myLevelName.setValue(newLevel.getCharacteristics().getName());
 	}
 	public SimpleObjectProperty<LevelObject> getCurrentLevelProperty(){
 		return currentLevel;

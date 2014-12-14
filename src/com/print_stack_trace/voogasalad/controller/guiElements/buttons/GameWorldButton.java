@@ -7,16 +7,13 @@ import com.print_stack_trace.voogasalad.controller.popUpPanes.PopUpPane;
 
 
 public class GameWorldButton extends AbstractButton{
-
+	private PopUpPane myPane;
 	public GameWorldButton(String text, ViewObjectDelegate viewObjectDelegate) {
 		super(text, viewObjectDelegate);
-		
+		myPane=new PopUpPane("GameWorldPane",new GameWorldObject("", myViewObjectDelegate));
 	}
-
+	
 	@Override
-	protected void behavior() {
-		PopUpPane myPane=new PopUpPane("GameWorldPane",new GameWorldObject("", myViewObjectDelegate));
-		myPane.openPane();
-	}
+	protected void behavior() {if (!myPane.isOpen()) myPane.openPane();};
 
 }

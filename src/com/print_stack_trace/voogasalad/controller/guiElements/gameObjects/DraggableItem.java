@@ -92,42 +92,14 @@ public class DraggableItem {
 			}
 		});
 	}
-	private double translateMouseX(MouseEvent event){
-		if (scrollHVal.doubleValue()<700){
-			if ((event.getSceneX()-startX)>scrollHVal.doubleValue())
-				return ((event.getSceneX()-startX)+scrollHVal.doubleValue());
-			else if ((event.getSceneX()-startX)<=scrollHVal.doubleValue()){
-				System.out.println((event.getSceneX()-startX)+" "+(scrollHVal.doubleValue()-(event.getSceneX()-startX)));
-				return (scrollHVal.doubleValue()-(scrollHVal.doubleValue()-(event.getSceneX()-startX)));
-			}
-		}
-		else{
-			if ((event.getSceneX()-startX)>scrollHVal.doubleValue())
-				return ((event.getSceneX()-startX)+scrollHVal.doubleValue());
-			else if ((event.getSceneX()-startX)<=scrollHVal.doubleValue()){
-				System.out.println((event.getSceneX()-startX)+" "+(scrollHVal.doubleValue()-(event.getSceneX()-startX)));
-				return (700+scrollHVal.doubleValue()-(scrollHVal.doubleValue()-(event.getSceneX()-startX)));
-			}
-			
-		}
-			return buffer;
 
 
-
-		}
-		private double translateMouseY(MouseEvent event){
-			if (scrollVVal.doubleValue()>638){
-				return (event.getSceneY()+(scrollVVal.doubleValue()-638)-startY);
-			}
-			return event.getSceneY()+scrollVVal.doubleValue()-startY;
-		}
-
-		private void translate(){
-			myItem.setSpriteX(myX-myWidth/2);
-			myItem.setSpriteY(myY-myHeight/2);
-		}
-
-		private boolean outOfBounds(Point myLocation){
-			return (myLocation.x> (gridWidth-(myWidth/2))||(myLocation.x<startX)||(myLocation.y>gridHeight)|| (myLocation.y<startY));
-		}
+	private void translate(){
+		myItem.setSpriteX(myX-myWidth/2);
+		myItem.setSpriteY(myY-myHeight/2);
 	}
+
+	private boolean outOfBounds(Point myLocation){
+		return (myLocation.x> (gridWidth-(myWidth/2))||(myLocation.x<startX)||(myLocation.y>gridHeight)|| (myLocation.y<startY));
+	}
+}
