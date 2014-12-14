@@ -11,35 +11,40 @@
         "0": {
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/EnemyImages/MarioEnemy.png",
           "p": {
-            "x": 193,
-            "y": 103
+            "x": 272,
+            "y": 73
           },
-          "interactive": true,
+          "interactive": false,
           "objectType": "HERO",
           "startingHealth": 10,
           "startingSpeed": 10.0,
           "value": 0,
           "orientation": 0.0,
-          "name": "hey",
+          "name": "mario",
           "width": 100.0,
           "height": 100.0,
           "doubleJump": false,
           "damageDealt": 5,
-          "myMovements": {},
+          "myMovements": {
+            "RIGHT": "Right",
+            "LEFT": "Left",
+            "UP": "Up",
+            "DOWN": "Down"
+          },
           "myAnimations": {
-            "Left": [],
-            "Right": [],
-            "Jump": [],
-            "Default": [],
             "Up": [],
-            "Down": []
+            "Jump": [],
+            "Left": [],
+            "Default": [],
+            "Down": [],
+            "Right": []
           }
         },
         "1": {
-          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObjectImages/mushroom.png",
+          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
           "p": {
-            "x": 36,
-            "y": 259
+            "x": 0,
+            "y": 0
           },
           "interactive": false,
           "objectType": "PLATFORM",
@@ -47,35 +52,89 @@
           "startingSpeed": 10.0,
           "value": 0,
           "orientation": 0.0,
-          "name": "",
-          "width": 200.0,
+          "name": "brick",
+          "width": 100.0,
+          "height": 1000.0,
+          "doubleJump": false,
+          "damageDealt": 5,
+          "myMovements": {},
+          "myAnimations": {
+            "Up": [],
+            "Jump": [],
+            "Left": [],
+            "Default": [],
+            "Down": [],
+            "Right": []
+          }
+        },
+        "2": {
+          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+          "p": {
+            "x": 658,
+            "y": -397
+          },
+          "interactive": false,
+          "objectType": "PLATFORM",
+          "startingHealth": 10,
+          "startingSpeed": 10.0,
+          "value": 0,
+          "orientation": 0.0,
+          "name": "brick2",
+          "width": 100.0,
+          "height": 1000.0,
+          "doubleJump": false,
+          "damageDealt": 5,
+          "myMovements": {},
+          "myAnimations": {
+            "Up": [],
+            "Jump": [],
+            "Left": [],
+            "Default": [],
+            "Down": [],
+            "Right": []
+          }
+        },
+        "3": {
+          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/luigi.png",
+          "p": {
+            "x": 288,
+            "y": 305
+          },
+          "interactive": false,
+          "objectType": "ENEMY",
+          "startingHealth": 10,
+          "startingSpeed": 10.0,
+          "value": 0,
+          "orientation": 0.0,
+          "name": "luigiEnemy",
+          "width": 100.0,
           "height": 100.0,
           "doubleJump": false,
           "damageDealt": 5,
           "myMovements": {},
           "myAnimations": {
-            "Left": [],
-            "Right": [],
-            "Jump": [],
-            "Default": [],
             "Up": [],
-            "Down": []
+            "Jump": [],
+            "Left": [],
+            "Default": [],
+            "Down": [],
+            "Right": []
           }
         }
       },
-      "currentID": 1,
+      "currentID": 3,
       "isLocked": false,
       "physicsEngine": {
         "decisionMatrix": [
           [
             "ObjectBothNoDisplacement",
-            "ObjectBothNoDisplacement",
+            "HeroDamageCollision",
             "ObjectBothNoDisplacement",
             "ObjectBothNoDisplacement",
             "ObjectBothNoDisplacement"
           ],
           [
-            "ObjectBothNoDisplacement",
+            "HeroDamageCollision",
             "ObjectBothNoDisplacement",
             "ObjectBothNoDisplacement",
             "ObjectBothNoDisplacement",
@@ -106,7 +165,7 @@
         "handlerMap": {}
       },
       "myLevelChars": {
-        "name": "d",
+        "name": "frogger2",
         "nextLevel": -1,
         "previousLevel": -1,
         "ID": 1,
@@ -119,7 +178,7 @@
         "cameraSpeed": 3,
         "myHorizontalPaneCount": 1,
         "myVerticalPaneCount": 1,
-        "cameraType": "PlayerFollow"
+        "cameraType": "ConstantHorizontalScroll"
       },
       "myGoalFactory": {},
       "myKeyMap": {},
