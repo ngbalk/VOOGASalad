@@ -54,5 +54,11 @@ public class CollisionHandlerTest extends CollisionHandler {
 	}
 
 
+    @Override
+    public boolean shouldStick (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        return true;
+    }
+
+
 
 }

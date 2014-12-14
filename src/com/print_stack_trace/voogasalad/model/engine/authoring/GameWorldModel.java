@@ -61,6 +61,8 @@ public class GameWorldModel {
     
     public void addLevel(Integer id, LevelCharacteristics levelCharacteristics) {
         LevelModel levelModel = new LevelModel();
+        if(id != 1)
+            levelModel.getPhysicsEngine().setDecisionMatrix(levelMap.get(id-1).getPhysicsEngine().getDecisionMatrix());
         levelCharacteristics.setID(id);
         levelModel.setLevelCharacteristics(levelCharacteristics);
     	levelMap.put(id, levelModel);
@@ -71,7 +73,6 @@ public class GameWorldModel {
     }
     
     public void setCurrentLevel(int index) {
-        System.out.println("INdex: " + index);
         if(index < FIRST_LEVEL_INDEX) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -82,7 +83,6 @@ public class GameWorldModel {
     }
     
     public LevelModel getNextLevel() {
-        System.out.println(currentLevelIndex);
         currentLevelIndex++;
         return levelMap.get(currentLevelIndex);
     }

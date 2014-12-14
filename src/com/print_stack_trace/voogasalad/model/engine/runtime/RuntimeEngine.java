@@ -33,7 +33,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     private Map<Integer, Goal> goalMap;
     private CameraHandler cameraHandler;
     private Dimension viewport;
-   	private int completedGoalCount = 0;
+    private int completedGoalCount = 0;
 
 
     //-------------------CONSTRUCTORS-------------------//
@@ -72,8 +72,11 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     //-------------------PUBLIC METHODS-------------------//
 
     private void getNextLevel() {
-        System.out.println(gameWorld);
         currentLevel = gameWorld.getNextLevel();
+        if(currentLevel == null){
+            runtimeModel.gameTotallyOver = true;
+            return;
+        }
         createRuntimeState(currentLevel, viewport);
     }
     
@@ -97,15 +100,17 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
         if (reqGoals > 0) {
             if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
-                System.out.println("YOU WIN");
-                winGame();
+
+                runtimeModel.gameOver = true;
+                runtimeModel.gameVictory = true;
                 getNextLevel();
             }
         }
 		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
 		if(gameOver(mainChar)){
-			System.out.println("YOU DIED BITCH");
-			loseGame();
+
+			runtimeModel.gameOver = true;
+			runtimeModel.gameVictory = false;
 		}
 		updateSpritePositions();
 		cameraHandler.updateCamera(runtimeModel);
@@ -166,7 +171,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	}
 
 	private void handleKey(KeyEvent event, boolean press) {
-//		System.out.println("checking keycode");
 		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
 		KeyApplicator applicator = applicatorCache.get(res);
 		Integer mainChar = runtimeModel.getMainCharacter();
@@ -177,19 +181,15 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		}
 		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {
 			applicator.applyPressActionToRuntimeSprite(mainCharData);
-			//SET POSSIBLE SPRITE ACTION OF MAIN CHARACTER
-			//mainCharData.setPossibleSpriteAction(res);
 		}
 		else{
 			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
-			//RESET SPRITE ACTION AFTER KEY RELEASE
-			//mainCharData.setPossibleSpriteAction(null);
 			return;
 		}
 	}
 	    
 	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
-	    if(mainChar == null) return false;
+	    if(mainChar == null) return true;
 	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
                     
 	}

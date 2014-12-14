@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -18,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -27,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -34,20 +35,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
 import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.VOOGASalad;
 import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
-import com.print_stack_trace.voogasalad.controller.guiElements.HUD;
-import com.print_stack_trace.voogasalad.controller.guiElements.IntroSplashScreen;
-import com.print_stack_trace.voogasalad.controller.guiElements.PlayPane;
-import com.print_stack_trace.voogasalad.controller.guiElements.PlayerActionButton;
-import com.print_stack_trace.voogasalad.controller.guiElements.PlayerSaveButton;
-import com.print_stack_trace.voogasalad.controller.guiElements.PlayerToolBar;
-import com.print_stack_trace.voogasalad.controller.guiElements.SaveMenuItem;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteMovement;
+import com.print_stack_trace.voogasalad.controller.guiElements.buttons.PlayerActionButton;
+import com.print_stack_trace.voogasalad.controller.guiElements.buttons.PlayerSaveButton;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.DecisionTable;
+import com.print_stack_trace.voogasalad.controller.guiElements.splashScreen.AuthorSplashScreen;
+import com.print_stack_trace.voogasalad.controller.guiElements.splashScreen.IntroSplashScreen;
+import com.print_stack_trace.voogasalad.controller.guiElements.topFileMenuBar.SaveMenuItem;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.sprite.SpriteMovement;
 import com.print_stack_trace.voogasalad.exceptions.InvalidImageFileException;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
@@ -57,17 +55,22 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.player.Score;
-import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
-import com.print_stack_trace.voogasalad.utilities.Reflection;
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
+import com.print_stack_trace.voogasalad.utilities.twillio.PSTTwillioCore;
+import com.print_stack_trace.voogasalad.utilities.FileLoadUtility;
 
 public class GamePlayer implements ViewController {
-
+    private static final String DEFAULT_WIN_SCREEN="./com/print_stack_trace/voogasalad/"
+                    + "controller/guiResources/WinSplashScreen.Properties";
+    private static final String DEFAULT_LOSE_SCREEN="./com/print_stack_trace/voogasalad/"
+            + "controller/guiResources/LoseSplashScreen.Properties";
+    
 	private final static int FPS = 15;
 	private static final double ANIMATION_DURATION = 0.001;
 	private Group myRoot;
 	private Group myGameRoot;
 	private ScrollPane myViewPort = new ScrollPane();
-	private PlayPane myPlayPane;
+	private Pane myPlayPane;
 	private GameEngine myGameEngine;
 	private boolean isPlaying = false;
 	private Score currentScore;
@@ -79,6 +82,7 @@ public class GamePlayer implements ViewController {
 	int animationIndex=0;
 	private HUD myHud = new HUD();
 	private File myFile = null;
+	public Stage mainStage;
 
 
 	/* instance of buttons */
@@ -103,13 +107,13 @@ public class GamePlayer implements ViewController {
 
 		myRoot.setOnKeyReleased(gameEngine.getRuntimeKeyReleaseHandler());
 		splash.continueFromSplashScreen(this, myRoot);
-		myPlayPane = new PlayPane();
+		myPlayPane = new Pane();
 		myPlayPane.setPrefSize(VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT);
 		myPlayPane.setLayoutY(100);
 		myPlayPane.toBack();
 		myGameRoot = new Group(myPlayPane); 
 		myRoot.getChildren().add(myGameRoot);
-		myRoot.getChildren().add(myHud);
+		//myRoot.getChildren().add(myHud);
 		myHud.setTranslateY(40);
 
 		KeyFrame frame = start();
@@ -134,10 +138,20 @@ public class GamePlayer implements ViewController {
 		public void handle(ActionEvent evt) {
 			if(isPlaying){
 				myGameEngine.update();
-				updateScene();
+				RuntimeModel r = myGameEngine.getStatus();
+				if(r.gameTotallyOver) showSplashScreen(DEFAULT_WIN_SCREEN);
+				else if(r.gameOver) showSplashScreen(DEFAULT_LOSE_SCREEN);
+				else updateScene();
 			}
 		}
 	};
+	
+	private void showSplashScreen(String s){
+            isPlaying = false;
+            AuthorSplashScreen endScreen = new AuthorSplashScreen(s, VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT);
+            mainStage.setScene(endScreen.getScene());
+            mainStage.show();
+	}
 
 	/**
 	 * update the players view: Engine will change locations/stats on the backend; player will update the scene after changes
@@ -173,22 +187,18 @@ public class GamePlayer implements ViewController {
 		}	
 		
 		//background.relocate(5,5);
-//		System.out.println("fit height: " + background.getFitHeight());
-//		System.out.println("fit width: " + background.getFitWidth());
-//		System.out.println("pref height: " + myPlayPane.getPrefHeight());
-//		System.out.println("pref width: " + myPlayPane.getPrefWidth());
 
 		for(Integer id : spriteMap.keySet()){
 			RuntimeSpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
 			img = new Image(spriteCharacteristics.getImagePath());
-			spriteImageView = new ImageView(img);
+			spriteImageView = new ImageView();
 			spriteImageView.setFitWidth(spriteCharacteristics.getWidth());
 			spriteImageView.setFitHeight(spriteCharacteristics.getHeight());
 			spriteImageView.setRotate(spriteCharacteristics.getOrientation());
 			spriteImageView.setLayoutX(spriteCharacteristics.getX());
 			spriteImageView.setLayoutY(spriteCharacteristics.getY());
 
-			executeAnimation(spriteImageView, spriteCharacteristics);
+			executeAnimation(img,spriteImageView, spriteCharacteristics);
 		}
 
 	}
@@ -198,9 +208,10 @@ public class GamePlayer implements ViewController {
 	 * @param currentSpriteImageView
 	 * @param spriteCharacteristics
 	 */
-	private void executeAnimation(ImageView currentSpriteImageView, RuntimeSpriteCharacteristics spriteCharacteristics){
+	private void executeAnimation(Image img, ImageView currentSpriteImageView, RuntimeSpriteCharacteristics spriteCharacteristics){
 		KeyResult animationType = spriteCharacteristics.getCurrentAnimation();
 		if(animationType==null){
+			currentSpriteImageView.setImage(img);
 			myPlayPane.getChildren().add(currentSpriteImageView);
 			return;
 		}
@@ -209,7 +220,6 @@ public class GamePlayer implements ViewController {
 		animationTimeline.setCycleCount(Timeline.INDEFINITE);
 		/*
 		for(Image spriteImage : animationImages){
-		    System.out.println(spriteImage);
 		    if(spriteImage == null) {
 		        continue;
 		    }
@@ -225,11 +235,9 @@ public class GamePlayer implements ViewController {
 			
 	}
 	private void animateSprite(ImageView currentSpriteImageView, ArrayList<Image> spriteImage, SpriteCharacteristics spriteCharacteristics, int index){
-        System.out.println(spriteImage.size());
 	    if (animationIndex>=spriteImage.size())
             animationIndex=0;
 	    currentSpriteImageView.setImage(spriteImage.get(index));
-	    System.out.println(spriteImage.get(index));
 	    spriteCharacteristics.setImage(spriteImage.get(index));
         animationIndex++;
         //this.myPlayPane.getChildren().add(currentSpriteImageView);
@@ -289,11 +297,9 @@ public class GamePlayer implements ViewController {
 		//gameEngine.stopGame();
 	}
 	public void loadGame(){
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Load level");
-		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
-		Stage newStage=new Stage();
-		File file = fileChooser.showOpenDialog(newStage);
+		File file = FileLoadUtility.loadFile(
+				System.getProperty("user.dir") +
+				"/src/com/print_stack_trace/voogasalad/model/data/");
 		if (file != null) {
 			try {
 				myGameEngine.loadGame(file);
@@ -323,15 +329,8 @@ public class GamePlayer implements ViewController {
 	/***
 	 * Method for Choosing Image --> Front End Person to modify to his/her liking
 	 */
-	private void getImageFromFile(){
-		FileChooser fc = new FileChooser(); 
-		File file = fc.showOpenDialog(new Stage());
-		if (!file.getName().endsWith(Constants.JPEG) && !file.getName().endsWith(Constants.PNG)){
-
-			ViewController.displayError(new InvalidImageFileException());
-			return; 
-		}
-		FileInputStream fis;
+	private Image getImageFromFile(){
+		return FileLoadUtility.loadImage();
 	}
 	
 	public void restartCurrentLevel() {
@@ -345,6 +344,7 @@ public class GamePlayer implements ViewController {
 	}
 	
 	public void startNewGame() {
+            myRoot.getChildren().add(myHud);
 	    myGameEngine.startNewGame();
 	}
 }

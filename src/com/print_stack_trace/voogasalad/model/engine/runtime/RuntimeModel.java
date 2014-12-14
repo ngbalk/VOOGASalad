@@ -32,6 +32,7 @@ public class RuntimeModel extends LevelModel {
 	public int height;
 	public Integer mainChar;
 	public Dimension viewport;
+	public boolean gameTotallyOver;
 
 	//-------------------CONSTRUCTORS-------------------//
 
