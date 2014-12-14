@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -11,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+
 
 
 import com.google.gson.JsonSyntaxException;
@@ -28,6 +30,7 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
+import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 
 public class GamePane extends Pane implements ViewObjectDelegate {
@@ -237,7 +240,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		return sprites;
 	}
 
-	public void setCamera(CameraFactory.CameraType cameratype) {
+	public void setCamera(CameraType cameratype) {
 		myGameEngine.setCameraType(cameratype);
 	}
 	@Override

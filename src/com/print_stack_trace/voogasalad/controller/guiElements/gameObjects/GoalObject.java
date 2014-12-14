@@ -44,18 +44,9 @@ public class GoalObject extends GameObject {
 		myDelegate.update(this);
 	}
 	@Override
-	public void createPane() {
-		// TODO Auto-generated method stub
-	}
+	public void createPane() {}
 	@Override
-	public void showPane() {
-		// TODO Auto-generated method stub
-	}
+	public void showPane() {}
 	@Override
-	public void setImageCharacteristics() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
+	public void setImageCharacteristics() {}
 }
