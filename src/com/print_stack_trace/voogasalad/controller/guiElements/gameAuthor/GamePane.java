@@ -1,5 +1,9 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor;
 
+/*
+ * This is the area where the game will be rendered.
+ */
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
