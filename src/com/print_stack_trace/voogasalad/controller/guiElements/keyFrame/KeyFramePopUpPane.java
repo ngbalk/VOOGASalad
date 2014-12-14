@@ -16,14 +16,14 @@ import javax.swing.JOptionPane;
 
 
 
+
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.GeneralPane;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.ImageUpload;
 import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
-
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
-import com.print_stack_trace.voogasalad.utilities.FileLoadUtility;
+import com.print_stack_trace.voogasalad.utilities.fileloading.FileLoadUtility;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
