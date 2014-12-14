@@ -1,7 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.sprite;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
 
 public class SpriteOrientation extends SpriteCharacteristicController {
 	public SpriteOrientation(String[] values,  double width, double height, double x, double y, GameObject object){

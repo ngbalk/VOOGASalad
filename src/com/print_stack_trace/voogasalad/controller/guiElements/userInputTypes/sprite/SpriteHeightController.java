@@ -6,8 +6,8 @@ import javafx.scene.control.TextField;
 
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
 
 public class SpriteHeightController extends SpriteCharacteristicController{
 	public SpriteHeightController(String[] values,  double width, double height, double x, double y, GameObject object){
@@ -22,10 +22,7 @@ public class SpriteHeightController extends SpriteCharacteristicController{
 		catch(NumberFormatException e){
 			
 		}
-		mySprite.getImage().setFitHeight(newHeight);
-		mySprite.getImage().setPreserveRatio(false);
-		((SpriteObject) mySprite).getCharacteristics().setHeight(newHeight);
-		mySprite.getDelegate().update((SpriteObject) mySprite);
+		((SpriteObject) mySprite).setSpriteHeight(newHeight);
 	}
 	@Override 
 	protected void populateDefaultText(){

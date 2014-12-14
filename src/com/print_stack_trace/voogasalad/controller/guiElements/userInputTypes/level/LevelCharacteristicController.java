@@ -1,7 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.level;
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.LevelObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputText;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputText;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;

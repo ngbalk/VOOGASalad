@@ -1,18 +1,20 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.goal;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputDropDownMenu;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ObjectAction;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GoalObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
 
 public class GoalObjectiveID extends UserInputDropDownMenu{
 	protected HashMap<String, ArrayList<SpriteObject>> mySpriteData=new HashMap<String, ArrayList<SpriteObject>>();
-	
 	public GoalObjectiveID (String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 		createDataMap();
@@ -28,25 +30,24 @@ public class GoalObjectiveID extends UserInputDropDownMenu{
 
 	}
 	private void createDataMap(){
-		for(GameObject object: (HashSet<GameObject>)mySprite.getDelegate().getCurrentLevelSprites()){
-			if (object instanceof SpriteObject){
-				SpriteObject myObject=(SpriteObject)object;
-				if (myObject.getType().toUpperCase().equals(SpriteType.REWARD.name())){
-					String myCode=myObject.getID()+"";
-					if (!myObject.getCode().equals("")){
-						myCode=myObject.getCode();
-					}
-					data.put(myCode,myCode);
-					if (!mySpriteData.containsKey(myCode))
-						mySpriteData.put(myCode, new ArrayList<SpriteObject>());
-					mySpriteData.get(myCode).add(myObject);
+		mySprite.getDelegate().actionToCurrentLevelSprites((type)->addData(type));
+	}
+	private void addData(Object type){
+		if (type instanceof SpriteObject){
+			SpriteObject myObject=(SpriteObject)type;
+			if (myObject.getType().toUpperCase().equals(SpriteType.REWARD.name())){
+				String myCode=myObject.getID()+"";
+				if (!myObject.getCode().equals("")){
+					myCode=myObject.getCode();
 				}
+				data.put(myCode,myCode);
+				if (!mySpriteData.containsKey(myCode))
+					mySpriteData.put(myCode, new ArrayList<SpriteObject>());
+				mySpriteData.get(myCode).add(myObject);
 			}
 		}
 
 	}
-
 }
 
-
-
+	

@@ -4,9 +4,10 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.g
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.MessagePopUp;
-import com.print_stack_trace.voogasalad.controller.guiElements.ResourceReader;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GoalObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
+import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
 
 
 public class GoalReachDistance extends GoalCharacteristicController {

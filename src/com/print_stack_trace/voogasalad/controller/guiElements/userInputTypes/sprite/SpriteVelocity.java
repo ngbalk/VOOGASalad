@@ -8,8 +8,8 @@ import javafx.scene.control.TextField;
 
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
 
 public class SpriteVelocity extends SpriteCharacteristicController{
 	public SpriteVelocity(String[] values,  double width, double height, double x, double y, GameObject object){

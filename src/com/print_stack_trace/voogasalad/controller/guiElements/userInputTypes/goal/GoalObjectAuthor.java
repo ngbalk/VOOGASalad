@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputDropDownMenu;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GoalObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
 
@@ -27,22 +28,23 @@ public class GoalObjectAuthor extends UserInputDropDownMenu{
 
 	}
 	private void createDataMap(){
-		for(GameObject object: (HashSet<GameObject>)mySprite.getDelegate().getCurrentLevelSprites()){
-			if (object instanceof SpriteObject){
-				SpriteObject myObject=(SpriteObject)object;
-				if (myObject.getType().toUpperCase().equals(SpriteType.ENEMY.name())){
-					String myCode=myObject.getID()+"";
-					if (!myObject.getCode().equals("")){
-						myCode=myObject.getCode();
-					}
-					data.put(myCode,myCode);
-					if (!mySpriteData.containsKey(myCode))
-						mySpriteData.put(myCode, new ArrayList<SpriteObject>());
-					mySpriteData.get(myCode).add(myObject);
+		mySprite.getDelegate().actionToCurrentLevelSprites((type)->addData(type));
+
+	}
+	private void addData(Object toAdd){
+		if (toAdd instanceof SpriteObject){
+			SpriteObject myObject=(SpriteObject) mySprite;
+			if (myObject.getType().toUpperCase().equals(SpriteType.ENEMY.name())){
+				String myCode=myObject.getID()+"";
+				if (!myObject.getCode().equals("")){
+					myCode=myObject.getCode();
 				}
+				data.put(myCode,myCode);
+				if (!mySpriteData.containsKey(myCode))
+					mySpriteData.put(myCode, new ArrayList<SpriteObject>());
+				mySpriteData.get(myCode).add(myObject);
 			}
 		}
-
 	}
 
 }

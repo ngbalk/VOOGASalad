@@ -3,9 +3,9 @@ package com.print_stack_trace.voogasalad;
 import java.awt.Dimension;
 
 import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.controller.guiElements.AbstractSplashScreen;
-import com.print_stack_trace.voogasalad.controller.guiElements.AuthorSplashScreen;
-import com.print_stack_trace.voogasalad.controller.guiElements.GameAuthorSplashScreen;
+import com.print_stack_trace.voogasalad.controller.guiElements.splashScreen.AbstractSplashScreen;
+import com.print_stack_trace.voogasalad.controller.guiElements.splashScreen.AuthorSplashScreen;
+import com.print_stack_trace.voogasalad.controller.guiElements.splashScreen.GameAuthorSplashScreen;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.application.Application;

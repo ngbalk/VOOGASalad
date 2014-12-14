@@ -3,9 +3,9 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.s
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputDropDownMenu;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 public abstract class SpriteUserInputDropDown extends UserInputDropDownMenu{

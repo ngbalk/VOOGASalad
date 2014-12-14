@@ -1,6 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.goal;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GoalObject;
 
 
 public class GoalPoints extends GoalCharacteristicController {

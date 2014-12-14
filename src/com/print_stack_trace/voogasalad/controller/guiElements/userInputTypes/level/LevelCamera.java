@@ -1,8 +1,8 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.level;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.ResourceReader;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputDropDownMenu;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
 

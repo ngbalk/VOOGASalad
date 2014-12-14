@@ -2,10 +2,10 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.s
 
 import java.util.HashMap;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.ResourceReader;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputDropDownMenu;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
 import javafx.scene.Group;

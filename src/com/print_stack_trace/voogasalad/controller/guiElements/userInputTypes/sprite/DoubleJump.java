@@ -5,10 +5,10 @@ import javafx.scene.control.TextField;
 
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.ResourceReader;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputDropDownMenu;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 
 public class DoubleJump extends SpriteUserInputDropDown{
 	public DoubleJump(String[] values,  double width, double height, double x, double y, GameObject object){

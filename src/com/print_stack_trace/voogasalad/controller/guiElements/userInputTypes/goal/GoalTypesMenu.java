@@ -4,12 +4,17 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.ResourceReader;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputDropDownMenu;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputType;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GoalObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputType;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
+
+
+
+
 
 
 

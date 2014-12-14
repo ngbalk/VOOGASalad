@@ -2,8 +2,8 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.s
 
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,7 +23,7 @@ public class SpriteYController extends SpriteCharacteristicController{
 		catch(NumberFormatException e){
 			
 		}
-		((SpriteObject)mySprite).setMyY(newYValue);
+		((SpriteObject)mySprite).setSpriteY(newYValue);
 	}
 	@Override
 	protected void populateDefaultText() {

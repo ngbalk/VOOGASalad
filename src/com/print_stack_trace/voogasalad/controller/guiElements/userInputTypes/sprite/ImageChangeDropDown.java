@@ -13,10 +13,10 @@ import javafx.scene.image.Image;
 
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.ResourceReader;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputDropDownMenu;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 
 public class ImageChangeDropDown extends SpriteUserInputDropDown{
 	public ImageChangeDropDown(String[] values,  double width, double height, double x, double y, GameObject object){
@@ -28,10 +28,7 @@ public class ImageChangeDropDown extends SpriteUserInputDropDown{
 		Iterator<String> myValue=Arrays.asList(this.split(data.get(image))).iterator();
 		currentMenu.setText(myValue.next());
 		String imgPath=myValue.next();
-		Image imageLinked=new Image(imgPath);
-		mySprite.getImage().setImage(imageLinked);
-		mySprite.setImagePath(imgPath);
-		((SpriteObject)mySprite).getCharacteristics().setImage(imageLinked);
+		mySprite.setImage(imgPath);
 		mySprite.getDelegate().update((SpriteObject)mySprite);
 
 	}

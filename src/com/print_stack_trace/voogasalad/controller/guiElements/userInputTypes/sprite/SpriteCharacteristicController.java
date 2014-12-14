@@ -1,9 +1,9 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.sprite;
 
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.SpriteObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputText;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputText;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 
 import javafx.beans.property.SimpleDoubleProperty;

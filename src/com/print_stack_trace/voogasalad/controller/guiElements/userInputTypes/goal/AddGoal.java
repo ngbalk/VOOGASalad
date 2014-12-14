@@ -1,7 +1,8 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.goal;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.GameObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.UserInputType;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GoalObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputType;
 
 import javafx.scene.control.Button;
 
