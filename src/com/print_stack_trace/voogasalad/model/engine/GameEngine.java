@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -188,7 +189,7 @@ public class GameEngine {
     //GAME PLAYER
 
     public Map<Integer, SpriteCharacteristics> getSpriteMap(){
-        return currentLevel.getSpriteMap();
+        return Collections.unmodifiableMap(currentLevel.getSpriteMap());
     }
     public LevelCharacteristics getLevelCharacteristics(){
         return currentLevel.getLevelCharacteristics();
@@ -209,10 +210,10 @@ public class GameEngine {
         try {
             highScores = (Map<String, HighScore>) gameData.getObject("HighScores", highScores.getClass());
         } catch (IOException e) {
-        	//Someone forgot to handle this error. This is a patch to fix this without breaking the program.
+            
         	highScores = new HashMap<String, HighScore>();
         }
-        return highScores;
+        return Collections.unmodifiableMap(highScores);
     }
 
     public EventHandler<KeyEvent> getRuntimeKeyPressHandler() {

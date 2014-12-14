@@ -49,7 +49,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         goalFactory = new GoalFactory();
         goalMap = new HashMap<>();
         populateGoalMap();
-        cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
+        cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().getCameraType());
         this.viewport = viewport;
     }
     
@@ -66,7 +66,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         goalFactory = new GoalFactory();
         goalMap = new HashMap<>();
         populateGoalMap();
-        cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
+        cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().getCameraType());
     }
 
     //-------------------PUBLIC METHODS-------------------//
@@ -97,9 +97,9 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
             g.acceptChecker(goalChecker);
             if(g.isCompleted)completedCount++;
         }
-        int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
+        int reqGoals = runtimeModel.getLevelCharacteristics().getRequiredNumberOfGoals();
         if (reqGoals > 0) {
-            if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+            if(completedCount >= runtimeModel.getLevelCharacteristics().getRequiredNumberOfGoals()) {
 
                 runtimeModel.gameOver = true;
                 runtimeModel.gameVictory = true;

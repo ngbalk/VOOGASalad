@@ -14,7 +14,7 @@ public class Points extends Goal implements GoalElement{
     
     @Override
     protected void setGoalProperties() {
-    	reqPoints = myGoalCharacteristics.myPointTotal;
+    	reqPoints = myGoalCharacteristics.getPointsTotal();
         
     }
 

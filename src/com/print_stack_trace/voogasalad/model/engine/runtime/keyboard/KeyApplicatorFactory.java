@@ -4,9 +4,9 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 
 public class KeyApplicatorFactory {
 	
-	public static final int V_KEY_CONSTANT = 30;
-	public static final int H_KEY_CONSTANT = 20;
-	public static final int V_TERMINAL_VELOCITY = 50;
+	private static final int V_KEY_CONSTANT = 30;
+	private static final int H_KEY_CONSTANT = 20;
+	private static final int V_TERMINAL_VELOCITY = 50;
 
 
 	
