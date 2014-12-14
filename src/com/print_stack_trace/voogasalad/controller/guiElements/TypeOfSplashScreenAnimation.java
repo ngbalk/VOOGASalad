@@ -1,6 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.guiElements;
 
-import com.print_stack_trace.voogasalad.utilities.Reflection;
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 
 import javafx.scene.Group;
 

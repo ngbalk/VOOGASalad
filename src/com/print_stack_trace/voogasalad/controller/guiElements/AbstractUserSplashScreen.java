@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import com.print_stack_trace.voogasalad.utilities.Reflection;
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

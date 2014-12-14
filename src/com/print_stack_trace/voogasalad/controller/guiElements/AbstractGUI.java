@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
-import com.print_stack_trace.voogasalad.utilities.Reflection;
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
