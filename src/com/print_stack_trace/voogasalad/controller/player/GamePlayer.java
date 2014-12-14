@@ -124,7 +124,7 @@ public class GamePlayer implements ViewController {
 		myPlayPane.toBack();
 		myGameRoot = new Group(myPlayPane); 
 		myRoot.getChildren().add(myGameRoot);
-		//myRoot.getChildren().add(myHud);
+		myRoot.getChildren().add(myHud);
 		myHud.setTranslateY(40);
 
 		KeyFrame frame = start();
@@ -347,7 +347,7 @@ public class GamePlayer implements ViewController {
 	}
 	
 	public void startNewGame() {
-            myRoot.getChildren().add(myHud);
+		//myRoot.getChildren().add(myHud);
 	    myGameEngine.startNewGame();
 	}
 }
