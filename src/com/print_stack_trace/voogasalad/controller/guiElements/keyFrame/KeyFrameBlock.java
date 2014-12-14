@@ -14,6 +14,7 @@ public class KeyFrameBlock extends Rectangle{
 	private String myName;
 	private int myIndex;
 	private File myImagePath;
+	
 	public KeyFrameBlock(File imgPath,Image image, String name, int index){
 		myImage =image;
 		myName=name;
