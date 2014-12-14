@@ -18,11 +18,28 @@ import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerato
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
-
+/**
+ * @author Ethan Chang, Jack Baskin, Nick Widmaier
+ * 
+ * Implementation of IGameAuthorEngine to be used for our game
+ * engine. The class contains a list of all the possible levels
+ * as well as a stored current level so assets can be modified
+ * directly. Additionally, enumerations for the types of sprites
+ * and camera types can be found in this class. Since the game engine
+ * calls upon the methods in GameAuthorEngine to update the characteristics
+ * of sprites, we have analogous methods to those in the GameEngine for updating
+ * sprites and setting the physics engine to use.
+ */
 public class GameAuthorEngine implements IGameAuthorEngine {
 	
 	private GameWorldModel gameWorldModel;
-
+    /**
+     * Contains potential sprite types that the user can select
+     * for their sprites. Using an enumeration allows for lists in
+     * the front end to be updated dynamically as items are added
+     * to the enumeration.
+     *
+     */
 	public enum SpriteType {
 		HERO,
 		ENEMY,
@@ -30,7 +47,10 @@ public class GameAuthorEngine implements IGameAuthorEngine {
 		OBSTACLE,
 		REWARD
 	}
-
+    /**
+     * Constructor for GameAuthorEngine, initializes
+     * all of the objects needed and adds an initial level.
+     */
 	public GameAuthorEngine(){
 		gameWorldModel = new GameWorldModel();
 	}

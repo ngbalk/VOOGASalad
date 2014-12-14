@@ -1,7 +1,8 @@
 /**
- * @author 
+ * @author Ethan Chang, Pranava Raparla
  * Date Created: 12/02/14
  * Date Modified: 12/06/14
+ * Hold all levels in the game and provides the logic for switching levels.
  */
 
 package com.print_stack_trace.voogasalad.model.engine.authoring;
@@ -60,6 +61,12 @@ public class GameWorldModel {
         levelMap.put(id, levelModel);
     }
     
+    /**
+     * Adds a new level to the gameworld by adding it to a map where the id is mapped
+     * to the level's characteristics
+     * @param id
+     * @param levelCharacteristics
+     */
     public void addLevel(Integer id, LevelCharacteristics levelCharacteristics) {
         LevelModel levelModel = new LevelModel();
         if(id != 1)
@@ -95,6 +102,11 @@ public class GameWorldModel {
         return false;
     }
 
+    /**
+     * Begins a new game by initializing setting the gmeworld to be at the lowest possible
+     * index of hte game
+     * @return
+     */
     public LevelModel startNewGame() {
         currentLevelIndex = FIRST_LEVEL_INDEX;
         return levelMap.get(currentLevelIndex);

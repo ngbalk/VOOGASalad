@@ -1,6 +1,8 @@
 /**
+ * @author Ethan Chang, Pranava Raparla
  * Date Created: 12/02/14
  * Date Modified: 12/06/14
+ * Contains general information to describe the game we create
  */
 
 package com.print_stack_trace.voogasalad.model;
