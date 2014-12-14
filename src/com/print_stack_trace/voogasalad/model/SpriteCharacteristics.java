@@ -169,7 +169,7 @@ public class SpriteCharacteristics {
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Image couldn't be uploaded");
+				System.out.println(e.getMessage());
 			}
 			
     	}

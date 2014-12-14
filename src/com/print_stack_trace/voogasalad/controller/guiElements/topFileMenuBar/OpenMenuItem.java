@@ -40,7 +40,6 @@ public class OpenMenuItem extends AbstractMenuItem{
 				.getGameWorldCharacteristics();
 		Map<Integer, LevelModel> levelMap = gameWorldModel.getLevelMap();
 		for (LevelModel level : levelMap.values()) {
-			System.out.println("YP");
 			loadLevel(level);
 		}
 	}

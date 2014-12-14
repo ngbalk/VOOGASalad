@@ -18,6 +18,4 @@ public class GameName extends GameCharacteristicController{
 		((GameWorldObject)mySprite).getCharacteristics().setGameTitle(newValue);
 		mySprite.update();
 	}
-	
-
 }
