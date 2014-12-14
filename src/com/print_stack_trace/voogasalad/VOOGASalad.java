@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.guiElements.splashScreen.AbstractSplashScreen;
 import com.print_stack_trace.voogasalad.controller.guiElements.splashScreen.AuthorSplashScreen;
-import com.print_stack_trace.voogasalad.controller.guiElements.splashScreen.GameAuthorSplashScreen;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.application.Application;
@@ -22,16 +21,15 @@ public abstract class VOOGASalad extends Application {
 	@Override
 	public void start(Stage arg0) throws Exception {
 		mainStage = arg0;
-		
 		GameEngine gameEngine = new GameEngine(new Dimension((int)getWidth(), (int)getHeight()));
-		ViewController authorGUI = getMainGUI();
+		ViewController authorGUI = getMainGUI(mainStage);
 		Scene scene = new Scene(authorGUI.initialize(gameEngine), getWidth(), getHeight());
 		AuthorSplashScreen mySplashScreen=new AuthorSplashScreen(DEFAULT_SPLASH_SCREEN, getWidth(), getHeight(), e->start(scene));
 		mainStage.setScene(mySplashScreen.getScene());
 		mainStage.show();
 	}
 	
-	public abstract ViewController getMainGUI();
+	public abstract ViewController getMainGUI(Stage s);
 	
 	public double getWidth() {
 		return DEFAULT_WIDTH;

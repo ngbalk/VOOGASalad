@@ -20,4 +20,9 @@ public class ObjectOneDisappear extends CollisionHandler {
 		s1.flagForRemoval();
 	}
 
+    @Override
+    public boolean shouldStick (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        return true;
+    }
+
 }

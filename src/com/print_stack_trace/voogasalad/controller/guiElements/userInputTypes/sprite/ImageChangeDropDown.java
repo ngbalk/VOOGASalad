@@ -29,15 +29,9 @@ public class ImageChangeDropDown extends SpriteUserInputDropDown{
 		currentMenu.setText(myValue.next());
 		String imgPath=myValue.next();
 		mySprite.setImage(imgPath);
-		mySprite.getDelegate().update((SpriteObject)mySprite);
+		mySprite.update();
 
 	}
-
-	@Override
-	protected void observableFunction() {
-		loadInitial();
-	}
-
 
 	@Override
 	protected void loadData() {
@@ -60,7 +54,6 @@ public class ImageChangeDropDown extends SpriteUserInputDropDown{
 
 	@Override
 	protected Object getCharacteristicType() {
-		String path=((SpriteObject) mySprite).getCharacteristics().getImagePath();
-		return path;
+		return ((SpriteObject) mySprite).getCharacteristics().getImagePath();
 	}
 }

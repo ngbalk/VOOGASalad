@@ -11,13 +11,16 @@ public class BackgroundSplashImage extends SplashScreenObject {
 			Group group) {
 		super(source, width, height, group);
 		myView=new ImageView(new Image(source));
+		setUpImage(width, height);	
+	}
+	
+	private void setUpImage(double width, double height){
 		myNode=myView;
 		myView.setFitWidth(width);
 		myView.setFitHeight(height);
 		myView.setSmooth(true);
-		
 	}
-
+	
 	@Override
 	public boolean update() {
 		return false;

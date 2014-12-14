@@ -33,7 +33,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     private Map<Integer, Goal> goalMap;
     private CameraHandler cameraHandler;
     private Dimension viewport;
-   	private int completedGoalCount = 0;
+    private int completedGoalCount = 0;
 
 
     //-------------------CONSTRUCTORS-------------------//
@@ -73,6 +73,10 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
     private void getNextLevel() {
         currentLevel = gameWorld.getNextLevel();
+        if(currentLevel == null){
+            runtimeModel.gameTotallyOver = true;
+            return;
+        }
         createRuntimeState(currentLevel, viewport);
     }
     
@@ -96,6 +100,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
         if (reqGoals > 0) {
             if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+
                 runtimeModel.gameOver = true;
                 runtimeModel.gameVictory = true;
                 getNextLevel();
@@ -103,6 +108,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         }
 		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
 		if(gameOver(mainChar)){
+
 			runtimeModel.gameOver = true;
 			runtimeModel.gameVictory = false;
 		}
@@ -142,6 +148,16 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
 
 	//-------------------PRIVATE METHODS-------------------//
+    
+    private void winGame() {
+    	runtimeModel.gameOver = true;
+        runtimeModel.gameVictory = true;
+    }
+    
+    private void loseGame() {
+    	runtimeModel.gameOver = true;
+        runtimeModel.gameVictory = false;
+    }
 
 	//Sprites move around even when this method is commented out
 	//why is that? this method should be the one controlling movement
@@ -173,7 +189,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	}
 	    
 	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
-	    if(mainChar == null) return false;
+	    if(mainChar == null) return true;
 	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
                     
 	}

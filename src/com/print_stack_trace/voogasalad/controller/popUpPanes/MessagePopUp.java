@@ -22,11 +22,8 @@ public class MessagePopUp extends Stage{
 	protected double width=400;
 	protected double height=200;
 	private String dropDownString="";
+	private static String DEFAULT_STYLE="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
 	public MessagePopUp(String style){
-		this();
-		myMessagePane.getStylesheets().add(style);
-	}
-	public MessagePopUp() {
 		myMessagePane=new Pane();
 		myMessagePane.setStyle("-fx-background-color: BLACK");
 		myMessagePane.setPrefSize(width, height);
@@ -35,11 +32,16 @@ public class MessagePopUp extends Stage{
 		Scene myScene=new Scene(myMessagePane, width, height);
 		setScene(myScene);
 		makeMessage("");
-		
+		myMessagePane.getStylesheets().add(style);
 	}
+	public MessagePopUp() {
+		this(DEFAULT_STYLE);
+	}
+
 	protected void add(Node toAdd){
 		myMessagePane.getChildren().add(toAdd);
 	}
+
 	protected void makeMessage(String message){
 		Label myLabel=new Label();
 		myLabel.setText(message);
@@ -53,9 +55,11 @@ public class MessagePopUp extends Stage{
 		makeMessage(message);
 		showStage();
 	}
+
 	protected void showStage(){
 		showAndWait();
 	}
+
 	public String showInputDialog(String message){
 		TextField myTextField=new TextField();
 		myTextField.relocate(0, height/2);
@@ -67,12 +71,13 @@ public class MessagePopUp extends Stage{
 				}
 			}
 		});
+
 		add(myTextField);
 		makeMessage(message);
 		showStage();
 		return myTextField.getText();
 	}
-	
+
 	public String showDropDownDialog(String message, String[] options){
 		MenuBar bar=new MenuBar();
 		bar.relocate(0, height/2);
@@ -83,8 +88,7 @@ public class MessagePopUp extends Stage{
 			item.setOnAction(e->{
 				dropDownString=item.getText();
 				close();
-			}
-					);
+			});
 			menuName.getItems().add(item);
 		}
 		bar.getMenus().add(menuName);

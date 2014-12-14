@@ -18,59 +18,69 @@ public abstract class UserInputDropDownMenu extends UserInputType{
 	protected Menu currentMenu=new Menu("\t\t\t");
 	protected HashMap<String, CheckMenuItem> menuMap=new HashMap<String, CheckMenuItem>();
 	public UserInputDropDownMenu(){
-		myNode=new MenuBar();
-		myMenuBar=(MenuBar)myNode;
-		myMenuBar.getMenus().add(currentMenu);
-		this.makeInitialNode();
+		setUpDropDownMenu();
+		makeInitialNode();
 	}
+	
 	public UserInputDropDownMenu(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
+		setUpDropDownMenu();
+		mySprite=object;
+		this.makeInitialNode();
+	}
+	private void setUpDropDownMenu(){
 		myNode=new MenuBar();
 		myMenuBar=(MenuBar)myNode;
 		myMenuBar.getMenus().add(currentMenu);
-		mySprite=object;
-		this.makeInitialNode();
 	}
 	protected void setCurrent(String myName){
 		currentMenu.setText(myName);
 	}
+	
 	protected void addMenus(){
 		for (String menuName: data.keySet()){
 			addMenu(menuName);
 		}
 	}
+	
 	protected void addMenu(String menuName){
 		CheckMenuItem currentMenuItem=new CheckMenuItem(returnStringName(data.get(menuName)));
 		currentMenuItem.setOnAction(e->checkCorrectMenu(currentMenuItem,menuName));
 		menuMap.put(menuName, currentMenuItem);
-		this.currentMenu.getItems().add(currentMenuItem);
+		currentMenu.getItems().add(currentMenuItem);
 	}
+	
 	private String returnStringName(String value){
 		String toReturn = value;
 		if (canSplit(value))
 			toReturn=Arrays.asList(value.split(";")).iterator().next();
 		return toReturn;
 	}
+	
 	protected String[] split(String value){
 		return value.split(";");
 	}
+	
 	protected boolean canSplit(String value){
-		return (value.contains(";"));
+		return value.contains(";");
 	}
+	
 	protected void checkCorrectMenu(CheckMenuItem currentItem, String menuName){
 		for (MenuItem item: currentMenu.getItems()){
 			((CheckMenuItem)item).setSelected(false);
 		}
 		currentItem.setSelected(true);
-		this.linkMovement(menuName);
+		linkMovement(menuName);
 	}
+	
 	protected abstract void linkMovement(String dataValue);
+	
 	protected void checkSelectBox(String name){
 		menuMap.get(name).setSelected(true);
 		setCurrent(data.get(name));
 	}
+	
 	protected void uncheckSelectBox(String name){
 		menuMap.get(name).setSelected(false);
-
 	}
 }

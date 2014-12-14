@@ -13,7 +13,7 @@ import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.Level
 import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
-public class NextLevelProperty extends UserInputDropDownMenu{
+public class NextLevelProperty extends LevelProperty{
 	public NextLevelProperty (String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 		createDataMap();
@@ -26,31 +26,6 @@ public class NextLevelProperty extends UserInputDropDownMenu{
 
 
 	}
-	private void createDataMap(){
-
-		if (mySprite.getDelegate()!=null){
-			mySprite.getDelegate().currentLevelProperty().addListener(new ChangeListener<LevelObject>(){
-
-				@Override
-				public void changed(
-						ObservableValue<? extends LevelObject> arg0,
-						LevelObject arg1, LevelObject arg2) {
-					mySprite.getDelegate().actionToAllLevels((type)->addData(type));
-				}
-
-			});
-
-		}
-	}
-	private void addData(Object toAdd){
-		if (toAdd instanceof LevelObject){
-			LevelObject myObject=(LevelObject)toAdd;
-			data.put(myObject.getID()+"",myObject.getCharacteristics().getName());
-			addMenu(myObject.getID()+"");
-
-		}
-	}
-
 }
 
 

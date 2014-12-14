@@ -61,6 +61,8 @@ public class GameWorldModel {
     
     public void addLevel(Integer id, LevelCharacteristics levelCharacteristics) {
         LevelModel levelModel = new LevelModel();
+        if(id != 1)
+            levelModel.getPhysicsEngine().setDecisionMatrix(levelMap.get(id-1).getPhysicsEngine().getDecisionMatrix());
         levelCharacteristics.setID(id);
         levelModel.setLevelCharacteristics(levelCharacteristics);
     	levelMap.put(id, levelModel);
@@ -95,6 +97,10 @@ public class GameWorldModel {
     public LevelModel startNewGame() {
         currentLevelIndex = FIRST_LEVEL_INDEX;
         return levelMap.get(currentLevelIndex);
+    }
+    
+    public String toString() {
+    	return "Game-" + gameWorldCharacteristics.toString();
     }
 
 }

@@ -2,16 +2,16 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.g
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameWorldObject;
-import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.CharacteristicController;
 
-public class GameName extends GameCharacteristicController{
+public class GameName extends CharacteristicController{
 	public GameName(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 	}
 	
 	@Override
 	protected void populateDefaultText(){
-		myTextBox.setText(((GameWorldObject)mySprite).getCharacteristics().getGameTitle()+"");
+		myTextBox.setText(((GameWorldObject)mySprite).getCharacteristics().getName()+"");
 	}
 	@Override
 	protected void setCharacteristic(String newValue) {

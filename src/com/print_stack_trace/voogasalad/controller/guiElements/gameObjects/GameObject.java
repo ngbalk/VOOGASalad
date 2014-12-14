@@ -40,9 +40,16 @@ public abstract class GameObject {
 	}
 
 	public void setImage(String imgPath) {
-		myImage.setImage(new Image(imgPath));
-		myImagePath = imgPath;
-		setImageCharacteristics();
+		if (imgPath==null){
+			myImage.setImage(null);
+			myImagePath="";
+			setImageCharacteristics();
+		}
+		else{
+			myImage.setImage(new Image(imgPath));
+			myImagePath = imgPath;
+			setImageCharacteristics();
+		}
 	}
 
 	public String getImagePath() {
@@ -54,13 +61,13 @@ public abstract class GameObject {
 	public ViewObjectDelegate getDelegate() {
 		return myDelegate;
 	}
-	
+
 	public void setDelegate(ViewObjectDelegate delegate){
 		myDelegate=delegate;
 	}
-	
+
 	public abstract void update();
-	
+
 	public boolean isClicked() {
 		doubleclick = !doubleclick;
 		return doubleclick;
@@ -75,5 +82,5 @@ public abstract class GameObject {
 		if (isClicked()&&!((GeneralPane) myPane).isOpen())
 			((GeneralPane) myPane).openPane();
 	}
-	
+
 }

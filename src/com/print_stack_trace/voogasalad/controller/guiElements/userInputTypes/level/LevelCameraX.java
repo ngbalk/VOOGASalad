@@ -2,8 +2,10 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.l
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.CharacteristicController;
+import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
 
-public class LevelCameraX extends LevelCharacteristicController{
+public class LevelCameraX extends CharacteristicController{
 	
 	public LevelCameraX(String[] values, double width, double height, double x,
 			double y, GameObject object) {
@@ -23,7 +25,7 @@ public class LevelCameraX extends LevelCharacteristicController{
 			newXValue = Double.parseDouble(newValue);
 		}
 		catch(NumberFormatException e){
-			
+			new MessagePopUp().showMessageDialog("Not A Number");
 		}
 		((LevelObject)mySprite).getCharacteristics().setCameraX(newXValue);
 	}

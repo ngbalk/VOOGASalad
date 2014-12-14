@@ -27,8 +27,7 @@ public class SaveMenuItem extends AbstractMenuItem{
 		super(name);
 	}
 	public SaveMenuItem(String name, AbstractViewDelegate delegate, ViewObjectDelegate game){
-		super(name, delegate, game);
-		
+		super(name, delegate, game);	
 	}
 	@Override
 	public void doAction() {

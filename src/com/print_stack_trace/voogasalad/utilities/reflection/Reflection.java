@@ -1,4 +1,4 @@
-package com.print_stack_trace.voogasalad.utilities;
+package com.print_stack_trace.voogasalad.utilities.reflection;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;

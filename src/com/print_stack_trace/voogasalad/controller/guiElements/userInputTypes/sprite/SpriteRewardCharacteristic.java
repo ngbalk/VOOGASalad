@@ -3,27 +3,27 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.s
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
 
-public class SpriteRewardCharacteristic extends SpriteCharacteristicController{
+public class SpriteRewardCharacteristic extends NumberController{
 
 	public SpriteRewardCharacteristic(String[] values, double width,
 			double height, double x, double y, GameObject object) {
 		super(values, width, height, x, y, object);
 		// TODO Auto-generated constructor stub
 	}
-
-
 	@Override
 	protected void populateDefaultText() {
 		myTextBox.setText(((SpriteObject)mySprite).getCharacteristics().getValue()+"");
 	}
 	@Override
-	protected void setCharacteristic(String newValue) {
-		int newPointsValue = ((SpriteObject)mySprite).getCharacteristics().getValue();
-		try{
-			newPointsValue = Integer.parseInt(newValue);
-		}
-		catch(NumberFormatException e){
-		}
-		((SpriteObject)mySprite).getCharacteristics().setValue(newPointsValue);
+	protected Number getIntegerCharacteristic() {
+		return ((SpriteObject)mySprite).getCharacteristics().getValue();
+	}
+	@Override
+	protected Number parseNumber(String value) {
+		return Integer.parseInt(value);
+	}
+	@Override
+	protected void setCharacteristic(Number value) {
+		((SpriteObject)mySprite).getCharacteristics().setValue(value.intValue());
 	}
 }

@@ -19,8 +19,6 @@ public abstract class SplashScreenObject {
 		root=group;
 	}
 	public abstract boolean update();
-	public Node getNode(){
-		return myNode;
-	}
+	public Node getNode(){return myNode;}
 	public abstract void addEnd(EventHandler event);
 }

@@ -9,26 +9,26 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
-public class SpriteYController extends SpriteCharacteristicController{
+public class SpriteYController extends NumberController{
 	public SpriteYController(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
-	}
-	@Override
-	public void setCharacteristic(String newValue){
-	
-		double newYValue = ((SpriteObject)mySprite).getCharacteristics().getY();
-		try{
-			newYValue = Double.parseDouble(newValue);
-		}
-		catch(NumberFormatException e){
-			
-		}
-		((SpriteObject)mySprite).setSpriteY(newYValue);
 	}
 	@Override
 	protected void populateDefaultText() {
 		this.setObservable(((SpriteObject) mySprite).getObservableY());
 		
+	}
+	@Override
+	protected Number getIntegerCharacteristic() {
+		return ((SpriteObject)mySprite).getCharacteristics().getY();
+	}
+	@Override
+	protected Number parseNumber(String value) {
+		return Double.parseDouble(value);
+	}
+	@Override
+	protected void setCharacteristic(Number value) {
+		((SpriteObject)mySprite).setSpriteY(value.doubleValue());
 	}
 
 }

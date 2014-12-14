@@ -32,7 +32,6 @@ public abstract class GoalDropDownMenu extends UserInputDropDownMenu{
 			}
 		});
 	}
-
 	protected abstract void observableFunction();
 	protected void loadInitial(){
 		Object type=getCharacteristicType();
@@ -40,6 +39,7 @@ public abstract class GoalDropDownMenu extends UserInputDropDownMenu{
 			loadInitialFunction(menuItemName,type);
 		}
 	}
+	
 	protected abstract void loadInitialFunction(String name, Object type);
 	protected abstract void loadData();
 	protected abstract Object getCharacteristicType();

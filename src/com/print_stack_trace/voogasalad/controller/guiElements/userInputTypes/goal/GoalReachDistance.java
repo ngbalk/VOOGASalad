@@ -28,7 +28,7 @@ public class GoalReachDistance extends GoalCharacteristicController {
 			dest =Double.parseDouble(newValue);
 		}
 		catch(NumberFormatException e){
-
+			new MessagePopUp().showMessageDialog("NOT A NUMBER");
 		}
 		if (direction.equals("UP")){
 			((GoalObject) mySprite).getCharacteristics().setHorizontalDestination(false);
@@ -46,9 +46,7 @@ public class GoalReachDistance extends GoalCharacteristicController {
 			((GoalObject) mySprite).getCharacteristics().setHorizontalDestination(true);
 			((GoalObject)mySprite).getCharacteristics().setDestination(dest);
 		}		
-
-		mySprite.getDelegate().update((GoalObject) mySprite);
-
+		mySprite.update();
 	}
 
 	private String[] getResource(){

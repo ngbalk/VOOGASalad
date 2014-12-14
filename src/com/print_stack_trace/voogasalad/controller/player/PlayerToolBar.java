@@ -13,7 +13,7 @@ import javafx.scene.input.KeyEvent;
 
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
-import com.print_stack_trace.voogasalad.utilities.Reflection;
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 
 public class PlayerToolBar extends ToolBar {
 
@@ -40,7 +40,6 @@ public class PlayerToolBar extends ToolBar {
 				newClass.getClass().getMethod("setLabel", String.class).invoke(newClass, labelProp.get(key));
 				this.getItems().add((Node) newClass);
 			}
-			
 		} catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}

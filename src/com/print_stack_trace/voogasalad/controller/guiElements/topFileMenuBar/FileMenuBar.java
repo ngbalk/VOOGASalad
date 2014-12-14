@@ -1,13 +1,16 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.topFileMenuBar;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.AbstractViewDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ViewObjectDelegate;
+import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
 import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 
 import javafx.css.CssMetaData;
 import javafx.css.Styleable;
@@ -26,38 +29,26 @@ public class FileMenuBar extends MenuBar{
 	}
 
 	private void loadMenuItems(Menu menuName){
-		try {
-			Properties prop = new Properties();
-			InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/controller/guiResources/FileMenuBarNames.Properties");
-			prop.load(stream);
-			for(Object menuItemName : prop.keySet()){
-				String[] value=prop.getProperty((String) menuItemName).split(";");
-				if (value[0].equals(menuName.getText())){
-					Class menuItemClass=Class.forName(value[2]);
-					AbstractMenuItem myItem=(AbstractMenuItem) menuItemClass.getConstructor(String.class, AbstractViewDelegate.class, ViewObjectDelegate.class).newInstance(value[1], myDelegate, myGame);
-					menuName.getItems().add(myItem);
-				}
+		HashMap<String, String> resources=new ResourceReader
+				("./com/print_stack_trace/voogasalad/controller/guiResources/FileMenuBarNames.Properties").getProperties();
+		for(String menuItemName : resources.keySet()){
+			String[] value=resources.get(menuItemName).split(";");
+			if (value[0].equals(menuName.getText())){
+				new Reflection();
+				AbstractMenuItem myItem=(AbstractMenuItem) Reflection.createInstance(value[2],
+						value[1], myDelegate, myGame);
+				menuName.getItems().add(myItem);
 			}
-		}
-		catch (Exception e) {
-			new MessagePopUp().showMessageDialog("File for MENUBAR not Found");
 		}
 	}
 
 	private void loadMenuNames(){
-		try {
-			Properties prop = new Properties();
-			InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/controller/guiResources/FileBarMenu.Properties");
-			prop.load(stream);
-			for(Object menuName : prop.keySet()){
-				Menu myNewMenu=new Menu(prop.getProperty((String)menuName));
-				this.getMenus().add(myNewMenu);
-				loadMenuItems(myNewMenu);
-			}
+		HashMap<String, String> resources=new ResourceReader(
+				"./com/print_stack_trace/voogasalad/controller/guiResources/FileBarMenu.Properties").getProperties();
+		for(String name : resources.keySet()){
+			Menu myNewMenu=new Menu(resources.get(name));
+			getMenus().add(myNewMenu);
+			loadMenuItems(myNewMenu);
 		}
-		catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "File not Found");
-		}
-
 	}
 }
