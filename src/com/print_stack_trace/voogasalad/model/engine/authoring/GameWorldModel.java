@@ -98,5 +98,9 @@ public class GameWorldModel {
         currentLevelIndex = FIRST_LEVEL_INDEX;
         return levelMap.get(currentLevelIndex);
     }
+    
+    public String toString() {
+    	return "Game-" + gameWorldCharacteristics.toString();
+    }
 
 }
