@@ -24,15 +24,16 @@ public class OpenMenuItem extends AbstractMenuItem{
 	public OpenMenuItem(String name){
 		super(name);
 	}
+	
 	public OpenMenuItem(String name, AbstractViewDelegate delegate, ViewObjectDelegate game){
 		super(name, delegate, game);
 	}
+	
 	public void doAction() {
-		loadGame();
-		
+		loadGame();	
 	}
+	
 	public void loadGame() {
-		// load in level from game data
 		GameWorldModel gameWorldModel = loadGameWorldModelFromFile();
 		if (gameWorldModel == null)
 			return;
@@ -64,8 +65,6 @@ public class OpenMenuItem extends AbstractMenuItem{
 		loadGoalObjectsFromLevel(levelModel.getGoalMap());
 		myGame.setCamera(levelModel.getCameraType());
 		myGame.setPhysics(levelModel.getPhysicsEngine());
-
-		// TODO: add more here if necessary
 	}
 
 	private void loadLevelObjectFromLevel(
@@ -74,7 +73,6 @@ public class OpenMenuItem extends AbstractMenuItem{
 				levelCharacteristics.getBackgroundImagePath(), myGame,
 				levelCharacteristics);
 		myGame.addLevelToEngine(levelObject);
-		//myGameEngine.setCurrentLevel(levelTracker.getNumberOfLevels());
 		levelObject.update();
 		double width = myGame.getProgramWidth();
 		double height = myGame.getProgramHeight();
@@ -90,6 +88,7 @@ public class OpenMenuItem extends AbstractMenuItem{
 				levelObject.getImage().relocate(i * width, j * height);
 			}
 		}
+		
 		levelObject.update();
 	}
 
@@ -100,16 +99,15 @@ public class OpenMenuItem extends AbstractMenuItem{
 			SpriteObject spriteObject = (SpriteObject) myGame.createSpriteToBeAdded(imageView,
 					sc.getImagePath(),capitalize(sc.getObjectType().name()));
 			spriteObject.setCharacteristics(sc);
-			//spriteObject.getImage().relocate(sc.getX(), sc.getY());
 			spriteObject.initializeImage();
 			myGame.update(spriteObject);
-			//myGame.update(spriteObject.getId(),
-				//	spriteObject.getCharacteristics());
 		}
 	}
+	
 	private String capitalize(String caps){
 		return (caps.charAt(0)+"").toUpperCase()+(caps.substring(1).toLowerCase());
 	}
+	
 	private void loadGoalObjectsFromLevel(
 			Map<Integer, GoalCharacteristics> goalMap) {
 		for (GoalCharacteristics goalChars : goalMap.values()) {

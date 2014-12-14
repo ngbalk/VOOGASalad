@@ -10,12 +10,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public abstract class AbstractUserSplashScreen {
@@ -31,8 +26,12 @@ public abstract class AbstractUserSplashScreen {
 		this(resourceName, width, height, null);
 		
 	}
+	
+	public AbstractUserSplashScreen(Number width, Number height){
+		this ("", width, height);
+	}
+	
 	public AbstractUserSplashScreen(String resource, Number width, Number height, EventHandler event){
-		
 		this.initialize(width.doubleValue(), height.doubleValue());
 		myData=new ResourceReader(resource).getProperties();
 		myEvent=event;
