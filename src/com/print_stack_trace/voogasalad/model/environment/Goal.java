@@ -38,7 +38,7 @@ public abstract class Goal implements GoalElement {
      * Overridden by subclasses to include more variables to be set
      */
     protected void setGoalProperties() {
-        myGoalType = myGoalCharacteristics.myGoalType;
+        myGoalType = myGoalCharacteristics.getMyGoalType();
     }
     
     /**

@@ -17,6 +17,7 @@ public class PreviousLevelProperty extends LevelProperty{
 	protected void linkMovement(String dataValue) {
 		((LevelObject) mySprite).getCharacteristics().setPreviousLevel(Integer.parseInt(dataValue));
 		mySprite.update();
+		currentMenu.setText(dataValue);
 	}
 }
 

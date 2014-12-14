@@ -17,7 +17,7 @@ public class StayAlive extends Goal implements GoalElement{
     @Override
     protected void setGoalProperties() {
         super.setGoalProperties();
-        myHeroID = myGoalCharacteristics.myObjectID;
+        myHeroID = myGoalCharacteristics.getObjectID();
         
     }
 

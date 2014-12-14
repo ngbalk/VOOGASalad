@@ -112,7 +112,7 @@ public class SpriteObject extends GameObject{
 	}
 	
 	public String getCode(){
-		return this.getCharacteristics().getName();
+		return getCharacteristics().getName();
 	}
 	
 	public void setCharacteristics(SpriteCharacteristics characteristics){
@@ -138,16 +138,19 @@ public class SpriteObject extends GameObject{
 	public void initializeSprite(){
 		getCharacteristics().setHeight(getImage().getFitHeight());
 		getCharacteristics().setWidth(getImage().getFitWidth());
-	//	getCharacteristics().setX(getImage().getLayoutX());
-		//getCharacteristics().setY(getImage().getLayoutY());
 		getCharacteristics().setOrientation(
 				getImage().getRotate());
+	}
+	public void setLocation(){
+		xProp.setValue(getImage().getLayoutX());
+		yProp.setValue(getImage().getLayoutY());
+		getCharacteristics().setX(getImage().getLayoutX());
+		getCharacteristics().setY(getImage().getLayoutY());
 	}
 	public void initializeImage(){
 		getImage().setFitHeight(getCharacteristics().getHeight());
 		getImage().setFitWidth(getCharacteristics().getWidth());
 		getImage().setRotate(getCharacteristics().getOrientation());
-		
 		getImage().setX(getCharacteristics().getX());
 		getImage().setY(getCharacteristics().getY());
 	}

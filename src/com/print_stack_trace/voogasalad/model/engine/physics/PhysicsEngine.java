@@ -76,7 +76,7 @@ public class PhysicsEngine {
         for(RuntimeSpriteCharacteristics obj : allObjects) {
             obj.setDecelerationConstant(0.0f);
             obj.isColliding = obj.isCollidingHorizontally = obj.isCollidingVertically = false;
-            if(obj.interactive) soloHandler.applyPhysics(obj, framesPerSecond);
+            if(obj.isInteractive()) soloHandler.applyPhysics(obj, framesPerSecond);
         }
         
 
@@ -129,7 +129,7 @@ public class PhysicsEngine {
 
         for(int i = 0; i < array.length; i ++){
             RuntimeSpriteCharacteristics sprite = (RuntimeSpriteCharacteristics) array[i];
-            if(sprite.objectType.equals(SpriteType.ENEMY) && sprite.enemyPatrols){
+            if(sprite.getObjectType().equals(SpriteType.ENEMY) && sprite.enemyPatrols){
                 patrolEnemy(sprite);
             }
         }
@@ -138,23 +138,23 @@ public class PhysicsEngine {
     private void patrolEnemy(RuntimeSpriteCharacteristics enemy){
         if(enemy.isCollidingHorizontally) enemy.isPatrollingLeft = !enemy.isPatrollingLeft;
         if(enemy.isPatrollingLeft){
-            enemy.setX(enemy.getX() + enemy.startingSpeed);
+            enemy.setX(enemy.getX() + enemy.getStartingSpeed());
         }
         else{
-            enemy.setX(enemy.getX() + -enemy.startingSpeed);
+            enemy.setX(enemy.getX() + -enemy.getStartingSpeed());
         }
     }
 
     private void stickSpriteToSide(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2){
 
-        //		ugly fixes!!!
-        if((s2.objectType.equals(SpriteType.HERO) || s2.objectType.equals(SpriteType.ENEMY))
-                && s1.objectType.equals(SpriteType.PLATFORM)){
+        
+        if((s2.getObjectType().equals(SpriteType.HERO) || s2.getObjectType().equals(SpriteType.ENEMY))
+                && s1.getObjectType().equals(SpriteType.PLATFORM)){
             RuntimeSpriteCharacteristics copys1 = s1;
             s1 = s2;
             s2 = copys1;
         }
-        if(s1.objectType.equals(s2.objectType)) return;
+        if(s1.getObjectType().equals(s2.getObjectType())) return;
 
 
         if(CollisionDetector.haveCollidedFromTop(s1, s2)){
@@ -213,7 +213,7 @@ public class PhysicsEngine {
     }
 
     private CollisionResult getResultOfCollision(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
-        return decisionMatrix[s1.objectType.ordinal()][s2.objectType.ordinal()];
+        return decisionMatrix[s1.getObjectType().ordinal()][s2.getObjectType().ordinal()];
     }
 
     public void setResultOfCollision(CollisionResult result, SpriteType s1, SpriteType s2) {

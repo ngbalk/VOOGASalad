@@ -10,17 +10,18 @@ import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.Level
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 
 public class ExtendDirection {
-	private LevelObject myLevel;
 	private LevelCharacteristics myLevelCharacteristics;
 	private ViewObjectDelegate myGame;
 	private Node myBackground;
 	public ExtendDirection(LevelObject level, ViewObjectDelegate gamePane, Node background){
-		myLevel=level;
 		myLevelCharacteristics=(level!=null)? level.getCharacteristics(): null;
 		myBackground=background;
 		myGame=gamePane;
 	}
 	
+	/**
+	 * Extend the Pane right with the background Node
+	 */
 	public void extendRight(){
 		if (!isLevelNull()){
 			int newHorizontalPaneCount = myLevelCharacteristics
@@ -33,7 +34,9 @@ public class ExtendDirection {
 					(view, horizontal, vertical)->extendHorizontal(view, horizontal, vertical));
 		}
 	}
-	
+	/**
+	 * Extend the Pane down with the background Node
+	 */
 	public void extendDown(){
 		if (!isLevelNull()){
 			int newVerticalPaneCount=myLevelCharacteristics
@@ -69,6 +72,10 @@ public class ExtendDirection {
 		}
 	}
 	
+	/**
+	 * Make a copy of a Node in the correct size/format
+	 * @return Node representing the background Image
+	 */
 	private Node duplicateBackgroundImage(){
 		if (myBackground instanceof ImageView){
 			ImageView backgroundImageView = (ImageView)myBackground;
