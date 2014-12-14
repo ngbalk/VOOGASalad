@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 
 public abstract class UserInputType  {
 	protected Node myNode=null;
-	protected String[] myValues;
 	protected GameObject mySprite;
 	protected ResourceReader myResourceReader;
 	protected double myWidth;
@@ -26,8 +25,9 @@ public abstract class UserInputType  {
 	protected Label myLabel;
 	protected String[] value;
 	protected String myStyle="./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
-	public UserInputType(){
-	}
+	
+	public UserInputType(){}
+	
 	public UserInputType(String[] values,  double width, double height, double x, double y, GameObject object){
 		mySprite=object;
 		value=values;
@@ -38,28 +38,40 @@ public abstract class UserInputType  {
 		myPanes.setPrefSize(myWidth, myHeight);
 		makeLabel(values[0], values[1], width, height, x, y);
 	}
+	
 	public Node getType(){
 		return myNode;
 	}
+	
 	public VBox getLabelAndType(){
 		return myPanes;
 	}
+	
 	protected void makeLabel(String name, String style, double width, double height, double x, double y){
 		root.add(new Pane());
 		Pane labelPane=root.get((root.size()-1));
-		myLabel=new Label("  "+name);
-		myLabel.getStylesheets().add(myStyle);
-		myLabel.getStyleClass().add(style);
-		myLabel.setPrefSize(myWidth, myHeight);
+		styleLabel(name, style);
+		styleAndAddPane(labelPane);
+	}
+	
+	private void styleAndAddPane(Pane labelPane){
 		labelPane.getChildren().add(myLabel);
 		labelPane.setPrefSize(myWidth, myHeight);
 		myPanes.setPrefSize(myWidth, root.size()*myHeight);
 		myPanes.getChildren().add(labelPane);
 	}
-	protected Node makeInitialNode(){
-		return makeNode(myNode);
-		
+	
+	private void styleLabel(String name, String style){
+		myLabel=new Label("  "+name);
+		myLabel.getStylesheets().add(myStyle);
+		myLabel.getStyleClass().add(style);
+		myLabel.setPrefSize(myWidth, myHeight);
 	}
+	
+	protected Node makeInitialNode(){
+		return makeNode(myNode);	
+	}
+	
 	protected Node makeNode(Node node){
 		node.relocate(myWidth*.5, myHeight*.25);
 		((Region) node).setPrefSize(myWidth*.4, myHeight*.2);
@@ -68,11 +80,10 @@ public abstract class UserInputType  {
 	}
 	
 	protected void makeLabel(String name, String style, double width, double height, double x, double y, UserInputType type){
-		
 		makeLabel(name, style, width, height, x, y);
-		this.makeNode(type.getType());
-		
+		makeNode(type.getType());
 	}
+	
 	public VBox getLabel(){
 		return myPanes;
 	}

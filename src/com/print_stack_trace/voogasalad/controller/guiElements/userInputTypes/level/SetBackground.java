@@ -14,7 +14,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 
 public class SetBackground extends UserInputDropDownMenu{
-
 	public SetBackground(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/controller/guiResources/LevelImages.Properties");
@@ -32,7 +31,7 @@ public class SetBackground extends UserInputDropDownMenu{
 		mySprite.getImage().setVisible(true);
 		((LevelObject) mySprite).getColorPane().setVisible(false);
 		((LevelObject)mySprite).getCharacteristics().setBackground(imageLinked);
-		mySprite.getDelegate().update((LevelObject)mySprite);
+		mySprite.update();
 		currentMenu.setText(imgName);
 	}
 	

@@ -11,36 +11,28 @@ import javafx.scene.layout.Pane;
 import javax.swing.JOptionPane;
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
 
 public class PaneChooser {
-		private Map<String, String> myTypes;
-		public PaneChooser(){
-			myTypes = new HashMap<String, String>();
-			createMap();
-		}
-		public Pane createPane(String myType, GameObject myObject){
-			if (myTypes.get(myType)==null){
-				return null;
-			}
-			System.out.println(myTypes.get(myType));
-			PopUpPane mySpecificType = new PopUpPane(myTypes.get(myType), myObject);
-			return mySpecificType;
-		}
-		private void createMap(){
-			try{
-				Properties prop = new Properties();
-				InputStream stream = getClass().getClassLoader().getResourceAsStream("./com/print_stack_trace/voogasalad/controller/guiResources/AllPaneTypes.Properties");
-				prop.load(stream);
-				for(Object typeName : prop.keySet()){
-					String values[]=prop.getProperty((String) typeName).split(";");
-					myTypes.put(values[0],  values[1]);
-				}
-			}
-			catch(Exception e){
-				JOptionPane.showMessageDialog(null, "Pane type not found");
-			}
+	private Map<String, String> myTypes;
+	public PaneChooser(){
+		myTypes = new HashMap<String, String>();
+		createMap();
+	}
+	
+	public Pane createPane(String myType, GameObject myObject){
+		return (myTypes.get(myType)==null)? null: new PopUpPane(myTypes.get(myType), myObject);
+	}
+	
+	private void createMap(){
+		HashMap<String, String> resource=new ResourceReader
+				("./com/print_stack_trace/voogasalad/controller/guiResources/AllPaneTypes.Properties").getProperties();
+		for(String typeName : resource.keySet()){
+			String values[]=resource.get(typeName).split(";");
+			myTypes.put(values[0],  values[1]);
 		}
 	}
-		
+}
+
 
 

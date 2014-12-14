@@ -21,11 +21,10 @@ public class LevelPhysics extends UserInputDropDownMenu {
 		ProgramPhysicEngine type=null;
 		for (ProgramPhysicEngine physics: ProgramPhysicEngine.values()){
 			if (physics.name().equals(dataValue));
-				this.setCurrent(data.get(dataValue));
+				setCurrent(data.get(dataValue));
 				type=physics;
 				mySprite.getDelegate().setPhysics(type);
 				break;
 		}	
 	}
-	
 }

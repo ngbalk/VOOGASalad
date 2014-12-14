@@ -13,8 +13,6 @@ public class UserInputText extends UserInputType{
 		super(values, width, height, x, y, object);
 		mySprite=object;
 		myNode=new TextField();
-		this.makeInitialNode();
-		
+		makeInitialNode();	
 	}
-
 }

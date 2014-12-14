@@ -25,12 +25,12 @@ public class BackgroundColorScheme extends UserInputType{
 		myNode= new ColorPicker();
 		mySprite=object;
 		((ColorPicker) myNode).setOnAction(e -> changeColor(((ColorPicker) myNode).getValue()));
-		this.makeInitialNode();
+		makeInitialNode();
 	}
 	private void changeColor(Color color){
 		((LevelObject) mySprite).setColorPane(Integer.toHexString(color.hashCode()));
 		((LevelObject) mySprite).getCharacteristics().setBackgroundColor(Integer.toHexString(color.hashCode()));
-		((LevelObject) mySprite).getDelegate().update((LevelObject)mySprite);
+		mySprite.update();
 	}
 	
 }

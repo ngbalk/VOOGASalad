@@ -5,10 +5,14 @@ import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameO
 public class NullInput extends UserInputType{
 	public NullInput(){
 		myNode=null;
+		setUpInput();
 	}
 	public NullInput(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 		mySprite=object;
+		setUpInput();
+	}
+	private void setUpInput(){
 		myNode=null;
 	}
 }

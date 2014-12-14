@@ -21,7 +21,7 @@ public class LevelCamera extends UserInputDropDownMenu{
 		CameraFactory.CameraType scroll=null;
 		for (CameraFactory.CameraType camera: CameraFactory.CameraType.values()){
 			if (camera.name().equals(dataValue));
-				this.setCurrent(data.get(dataValue));
+				setCurrent(data.get(dataValue));
 				scroll=camera;
 				mySprite.getDelegate().setCamera(camera);
 				break;
