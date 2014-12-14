@@ -147,7 +147,7 @@ public class LevelModel {
 	}
 
 	public Map<Integer, GoalCharacteristics> getGoalMap() {
-		return Collections.unmodifiableMap(goalMap);
+		return goalMap;
 	}
 
 
@@ -202,7 +202,7 @@ public class LevelModel {
 	}
 
 	public Map<Integer, SpriteCharacteristics> getSpriteMap() {
-		return Collections.unmodifiableMap(mySpriteMap);
+		return mySpriteMap;
 	}
 
 	public void setSpriteMap(Map<Integer, SpriteCharacteristics> spriteMap) {

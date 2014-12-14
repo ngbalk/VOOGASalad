@@ -63,7 +63,7 @@ public class RuntimeModel extends LevelModel {
 	 * @return spriteMap
 	 */
 	public Map<Integer, RuntimeSpriteCharacteristics> getRuntimeSpriteMap() {
-		return Collections.unmodifiableMap(runtimeSpriteMap);
+		return runtimeSpriteMap;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class RuntimeModel extends LevelModel {
 	 */
 	public Map<Integer,GoalCharacteristics> getGoalMap() {
 		//consider returning a string instead of the entire goal
-		return Collections.unmodifiableMap(goalMap);
+		return goalMap;
 	}
 
 }

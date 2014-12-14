@@ -189,7 +189,7 @@ public class GameEngine {
     //GAME PLAYER
 
     public Map<Integer, SpriteCharacteristics> getSpriteMap(){
-        return Collections.unmodifiableMap(currentLevel.getSpriteMap());
+        return currentLevel.getSpriteMap();
     }
     public LevelCharacteristics getLevelCharacteristics(){
         return currentLevel.getLevelCharacteristics();
@@ -213,7 +213,7 @@ public class GameEngine {
             
         	highScores = new HashMap<String, HighScore>();
         }
-        return Collections.unmodifiableMap(highScores);
+        return highScores;
     }
 
     public EventHandler<KeyEvent> getRuntimeKeyPressHandler() {

@@ -137,7 +137,7 @@ public class SpriteCharacteristics {
 		return img;
 	}
 	public Map<KeyResult, ArrayList<File>> getAnimations(){
-		return Collections.unmodifiableMap(myAnimations);
+		return myAnimations;
 	}
     public javafx.scene.image.Image getImage () {
         //BufferedImage bufferedImage = (BufferedImage) img;
@@ -281,7 +281,7 @@ public class SpriteCharacteristics {
 	}
 
 	public Map<KeyCode, KeyResult> getMovements(){
-		return Collections.unmodifiableMap(myMovements);
+		return myMovements;
 	}
 
 	public double getWidth(){
