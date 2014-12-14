@@ -1,6 +1,5 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.layout;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.AbstractViewDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ViewObjectDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.topFileMenuBar.FileMenuBar;
 

@@ -1,7 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.topFileMenuBar;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.AbstractViewDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ViewObjectDelegate;
+import com.print_stack_trace.voogasalad.controller.guiElements.layout.AbstractViewDelegate;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;

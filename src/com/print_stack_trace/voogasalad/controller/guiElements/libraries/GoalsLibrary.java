@@ -16,8 +16,6 @@ public class GoalsLibrary extends AbstractLibraryPane{
 
 	@Override
 	protected void loadAndAddData() {
-		//GoalObject myGameObject=new GoalObject("", (ViewObjectDelegate)this.myMainPane);
-
 		PopUpPane myPopUpPane=new PopUpPane(this.getPrefWidth(), this.getPrefHeight(),"GoalPane",
 				new GoalObject("",(ViewObjectDelegate) this.myMainPane));
 		myPopUpPane.close();
