@@ -101,7 +101,7 @@ public class PhysicsEngine {
                 copys2.v_y = s2.v_y;
                 this.moveSpritesForward(copys1, copys2, framesPerSecond);
                 if(CollisionDetector.haveCollided(copys1, copys2)) {
-                    stickSpriteToSide(s1,s2);
+                    stickIfNeeded(s1,s2);
                     collisionHandler(s1, s2, currentRuntime);
 
                 }	
@@ -115,6 +115,15 @@ public class PhysicsEngine {
         }
         allObjects.removeAll(toRemove);
 
+    }
+
+    private void stickIfNeeded (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        CollisionResult result = getResultOfCollision(s1, s2);
+        CollisionHandler handler = getHandlerForResult(result);
+        if(handler.shouldStick(s1, s2)){
+            stickSpriteToSide(s1, s2);
+        }
+        
     }
 
     private void performEnemyAI(Object[] array) {
