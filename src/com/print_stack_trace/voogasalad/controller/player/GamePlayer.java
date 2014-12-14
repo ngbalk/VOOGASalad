@@ -61,6 +61,15 @@ import com.print_stack_trace.voogasalad.utilities.fileloading.FileLoadUtility;
 import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 import com.print_stack_trace.voogasalad.utilities.twillio.PSTTwillioCore;
 
+/*
+ * This file runs the GamePlayer and contains the game loop that updates
+ * the engine and the view every iteration.
+ * 
+ * @author Daniel M
+ * @author Nick B
+ * @author Petra R
+ */
+
 public class GamePlayer implements ViewController {
     private static final String DEFAULT_WIN_SCREEN="./com/print_stack_trace/voogasalad/"
                     + "controller/guiResources/WinSplashScreen.Properties";
@@ -115,7 +124,7 @@ public class GamePlayer implements ViewController {
 		myPlayPane.toBack();
 		myGameRoot = new Group(myPlayPane); 
 		myRoot.getChildren().add(myGameRoot);
-		//myRoot.getChildren().add(myHud);
+		myRoot.getChildren().add(myHud);
 		myHud.setTranslateY(40);
 
 		KeyFrame frame = start();
@@ -255,11 +264,6 @@ public class GamePlayer implements ViewController {
 		//this.myPlayPane.getChildren().add(currentSpriteImageView);
 	}
 	
-	private void updateViewPort(){
-		//myPlayPane
-	}
-
-
 	/*** 
 	 * calls gameEngine to update Score;; need to hash out out we handle scores/coins
 	 */
@@ -270,15 +274,12 @@ public class GamePlayer implements ViewController {
 
 	public void pauseGame(){ //buttons with handlers
 		isPlaying = false;
-		//		gameEngine.pause();
-		//if gameplayer is the gameloop --> timeline.stop();
 	}
 
 	public void resumeGame(){ //buttons with handlers
 		isPlaying = true;
-		//gameEngine.resume();
-		//timeline.resume();
 	}
+	
 	public void saveGame(){   
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Level");
@@ -346,7 +347,7 @@ public class GamePlayer implements ViewController {
 	}
 	
 	public void startNewGame() {
-            myRoot.getChildren().add(myHud);
+		//myRoot.getChildren().add(myHud);
 	    myGameEngine.startNewGame();
 	}
 }

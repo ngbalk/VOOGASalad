@@ -13,6 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+/*
+ * Item that can be dragged around authoring environment for repositioning.
+ */
+
 public class DraggableItem {
 	private SpriteObject myItem;
 	private double myX;
