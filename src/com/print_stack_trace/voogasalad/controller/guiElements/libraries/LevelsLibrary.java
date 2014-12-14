@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class LevelsLibrary extends PictureLibrary{
-	HashSet<ImageView> onGamePane=new HashSet<ImageView>();
+	private HashSet<ImageView> onGamePane=new HashSet<ImageView>();
 	public LevelsLibrary(Number width, Number height, Pane otherPane) {
 		super(width, height, otherPane);
 		myResources="./com/print_stack_trace/voogasalad/controller/guiResources/LevelImages.Properties";

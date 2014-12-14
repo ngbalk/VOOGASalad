@@ -6,8 +6,8 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.AbstractViewDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ViewObjectDelegate;
+import com.print_stack_trace.voogasalad.controller.guiElements.layout.AbstractViewDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
 import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
 import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;

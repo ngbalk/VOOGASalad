@@ -10,14 +10,17 @@ import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.Level
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 
 public class ExtendDirection {
+	private LevelObject myLevel;
 	private LevelCharacteristics myLevelCharacteristics;
 	private ViewObjectDelegate myGame;
 	private Node myBackground;
 	public ExtendDirection(LevelObject level, ViewObjectDelegate gamePane, Node background){
+		myLevel=level;
 		myLevelCharacteristics=(level!=null)? level.getCharacteristics(): null;
 		myBackground=background;
 		myGame=gamePane;
 	}
+	
 	public void extendRight(){
 		if (!isLevelNull()){
 			int newHorizontalPaneCount = myLevelCharacteristics
@@ -30,9 +33,10 @@ public class ExtendDirection {
 					(view, horizontal, vertical)->extendHorizontal(view, horizontal, vertical));
 		}
 	}
+	
 	public void extendDown(){
 		if (!isLevelNull()){
-			int newVerticalPaneCount =myLevelCharacteristics
+			int newVerticalPaneCount=myLevelCharacteristics
 					.incrementVerticalPaneCount();
 			int currentHorizontalPaneCount = myLevelCharacteristics
 					.getHorizontalPaneCount();
@@ -42,8 +46,8 @@ public class ExtendDirection {
 					(view, horizontal, vertical)->extendVertical(view, horizontal, vertical));
 		}
 	}
-	public void extendUp() {
-		//TODO: IMPLEMENT THIS
+	
+	public void extendUp() {//TODO: IMPLEMENT THIS
 	}
 
 	private void extendHorizontal(Node view, int horizontal, int vertical){
@@ -57,7 +61,6 @@ public class ExtendDirection {
 				* (horizontal-1), getHeight()
 				* (vertical - 1));
 	}
-
 	private void extend(int numToExtend, int notChanged, Extend toExtend){
 		for (int i = 1; i <= numToExtend; i++) {
 			Node copyView = duplicateBackgroundImage();
@@ -65,7 +68,7 @@ public class ExtendDirection {
 			myGame.addBackground(copyView);
 		}
 	}
-
+	
 	private Node duplicateBackgroundImage(){
 		if (myBackground instanceof ImageView){
 			ImageView backgroundImageView = (ImageView)myBackground;
@@ -83,27 +86,18 @@ public class ExtendDirection {
 		copyPane.setPrefSize(toCopy.getWidth(), toCopy.getHeight());
 		copyPane.setStyle(toCopy.styleProperty().getValue());
 		return copyPane;
-		
-
 	}
 	private boolean isLevelNull(){
 		return (myLevelCharacteristics!=null)? (myLevelCharacteristics.getBackgroundImagePath()==""):true;
 	}
-
+	
 	private double getHeight(){
-		if (myBackground instanceof ImageView){
-			return ((ImageView)myBackground).getFitHeight();
-		}
-		else
-			return ((Pane) myBackground).getPrefHeight();
+		return (myBackground instanceof ImageView)? ((ImageView)myBackground).getFitHeight(): 
+			((Pane) myBackground).getPrefHeight();
 	}
 
 	private double getWidth(){
-		if (myBackground instanceof ImageView){
-			return ((ImageView)myBackground).getFitWidth();
-		}
-		else
-			return ((Pane) myBackground).getPrefWidth();
+		return (myBackground instanceof ImageView)? ((ImageView)myBackground).getFitWidth()
+			: ((Pane) myBackground).getPrefWidth();
 	}
-
 }

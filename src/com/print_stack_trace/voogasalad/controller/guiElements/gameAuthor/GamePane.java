@@ -29,20 +29,16 @@ import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
-import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
-import com.print_stack_trace.voogasalad.model.environment.Goal;
+
 
 public class GamePane extends Pane implements ViewObjectDelegate {
 	private GameEngine myGameEngine;
-	private ImageView background;
 	private HashMap<String, HashSet<SpriteObject>> myData;
 	private SimpleObjectProperty<SpriteObject> changedSprite = new SimpleObjectProperty<SpriteObject>();
 	private LevelTracker levelTracker;
 	private SimpleDoubleProperty xVal = new SimpleDoubleProperty(0);
 	private SimpleDoubleProperty yVal = new SimpleDoubleProperty(0);
-	private ReadOnlyDoubleProperty scrollVValue=new SimpleDoubleProperty(0);
-	private ReadOnlyDoubleProperty scrollHValue=new SimpleDoubleProperty(0);
 	private String myStyle = "./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
 	private HashMap<String,String> myMessages;
 
@@ -197,7 +193,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	}
 
 	private void levelChange(LevelObject currentLevel) {
-		background = currentLevel.getImage();
 		levelTracker.setCurrentLevel(currentLevel);
 		levelTracker.clearNonActiveLevels((type)->this.getChildren().remove(type),
 				(type)->this.getChildren().add((Node)type));
@@ -313,11 +308,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	}
 	public Node getBackgroundPane(){
 		return this.getChildren().get(0);
-	}
-	public void addScrollBarValues(ReadOnlyDoubleProperty vValue, ReadOnlyDoubleProperty hValue){
-		this.scrollHValue=hValue;
-		this.scrollVValue=vValue;
-		
 	}
 
 }

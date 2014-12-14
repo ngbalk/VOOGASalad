@@ -1,15 +1,11 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.layout;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.AbstractViewDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.libraries.MultipleLibraryPane;
 
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 public class MultipleLibraryLayoutNode extends AbstractLayoutNode{
-	
-	
-	
 	public MultipleLibraryLayoutNode(double width, double height, Node toBeLinked,Object engine, AbstractViewDelegate delegate) {
 		super(width,height,toBeLinked,engine, delegate);
 	}

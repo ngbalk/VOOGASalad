@@ -3,11 +3,7 @@ package com.print_stack_trace.voogasalad.controller.guiElements.resourceReader;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
-
-import javax.swing.JOptionPane;
-
 import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
-
 public class ResourceReader {
 	private HashMap<String, String> myProperties=new HashMap<String, String>();
 	public ResourceReader(String resource){
@@ -23,7 +19,6 @@ public class ResourceReader {
 			new MessagePopUp().showMessageDialog(resource+ "file not found");
 		}
 	}
-	
 	public HashMap<String, String> getProperties(){
 		return myProperties;
 	}
