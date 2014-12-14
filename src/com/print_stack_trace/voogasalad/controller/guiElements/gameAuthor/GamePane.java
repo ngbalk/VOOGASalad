@@ -2,27 +2,19 @@ package com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableSet;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 
 import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.DraggableItem;
-import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameWorldObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GoalObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
@@ -30,14 +22,9 @@ import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.Sprit
 import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.BlankSpaceTextChecker;
 import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
 import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
-import com.print_stack_trace.voogasalad.model.GameWorldCharacteristics;
-import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
-import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameWorldModel;
-import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
@@ -120,7 +107,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		SpriteObject myGameObject = new SpriteObject(0, imagePath, type, this);
 		myGameObject.initializeSprite();
 		DraggableItem copyNode = new DraggableItem(myGameObject, this.prefWidthProperty(),
-				this.prefHeightProperty(), scrollHValue, scrollVValue, xVal, yVal);
+				this.prefHeightProperty(), xVal, yVal);
 		addSpriteToLevel(myGameObject);
 		return myGameObject;
 	}
@@ -270,8 +257,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		try {
 			myGameEngine.saveGame();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new MessagePopUp(myStyle).showMessageDialog(myMessages.get("saveGame"));
 		}
 	}
 	@Override
