@@ -127,6 +127,8 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 				newSprite.getImagePath(), newSprite.getType());
 		spriteOnBoard.setCharacteristics(newSprite.getCharacteristics());
 		spriteOnBoard.initializeImage();
+		removeSpriteObjects(spriteOnBoard);
+		myData.get(spriteOnBoard.getCode()).add(spriteOnBoard);
 	}
 
 	public boolean isReady() {
@@ -152,9 +154,9 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		if (new BlankSpaceTextChecker().checkText(spriteCode)) {
 			for (SpriteObject sprite : myData.get(spriteCode)) {
 				sprite.setCharacteristics(characteristics);
+				sprite.setLocation();
 				sprite.initializeSprite();
-				sprite.setImage(sprite.getImagePath());
-				//sprite.initializeImage();
+				sprite.setImage(sprite.getCharacteristics().getImagePath());
 				myGameEngine.updateObject(sprite.getID(),
 						sprite.getCharacteristics());
 			}
