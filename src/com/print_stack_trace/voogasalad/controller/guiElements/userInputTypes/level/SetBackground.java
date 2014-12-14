@@ -27,8 +27,7 @@ public class SetBackground extends UserInputDropDownMenu{
 		String imgName=nextValue.next();
 		String image=nextValue.next();
 		Image imageLinked=new Image(image);
-		mySprite.getImage().setImage(imageLinked);
-		mySprite.getImage().setVisible(true);
+		mySprite.setImage(image);
 		((LevelObject) mySprite).getColorPane().setVisible(false);
 		((LevelObject)mySprite).getCharacteristics().setBackground(imageLinked);
 		mySprite.update();

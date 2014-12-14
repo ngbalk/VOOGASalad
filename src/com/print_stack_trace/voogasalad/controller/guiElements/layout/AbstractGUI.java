@@ -22,8 +22,8 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 	private double myHeight;
 	private Node focusPane=new Pane();
 	protected String myStyle;
-	HashMap<String, String> locations=new HashMap<String, String>();
-	HashMap<LayoutNodeLocation, LayoutNode> layouts=new HashMap<LayoutNodeLocation, LayoutNode>();
+	private HashMap<String, String> locations=new HashMap<String, String>();
+	private HashMap<LayoutNodeLocation, LayoutNode> layouts=new HashMap<LayoutNodeLocation, LayoutNode>();
 	protected final static String DEFAULT_LAYOUT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/GUILayout.Properties";
 	public AbstractGUI(Number width, Number height){
 		setPrefSize(width.doubleValue(), height.doubleValue());
@@ -40,17 +40,15 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 		TOP,
 		BOTTOM
 	}
+	
 	private void createLayout(){
 		for (LayoutNodeLocation loc: LayoutNodeLocation.values()){
 			locations.put(loc.name(), null);
 		}
 	}
-
 	protected Node setCenterPane(Object engine){
-
 		focusPane=styleNode(createNode(LayoutNodeLocation.CENTER,locations.get(LayoutNodeLocation.CENTER.name()), engine));
 		ScrollBarPane myScroll=new ScrollBarPane(myWidth, myHeight, focusPane);
-		((GamePane) focusPane).addScrollBarValues(myScroll.hmaxProperty(), myScroll.hvalueProperty());
 		setBorderAndBackgroundStyle(focusPane);
 		return myScroll;
 	}
