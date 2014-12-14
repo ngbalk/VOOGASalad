@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.AbstractViewDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ViewObjectDelegate;
+import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameWorldObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GoalObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
@@ -18,6 +19,8 @@ import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 import com.print_stack_trace.voogasalad.model.SpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameWorldModel;
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
+import com.print_stack_trace.voogasalad.utilities.fileloading.FileLoadUtility;
+
 
 public class OpenMenuItem extends AbstractMenuItem{
 
@@ -37,8 +40,10 @@ public class OpenMenuItem extends AbstractMenuItem{
 		GameWorldModel gameWorldModel = loadGameWorldModelFromFile();
 		if (gameWorldModel == null)
 			return;
-		GameWorldCharacteristics gameWorldCharacteristics = gameWorldModel
-				.getGameWorldCharacteristics();
+		GameWorldCharacteristics gameWorldCharacteristics = gameWorldModel.getGameWorldCharacteristics();
+		GameWorldObject gameWorldObject = new GameWorldObject("", myGame);
+		gameWorldObject.setCharacteristics(gameWorldCharacteristics);
+		gameWorldObject.update();
 		Map<Integer, LevelModel> levelMap = gameWorldModel.getLevelMap();
 		for (LevelModel level : levelMap.values()) {
 			loadLevel(level);
@@ -46,12 +51,8 @@ public class OpenMenuItem extends AbstractMenuItem{
 	}
 
 	private GameWorldModel loadGameWorldModelFromFile() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Load Game");
-		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")
+		File file = FileLoadUtility.loadFile((System.getProperty("user.dir")
 				+ "/src/com/print_stack_trace/voogasalad/model/data/"));
-		Stage newStage = new Stage();
-		File file = fileChooser.showOpenDialog(newStage);
 		return (file != null)? (GameWorldModel)myGame.load(file):null;
 	}
 
@@ -66,7 +67,7 @@ public class OpenMenuItem extends AbstractMenuItem{
 		myGame.setCamera(levelModel.getCameraType());
 		myGame.setPhysics(levelModel.getPhysicsEngine());
 	}
-
+	
 	private void loadLevelObjectFromLevel(
 			LevelCharacteristics levelCharacteristics) {
 		LevelObject levelObject = new LevelObject(

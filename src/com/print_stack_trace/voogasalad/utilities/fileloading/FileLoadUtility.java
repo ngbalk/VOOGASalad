@@ -2,7 +2,7 @@
  * @author Pranava Raparla
  */
 
-package com.print_stack_trace.voogasalad.utilities;
+package com.print_stack_trace.voogasalad.utilities.fileloading;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

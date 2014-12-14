@@ -12,7 +12,7 @@ public class AddGoal extends UserInputType{
 		myNode=new Button();
 		((Button) myNode).setText("Add");
 		((Button) myNode).setOnAction(event->doAction());
-		this.makeInitialNode();
+		makeInitialNode();
 	}
 	public void doAction(){
 		if (((GoalObject) mySprite).getCharacteristics()!=null){
