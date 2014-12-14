@@ -33,7 +33,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     private Map<Integer, Goal> goalMap;
     private CameraHandler cameraHandler;
     private Dimension viewport;
-   	private int completedGoalCount = 0;
+    private int completedGoalCount = 0;
 
 
     //-------------------CONSTRUCTORS-------------------//
@@ -73,6 +73,10 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 
     private void getNextLevel() {
         currentLevel = gameWorld.getNextLevel();
+        if(currentLevel == null){
+            runtimeModel.gameTotallyOver = true;
+            return;
+        }
         createRuntimeState(currentLevel, viewport);
     }
     
@@ -173,7 +177,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	}
 	    
 	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
-	    if(mainChar == null) return false;
+	    if(mainChar == null) return true;
 	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
                     
 	}

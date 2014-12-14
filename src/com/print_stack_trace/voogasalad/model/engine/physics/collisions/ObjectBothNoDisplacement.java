@@ -22,4 +22,9 @@ public class ObjectBothNoDisplacement extends CollisionHandler {
         //s2.setDecelerationConstant(1.0f);
     }
 
+    @Override
+    public boolean shouldStick (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        return true;
+    }
+
 }

@@ -26,6 +26,7 @@ public class CollisionFactory {
 		ObjectTwoDisappear,
 		ObjectBothDisappear,
 		HeroDamageCollision,
+		ObjectOnePassThroughBottom,
 	};
 	
 	public enum UserDefinedCollisionParams {
@@ -86,6 +87,11 @@ public class CollisionFactory {
 					break;
 				}
 			}
+            @Override
+            public boolean shouldStick (RuntimeSpriteCharacteristics s1,
+                                        RuntimeSpriteCharacteristics s2) {
+                return true;
+            }
 		};
 	}
     

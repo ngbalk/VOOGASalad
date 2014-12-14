@@ -20,4 +20,9 @@ public class ObjectTwoDisappear extends CollisionHandler {
 		s2.flagForRemoval();
 	}
 
+    @Override
+    public boolean shouldStick (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        return true;
+    }
+
 }
