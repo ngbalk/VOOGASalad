@@ -19,16 +19,25 @@ public class ObjectOnePassThroughBottom extends CollisionHandler {
 
         if(s1.v_y < 0 && Math.abs(s1.v_y) > Math.abs(s1.v_x)) {
             noAction.applyCollisionEffects(s1, s2, currentRuntime);
-            shouldStick = false;
-        } else {
+        } 
+        else{
             obnd.applyCollisionEffects(s1, s2, currentRuntime);
-            shouldStick = true;
+            s1.v_y = -25;
         }
 
     }
 
     @Override
     public boolean shouldStick (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        if(s1.v_y < 0 && Math.abs(s1.v_y) > Math.abs(s1.v_x)){
+            shouldStick = false;
+        }
+        else if(s1.v_y < 0){
+            shouldStick = false;
+        }
+        else{
+            shouldStick = true;
+        }
         return shouldStick;
         
     }

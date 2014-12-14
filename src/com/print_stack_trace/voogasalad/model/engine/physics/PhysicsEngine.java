@@ -103,7 +103,6 @@ public class PhysicsEngine {
                 if(CollisionDetector.haveCollided(copys1, copys2)) {
                     stickIfNeeded(s1,s2);
                     collisionHandler(s1, s2, currentRuntime);
-
                 }	
             }
         }
