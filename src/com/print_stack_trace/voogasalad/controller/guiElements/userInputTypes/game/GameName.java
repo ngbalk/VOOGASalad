@@ -11,7 +11,7 @@ public class GameName extends CharacteristicController{
 	
 	@Override
 	protected void populateDefaultText(){
-		myTextBox.setText(((GameWorldObject)mySprite).getCharacteristics().getGameTitle()+"");
+		myTextBox.setText(((GameWorldObject)mySprite).getCharacteristics().getName()+"");
 	}
 	@Override
 	protected void setCharacteristic(String newValue) {
