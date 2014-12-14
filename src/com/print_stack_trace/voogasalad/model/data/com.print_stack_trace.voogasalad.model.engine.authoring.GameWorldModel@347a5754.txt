@@ -1,0 +1,155 @@
+{
+  "gameWorldCharacteristics": {},
+  "levelMap": {
+    "1": {
+      "goalMap": {},
+      "mySpriteMap": {
+        "0": {
+          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+          "p": {
+            "x": 29,
+            "y": 253
+          },
+          "interactive": false,
+          "objectType": "PLATFORM",
+          "startingHealth": 10,
+          "startingSpeed": 10.0,
+          "value": 0,
+          "orientation": 0.0,
+          "name": "1",
+          "width": 100.0,
+          "height": 100.0,
+          "doubleJump": false,
+          "damageDealt": 5,
+          "myMovements": {},
+          "myAnimations": {
+            "Jump": [],
+            "Up": [],
+            "Right": [],
+            "Down": [],
+            "Default": [],
+            "Left": []
+          }
+        },
+        "1": {
+          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/SpriteImages/mario.png",
+          "p": {
+            "x": 0,
+            "y": 0
+          },
+          "interactive": true,
+          "objectType": "HERO",
+          "startingHealth": 10,
+          "startingSpeed": 10.0,
+          "value": 0,
+          "orientation": 0.0,
+          "name": "mario",
+          "width": 100.0,
+          "height": 100.0,
+          "doubleJump": false,
+          "damageDealt": 5,
+          "myMovements": {
+            "D": "Right"
+          },
+          "myAnimations": {
+            "Jump": [],
+            "Up": [],
+            "Right": [],
+            "Down": [],
+            "Default": [],
+            "Left": []
+          }
+        },
+        "2": {
+          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
+          "p": {
+            "x": -1,
+            "y": 538
+          },
+          "interactive": false,
+          "objectType": "OBSTACLE",
+          "startingHealth": 10,
+          "startingSpeed": 10.0,
+          "value": 0,
+          "orientation": 0.0,
+          "name": "",
+          "width": 1160.0,
+          "height": 100.0,
+          "doubleJump": false,
+          "damageDealt": 5,
+          "myMovements": {},
+          "myAnimations": {
+            "Up": [],
+            "Jump": [],
+            "Right": [],
+            "Down": [],
+            "Default": [],
+            "Left": []
+          }
+        }
+      },
+      "currentID": 2,
+      "isLocked": false,
+      "physicsEngine": {
+        "decisionMatrix": [
+          [
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement"
+          ],
+          [
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement"
+          ],
+          [
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement"
+          ],
+          [
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement"
+          ],
+          [
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement",
+            "ObjectBothNoDisplacement"
+          ]
+        ],
+        "handlerMap": {}
+      },
+      "myLevelChars": {
+        "name": "",
+        "nextLevel": -1,
+        "previousLevel": -1,
+        "ID": 1,
+        "backgroundImagePath": "./com/print_stack_trace/voogasalad/controller/images/LevelImages/overworld_bg.png",
+        "requiredNumberOfGoals": 1,
+        "cameraStart": {
+          "x": 0,
+          "y": 0
+        },
+        "cameraSpeed": 3,
+        "myHorizontalPaneCount": 1,
+        "myVerticalPaneCount": 1,
+        "cameraType": "PlayerFollow"
+      },
+      "myGoalFactory": {},
+      "myKeyMap": {},
+      "mainCharacter": 1
+    }
+  },
+  "currentLevelIndex": 1
+}
