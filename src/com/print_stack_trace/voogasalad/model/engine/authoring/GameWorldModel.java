@@ -43,7 +43,7 @@ public class GameWorldModel {
     }
     
     public Map<Integer, LevelModel> getLevelMap() {
-    	return Collections.unmodifiableMap(levelMap);
+    	return levelMap;
     }
 
     public LevelModel getLevelModel(int id) {
