@@ -27,6 +27,17 @@ import javafx.scene.input.KeyCode;
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 
+/**
+ * @author Ethan Chang, Jack Baskin, Nick Widmaier
+ * Date Created: 11/??/14
+ * Date Modified: 11/23/14
+ * 
+ * Class for all objects on the screen. Because most sprites differ
+ * only by state, we use composition to deal with all types of sprites.
+ * We need only add an enumeration to allow the runtime engine to know
+ * how different sprites should interact with one another.
+ */
+
 public class SpriteCharacteristics {
 
 	// DEFAULT VARIABLES
