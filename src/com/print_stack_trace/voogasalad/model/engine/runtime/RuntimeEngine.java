@@ -60,7 +60,7 @@ public class RuntimeEngine implements IRuntimeEngine {
      * @param viewport
      */
     public RuntimeEngine(LevelModel currentLevel, Dimension viewport) {
-		this.currentLevel = currentLevel;
+        this.currentLevel = currentLevel;
         createRuntimeState(currentLevel, viewport);
     }
     /**
@@ -70,7 +70,7 @@ public class RuntimeEngine implements IRuntimeEngine {
      * @param viewport
      */
     public RuntimeEngine(GameWorldModel gameWorld, Dimension viewport) {
-	    this.gameWorld = gameWorld;
+	   this.gameWorld = gameWorld;
         currentLevel = gameWorld.getCurrentLevel();
         createRuntimeState(currentLevel, viewport);
     }
@@ -85,7 +85,7 @@ public class RuntimeEngine implements IRuntimeEngine {
         goalFactory = new GoalFactory();
         goalMap = new HashMap<>();
         populateGoalMap();
-        cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().cameraType);
+        cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().getCameraType());
         this.viewport = viewport;
     }
 
@@ -117,16 +117,16 @@ public class RuntimeEngine implements IRuntimeEngine {
             g.acceptChecker(goalChecker);
             if(g.isCompleted)completedCount++;
         }
-        int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
+        int reqGoals = runtimeModel.getLevelCharacteristics().getRequiredNumberOfGoals();
         if (reqGoals > 0) {
-            if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
+            if(completedCount >= runtimeModel.getLevelCharacteristics().getRequiredNumberOfGoals()) {
                 winGame();
                 getNextLevel();
             }
         }
 		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
 		if(gameOver(mainChar)){
-			loseGame();
+		    loseGame();
 		}
 		updateSpritePositions();
 		cameraHandler.updateCamera(runtimeModel);

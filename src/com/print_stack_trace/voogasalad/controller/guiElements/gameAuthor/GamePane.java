@@ -8,17 +8,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-
-import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-
-
 import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.DraggableItem;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameWorldObject;
@@ -34,7 +29,6 @@ import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.
 import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
-
 
 public class GamePane extends Pane implements ViewObjectDelegate {
 	private GameEngine myGameEngine;
@@ -55,12 +49,11 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		this.getStylesheets().add(myStyle);
 	}
 	
+	//Sizing methods (ACCESSORS AND MUTATORS)
 	private void size(double width, double height){
 		setProgramWidth(width);
 		setProgramHeight(height);
 	}
-	
-	//WIDTH AND HEIGHT ACCESSORS AND MUTATORS
 	public double getProgramWidth(){
 		return getPrefWidth();
 	}
@@ -73,6 +66,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	public void setProgramHeight(Number height){
 		setPrefHeight(height.doubleValue());
 	}
+	
 	//Properties
 	public void setXProperty(double val) {
 		xVal.setValue(val);
@@ -80,7 +74,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	public void setYProperty(double val) {
 		yVal.setValue(val);
 	}
-	
 	public SimpleObjectProperty<LevelObject> currentLevelProperty() {
 		return levelTracker.getCurrentLevelProperty();
 	}
@@ -95,6 +88,11 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		return levelTracker.nameProperty();
 	}
 
+	/**
+	 * Adds a sprite to the GamePane
+	 * @param gameObjectImageView		ImageView of object toAdd
+	 * @param imagePath					ImagePath of the Image to Add
+	 */
 	public void addSpriteObject(ImageView gameObjectImageView, String imagePath) {
 		if (imagePath != null) {
 			String myMessage = new MessagePopUp(myStyle).showDropDownDialog(myMessages.get("addSprite"),
@@ -115,28 +113,43 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		return myGameObject;
 	}
 
+	/**
+	 * Adds the SpriteObject to a specific level
+	 * @param sprite sprite to be Added
+	 */
 	private void addSpriteToLevel(SpriteObject sprite){
 		sprite.setID(myGameEngine.addObjectToLevel(sprite
 				.getCharacteristics()));
 		if (!myData.containsKey(sprite.getCode()))
 			myData.put(sprite.getCode(), new HashSet<SpriteObject>());
 		myData.get(sprite.getCode()).add(sprite);
-		this.getChildren().add(sprite.getImage());
+		getChildren().add(sprite.getImage());
 		levelTracker.addSprite(sprite);
 	}
 
+	/**
+	 * Adds a sprite with characterisitcs that has already been set from UserObjectsLibrary
+	 * @param newSprite 	sprite to be Added
+	 */
 	public void addExistingObjectToOtherPane(SpriteObject newSprite) {
 		newSprite.initializeImage();
 		SpriteObject spriteOnBoard = (SpriteObject) this.createSpriteToBeAdded(newSprite.getImage(),
 				newSprite.getImagePath(), newSprite.getType());
 		spriteOnBoard.setCharacteristics(newSprite.getCharacteristics());
 		spriteOnBoard.initializeImage();
+		removeSpriteObjects(spriteOnBoard);
+		myData.get(spriteOnBoard.getCode()).add(spriteOnBoard);
 	}
 
+	/**
+	 * 
+	 * @return if the first level has been created
+	 */
 	public boolean isReady() {
 		return levelTracker.getNumberOfLevels() > 0;
 	}
 
+	
 	public void addBackground(ImageView imgView, String imagePath) {
 		LevelObject levelBackground = levelTracker.getCurrentLevel();
 		this.getChildren().remove(levelBackground.getImage());
@@ -146,6 +159,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		levelChange(levelBackground);
 	}
 
+	
 	public void update(SpriteObject myObject) {
 		String spriteCode=myObject.getCode();
 		SpriteCharacteristics characteristics = myObject.getCharacteristics();
@@ -156,9 +170,9 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		if (new BlankSpaceTextChecker().checkText(spriteCode)) {
 			for (SpriteObject sprite : myData.get(spriteCode)) {
 				sprite.setCharacteristics(characteristics);
+				sprite.setLocation();
 				sprite.initializeSprite();
-				sprite.setImage(sprite.getImagePath());
-				//sprite.initializeImage();
+				sprite.setImage(sprite.getCharacteristics().getImagePath());
 				myGameEngine.updateObject(sprite.getID(),
 						sprite.getCharacteristics());
 			}
@@ -172,6 +186,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		getChangedSprite().setValue(temp);
 	}
 
+	
 	public void update(LevelObject currentLevel) {
 		levelChange(currentLevel);
 	}
@@ -189,6 +204,8 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 
 		}
 	}
+	
+	
 	public void addLevelToEngine(Object level){
 		levelTracker.addLevel((LevelObject) level, e -> levelChange((LevelObject)level));
 		myGameEngine.addLevel(levelTracker.getNumberOfLevels(),
@@ -196,13 +213,17 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		levelChange((LevelObject)level);
 	}
 
+	/**
+	 * Switches the Pane's view to the current level
+	 * @param currentLevel current level of the game
+	 */
 	private void levelChange(LevelObject currentLevel) {
 		levelTracker.setCurrentLevel(currentLevel);
 		levelTracker.clearNonActiveLevels((type)->this.getChildren().remove(type),
 				(type)->this.getChildren().add((Node)type));
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
-		myGameEngine.setCurrentLevel(currentLevel.getCharacteristics().ID);
+		myGameEngine.setCurrentLevel(currentLevel.getCharacteristics().getID());
 		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
 	}
 
@@ -210,7 +231,11 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	public void update(GameWorldObject gameWorld){
 		myGameEngine.setGameWorldCharacteristics(gameWorld.getCharacteristics());
 	}
-	
+	/**
+	 * 
+	 * @param toBeSized 	Pane to be sized
+	 * @return			a pane with the height and width of the GamePane
+	 */
 	public Pane sizePane(Pane toBeSized) {
 		toBeSized.setPrefSize(this.getPrefWidth(), this.getPrefHeight());
 		return toBeSized;
@@ -224,6 +249,10 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		myGameEngine.addGoalToLevel(myObject.getCharacteristics());
 	}
 
+	/**
+	 * 
+	 * @return String[] with all the names of the types of sprites from a properties file
+	 */
 	public String[] spriteTypeNames() {
 		String spriteNames = "./com/print_stack_trace/voogasalad/controller/guiResources/PaneTypes.Properties";
 		ResourceReader resourceRead = new ResourceReader(spriteNames);
@@ -288,29 +317,30 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	public SimpleObjectProperty<SpriteObject> getChangedSprite() {
 		return changedSprite;
 	}
-	public void setChangedSprite(SimpleObjectProperty<SpriteObject> changedSprite) {
-		this.changedSprite = changedSprite;
-	}
 	@Override
 	public void actionToAllLevels(ObjectAction object) {
 		levelTracker.actionToAllLevels(object);
 	}
 
+	/**
+	 * Used in loading in a preexisting file level
+	 */
 	@Override
 	public Object load(File file) {
 		try {
 			return myGameEngine.loadGameFromFile(file);
 		} catch (JsonSyntaxException | ClassNotFoundException | IOException e) {
-			new MessagePopUp(myStyle).showMessageDialog("File cannot load");
+			new MessagePopUp(myStyle).showMessageDialog(myMessages.get("cannotLoad"));
 			return null;
 		}
 	}
 
+	//Background
 	@Override
 	public void addBackground(Node level) {
 		this.getChildren().add(0, level);
 	}
-	public Node getBackgroundPane(){
+	private Node getBackgroundPane(){
 		return this.getChildren().get(0);
 	}
 

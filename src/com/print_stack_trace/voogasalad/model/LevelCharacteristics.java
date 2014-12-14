@@ -21,18 +21,18 @@ public class LevelCharacteristics {
 	private static final int DEFAULT_CAMERA_SPEED = 3;
 	
 	private String name = "";
-	public Integer nextLevel = -1;
-	public Integer previousLevel = -1;
-	public Integer ID = null;
+	private Integer nextLevel = -1;
+	private Integer previousLevel = -1;
+	private Integer ID = null;
 	private transient Image backgroundImage = null;
 	private String backgroundImagePath = "";
-	public int requiredNumberOfGoals = 1;
-	public Point cameraStart = new Point(0, 0);
-	public int cameraSpeed = DEFAULT_CAMERA_SPEED;
+	private int requiredNumberOfGoals = 1;
+	private Point cameraStart = new Point(0, 0);
+	private int cameraSpeed = DEFAULT_CAMERA_SPEED;
 	private String myColor;
 	private int myHorizontalPaneCount=1;
 	private int myVerticalPaneCount=1;
-	public CameraType cameraType = CameraType.PlayerFollow; 
+	private CameraType cameraType = CameraType.PlayerFollow; 
 	
 	public String getName() {
 		return name;
@@ -107,5 +107,22 @@ public class LevelCharacteristics {
 	public int getHorizontalPaneCount(){
 		return this.myHorizontalPaneCount;
 	}
+	
+    public CameraType getCameraType () {
+        return cameraType;
+    }
+    public int getRequiredNumberOfGoals () {
+        return requiredNumberOfGoals;
+    }
+    public Point getCameraStart () {
+        return cameraStart;
+    }
+    public void setRequiredNumberOfGoals (int num) {
+        requiredNumberOfGoals = num;        
+    }
+    public void setCameraType (CameraType cameraType) {
+        this.cameraType = cameraType;
+        
+    }
 	
 }

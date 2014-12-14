@@ -84,7 +84,7 @@ public class CollisionDetector {
 	}
 	
 	public static boolean incorrectSpriteType(RuntimeSpriteCharacteristics hero) {
-		return (!(hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))));
+		return (!(hero.getObjectType().equals(SpriteType.HERO) || (hero.getObjectType().equals(SpriteType.ENEMY))));
 	}
 	
 	public static Rectangle makeIntersector(RuntimeSpriteCharacteristics rs1, RuntimeSpriteCharacteristics rs2) {

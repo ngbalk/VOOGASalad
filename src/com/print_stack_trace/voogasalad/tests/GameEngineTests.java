@@ -33,12 +33,12 @@ public class GameEngineTests {
 		}
 		for (Integer i : lvl.getSpriteMap().keySet()) {
 			SpriteCharacteristics s = lvl.getSpriteMap().get(i);
-			System.out.println("type = " + s.objectType + "x,y = " + s.getX()
+			System.out.println("type = " + s.getObjectType() + "x,y = " + s.getX()
 					+ "," + s.getY() + "orientation = " + s.getOrientation()
 					+ "name = " + s.getName());
 		}
 		for (GoalCharacteristics g : lvl.getGoalMap().values()) {
-			System.out.println(g.myGoalType);
+			System.out.println(g.getMyGoalType());
 		}
 	}
 
