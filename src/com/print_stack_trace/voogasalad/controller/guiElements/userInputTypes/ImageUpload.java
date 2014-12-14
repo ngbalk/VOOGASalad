@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-import com.print_stack_trace.voogasalad.utilities.FileLoadUtility;
+import com.print_stack_trace.voogasalad.utilities.fileloading.FileLoadUtility;
 
 
 public class ImageUpload extends Button {

@@ -40,7 +40,6 @@ public class PlayerToolBar extends ToolBar {
 				newClass.getClass().getMethod("setLabel", String.class).invoke(newClass, labelProp.get(key));
 				this.getItems().add((Node) newClass);
 			}
-			
 		} catch (Exception e1) {
 			System.out.println(e1.getMessage());
 		}

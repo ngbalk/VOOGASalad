@@ -33,7 +33,7 @@ public class CameraFactory {
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 			return newCamera;
 		} catch (ClassNotFoundException e) {
