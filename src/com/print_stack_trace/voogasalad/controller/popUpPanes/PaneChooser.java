@@ -22,6 +22,7 @@ public class PaneChooser {
 			if (myTypes.get(myType)==null){
 				return null;
 			}
+			System.out.println(myTypes.get(myType));
 			PopUpPane mySpecificType = new PopUpPane(myTypes.get(myType), myObject);
 			return mySpecificType;
 		}

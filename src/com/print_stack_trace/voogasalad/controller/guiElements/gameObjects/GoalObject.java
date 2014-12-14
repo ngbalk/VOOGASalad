@@ -40,7 +40,7 @@ public class GoalObject extends GameObject {
 		myCharacteristics.setValue(goalCharacteristics);
 	}
 	@Override
-	protected void update() {
+	public void update() {
 		myDelegate.update(this);
 	}
 	@Override

@@ -128,7 +128,7 @@ public class SpriteObject extends GameObject{
 	}
 	
 	@Override
-	protected void update() {
+	public void update() {
 		myDelegate.update(this);
 	}
 	

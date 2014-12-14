@@ -59,7 +59,8 @@ public abstract class GameObject {
 		myDelegate=delegate;
 	}
 	
-	protected abstract void update();
+	public abstract void update();
+	
 	public boolean isClicked() {
 		doubleclick = !doubleclick;
 		return doubleclick;

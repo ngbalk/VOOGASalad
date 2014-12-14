@@ -8,14 +8,15 @@ public class GameWorldObject extends GameObject{
 	private GameWorldCharacteristics myCharacteristics;
 	public GameWorldObject(String imagePath, ViewObjectDelegate delegate) {
 		super(imagePath, delegate);
+		myCharacteristics=new GameWorldCharacteristics();
 	}
 	@Override
 	public void setImageCharacteristics() {
 	}
 
 	@Override
-	protected void update() {
-		// TODO Auto-generated method stub
+	public void update() {
+		myDelegate.update(this);
 	}
 
 	@Override

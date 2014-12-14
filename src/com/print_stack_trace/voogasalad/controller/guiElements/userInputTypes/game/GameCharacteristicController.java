@@ -12,7 +12,7 @@ public abstract class GameCharacteristicController extends UserInputText{
 	protected TextField myTextBox;
 	public GameCharacteristicController(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
-		mySprite = (GameObject) object;
+		mySprite = object;
 		myTextBox = (TextField) myNode;
 		populateDefaultText();
 		myTextBox.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
@@ -22,8 +22,8 @@ public abstract class GameCharacteristicController extends UserInputText{
 					setCharacteristic(myTextBox.getText());
 				}
 			}
-
 		});
+		
 	}
 	abstract protected void populateDefaultText();
 	abstract protected void setCharacteristic(String newValue);
