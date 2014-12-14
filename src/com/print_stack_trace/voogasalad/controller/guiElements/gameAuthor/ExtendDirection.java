@@ -42,6 +42,9 @@ public class ExtendDirection {
 					(view, horizontal, vertical)->extendVertical(view, horizontal, vertical));
 		}
 	}
+	public void extendUp() {
+		//TODO: IMPLEMENT THIS
+	}
 
 	private void extendHorizontal(Node view, int horizontal, int vertical){
 		view.relocate(getWidth()

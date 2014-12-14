@@ -10,6 +10,7 @@ public class GameWorldObject extends GameObject{
 		super(imagePath, delegate);
 		myCharacteristics=new GameWorldCharacteristics();
 	}
+
 	@Override
 	public void setImageCharacteristics() {
 	}
@@ -25,5 +26,8 @@ public class GameWorldObject extends GameObject{
 	
 	public GameWorldCharacteristics getCharacteristics(){
 		return myCharacteristics;
+	}
+	public void setCharacteristics(GameWorldCharacteristics characteristics){
+		this.myCharacteristics = characteristics;
 	}
 }
