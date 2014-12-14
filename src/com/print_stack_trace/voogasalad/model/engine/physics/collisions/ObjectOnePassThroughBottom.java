@@ -1,8 +1,5 @@
 package com.print_stack_trace.voogasalad.model.engine.physics.collisions;
 
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionDetector;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
@@ -17,13 +14,15 @@ public class ObjectOnePassThroughBottom extends CollisionHandler {
                                        RuntimeSpriteCharacteristics s2,
                                        RuntimeModel currentRuntime) {
 
-        if(s1.v_y < 0 && Math.abs(s1.v_y) > Math.abs(s1.v_x)) {
-            noAction.applyCollisionEffects(s1, s2, currentRuntime);
-        } 
-        else{
-            obnd.applyCollisionEffects(s1, s2, currentRuntime);
-        }
+        if(!noActionApply(s1,s2,currentRuntime))
+            setDisplacedActions(s1,s2,currentRuntime);
+    }
 
+    protected void setDisplacedActions (RuntimeSpriteCharacteristics s1,
+                                        RuntimeSpriteCharacteristics s2,
+                                        RuntimeModel currentRuntime) {
+        obnd.applyCollisionEffects(s1, s2, currentRuntime);
+        
     }
 
     @Override
@@ -40,6 +39,16 @@ public class ObjectOnePassThroughBottom extends CollisionHandler {
         return shouldStick;
         
     }
+    
+    protected boolean noActionApply(RuntimeSpriteCharacteristics s1,
+                                    RuntimeSpriteCharacteristics s2,
+                                    RuntimeModel currentRuntime){
+     if(s1.v_y < 0 && Math.abs(s1.v_y) > Math.abs(s1.v_x)) {
+         noAction.applyCollisionEffects(s1, s2, currentRuntime);
+         return true;
+     }
+     return false;
+ }
         
 }
 
