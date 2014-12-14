@@ -19,7 +19,7 @@ public class DoodleJumpDamageCollision extends CollisionHandler {
         } 
         else{
             obnd.applyCollisionEffects(s1, s2, currentRuntime);
-            s1.v_y = -25;
+            s1.v_y = -20;
             s1.setHealthProperty(s1.getPropertyReadOnlyHealth().getValue() - s2.getDamageDealt());
         }
 

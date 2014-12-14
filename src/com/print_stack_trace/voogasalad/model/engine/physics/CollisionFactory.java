@@ -28,6 +28,7 @@ public class CollisionFactory {
 		ObjectOnePassThroughBottom,
 		DoodleJumpNormalPlatform,
 		DoodleJumpDamageCollision,
+		DoodleJumpDisappearingPlatform,
 	};
 	
 	public enum UserDefinedCollisionParams {

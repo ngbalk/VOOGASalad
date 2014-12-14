@@ -1,13 +1,10 @@
 package com.print_stack_trace.voogasalad.model.engine.physics.collisions;
 
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionDetector;
-import com.print_stack_trace.voogasalad.model.engine.physics.CollisionFactory.CollisionResult;
 import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
-public class DoodleJumpNormalPlatform extends CollisionHandler {
+public class DoodleJumpDisappearingPlatform extends CollisionHandler {
     private NoAction noAction = new NoAction();
     private ObjectBothNoDisplacement obnd = new ObjectBothNoDisplacement();
     private boolean shouldStick = true;
@@ -23,6 +20,7 @@ public class DoodleJumpNormalPlatform extends CollisionHandler {
         else{
             obnd.applyCollisionEffects(s1, s2, currentRuntime);
             s1.v_y = -20;
+            s2.flagForRemoval();
         }
 
     }
