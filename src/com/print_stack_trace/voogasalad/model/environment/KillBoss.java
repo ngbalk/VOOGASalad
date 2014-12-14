@@ -20,7 +20,7 @@ public class KillBoss extends Goal implements GoalElement{
     @Override
     protected void setGoalProperties() {
         super.setGoalProperties();
-        myBossID = myGoalCharacteristics.myObjectiveID;
+        myBossID = myGoalCharacteristics.getObjectiveID();
         
     }
 

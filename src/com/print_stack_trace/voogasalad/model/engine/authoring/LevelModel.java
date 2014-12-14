@@ -21,8 +21,8 @@ import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
 public class LevelModel {
 
-	public Map<Integer, GoalCharacteristics> goalMap; // good
-	public Map<Integer, SpriteCharacteristics> mySpriteMap; // good
+	private Map<Integer, GoalCharacteristics> goalMap; // good
+	private Map<Integer, SpriteCharacteristics> mySpriteMap; // good
 	private Integer currentID;
 	private boolean isLocked;
 	private PhysicsEngine physicsEngine;

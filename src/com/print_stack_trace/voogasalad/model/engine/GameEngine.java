@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javafx.event.EventHandler;
@@ -87,31 +88,6 @@ public class GameEngine {
         GameWorldModel game = authorEngine.getGameWorldModel();
         game.setCurrentLevel(INITIAL_GAME_LEVEL);
         gameData.write(game);
-        for(LevelModel level: game.getLevelMap().values()) {
-            debugLevel(level);
-        }
-    }
-
-    public void debugLevel(LevelModel lvl){
-        System.out.println(lvl.getPhysicsEngine().decisionMatrix);
-        for(int i=0 ;i < lvl.getPhysicsEngine().decisionMatrix.length ;i++){
-            for(int j=0; j < lvl.getPhysicsEngine().decisionMatrix[0].length; j++){
-                CollisionResult c = lvl.getPhysicsEngine().decisionMatrix[i][j];
-                if(!(c.name().toString().equals(CollisionResult.NoAction.toString()))){
-                    System.out.println(c.name());
-                }
-            }
-        }
-        for(Integer i : lvl.getSpriteMap().keySet()){
-            SpriteCharacteristics s = lvl.getSpriteMap().get(i);
-            System.out.println("type = " + s.objectType
-                    + "x,y = " + s.getX() +"," + s.getY()
-                    + "orientation = " + s.getOrientation()
-                    + "name = " + s.getName());
-        }
-        for(GoalCharacteristics g : lvl.getGoalMap().values()){
-            System.out.println(g.myGoalType);
-        }
     }	
 
     //GAME AUTHORING
@@ -233,8 +209,8 @@ public class GameEngine {
         try {
             highScores = (Map<String, HighScore>) gameData.getObject("HighScores", highScores.getClass());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            System.out.println(e.getMessage());
+        	//Someone forgot to handle this error. This is a patch to fix this without breaking the program.
+        	highScores = new HashMap<String, HighScore>();
         }
         return highScores;
     }
@@ -262,44 +238,9 @@ public class GameEngine {
     }
     
     //-------------------PRIVATE METHODS-------------------//
-
-    private void initializeLevel(LevelModel level) {
-        this.currentLevel = level;
-
-        //		FIXME: Remove this work around garbage
-        //Integer first = currentLevel.getSpriteMap().keySet().iterator().next();
-        //Integer hero = findHero();
-        //currentLevel.setMainCharacter(hero);
-        currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
-        currentLevel.setResultForKey(KeyResult.Down, KeyCode.DOWN);
-        currentLevel.setResultForKey(KeyResult.Left, KeyCode.LEFT);
-        currentLevel.setResultForKey(KeyResult.Right, KeyCode.RIGHT);
-
-        //		GoalCharacteristics g = new GoalCharacteristics(GoalType.REACH_OBJECT);
-        //		g.myDestination = 100;
-        //		g.myObjectID = 2;	
-        //		currentLevel.setGoal(g);
-        //
-        //		LevelCharacteristics l = currentLevel.getLevelCharacteristics();
-        //		l.requiredNumberOfGoals = 1;
-        //		currentLevel.setLevelCharacteristics(l);
-
-        runtimeEngine = new RuntimeEngine(currentLevel, viewport);
-        runtimeEngine.setFramesPerSecond(framesPerSecond);
-    }
-    /*
-    private Integer findHero() {
-    	for (Integer id: this.currentLevel.mySpriteMap.keySet()) {
-    		if (this.currentLevel.mySpriteMap.get(id).DEFAULT_OBJECT_TYPE == SpriteType.HERO) {
-    			return id;
-    		}
-    	}
-    	return 0;
-    }
-    */
 	
     private void initializeGame() {
-        //		FIXME: Remove this work around garbage
+        //FIXME: Remove this work around garbage
         for(LevelModel currentLevel : gameWorldModel.getLevelMap().values()) {
             currentLevel.setMainCharacter(currentLevel.getMainCharacter());
             currentLevel.setResultForKey(KeyResult.Up, KeyCode.UP);
