@@ -1,7 +1,7 @@
 /**
  * @author Pranava Raparla
  * Date Created: 11/10/14
- * Date Modified: 11/21/14
+ * Date Modified: 12/13/14
  */
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
@@ -24,7 +24,22 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplica
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
-public class RuntimeEngine extends AbstractRuntimeEngine {
+/**
+ * This class contains our implementation of the IRuntimeEngine interface.
+ * The purpose of this class is be the primary point of access for runtime
+ * actions. All of the runtime methods that the front end calls through game
+ * engine are passed through to RuntimeEngine. In this way, we can modify our
+ * implementation of RuntimeEngine without any changes to the front end's
+ * method call structure.
+ *
+ */
+public class RuntimeEngine implements IRuntimeEngine {
+	
+	/**
+	 * Private Variables for use in Runtime.
+	 */
+	private LevelModel currentLevel;
+	private GameWorldModel gameWorld;
     private PhysicsEngine physicsEngine;
     private RuntimeModel runtimeModel;
     int framesPerSecond;
@@ -39,27 +54,31 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     //-------------------CONSTRUCTORS-------------------//
 
     /**
-     * Takes in a LevelModel and sets private variables
-     * @param level
+     * Takes in a LevelModel and viewport to set private variables
+     * through calling a helper method.
+     * @param currentLevel
+     * @param viewport
      */
     public RuntimeEngine(LevelModel currentLevel, Dimension viewport) {
-        super(currentLevel);
-        runtimeModel = new RuntimeModel(currentLevel, viewport);
-        physicsEngine = currentLevel.getPhysicsEngine();
-        goalFactory = new GoalFactory();
-        goalMap = new HashMap<>();
-        populateGoalMap();
-        cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().getCameraType());
-        this.viewport = viewport;
+        this.currentLevel = currentLevel;
+        createRuntimeState(currentLevel, viewport);
     }
-    
+    /**
+     * Takes in a GameWorldModel and viewport to set private variables
+     * through calling a helper method.
+     * @param currentLevel
+     * @param viewport
+     */
     public RuntimeEngine(GameWorldModel gameWorld, Dimension viewport) {
-        super(gameWorld);
-        this.viewport = viewport;
+	   this.gameWorld = gameWorld;
         currentLevel = gameWorld.getCurrentLevel();
         createRuntimeState(currentLevel, viewport);
     }
-
+    /**
+     * This helper method takes in a LevelModel and viewport to set private variables.
+     * @param currentLevel
+     * @param viewport
+     */
     private void createRuntimeState(LevelModel levelModel, Dimension viewport) {
         runtimeModel = new RuntimeModel(gameWorld.getCurrentLevel(), viewport);
         physicsEngine = gameWorld.getCurrentLevel().getPhysicsEngine();
@@ -67,6 +86,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         goalMap = new HashMap<>();
         populateGoalMap();
         cameraHandler = CameraFactory.buildCameraHandler(currentLevel.getLevelCharacteristics().getCameraType());
+        this.viewport = viewport;
     }
 
     //-------------------PUBLIC METHODS-------------------//
@@ -100,67 +120,89 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         int reqGoals = runtimeModel.getLevelCharacteristics().getRequiredNumberOfGoals();
         if (reqGoals > 0) {
             if(completedCount >= runtimeModel.getLevelCharacteristics().getRequiredNumberOfGoals()) {
-
-                runtimeModel.gameOver = true;
-                runtimeModel.gameVictory = true;
+                winGame();
                 getNextLevel();
             }
         }
 		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
 		if(gameOver(mainChar)){
-
-			runtimeModel.gameOver = true;
-			runtimeModel.gameVictory = false;
+		    loseGame();
 		}
 		updateSpritePositions();
 		cameraHandler.updateCamera(runtimeModel);
     }
-
+    
+    /**
+     * This method sets the FPS for the Game Player in runtime.
+     * @param framesPerSecond
+     */
     public void setFramesPerSecond(int framesPerSecond) {
         this.framesPerSecond = framesPerSecond;
     }
-
-    //GAME PLAYER
-
+    
     /**
-     * Get the current state of the level in progress
+     * This method returns the current state of the level in progress.
      * @return runtimeModel 
      */
     public RuntimeModel getStatus() {
         return runtimeModel;
     }
-
+    
+    /**
+     * This method starts a new game through calling the gameWorld's
+     * start new game method. It is a pass through method.
+     * @return levelModel
+     */
+    public LevelModel startNewGame () {
+        return gameWorld.startNewGame();
+    }
+    
+    /**
+     * This method handles Key Release Events.
+     */
     public void handleKeyRelease(KeyEvent event) {
         handleKey(event, false);
     }
-
+    /**
+     * This method handles Key Press Events.
+     */
     public void handleKeyPress(KeyEvent event) {
         handleKey(event, true);
     }
     
+    /**
+     * This method loops through the Goals in the RuntimeModel's goal map
+     * and puts new GoalCharacteristics through using the goal factory.
+     */
     public void populateGoalMap(){
         for(Integer i : runtimeModel.getGoalMap().keySet()){
             goalMap.put(i, goalFactory.buildGoal(runtimeModel.getGoalMap().get(i)));
         }
     }
 
-	//-------------------ACCESSORS-------------------//
-
-
 	//-------------------PRIVATE METHODS-------------------//
     
+    /**
+     * This method sets the states in RuntimeModel for
+     * a game win to be registered.
+     */
     private void winGame() {
     	runtimeModel.gameOver = true;
         runtimeModel.gameVictory = true;
     }
-    
+    /**
+     * This method sets the states in RuntimeModel for
+     * a game loss to be registered.
+     */
     private void loseGame() {
     	runtimeModel.gameOver = true;
         runtimeModel.gameVictory = false;
     }
-
-	//Sprites move around even when this method is commented out
-	//why is that? this method should be the one controlling movement
+    
+    /**
+     * This method updates all the sprite positions by accessing their
+     * velocities and updating their x and y data.
+     */
 	private void updateSpritePositions(){
 		for(RuntimeSpriteCharacteristics rst : runtimeModel.getRuntimeSpriteMap().values()) {
 			rst.setX(rst.getX()+((double)rst.v_x/(double)framesPerSecond));
@@ -169,7 +211,14 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 			rst.v_y *= (1.0f-rst.getDecelerationConstant());
 		}
 	}
-
+	
+	/**
+	 * This method takes in a key event and a boolean to determine what action
+	 * should result based on the authored data that was stored in LevelModel and
+	 * transferred to RuntimeModel.
+	 * @param event
+	 * @param press
+	 */
 	private void handleKey(KeyEvent event, boolean press) {
 		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
 		KeyApplicator applicator = applicatorCache.get(res);
@@ -187,14 +236,16 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 			return;
 		}
 	}
-	    
+	
+	/**
+	 * This method takes in the main character and determines if it is still "alive."
+	 * If the player is not alive in the game, then true will be returned.
+	 * @param mainChar
+	 * @return bool
+	 */
 	private boolean gameOver(RuntimeSpriteCharacteristics mainChar){
 	    if(mainChar == null) return true;
 	    return(mainChar.getPropertyReadOnlyHealth().getValue() <= 0 || mainChar.getY() > (runtimeModel.camera.y + runtimeModel.viewport.height));
-                    
 	}
 
-    public LevelModel startNewGame () {
-        return gameWorld.startNewGame();
-    }
 }
