@@ -10,40 +10,24 @@ import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.Sprit
 import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
 import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 
-public class DoubleJump extends SpriteUserInputDropDown{
+public class DoubleJump extends BooleanController{
 	public DoubleJump(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 	}
-
 	@Override
 	protected void linkMovement(String dataValue) {
 		((SpriteObject)mySprite).getCharacteristics().setDoubleJump(Boolean.parseBoolean(dataValue));
 		setCurrent(data.get(dataValue));
 		mySprite.getDelegate().update((SpriteObject)mySprite);
 	}
-
-	@Override
-	protected void observableFunction() {
-		loadInitial();
-	}
-
-	@Override
-	protected void loadInitialFunction(String menuItemName, Object initial) {
-		if (Boolean.parseBoolean(menuItemName)==((boolean)initial)){
-			checkSelectBox(menuItemName);
-		}
-		else
-			uncheckSelectBox(menuItemName);
-	}
-
 	protected Object getCharacteristicType(){
-		boolean type=((SpriteObject) mySprite).getCharacteristics().canDoubleJump();
-		return type;
+		return ((SpriteObject) mySprite).getCharacteristics().canDoubleJump();
 	}
 	@Override
 	protected void loadData() {
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/controller/guiResources/Boolean.Properties");
 		data=myResourceReader.getProperties();		
 	}
+	
 }
 

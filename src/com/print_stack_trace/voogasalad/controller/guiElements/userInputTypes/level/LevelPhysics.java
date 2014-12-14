@@ -18,14 +18,11 @@ public class LevelPhysics extends UserInputDropDownMenu {
 
 	@Override
 	protected void linkMovement(String dataValue) {
-		ProgramPhysicEngine type=null;
 		for (ProgramPhysicEngine physics: ProgramPhysicEngine.values()){
 			if (physics.name().equals(dataValue));
-				this.setCurrent(data.get(dataValue));
-				type=physics;
-				mySprite.getDelegate().setPhysics(type);
+				setCurrent(data.get(dataValue));
+				mySprite.getDelegate().setPhysics(physics);
 				break;
 		}	
 	}
-	
 }

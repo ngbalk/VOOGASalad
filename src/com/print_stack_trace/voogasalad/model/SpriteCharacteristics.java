@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -22,7 +23,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
-
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
@@ -41,18 +41,18 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplica
 public class SpriteCharacteristics {
 
 	// DEFAULT VARIABLES
-	public static final Image DEFAULT_IMAGE = null;
-	public static final boolean DEFAULT_INTERACTIVE = false;
-	public static final SpriteType DEFAULT_OBJECT_TYPE = null;
-	public static final int DEFAULT_HEALTH = 10;
-	public static final double DEFAULT_SPEED = 10;
-	public static final int DEFAULT_VALUE = 0;
-	public static final double DEFAULT_ORIENTATION = 0;
-	public static final String DEFAULT_NAME="";
-	public static final double DEFAULT_WIDTH=100;
-	public static final double DEFAULT_HEIGHT=100;
-	public static final boolean DEFAULT_DOUBLE_JUMP=false;
-	public static final int DEFAULT_DAMAGE_DEALT = 5;
+	private static final Image DEFAULT_IMAGE = null;
+	private static final boolean DEFAULT_INTERACTIVE = false;
+	private static final SpriteType DEFAULT_OBJECT_TYPE = null;
+	private static final int DEFAULT_HEALTH = 10;
+	private static final double DEFAULT_SPEED = 10;
+	private static final int DEFAULT_VALUE = 0;
+	private static final double DEFAULT_ORIENTATION = 0;
+	private static final String DEFAULT_NAME="";
+	private static final double DEFAULT_WIDTH=100;
+	private static final double DEFAULT_HEIGHT=100;
+	private static final boolean DEFAULT_DOUBLE_JUMP=false;
+	private static final int DEFAULT_DAMAGE_DEALT = 5;
 
 	// GAME AUTHORING VARIABLES
 	public transient Image img;
@@ -71,8 +71,8 @@ public class SpriteCharacteristics {
 	public double height;
 	public boolean doubleJump;
 	public int damageDealt;
-	public HashMap<KeyCode,KeyResult> myMovements;
-	public HashMap<KeyResult, ArrayList<File>> myAnimations;
+	private Map<KeyCode,KeyResult> myMovements;
+	private Map<KeyResult, ArrayList<File>> myAnimations;
 
 
 	//-------------------CONSTRUCTORS-------------------//
@@ -146,7 +146,7 @@ public class SpriteCharacteristics {
 	public java.awt.Image getJavaAWTImage () {
 		return img;
 	}
-	public HashMap<KeyResult, ArrayList<File>> getAnimations(){
+	public Map<KeyResult, ArrayList<File>> getAnimations(){
 		return myAnimations;
 	}
     public javafx.scene.image.Image getImage () {
@@ -290,7 +290,7 @@ public class SpriteCharacteristics {
 		myMovements.put(myKey, myAction);
 	}
 
-	public HashMap<KeyCode, KeyResult> getMovements(){
+	public Map<KeyCode, KeyResult> getMovements(){
 		return myMovements;
 	}
 

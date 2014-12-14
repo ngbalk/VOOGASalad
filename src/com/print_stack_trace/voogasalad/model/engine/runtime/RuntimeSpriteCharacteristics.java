@@ -25,8 +25,8 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public boolean isPatrollingLeft = true;
 	private float decelerationConstant;
 	public KeyResult currentSpriteAction;
-	public ReadOnlyIntegerWrapper healthProperty=new ReadOnlyIntegerWrapper(this.startingHealth);
-	public ReadOnlyIntegerWrapper pointsProperty=new ReadOnlyIntegerWrapper(0);
+	private ReadOnlyIntegerWrapper healthProperty=new ReadOnlyIntegerWrapper(this.startingHealth);
+	private ReadOnlyIntegerWrapper pointsProperty=new ReadOnlyIntegerWrapper(0);
 	
 	public int health;
 	private boolean remove = false;

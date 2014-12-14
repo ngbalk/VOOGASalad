@@ -6,17 +6,18 @@ public class BlankSpaceTextChecker implements TextChecker{
 	}
 	@Override
 	public boolean checkText(String text) {
-		return (text.length()!=0||!allBlankSpaces(text))? true:false;
+		return (text.length()!=0||!allBlankSpaces(text));
 	}
-
+	
 	private boolean allBlankSpaces(String text){
 		int count=0;
 		for (int i=0; i<text.length();  i++){
-			if (text.charAt(i)==' ')
-				count++;
-		}
-		return (count==text.length())? true:false;
+			if (!(text.charAt(i)==' '))
+				return false;
+			}
+		return true;
 	}
+	
 	public boolean addText(TextChecker newTypeOfCheck, String text){
 		return newTypeOfCheck.checkText(text);
 	}

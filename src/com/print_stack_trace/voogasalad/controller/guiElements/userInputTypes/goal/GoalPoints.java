@@ -2,6 +2,7 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.g
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GoalObject;
+import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
 
 
 public class GoalPoints extends GoalCharacteristicController {
@@ -21,7 +22,7 @@ public class GoalPoints extends GoalCharacteristicController {
 			points =Integer.parseInt(newValue);
 		}
 		catch(NumberFormatException e){
-			
+			new MessagePopUp().showMessageDialog("NOT A NUMBER");
 		}
 		((GoalObject)mySprite).getCharacteristics().setPointsTotal(points);
 		mySprite.getDelegate().update((GoalObject) mySprite);

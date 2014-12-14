@@ -30,6 +30,7 @@ public interface ViewObjectDelegate {
 	void deleteObject(SpriteObject object);
 	void extendRight();
 	void extendDown();
+	void extendUp();
 	public SimpleObjectProperty<LevelObject> currentLevelProperty();
 	void actionToCurrentLevelSprites(ObjectAction action);
 	void actionToAllLevels(ObjectAction object);

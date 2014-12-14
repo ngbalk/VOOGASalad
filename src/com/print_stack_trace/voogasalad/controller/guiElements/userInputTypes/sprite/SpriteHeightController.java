@@ -9,24 +9,24 @@ import javax.swing.JOptionPane;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
 
-public class SpriteHeightController extends SpriteCharacteristicController{
+public class SpriteHeightController extends NumberController{
 	public SpriteHeightController(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
-	}
-	@Override	
-	protected void setCharacteristic(String newValue){
-		double newHeight = ((SpriteObject)mySprite).getCharacteristics().getHeight();
-		try{
-			newHeight = Double.parseDouble(newValue);
-		}
-		catch(NumberFormatException e){
-			
-		}
-		((SpriteObject) mySprite).setSpriteHeight(newHeight);
 	}
 	@Override 
 	protected void populateDefaultText(){
 		myTextBox.setText(Double.toString(((SpriteObject)mySprite).getCharacteristics().getHeight()));
 	}
-
+	@Override
+	protected Number getIntegerCharacteristic() {
+		return ((SpriteObject)mySprite).getCharacteristics().getHeight();
+	}
+	@Override
+	protected Number parseNumber(String value) {
+		return Double.parseDouble(value);
+	}
+	@Override
+	protected void setCharacteristic(Number value) {
+		((SpriteObject) mySprite).setSpriteHeight(value.doubleValue());
+	}
 }

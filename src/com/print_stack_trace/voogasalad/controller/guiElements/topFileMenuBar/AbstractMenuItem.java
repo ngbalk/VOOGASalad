@@ -13,7 +13,7 @@ public abstract class AbstractMenuItem extends MenuItem {
 		this(name, null, null);
 		this.setOnAction(e->doAction());
 	}
-	
+
 	public AbstractMenuItem(String name, AbstractViewDelegate delegate,
 			ViewObjectDelegate game) {
 		setText(name);

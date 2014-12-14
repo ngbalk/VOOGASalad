@@ -32,7 +32,6 @@ public class GameMainLayoutNode extends AbstractLayoutNode{
 
 	@Override
 	public Number getWidth() {
-		// TODO Auto-generated method stub
 		return ((GamePane) myNode).getPrefWidth();
 	}
 

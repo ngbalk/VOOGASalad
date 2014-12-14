@@ -21,14 +21,9 @@ public class DraggableItem {
 	private double myHeight;
 	private double gridWidth;
 	private double gridHeight;
-	private double initialWidth;
-
-	private ReadOnlyDoubleProperty scrollHVal;
-	private ReadOnlyDoubleProperty scrollVVal;
 	private double startX;
 	private double startY;
-	private int buffer=30;
-	public DraggableItem(SpriteObject item, ReadOnlyDoubleProperty width, ReadOnlyDoubleProperty height, ReadOnlyDoubleProperty hVal, ReadOnlyDoubleProperty vVal, SimpleDoubleProperty x, SimpleDoubleProperty y){
+	public DraggableItem(SpriteObject item, ReadOnlyDoubleProperty width, ReadOnlyDoubleProperty height, SimpleDoubleProperty x, SimpleDoubleProperty y){
 		myItem=item;
 		myWidth=item.getImage().getFitWidth();
 		myHeight=item.getImage().getFitHeight();
@@ -36,8 +31,6 @@ public class DraggableItem {
 		gridHeight=height.getValue().doubleValue();
 		startX=x.getValue().doubleValue();
 		startY=y.getValue().doubleValue();
-		scrollHVal=hVal;
-		scrollVVal=vVal;
 		addListener(x, (toChange)->changeX(toChange));
 		addListener(y, (toChange)->changeY(toChange));
 		addListener(myItem.getObservableWidth(), (toChange)->changeWidth(toChange));
@@ -92,13 +85,10 @@ public class DraggableItem {
 			}
 		});
 	}
-
-
 	private void translate(){
 		myItem.setSpriteX(myX-myWidth/2);
 		myItem.setSpriteY(myY-myHeight/2);
 	}
-
 	private boolean outOfBounds(Point myLocation){
 		return (myLocation.x> (gridWidth-(myWidth/2))||(myLocation.x<startX)||(myLocation.y>gridHeight)|| (myLocation.y<startY));
 	}

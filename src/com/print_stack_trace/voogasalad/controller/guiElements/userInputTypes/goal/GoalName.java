@@ -18,7 +18,7 @@ public class GoalName extends GoalCharacteristicController{
 	protected void setCharacteristic(String newValue) {
 		if (!isNull()){
 			((GoalObject) mySprite).getCharacteristics().setName(newValue);
-			((GoalObject) mySprite).getDelegate().update((GoalObject)mySprite);
+			mySprite.update();
 		}
 	}
 	

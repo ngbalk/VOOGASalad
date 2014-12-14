@@ -18,7 +18,6 @@ public abstract class GoalCharacteristicController extends CharacteristicControl
 	public GoalCharacteristicController(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 	}
-	
 	abstract protected void populateDefaultText();
 	
 	abstract protected void setCharacteristic(String newValue);

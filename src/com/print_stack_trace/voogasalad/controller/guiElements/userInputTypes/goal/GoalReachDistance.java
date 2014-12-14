@@ -28,27 +28,17 @@ public class GoalReachDistance extends GoalCharacteristicController {
 			dest =Double.parseDouble(newValue);
 		}
 		catch(NumberFormatException e){
-
+			new MessagePopUp().showMessageDialog("NOT A NUMBER");
 		}
-		if (direction.equals("UP")){
+		if (direction.equals("UP") || direction.equals("DOWN")){
 			((GoalObject) mySprite).getCharacteristics().setHorizontalDestination(false);
-			((GoalObject)mySprite).getCharacteristics().setDestination(dest);
-		}
-		else if (direction.equals("DOWN")){
-			((GoalObject) mySprite).getCharacteristics().setHorizontalDestination(false);
-			((GoalObject)mySprite).getCharacteristics().setDestination(dest);
-		}
-		else if (direction.equals("RIGHT")){
-			((GoalObject) mySprite).getCharacteristics().setHorizontalDestination(true);
 			((GoalObject)mySprite).getCharacteristics().setDestination(dest);
 		}
 		else {
 			((GoalObject) mySprite).getCharacteristics().setHorizontalDestination(true);
 			((GoalObject)mySprite).getCharacteristics().setDestination(dest);
 		}		
-
-		mySprite.getDelegate().update((GoalObject) mySprite);
-
+		mySprite.update();
 	}
 
 	private String[] getResource(){

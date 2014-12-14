@@ -31,7 +31,9 @@ public abstract class SpriteUserInputDropDown extends UserInputDropDownMenu{
 		});
 	}
 
-	protected abstract void observableFunction();
+	protected void observableFunction(){
+		loadInitial();
+	}
 	protected void loadInitial(){
 		Object type=getCharacteristicType();
 		for (String menuItemName: menuMap.keySet()){

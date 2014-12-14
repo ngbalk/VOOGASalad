@@ -12,7 +12,7 @@ public class TextDialogBox extends AbstractDialogBox<TextField> {
 	public TextDialogBox(TextField e) {
 		super(constructorConvert(e));
 	}
-	
+
 	public TextDialogBox(List<TextField> e) {
 		super(e);
 	}
