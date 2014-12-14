@@ -3,6 +3,8 @@ package com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
@@ -10,8 +12,8 @@ import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 public class ExtendDirection {
 	private LevelCharacteristics myLevelCharacteristics;
 	private ViewObjectDelegate myGame;
-	private ImageView myBackground;
-	public ExtendDirection(LevelObject level, ViewObjectDelegate gamePane, ImageView background){
+	private Node myBackground;
+	public ExtendDirection(LevelObject level, ViewObjectDelegate gamePane, Node background){
 		myLevelCharacteristics=(level!=null)? level.getCharacteristics(): null;
 		myBackground=background;
 		myGame=gamePane;
@@ -22,7 +24,7 @@ public class ExtendDirection {
 					.incrementHorizontalPaneCount();
 			int currentVerticalPaneCount = myLevelCharacteristics
 					.getVerticalPaneCount();
-			myGame.setProgramWidth(myBackground.getFitWidth()
+			myGame.setProgramWidth(getWidth()
 					* newHorizontalPaneCount);
 			extend(newHorizontalPaneCount, currentVerticalPaneCount,
 					(view, horizontal, vertical)->extendHorizontal(view, horizontal, vertical));
@@ -34,47 +36,71 @@ public class ExtendDirection {
 					.incrementVerticalPaneCount();
 			int currentHorizontalPaneCount = myLevelCharacteristics
 					.getHorizontalPaneCount();
-			myGame.setProgramHeight(myBackground.getFitHeight()
-					* newVerticalPaneCount);
+			myGame.setProgramHeight(this.getHeight()*
+					newVerticalPaneCount);
 			extend(currentHorizontalPaneCount, newVerticalPaneCount,
 					(view, horizontal, vertical)->extendVertical(view, horizontal, vertical));
 		}
 	}
 
 	private void extendHorizontal(Node view, int horizontal, int vertical){
-		view.relocate(((ImageView) view).getFitWidth()
+		view.relocate(getWidth()
 				* (horizontal - 1),
-				((ImageView) view).getFitHeight() * (vertical-1));
+				getHeight() * (vertical-1));
 	}
+
 	private void extendVertical(Node view, int horizontal, int vertical){
-		view.relocate(((ImageView) view).getFitWidth()
-				* (horizontal-1), ((ImageView) view).getFitHeight()
+		view.relocate(getWidth()
+				* (horizontal-1), getHeight()
 				* (vertical - 1));
 	}
 
 	private void extend(int numToExtend, int notChanged, Extend toExtend){
-		myGame.setProgramHeight(myBackground.getFitHeight()
-				* notChanged);
 		for (int i = 1; i <= numToExtend; i++) {
-			ImageView copyView = duplicateBackgroundImage();
+			Node copyView = duplicateBackgroundImage();
 			toExtend.extend(copyView,i, notChanged);
 			myGame.addBackground(copyView);
 		}
 	}
 
-	private ImageView duplicateBackgroundImage(){
-		ImageView backgroundImageView = myBackground;
-		ImageView backgroundImageViewCopy = new ImageView(
-				backgroundImageView.getImage());
-		backgroundImageViewCopy.setFitHeight(backgroundImageView
-				.getFitHeight());
-		backgroundImageViewCopy.setFitWidth(backgroundImageView
-				.getFitWidth());
-		backgroundImageViewCopy.setSmooth(true);
-		return backgroundImageViewCopy;
+	private Node duplicateBackgroundImage(){
+		if (myBackground instanceof ImageView){
+			ImageView backgroundImageView = (ImageView)myBackground;
+			ImageView backgroundImageViewCopy = new ImageView(
+					backgroundImageView.getImage());
+			backgroundImageViewCopy.setFitHeight(backgroundImageView
+					.getFitHeight());
+			backgroundImageViewCopy.setFitWidth(backgroundImageView
+					.getFitWidth());
+			backgroundImageViewCopy.setSmooth(true);
+			return backgroundImageViewCopy;
+		}
+		Pane copyPane= new Pane();
+		Pane toCopy=(Pane) myBackground;
+		copyPane.setPrefSize(toCopy.getWidth(), toCopy.getHeight());
+		copyPane.setStyle(toCopy.styleProperty().getValue());
+		return copyPane;
+		
+
 	}
 	private boolean isLevelNull(){
 		return (myLevelCharacteristics!=null)? (myLevelCharacteristics.getBackgroundImagePath()==""):true;
+	}
+
+	private double getHeight(){
+		if (myBackground instanceof ImageView){
+			return ((ImageView)myBackground).getFitHeight();
+		}
+		else
+			return ((Pane) myBackground).getPrefHeight();
+	}
+
+	private double getWidth(){
+		if (myBackground instanceof ImageView){
+			return ((ImageView)myBackground).getFitWidth();
+		}
+		else
+			return ((Pane) myBackground).getPrefWidth();
 	}
 
 }
