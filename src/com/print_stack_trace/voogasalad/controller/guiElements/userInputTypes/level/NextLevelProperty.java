@@ -22,7 +22,8 @@ public class NextLevelProperty extends LevelProperty{
 	@Override
 	protected void linkMovement(String dataValue) {
 		((LevelObject)mySprite).getCharacteristics().setNextLevel(Integer.parseInt(dataValue));
-		((LevelObject) mySprite).getDelegate().update(((LevelObject)mySprite));
+		mySprite.update();
+		currentMenu.setText(dataValue);
 
 
 	}

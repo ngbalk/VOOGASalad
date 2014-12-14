@@ -13,11 +13,11 @@ import javafx.geometry.Point2D;
 public class GoalCharacteristics {
 
     private String myName="";
-    public GoalType myGoalType=GoalType.POINTS;
-    public Integer myObjectID = 0;
+    private GoalType myGoalType=GoalType.POINTS;
+    private Integer myObjectID = 0;
     private List<Integer> myObjectiveID = new ArrayList<>();
-    public Integer myPointTotal=0;
-    public double myDestination=0;
+    private Integer myPointTotal=0;
+    private double myDestination=0;
     private boolean myHorizontalDestination=true;
 
 
@@ -70,4 +70,7 @@ public class GoalCharacteristics {
 	public GoalType getGoalType() {
 		return myGoalType;
 	}
+    public GoalType getMyGoalType () {
+        return myGoalType;
+    }
 }
