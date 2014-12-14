@@ -73,7 +73,6 @@ public class GameWorldModel {
     }
     
     public void setCurrentLevel(int index) {
-        System.out.println("INdex: " + index);
         if(index < FIRST_LEVEL_INDEX) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -84,7 +83,6 @@ public class GameWorldModel {
     }
     
     public LevelModel getNextLevel() {
-        System.out.println(currentLevelIndex);
         currentLevelIndex++;
         return levelMap.get(currentLevelIndex);
     }

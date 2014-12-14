@@ -72,7 +72,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     //-------------------PUBLIC METHODS-------------------//
 
     private void getNextLevel() {
-        System.out.println(gameWorld);
         currentLevel = gameWorld.getNextLevel();
         if(currentLevel == null){
             runtimeModel.gameTotallyOver = true;
@@ -101,7 +100,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         int reqGoals = runtimeModel.getLevelCharacteristics().requiredNumberOfGoals;
         if (reqGoals > 0) {
             if(completedCount >= runtimeModel.getLevelCharacteristics().requiredNumberOfGoals) {
-                System.out.println("YOU WIN");
                 runtimeModel.gameOver = true;
                 runtimeModel.gameVictory = true;
                 getNextLevel();
@@ -109,7 +107,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
         }
 		RuntimeSpriteCharacteristics mainChar = runtimeModel.getRuntimeSpriteMap().get(runtimeModel.mainChar);
 		if(gameOver(mainChar)){
-			System.out.println("YOU DIED BITCH");
 			runtimeModel.gameOver = true;
 			runtimeModel.gameVictory = false;
 		}
@@ -162,7 +159,6 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 	}
 
 	private void handleKey(KeyEvent event, boolean press) {
-//		System.out.println("checking keycode");
 		KeyResult res = runtimeModel.getResultOfKey(event.getCode());
 		KeyApplicator applicator = applicatorCache.get(res);
 		Integer mainChar = runtimeModel.getMainCharacter();
@@ -173,13 +169,9 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
 		}
 		if(press && KeyApplicationChecker.doesKeyApply(res, mainCharData)) {
 			applicator.applyPressActionToRuntimeSprite(mainCharData);
-			//SET POSSIBLE SPRITE ACTION OF MAIN CHARACTER
-			//mainCharData.setPossibleSpriteAction(res);
 		}
 		else{
 			applicator.applyReleaseActionToRuntimeSprite(mainCharData);
-			//RESET SPRITE ACTION AFTER KEY RELEASE
-			//mainCharData.setPossibleSpriteAction(null);
 			return;
 		}
 	}

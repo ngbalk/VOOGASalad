@@ -15,6 +15,7 @@ public class ObjectOnePassThroughTop extends CollisionHandler {
     public void applyCollisionEffects (RuntimeSpriteCharacteristics s1,
                                        RuntimeSpriteCharacteristics s2,
                                        RuntimeModel currentRuntime) {
+        
 	        if(s1.v_y > 0 && Math.abs(s1.v_y) < Math.abs(s1.v_x)) {
 	            noAction .applyCollisionEffects(s1, s2, currentRuntime);
 	            shouldStick = false;

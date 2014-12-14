@@ -38,7 +38,6 @@ public class GoalChecker implements GoalElementVisitor {
 		double heroPosition = 0;
 		if(goal.isHorizontal()){
 			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getX();
-			System.out.println("HERO X POS:    " + heroPosition);
 		}
 		else{
 			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getY();

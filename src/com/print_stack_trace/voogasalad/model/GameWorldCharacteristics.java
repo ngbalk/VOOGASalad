@@ -24,12 +24,14 @@ public class GameWorldCharacteristics {
     
     
     //-------------------ACCESSORS-------------------//
+	public String getName() {
+		return gameTitle;
+	}
     public String getGameTitle() {
         return gameTitle;
     }
     public void setGameTitle(String gameTitle) {
         this.gameTitle = gameTitle;
-    }    
-
+    }
 
 }
