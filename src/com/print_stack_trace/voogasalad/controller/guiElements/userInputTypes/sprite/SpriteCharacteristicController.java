@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public abstract class SpriteCharacteristicController extends CharacteristicController {
+	
 	public SpriteCharacteristicController(String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 	}

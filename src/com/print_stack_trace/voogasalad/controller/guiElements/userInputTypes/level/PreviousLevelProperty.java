@@ -1,47 +1,23 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.level;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
-import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 
-public class PreviousLevelProperty extends UserInputDropDownMenu{
+
+public class PreviousLevelProperty extends LevelProperty{
 	public PreviousLevelProperty (String[] values,  double width, double height, double x, double y, GameObject object){
 		super(values, width, height, x, y, object);
 		createDataMap();
 	}
-
 	@Override
 	protected void linkMovement(String dataValue) {
 		((LevelObject) mySprite).getCharacteristics().setPreviousLevel(Integer.parseInt(dataValue));
-		((LevelObject) mySprite).getDelegate().update(((LevelObject)mySprite));
+		mySprite.update();
 	}
-	private void createDataMap(){
-		if (mySprite.getDelegate()!=null){
-			mySprite.getDelegate().currentLevelProperty().addListener(new ChangeListener<LevelObject>(){
-				@Override
-				public void changed(ObservableValue<? extends LevelObject> arg0, LevelObject arg1, LevelObject arg2) {
-					mySprite.getDelegate().actionToAllLevels((type)->addData(type));
-				}
-			});
-		}
-	}
-	private void addData(Object toAdd){
-		if (toAdd instanceof LevelObject){
-			LevelObject myObject=(LevelObject)toAdd;
-			data.put(myObject.getID()+"",myObject.getCharacteristics().getName());
-			addMenu(myObject.getID()+"");
-		}
-	}
-
 }
 
 

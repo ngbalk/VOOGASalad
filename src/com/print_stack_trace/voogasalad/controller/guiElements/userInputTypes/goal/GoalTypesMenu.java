@@ -21,36 +21,36 @@ public class GoalTypesMenu extends UserInputDropDownMenu {
 		currentMenu.setText("Pick type of Goal");
 		myResourceReader=new ResourceReader("./com/print_stack_trace/voogasalad/controller/guiResources/GoalTypes.Properties");
 		data=myResourceReader.getProperties();
-		addMenus();
-		
-		
-		
+		addMenus();	
 	}
+	
 	protected void linkMovement(String myName){
 		for (GoalType name: GoalType.values()){
 			if (name.name().equals(myName)){
 				((GoalObject) mySprite).setCharacteristics(name);
 				mySprite.getDelegate().update((GoalObject)mySprite);
-				this.setCurrent(myName);
+				setCurrent(myName);
 				Iterator<String> myIterator;
 				UserInputType myType=null;
 				Label myLabel=null;
-				if (this.canSplit(data.get(myName))){
+				if (canSplit(data.get(myName))){
 					myIterator=Arrays.asList(data.get(myName).split(";")).iterator();
 					myIterator.next();
 					String className=myIterator.next();
-					if (root.size()>=2){
-						this.myPanes.getChildren().remove(this.root.get(root.size()-1));
-					}
+					removeNode();
 					myType=(UserInputType) new Reflection().createInstance(className, value, myWidth, myHeight, myX, myY, mySprite);
 					this.makeLabel(myName,value[1],myWidth,myHeight, myX, myY, myType);
 				}
 				else{
-					if (root.size()>=2){
-						this.myPanes.getChildren().remove(this.root.get(root.size()-1));
-					}
+					removeNode();
 				}
 			}
+		}
+	}
+	
+	private void removeNode(){
+		if (root.size()>=2){
+			myPanes.getChildren().remove(this.root.get(root.size()-1));
 		}
 	}
 

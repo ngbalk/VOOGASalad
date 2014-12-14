@@ -10,12 +10,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public abstract class AbstractUserSplashScreen {
@@ -26,32 +21,44 @@ public abstract class AbstractUserSplashScreen {
 	protected Scene myScene;
 	protected HashMap<Integer,SplashScreenObject> myNodes=new HashMap<Integer,SplashScreenObject>();
 	protected EventHandler myEvent;
+	
 	public AbstractUserSplashScreen(String resourceName, Number width, Number height){
 		this(resourceName, width, height, null);
 		
 	}
+	
+	public AbstractUserSplashScreen(Number width, Number height){
+		this ("", width, height);
+	}
+	
 	public AbstractUserSplashScreen(String resource, Number width, Number height, EventHandler event){
 		this.initialize(width.doubleValue(), height.doubleValue());
-		myTimeline.setCycleCount(Timeline.INDEFINITE);
-		KeyFrame myKeyFrame=new KeyFrame(Duration.millis(1000/DEFAULT_FPS), e->update());
-		myTimeline.getKeyFrames().add(myKeyFrame);
 		myData=new ResourceReader(resource).getProperties();
 		myEvent=event;
+		
+		KeyFrame myKeyFrame=new KeyFrame(Duration.millis(1000/DEFAULT_FPS), e->update());
+		myTimeline.setCycleCount(Timeline.INDEFINITE);
+		myTimeline.getKeyFrames().add(myKeyFrame);
 		myTimeline.play();
+		
 		makeNode();
 		add();
 		update();
 	}
+	
 	public Scene getScene(){
 		return myScene;
 	}
-	public Scene  initialize(double width, double height){
+	
+	public Scene initialize(double width, double height){
 		myScene=new Scene(myGroup,width, height);
 		return myScene;	
 	}
+	
 	private EventHandler stopAnimation(){
 		return myEvent;
 	}
+	
 	private void update(){
 		int count=0;
 		for (Integer node: myNodes.keySet()){
@@ -64,6 +71,7 @@ public abstract class AbstractUserSplashScreen {
 			myTimeline.stop();
 		}
 	}
+	
 	private void add(){
 		int max=0;
 		for (Integer index: myNodes.keySet()){
@@ -75,6 +83,7 @@ public abstract class AbstractUserSplashScreen {
 			}
 		}
 	}
+	
 	private void makeNode(){
 		for (String key: myData.keySet()){
 			String [] values=myData.get(key).split(";");

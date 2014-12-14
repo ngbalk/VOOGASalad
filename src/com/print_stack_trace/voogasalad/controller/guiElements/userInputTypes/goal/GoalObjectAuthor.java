@@ -23,14 +23,13 @@ public class GoalObjectAuthor extends UserInputDropDownMenu{
 	protected void linkMovement(String dataValue) {
 		for (SpriteObject sprite: mySpriteData.get(dataValue)){
 			((GoalObject)mySprite).getCharacteristics().setObjectID(sprite.getID());;
-			((GoalObject) mySprite).getDelegate().update(((GoalObject)mySprite));
+			mySprite.update();
 		}
-
 	}
 	private void createDataMap(){
 		mySprite.getDelegate().actionToCurrentLevelSprites((type)->addData(type));
-
 	}
+	
 	private void addData(Object toAdd){
 		if (toAdd instanceof SpriteObject){
 			SpriteObject myObject=(SpriteObject) mySprite;

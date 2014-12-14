@@ -1,5 +1,7 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.splashScreen;
 
+import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
+
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -23,21 +25,19 @@ public class DuvallImage extends SplashScreenObject{
 			myImageView.relocate(myWidth/2-myImageView.getFitWidth()/2, myHeight/2-myImageView.getFitHeight()/2);
 			myImageView.setFitWidth(myImageView.getFitWidth()+speed);
 			myImageView.setRotate(myImageView.getRotate()+speed);
-			return true;
 		}
 		else if (myImageView.getRotate()<=360){
 			myImageView.setRotate(myImageView.getRotate()+speed);
-			return true;
 		}
-
-		return false;
-
-
+		
+		return (myImageView.getFitHeight()<=300||myImageView.getRotate()<=300);
 	}
 
 	@Override
 	public void addEnd(EventHandler event) {
-		Button startButton=new Button("Start");
+		String buttonName=new ResourceReader("./com/print_stack_trace/voogasalad/"
+				+ "controller/guiResources/MenuAndButtonLabels.Properties").getProperties().get("start");
+		Button startButton=new Button(buttonName);
 		startButton.relocate(myWidth-200, myHeight-300);
 		startButton.setPrefSize(100, 100);
 		startButton.setOnAction(event);

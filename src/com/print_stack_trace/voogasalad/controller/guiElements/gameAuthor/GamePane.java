@@ -54,7 +54,6 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	private ReadOnlyDoubleProperty scrollVValue=new SimpleDoubleProperty(0);
 	private ReadOnlyDoubleProperty scrollHValue=new SimpleDoubleProperty(0);
 	private String myStyle = "./com/print_stack_trace/voogasalad/controller/guiResources/SpritePane.css";
-	private GameWorldCharacteristics gameWorldCharacteristics = new GameWorldCharacteristics();
 	private HashMap<String,String> myMessages;
 
 	public GamePane(double width, double height, GameEngine gameEngine) {
@@ -290,6 +289,11 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		new ExtendDirection(levelTracker.getCurrentLevel(), this, getBackgroundPane()).extendDown();
 	}
 	@Override
+	public void extendUp() {
+		new ExtendDirection(levelTracker.getCurrentLevel(), this, getBackgroundPane()).extendUp();
+	}
+
+	@Override
 	public void actionToCurrentLevelSprites(ObjectAction action) {
 		levelTracker.currentLevelSprites(action);
 	}
@@ -326,4 +330,5 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		this.scrollVValue=vValue;
 		
 	}
+
 }

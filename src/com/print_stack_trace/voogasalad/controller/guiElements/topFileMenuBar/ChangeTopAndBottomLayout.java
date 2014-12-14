@@ -6,22 +6,14 @@ import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ViewOb
 public class ChangeTopAndBottomLayout extends AbstractMenuItem{
 
 	public ChangeTopAndBottomLayout(String name, AbstractViewDelegate delegate, ViewObjectDelegate game) {
-		super(name, delegate, game);
-		// TODO Auto-generated constructor stub
-	}
+		super(name, delegate, game);}
 
-	public ChangeTopAndBottomLayout(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
-	}
+	public ChangeTopAndBottomLayout(String name) {super(name);}
 
 	@Override
 	public void doAction() {
 		if (myDelegate!=null){
 			myDelegate.switchTopAndBottomNode();
 		}
-
 	}
-
-
 }
