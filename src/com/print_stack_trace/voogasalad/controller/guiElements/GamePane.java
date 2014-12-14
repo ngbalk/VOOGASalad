@@ -31,6 +31,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.PhysicsEngine;
 import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerator.ProgramPhysicEngine;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
+import com.print_stack_trace.voogasalad.utilities.FileLoadUtility;
 
 public class GamePane extends Pane implements ViewObjectDelegate {
 	private double myWidth;
@@ -387,12 +388,9 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	}
 
 	public GameWorldModel loadGameWorldModelFromFile() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Load Game");
-		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")
-				+ "/src/com/print_stack_trace/voogasalad/model/data/"));
-		Stage newStage = new Stage();
-		File file = fileChooser.showOpenDialog(newStage);
+		File file = FileLoadUtility.loadFile(
+				System.getProperty("user.dir") +
+				"/src/com/print_stack_trace/voogasalad/model/data/");
 		if (file != null) {
 			try {
 				return myGameEngine.loadGameFromFile(file);

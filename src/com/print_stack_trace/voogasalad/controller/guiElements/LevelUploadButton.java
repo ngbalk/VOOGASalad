@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import com.print_stack_trace.voogasalad.utilities.FileLoadUtility;
+
 
 public class LevelUploadButton extends UserInputButton {
 	public LevelUploadButton(){
@@ -21,14 +23,8 @@ public class LevelUploadButton extends UserInputButton {
 		((Button) myNode).setText("Upload Level");
 	}
 	public File doAction(){
-		Stage stage=new Stage();
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Select Level File");
-		fileChooser.setInitialDirectory(new File("./"));
-		File file = fileChooser.showOpenDialog(stage);
-		if(file != null && (file.getName().toUpperCase().contains(".TXT"))){
-			return file;
-		}
-		return null;
+		return FileLoadUtility.loadTextFile(
+				System.getProperty("user.dir") +
+				"/src/com/print_stack_trace/voogasalad/model/data/");
 	}
 }

@@ -23,7 +23,6 @@ public class SpriteWidthController extends SpriteCharacteristicController{
 		catch(NumberFormatException e){
 			
 		}
-		System.out.println(newWidth);
 		mySprite.getImage().setFitWidth(newWidth);
 		mySprite.getImage().setPreserveRatio(false);
 		((SpriteObject)mySprite).getCharacteristics().setWidth(newWidth);

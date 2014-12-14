@@ -37,7 +37,6 @@ public class LevelBar extends MenuBar{
 			public void changed(ObservableValue<? extends LevelObject> arg0,
 					LevelObject arg1, LevelObject current) {
 				MenuItem myLevel=new MenuItem(current.getCharacteristics().getName());
-				System.out.println(myAddEvent.getValue());
 				myLevel.setOnAction(myAddEvent.getValue());
 				levelMenu.getItems().add(myLevel);
 				myLevelMap.put(current, myLevel);
