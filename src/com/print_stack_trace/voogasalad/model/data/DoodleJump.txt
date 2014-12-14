@@ -394,33 +394,6 @@
             "Default": []
           }
         },
-        "14": {
-          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/breakingplatform.png",
-          "p": {
-            "x": 460,
-            "y": -700
-          },
-          "interactive": false,
-          "objectType": "REWARD",
-          "startingHealth": 10,
-          "startingSpeed": 10.0,
-          "value": 0,
-          "orientation": 0.0,
-          "name": "",
-          "width": 200.0,
-          "height": 20.0,
-          "doubleJump": false,
-          "damageDealt": 5,
-          "myMovements": {},
-          "myAnimations": {
-            "Up": [],
-            "Jump": [],
-            "Left": [],
-            "Right": [],
-            "Down": [],
-            "Default": []
-          }
-        },
         "15": {
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
           "p": {
@@ -529,33 +502,6 @@
             "Default": []
           }
         },
-        "19": {
-          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/breakingplatform.png",
-          "p": {
-            "x": -120,
-            "y": -930
-          },
-          "interactive": false,
-          "objectType": "REWARD",
-          "startingHealth": 10,
-          "startingSpeed": 10.0,
-          "value": 0,
-          "orientation": 0.0,
-          "name": "",
-          "width": 200.0,
-          "height": 20.0,
-          "doubleJump": false,
-          "damageDealt": 5,
-          "myMovements": {},
-          "myAnimations": {
-            "Up": [],
-            "Jump": [],
-            "Left": [],
-            "Right": [],
-            "Down": [],
-            "Default": []
-          }
-        },
         "20": {
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/spikes.png",
           "p": {
@@ -587,37 +533,10 @@
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
           "p": {
             "x": -210,
-            "y": -1250
+            "y": -1150
           },
           "interactive": false,
           "objectType": "PLATFORM",
-          "startingHealth": 10,
-          "startingSpeed": 10.0,
-          "value": 0,
-          "orientation": 0.0,
-          "name": "",
-          "width": 200.0,
-          "height": 20.0,
-          "doubleJump": false,
-          "damageDealt": 5,
-          "myMovements": {},
-          "myAnimations": {
-            "Up": [],
-            "Jump": [],
-            "Left": [],
-            "Right": [],
-            "Down": [],
-            "Default": []
-          }
-        },
-        "22": {
-          "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/spikes.png",
-          "p": {
-            "x": 150,
-            "y": -1108
-          },
-          "interactive": false,
-          "objectType": "OBSTACLE",
           "startingHealth": 10,
           "startingSpeed": 10.0,
           "value": 0,
@@ -668,7 +587,7 @@
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/breakingplatform.png",
           "p": {
             "x": 458,
-            "y": -1450
+            "y": -1400
           },
           "interactive": false,
           "objectType": "REWARD",
@@ -695,7 +614,7 @@
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
           "p": {
             "x": 150,
-            "y": -1620
+            "y": -1560
           },
           "interactive": false,
           "objectType": "PLATFORM",
@@ -722,7 +641,7 @@
           "imagePath": "./com/print_stack_trace/voogasalad/controller/images/ObstacleImages/brick.png",
           "p": {
             "x": 330,
-            "y": -1750
+            "y": -1720
           },
           "interactive": false,
           "objectType": "PLATFORM",
