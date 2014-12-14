@@ -1,4 +1,4 @@
-package com.print_stack_trace.voogasalad.utilities;
+package com.print_stack_trace.voogasalad.utilities.twillio;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

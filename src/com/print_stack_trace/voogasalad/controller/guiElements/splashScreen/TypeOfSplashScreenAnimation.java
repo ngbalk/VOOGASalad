@@ -1,9 +1,8 @@
 package com.print_stack_trace.voogasalad.controller.guiElements.splashScreen;
-
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
 import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
-import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 import javafx.scene.Group;
 

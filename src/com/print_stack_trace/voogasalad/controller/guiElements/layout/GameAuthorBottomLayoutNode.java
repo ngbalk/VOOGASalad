@@ -3,7 +3,6 @@ package com.print_stack_trace.voogasalad.controller.guiElements.layout;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import com.print_stack_trace.voogasalad.controller.guiElements.buttons.AbstractButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.buttons.DecisionTableButton;
 import com.print_stack_trace.voogasalad.controller.guiElements.buttons.LevelExtendDownButton;
@@ -16,8 +15,7 @@ import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ViewOb
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
-import com.print_stack_trace.voogasalad.utilities.Reflection;
-
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;

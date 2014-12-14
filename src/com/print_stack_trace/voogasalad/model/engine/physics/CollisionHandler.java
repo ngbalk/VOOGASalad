@@ -20,4 +20,6 @@ public abstract class CollisionHandler {
 	 * @param s2	the second "sprite" to have collision effects applied
 	 */
 	public abstract void applyCollisionEffects(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime);
+
+	public abstract boolean shouldStick(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2);
 }

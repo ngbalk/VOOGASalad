@@ -10,16 +10,7 @@ import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.Re
 import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputDropDownMenu;
 import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.UserInputType;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory.GoalType;
-import com.print_stack_trace.voogasalad.utilities.Reflection;
-
-
-
-
-
-
-
-
-
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 
 import javafx.scene.control.Label;
 
