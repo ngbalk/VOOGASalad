@@ -18,7 +18,12 @@ import com.print_stack_trace.voogasalad.model.engine.physics.SoloPhysicsGenerato
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory;
 import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactory.CameraType;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
-
+/**
+ * Interface containing the necessary methods that someone would need to implement if they wanted
+ * to create their own game author engine 
+ * @author Ethan Chang, Jack Baskin, Nick Widmaiwer, Zach Podbela
+ *
+ */
 public interface IGameAuthorEngine {
 
 	public GameWorldModel getGameWorldModel();
