@@ -32,7 +32,7 @@ public class FileLoadUtility {
 	 * The default variables include sets for file extension groups and paths.
 	 * These are used in subcalls for the argumentless method calls.
 	 */
-	public static final HashSet<String> DEFAULT_IMAGE_EXTENTIONS = new HashSet<String>(Arrays.asList(".JPG",".PNG","JPEG"));
+	public static final HashSet<String> DEFAULT_IMAGE_EXTENTIONS = new HashSet<String>(Arrays.asList(".JPG", ".PNG", ".JPEG"));
 	public static final HashSet<String> DEFAULT_TEXT_EXTENTIONS = new HashSet<String>(Arrays.asList(".TXT",".MD"));
 	public static final String DEFAULT_DIRECTORY_PATH = "./";
 	
@@ -89,7 +89,9 @@ public class FileLoadUtility {
      */
 	public static File loadImageFile(String directoryPath) {
 		File file = loadFile(directoryPath);
-		if(file != null && !DEFAULT_IMAGE_EXTENTIONS.contains(file.getName().toUpperCase())) {
+		if(file != null && !DEFAULT_IMAGE_EXTENTIONS.contains((file.getName().toUpperCase().substring(
+				file.getName().length()-3)))&& !DEFAULT_IMAGE_EXTENTIONS.contains((file.getName().toUpperCase().substring(
+						file.getName().length()-4)))) {
 			file = null;
 			ViewController.displayError(new InvalidImageFileException());
 		}

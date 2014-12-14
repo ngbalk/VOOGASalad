@@ -11,7 +11,6 @@ public class LevelExtendDownButton extends AbstractButton {
 	@Override
 	protected void behavior() {
 		this.myViewObjectDelegate.extendDown();
-
 	}
 
 }

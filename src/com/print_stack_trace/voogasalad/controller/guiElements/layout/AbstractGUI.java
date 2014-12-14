@@ -3,7 +3,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.AbstractViewDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.GamePane;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ScrollBarPane;
 import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
@@ -22,17 +21,18 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 	private double myHeight;
 	private Node focusPane=new Pane();
 	protected String myStyle;
-	HashMap<String, String> locations=new HashMap<String, String>();
-	HashMap<LayoutNodeLocation, LayoutNode> layouts=new HashMap<LayoutNodeLocation, LayoutNode>();
+	private HashMap<String, String> locations=new HashMap<String, String>();
+	private HashMap<LayoutNodeLocation, LayoutNode> layouts=new HashMap<LayoutNodeLocation, LayoutNode>();
 	protected final static String DEFAULT_LAYOUT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/GUILayout.Properties";
+	
 	public AbstractGUI(Number width, Number height){
 		setPrefSize(width.doubleValue(), height.doubleValue());
 		myWidth= width.doubleValue();
 		myHeight=height.doubleValue();
 		createLayout();
 		makeLayoutMap();
-
 	}
+	
 	public enum LayoutNodeLocation{
 		CENTER,
 		LEFT,
@@ -40,21 +40,29 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 		TOP,
 		BOTTOM
 	}
+	
+	/**
+	 * Creates a Map with the LayoutNodeEnum as the keys
+	 */
 	private void createLayout(){
 		for (LayoutNodeLocation loc: LayoutNodeLocation.values()){
 			locations.put(loc.name(), null);
 		}
 	}
-
+	
+	/**
+	 * Sets the center Node of a GUI 
+	 * @param engine The backend (engine) of a GUI
+	 * @return The Center/Main Node of a GUI
+	 */
 	protected Node setCenterPane(Object engine){
-
 		focusPane=styleNode(createNode(LayoutNodeLocation.CENTER,locations.get(LayoutNodeLocation.CENTER.name()), engine));
 		ScrollBarPane myScroll=new ScrollBarPane(myWidth, myHeight, focusPane);
-		((GamePane) focusPane).addScrollBarValues(myScroll.hmaxProperty(), myScroll.hvalueProperty());
 		setBorderAndBackgroundStyle(focusPane);
 		return myScroll;
 	}
-
+	
+	
 	protected Node setTopPane(Object engine){
 		return createNode(LayoutNodeLocation.TOP,locations.get(LayoutNodeLocation.TOP.name()), engine);	
 	}
@@ -70,6 +78,14 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 	protected Node setRightPane(Object engine){
 		return createNode(LayoutNodeLocation.RIGHT,locations.get(LayoutNodeLocation.RIGHT.name()), engine);
 	}
+	
+	/**
+	 * Creates a Node based on the location and a properties file
+	 * @param loc			LayouNodeLocationEnum with the specific location for a Node
+	 * @param value			Value of Properties File with the className of a Node, and the width and height of that Node
+	 * @param engine		Game Engine (Backend) of the GUI
+	 * @return				Node to be added
+	 */
 	private Node createNode(LayoutNodeLocation loc, String value, Object engine){
 		String className=value;
 		double width=0;
@@ -93,6 +109,10 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 		}
 		return styleNode;
 	}
+	
+	/**
+	 * Makes a Map with the Keys being the Location and the Values being the Properties of a Node to that Location
+	 */
 	protected void makeLayoutMap(){
 		ResourceReader myResource=new ResourceReader(DEFAULT_LAYOUT_RESOURCE);
 		HashMap<String, String> typeOfLayout=myResource.getProperties();
@@ -118,11 +138,9 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 		root.getChildren().add(this);
 		((GamePane) focusPane).setXProperty(layouts.get(LayoutNodeLocation.LEFT).getWidth().doubleValue());
 		((GamePane) focusPane).setYProperty(layouts.get(LayoutNodeLocation.TOP).getHeight().doubleValue());
-		
 		return root;
 	}
-	public void open(){};
-	public void save(){};
+	
 	public void switchRightAndLeftNode(){
 		Node myRight=this.getRight();
 		Node myLeft=this.getLeft();
@@ -135,9 +153,8 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 		layouts.put(LayoutNodeLocation.RIGHT, leftNode);
 		layouts.put(LayoutNodeLocation.LEFT, rightNode);
 		((GamePane) focusPane).setXProperty(layouts.get(LayoutNodeLocation.LEFT).getWidth().doubleValue());
-		
-		
 	}
+	
 	public void switchTopAndBottomNode(){
 		Node myTop=this.getTop();
 		Node myBottom=this.getBottom();
@@ -150,7 +167,5 @@ public abstract class AbstractGUI extends BorderPane implements AbstractViewDele
 		layouts.put(LayoutNodeLocation.TOP, bottomNode);
 		layouts.put(LayoutNodeLocation.BOTTOM, topNode);
 		((GamePane) focusPane).setYProperty(layouts.get(LayoutNodeLocation.TOP).getHeight().doubleValue());
-		
-		
 	}
 }

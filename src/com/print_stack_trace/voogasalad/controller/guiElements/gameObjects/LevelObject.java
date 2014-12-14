@@ -6,6 +6,7 @@ import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.ViewOb
 import com.print_stack_trace.voogasalad.controller.popUpPanes.PaneChooser;
 import com.print_stack_trace.voogasalad.model.LevelCharacteristics;
 
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -14,13 +15,10 @@ import javafx.scene.paint.Color;
 public class LevelObject extends GameObject{
 	private LevelCharacteristics myCharacteristics;
 	private Pane colorPane;
-	private ArrayList<ImageView> myImages=new ArrayList<ImageView>();
-	private ArrayList<Pane> myColorPanes=new ArrayList<Pane>();
-	
 	public LevelObject(String imagePath, ViewObjectDelegate myDelegate) {
 		this(imagePath, myDelegate, new LevelCharacteristics());
 	}
-	
+
 	public LevelObject(String imagePath, ViewObjectDelegate myDelegate, LevelCharacteristics levelCharacteristics) {
 		super(imagePath, myDelegate);
 		myCharacteristics = levelCharacteristics;
@@ -32,26 +30,25 @@ public class LevelObject extends GameObject{
 		createPane();
 		getImage().setOnMouseClicked(e->showPane());
 	}
-	
+
 	public LevelObject(String imagePath) {
 		super(imagePath);
 	}
-	
+
 	public LevelCharacteristics getCharacteristics(){
 		return myCharacteristics;
 	}
-	
+
 	private void setImageView(ImageView myView){
 		myImage=myView;
 		getImage().setOnMouseClicked(e->showPane());
 	}
-	
 	public void setImageViewWithImage(ImageView view, String path){
 		setImageView(view);
 		setImage(path);
 		getColorPane().setVisible(false);
 	}
-	
+
 	public void setColorPane(String color){
 		setImage(null);
 		myImage.setVisible(false);
@@ -60,11 +57,11 @@ public class LevelObject extends GameObject{
 		colorPane.setStyle("-fx-background-color: #"+color);
 		update();
 	}
-	
+
 	public Pane getColorPane (){
 		return colorPane;
 	}
-	
+
 	@Override
 	public void update() {
 		myDelegate.update(this);
@@ -83,7 +80,7 @@ public class LevelObject extends GameObject{
 		getCharacteristics().setBackground(getImage().getImage());
 		return getImage();
 	}
-	
+
 	@Override
 	public void setImageCharacteristics() {
 		myCharacteristics.setBackgroundImagePath(myImagePath);	

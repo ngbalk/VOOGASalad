@@ -2,7 +2,6 @@ package com.print_stack_trace.voogasalad.controller.guiElements.layout;
 
 import java.util.HashMap;
 
-import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.AbstractViewDelegate;
 import com.print_stack_trace.voogasalad.controller.guiElements.resourceReader.ResourceReader;
 
 import javafx.scene.Node;
@@ -14,7 +13,6 @@ public abstract class AbstractLayoutNode implements LayoutNode {
 	public AbstractLayoutNode(double width, double height, Node focus, Object engine, AbstractViewDelegate delegate){
 		myResource=new ResourceReader(DEFAULT_RESOURCE).getProperties();
 		this.initialize(width, height, focus, engine, delegate);
-		
 	}
 	@Override
 	public Node show(){
