@@ -200,7 +200,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 				(type)->this.getChildren().add((Node)type));
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
-		myGameEngine.setCurrentLevel(currentLevel.getCharacteristics().ID);
+		myGameEngine.setCurrentLevel(currentLevel.getCharacteristics().getID());
 		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
 	}
 

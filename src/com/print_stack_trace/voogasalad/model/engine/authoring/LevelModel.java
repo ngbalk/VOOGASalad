@@ -1,5 +1,6 @@
 package com.print_stack_trace.voogasalad.model.engine.authoring;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -135,8 +136,8 @@ public class LevelModel {
 		if (isLocked)
 			throw new ElementLockedException();
 		goalMap.remove(goalID);
-		if (myLevelChars.requiredNumberOfGoals > goalMap.size()) {
-			myLevelChars.requiredNumberOfGoals = myLevelChars.requiredNumberOfGoals - 1;
+		if (myLevelChars.getRequiredNumberOfGoals() > goalMap.size()) {
+			myLevelChars.setRequiredNumberOfGoals(myLevelChars.getRequiredNumberOfGoals() - 1);
 		}
 
 	}
@@ -146,7 +147,7 @@ public class LevelModel {
 	}
 
 	public Map<Integer, GoalCharacteristics> getGoalMap() {
-		return goalMap;
+		return Collections.unmodifiableMap(goalMap);
 	}
 
 
@@ -155,11 +156,11 @@ public class LevelModel {
 		if (isLocked)
 			throw new ElementLockedException();
 		// in what context can you not set a certain cameraType
-		myLevelChars.cameraType = cameraType;
+		myLevelChars.setCameraType(cameraType);
 	}
 
 	public CameraFactory.CameraType getCameraType() {
-		return myLevelChars.cameraType;
+		return myLevelChars.getCameraType();
 	}
 
 	public void setLevelCharacteristics(LevelCharacteristics levelSpecs)
@@ -201,7 +202,7 @@ public class LevelModel {
 	}
 
 	public Map<Integer, SpriteCharacteristics> getSpriteMap() {
-		return mySpriteMap;
+		return Collections.unmodifiableMap(mySpriteMap);
 	}
 
 	public void setSpriteMap(Map<Integer, SpriteCharacteristics> spriteMap) {

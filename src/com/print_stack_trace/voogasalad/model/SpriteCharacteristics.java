@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -44,22 +45,22 @@ public class SpriteCharacteristics {
 	private static final int DEFAULT_DAMAGE_DEALT = 5;
 
 	// GAME AUTHORING VARIABLES
-	public transient Image img;
-	public String imagePath;
-	public Point p;
+	private transient Image img;
+	private String imagePath;
+	private Point p;
 	//public int xPosition;
 	//public int yPosition;
-	public boolean interactive;
-	public SpriteType objectType;
-	public int startingHealth;
-	public double startingSpeed;
-	public int value;
-	public double orientation;
-	public String name;
-	public double width;
-	public double height;
-	public boolean doubleJump;
-	public int damageDealt;
+	private boolean interactive;
+	private SpriteType objectType;
+	protected int startingHealth;
+	private double startingSpeed;
+	private int value;
+	private double orientation;
+	private String name;
+	private double width;
+	private double height;
+	private boolean doubleJump;
+	private int damageDealt;
 	private Map<KeyCode,KeyResult> myMovements;
 	private Map<KeyResult, ArrayList<File>> myAnimations;
 
@@ -136,7 +137,7 @@ public class SpriteCharacteristics {
 		return img;
 	}
 	public Map<KeyResult, ArrayList<File>> getAnimations(){
-		return myAnimations;
+		return Collections.unmodifiableMap(myAnimations);
 	}
     public javafx.scene.image.Image getImage () {
         //BufferedImage bufferedImage = (BufferedImage) img;
@@ -280,7 +281,7 @@ public class SpriteCharacteristics {
 	}
 
 	public Map<KeyCode, KeyResult> getMovements(){
-		return myMovements;
+		return Collections.unmodifiableMap(myMovements);
 	}
 
 	public double getWidth(){
@@ -318,7 +319,9 @@ public class SpriteCharacteristics {
 	public int getDamageDealt(){
 	    return damageDealt;
 	}
-
-
+	
+	public void toggleInteractive(boolean b) {
+	    interactive = b;
+	}
 
 }

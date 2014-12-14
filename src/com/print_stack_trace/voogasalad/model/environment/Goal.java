@@ -14,7 +14,7 @@ public abstract class Goal implements GoalElement {
     }
     
     protected void setGoalProperties() {
-        myGoalType = myGoalCharacteristics.myGoalType;
+        myGoalType = myGoalCharacteristics.getMyGoalType();
     }
     
     public boolean updateGoalCharacteristics(GoalCharacteristics goalCharacteristics) {

@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class CameraFactory {
 
-	public static final String cameraPath = "com.print_stack_trace.voogasalad.model.engine.runtime.camera.";
+	private static final String cameraPath = "com.print_stack_trace.voogasalad.model.engine.runtime.camera.";
 
 
 	public enum CameraType {
