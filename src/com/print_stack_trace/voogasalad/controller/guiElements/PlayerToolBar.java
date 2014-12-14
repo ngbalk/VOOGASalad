@@ -14,7 +14,7 @@ import javafx.scene.input.KeyEvent;
 import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 import com.print_stack_trace.voogasalad.player.Score;
-import com.print_stack_trace.voogasalad.utilities.Reflection;
+import com.print_stack_trace.voogasalad.utilities.reflection.Reflection;
 
 public class PlayerToolBar extends ToolBar {
 

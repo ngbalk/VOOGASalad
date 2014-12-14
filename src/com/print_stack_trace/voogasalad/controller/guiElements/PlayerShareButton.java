@@ -4,8 +4,8 @@ import javafx.scene.control.TextField;
 
 import com.print_stack_trace.voogasalad.controller.ViewController;
 import com.print_stack_trace.voogasalad.controller.player.GamePlayer;
-import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
-import com.print_stack_trace.voogasalad.utilities.PSTTwillioException;
+import com.print_stack_trace.voogasalad.utilities.twillio.PSTTwillioCore;
+import com.print_stack_trace.voogasalad.utilities.twillio.PSTTwillioException;
 
 public class PlayerShareButton extends PlayerActionButton {
 	private static final String SHARE_MESSAGE = "Hey come play Print Stack Trace with your friend!";
