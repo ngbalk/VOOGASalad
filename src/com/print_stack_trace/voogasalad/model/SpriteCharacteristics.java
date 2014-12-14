@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -22,7 +23,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
-
 
 import com.print_stack_trace.voogasalad.model.engine.authoring.GameAuthorEngine.SpriteType;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
@@ -60,8 +60,8 @@ public class SpriteCharacteristics {
 	public double height;
 	public boolean doubleJump;
 	public int damageDealt;
-	private HashMap<KeyCode,KeyResult> myMovements;
-	private HashMap<KeyResult, ArrayList<File>> myAnimations;
+	private Map<KeyCode,KeyResult> myMovements;
+	private Map<KeyResult, ArrayList<File>> myAnimations;
 
 
 	//-------------------CONSTRUCTORS-------------------//

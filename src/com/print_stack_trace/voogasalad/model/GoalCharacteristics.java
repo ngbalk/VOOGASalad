@@ -15,7 +15,7 @@ public class GoalCharacteristics {
     private String myName="";
     public GoalType myGoalType=GoalType.POINTS;
     public Integer myObjectID = 0;
-    public List<Integer> myObjectiveID = new ArrayList<>();
+    private List<Integer> myObjectiveID = new ArrayList<>();
     public Integer myPointTotal=0;
     public double myDestination=0;
     private boolean myHorizontalDestination=true;
