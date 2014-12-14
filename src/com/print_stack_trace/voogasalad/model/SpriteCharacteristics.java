@@ -135,7 +135,7 @@ public class SpriteCharacteristics {
 	public java.awt.Image getJavaAWTImage () {
 		return img;
 	}
-	public HashMap<KeyResult, ArrayList<File>> getAnimations(){
+	public Map<KeyResult, ArrayList<File>> getAnimations(){
 		return myAnimations;
 	}
     public javafx.scene.image.Image getImage () {
@@ -279,7 +279,7 @@ public class SpriteCharacteristics {
 		myMovements.put(myKey, myAction);
 	}
 
-	public HashMap<KeyCode, KeyResult> getMovements(){
+	public Map<KeyCode, KeyResult> getMovements(){
 		return myMovements;
 	}
 
