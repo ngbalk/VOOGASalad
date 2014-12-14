@@ -2,8 +2,9 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.l
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.CharacteristicController;
 
-public class LevelCameraX extends LevelCharacteristicController{
+public class LevelCameraX extends CharacteristicController{
 	
 	public LevelCameraX(String[] values, double width, double height, double x,
 			double y, GameObject object) {

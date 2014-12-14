@@ -101,6 +101,10 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	public SimpleObjectProperty<EventHandler> eventLevelProperty() {
 		return levelTracker.getEventProperty();
 	}
+	
+	public SimpleObjectProperty<String> levelNameProperty() {
+		return levelTracker.nameProperty();
+	}
 
 	public void addSpriteObject(ImageView gameObjectImageView, String imagePath) {
 		if (imagePath != null) {
@@ -211,6 +215,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
 		myGameEngine.setCurrentLevel(currentLevel.getCharacteristics().ID);
+		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
 	}
 
 	

@@ -12,7 +12,6 @@ public class AddLevel extends AbstractButton{
 	@Override
 	protected void behavior() {
 		myViewObjectDelegate.addNewLevel(new LevelObject("", (ViewObjectDelegate) myViewObjectDelegate));
-		
 	}
 	
 }
