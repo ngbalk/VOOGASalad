@@ -21,13 +21,12 @@ public class CameraFactory {
 
 		try {
 			String objectType = myCameraType.toString();
-			System.out.println(cameraPath+objectType);
 			Class<?> newCameraClass = Class.forName(cameraPath + objectType);
 			try {
 				con = newCameraClass.getConstructor();
 			} catch (NoSuchMethodException | SecurityException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 			try {
 				newCamera = (CameraHandler) con.newInstance();
@@ -38,7 +37,7 @@ public class CameraFactory {
 			}
 			return newCamera;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 		return null;
