@@ -138,8 +138,8 @@ public class SpriteObject extends GameObject{
 	public void initializeSprite(){
 		getCharacteristics().setHeight(getImage().getFitHeight());
 		getCharacteristics().setWidth(getImage().getFitWidth());
-		getCharacteristics().setX(getImage().getX());
-		getCharacteristics().setY(getImage().getY());
+	//	getCharacteristics().setX(getImage().getLayoutX());
+		//getCharacteristics().setY(getImage().getLayoutY());
 		getCharacteristics().setOrientation(
 				getImage().getRotate());
 	}
@@ -147,6 +147,7 @@ public class SpriteObject extends GameObject{
 		getImage().setFitHeight(getCharacteristics().getHeight());
 		getImage().setFitWidth(getCharacteristics().getWidth());
 		getImage().setRotate(getCharacteristics().getOrientation());
+		
 		getImage().setX(getCharacteristics().getX());
 		getImage().setY(getCharacteristics().getY());
 	}

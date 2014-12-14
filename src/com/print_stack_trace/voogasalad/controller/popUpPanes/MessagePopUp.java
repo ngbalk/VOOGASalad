@@ -56,6 +56,7 @@ public class MessagePopUp extends Stage{
 	protected void showStage(){
 		showAndWait();
 	}
+	
 	public String showInputDialog(String message){
 		TextField myTextField=new TextField();
 		myTextField.relocate(0, height/2);

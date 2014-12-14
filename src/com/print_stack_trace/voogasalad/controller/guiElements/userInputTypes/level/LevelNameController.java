@@ -2,13 +2,13 @@ package com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.l
 
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.LevelObject;
+import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.CharacteristicController;
 
 
 
-public class LevelNameController extends LevelCharacteristicController {
+public class LevelNameController extends CharacteristicController {
 	
 	public LevelNameController(String[] values,  double width, double height, double x, double y, GameObject object){
-		
 		super(values, width, height, x, y, object);
 	}
 	@Override
@@ -18,6 +18,6 @@ public class LevelNameController extends LevelCharacteristicController {
 	@Override
 	protected void setCharacteristic(String newValue) {
 		((LevelObject)mySprite).getCharacteristics().setName(newValue);
-		((LevelObject)mySprite).getDelegate().update((LevelObject)mySprite);
+		mySprite.update();
 	}
 }

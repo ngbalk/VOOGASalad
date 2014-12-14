@@ -44,7 +44,7 @@ public class GameAuthorBottomLayoutNode extends AbstractLayoutNode{
 		Pane bottomPane=new Pane();
 		bottomPane.setPrefSize(width, height*.2);
 		LevelBar myLevelBar=new LevelBar(width*.025, 20, width*.2, height*.05, ((GamePane) myLinkedObject).currentLevelProperty(), 
-				((GamePane) myLinkedObject).addLevelProperty(), ((GamePane) myLinkedObject).eventLevelProperty());	
+				((GamePane) myLinkedObject).addLevelProperty(), ((GamePane) myLinkedObject).eventLevelProperty(), ((GamePane) myLinkedObject).levelNameProperty());	
 		HBox myToolBar=new HBox();
 		myToolBar.getChildren().add(myLevelBar);
 		for (String values: myResource.values()){

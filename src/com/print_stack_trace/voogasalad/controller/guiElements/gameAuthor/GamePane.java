@@ -101,6 +101,10 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	public SimpleObjectProperty<EventHandler> eventLevelProperty() {
 		return levelTracker.getEventProperty();
 	}
+	
+	public SimpleObjectProperty<String> levelNameProperty() {
+		return levelTracker.nameProperty();
+	}
 
 	public void addSpriteObject(ImageView gameObjectImageView, String imagePath) {
 		if (imagePath != null) {
@@ -165,6 +169,7 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 				sprite.setCharacteristics(characteristics);
 				sprite.initializeSprite();
 				sprite.setImage(sprite.getImagePath());
+				//sprite.initializeImage();
 				myGameEngine.updateObject(sprite.getID(),
 						sprite.getCharacteristics());
 			}
@@ -210,11 +215,9 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 		this.getChildren().add(0, currentLevel.getImage());
 		this.getChildren().add(1, sizePane(currentLevel.getColorPane()));
 		myGameEngine.setCurrentLevel(currentLevel.getCharacteristics().ID);
+		myGameEngine.setLevelCharacteristics(currentLevel.getCharacteristics());
 	}
 
-	public ImageView getBackgroundImage() {
-		return background;
-	}
 	
 	public void update(GameWorldObject gameWorld){
 		myGameEngine.setGameWorldCharacteristics(gameWorld.getCharacteristics());
@@ -280,11 +283,11 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	}
 
 	public void extendRight() {
-		new ExtendDirection(levelTracker.getCurrentLevel(), this, this.getBackgroundImage()).extendRight();
+		new ExtendDirection(levelTracker.getCurrentLevel(), this, getBackgroundPane()).extendRight();
 	}
 	@Override
 	public void extendDown() {
-		new ExtendDirection(levelTracker.getCurrentLevel(), this, this.getBackgroundImage()).extendDown();
+		new ExtendDirection(levelTracker.getCurrentLevel(), this, getBackgroundPane()).extendDown();
 	}
 	@Override
 	public void actionToCurrentLevelSprites(ObjectAction action) {
@@ -314,6 +317,9 @@ public class GamePane extends Pane implements ViewObjectDelegate {
 	@Override
 	public void addBackground(Node level) {
 		this.getChildren().add(0, level);
+	}
+	public Node getBackgroundPane(){
+		return this.getChildren().get(0);
 	}
 	public void addScrollBarValues(ReadOnlyDoubleProperty vValue, ReadOnlyDoubleProperty hValue){
 		this.scrollHValue=hValue;
