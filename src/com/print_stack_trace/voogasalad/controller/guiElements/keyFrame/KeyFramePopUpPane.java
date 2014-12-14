@@ -16,19 +16,14 @@ import javax.swing.JOptionPane;
 
 
 
-
-
-
-
-
-
-
 import com.print_stack_trace.voogasalad.controller.guiElements.gameAuthor.GeneralPane;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.GameObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.gameObjects.SpriteObject;
 import com.print_stack_trace.voogasalad.controller.guiElements.userInputTypes.ImageUpload;
 import com.print_stack_trace.voogasalad.controller.popUpPanes.MessagePopUp;
+
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
+import com.print_stack_trace.voogasalad.utilities.FileLoadUtility;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -168,21 +163,8 @@ public class KeyFramePopUpPane extends GeneralPane {
 		setCurrentKeyImage(myView.getImage(), imgPath);
 
 	}
-	public void setImageOnAction(){
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setInitialDirectory(new File("./"));
-		File file = fileChooser.showOpenDialog(new Stage());
-		if(file != null&&(file.getName().toUpperCase().contains(".JPG")||file.getName().toUpperCase().contains(".PNG")||file.getName().toUpperCase().contains(".JPEG"))){
-			BufferedImage buffer;
-			try {
-				buffer = ImageIO.read(file);
-				Image img=SwingFXUtils.toFXImage(buffer, null);
-
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "Please select another file");
-			}
-		}
-
+	public Image setImageOnAction(){
+		return FileLoadUtility.loadImage();
 	}
 
 }

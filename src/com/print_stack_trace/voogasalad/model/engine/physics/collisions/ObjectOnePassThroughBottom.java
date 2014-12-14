@@ -14,7 +14,6 @@ public class ObjectOnePassThroughBottom extends CollisionHandler {
                                        RuntimeSpriteCharacteristics s2,
                                        RuntimeModel currentRuntime) {
             if(s1.getObjectType().equals(SpriteType.HERO) && s1.isCollidingVertically && s1.v_y < 0){
-                System.out.println("jkasbdjasd");
                 return;
             }
 

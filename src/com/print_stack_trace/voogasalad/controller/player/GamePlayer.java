@@ -55,6 +55,7 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplicatorFactory.KeyResult;
 import com.print_stack_trace.voogasalad.player.Score;
+import com.print_stack_trace.voogasalad.utilities.FileLoadUtility;
 import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
@@ -171,10 +172,6 @@ public class GamePlayer implements ViewController {
 		}	
 		
 		//background.relocate(5,5);
-//		System.out.println("fit height: " + background.getFitHeight());
-//		System.out.println("fit width: " + background.getFitWidth());
-//		System.out.println("pref height: " + myPlayPane.getPrefHeight());
-//		System.out.println("pref width: " + myPlayPane.getPrefWidth());
 
 		for(Integer id : spriteMap.keySet()){
 			RuntimeSpriteCharacteristics spriteCharacteristics = spriteMap.get(id);
@@ -208,7 +205,6 @@ public class GamePlayer implements ViewController {
 		animationTimeline.setCycleCount(Timeline.INDEFINITE);
 		/*
 		for(Image spriteImage : animationImages){
-		    System.out.println(spriteImage);
 		    if(spriteImage == null) {
 		        continue;
 		    }
@@ -224,11 +220,9 @@ public class GamePlayer implements ViewController {
 			
 	}
 	private void animateSprite(ImageView currentSpriteImageView, ArrayList<Image> spriteImage, SpriteCharacteristics spriteCharacteristics, int index){
-        System.out.println(spriteImage.size());
 	    if (animationIndex>=spriteImage.size())
             animationIndex=0;
 	    currentSpriteImageView.setImage(spriteImage.get(index));
-	    System.out.println(spriteImage.get(index));
 	    spriteCharacteristics.setImage(spriteImage.get(index));
         animationIndex++;
         //this.myPlayPane.getChildren().add(currentSpriteImageView);
@@ -288,11 +282,9 @@ public class GamePlayer implements ViewController {
 		//gameEngine.stopGame();
 	}
 	public void loadGame(){
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Load level");
-		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/com/print_stack_trace/voogasalad/model/data/"));
-		Stage newStage=new Stage();
-		File file = fileChooser.showOpenDialog(newStage);
+		File file = FileLoadUtility.loadFile(
+				System.getProperty("user.dir") +
+				"/src/com/print_stack_trace/voogasalad/model/data/");
 		if (file != null) {
 			try {
 				myGameEngine.loadGame(file);
@@ -322,15 +314,8 @@ public class GamePlayer implements ViewController {
 	/***
 	 * Method for Choosing Image --> Front End Person to modify to his/her liking
 	 */
-	private void getImageFromFile(){
-		FileChooser fc = new FileChooser(); 
-		File file = fc.showOpenDialog(new Stage());
-		if (!file.getName().endsWith(Constants.JPEG) && !file.getName().endsWith(Constants.PNG)){
-
-			ViewController.displayError(new InvalidImageFileException());
-			return; 
-		}
-		FileInputStream fis;
+	private Image getImageFromFile(){
+		return FileLoadUtility.loadImage();
 	}
 	
 	public void restartCurrentLevel() {

@@ -22,7 +22,6 @@ public class GoalFactory {
 
         try {
             String objectType = reformatTypeString(myGoalCharacteristics.myGoalType.toString());
-            System.out.println(goalPath+objectType);
             Class<?> newGoalClass = Class.forName(goalPath + objectType);
             try {
                 con = newGoalClass.getConstructor(GoalCharacteristics.class);

@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import com.print_stack_trace.voogasalad.utilities.FileLoadUtility;
+
 
 public class ImageUpload extends Button {
 	public ImageUpload(){
@@ -21,14 +23,6 @@ public class ImageUpload extends Button {
 		setText("Upload Image");
 	}
 	public File doAction(){
-		Stage stage=new Stage();
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Select Image");
-		fileChooser.setInitialDirectory(new File("./"));
-		File file = fileChooser.showOpenDialog(stage);
-		if(file != null&&(file.getName().toUpperCase().contains(".JPG")||file.getName().toUpperCase().contains(".PNG")||file.getName().toUpperCase().contains(".JPEG"))){
-			return file;
-		}
-		return null;
+		return FileLoadUtility.loadImageFile("./");
 	}
 }
