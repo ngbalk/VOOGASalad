@@ -7,7 +7,7 @@ import com.print_stack_trace.voogasalad.model.engine.physics.CollisionHandler;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeModel;
 import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharacteristics;
 
-public class ObjectOnePassThroughBottom extends CollisionHandler {
+public class DoodleJumpNormalPlatform extends CollisionHandler {
     private NoAction noAction = new NoAction();
     private ObjectBothNoDisplacement obnd = new ObjectBothNoDisplacement();
     private boolean shouldStick = true;
@@ -22,6 +22,7 @@ public class ObjectOnePassThroughBottom extends CollisionHandler {
         } 
         else{
             obnd.applyCollisionEffects(s1, s2, currentRuntime);
+            s1.v_y = -25;
         }
 
     }
@@ -40,6 +41,4 @@ public class ObjectOnePassThroughBottom extends CollisionHandler {
         return shouldStick;
         
     }
-        
 }
-
