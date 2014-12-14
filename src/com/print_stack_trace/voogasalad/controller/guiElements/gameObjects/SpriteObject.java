@@ -90,9 +90,7 @@ public class SpriteObject extends GameObject{
 	
 	public void createPane(){
 		PaneChooser myPaneChooser=new PaneChooser();
-		
 		myPane=myPaneChooser.createPane(this.getType(), this);
-		System.out.println(myPane);
 	}
 	
 	public void changeImageView(ImageView imageView){
