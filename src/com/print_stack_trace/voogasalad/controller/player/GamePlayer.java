@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -18,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -34,11 +34,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
 import com.google.gson.JsonSyntaxException;
 import com.print_stack_trace.voogasalad.Constants;
 import com.print_stack_trace.voogasalad.VOOGASalad;
 import com.print_stack_trace.voogasalad.controller.ViewController;
+import com.print_stack_trace.voogasalad.controller.guiElements.AuthorSplashScreen;
 import com.print_stack_trace.voogasalad.controller.guiElements.DecisionTable;
 import com.print_stack_trace.voogasalad.controller.guiElements.HUD;
 import com.print_stack_trace.voogasalad.controller.guiElements.IntroSplashScreen;
@@ -61,7 +61,11 @@ import com.print_stack_trace.voogasalad.utilities.PSTTwillioCore;
 import com.print_stack_trace.voogasalad.utilities.Reflection;
 
 public class GamePlayer implements ViewController {
-
+    private static final String DEFAULT_WIN_SCREEN="./com/print_stack_trace/voogasalad/"
+                    + "controller/guiResources/WinSplashScreen.Properties";
+    private static final String DEFAULT_LOSE_SCREEN="./com/print_stack_trace/voogasalad/"
+            + "controller/guiResources/LoseSplashScreen.Properties";
+    
 	private final static int FPS = 15;
 	private static final double ANIMATION_DURATION = 0.001;
 	private Group myRoot;
@@ -79,6 +83,7 @@ public class GamePlayer implements ViewController {
 	int animationIndex=0;
 	private HUD myHud = new HUD();
 	private File myFile = null;
+	public Stage mainStage;
 
 
 	/* instance of buttons */
@@ -134,10 +139,20 @@ public class GamePlayer implements ViewController {
 		public void handle(ActionEvent evt) {
 			if(isPlaying){
 				myGameEngine.update();
-				updateScene();
+				RuntimeModel r = myGameEngine.getStatus();
+				if(r.gameTotallyOver) showSplashScreen(DEFAULT_WIN_SCREEN);
+				else if(r.gameOver) showSplashScreen(DEFAULT_LOSE_SCREEN);
+				else updateScene();
 			}
 		}
 	};
+	
+	private void showSplashScreen(String s){
+            isPlaying = false;
+            AuthorSplashScreen endScreen = new AuthorSplashScreen(s, VOOGASalad.DEFAULT_WIDTH, VOOGASalad.DEFAULT_HEIGHT);
+            mainStage.setScene(endScreen.getScene());
+            mainStage.show();
+	}
 
 	/**
 	 * update the players view: Engine will change locations/stats on the backend; player will update the scene after changes
