@@ -18,7 +18,7 @@ import com.print_stack_trace.voogasalad.utilities.Reflection;
 public class PlayerToolBar extends ToolBar {
 
 	private static final String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
-	private static final String DEFAULT_CLASS_PATH="com.print_stack_trace.voogasalad.controller.guiElements.";
+	private static final String DEFAULT_CLASS_PATH="com.print_stack_trace.voogasalad.controller.guiElements.buttons.";
 	private static final String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
 	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	
