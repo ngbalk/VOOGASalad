@@ -1,7 +1,7 @@
 /**
  * @author Pranava Raparla
  * Date Created: 11/10/14
- * Date Modified: 11/21/14
+ * Date Modified: 12/13/14
  */
 
 package com.print_stack_trace.voogasalad.model.engine.runtime;
@@ -24,7 +24,9 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.keyboard.KeyApplica
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 import com.print_stack_trace.voogasalad.model.environment.GoalFactory;
 
-public class RuntimeEngine extends AbstractRuntimeEngine {
+public class RuntimeEngine implements IRuntimeEngine {
+	private LevelModel currentLevel;
+	private GameWorldModel gameWorld;
     private PhysicsEngine physicsEngine;
     private RuntimeModel runtimeModel;
     int framesPerSecond;
@@ -43,7 +45,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
      * @param level
      */
     public RuntimeEngine(LevelModel currentLevel, Dimension viewport) {
-        super(currentLevel);
+		this.currentLevel = currentLevel;
         runtimeModel = new RuntimeModel(currentLevel, viewport);
         physicsEngine = currentLevel.getPhysicsEngine();
         goalFactory = new GoalFactory();
@@ -54,7 +56,7 @@ public class RuntimeEngine extends AbstractRuntimeEngine {
     }
     
     public RuntimeEngine(GameWorldModel gameWorld, Dimension viewport) {
-        super(gameWorld);
+	    this.gameWorld = gameWorld;
         this.viewport = viewport;
         currentLevel = gameWorld.getCurrentLevel();
         createRuntimeState(currentLevel, viewport);
