@@ -22,7 +22,6 @@ public class ObjectOneDisappear extends CollisionHandler {
 
     @Override
     public boolean shouldStick (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
-        // TODO Auto-generated method stub
         return true;
     }
 
