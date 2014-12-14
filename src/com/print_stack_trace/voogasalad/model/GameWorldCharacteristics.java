@@ -1,6 +1,8 @@
 /**
+ * @author Ethan Chang, Pranava Raparla
  * Date Created: 12/02/14
  * Date Modified: 12/06/14
+ * Contains general information to describe the game we create
  */
 
 package com.print_stack_trace.voogasalad.model;
@@ -9,11 +11,11 @@ import java.util.Date;
 
 public class GameWorldCharacteristics {
 	// DEFAULT VARIABLES
-	public static final String DEFAULT_GAME_TITLE = "Game";
-	public static final String DEFAULT_GAME_AUTHOR = "PrintStackTrace";
+	private static final String DEFAULT_GAME_TITLE = "Game";
+	private static final String DEFAULT_GAME_AUTHOR = "PrintStackTrace";
 	//public static final Date DEFAULT_DATE_CREATED = new Date();
 	//public static final Date DEFAULT_DATE_MODIFIED = new Date();
-	public static final GameDifficulty DEFAULT_GAME_DIFFICULTY = GameDifficulty.MEDIUM;
+	private static final GameDifficulty DEFAULT_GAME_DIFFICULTY = GameDifficulty.MEDIUM;
 
     // PRIVATE VARIABLES
     private String gameTitle;

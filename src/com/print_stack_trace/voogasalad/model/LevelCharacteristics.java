@@ -9,7 +9,14 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactor
 
 import javafx.scene.image.Image; //change to java awt
 //import javafx.scene.paint.Color;
-
+/**
+ * 
+ * @author Ethan Chang, Jack Baskin, Nick Widmaier
+ * This class sets many of the properties associated with a particular
+ * level. Each LevelModel contains a particular instance of this class
+ * which contains information specific to that level.
+ *
+ */
 public class LevelCharacteristics {
 	private static final int DEFAULT_CAMERA_SPEED = 3;
 	
