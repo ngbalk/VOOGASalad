@@ -7,17 +7,28 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 
 public class ObjectOnePassThroughTop extends CollisionHandler {
 	
-	@Override
+    private CollisionHandler noAction = new NoAction();
+    private boolean shouldStick;
+    private CollisionHandler obnd = new ObjectBothNoDisplacement();
+
+    @Override
     public void applyCollisionEffects (RuntimeSpriteCharacteristics s1,
                                        RuntimeSpriteCharacteristics s2,
                                        RuntimeModel currentRuntime) {
-            if(s1.getObjectType().equals(SpriteType.HERO) && s1.isCollidingVertically && s1.v_y > 0){
-                System.out.println("jkasbdjasd");
-                return;
-            }
-                //s2.v_x = 0;
-            s1.v_y = 0;
-                //s2.v_y = 0;
+        
+	        if(s1.v_y > 0 && Math.abs(s1.v_y) < Math.abs(s1.v_x)) {
+	            noAction .applyCollisionEffects(s1, s2, currentRuntime);
+	            shouldStick = false;
+	        } else {
+	            obnd.applyCollisionEffects(s1, s2, currentRuntime);
+	            shouldStick = true;
+	        }
+
+    }
+
+    @Override
+    public boolean shouldStick (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        return shouldStick;
     }
 	
 }

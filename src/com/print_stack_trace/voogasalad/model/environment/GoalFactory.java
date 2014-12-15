@@ -5,9 +5,29 @@ import java.lang.reflect.InvocationTargetException;
 
 import com.print_stack_trace.voogasalad.model.GoalCharacteristics;
 
+/**
+ * 
+ * @author Ethan Chang, Jack Baskin, Nick Widmaier
+ *
+ * This class is a factory which allows us to create particular instances of
+ * specific subclasses of Goal based on the characteristics given from the user.
+ * The GoalType value is set by the user and is the basis for creating the correct instance of a Goal.
+ * To build a goal you take an instance of GoalCharacteristics as passed
+ * from the front end to the LevelModel, who calls on the factory to
+ * create the goal, which is ultimately stored in a map in the LevelModel
+ * 
+ */
 public class GoalFactory {
     public static final String goalPath = "com.print_stack_trace.voogasalad.model.environment.";
-
+    
+    /**
+     * 
+     * @author Ethan Chang, Jack Baskin, Nick Widmaier
+     * an enumeration of all possible subclasses of goal the author can create
+     * Whenever a new subclass is added, an appropriate value must be added to
+     * this enumeration - this allows the full list of options for the author to always be
+     * displayed correctly.
+     */
     public enum GoalType {
         REACH_OBJECT,
         REACH_DISTANCE,
@@ -16,13 +36,20 @@ public class GoalFactory {
         STAY_ALIVE
     }
     
+    /**
+     * Creates an instance of the correct subclass of Goal based off
+     * the GoalType field as set by the author
+     * @param myGoalCharacteristics the characteristics passed from the
+     * front end containing all the relevant information used to create
+     * a goal
+     * @return the goal created by the factory
+     */
     public Goal buildGoal(GoalCharacteristics myGoalCharacteristics) {
         Constructor<?> con = null;
         Goal newGoal = null;
 
         try {
-            String objectType = reformatTypeString(myGoalCharacteristics.myGoalType.toString());
-            System.out.println(goalPath+objectType);
+            String objectType = reformatTypeString(myGoalCharacteristics.getMyGoalType().toString());
             Class<?> newGoalClass = Class.forName(goalPath + objectType);
             try {
                 con = newGoalClass.getConstructor(GoalCharacteristics.class);

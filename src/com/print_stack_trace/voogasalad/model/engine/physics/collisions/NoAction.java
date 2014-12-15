@@ -20,4 +20,9 @@ public class NoAction extends CollisionHandler {
 		return;
 	}
 
+    @Override
+    public boolean shouldStick (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        return false;
+    }
+
 }

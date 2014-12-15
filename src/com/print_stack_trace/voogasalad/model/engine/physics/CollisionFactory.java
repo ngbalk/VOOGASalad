@@ -13,7 +13,6 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 import com.print_stack_trace.voogasalad.model.engine.physics.collisions.*;
 
 public class CollisionFactory {
-	//TODO: verify that this path takes us to the right package
 	public static final String collisionResultPath = "com.print_stack_trace.voogasalad.model.engine.physics.collisions.";
 	
 	public enum CollisionResult {
@@ -26,6 +25,10 @@ public class CollisionFactory {
 		ObjectTwoDisappear,
 		ObjectBothDisappear,
 		HeroDamageCollision,
+		ObjectOnePassThroughBottom,
+		DoodleJumpNormalPlatform,
+		DoodleJumpDamageCollision,
+		DoodleJumpDisappearingPlatform,
 	};
 	
 	public enum UserDefinedCollisionParams {
@@ -33,7 +36,6 @@ public class CollisionFactory {
 		DamageDealt
 	}
 	
-	//TODO: make sure its collision result vs. collision handler and vice-versa
     public static CollisionHandler buildCollisionHandler(CollisionResult myCollisionResult) {
         Constructor<?> con = null;
         CollisionHandler newCollisionResult = null;
@@ -86,6 +88,11 @@ public class CollisionFactory {
 					break;
 				}
 			}
+            @Override
+            public boolean shouldStick (RuntimeSpriteCharacteristics s1,
+                                        RuntimeSpriteCharacteristics s2) {
+                return true;
+            }
 		};
 	}
     

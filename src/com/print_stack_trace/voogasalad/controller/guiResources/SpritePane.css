@@ -57,7 +57,7 @@
 	-fx-background-insets: 0, 0, 2, 10;
 	-fx-text-fill: WHITE;
 }
-.buttonTemplate2 {
+.buttonTemplate2{
 	-fx-font: 12px "Serif";
 	-fx-border-color:#0099CC;
 	-fx-background-color: #000000;

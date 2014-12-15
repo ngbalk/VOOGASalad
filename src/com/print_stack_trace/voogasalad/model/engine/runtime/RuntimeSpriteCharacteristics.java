@@ -25,12 +25,13 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 	public boolean isPatrollingLeft = true;
 	private float decelerationConstant;
 	public KeyResult currentSpriteAction;
-	public ReadOnlyIntegerWrapper healthProperty=new ReadOnlyIntegerWrapper(this.startingHealth);
-	public ReadOnlyIntegerWrapper pointsProperty=new ReadOnlyIntegerWrapper(0);
+	private ReadOnlyIntegerWrapper healthProperty=new ReadOnlyIntegerWrapper(this.getStartingHealth());
+	private ReadOnlyIntegerWrapper pointsProperty=new ReadOnlyIntegerWrapper(0);
 	
 	public int health;
 	private boolean remove = false;
 	private float alpha = 1.0f;
+	private boolean powered;
 	
 	public RuntimeSpriteCharacteristics(SpriteType t) {
 		super(t);
@@ -108,6 +109,15 @@ public class RuntimeSpriteCharacteristics extends SpriteCharacteristics {
 		currentSpriteAction = spriteAction;
 		//TODO: implement this on back end.
 
+	}
+
+	public boolean getPower() {
+		// TODO Auto-generated method stub
+		return powered;
+	}
+	
+	public void setPower(boolean b){
+		powered = b;
 	}
 
 }

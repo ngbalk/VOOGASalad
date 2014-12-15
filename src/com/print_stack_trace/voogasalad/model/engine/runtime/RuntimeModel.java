@@ -8,6 +8,7 @@ package com.print_stack_trace.voogasalad.model.engine.runtime;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,15 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.RuntimeSpriteCharac
 import com.print_stack_trace.voogasalad.model.engine.authoring.LevelModel;
 import com.print_stack_trace.voogasalad.model.environment.Goal;
 
+/**
+ * This RuntimeModel class extends LevelModel to separate authoring
+ * data from runtime data. Since data set in the authoring environment
+ * must be accessed in runtime, this class extends LevelModel. This
+ * class is updated in the RuntimeEngine and used by the GamePlayer
+ * front end for visualization.
+ * @author Pranava Raparla
+ *
+ */
 public class RuntimeModel extends LevelModel {
 
 	//-------------------VARIABLES-------------------//
@@ -32,9 +42,10 @@ public class RuntimeModel extends LevelModel {
 	public int height;
 	public Integer mainChar;
 	public Dimension viewport;
+	public boolean gameTotallyOver;
 
 	//-------------------CONSTRUCTORS-------------------//
-
+	
 	/**
 	 * Constructor that takes in a level as a parameter and populates the runtime data
 	 * @param level
@@ -49,7 +60,7 @@ public class RuntimeModel extends LevelModel {
 		goalMap = level.getGoalMap();
 		currentPoints = 0;
 		currentTime = new Date();
-		camera = level.getLevelCharacteristics().cameraStart;
+		camera = level.getLevelCharacteristics().getCameraStart();
 		this.viewport = viewport;
 		mainChar = level.getMainCharacter();
 	}

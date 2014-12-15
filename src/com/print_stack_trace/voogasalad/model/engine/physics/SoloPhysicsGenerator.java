@@ -19,7 +19,7 @@ public class SoloPhysicsGenerator {
     	switch(engineType) {
         default:
         case EarthPhysicsEngine:
-            return physicEngineFromParams(9.81f, 0f, 6.0f);
+            return physicEngineFromParams(9.81f, 0f, 3.0f);
         case HalfGravityEngine:
             return physicEngineFromParams(4.405f, 0f, 3.0f);
         case ZeroGravityEngine:
@@ -42,7 +42,7 @@ public class SoloPhysicsGenerator {
             public void applyPhysics(RuntimeSpriteCharacteristics s1, int framesPerSecond) {
 
 
-                s1.v_y += (1.0f/(float)framesPerSecond)*fgravity*fintensity;
+                s1.v_y += .5*(1.0f/(float)framesPerSecond)*fgravity*fintensity;
                 s1.v_x -= (1.0f/(float)framesPerSecond)*fdrag*fintensity;
 
             }

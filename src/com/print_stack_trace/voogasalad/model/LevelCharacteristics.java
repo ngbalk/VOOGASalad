@@ -9,25 +9,39 @@ import com.print_stack_trace.voogasalad.model.engine.runtime.camera.CameraFactor
 
 import javafx.scene.image.Image; //change to java awt
 //import javafx.scene.paint.Color;
-
+/**
+ * 
+ * @author Ethan Chang, Jack Baskin, Nick Widmaier
+ * This class sets many of the properties associated with a particular
+ * level. Each LevelModel contains a particular instance of this class
+ * which contains information specific to that level.
+ *
+ */
 public class LevelCharacteristics {
 	private static final int DEFAULT_CAMERA_SPEED = 3;
 	
-	private String name;
-	public int nextLevel=-1;
-	public int previousLevel=-1;
+	private String name = "";
+	private Integer nextLevel = -1;
+	private Integer previousLevel = -1;
+	private Integer ID = null;
 	private transient Image backgroundImage = null;
-	private String backgroundImagePath;
-	public int requiredNumberOfGoals = 1;
-	public Point cameraStart = new Point(0, 0);
-	public int cameraSpeed = DEFAULT_CAMERA_SPEED;
+	private String backgroundImagePath = "";
+	private int requiredNumberOfGoals = 1;
+	private Point cameraStart = new Point(0, 0);
+	private int cameraSpeed = DEFAULT_CAMERA_SPEED;
 	private String myColor;
 	private int myHorizontalPaneCount=1;
 	private int myVerticalPaneCount=1;
-	public CameraType cameraType = CameraType.PlayerFollow; 
+	private CameraType cameraType = CameraType.PlayerFollow; 
 	
 	public String getName() {
 		return name;
+	}
+	public Integer getID() {
+		return ID;
+	}
+	public void setID(int ID) {
+		this.ID=ID;
 	}
 	public void setName(String name){
 		this.name = name;
@@ -93,5 +107,22 @@ public class LevelCharacteristics {
 	public int getHorizontalPaneCount(){
 		return this.myHorizontalPaneCount;
 	}
+	
+    public CameraType getCameraType () {
+        return cameraType;
+    }
+    public int getRequiredNumberOfGoals () {
+        return requiredNumberOfGoals;
+    }
+    public Point getCameraStart () {
+        return cameraStart;
+    }
+    public void setRequiredNumberOfGoals (int num) {
+        requiredNumberOfGoals = num;        
+    }
+    public void setCameraType (CameraType cameraType) {
+        this.cameraType = cameraType;
+        
+    }
 	
 }

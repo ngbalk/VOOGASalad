@@ -10,12 +10,17 @@ public class ObjectBothDisappear extends CollisionHandler {
 	public void applyCollisionEffects(RuntimeSpriteCharacteristics s1,
 			RuntimeSpriteCharacteristics s2, RuntimeModel currentRuntime) {
 		// TODO Auto-generated method stub
-		s1.interactive = false;
+		s1.toggleInteractive(false);
 		s1.setAlpha(0.0f);
 		s1.flagForRemoval();
-		s2.interactive = false;
+		s2.toggleInteractive(false);
 		s2.setAlpha(0.0f);
 		s2.flagForRemoval();
 	}
+
+    @Override
+    public boolean shouldStick (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        return true;
+    }
 
 }

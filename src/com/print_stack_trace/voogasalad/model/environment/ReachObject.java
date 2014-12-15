@@ -25,8 +25,8 @@ public class ReachObject extends Goal implements GoalElement{
     @Override
     protected void setGoalProperties() {
         super.setGoalProperties();
-        mySpriteID = myGoalCharacteristics.myObjectID;
-        myObjectiveID = myGoalCharacteristics.myObjectiveID;
+        mySpriteID = myGoalCharacteristics.getObjectID();
+        myObjectiveID = myGoalCharacteristics.getObjectiveID();
 
     }
 

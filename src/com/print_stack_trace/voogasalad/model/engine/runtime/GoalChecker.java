@@ -8,9 +8,14 @@ import com.print_stack_trace.voogasalad.model.environment.Points;
 import com.print_stack_trace.voogasalad.model.environment.ReachDistance;
 import com.print_stack_trace.voogasalad.model.environment.ReachObject;
 import com.print_stack_trace.voogasalad.model.environment.StayAlive;
-
+/**
+ * 
+ * @author Ethan Chang
+ * Visitor for our goal implementation. Contains methods for visiting all types of possible
+ * goals.
+ */
 public class GoalChecker implements GoalElementVisitor {
-	private static final int GOAL_DESTINATION_BUFFER = 20;
+	private static final int GOAL_DESTINATION_BUFFER = 15;
 	private RuntimeModel myLevel;
 
 	public GoalChecker(RuntimeModel level) {
@@ -38,7 +43,6 @@ public class GoalChecker implements GoalElementVisitor {
 		double heroPosition = 0;
 		if(goal.isHorizontal()){
 			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getX();
-			System.out.println("HERO X POS:    " + heroPosition);
 		}
 		else{
 			heroPosition = myLevel.getRuntimeSpriteMap().get(goal.getHeroID()).getY();

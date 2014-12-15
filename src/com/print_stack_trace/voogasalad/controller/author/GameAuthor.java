@@ -1,7 +1,11 @@
 package com.print_stack_trace.voogasalad.controller.author;
 
+/*
+ * Important class for booting up the Game Authoring Engine
+ */
+
 import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.controller.guiElements.GreenGUI;
+import com.print_stack_trace.voogasalad.controller.guiElements.layout.GreenGUI;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;

@@ -1,6 +1,6 @@
 package com.print_stack_trace.voogasalad.controller.player;
 import com.print_stack_trace.voogasalad.controller.ViewController;
-import com.print_stack_trace.voogasalad.controller.guiElements.AbstractGUI;
+import com.print_stack_trace.voogasalad.controller.guiElements.layout.AbstractGUI;
 import com.print_stack_trace.voogasalad.model.engine.GameEngine;
 
 import javafx.scene.Group;

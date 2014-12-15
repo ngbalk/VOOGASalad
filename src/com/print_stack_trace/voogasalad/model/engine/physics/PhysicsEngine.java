@@ -76,7 +76,7 @@ public class PhysicsEngine {
         for(RuntimeSpriteCharacteristics obj : allObjects) {
             obj.setDecelerationConstant(0.0f);
             obj.isColliding = obj.isCollidingHorizontally = obj.isCollidingVertically = false;
-            if(obj.interactive) soloHandler.applyPhysics(obj, framesPerSecond);
+            if(obj.isInteractive()) soloHandler.applyPhysics(obj, framesPerSecond);
         }
         
 
@@ -101,10 +101,8 @@ public class PhysicsEngine {
                 copys2.v_y = s2.v_y;
                 this.moveSpritesForward(copys1, copys2, framesPerSecond);
                 if(CollisionDetector.haveCollided(copys1, copys2)) {
-
-                    stickSpriteToSide(s1,s2);
+                    stickIfNeeded(s1,s2);
                     collisionHandler(s1, s2, currentRuntime);
-
                 }	
             }
         }
@@ -118,11 +116,20 @@ public class PhysicsEngine {
 
     }
 
+    private void stickIfNeeded (RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
+        CollisionResult result = getResultOfCollision(s1, s2);
+        CollisionHandler handler = getHandlerForResult(result);
+        if(handler.shouldStick(s1, s2)){
+            stickSpriteToSide(s1, s2);
+        }
+        
+    }
+
     private void performEnemyAI(Object[] array) {
 
         for(int i = 0; i < array.length; i ++){
             RuntimeSpriteCharacteristics sprite = (RuntimeSpriteCharacteristics) array[i];
-            if(sprite.objectType.equals(SpriteType.ENEMY) && sprite.enemyPatrols){
+            if(sprite.getObjectType().equals(SpriteType.ENEMY) && sprite.enemyPatrols){
                 patrolEnemy(sprite);
             }
         }
@@ -131,23 +138,23 @@ public class PhysicsEngine {
     private void patrolEnemy(RuntimeSpriteCharacteristics enemy){
         if(enemy.isCollidingHorizontally) enemy.isPatrollingLeft = !enemy.isPatrollingLeft;
         if(enemy.isPatrollingLeft){
-            enemy.setX(enemy.getX() + enemy.startingSpeed);
+            enemy.setX(enemy.getX() + enemy.getStartingSpeed());
         }
         else{
-            enemy.setX(enemy.getX() + -enemy.startingSpeed);
+            enemy.setX(enemy.getX() + -enemy.getStartingSpeed());
         }
     }
 
     private void stickSpriteToSide(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2){
 
-        //		ugly fixes!!!
-        if((s2.objectType.equals(SpriteType.HERO) || s2.objectType.equals(SpriteType.ENEMY))
-                && s1.objectType.equals(SpriteType.PLATFORM)){
+        
+        if((s2.getObjectType().equals(SpriteType.HERO) || s2.getObjectType().equals(SpriteType.ENEMY))
+                && s1.getObjectType().equals(SpriteType.PLATFORM)){
             RuntimeSpriteCharacteristics copys1 = s1;
             s1 = s2;
             s2 = copys1;
         }
-        if(s1.objectType.equals(s2.objectType)) return;
+        if(s1.getObjectType().equals(s2.getObjectType())) return;
 
 
         if(CollisionDetector.haveCollidedFromTop(s1, s2)){
@@ -172,10 +179,10 @@ public class PhysicsEngine {
     }
 
     public void moveSpritesForward(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2, int framesPerSecond){
-        s1.setX(s1.getX()+(2*(double)s1.v_x/(double)framesPerSecond));
-        s1.setY(s1.getY()+(2*(double)s1.v_y/(double)framesPerSecond));
-        s2.setX(s2.getX()+(2*(double)s2.v_x/(double)framesPerSecond));
-        s2.setY(s2.getY()+(2*(double)s2.v_y/(double)framesPerSecond));
+        s1.setX(s1.getX()+((double)s1.v_x/(double)framesPerSecond));
+        s1.setY(s1.getY()+((double)s1.v_y/(double)framesPerSecond));
+        s2.setX(s2.getX()+((double)s2.v_x/(double)framesPerSecond));
+        s2.setY(s2.getY()+((double)s2.v_y/(double)framesPerSecond));
 
     }
 
@@ -206,11 +213,19 @@ public class PhysicsEngine {
     }
 
     private CollisionResult getResultOfCollision(RuntimeSpriteCharacteristics s1, RuntimeSpriteCharacteristics s2) {
-        return decisionMatrix[s1.objectType.ordinal()][s2.objectType.ordinal()];
+        return decisionMatrix[s1.getObjectType().ordinal()][s2.getObjectType().ordinal()];
     }
 
     public void setResultOfCollision(CollisionResult result, SpriteType s1, SpriteType s2) {
         decisionMatrix[s1.ordinal()][s2.ordinal()] = result;
+    }
+    
+    public void setDecisionMatrix(CollisionResult[][] decision){
+        decisionMatrix = decision;
+    }
+    
+    public CollisionResult[][] getDecisionMatrix(){
+        return decisionMatrix;
     }
 
     private CollisionHandler getHandlerForResult(CollisionResult result) {

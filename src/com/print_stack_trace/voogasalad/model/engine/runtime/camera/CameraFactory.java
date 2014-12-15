@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class CameraFactory {
 
-	public static final String cameraPath = "com.print_stack_trace.voogasalad.model.engine.runtime.camera.";
+	private static final String cameraPath = "com.print_stack_trace.voogasalad.model.engine.runtime.camera.";
 
 
 	public enum CameraType {
@@ -21,24 +21,23 @@ public class CameraFactory {
 
 		try {
 			String objectType = myCameraType.toString();
-			System.out.println(cameraPath+objectType);
 			Class<?> newCameraClass = Class.forName(cameraPath + objectType);
 			try {
 				con = newCameraClass.getConstructor();
 			} catch (NoSuchMethodException | SecurityException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 			try {
 				newCamera = (CameraHandler) con.newInstance();
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 			return newCamera;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 		return null;

@@ -9,6 +9,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/*
+ * Interface that contains methods necessary for startup. The Player and Author
+ * both implement this interface to start up their programs.
+ */
+
 public interface ViewController {
 
 	/**

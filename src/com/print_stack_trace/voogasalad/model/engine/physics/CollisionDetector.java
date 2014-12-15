@@ -1,7 +1,4 @@
 /**
- * @author Justin Carrao
- * @author Zachary Podbela
- * @author Pranava Raparla
  * Date Created: 11/15/14
  * Date Modified: 11/23/14
  */
@@ -26,7 +23,7 @@ public class CollisionDetector {
 	          }
 	    Rectangle rect1 = new Rectangle((int) spriteA.getX(), (int) spriteA.getY(), (int) spriteA.getWidth(), (int) spriteA.getHeight());
 		Rectangle rect2 = new Rectangle((int) spriteB.getX(), (int) spriteB.getY(), (int) spriteB.getWidth(), (int) spriteB.getHeight());
-		return rect1.intersects(rect2);
+        return rect1.intersects(rect2);
 	}
 
 	public static boolean haveCollidedHorizontally(RuntimeSpriteCharacteristics spriteA, RuntimeSpriteCharacteristics spriteB){
@@ -87,7 +84,7 @@ public class CollisionDetector {
 	}
 	
 	public static boolean incorrectSpriteType(RuntimeSpriteCharacteristics hero) {
-		return (!(hero.objectType.equals(SpriteType.HERO) || (hero.objectType.equals(SpriteType.ENEMY))));
+		return (!(hero.getObjectType().equals(SpriteType.HERO) || (hero.getObjectType().equals(SpriteType.ENEMY))));
 	}
 	
 	public static Rectangle makeIntersector(RuntimeSpriteCharacteristics rs1, RuntimeSpriteCharacteristics rs2) {
