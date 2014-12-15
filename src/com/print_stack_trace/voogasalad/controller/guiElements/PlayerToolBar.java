@@ -21,7 +21,7 @@ public class PlayerToolBar extends ToolBar {
 	private static final String DEFAULT_RESOURCE="./com/print_stack_trace/voogasalad/controller/guiResources/";
 	private static final String DEFAULT_CLASS_PATH="com.print_stack_trace.voogasalad.controller.guiElements.";
 	private static final String ELEMENT_RESOURCE_NAME="PlayerGUIElements";
-	private String LABEL_RESOURCE_NAME="PlayerGUILabels";
+	private static final String LABEL_RESOURCE_NAME="PlayerGUILabels";
 	
 	public PlayerToolBar(GamePlayer gamePlayer){
 		Properties classProp = new Properties();
@@ -31,10 +31,9 @@ public class PlayerToolBar extends ToolBar {
 		try { 
 			classProp.load(classStream);
 			labelProp.load(labelStream);
-			Iterator it = classProp.keySet().iterator();
-			while(it.hasNext()){
-				Object key = it.next();
-				String classType = (String) key;
+			Iterator iterator = classProp.keySet().iterator();
+			while(iterator.hasNext()){
+				Object key = iterator.next();
 				String className = (String) classProp.get(key);
 				className = DEFAULT_CLASS_PATH + className; 
 				Object newClass = Reflection.createInstance(className, gamePlayer);
